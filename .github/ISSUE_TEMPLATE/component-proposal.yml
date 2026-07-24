@@ -1,0 +1,33 @@
+name: Component proposal
+description: Propose a healthcare or life-science registry item.
+title: "[Component]: "
+labels: ["component"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User need
+      description: Describe the workflow and intended users without including real patient or study data.
+    validations:
+      required: true
+  - type: textarea
+    id: states
+    attributes:
+      label: States and edge cases
+      description: List empty, loading, unavailable, error, and domain-specific states.
+    validations:
+      required: true
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility and safety
+      description: Explain semantics, keyboard behavior, text alternatives, and local validation needs.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data safety
+      options:
+        - label: All examples and attachments use synthetic data.
+          required: true

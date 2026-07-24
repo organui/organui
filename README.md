@@ -1,54 +1,36 @@
 # OrganUI
 
-Open UI building blocks for healthcare and life-science products, built on the
-[shadcn registry](https://ui.shadcn.com/docs/registry).
+Accessible, source-first UI building blocks for healthcare and life-science products, built on the [shadcn registry](https://ui.shadcn.com/docs/registry). Browse the live collection at [organui.com](https://organui.com).
 
-## Getting started
+## Install a component
+
+Register the hosted namespace once, then add any item:
+
+```bash
+npx shadcn@latest registry add @organui=https://organui.com/r/{name}.json
+npx shadcn@latest add @organui/lab-result-card
+```
+
+Available items: `patient-status-badge`, `lab-result-card`, `vital-sign-card`, `medication-status`, `specimen-status`, `clinical-alert`, `study-phase-badge`, and `patient-summary-header`.
+
+## Develop locally
 
 ```bash
 npm install
-npm run registry:validate
-npm run registry:build
-npm test
 npm run dev
+npm run check
+npm run test:visual
+npm run test:registry-install
 ```
 
-The showcase runs at `http://localhost:3000`. The source catalog lives in
-`registry.json`. Registry item source files belong
-under `registry/default/<item-name>/`. A production build is written to
-`public/r/`.
+Source belongs under `registry/default/<item-name>/` and every distributable item must appear in `registry.json`. `npm run registry:build` produces hosted artifacts under `public/r/`. Visual snapshots cover desktop, mobile, dark examples, and 200% zoom.
 
-Project standards for accessibility, data safety, clinical language, and design
-tokens are documented in [`docs/foundations.md`](docs/foundations.md).
+Read [OrganUI Foundations](docs/foundations.md), [Versioning and Registry Stability](VERSIONING.md), [Security Policy](SECURITY.md), and [Repository Guidelines](AGENTS.md) before contributing.
 
-Run `npm run test:registry-install` to build the registry, install the item and
-its dependencies into a clean temporary shadcn project, and build the consumer.
+## Safety
 
-## Add a registry item
+All examples are synthetic. OrganUI components are presentational and do not provide diagnosis, urgency, treatment, authorization, auditing, retention, regulatory compliance, or clinical validation.
 
-1. Create the component, hook, or block under
-   `registry/default/<item-name>/`.
-2. Add its metadata and files to `registry.json`.
-3. Run `npm run registry:check`.
+## License
 
-Use descriptive, domain-specific names such as `patient-status-badge`,
-`lab-result-card`, or `clinical-timeline`. Components should be accessible,
-themeable, and safe for realistic clinical data without embedding real patient
-information in examples.
-
-## Install from GitHub
-
-Once this repository is public, users can install an item directly:
-
-```bash
-npx shadcn@latest add <github-owner>/organui/<item-name>
-```
-
-## Serve as a hosted registry
-
-Publish the contents of `public/` at your website, then consumers can use:
-
-```bash
-npx shadcn@latest registry add @organui=https://your-domain.com/r/{name}.json
-npx shadcn@latest add @organui/<item-name>
-```
+MIT

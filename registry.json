@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "organui",
-  "homepage": "https://github.com/organui/organui",
+  "homepage": "https://organui.com",
   "items": [
     {
       "name": "patient-status-badge",
@@ -21,7 +21,252 @@
         "healthcare",
         "status",
         "accessibility"
-      ]
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Every state has a visible text label.",
+          "safety": "Workflow status only; not a clinical assessment.",
+          "states": [
+            "active",
+            "inactive",
+            "critical",
+            "pending",
+            "unknown"
+          ]
+        }
+      }
+    },
+    {
+      "name": "lab-result-card",
+      "type": "registry:component",
+      "title": "Lab Result Card",
+      "description": "A structured laboratory result with value, unit, reference range, collection time, and explicit workflow state.",
+      "registryDependencies": [
+        "badge",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/default/lab-result-card/lab-result-card.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "laboratory",
+        "data-display"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Result states and missing values are communicated with text.",
+          "safety": "Reference ranges and urgency must be configured and validated locally.",
+          "states": [
+            "normal",
+            "abnormal",
+            "critical",
+            "pending",
+            "unavailable"
+          ]
+        }
+      }
+    },
+    {
+      "name": "vital-sign-card",
+      "type": "registry:component",
+      "title": "Vital Sign Card",
+      "description": "A compact vital-sign measurement with unit, timestamp, and a visible review state.",
+      "registryDependencies": [
+        "badge",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/default/vital-sign-card/vital-sign-card.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "vitals",
+        "data-display"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Unavailable measurements and review states use visible labels.",
+          "safety": "Thresholds and clinical interpretation remain consumer responsibilities.",
+          "states": [
+            "recorded",
+            "attention",
+            "unavailable"
+          ]
+        }
+      }
+    },
+    {
+      "name": "medication-status",
+      "type": "registry:component",
+      "title": "Medication Status",
+      "description": "A medication workflow badge with configurable, text-first state labels.",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/medication-status/medication-status.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "medication",
+        "status"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Medication state is never conveyed by color alone.",
+          "safety": "The component does not provide prescribing or administration guidance.",
+          "states": [
+            "active",
+            "held",
+            "completed",
+            "discontinued",
+            "unknown"
+          ]
+        }
+      }
+    },
+    {
+      "name": "specimen-status",
+      "type": "registry:component",
+      "title": "Specimen Status",
+      "description": "A text-first badge for specimen collection and laboratory transport workflows.",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/specimen-status/specimen-status.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "life-science",
+        "laboratory",
+        "status"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Transport and rejection states have explicit text.",
+          "safety": "Local chain-of-custody and rejection policies remain authoritative.",
+          "states": [
+            "collected",
+            "in-transit",
+            "received",
+            "rejected",
+            "unavailable"
+          ]
+        }
+      }
+    },
+    {
+      "name": "clinical-alert",
+      "type": "registry:component",
+      "title": "Clinical Alert",
+      "description": "An accessible alert for informational, warning, and critical workflow messages.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "alert"
+      ],
+      "files": [
+        {
+          "path": "registry/default/clinical-alert/clinical-alert.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "feedback",
+        "accessibility"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Uses alert semantics, a title, description, and visible severity language.",
+          "safety": "Consumers define escalation logic and clinically validated wording.",
+          "states": [
+            "information",
+            "warning",
+            "critical"
+          ]
+        }
+      }
+    },
+    {
+      "name": "study-phase-badge",
+      "type": "registry:component",
+      "title": "Study Phase Badge",
+      "description": "A consistent badge for common interventional study phase labels.",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/study-phase-badge/study-phase-badge.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "life-science",
+        "clinical-research",
+        "status"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Study phase is expressed as readable text.",
+          "safety": "Phase labels are display metadata and do not imply study suitability.",
+          "states": [
+            "early-phase-1",
+            "phase-1",
+            "phase-2",
+            "phase-3",
+            "phase-4",
+            "not-applicable"
+          ]
+        }
+      }
+    },
+    {
+      "name": "patient-summary-header",
+      "type": "registry:component",
+      "title": "Patient Summary Header",
+      "description": "A compact record header for identity context, synthetic identifiers, details, and workflow status.",
+      "registryDependencies": [
+        "badge",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/default/patient-summary-header/patient-summary-header.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "patient-context",
+        "data-display"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "Identity and record context use structured visible text.",
+          "safety": "Examples are synthetic; consumers must enforce privacy and minimum-necessary display.",
+          "states": [
+            "with-details",
+            "without-details",
+            "with-status"
+          ]
+        }
+      }
     }
   ]
 }
