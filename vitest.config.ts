@@ -13,6 +13,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    exclude: ["tests/visual/**", "node_modules/**", ".next/**"],
     setupFiles: ["./vitest.setup.ts"],
   },
 })

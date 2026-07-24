@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a reproducible component or registry problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: input
+    id: item
+    attributes:
+      label: Registry item
+      placeholder: lab-result-card
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the install command, framework, browser, and minimal synthetic example.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This report contains no protected health information or confidential study data.
+          required: true

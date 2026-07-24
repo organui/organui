@@ -56,21 +56,40 @@ try {
     "base",
     "--yes",
   ])
-  run("npx", [
-    "shadcn@latest",
-    "add",
-    "--cwd",
-    consumerPath,
-    path.join(
-      repositoryRoot,
-      "public/r/patient-status-badge.json"
-    ),
-    "--yes",
-  ])
+  const registryItems = [
+    "patient-status-badge",
+    "lab-result-card",
+    "vital-sign-card",
+    "medication-status",
+    "specimen-status",
+    "clinical-alert",
+    "study-phase-badge",
+    "patient-summary-header",
+  ]
+
+  for (const item of registryItems) {
+    run("npx", [
+      "shadcn@latest",
+      "add",
+      "--cwd",
+      consumerPath,
+      path.join(repositoryRoot, `public/r/${item}.json`),
+      "--yes",
+    ])
+  }
 
   const expectedFiles = [
     "src/components/patient-status-badge.tsx",
+    "src/components/lab-result-card.tsx",
+    "src/components/vital-sign-card.tsx",
+    "src/components/medication-status.tsx",
+    "src/components/specimen-status.tsx",
+    "src/components/clinical-alert.tsx",
+    "src/components/study-phase-badge.tsx",
+    "src/components/patient-summary-header.tsx",
     "src/components/ui/badge.tsx",
+    "src/components/ui/card.tsx",
+    "src/components/ui/alert.tsx",
   ]
 
   for (const file of expectedFiles) {
