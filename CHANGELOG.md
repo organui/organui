@@ -5,6 +5,12 @@ this project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Searchable, category-filtered component discovery with shareable URLs.
+- Lab Results Panel workflow block with explicit states, summary counts, and
+  an empty state.
+
 ## [0.2.0] - 2026-07-24
 
 ### Added

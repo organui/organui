@@ -1,6 +1,7 @@
 export const componentApi: Record<string, string[]> = {
   "patient-status-badge": ["status (required)", "label", "Badge props"],
   "lab-result-card": ["name and status (required)", "value", "unit", "referenceRange", "collectedAt", "statusLabel", "Card props"],
+  "lab-results-panel": ["results (required)", "title", "description", "Card props"],
   "vital-sign-card": ["label (required)", "value", "unit", "measuredAt", "status", "Card props"],
   "medication-status": ["status (required)", "label", "Badge props"],
   "specimen-status": ["status (required)", "label", "Badge props"],

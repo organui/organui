@@ -1,6 +1,7 @@
+import { Suspense } from "react"
 import Link from "next/link"
 
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentCatalog } from "@/components/component-catalog"
 import { catalog } from "@/lib/catalog"
 import { PatientStatusBadge } from "@/registry/default/patient-status-badge/patient-status-badge"
 
@@ -67,18 +68,10 @@ export default function Home() {
           <h2 id="collection-title" className="text-3xl font-semibold tracking-tight">Healthcare and life-science collection</h2>
           <p className="max-w-2xl text-muted-foreground">Browse synthetic previews, installation commands, supported states, and accessibility guidance for every item.</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
-          {catalog.map((item) => (
-            <article key={item.slug} className="flex flex-col overflow-hidden rounded-xl border bg-card">
-              <div className="flex min-h-56 items-center justify-center bg-muted/40 p-6"><ComponentPreview slug={item.slug} /></div>
-              <div className="flex flex-1 flex-col gap-3 border-t p-5">
-                <p className="font-mono text-xs text-muted-foreground">{item.category}</p>
-                <h3 className="text-xl font-semibold"><Link className="underline-offset-4 hover:underline" href={"/components/" + item.slug}>{item.title}</Link></h3>
-                <p className="text-sm leading-6 text-muted-foreground">{item.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <Suspense fallback={<p className="text-sm text-muted-foreground">Loading component catalog...</p>}>
+          <ComponentCatalog />
+        </Suspense>
+
       </section>
 
       <footer className="border-t pt-6 text-sm text-muted-foreground">
