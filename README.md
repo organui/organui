@@ -9,6 +9,7 @@ Open UI building blocks for healthcare and life-science products, built on the
 npm install
 npm run registry:validate
 npm run registry:build
+npm test
 npm run dev
 ```
 
@@ -19,6 +20,9 @@ under `registry/default/<item-name>/`. A production build is written to
 
 Project standards for accessibility, data safety, clinical language, and design
 tokens are documented in [`docs/foundations.md`](docs/foundations.md).
+
+Run `npm run test:registry-install` to build the registry, install the item and
+its dependencies into a clean temporary shadcn project, and build the consumer.
 
 ## Add a registry item
 
