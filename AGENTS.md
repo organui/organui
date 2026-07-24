@@ -4,21 +4,20 @@
 
 OrganUI is a source-first shadcn registry for healthcare and life-science UI.
 The root `registry.json` is the catalog and must list every distributable item.
-Place item source under `registry/default/<item-name>/`; keep all files for a
-block together. The Next.js showcase lives in `src/app/`, shared preview primitives in
-`src/components/ui/`, and project standards in `docs/`. Generated JSON is written
-to `public/r/` and ignored by Git. Project metadata and registry scripts live in `package.json`. Contributor-facing
-setup and installation examples belong in `README.md`.
+Place item source under `registry/default/<item-name>/`. The Next.js showcase
+lives in `src/app/`, preview primitives in `src/components/ui/`, and standards in
+`docs/`. Generated JSON goes to ignored `public/r/`. Scripts live in
+`package.json`; contributor examples belong in `README.md`.
 
 ## Build, Test, and Development Commands
 
 - `npm run dev` starts the local component showcase.
 - `npm run build` builds registry artifacts and the production showcase.
 - `npm run lint` checks TypeScript and React source with ESLint.
-- `npm install` installs the locked development dependencies. Use Node.js 20 or
-  newer.
-- `npm run registry:validate` checks `registry.json` and all declared items
-  against the current shadcn schemas.
+- `npm test` runs component and accessibility tests once with Vitest.
+- `npm run test:registry-install` installs the built item in a clean app.
+- `npm install` installs dependencies using Node.js 20 or newer.
+- `npm run registry:validate` checks the catalog against shadcn schemas.
 - `npm run registry:build` compiles the catalog into installable files under
   `public/r/`.
 - `npm run registry:check` runs validation followed by a full build. Run this
@@ -35,17 +34,16 @@ types, package dependencies, and registry dependencies in each catalog entry.
 
 ## Testing Guidelines
 
-No automated test framework or coverage threshold is configured. At minimum,
-run `npm run registry:check` and inspect the generated item JSON. For interactive
-components, add focused tests alongside the item when a test runner is
-introduced, using names such as `lab-result-card.test.tsx`. Test accessibility,
-empty and error states, keyboard behavior, and realistic edge cases. Never use
-real patient or confidential research data in fixtures.
+Vitest, Testing Library, and axe cover component behavior and accessibility.
+Keep tests beside registry items using names such as
+`lab-result-card.test.tsx`. Run `npm test` and `npm run registry:check` before
+opening a PR. Test accessible names, empty and error states, keyboard behavior,
+and realistic edge cases. Never use real patient or confidential research data
+in fixtures.
 
 ## Commit & Pull Request Guidelines
 
-The history currently contains only `Initial commit`, so no established commit
-format exists. Use short, imperative subjects, for example `Add lab result card`.
+Use short, imperative commit subjects, for example `Add lab result card`.
 Keep commits focused. Pull requests should explain the user need, list registry
 items changed, and report `registry:check` results. Link relevant issues and add
 screenshots or recordings for visual or interactive changes. Call out new
