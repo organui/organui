@@ -34,3 +34,20 @@ test("collection remains usable at 200% zoom", async ({ page }) => {
     animations: "disabled",
   })
 })
+
+test("patient context handles long identifiers", async ({ page }) => {
+  await page.goto("/components/patient-summary-header")
+  await page.waitForLoadState("networkidle")
+  const identifier = page.getByText("Record SYN-2048")
+  await expect(identifier).toHaveCount(2)
+  await identifier.evaluateAll((elements) => {
+    for (const element of elements) {
+      element.textContent =
+        "Record SYN-2048-LONG-SYNTHETIC-IDENTIFIER-WITHOUT-SPACES-0000000001"
+    }
+  })
+  await expect(page).toHaveScreenshot("patient-summary-long-identifier.png", {
+    fullPage: true,
+    animations: "disabled",
+  })
+})
