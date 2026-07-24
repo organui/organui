@@ -71,6 +71,44 @@
       }
     },
     {
+      "name": "lab-results-panel",
+      "type": "registry:block",
+      "title": "Lab Results Panel",
+      "description": "An accessible laboratory results workflow with summary counts, explicit states, an empty state, and a responsive table.",
+      "registryDependencies": [
+        "badge",
+        "card",
+        "empty",
+        "table"
+      ],
+      "files": [
+        {
+          "path": "registry/default/lab-results-panel/lab-results-panel.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "laboratory",
+        "workflow",
+        "data-display"
+      ],
+      "meta": {
+        "organui": {
+          "accessibility": "A semantic table, visible status labels, meaningful missing-value text, and a clear empty state communicate every result.",
+          "safety": "Synthetic display component only; reference ranges, alert thresholds, and escalation policies must be validated locally.",
+          "states": [
+            "normal",
+            "abnormal",
+            "critical",
+            "pending",
+            "unavailable",
+            "empty"
+          ]
+        }
+      }
+    },
+    {
       "name": "vital-sign-card",
       "type": "registry:component",
       "title": "Vital Sign Card",

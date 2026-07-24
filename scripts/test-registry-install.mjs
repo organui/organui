@@ -59,6 +59,7 @@ try {
   const registryItems = [
     "patient-status-badge",
     "lab-result-card",
+    "lab-results-panel",
     "vital-sign-card",
     "medication-status",
     "specimen-status",
@@ -81,6 +82,7 @@ try {
   const expectedFiles = [
     "src/components/patient-status-badge.tsx",
     "src/components/lab-result-card.tsx",
+    "src/components/lab-results-panel.tsx",
     "src/components/vital-sign-card.tsx",
     "src/components/medication-status.tsx",
     "src/components/specimen-status.tsx",
@@ -89,6 +91,8 @@ try {
     "src/components/patient-summary-header.tsx",
     "src/components/ui/badge.tsx",
     "src/components/ui/card.tsx",
+    "src/components/ui/empty.tsx",
+    "src/components/ui/table.tsx",
     "src/components/ui/alert.tsx",
   ]
 

@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test"
 const components = [
   "patient-status-badge",
   "lab-result-card",
+  "lab-results-panel",
   "vital-sign-card",
   "medication-status",
   "specimen-status",
@@ -47,6 +48,25 @@ test("patient context handles long identifiers", async ({ page }) => {
     }
   })
   await expect(page).toHaveScreenshot("patient-summary-long-identifier.png", {
+    fullPage: true,
+    animations: "disabled",
+  })
+})
+
+
+test("catalog search and category filters are shareable", async ({ page }) => {
+  await page.goto("/?q=critical&category=laboratory")
+  await page.waitForLoadState("networkidle")
+  await expect(
+    page.getByRole("searchbox", { name: "Search components" })
+  ).toHaveValue("critical")
+  await expect(page.getByText("2 items")).toBeVisible()
+  await expect(page.getByRole("link", { name: "Lab Result Card" })).toBeVisible()
+  await expect(
+    page.getByRole("link", { name: "Lab Results Panel" })
+  ).toBeVisible()
+  await expect(page.getByRole("link", { name: "Clinical Alert" })).toHaveCount(0)
+  await expect(page).toHaveScreenshot("catalog-filtered.png", {
     fullPage: true,
     animations: "disabled",
   })

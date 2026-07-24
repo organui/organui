@@ -11,7 +11,13 @@ npx shadcn@latest registry add @organui=https://organui.com/r/{name}.json
 npx shadcn@latest add @organui/lab-result-card
 ```
 
-Available items: `patient-status-badge`, `lab-result-card`, `vital-sign-card`, `medication-status`, `specimen-status`, `clinical-alert`, `study-phase-badge`, and `patient-summary-header`.
+Search the live catalog by component name, workflow state, or category. Filter
+selections are reflected in the URL for sharing.
+
+Available items: `patient-status-badge`, `lab-result-card`,
+`lab-results-panel`, `vital-sign-card`, `medication-status`,
+`specimen-status`, `clinical-alert`, `study-phase-badge`, and
+`patient-summary-header`.
 
 ## Develop locally
 

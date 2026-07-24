@@ -1,5 +1,6 @@
 import { ClinicalAlert } from "@/registry/default/clinical-alert/clinical-alert"
 import { LabResultCard } from "@/registry/default/lab-result-card/lab-result-card"
+import { LabResultsPanel } from "@/registry/default/lab-results-panel/lab-results-panel"
 import { MedicationStatus } from "@/registry/default/medication-status/medication-status"
 import { PatientStatusBadge } from "@/registry/default/patient-status-badge/patient-status-badge"
 import { PatientSummaryHeader } from "@/registry/default/patient-summary-header/patient-summary-header"
@@ -13,6 +14,8 @@ export function ComponentPreview({ slug }: { slug: string }) {
       return <div className="flex flex-wrap gap-2"><PatientStatusBadge status="active" /><PatientStatusBadge status="pending" /><PatientStatusBadge status="critical" /><PatientStatusBadge status="unknown" /></div>
     case "lab-result-card":
       return <LabResultCard className="w-full max-w-md" name="Hemoglobin" value="13.8" unit="g/dL" referenceRange="12.0–16.0 g/dL" collectedAt="24 Jul 2026, 09:30" status="normal" />
+    case "lab-results-panel":
+      return <LabResultsPanel className="w-full max-w-xl" results={[{ id: "hemoglobin", name: "Hemoglobin", value: "13.8", unit: "g/dL", referenceRange: "12.0-16.0", status: "normal" }, { id: "potassium", name: "Potassium", value: "6.2", unit: "mmol/L", referenceRange: "3.5-5.1", status: "critical" }, { id: "culture", name: "Blood culture", status: "pending" }]} />
     case "vital-sign-card":
       return <VitalSignCard className="w-full max-w-sm" label="Heart rate" value={72} unit="bpm" measuredAt="Recorded 09:32" />
     case "medication-status":
