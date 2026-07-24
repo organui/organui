@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "organui",
+  "homepage": "https://github.com/organui/organui",
+  "items": [
+    {
+      "name": "patient-status-badge",
+      "type": "registry:component",
+      "title": "Patient Status Badge",
+      "description": "An accessible badge for concise patient workflow status labels. Status is always communicated with text, not color alone.",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/patient-status-badge/patient-status-badge.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "healthcare",
+        "status",
+        "accessibility"
+      ]
+    }
+  ]
+}
