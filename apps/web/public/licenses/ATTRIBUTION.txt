@@ -1,0 +1,68 @@
+OrganUI homepage asset attribution
+Recorded 2026-09-23
+
+All preview images are actual screenshots of the working OrganUI explorers.
+No anatomical content was generated, repainted, or modified for this site.
+The *-cover.webp images crop the model area from the desktop screenshots,
+proportionally fit it to 720 x 720 pixels using original canvas-color padding, and use WebP quality 88. Other WebP previews
+compress the complete original screenshots at quality 88 without cropping.
+Model colors and shapes are unchanged. CSS scales the crops proportionally.
+
+HEART AND LIVER
+BodyParts3D, © The Database Center for Life Science licensed under
+CC Attribution 4.0 International.
+License: https://creativecommons.org/licenses/by/4.0/
+Source: BodyParts3D 4.0 (2013-05-16), directly downloaded by the explorers
+on 2026-09-22 from the official LSDB archive.
+https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html
+Current archive grant, checked 2026-09-23:
+https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+Older OBJ comments cite BY-SA 2.1 Japan; the explorers rely on the current
+CC BY 4.0 grant for data obtained directly from this archive.
+Adaptations by OrganUI: subset selection, common coordinate transform,
+normal computation, illustrative materials, grouping and GLB conversion.
+
+Files: heart-cover.webp, heart-desktop.webp, heart-anatomy.webp,
+liver-cover.webp, liver-desktop.webp, liver-interior.webp.
+Copied from heart-3d/docs/screenshots/{desktop,anatomy}.png and
+liver-3d/docs/screenshots/{desktop,interior}.png on 2026-09-23.
+Repository destinations (full implementation publication pending):
+https://github.com/organui/heart-3d
+https://github.com/organui/liver-3d
+Full provenance snapshots: /licenses/heart-provenance.md and
+/licenses/liver-provenance.md (relative links inside refer to those repos).
+
+LUNGS
+BodyParts3D / Anatomography, © The Database Center for Life Science (DBCLS).
+Adapted by OrganUI. No endorsement is implied.
+Model and all rendered screenshots, including these cropped/compressed
+versions, are distributed under CC BY-SA 2.1 Japan:
+https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en
+https://creativecommons.org/licenses/by-sa/2.1/jp/legalcode
+Source: BodyParts3D / Anatomography 4.3, ontology FMA3.0, retrieved 2026-09-22.
+Original service and license, checked 2026-09-23:
+https://lifesciencedb.jp/bp3d/info/index.html
+Geometry mirror: https://github.com/olivercase/body_parts_3d_api
+Pinned commit: fd527e6f4daf732fd814314d9257df5877b844bc
+The archive's separate 4.0 CC BY grant does not replace the original 4.3
+service's share-alike license for these images.
+Adaptations by OrganUI: subset selection, shared coordinate transform,
+normal computation, mesh simplification, illustrative materials, GLB
+conversion, screenshot rendering, cropping/resizing and WebP compression.
+
+Files: lungs-cover.webp, lungs-desktop.webp, lungs-mobile.webp.
+Copied from lungs-3d/docs/screenshots/{desktop,mobile}.png on 2026-09-23.
+Repository destination (full implementation publication pending):
+https://github.com/organui/lungs-3d
+Full provenance snapshot: /licenses/lungs-provenance.md
+(relative links inside refer to that repository).
+
+FONTS AND ICONS
+Manrope and DM Sans Latin variable fonts: Fontsource 5.3.0 packages.
+SIL Open Font License 1.1; see Manrope-OFL.txt and DM-Sans-OFL.txt.
+Lucide icons: ISC; see lucide-LICENSE.txt.
+OrganUI pulse wordmark and favicon: original OrganUI artwork.
+Anatomy image licenses remain separate from the website's application code.
+
+Website verification screenshots in docs/screenshots also depict these assets.
+Their depicted anatomy retains the image licenses and credits stated above.
