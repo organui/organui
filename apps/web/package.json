@@ -7,9 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint --max-warnings=0",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "stage-registry": "bun scripts/stage-registry.ts"
   },
   "dependencies": {
     "@workspace/ui": "workspace:*",
@@ -17,7 +18,8 @@
     "next": "16.3.3",
     "next-themes": "^0.4.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "@workspace/registry": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

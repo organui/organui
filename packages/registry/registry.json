@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "organui",
+  "homepage": "https://github.com/organui/organui",
+  "items": [
+    {
+      "name": "anatomy-tree",
+      "type": "registry:ui",
+      "title": "Anatomy tree",
+      "description": "Search, select and control visibility in hierarchical anatomy data.",
+      "dependencies": ["@base-ui/react@^1.8.0"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/anatomy-tree.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
