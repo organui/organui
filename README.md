@@ -17,5 +17,12 @@ This will place the ui components in the `packages/ui/src/components` directory.
 To use the components in your app, import them from the `ui` package.
 
 ```tsx
-import { Button } from "@workspace/ui/components/button";
+import { Button } from "@workspace/ui/components/button"
 ```
+
+## Anatomy tree registry
+
+See the [registry architecture and verification commands](docs/architecture.md).
+Run `bun install --frozen-lockfile` and `bun run dev`, then open
+`/docs/anatomy-tree` for installation instructions and the interactive example.
+Registry JSON is built by `packages/registry` and staged by the website at `/r`.

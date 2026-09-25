@@ -19,6 +19,24 @@
     "dev": {
       "cache": false,
       "persistent": true
-    }
+    },
+    "@workspace/registry#build": {
+      "outputs": ["dist/**"]
+    },
+    "web#stage-registry": {
+      "dependsOn": ["@workspace/registry#build"],
+      "outputs": ["public/r/**"]
+    },
+    "web#build": {
+      "dependsOn": ["^build", "stage-registry"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "web#dev": {
+      "dependsOn": ["stage-registry"],
+      "cache": false,
+      "persistent": true
+    },
+    "test": {}
   }
 }
