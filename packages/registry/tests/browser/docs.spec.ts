@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
@@ -37,6 +38,19 @@ test("documentation interaction, styling and registry serving", async ({
       () => document.documentElement.scrollWidth <= window.innerWidth
     )
   ).toBe(true)
+  const command = page.getByRole("region", { name: "Installation command" })
+  await command.focus()
+  await expect(command).toBeFocused()
+  if (
+    await command.evaluate(
+      (element) => element.scrollWidth > element.clientWidth
+    )
+  ) {
+    await command.press("ArrowRight")
+    await expect
+      .poll(() => command.evaluate((element) => element.scrollLeft))
+      .toBeGreaterThan(0)
+  }
   await page.screenshot({ path: info.outputPath("docs.png"), fullPage: true })
   const itemResponse = await request.get("/r/anatomy-tree.json")
   expect(itemResponse.ok()).toBe(true)
@@ -56,4 +70,24 @@ test("documentation interaction, styling and registry serving", async ({
       .items.map((item) => item.name)
   ).toEqual(["anatomy-tree"])
   expect(errors).toEqual([])
+})
+
+test("accessibility scan covers expanded, mixed and filtered states", async ({
+  page,
+}, info) => {
+  await page.goto("/docs/anatomy-tree")
+  for (const state of ["expanded", "mixed", "filtered"]) {
+    if (state === "mixed")
+      await page
+        .getByRole("button", { name: "Hide Left atrium", exact: true })
+        .click()
+    if (state === "filtered")
+      await page.getByRole("searchbox").fill("ventricle")
+    const result = await new AxeBuilder({ page }).analyze()
+    await info.attach(`axe-${state}`, {
+      body: JSON.stringify(result, null, 2),
+      contentType: "application/json",
+    })
+    expect(result.violations).toEqual([])
+  }
 })

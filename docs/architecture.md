@@ -61,3 +61,22 @@ The browser matrix uses ports 4318, 4319 and 4321 and refuses to reuse another s
 - [shadcn registry catalog specification](https://ui.shadcn.com/docs/registry/registry-json)
 - [Base UI Button](https://base-ui.com/react/components/button)
 - Installed Next.js 16.3.3 documentation under `apps/web/node_modules/next/dist/docs` governs the Server/Client Component boundary.
+
+## Follow-up release checks
+
+`apps/web/vercel.json` pins dependency installation to Bun 1.4.2 with a frozen lockfile, following [Vercel's Bun pinning guidance](https://vercel.com/kb/guide/how-to-pin-a-specific-bun-version-for-vercel-builds). The build command launches `scripts/vercel-build.ts` with the same version. That script checks the root `packageManager` declaration and places the pinned executable first on PATH for Turbo's child package scripts. This changes build tooling only; Next.js keeps its existing server runtime.
+
+Browser tests now run axe-core on the full documentation and both installed consumer pages in expanded, mixed-visibility and filtered states. These scans complement keyboard/focus tests; they do not establish screen-reader usability or complete WCAG conformance.
+
+### Manual screen-reader acceptance checklist (not yet performed)
+
+Use NVDA with Chrome/Firefox or VoiceOver with Safari and record the browser and screen-reader versions. A screen reader is not installed in the implementation environment.
+
+1. Reach the search input and then the tree with Tab. Confirm the tree name, keyboard help, structure label and level are announced.
+2. Use Up/Down, Left/Right and Home/End. Confirm focus, expansion and collapsed descendants are understandable without looking at the screen.
+3. Press Enter to select a leaf, then Space to hide it. Confirm selection and visibility are announced as distinct states and that the parent is mixed.
+4. Activate a mixed parent's visibility action. Confirm all its descendant leaves become visible without changing selection.
+5. Search for `ventricle`. Confirm ancestor context is understandable, nonmatching rows are absent, and clearing search restores expansion. Search for an absent term and confirm the no-results message is announced.
+6. Check an empty dataset and replacement of the focused node using the generated consumer harness. Confirm focus returns somewhere understandable without unexpectedly leaving the component.
+
+Release review should record findings from this checklist before making any screen-reader compatibility claim.

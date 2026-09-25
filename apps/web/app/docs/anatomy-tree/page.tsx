@@ -42,7 +42,12 @@ export default function Page() {
           Base UI / Nova theme, run the command below. Replace REGISTRY_ORIGIN
           with this site’s origin (including https://).
         </p>
-        <pre className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm">
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="Installation command"
+          className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+        >
           bunx shadcn@4.21.0 add REGISTRY_ORIGIN/r/anatomy-tree.json
         </pre>
         <p className="text-sm text-muted-foreground">
@@ -57,7 +62,12 @@ export default function Page() {
       </section>
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Connect your state</h2>
-        <pre className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm">
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="State wiring example"
+          className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+        >
           {usage}
         </pre>
         <p>

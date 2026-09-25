@@ -22,7 +22,7 @@ jobs:
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run test
-      - run: bun run build
+      - run: bun scripts/vercel-build.ts
       - run: bun run test:cache
       - run: bun run test:consumers
       - run: bunx playwright install --with-deps chromium

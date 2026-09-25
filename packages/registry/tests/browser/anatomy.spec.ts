@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 
 test.beforeEach(async ({ page }) => {
@@ -155,4 +156,24 @@ test("empty updates restore search focus and arbitrary IDs retain visibility", a
   await expect(
     page.getByRole("treeitem", { name: "Special ID", exact: true })
   ).toHaveAttribute("aria-checked", "false")
+})
+
+test("accessibility scan covers expanded, mixed and filtered states", async ({
+  page,
+}, info) => {
+  await page.goto("/")
+  for (const state of ["expanded", "mixed", "filtered"]) {
+    if (state === "mixed")
+      await page
+        .getByRole("button", { name: "Hide Left atrium", exact: true })
+        .click()
+    if (state === "filtered")
+      await page.getByRole("searchbox").fill("ventricle")
+    const result = await new AxeBuilder({ page }).analyze()
+    await info.attach(`axe-${state}`, {
+      body: JSON.stringify(result, null, 2),
+      contentType: "application/json",
+    })
+    expect(result.violations).toEqual([])
+  }
 })

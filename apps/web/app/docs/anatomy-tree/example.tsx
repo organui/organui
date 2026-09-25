@@ -49,7 +49,9 @@ export function Example() {
           Selected: {selectedId ?? "none"}
         </p>
         <pre
-          className="mt-4 overflow-auto rounded-md bg-background p-3 text-xs"
+          tabIndex={0}
+          role="region"
+          className="mt-4 overflow-auto rounded-md bg-background p-3 text-xs focus-visible:outline-2 focus-visible:outline-ring"
           aria-label="Visibility state"
         >
           {JSON.stringify(visibility, null, 2)}

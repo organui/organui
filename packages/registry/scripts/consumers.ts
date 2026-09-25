@@ -129,7 +129,7 @@ try {
       await put(
         dir,
         "src/app/layout.tsx",
-        'import "../globals.css"; export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}'
+        'import "../globals.css"; export const metadata = {title:"Anatomy tree consumer"}; export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}'
       )
       await put(dir, "next.config.mjs", "export default {}")
     } else {
