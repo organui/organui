@@ -27,7 +27,7 @@ export default function Page() {
             aria-label="OrganUI on GitHub"
             className={cn(
               buttonVariants({ variant: "ghost", size: "icon" }),
-              "size-11"
+              "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
             )}
           >
             <GitHubIcon />
@@ -37,7 +37,7 @@ export default function Page() {
             aria-label="OrganUI on X"
             className={cn(
               buttonVariants({ variant: "ghost", size: "icon" }),
-              "size-11"
+              "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
             )}
           >
             <XIcon />
