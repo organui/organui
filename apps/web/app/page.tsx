@@ -1,4 +1,9 @@
 import type { Metadata } from "next"
+import { ButtonLink } from "@workspace/ui/components/button-link"
+import { OrganUIMark } from "@workspace/ui/components/organui-mark"
+import { cn } from "@workspace/ui/lib/utils"
+
+import { GitHubIcon, XIcon } from "@/components/social-icons"
 import styles from "./page.module.css"
 
 export const metadata: Metadata = {
@@ -8,41 +13,39 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className={styles.page}>
-      <div className={styles.content}>
-        <h1 className={styles.brand}>
-          <svg
-            className={styles.mark}
-            viewBox="0 0 100 104"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              fill="currentColor"
-              fillRule="evenodd"
-              d="M47 2C62 1 74 8 79 21C82 30 85 34 92 41C102 51 101 68 94 80C85 96 69 103 51 103C23 103 3 84 1 56C-1 32 18 6 47 2ZM55 22C43 26 25 39 23 51C19 68 30 81 46 83C61 86 74 81 76 70C79 59 66 54 65 45C63 36 72 28 67 23C64 19 60 20 55 22Z"
-            />
-          </svg>
+    <main
+      className={cn(
+        styles.theme,
+        "grid min-h-svh place-items-center bg-background px-6 pt-12 pb-28 text-foreground [color-scheme:light]"
+      )}
+    >
+      <div className="flex w-full flex-col items-center text-center">
+        <h1 className="m-0 flex items-center gap-3.5 text-4xl leading-none font-[550] tracking-[-1.3px]">
+          <OrganUIMark />
           <span>organui</span>
         </h1>
-        <p className={styles.sentence}>The interfaces healthcare deserves.</p>
-        <div className={styles.socials}>
-          <a href="https://github.com/organui" aria-label="OrganUI on GitHub">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                fill="currentColor"
-                d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.71 2.62 1.22 3.26.93.1-.73.39-1.22.71-1.5-2.5-.29-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.29-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.16A10.8 10.8 0 0 1 12 6.17c.96 0 1.92.13 2.82.38 2.15-1.46 3.09-1.16 3.09-1.16.62 1.55.23 2.69.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.11c0 .3.2.65.77.54A11.25 11.25 0 0 0 12 .75Z"
-              />
-            </svg>
-          </a>
-          <a href="https://x.com/organui" aria-label="OrganUI on X">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                fill="currentColor"
-                d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-7.41L5.58 22H2.46l7.95-9.09L2.8 2h6.4l4.42 6.76L18.9 2ZM17.8 20h1.73L8.24 3.89H6.38L17.8 20Z"
-              />
-            </svg>
-          </a>
+        <p className="mt-7.5 text-[26px] leading-[1.4] font-normal tracking-[-0.65px] text-balance max-[480px]:max-w-80 max-[480px]:text-2xl max-[480px]:leading-[1.4]">
+          The interfaces healthcare deserves.
+        </p>
+        <div className="mt-6 flex gap-4">
+          <ButtonLink
+            variant="ghost"
+            size="icon"
+            href="https://github.com/organui"
+            aria-label="OrganUI on GitHub"
+            className="size-11 hover:bg-transparent hover:text-primary dark:hover:bg-transparent"
+          >
+            <GitHubIcon />
+          </ButtonLink>
+          <ButtonLink
+            variant="ghost"
+            size="icon"
+            href="https://x.com/organui"
+            aria-label="OrganUI on X"
+            className="size-11 hover:bg-transparent hover:text-primary dark:hover:bg-transparent"
+          >
+            <XIcon />
+          </ButtonLink>
         </div>
       </div>
     </main>
