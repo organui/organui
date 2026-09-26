@@ -39,6 +39,9 @@ test("documentation interaction, styling and registry serving", async ({
     )
   ).toBe(true)
   const command = page.getByRole("region", { name: "Installation command" })
+  await expect(command).toHaveText(
+    "bunx shadcn@4.21.0 add https://organui.com/r/anatomy-tree.json"
+  )
   await command.focus()
   await expect(command).toBeFocused()
   if (
@@ -58,7 +61,7 @@ test("documentation interaction, styling and registry serving", async ({
   const item = registryItemSchema.parse(await itemResponse.json())
   expect(item.files?.[0]?.content).toBe(
     await readFile(
-      new URL("../../src/anatomy-tree.tsx", import.meta.url),
+      new URL(import.meta.resolve("@workspace/registry/anatomy-tree")),
       "utf8"
     )
   )
@@ -79,7 +82,7 @@ test("accessibility scan covers expanded, mixed and filtered states", async ({
   for (const state of ["expanded", "mixed", "filtered"]) {
     if (state === "mixed")
       await page
-        .getByRole("button", { name: "Hide Left atrium", exact: true })
+        .getByRole("button", { name: "Visible: hide Left atrium", exact: true })
         .click()
     if (state === "filtered")
       await page.getByRole("searchbox").fill("ventricle")

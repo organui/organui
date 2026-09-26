@@ -1,4 +1,6 @@
 import { defineConfig } from "@playwright/test"
+import { fileURLToPath } from "node:url"
+const web = fileURLToPath(new URL(".", import.meta.resolve("web/package.json")))
 export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: true,
@@ -41,19 +43,19 @@ export default defineConfig({
   webServer: [
     {
       command: "bun run start --port 4321",
-      cwd: "../../apps/web",
+      cwd: web,
       url: "http://127.0.0.1:4321/docs/anatomy-tree",
       reuseExistingServer: false,
     },
     {
       command: "bun run start",
-      cwd: "../../.consumers/next",
+      cwd: ".consumers/next",
       url: "http://127.0.0.1:4318",
       reuseExistingServer: false,
     },
     {
       command: "bun run start",
-      cwd: "../../.consumers/vite",
+      cwd: ".consumers/vite",
       url: "http://127.0.0.1:4319",
       reuseExistingServer: false,
     },

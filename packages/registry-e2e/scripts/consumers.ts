@@ -1,12 +1,14 @@
 import { mkdir, writeFile, readFile, rm } from "node:fs/promises"
-import { resolve } from "node:path"
-const root = resolve(import.meta.dirname, "../../..")
-const out = resolve(root, ".consumers")
+import { dirname, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
+const out = resolve(import.meta.dirname, "../.consumers")
 const shadcn = resolve(
   import.meta.dirname,
   "../node_modules/shadcn/dist/index.js"
 )
-const registry = resolve(import.meta.dirname, "../dist")
+const registry = dirname(
+  fileURLToPath(import.meta.resolve("@workspace/registry/dist/registry.json"))
+)
 const server = Bun.serve({
   port: 0,
   hostname: "127.0.0.1",
@@ -41,7 +43,7 @@ export default function Harness(){
  const [data,setData]=useState(original)
  const [selectedId,select]=useState<string|null>(null)
  const [visibility,show]=useState<Record<string,boolean>>({})
- return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed anatomy tree</h1><AnatomyTree data={data} selectedId={selectedId} onSelectionChange={select} visibility={visibility} onVisibilityChange={show} defaultExpandedIds={["heart","left","right"]}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="Visibility">{JSON.stringify(visibility)}</output><button onClick={()=>setData([{id:"heart",label:"Heart",children:[{id:"new",label:"New structure"}]}])}>Replace data</button><button onClick={()=>setData([])}>Empty data</button><button onClick={()=>setTimeout(()=>setData([{id:"heart",label:"Heart",children:[{id:"new",label:"New structure"}]}]),500)}>Schedule replacement</button><button onClick={()=>setTimeout(()=>setData([]),500)}>Schedule empty</button><button onClick={()=>setData([{id:"__proto__",label:"Special ID"}])}>Special IDs</button></main>
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed anatomy tree</h1><AnatomyTree data={data} selectedId={selectedId} onSelectionChange={select} visibility={visibility} onVisibilityChange={show} defaultExpandedIds={["heart","left","right"]}/><output aria-label="Selected">{selectedId??"none"}</output><canvas role="img" aria-label="Viewer" width={240} height={40} onClick={()=>select("rv")}/><output aria-label="Visibility">{JSON.stringify(visibility)}</output><button onClick={()=>setData([{id:"heart",label:"Heart",children:[{id:"new",label:"New structure"}]}])}>Replace data</button><button onClick={()=>setData([])}>Empty data</button><button onClick={()=>setTimeout(()=>setData([{id:"heart",label:"Heart",children:[{id:"new",label:"New structure"}]}]),500)}>Schedule replacement</button><button onClick={()=>setTimeout(()=>setData([]),500)}>Schedule empty</button><button onClick={()=>setData([{id:"__proto__",label:"Special ID"}])}>Special IDs</button></main>
 }`
 // Deliberately use distinct theme values to detect accidental theme overwrites.
 const css = `@import "tailwindcss";
@@ -109,6 +111,9 @@ try {
         cssVariables: true,
       },
       iconLibrary: "lucide",
+      registries: {
+        "@organui": `http://127.0.0.1:${server.port}/{name}.json`,
+      },
       aliases: {
         components: "@/components",
         ui: "@/components/ui",
@@ -155,7 +160,10 @@ try {
         "node",
         shadcn,
         "add",
-        `http://127.0.0.1:${server.port}/anatomy-tree.json`,
+        // Vite exercises the documented namespace; Next installs by URL.
+        framework === "vite"
+          ? "@organui/anatomy-tree"
+          : `http://127.0.0.1:${server.port}/anatomy-tree.json`,
         "--yes",
       ],
       dir

@@ -7,34 +7,19 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
+    "transit": {
+      "dependsOn": ["^transit"]
     },
-    "format": {
-      "dependsOn": ["^format"]
+    "lint": {
+      "dependsOn": ["transit"]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["transit"]
+    },
+    "format": {
+      "cache": false
     },
     "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "@workspace/registry#build": {
-      "outputs": ["dist/**"]
-    },
-    "web#stage-registry": {
-      "dependsOn": ["@workspace/registry#build"],
-      "outputs": ["public/r/**"]
-    },
-    "web#build": {
-      "dependsOn": ["^build", "stage-registry"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["VERCEL_ENV"]
-    },
-    "web#dev": {
-      "dependsOn": ["stage-registry"],
       "cache": false,
       "persistent": true
     },
