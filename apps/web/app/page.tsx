@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { site } from "@/lib/site"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
@@ -6,8 +7,15 @@ import { OrganUIMark } from "@workspace/ui/components/organui-mark"
 import { GitHubIcon, XIcon } from "@/components/social-icons"
 
 export const metadata: Metadata = {
-  title: "OrganUI — The interfaces healthcare deserves.",
-  description: "Interfaces for healthcare and life sciences.",
+  title: { absolute: site.title },
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    url: "/",
+  },
 }
 
 export default function Page() {

@@ -30,7 +30,8 @@
     "web#build": {
       "dependsOn": ["^build", "stage-registry"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["VERCEL_ENV"]
     },
     "web#dev": {
       "dependsOn": ["stage-registry"],
