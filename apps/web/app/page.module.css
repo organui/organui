@@ -1,7 +1,0 @@
-/* Scope the approved brand palette to the homepage, including in dark mode. */
-.theme {
-  --background: #f7f7f3;
-  --foreground: #25272b;
-  --primary: #626ac4;
-  --ring: var(--primary);
-}

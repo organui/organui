@@ -1,10 +1,8 @@
 import type { Metadata } from "next"
 import { ButtonLink } from "@workspace/ui/components/button-link"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
-import { cn } from "@workspace/ui/lib/utils"
 
 import { GitHubIcon, XIcon } from "@/components/social-icons"
-import styles from "./page.module.css"
 
 export const metadata: Metadata = {
   title: "OrganUI — The interfaces healthcare deserves.",
@@ -13,12 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main
-      className={cn(
-        styles.theme,
-        "grid min-h-svh place-items-center bg-background px-6 pt-12 pb-28 text-foreground [color-scheme:light]"
-      )}
-    >
+    <main className="grid min-h-svh place-items-center px-6 pt-12 pb-28">
       <div className="flex w-full flex-col items-center text-center">
         <h1 className="m-0 flex items-center gap-3.5 text-4xl leading-none font-[550] tracking-[-1.3px]">
           <OrganUIMark />
@@ -33,7 +26,7 @@ export default function Page() {
             size="icon"
             href="https://github.com/organui"
             aria-label="OrganUI on GitHub"
-            className="size-11 hover:bg-transparent hover:text-primary dark:hover:bg-transparent"
+            className="size-11"
           >
             <GitHubIcon />
           </ButtonLink>
@@ -42,7 +35,7 @@ export default function Page() {
             size="icon"
             href="https://x.com/organui"
             aria-label="OrganUI on X"
-            className="size-11 hover:bg-transparent hover:text-primary dark:hover:bg-transparent"
+            className="size-11"
           >
             <XIcon />
           </ButtonLink>
