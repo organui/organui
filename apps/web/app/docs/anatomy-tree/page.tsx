@@ -1,7 +1,35 @@
+import type { Metadata } from "next"
 import Link from "next/link"
+import { site } from "@/lib/site"
 import { Example } from "./example"
 
-export const metadata = { title: "Anatomy tree — OrganUI" }
+const description =
+  "An accessible anatomy tree component for selecting structures and controlling visibility in healthcare interfaces."
+
+export const metadata: Metadata = {
+  title: "Anatomy tree",
+  description,
+  alternates: { canonical: "/docs/anatomy-tree" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: "Anatomy tree — OrganUI",
+    description,
+    url: "/docs/anatomy-tree",
+    images: [
+      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@organui",
+    title: "Anatomy tree — OrganUI",
+    description,
+    images: [
+      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
+    ],
+  },
+}
 const usage = `"use client"
 import { useState } from "react"
 import { AnatomyTree } from "@/components/ui/anatomy-tree"
