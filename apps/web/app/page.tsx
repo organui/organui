@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { ButtonLink } from "@workspace/ui/components/button-link"
+import { buttonVariants } from "@workspace/ui/components/button"
+import { cn } from "@workspace/ui/lib/utils"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
 
 import { GitHubIcon, XIcon } from "@/components/social-icons"
@@ -21,24 +22,26 @@ export default function Page() {
           The interfaces healthcare deserves.
         </p>
         <div className="mt-6 flex gap-4">
-          <ButtonLink
-            variant="ghost"
-            size="icon"
+          <a
             href="https://github.com/organui"
             aria-label="OrganUI on GitHub"
-            className="size-11"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              "size-11"
+            )}
           >
             <GitHubIcon />
-          </ButtonLink>
-          <ButtonLink
-            variant="ghost"
-            size="icon"
+          </a>
+          <a
             href="https://x.com/organui"
             aria-label="OrganUI on X"
-            className="size-11"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              "size-11"
+            )}
           >
             <XIcon />
-          </ButtonLink>
+          </a>
         </div>
       </div>
     </main>
