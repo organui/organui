@@ -20,16 +20,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="grid min-h-svh place-items-center px-6 pt-12 pb-28">
-      <div className="flex w-full flex-col items-center text-center">
-        <h1 className="m-0 flex items-center gap-3.5 text-4xl leading-none font-[550] tracking-[-1.3px]">
+    <main className="flex min-h-svh items-center justify-center p-6">
+      <div className="flex max-w-md min-w-0 flex-col items-center gap-4 text-center text-sm leading-loose">
+        <h1 className="flex items-center gap-4 text-4xl font-medium">
           <OrganUIMark />
           <span>organui</span>
         </h1>
-        <p className="mt-7.5 text-[26px] leading-[1.4] font-normal tracking-[-0.65px] text-balance max-[480px]:max-w-80 max-[480px]:text-2xl max-[480px]:leading-[1.4]">
-          The interfaces healthcare deserves.
-        </p>
-        <div className="mt-6 flex gap-4">
+        <p>The interfaces healthcare deserves.</p>
+        <div className="flex gap-4">
           <a
             href="https://github.com/organui"
             aria-label="OrganUI on GitHub"
