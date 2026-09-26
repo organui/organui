@@ -6,12 +6,12 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "turbo format",
+    "format": "prettier --write .",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
-    "test:consumers": "bun run build --filter=@workspace/registry && bun packages/registry/scripts/consumers.ts",
-    "test:browser": "bun run --cwd packages/registry test:browser",
-    "format:check": "prettier --check packages/registry apps/web/app/docs apps/web/scripts docs scripts turbo.json",
+    "test:consumers": "turbo run consumers",
+    "test:browser": "turbo run test:browser",
+    "format:check": "prettier --check .",
     "test:cache": "bun scripts/check-registry-cache.ts"
   },
   "devDependencies": {

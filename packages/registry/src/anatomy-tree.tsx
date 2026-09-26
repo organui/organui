@@ -19,33 +19,119 @@ export type AnatomyTreeProps = {
   label?: string
   className?: string
 }
+export type AnatomyIndex = {
+  nodes: Map<string, AnatomyNode>
+  parents: Map<string, string>
+  leaves: Map<string, string[]>
+}
+export type AnatomyRow = {
+  node: AnatomyNode
+  level: number
+  size: number
+  position: number
+}
 
-export function anatomyIndex(data: readonly AnatomyNode[]) {
+export function anatomyIndex(data: readonly AnatomyNode[]): AnatomyIndex {
   const nodes = new Map<string, AnatomyNode>()
   const parents = new Map<string, string>()
-  function visit(items: readonly AnatomyNode[], parent?: string) {
-    for (const node of items) {
-      if (!node.id || nodes.has(node.id))
-        throw new Error("Anatomy IDs must be nonempty and unique")
+  const leaves = new Map<string, string[]>()
+  function visit(items: readonly AnatomyNode[], parent?: string): string[] {
+    return items.flatMap((node) => {
+      if (!node.id)
+        throw new Error("Anatomy IDs must be nonempty and unique: found empty")
+      if (nodes.has(node.id))
+        throw new Error(
+          `Anatomy IDs must be nonempty and unique: "${node.id}" repeats`
+        )
       nodes.set(node.id, node)
       if (parent) parents.set(node.id, parent)
-      visit(node.children ?? [], node.id)
-    }
+      const ids = node.children?.length
+        ? visit(node.children, node.id)
+        : [node.id]
+      leaves.set(node.id, ids)
+      return ids
+    })
   }
   visit(data)
-  return { nodes, parents }
+  return { nodes, parents, leaves }
 }
 
 export function leafIds(node: AnatomyNode): string[] {
   return node.children?.length ? node.children.flatMap(leafIds) : [node.id]
 }
 
+function leafState(
+  ids: readonly string[],
+  visibility: Readonly<Record<string, boolean>>
+): boolean | "mixed" {
+  const values = ids.map((id) => visibility[id] !== false)
+  return values.every(Boolean) ? true : values.some(Boolean) ? "mixed" : false
+}
+
 export function visibilityState(
   node: AnatomyNode,
   visibility: Readonly<Record<string, boolean>>
 ): boolean | "mixed" {
-  const values = leafIds(node).map((id) => visibility[id] !== false)
-  return values.every(Boolean) ? true : values.some(Boolean) ? "mixed" : false
+  return leafState(leafIds(node), visibility)
+}
+
+/** Hides every leaf of a fully visible node, otherwise shows them all. */
+export function nextVisibility(
+  node: AnatomyNode,
+  index: AnatomyIndex,
+  visibility: Readonly<Record<string, boolean>>
+): Record<string, boolean> {
+  // A Map keeps IDs such as "__proto__" as ordinary keys.
+  const next = new Map<string, boolean>()
+  for (const id of index.nodes.keys())
+    if (Object.hasOwn(visibility, id)) next.set(id, visibility[id]!)
+  const ids = index.leaves.get(node.id) ?? leafIds(node)
+  const value = leafState(ids, visibility) !== true
+  for (const id of ids) next.set(id, value)
+  return Object.fromEntries(next)
+}
+
+/** Visible rows in order. A search shows matches with their ancestors. */
+export function anatomyRows(
+  data: readonly AnatomyNode[],
+  index: AnatomyIndex,
+  expanded: ReadonlySet<string>,
+  query: string
+): AnatomyRow[] {
+  const term = query.trim().toLocaleLowerCase()
+  const included = term ? new Set<string>() : undefined
+  if (included)
+    for (const node of index.nodes.values()) {
+      if (!node.label.toLocaleLowerCase().includes(term)) continue
+      let id: string | undefined = node.id
+      while (id && !included.has(id)) {
+        included.add(id)
+        id = index.parents.get(id)
+      }
+    }
+  const rows: AnatomyRow[] = []
+  function visit(items: readonly AnatomyNode[], level: number) {
+    const visible = included ? items.filter((n) => included.has(n.id)) : items
+    visible.forEach((node, position) => {
+      rows.push({ node, level, size: visible.length, position: position + 1 })
+      if (included || expanded.has(node.id))
+        visit(node.children ?? [], level + 1)
+    })
+  }
+  visit(data, 1)
+  return rows
+}
+
+/** The roving tab stop: the active row, else its nearest visible ancestor. */
+export function focusTarget(
+  rows: readonly AnatomyRow[],
+  activePath: readonly string[],
+  parents: ReadonlyMap<string, string>
+): string | undefined {
+  const ids = new Set(rows.map(({ node }) => node.id))
+  let id: string | undefined = activePath[0]
+  while (id && !ids.has(id)) id = parents.get(id)
+  return id ?? activePath.find((path) => ids.has(path)) ?? rows[0]?.node.id
 }
 
 export function AnatomyTree({
@@ -58,57 +144,37 @@ export function AnatomyTree({
   label = "Anatomy",
   className = "",
 }: AnatomyTreeProps) {
-  const { nodes, parents } = anatomyIndex(data)
+  const index = React.useMemo(() => anatomyIndex(data), [data])
   const [expanded, setExpanded] = React.useState(
     () => new Set(defaultExpandedIds)
   )
   const [query, setQuery] = React.useState("")
+  // Typing stays responsive while larger trees filter.
+  const deferredQuery = React.useDeferredValue(query)
   const [activePath, setActivePath] = React.useState<string[]>(() =>
     data[0] ? [data[0].id] : []
   )
-  const root = React.useRef<HTMLDivElement>(null)
   const search = React.useRef<HTMLInputElement>(null)
-  const hadFocus = React.useRef(false)
+  const lastFocused = React.useRef<Element | null>(null)
   const refs = React.useRef(new Map<string, HTMLDivElement>())
   const helpId = React.useId()
   const searchId = React.useId()
-  const term = query.trim().toLocaleLowerCase()
-  const included = new Set<string>()
-  if (term)
-    for (const node of nodes.values()) {
-      if (node.label.toLocaleLowerCase().includes(term)) {
-        let id: string | undefined = node.id
-        while (id) {
-          included.add(id)
-          id = parents.get(id)
-        }
-      }
-    }
-  const rows: {
-    node: AnatomyNode
-    level: number
-    size: number
-    position: number
-  }[] = []
-  function flatten(items: readonly AnatomyNode[], level: number) {
-    const visible = items.filter((n) => !term || included.has(n.id))
-    visible.forEach((node, index) => {
-      rows.push({ node, level, size: visible.length, position: index + 1 })
-      if (term || expanded.has(node.id)) flatten(node.children ?? [], level + 1)
-    })
-  }
-  flatten(data, 1)
-  let focusId: string | undefined = activePath[0]
-  while (focusId && !rows.some(({ node }) => node.id === focusId))
-    focusId = parents.get(focusId)
-  focusId ??=
-    activePath.find((id) => rows.some(({ node }) => node.id === id)) ??
-    rows[0]?.node.id
+  const searching = deferredQuery.trim() !== ""
+  const rows = React.useMemo(
+    () => anatomyRows(data, index, expanded, deferredQuery),
+    [data, index, expanded, deferredQuery]
+  )
+  const focusId = focusTarget(rows, activePath, index.parents)
   React.useLayoutEffect(() => {
-    if (hadFocus.current && !root.current?.contains(document.activeElement)) {
-      if (focusId) refs.current.get(focusId)?.focus()
-      else search.current?.focus()
-    }
+    // Recover only when an update removed the focused element. Focus that
+    // left the tree on purpose, even to the body, is never taken back.
+    const previous = lastFocused.current
+    if (!previous || previous.isConnected) return
+    lastFocused.current = null
+    if (document.activeElement && document.activeElement !== document.body)
+      return
+    if (focusId) refs.current.get(focusId)?.focus()
+    else search.current?.focus()
   })
   function focus(id?: string) {
     if (id) {
@@ -124,14 +190,7 @@ export function AnatomyTree({
     })
   }
   function toggleVisibility(node: AnatomyNode) {
-    const next = new Map(
-      [...nodes.keys()]
-        .filter((id) => Object.hasOwn(visibility, id))
-        .map((id) => [id, visibility[id]!] as const)
-    )
-    const value = visibilityState(node, visibility) !== true
-    for (const id of leafIds(node)) next.set(id, value)
-    onVisibilityChange(Object.fromEntries(next))
+    onVisibilityChange(nextVisibility(node, index, visibility))
   }
   return (
     <section
@@ -152,25 +211,33 @@ export function AnatomyTree({
         Arrows navigate and expand. Enter selects. Space toggles visibility.
       </p>
       <div
-        ref={root}
         role="tree"
         aria-label={label}
         aria-describedby={helpId}
-        onFocusCapture={() => {
-          hadFocus.current = true
+        onFocusCapture={(event) => {
+          lastFocused.current = event.target
         }}
         onBlurCapture={(event) => {
+          const element = event.target
           if (
-            event.relatedTarget &&
-            !event.currentTarget.contains(event.relatedTarget as Node)
+            event.relatedTarget instanceof Node &&
+            event.currentTarget.contains(event.relatedTarget)
           )
-            hadFocus.current = false
+            return
+          // Removing the focused row can also blur it. Once the update has
+          // committed, an element that is still attached was left on purpose.
+          queueMicrotask(() => {
+            if (element.isConnected && lastFocused.current === element)
+              lastFocused.current = null
+          })
         }}
       >
-        {rows.map(({ node, level, size, position }, index) => {
+        {rows.map(({ node, level, size, position }, rowIndex) => {
           const branch = !!node.children?.length
-          const open = !!term || expanded.has(node.id)
-          const checked = visibilityState(node, visibility)
+          const open = searching || expanded.has(node.id)
+          const checked = leafState(index.leaves.get(node.id)!, visibility)
+          const state =
+            checked === "mixed" ? "Mixed" : checked ? "Visible" : "Hidden"
           return (
             <div
               key={node.id}
@@ -189,10 +256,10 @@ export function AnatomyTree({
               tabIndex={focusId === node.id ? 0 : -1}
               onFocus={() => {
                 const path = [node.id]
-                let parent = parents.get(node.id)
+                let parent = index.parents.get(node.id)
                 while (parent) {
                   path.push(parent)
-                  parent = parents.get(parent)
+                  parent = index.parents.get(parent)
                 }
                 setActivePath(path)
               }}
@@ -211,18 +278,19 @@ export function AnatomyTree({
                 )
                   return
                 event.preventDefault()
-                if (event.key === "ArrowDown") focus(rows[index + 1]?.node.id)
-                if (event.key === "ArrowUp") focus(rows[index - 1]?.node.id)
+                if (event.key === "ArrowDown")
+                  focus(rows[rowIndex + 1]?.node.id)
+                if (event.key === "ArrowUp") focus(rows[rowIndex - 1]?.node.id)
                 if (event.key === "Home") focus(rows[0]?.node.id)
                 if (event.key === "End") focus(rows.at(-1)?.node.id)
                 if (event.key === "ArrowRight" && branch) {
                   if (!open) toggleExpanded(node.id)
-                  else if (rows[index + 1]?.level === level + 1)
-                    focus(rows[index + 1]?.node.id)
+                  else if (rows[rowIndex + 1]?.level === level + 1)
+                    focus(rows[rowIndex + 1]?.node.id)
                 }
                 if (event.key === "ArrowLeft") {
-                  if (branch && open && !term) toggleExpanded(node.id)
-                  else focus(parents.get(node.id))
+                  if (branch && open && !searching) toggleExpanded(node.id)
+                  else focus(index.parents.get(node.id))
                 }
                 if (event.key === "Enter") onSelectionChange(node.id)
                 if (event.key === " ") toggleVisibility(node)
@@ -234,7 +302,7 @@ export function AnatomyTree({
                 <Button
                   tabIndex={-1}
                   aria-label={`${open ? "Collapse" : "Expand"} ${node.label}`}
-                  disabled={!!term}
+                  disabled={searching}
                   onClick={() => {
                     focus(node.id)
                     toggleExpanded(node.id)
@@ -258,14 +326,15 @@ export function AnatomyTree({
               </Button>
               <Button
                 tabIndex={-1}
-                aria-label={`${checked === true ? "Hide" : "Show"} ${node.label}`}
+                // Starts with the visible state so voice control can target it.
+                aria-label={`${state}: ${checked === true ? "hide" : "show"} ${node.label}`}
                 onClick={() => {
                   focus(node.id)
                   toggleVisibility(node)
                 }}
                 className="shrink-0 rounded border px-2 py-1 text-xs"
               >
-                {checked === "mixed" ? "Mixed" : checked ? "Visible" : "Hidden"}
+                {state}
               </Button>
             </div>
           )

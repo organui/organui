@@ -4,29 +4,31 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./anatomy-tree": "./src/anatomy-tree.tsx"
+    "./anatomy-tree": "./src/anatomy-tree.tsx",
+    "./dist/*": "./dist/*"
   },
   "scripts": {
     "build": "bun scripts/build.ts",
     "lint": "eslint src --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test": "bun test tests/model.test.ts",
-    "test:browser": "playwright test"
+    "test": "bun test tests/model.test.ts"
   },
   "dependencies": {
-    "@base-ui/react": "^1.8.0",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "@base-ui/react": "^1.8.0"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.11.0",
-    "@playwright/test": "1.58.2",
-    "@types/bun": "latest",
+    "@types/bun": "1.4.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "eslint": "^9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "shadcn": "4.21.0",
     "typescript": "^5"
   }

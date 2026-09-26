@@ -56,7 +56,9 @@ test("filtered ancestors affect all leaves and clearing restores collapse", asyn
   await expect(
     page.getByRole("button", { name: "Collapse Heart", exact: true })
   ).toBeDisabled()
-  await page.getByRole("button", { name: "Hide Heart", exact: true }).click()
+  await page
+    .getByRole("button", { name: "Visible: hide Heart", exact: true })
+    .click()
   await expect(page.getByLabel("Visibility", { exact: true })).toHaveText(
     '{"la":false,"lv":false,"ra":false,"rv":false}'
   )
@@ -79,7 +81,7 @@ test("data replacement recovers focus and new leaves default visible", async ({
   page,
 }) => {
   await page
-    .getByRole("button", { name: "Hide Left atrium", exact: true })
+    .getByRole("button", { name: "Visible: hide Left atrium", exact: true })
     .click()
   await page
     .getByRole("button", { name: "Schedule replacement", exact: true })
@@ -93,7 +95,7 @@ test("data replacement recovers focus and new leaves default visible", async ({
     page.getByRole("treeitem", { name: "New structure", exact: true })
   ).toHaveAttribute("aria-checked", "true")
   await page
-    .getByRole("button", { name: "Hide New structure", exact: true })
+    .getByRole("button", { name: "Visible: hide New structure", exact: true })
     .click()
   await expect(page.getByLabel("Visibility", { exact: true })).toHaveText(
     '{"new":false}'
@@ -103,13 +105,32 @@ test("data replacement recovers focus and new leaves default visible", async ({
   await expect(page.getByText("No anatomy available.")).toBeVisible()
 })
 
+test("updates after focus leaves to a non-focusable viewer keep focus there", async ({
+  page,
+}) => {
+  const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
+  await heart.focus()
+  // A canvas viewer cannot take focus, so focus moves to the body.
+  await page.getByRole("img", { name: "Viewer", exact: true }).click()
+  await expect(page.getByLabel("Selected", { exact: true })).toHaveText("rv")
+  await expect(
+    page.getByRole("treeitem", { name: "Right ventricle", exact: true })
+  ).toHaveAttribute("aria-selected", "true")
+  await expect(heart).not.toBeFocused()
+  expect(
+    await page.evaluate(() => document.activeElement === document.body)
+  ).toBe(true)
+})
+
 test("theme preserved, no runtime errors or horizontal overflow", async ({
   page,
 }) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.reload()
-  await page.getByRole("button", { name: "Hide Heart", exact: true }).click()
+  await page
+    .getByRole("button", { name: "Visible: hide Heart", exact: true })
+    .click()
   expect(errors).toEqual([])
   expect(
     await page.evaluate(
@@ -148,7 +169,7 @@ test("empty updates restore search focus and arbitrary IDs retain visibility", a
   await expect(page.getByRole("searchbox")).toBeFocused()
   await page.getByRole("button", { name: "Special IDs", exact: true }).click()
   await page
-    .getByRole("button", { name: "Hide Special ID", exact: true })
+    .getByRole("button", { name: "Visible: hide Special ID", exact: true })
     .click()
   await expect(page.getByLabel("Visibility", { exact: true })).toHaveText(
     '{"__proto__":false}'
@@ -165,7 +186,7 @@ test("accessibility scan covers expanded, mixed and filtered states", async ({
   for (const state of ["expanded", "mixed", "filtered"]) {
     if (state === "mixed")
       await page
-        .getByRole("button", { name: "Hide Left atrium", exact: true })
+        .getByRole("button", { name: "Visible: hide Left atrium", exact: true })
         .click()
     if (state === "filtered")
       await page.getByRole("searchbox").fill("ventricle")

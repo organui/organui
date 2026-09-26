@@ -1,0 +1,17 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "stage-registry": {
+      "dependsOn": ["@workspace/registry#build"],
+      "outputs": ["public/r/**"]
+    },
+    "build": {
+      "dependsOn": ["^build", "stage-registry"],
+      "env": ["VERCEL_ENV"]
+    },
+    "dev": {
+      "dependsOn": ["stage-registry"]
+    }
+  }
+}

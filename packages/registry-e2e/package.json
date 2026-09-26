@@ -1,0 +1,21 @@
+{
+  "name": "@workspace/registry-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "consumers": "bun scripts/consumers.ts",
+    "test:browser": "playwright test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.0",
+    "@playwright/test": "1.58.2",
+    "@types/bun": "1.4.2",
+    "@workspace/registry": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "shadcn": "4.21.0",
+    "typescript": "^5",
+    "web": "workspace:*"
+  }
+}

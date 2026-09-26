@@ -1,28 +1,57 @@
-# shadcn/ui monorepo template
+# OrganUI
 
-This is a Next.js monorepo template with shadcn/ui.
+Interfaces for healthcare and life sciences, distributed as editable source
+through a [shadcn](https://ui.shadcn.com)-compatible registry at
+[organui.com](https://organui.com).
 
-## Adding components
+## Install a component
 
-To add components to your app, run the following command at the root of your `web` app:
+In a React 19 project configured with shadcn, Tailwind CSS 4 and the Base UI
+preset:
 
 ```bash
-pnpm dlx shadcn@latest add button -c apps/web
+bunx shadcn@4.21.0 add https://organui.com/r/anatomy-tree.json
 ```
 
-This will place the ui components in the `packages/ui/src/components` directory.
+Or register the namespace once in `components.json`:
 
-## Using components
-
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from "@workspace/ui/components/button"
+```json
+{
+  "registries": {
+    "@organui": "https://organui.com/r/{name}.json"
+  }
+}
 ```
 
-## Anatomy tree registry
+and run `bunx shadcn@4.21.0 add @organui/anatomy-tree`. See
+[the anatomy tree documentation](https://organui.com/docs/anatomy-tree).
 
-See the [registry architecture and verification commands](docs/architecture.md).
-Run `bun install --frozen-lockfile` and `bun run dev`, then open
-`/docs/anatomy-tree` for installation instructions and the interactive example.
-Registry JSON is built by `packages/registry` and staged by the website at `/r`.
+## Repository
+
+| Path                    | Contents                                                        |
+| ----------------------- | --------------------------------------------------------------- |
+| `apps/web`              | Website, component documentation and the staged registry (`/r`) |
+| `packages/registry`     | Public component source, `registry.json` and the registry build |
+| `packages/registry-e2e` | Generated Next.js/Vite consumers and Playwright browser tests   |
+| `packages/ui`           | Private website foundation (theme, internal components)         |
+| `packages/*-config`     | Shared ESLint and TypeScript configuration                      |
+
+## Develop
+
+Requires Bun 1.4.2 and Node 22.
+
+```bash
+bun install --frozen-lockfile
+bun run dev
+```
+
+Then open `http://localhost:3000/docs/anatomy-tree`. Run tasks from the root so
+Turborepo builds and stages the registry first; `next build` alone does not.
+
+`bun run lint`, `bun run typecheck`, `bun run test` and `bun run format:check`
+cover the quick checks. [docs/architecture.md](docs/architecture.md) describes
+the registry boundaries and the consumer, browser and cache suites.
+
+## License
+
+[MIT](LICENSE)
