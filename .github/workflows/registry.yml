@@ -5,32 +5,47 @@ on:
     branches: [master]
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
-  verify:
+  checks:
+    name: Format, lint, typecheck and unit tests
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: "1.4.2"
       - run: bun install --frozen-lockfile
       - run: bun run format:check
-      - run: bun run lint
-      - run: bun run typecheck
-      - run: bun run test
+      - run: bunx turbo run lint typecheck test
+  verify:
+    name: Build, cache and installed consumers
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.2"
+      - run: bun install --frozen-lockfile
       - run: bun scripts/vercel-build.ts
       - run: bun run test:cache
-      - run: bun run test:consumers
       - run: bunx playwright install --with-deps chromium
-        working-directory: packages/registry
+        working-directory: packages/registry-e2e
+      # Turbo generates the consumers and reuses the cached website build.
       - run: bun run test:browser
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           name: browser-failures
-          path: packages/registry/test-results
+          path: packages/registry-e2e/test-results
           if-no-files-found: ignore
