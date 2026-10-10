@@ -1,7 +1,6 @@
 import type { NextConfig } from "next"
 
-const nextConfig: NextConfig = {
-  transpilePackages: ["@workspace/ui"],
-}
+// Workspace packages are transpiled automatically by Next.js 16.
+const nextConfig: NextConfig = {}
 
 export default nextConfig

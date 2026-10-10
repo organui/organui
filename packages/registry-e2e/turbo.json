@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "consumers": {
+      "dependsOn": ["@workspace/registry#build"],
+      "cache": false
+    },
+    "test:browser": {
+      "dependsOn": ["consumers", "web#build"],
+      "cache": false
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "organui",
-  "homepage": "https://github.com/organui/organui",
+  "homepage": "https://organui.com",
   "items": [
     {
       "name": "anatomy-tree",

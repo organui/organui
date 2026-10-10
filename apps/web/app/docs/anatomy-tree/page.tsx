@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     ],
   },
 }
+const registries = JSON.stringify(
+  { registries: { "@organui": `${site.url}/r/{name}.json` } },
+  null,
+  2
+)
 const usage = `"use client"
 import { useState } from "react"
 import { AnatomyTree } from "@/components/ui/anatomy-tree"
@@ -67,8 +72,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">Install</h2>
         <p>
           In a React 19 project configured with shadcn, Tailwind CSS 4, and the
-          Base UI / Nova theme, run the command below. Replace REGISTRY_ORIGIN
-          with this site’s origin (including https://).
+          Base UI / Nova theme, run the command below.
         </p>
         <pre
           tabIndex={0}
@@ -76,7 +80,20 @@ export default function Page() {
           aria-label="Installation command"
           className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
         >
-          bunx shadcn@4.21.0 add REGISTRY_ORIGIN/r/anatomy-tree.json
+          {`bunx shadcn@4.21.0 add ${site.url}/r/anatomy-tree.json`}
+        </pre>
+        <p>
+          To install by name, add the OrganUI namespace to{" "}
+          <code>components.json</code> and run{" "}
+          <code>bunx shadcn@4.21.0 add @organui/anatomy-tree</code>.
+        </p>
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="Registry namespace configuration"
+          className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+        >
+          {registries}
         </pre>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory and adds
