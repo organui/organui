@@ -54,4 +54,6 @@ the registry boundaries and the consumer, browser and cache suites.
 
 ## License
 
-[MIT](LICENSE)
+OrganUI code is licensed under [MIT](LICENSE). Third-party dependencies, fonts,
+and other upstream material retain their own licenses; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

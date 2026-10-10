@@ -17,5 +17,6 @@
     "shadcn": "4.21.0",
     "typescript": "^5",
     "web": "workspace:*"
-  }
+  },
+  "license": "MIT"
 }
