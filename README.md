@@ -28,13 +28,13 @@ and run `bunx shadcn@4.21.0 add @organui/anatomy-tree`. See
 
 ## Repository
 
-| Path                    | Contents                                                        |
-| ----------------------- | --------------------------------------------------------------- |
-| `apps/web`              | Website, component documentation and the staged registry (`/r`) |
-| `packages/registry`     | Public component source, `registry.json` and the registry build |
-| `packages/registry-e2e` | Generated Next.js/Vite consumers and Playwright browser tests   |
-| `packages/ui`           | Private website foundation (theme, internal components)         |
-| `packages/*-config`     | Shared ESLint and TypeScript configuration                      |
+| Path                    | Contents                                                          |
+| ----------------------- | ----------------------------------------------------------------- |
+| `apps/web`              | Website, component documentation and the staged registry (`/r`)   |
+| `packages/registry`     | `registry.json`, item source under `registry/` and `shadcn build` |
+| `packages/registry-e2e` | Generated Next.js/Vite consumers and Playwright browser tests     |
+| `packages/ui`           | Private website foundation (theme, internal components)           |
+| `packages/*-config`     | Shared ESLint and TypeScript configuration                        |
 
 ## Develop
 

@@ -1,5 +1,5 @@
 {
   "extends": "@workspace/typescript-config/react-library.json",
   "compilerOptions": { "types": ["bun"] },
-  "include": ["src", "scripts", "tests"]
+  "include": ["registry", "scripts", "tests"]
 }

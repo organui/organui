@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./anatomy-tree": "./src/anatomy-tree.tsx",
+    "./anatomy-tree": "./registry/base-nova/anatomy-tree/anatomy-tree.tsx",
     "./dist/*": "./dist/*"
   },
   "scripts": {
     "build": "bun scripts/build.ts",
-    "lint": "eslint src --max-warnings=0",
+    "lint": "eslint registry --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "bun test tests/model.test.ts"
   },

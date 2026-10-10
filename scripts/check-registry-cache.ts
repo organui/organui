@@ -2,7 +2,10 @@ import { readFile, writeFile, rm } from "node:fs/promises"
 import { resolve } from "node:path"
 import assert from "node:assert/strict"
 const root = resolve(import.meta.dirname, "..")
-const source = resolve(root, "packages/registry/src/anatomy-tree.tsx")
+const source = resolve(
+  root,
+  "packages/registry/registry/base-nova/anatomy-tree/anatomy-tree.tsx"
+)
 const dist = resolve(root, "packages/registry/dist")
 const staged = resolve(root, "apps/web/public/r")
 async function turbo(args: string[]) {

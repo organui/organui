@@ -7,7 +7,7 @@ import {
   nextVisibility,
   visibilityState,
   type AnatomyNode,
-} from "../src/anatomy-tree.js"
+} from "../registry/base-nova/anatomy-tree/anatomy-tree.js"
 const node = {
   id: "root",
   label: "Root",

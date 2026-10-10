@@ -12,7 +12,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/anatomy-tree.tsx",
+          "path": "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
           "type": "registry:ui"
         }
       ]

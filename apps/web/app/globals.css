@@ -1,4 +1,4 @@
 @import "@workspace/ui/globals.css";
 
 /* The docs render the registry component from its workspace dependency. */
-@source "../node_modules/@workspace/registry/src";
+@source "../node_modules/@workspace/registry/registry";
