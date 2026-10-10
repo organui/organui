@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { site } from "@/lib/site"
+import { explorers, site } from "@/lib/site"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
@@ -27,6 +27,20 @@ export default function Page() {
           <span>organui</span>
         </h1>
         <p>The interfaces healthcare deserves.</p>
+        <nav aria-label="3D anatomy explorers">
+          <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+            {explorers.map((explorer) => (
+              <li key={explorer.name}>
+                <a
+                  href={explorer.href}
+                  className="underline-offset-4 hover:text-muted-foreground hover:underline"
+                >
+                  {explorer.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div className="flex gap-4">
           <a
             href="https://github.com/organui"
