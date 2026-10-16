@@ -104,14 +104,14 @@ test("homepage explorer links support keyboard navigation without overflow", asy
   const navigation = page.getByRole("navigation", {
     name: "3D anatomy explorers",
   })
-  await expect(navigation.getByRole("link")).toHaveCount(5)
-  const names = ["Brain", "Heart", "Kidneys", "Liver", "Lungs"]
+  const names = ["Brain", "Heart", "Kidneys", "Liver", "Lungs", "Spinal cord"]
+  await expect(navigation.getByRole("link")).toHaveCount(names.length)
   for (const [index, name] of names.entries()) {
     const link = navigation.getByRole("link", { name, exact: true })
     await expect(link).toBeVisible()
     await expect(link).toHaveAttribute(
       "href",
-      `https://github.com/organui/${name.toLowerCase()}-3d`
+      `https://github.com/organui/${name.toLowerCase().replaceAll(" ", "-")}-3d`
     )
     if (index === 0) await link.focus()
     else await page.keyboard.press("Tab")
