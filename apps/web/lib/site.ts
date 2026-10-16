@@ -7,12 +7,17 @@ export const site = {
 } as const
 
 // Standalone 3D anatomy explorers, each in its own repository.
-export const explorers = ["Brain", "Heart", "Kidneys", "Liver", "Lungs"].map(
-  (name) => ({
-    name,
-    href: `https://github.com/organui/${name.toLowerCase()}-3d`,
-  })
-)
+export const explorers = [
+  "Brain",
+  "Heart",
+  "Kidneys",
+  "Liver",
+  "Lungs",
+  "Vessels",
+].map((name) => ({
+  name,
+  href: `https://github.com/organui/${name.toLowerCase()}-3d`,
+}))
 
 // Preview and development builds should never be indexed as the public site.
 export const isProduction = process.env.VERCEL_ENV === "production"
