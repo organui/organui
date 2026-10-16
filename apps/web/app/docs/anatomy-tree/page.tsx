@@ -163,11 +163,11 @@ export default function Page() {
         <p>
           When <code>selectedId</code> changes to a row that is not shown, for
           example after a pick in your 3D viewer, the tree expands its ancestors
-          and scrolls the row into view. Mark a grouping with{" "}
-          <code>selectable: false</code> when it has no single structure to
-          select: clicking or pressing Enter on it expands or collapses it
-          instead. Give any node a <code>color</code> to show a matching swatch
-          before its label.
+          and scrolls the row into view within its scrolling container, without
+          moving the page. Mark a grouping with <code>selectable: false</code>{" "}
+          when it has no single structure to select: clicking or pressing Enter
+          on it expands or collapses it instead. Give any node a{" "}
+          <code>color</code> to show a matching swatch before its label.
         </p>
       </section>
       <section className="space-y-4">
