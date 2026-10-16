@@ -198,3 +198,55 @@ test("accessibility scan covers expanded, mixed and filtered states", async ({
     expect(result.violations).toEqual([])
   }
 })
+
+test("a selection made outside the tree expands and reveals its row", async ({
+  page,
+}) => {
+  await page
+    .getByRole("button", { name: "Collapse Heart", exact: true })
+    .click()
+  await expect(page.getByRole("treeitem")).toHaveCount(1)
+  await page.getByRole("img", { name: "Viewer", exact: true }).click()
+  const right = page.getByRole("treeitem", {
+    name: "Right ventricle",
+    exact: true,
+  })
+  await expect(right).toHaveAttribute("aria-selected", "true")
+  await expect(right).toBeInViewport()
+  await expect(
+    page.getByRole("treeitem", { name: "Left heart", exact: true })
+  ).toHaveAttribute("aria-expanded", "true")
+  // Collapsing again is respected until the selection changes.
+  await page
+    .getByRole("button", { name: "Collapse Heart", exact: true })
+    .click()
+  await expect(page.getByRole("treeitem")).toHaveCount(1)
+})
+
+test("groups that are not selectable expand instead, and colors show", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: "Grouped data", exact: true }).click()
+  const group = page.getByRole("treeitem", { name: "Chambers", exact: true })
+  await expect(group).not.toHaveAttribute("aria-selected")
+  await expect(group).toHaveAttribute("aria-expanded", "false")
+  await group.focus()
+  await page.keyboard.press("Enter")
+  await expect(group).toHaveAttribute("aria-expanded", "true")
+  await page.getByRole("button", { name: "Chambers", exact: true }).click()
+  await expect(group).toHaveAttribute("aria-expanded", "false")
+  await expect(page.getByLabel("Selected", { exact: true })).toHaveText("none")
+  await page.keyboard.press("Enter")
+  const atrium = page.getByRole("treeitem", {
+    name: "Left atrium",
+    exact: true,
+  })
+  await expect(atrium.locator('span[aria-hidden="true"]').first()).toHaveCSS(
+    "background-color",
+    "rgb(183, 124, 118)"
+  )
+  await page.getByRole("button", { name: "Left atrium", exact: true }).click()
+  await expect(page.getByLabel("Selected", { exact: true })).toHaveText("la")
+  const result = await new AxeBuilder({ page }).analyze()
+  expect(result.violations).toEqual([])
+})
