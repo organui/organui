@@ -3,82 +3,23 @@
 // Each organ's scripts/models/<organ>.json maps structure IDs to source
 // meshes, pinned by checksum. Structure IDs, labels and colours come from the
 // organ's registry item, so the GLB and the item cannot drift apart.
-import { createHash } from "node:crypto"
 import { mkdir } from "node:fs/promises"
 import type { OrganModel } from "../../packages/registry/registry/base-nova/organ-viewer/organ-viewer"
 
-const MIRROR = "olivercase/body_parts_3d_api"
-const COMMIT = "fd527e6f4daf732fd814314d9257df5877b844bc"
-const MAPPING = {
-  url: `https://raw.githubusercontent.com/${MIRROR}/${COMMIT}/metadata/FMA2Obj.txt`,
-  sha256: "a199eb9cb258266768b7690f4ac2591f67d4b146c95e14046c46091c35c09385",
-}
-// Millimetres to display units, with no anatomical reshaping.
-const SCALE = 0.025
-const CREDIT =
-  "BodyParts3D / Anatomography, © The Database Center for Life Science. CC BY-SA 2.1 Japan. Adapted by OrganUI."
+import {
+  COMMIT,
+  CREDIT,
+  MAPPING,
+  MIRROR,
+  SCALE,
+  fetchPinned,
+  parse,
+  root,
+  sha,
+  type Source,
+} from "./bodyparts3d"
 
-type Source = { element: string; file: string; sha256: string }
 type Spec = { structures: Record<string, Source[]> }
-
-const root = new URL("../../", import.meta.url)
-const cache = new URL("node_modules/.cache/organ-models/", root)
-const sha = (bytes: Uint8Array) =>
-  createHash("sha256").update(bytes).digest("hex")
-
-async function fetchPinned(name: string, url: string, sum: string) {
-  const file = Bun.file(new URL(name, cache))
-  let bytes: Uint8Array
-  if (await file.exists()) bytes = new Uint8Array(await file.arrayBuffer())
-  else {
-    const response = await fetch(url)
-    if (!response.ok) throw new Error(`${name}: HTTP ${response.status}`)
-    bytes = new Uint8Array(await response.arrayBuffer())
-  }
-  if (sha(bytes) !== sum)
-    throw new Error(`Checksum mismatch for ${name}; review upstream first`)
-  await Bun.write(file, bytes)
-  return new TextDecoder().decode(bytes)
-}
-
-await mkdir(cache, { recursive: true })
-const mapping = new Map<string, Set<string>>()
-for (const line of (
-  await fetchPinned("FMA2Obj.txt", MAPPING.url, MAPPING.sha256)
-).split(/\r\n?|\n/)) {
-  const [concept, , elements] = line.split("\t")
-  if (!concept?.startsWith("FMA") || !elements) continue
-  const set = mapping.get(concept) ?? new Set()
-  for (const element of elements.split("+")) set.add(element)
-  mapping.set(concept, set)
-}
-
-function parse(text: string, source: Source) {
-  const header = (name: string) =>
-    text.match(new RegExp(`^# ${name} : (.+)$`, "m"))?.[1]?.trim()
-  const concept = header("Concept ID")
-  if (
-    header("Compatibility version") !== "4.3" ||
-    header("File ID") !== source.element ||
-    !concept ||
-    !mapping.get(concept)?.has(source.element)
-  )
-    throw new Error(`${source.file} does not match the official mapping`)
-  const positions: number[] = []
-  const indices: number[] = []
-  for (const line of text.split(/\r\n?|\n/)) {
-    const [kind, ...tokens] = line.trim().split(/\s+/)
-    if (kind === "v") positions.push(...tokens.slice(0, 3).map(Number))
-    else if (kind === "f") {
-      const face = tokens.map((token) => Number(token.split("/")[0]) - 1)
-      for (let i = 1; i < face.length - 1; i++)
-        indices.push(face[0]!, face[i]!, face[i + 1]!)
-    }
-  }
-  if (!positions.length || !indices.length || !positions.every(Number.isFinite))
-    throw new Error(`${source.file} has no usable geometry`)
-  return { concept, name: header("English name")!, positions, indices }
-}
 
 function normals(positions: Float32Array, indices: Uint32Array) {
   const result = new Float32Array(positions.length)

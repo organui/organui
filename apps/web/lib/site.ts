@@ -38,10 +38,11 @@ export const explorers = [
   "Tongue",
   "Uterus",
   "Vessels",
-].map((name) => ({
-  name,
-  href: `https://github.com/organui/${name.toLowerCase().replaceAll(" ", "-")}-3d`,
-}))
+].map((name) => {
+  const slug = name.toLowerCase().replaceAll(" ", "-")
+  // The registry item for the same organ shares the slug.
+  return { name, slug, href: `https://github.com/organui/${slug}-3d` }
+})
 
 // Preview and development builds should never be indexed as the public site.
 export const isProduction = process.env.VERCEL_ENV === "production"

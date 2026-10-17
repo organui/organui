@@ -10,7 +10,8 @@
     "lint": "eslint --max-warnings=0",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
-    "stage-registry": "bun scripts/stage-registry.ts"
+    "stage-registry": "bun scripts/stage-registry.ts",
+    "test": "bun test lib"
   },
   "dependencies": {
     "@workspace/ui": "workspace:*",
@@ -29,7 +30,8 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "eslint": "^9",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@types/bun": "1.4.2"
   },
   "license": "MIT"
 }

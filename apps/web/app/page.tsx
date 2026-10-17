@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { explorers, site } from "@/lib/site"
+import { bodyPlaces } from "@/lib/body"
+import { registryItems } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
-import { OrganUIMark } from "@workspace/ui/components/organui-mark"
 
+import { BodyNavigator } from "@/components/body-navigator"
+import { SiteHeader } from "@/components/site-header"
 import { GitHubIcon, XIcon } from "@/components/social-icons"
 
 export const metadata: Metadata = {
@@ -19,58 +21,55 @@ export const metadata: Metadata = {
   },
 }
 
+// Every organ component, placed on the body.
+const organs = registryItems
+  .filter(({ organ }) => organ)
+  .map(({ name, title, href }) => ({
+    name,
+    title,
+    href,
+    explorer: explorers.find(({ slug }) => slug === name)?.href,
+    ...bodyPlaces[name]!,
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title))
+
+const social = cn(
+  buttonVariants({ variant: "ghost", size: "icon" }),
+  "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
+)
+
 export default function Page() {
   return (
-    <main className="flex min-h-svh items-center justify-center p-6">
-      <div className="flex max-w-md min-w-0 flex-col items-center gap-4 text-center text-sm leading-loose">
-        <h1 className="flex items-center gap-4 text-4xl font-medium">
-          <OrganUIMark />
-          <span>organui</span>
-        </h1>
-        <p>The interfaces healthcare deserves.</p>
-        <Link
-          href="/docs"
-          className="font-medium underline underline-offset-4 hover:text-muted-foreground"
-        >
-          Browse components
-        </Link>
-        <nav aria-label="3D anatomy explorers">
-          <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-            {explorers.map((explorer) => (
-              <li key={explorer.name}>
-                <a
-                  href={explorer.href}
-                  className="underline-offset-4 hover:text-muted-foreground hover:underline"
-                >
-                  {explorer.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="flex gap-4">
+    <>
+      <SiteHeader />
+      <main className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 sm:px-10">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            The interfaces healthcare deserves.
+          </h1>
+          <p className="text-muted-foreground">
+            Pick an organ on the body or in the list to zoom in and open its
+            component.
+          </p>
+        </div>
+        <BodyNavigator organs={organs} />
+        <footer className="flex justify-center gap-4">
           <a
             href="https://github.com/organui"
             aria-label="OrganUI on GitHub"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
-            )}
+            className={social}
           >
             <GitHubIcon />
           </a>
           <a
             href="https://x.com/organui"
             aria-label="OrganUI on X"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
-            )}
+            className={social}
           >
             <XIcon />
           </a>
-        </div>
-      </div>
-    </main>
+        </footer>
+      </main>
+    </>
   )
 }
