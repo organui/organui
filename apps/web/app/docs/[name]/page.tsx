@@ -44,6 +44,8 @@ export default async function Page({ params }: Props) {
   if (!found) notFound()
   const { item, load } = found
   const model = await load()
+  // Organs without an explorer are served by this site (see organ-models.ts).
+  const hosted = model.src.startsWith("/")
   const organ = name.split("-")
   const pascal = organ.map((word) => word[0]!.toUpperCase() + word.slice(1))
   const component = pascal.join("")
@@ -74,9 +76,10 @@ const data = organAnatomyNodes(${exportName})
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          The {model.name.toLowerCase()} from the OrganUI explorer, ready to
-          drop into your app: {model.structures.length} selectable structures
-          and {model.views.length} named views, built on the{" "}
+          The {model.name.toLowerCase()}
+          {hosted ? " model" : " from the OrganUI explorer"}, ready to drop into
+          your app: {model.structures.length} selectable structures and{" "}
+          {model.views.length} named views, built on the{" "}
           <Link href="/docs/organ-viewer" className="underline">
             organ viewer
           </Link>
@@ -168,14 +171,16 @@ const data = organAnatomyNodes(${exportName})
           elsewhere.
         </p>
         <p>
-          The GLB loads from a commit-pinned copy in the explorer repository,
+          {hosted
+            ? "The GLB is served by organui.com from the OrganUI repository,"
+            : "The GLB loads from a commit-pinned copy in the explorer repository,"}{" "}
           where its{" "}
           <a className="underline" href={model.attribution.source}>
             provenance and changes
           </a>{" "}
           are documented. To serve it yourself, download it from{" "}
           <a className="break-all underline" href={model.src}>
-            {model.src}
+            {hosted ? `https://organui.com${model.src}` : model.src}
           </a>{" "}
           and pass the new URL as <code>src</code>.
         </p>

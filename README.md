@@ -31,7 +31,8 @@ installs straight from source (append `#<commit>` to pin a version). See
 ## Organs
 
 Every OrganUI 3D explorer is also a registry item named after its organ:
-`heart`, `brain`, `spinal-cord` and so on, 30 in all.
+`heart`, `brain`, `spinal-cord` and so on. Organs without an explorer, such as
+the `diaphragm`, keep their model in `apps/web/public/models`.
 
 ```bash
 bunx shadcn@4.21.0 add https://organui.com/r/heart.json

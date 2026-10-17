@@ -16,6 +16,12 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/brain").then(
       (module) => module.brainModel
     ),
+  // Served by this site; same-origin so previews work before deployment.
+  diaphragm: () =>
+    import("@workspace/registry/organ-viewer/diaphragm").then((module) => ({
+      ...module.diaphragmModel,
+      src: "/models/diaphragm.glb",
+    })),
   ear: () =>
     import("@workspace/registry/organ-viewer/ear").then(
       (module) => module.earModel

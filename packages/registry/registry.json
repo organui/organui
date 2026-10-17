@@ -141,6 +141,37 @@
       ]
     },
     {
+      "name": "diaphragm",
+      "type": "registry:component",
+      "title": "Diaphragm",
+      "description": "The diaphragm with the structures that pass through it and the organs above and below: 13 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/diaphragm.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "ear",
       "type": "registry:component",
       "title": "Ear",

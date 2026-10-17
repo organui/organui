@@ -32,7 +32,8 @@ replace the font license.
 
 ## Anatomy assets
 
-This website branch contains no bundled anatomy meshes or screenshot previews.
 The independent organ explorer repositories document their source-specific
-anatomy asset licenses and attribution. Those notices are unaffected by the
-website code license.
+anatomy asset licenses and attribution. Models for organs without an explorer
+live in `apps/web/public/models`, each with an `<organ>.ATTRIBUTION.md` beside
+it; they keep their own licenses (BodyParts3D meshes: CC BY-SA 2.1 Japan).
+Those notices are unaffected by the website code license.
