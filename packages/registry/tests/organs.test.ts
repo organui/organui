@@ -45,11 +45,16 @@ for (const item of organItems) {
       for (const id of view.structureIds ?? []) expect(ids).toContain(id)
     }
     for (const id of model.hiddenIds ?? []) expect(ids).toContain(id)
-    // Models stay in their explorer repositories, pinned to a full commit.
+    // Models stay in their explorer repositories, pinned to a full commit,
+    // or are hosted by organui.com with their attribution in this repository.
     expect(model.src).toMatch(
-      /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$/
+      /^https:\/\/(cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models|organui\.com\/models)\/[a-z-]+\.glb$/
     )
-    expect(model.attribution.source).toStartWith("https://github.com/organui/")
+    expect(model.attribution.source).toStartWith(
+      model.src.startsWith("https://organui.com/")
+        ? "https://github.com/organui/organui/"
+        : "https://github.com/organui/"
+    )
     expect(model.attribution.licenseUrl).toStartWith("https://")
     expect(item.description).toContain(model.attribution.license)
     const nodes = organAnatomyNodes(model)

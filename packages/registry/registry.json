@@ -575,6 +575,37 @@
       ]
     },
     {
+      "name": "parathyroid",
+      "type": "registry:component",
+      "title": "Parathyroid",
+      "description": "The four parathyroid glands on the back of the thyroid: 9 selectable structures and 5 named views. Model licensed CC BY-SA 2.1 JP.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/parathyroid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "pharynx",
       "type": "registry:component",
       "title": "Pharynx",

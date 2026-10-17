@@ -74,7 +74,7 @@ const data = organAnatomyNodes(${exportName})
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          The {model.name.toLowerCase()} from the OrganUI explorer, ready to
+          The {model.name.toLowerCase()} as an interactive 3D model, ready to
           drop into your app: {model.structures.length} selectable structures
           and {model.views.length} named views, built on the{" "}
           <Link href="/docs/organ-viewer" className="underline">

@@ -72,6 +72,12 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/pancreas").then(
       (module) => module.pancreasModel
     ),
+  // Hosted by this site; the published item points at organui.com.
+  parathyroid: () =>
+    import("@workspace/registry/organ-viewer/parathyroid").then((module) => ({
+      ...module.parathyroidModel,
+      src: "/models/parathyroid.glb",
+    })),
   pharynx: () =>
     import("@workspace/registry/organ-viewer/pharynx").then(
       (module) => module.pharynxModel
