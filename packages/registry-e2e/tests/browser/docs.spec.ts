@@ -108,73 +108,101 @@ test("accessibility scan covers expanded, mixed and filtered states", async ({
   }
 })
 
-test("homepage explorer links support keyboard navigation without overflow", async ({
+test("homepage body navigator finds, zooms to and opens every organ", async ({
   page,
 }, info) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  await page.goto("/")
-  const navigation = page.getByRole("navigation", {
-    name: "3D anatomy explorers",
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text())
   })
-  const names = [
-    "Adrenals",
-    "Bladder",
-    "Brain",
-    "Ear",
-    "Esophagus",
-    "Eye",
-    "Gallbladder",
-    "Heart",
-    "Intestines",
-    "Kidneys",
-    "Larynx",
-    "Liver",
-    "Lungs",
-    "Lymph",
-    "Muscles",
-    "Nose",
-    "Pancreas",
-    "Pharynx",
-    "Prostate",
-    "Skeleton",
-    "Skin",
-    "Spinal cord",
-    "Spleen",
-    "Stomach",
-    "Teeth",
-    "Thymus",
-    "Thyroid",
-    "Tongue",
-    "Uterus",
-    "Vessels",
-  ]
-  await expect(navigation.getByRole("link")).toHaveCount(names.length)
-  for (const [index, name] of names.entries()) {
-    const link = navigation.getByRole("link", { name, exact: true })
-    await expect(link).toBeVisible()
-    await expect(link).toHaveAttribute(
-      "href",
-      `https://github.com/organui/${name.toLowerCase().replaceAll(" ", "-")}-3d`
-    )
-    if (index === 0) await link.focus()
-    else await page.keyboard.press("Tab")
-    await expect(link).toBeFocused()
-    expect(
-      await link.evaluate((element) =>
-        parseFloat(getComputedStyle(element).outlineWidth)
+  const catalog = registrySchema.parse(
+    JSON.parse(
+      await readFile(
+        new URL(import.meta.resolve("@workspace/registry/registry.json")),
+        "utf8"
       )
-    ).toBeGreaterThan(0)
-  }
+    )
+  )
+  const organs = catalog.items.filter(({ categories }) =>
+    categories?.includes("organ")
+  )
+  await page.goto("/")
+  const viewer = page.getByRole("region", { name: "Interactive human body" })
+  // The body fills the page under a floating header; the organ list stays
+  // behind the find button.
+  await expect(viewer.getByText("Drag to rotate")).toBeVisible({
+    timeout: 30_000,
+  })
+  await expect(viewer.getByRole("toolbar")).toHaveCount(0)
+  const list = page.getByRole("navigation", { name: "Organ components" })
+  await expect(list).toHaveCount(0)
+  const find = page.getByRole("button", { name: "Find an organ" })
+  await find.click()
+  const search = page.getByRole("searchbox", { name: "Search organs" })
+  await expect(search).toBeFocused()
+  await expect(list.getByRole("button")).toHaveCount(organs.length)
+  for (const organ of organs)
+    await expect(
+      list.getByRole("button", { name: organ.title, exact: true })
+    ).toBeAttached()
+
+  // Searching narrows the list; picking closes it and shows the card.
+  await search.fill("pitu")
+  await expect(list.getByRole("button")).toHaveCount(1)
+  await search.press("Tab")
+  const pituitary = list.getByRole("button", { name: "Pituitary" })
+  await expect(pituitary).toBeFocused()
+  expect(
+    await pituitary.evaluate((element) =>
+      parseFloat(getComputedStyle(element).outlineWidth)
+    )
+  ).toBeGreaterThan(0)
+  await page.keyboard.press("Enter")
+  await expect(list).toHaveCount(0)
+  await expect(find).toBeFocused()
+  const card = page.getByRole("complementary", { name: "Selected organ" })
+  await expect(
+    card.getByRole("heading", { name: "Pituitary", level: 2 })
+  ).toBeVisible()
+  await expect(
+    card.getByRole("link", { name: "Open the pituitary component" })
+  ).toHaveAttribute("href", "/docs/pituitary")
+
+  // Escape closes the finder; the close button clears the card.
+  await find.click()
+  await page.keyboard.press("Escape")
+  await expect(list).toHaveCount(0)
+  await expect(find).toBeFocused()
+  await card.getByRole("button", { name: "Close" }).click()
+  await expect(card.getByRole("heading")).toHaveCount(0)
+
+  // Organs with a standalone explorer link to it too.
+  await find.click()
+  await list.getByRole("button", { name: "Heart", exact: true }).click()
+  await expect(
+    card.getByRole("link", { name: "Heart explorer on GitHub" })
+  ).toHaveAttribute("href", "https://github.com/organui/heart-3d")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
     )
   ).toBe(true)
-  await page.screenshot({
-    path: info.outputPath("homepage.png"),
-    fullPage: true,
-  })
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({ path: info.outputPath("homepage.png") })
+
+  await page.route(heartModel.src, (route) =>
+    route.fulfill({
+      body: Buffer.from(fixtureGlb(heartModel.structures.map(({ id }) => id))),
+      contentType: "model/gltf-binary",
+    })
+  )
+  await card.getByRole("link", { name: "Open the heart component" }).click()
+  await expect(page).toHaveURL(/\/docs\/heart$/)
+  await expect(
+    page.getByRole("heading", { name: "Heart", level: 1 })
+  ).toBeVisible()
   expect(errors).toEqual([])
 })
 

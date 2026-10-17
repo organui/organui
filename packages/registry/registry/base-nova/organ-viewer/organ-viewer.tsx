@@ -50,6 +50,11 @@ export type OrganStructure = {
   group: string
   color: string
   description?: string
+  /**
+   * Resting opacity below 1 draws the structure as a translucent shell, such
+   * as skin over the organs. Picked shells turn solid.
+   */
+  opacity?: number
 }
 
 export type OrganView = {
@@ -84,6 +89,13 @@ export type OrganModel = {
 
 export type OrganViewerHandle = {
   setView: (name: string) => void
+  /**
+   * Moves the camera to fit these structures, or named nodes inside them,
+   * keeping its current direction. `fill` is the share of the stage they
+   * take, 0.8 like named views by default; lower it to keep their
+   * surroundings in sight.
+   */
+  focus: (ids: readonly string[], fill?: number) => void
   zoom: (factor: number) => void
   rotate: (azimuth: number, polar?: number) => void
   reset: () => void
@@ -150,20 +162,21 @@ function surfacePoints(meshes: Mesh[], stride = 16) {
 }
 
 // Distance along `direction` at which every sampled point sits inside
-// FRAME_FILL of the frustum.
+// `fill` of the frustum.
 function fitDistance(
   points: Vector3[],
   center: Vector3,
   direction: Vector3,
   fov: number,
-  aspect: number
+  aspect: number,
+  fill = FRAME_FILL
 ) {
   const forward = direction.clone().normalize()
   const right = new Vector3(0, 1, 0).cross(forward)
   if (right.lengthSq() < 1e-8) right.set(1, 0, 0)
   right.normalize()
   const up = forward.clone().cross(right).normalize()
-  const tanV = Math.tan((fov * Math.PI) / 360) * FRAME_FILL
+  const tanV = Math.tan((fov * Math.PI) / 360) * fill
   const tanH = tanV * aspect
   const offset = new Vector3()
   let distance = 0
@@ -500,8 +513,22 @@ export function OrganViewer({
 
     let dirty = true
     const render = () => (dirty = true)
+    // A focus glides the camera to its target, unless motion is reduced.
+    let flight: {
+      from: [Vector3, Vector3]
+      to: [Vector3, Vector3]
+      start: number
+    } | null = null
     let frame = 0
     const tick = () => {
+      if (flight) {
+        const t = Math.min(1, (performance.now() - flight.start) / 700)
+        const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2
+        orbit.target.lerpVectors(flight.from[0], flight.to[0], eased)
+        camera.position.lerpVectors(flight.from[1], flight.to[1], eased)
+        if (t === 1) flight = null
+        dirty = true
+      }
       if (orbit.update() || dirty) {
         renderer.render(stage, camera)
         dirty = false
@@ -513,6 +540,7 @@ export function OrganViewer({
     const preset = (name: string) => {
       const target = framing.get(name) ?? framing.values().next().value
       if (!target) return
+      flight = null
       orbit.reset()
       const direction = new Vector3(...target.entry.direction).normalize()
       const distance = Math.min(
@@ -562,7 +590,10 @@ export function OrganViewer({
 
     let interacting = false
     const lastRotation = camera.quaternion.clone()
-    const onStart = () => (interacting = true)
+    const onStart = () => {
+      interacting = true
+      flight = null
+    }
     const onEnd = () => (interacting = false)
     const onChange = () => {
       if (interacting) {
@@ -627,9 +658,13 @@ export function OrganViewer({
             else material.color.set(color)
             material.emissive.set(state === "selected" ? color : "#000000")
             material.emissiveIntensity = state === "selected" ? 0.35 : 0
-            material.transparent = state === "ghosted"
-            material.opacity = state === "ghosted" ? 0.22 : 1
-            material.depthWrite = state !== "ghosted"
+            const resting =
+              state === "selected" ? 1 : (structures.get(id)!.opacity ?? 1)
+            const opacity =
+              state === "ghosted" ? Math.min(0.22, resting) : resting
+            material.transparent = opacity < 1
+            material.opacity = opacity
+            material.depthWrite = opacity === 1
             material.roughness = 0.58
             // glTF defaults to fully metallic when a file omits the factor.
             material.metalness = 0
@@ -639,6 +674,49 @@ export function OrganViewer({
         render()
       },
       setView: preset,
+      focus(ids, fill) {
+        const list = ids.flatMap((id) => {
+          const own = meshes.get(id)
+          if (own) return own
+          const found: Mesh[] = []
+          scene.getObjectByName(id)?.traverse((object) => {
+            if (object instanceof Mesh) found.push(object)
+          })
+          return found
+        })
+        if (!list.length) return
+        const framed = surfacePoints(list)
+        const target = new Box3().setFromPoints(framed).getCenter(new Vector3())
+        const direction = camera.position.clone().sub(orbit.target).normalize()
+        const distance = fitDistance(
+          framed,
+          target,
+          direction,
+          camera.fov,
+          camera.aspect,
+          fill
+        )
+        // Small structures may come closer than any named view.
+        orbit.minDistance = Math.min(orbit.minDistance, distance)
+        camera.near = Math.min(camera.near, distance / 100)
+        camera.updateProjectionMatrix()
+        const position = direction
+          .multiplyScalar(Math.min(orbit.maxDistance, distance))
+          .add(target)
+        current = null
+        changeView(null)
+        if (motion.matches) {
+          flight = null
+          orbit.target.copy(target)
+          camera.position.copy(position)
+        } else
+          flight = {
+            from: [orbit.target.clone(), camera.position.clone()],
+            to: [target, position],
+            start: performance.now(),
+          }
+        render()
+      },
       reset: () => preset(latest.current.defaultView),
       zoom(factor) {
         const offset = camera.position.clone().sub(orbit.target)
@@ -695,6 +773,7 @@ export function OrganViewer({
     ref,
     () => ({
       setView: (name) => engine?.setView(name),
+      focus: (ids, fill) => engine?.focus(ids, fill),
       zoom: (factor) => engine?.zoom(factor),
       rotate: (azimuth, polar) => engine?.rotate(azimuth, polar),
       reset: () => engine?.reset(),

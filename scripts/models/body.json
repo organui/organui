@@ -1,0 +1,2999 @@
+{
+  "parts": [
+    {
+      "id": "skin",
+      "structure": "skin",
+      "triangles": 14000,
+      "sources": [
+        {
+          "element": "FJ2810",
+          "file": "FJ2810_BP22617_FMA7163_Skin.obj",
+          "sha256": "b96705b91fb861e4f63ca116c5fdc2c79d772083e9595ba1c0122a86ff2f7282"
+        }
+      ]
+    },
+    {
+      "id": "hair",
+      "structure": "hair",
+      "triangles": 2500,
+      "sources": [
+        {
+          "element": "FJ2813",
+          "file": "FJ2813_BP22643_FMA54241_Hair of head.obj",
+          "sha256": "d9d3cf782a16ea4b7059ac749c649047edde5f0533523a4c21539f2f07d1af78"
+        }
+      ]
+    },
+    {
+      "id": "external-ears",
+      "structure": "ear",
+      "triangles": 800,
+      "sources": [
+        {
+          "element": "FJ2811",
+          "file": "FJ2811_BP21857_FMA52781_External ear.obj",
+          "sha256": "97d4d3dc4b33a3a79f4de7c490cfcc301260b5980c30b9d8ef3bda71a48524eb"
+        }
+      ]
+    },
+    {
+      "id": "vestibulocochlear-nerves",
+      "structure": "vestibular",
+      "triangles": 300,
+      "sources": [
+        {
+          "element": "FJ3894",
+          "file": "FJ3894_BP29543_FMA50890_Right vestibulocochlear nerve.obj",
+          "sha256": "6be6de736fcf27c481890f605f1cc5e2211547b2a993a51a2922cf622d0c739e"
+        },
+        {
+          "element": "FJ3932",
+          "file": "FJ3932_BP29535_FMA50891_Left vestibulocochlear nerve.obj",
+          "sha256": "0ad502daacef35f5332e4afafacfa4eb4e054ff4aec32301b7e9d2c8cdbd98b0"
+        }
+      ]
+    },
+    {
+      "id": "brain",
+      "structure": "brain",
+      "triangles": 7000,
+      "sources": [
+        {
+          "element": "FJ1732",
+          "file": "FJ1732_BP21657_FMA72670_Left angular gyrus.obj",
+          "sha256": "b4091377b4dfd33f33a84a9a66f12f47fa534f6535429b2b0c0d4594a5b166cd"
+        },
+        {
+          "element": "FJ1733",
+          "file": "FJ1733_BP23987_FMA72669_Right angular gyrus.obj",
+          "sha256": "c8dd20ce18616ea43c4935733899a96ebf092de1eb65fe97f5dc6fec866cac68"
+        },
+        {
+          "element": "FJ1743",
+          "file": "FJ1743_BP22971_FMA62032_Habenula.obj",
+          "sha256": "ccb7f0eff4dba0ec780f0580830045e52f67915a65f15598ac53e7751fa6b663"
+        },
+        {
+          "element": "FJ1744",
+          "file": "FJ1744_BP22402_FMA72658_Left inferior frontal gyrus.obj",
+          "sha256": "52fbd7c171a48cc746e221e2caf7285dd3236d1997471a83a1d871be477e410a"
+        },
+        {
+          "element": "FJ1745",
+          "file": "FJ1745_BP22397_FMA72657_Right inferior frontal gyrus.obj",
+          "sha256": "b4d47e04b64092abc56e522a3e1e49f74bed6afebaf1061a6567d842b724c464"
+        },
+        {
+          "element": "FJ1748",
+          "file": "FJ1748_BP23978_FMA72978_Left insula.obj",
+          "sha256": "941d824f461433d486be6291a55e5b9aad880f759e16b616a04fecae3d2d3a38"
+        },
+        {
+          "element": "FJ1749",
+          "file": "FJ1749_BP21973_FMA72977_Right insula.obj",
+          "sha256": "c724379de905744b0a6ffea5a20376af1a521bd577e9abdca9665dfd3daf39e0"
+        },
+        {
+          "element": "FJ1750",
+          "file": "FJ1750_BP22348_FMA72907_Left internal capsule.obj",
+          "sha256": "cb931c008468da46fedbfeb3658cf558a057943ea175d7fbb0de3a42774c585f"
+        },
+        {
+          "element": "FJ1751",
+          "file": "FJ1751_BP22231_FMA72906_Right internal capsule.obj",
+          "sha256": "9730c79f00ae16b6291626dbf6a01839628758883f2637223796487bdbd1ee63"
+        },
+        {
+          "element": "FJ1759",
+          "file": "FJ1759_BP24047_FMA72714_Left hippocampus proper.obj",
+          "sha256": "40a18c0e3266a029629e1faa19a81b88b6623428a33362fc87596234f4ac9986"
+        },
+        {
+          "element": "FJ1760",
+          "file": "FJ1760_BP21294_FMA62008_Hypothalamus.obj",
+          "sha256": "c905d57330e86bcbc62f1494346fe25d77579bd3c10faa38c6cde4216288028c"
+        },
+        {
+          "element": "FJ1762",
+          "file": "FJ1762_BP22120_FMA73435_Left inferior colliculus.obj",
+          "sha256": "70be6021611e7c6915b81766efc5af20756bfd6672bdeee06de335a7745f723a"
+        },
+        {
+          "element": "FJ1769",
+          "file": "FJ1769_BP23201_FMA62004_Medulla oblongata.obj",
+          "sha256": "6d898f913df68a12422df564f54ddf6ee4d73c6a412808b456f23f1b2c9330eb"
+        },
+        {
+          "element": "FJ1770",
+          "file": "FJ1770_BP19692_FMA242162_Left cerebral crus.obj",
+          "sha256": "4e7f9246c039cdca2cc46b6fb638e5dce34140c460e8c35848228a98359a3a87"
+        },
+        {
+          "element": "FJ1775",
+          "file": "FJ1775_BP22028_FMA67943_Pons.obj",
+          "sha256": "755d10a5b4f471ed02b3188e2d70254a02152b89c803913afeec39cfac2131ec"
+        },
+        {
+          "element": "FJ1779",
+          "file": "FJ1779_BP20130_FMA73423_Left superior colliculus.obj",
+          "sha256": "20fa477d93d095efe6995e420755e8d72ea494bf0928e7d3ad380d5a599fa55f"
+        },
+        {
+          "element": "FJ1780",
+          "file": "FJ1780_BP22167_FMA62327_Tuber cinereum.obj",
+          "sha256": "da1ed143a5094de8ff34736499c2e02dc5440610692d03e4730dc3a24e78c121"
+        },
+        {
+          "element": "FJ1781",
+          "file": "FJ1781_BP22033_FMA67944_Cerebellum.obj",
+          "sha256": "58a6513be18c30875ae3bc124a0c7658ad1dbb060391fb4b48a5c43bac91d03e"
+        },
+        {
+          "element": "FJ1787",
+          "file": "FJ1787_BP22367_FMA72656_Left middle frontal gyrus.obj",
+          "sha256": "e6ca6e379b91d5f203c15f9f064e3958e390f91f819458f5fc4f37a4ce52344a"
+        },
+        {
+          "element": "FJ1788",
+          "file": "FJ1788_BP20959_FMA72655_Right middle frontal gyrus.obj",
+          "sha256": "6a615bb30f034dfea5e954aef0f6a182e7aa32cf19e2bfd307c2a9a091ed3461"
+        },
+        {
+          "element": "FJ1789",
+          "file": "FJ1789_BP22697_FMA72686_Left middle temporal gyrus.obj",
+          "sha256": "6c7165ea255b5d2da30ce1102b0f041e50a047e73c085e8a853e45b05ce5d6bb"
+        },
+        {
+          "element": "FJ1790",
+          "file": "FJ1790_BP22182_FMA72685_Right middle temporal gyrus.obj",
+          "sha256": "6c77777a0abb4171da95d9f37edfdf7ba3f53d828b9df6a73e77e6c976592397"
+        },
+        {
+          "element": "FJ1797",
+          "file": "FJ1797_BP22179_FMA72666_Left postcentral gyrus.obj",
+          "sha256": "b15debc6839323f9465abd0ffbdb3e589c567110c77000a25de09ef85d086a9c"
+        },
+        {
+          "element": "FJ1798",
+          "file": "FJ1798_BP22140_FMA72665_Right postcentral gyrus.obj",
+          "sha256": "654bfc5d371b721596ef891e528905caa810031541de3da6d53045be2a119484"
+        },
+        {
+          "element": "FJ1800",
+          "file": "FJ1800_BP22183_FMA72662_Left precentral gyrus.obj",
+          "sha256": "8d2f96c138a533222e1f70ea80c07ba0699e0985fa46e6f394bc64326c168d9c"
+        },
+        {
+          "element": "FJ1801",
+          "file": "FJ1801_BP22215_FMA72661_Right precentral gyrus.obj",
+          "sha256": "9520c6260fdad81f12bb0a7d3ff4288a9ca82e894c612cb2ce2856a8a204dece"
+        },
+        {
+          "element": "FJ1807",
+          "file": "FJ1807_BP24044_FMA72713_Right hippocampus proper.obj",
+          "sha256": "08882d712afe4782a89fa92d7290398938f1c2d099fa49c418f91b452d8e2f4a"
+        },
+        {
+          "element": "FJ1808",
+          "file": "FJ1808_BP21294_FMA62008_Hypothalamus.obj",
+          "sha256": "677133923905d836da89e3641e006e35565412a6e8f8b22966ad1c807164dcd0"
+        },
+        {
+          "element": "FJ1810",
+          "file": "FJ1810_BP23935_FMA73434_Right inferior colliculus.obj",
+          "sha256": "7d3edffaaa8fd68f3463b78cf918fe170f75bdce56a7f964790eb90a79045c5c"
+        },
+        {
+          "element": "FJ1817",
+          "file": "FJ1817_BP19691_FMA242160_Right cerebral crus.obj",
+          "sha256": "0fc89fa6d21b627912df8618c18d95846459660f65cb4b26da6dac8499f0379b"
+        },
+        {
+          "element": "FJ1822",
+          "file": "FJ1822_BP22028_FMA67943_Pons.obj",
+          "sha256": "850dd4aa348b95a47c3e79cfcd0c745266f1254155e5af7ce2c3258bb9ea5cbf"
+        },
+        {
+          "element": "FJ1826",
+          "file": "FJ1826_BP22114_FMA73422_Right superior colliculus.obj",
+          "sha256": "76b599400e911f82360e5760e3c62663dc5335b4b67321583ce5846770847690"
+        },
+        {
+          "element": "FJ1828",
+          "file": "FJ1828_BP22167_FMA62327_Tuber cinereum.obj",
+          "sha256": "af2d51ff0d06e454f95a4da06ab5cf31e57895e06a1d910624ebdb6ef26c1b2a"
+        },
+        {
+          "element": "FJ1830",
+          "file": "FJ1830_BP22033_FMA67944_Cerebellum.obj",
+          "sha256": "cf82a264696bdef138dd0f22e8a4d2fff4df4b04229410cc9212809a0ce16514"
+        },
+        {
+          "element": "FJ1831",
+          "file": "FJ1831_BP23201_FMA62004_Medulla oblongata.obj",
+          "sha256": "eab7e3bcb83eea47987673233d3965ea29a9b9e3d00bab9393c5ed12823f286e"
+        },
+        {
+          "element": "FJ1833",
+          "file": "FJ1833_BP22376_FMA72654_Left superior frontal gyrus.obj",
+          "sha256": "2e2abf960f62ffa0ae8c26656778be0764bdc2b612c238bdace447a40e8b03dd"
+        },
+        {
+          "element": "FJ1834",
+          "file": "FJ1834_BP23996_FMA72653_Right superior frontal gyrus.obj",
+          "sha256": "aa9948bdcefc28f079768397361f2ea640d81dac7dcf9ede83fb30ead3b964e7"
+        },
+        {
+          "element": "FJ1835",
+          "file": "FJ1835_BP22159_FMA72672_Left superior parietal lobule.obj",
+          "sha256": "a4b4c047928796b62147f8d8337e3d504569ebb11d409afe6b3221adcfc22666"
+        },
+        {
+          "element": "FJ1836",
+          "file": "FJ1836_BP22214_FMA72671_Right superior parietal lobule.obj",
+          "sha256": "03ecd1c245b7a1e7b554f8d6debd9de32ec3c9626749014c49a470d93adfb17e"
+        },
+        {
+          "element": "FJ1841",
+          "file": "FJ1841_BP22180_FMA72668_Left supramarginal gyrus.obj",
+          "sha256": "2217ead15bb83b7556f1efca934afa2f308f1d9d606ba86cfd72b40a3ea7b7e6"
+        },
+        {
+          "element": "FJ1842",
+          "file": "FJ1842_BP22255_FMA72667_Right supramarginal gyrus.obj",
+          "sha256": "f341ba331d13d72ecbe311e73f681b122bedb4d896263958327e236e50c06999"
+        },
+        {
+          "element": "FJ7462",
+          "file": "FJ7462_BP29926_FMA72674_Left precuneus.obj",
+          "sha256": "862da9144e77c8f8ba57ddf891e3840de623fd56466f9c108514bbb8a2719675"
+        },
+        {
+          "element": "FJ7462M",
+          "file": "FJ7462M_BP29930_FMA72673_Right precuneus.obj",
+          "sha256": "b79d31c480296763aa56f29aba364f739053ac23a0707947eefd2355e619ad58"
+        },
+        {
+          "element": "FJ7463",
+          "file": "FJ7463_BP22159_FMA72672_Left superior parietal lobule.obj",
+          "sha256": "9c37400a0047439901bc872d1255b83ff4c84774564c77557efa2c15b3649e6b"
+        },
+        {
+          "element": "FJ7463M",
+          "file": "FJ7463M_BP22214_FMA72671_Right superior parietal lobule.obj",
+          "sha256": "422948376b4795386e3c2eeedae94530e7b92e530df5c6f1a32ad2338527b82f"
+        },
+        {
+          "element": "FJ7465",
+          "file": "FJ7465_BP29911_FMA256200_Left anterior orbital gyrus.obj",
+          "sha256": "002e84a975f6c26b5a68094a1576a3aee80f55a11ab645d3adeee091d68962ac"
+        },
+        {
+          "element": "FJ7465M",
+          "file": "FJ7465M_BP29916_FMA256198_Right anterior orbital gyrus.obj",
+          "sha256": "09576da7e67c3a3d4d75e95d155138fd45f14b22fd595703f9a51e41c32b935a"
+        },
+        {
+          "element": "FJ7466",
+          "file": "FJ7466_BP29925_FMA72757_Left lateral orbital gyrus.obj",
+          "sha256": "a1a988a7f55e0901bebbf8bf17c9cf897a850bd4a75362023b0dbef5548c9d8b"
+        },
+        {
+          "element": "FJ7466M",
+          "file": "FJ7466M_BP29920_FMA72756_Right lateral orbital gyrus.obj",
+          "sha256": "a25229cc5a70693fa5e3436df878850c0feac6863a2132dd8f68a44e198c8639"
+        },
+        {
+          "element": "FJ7467",
+          "file": "FJ7467_BP29924_FMA72759_Left medial orbital gyrus.obj",
+          "sha256": "77f98495380b4ef0293021e404c1d55f86b03f4ae64e4f4babf092499e03b509"
+        },
+        {
+          "element": "FJ7467M",
+          "file": "FJ7467M_BP29929_FMA72758_Right medial orbital gyrus.obj",
+          "sha256": "65dd56dc8726f7cddfb5cd788a8eca68ec70a448265d5303d5e7149a78adebdb"
+        },
+        {
+          "element": "FJ7468",
+          "file": "FJ7468_BP29931_FMA80188_Left posterior orbital gyrus.obj",
+          "sha256": "9e8457534de9697799e7b1f9fa8d1db4edd651278b2961e93037d9f4fb32a174"
+        },
+        {
+          "element": "FJ7468M",
+          "file": "FJ7468M_BP29918_FMA80187_Right posterior orbital gyrus.obj",
+          "sha256": "3cf80e55f9b44de75dd78128068576b0e2625e7217056359f42ca3e5c1c47af4"
+        },
+        {
+          "element": "FJ7469",
+          "file": "FJ7469_BP29922_FMA72660_Left straight gyrus.obj",
+          "sha256": "3e4c6f8fcd00333350c77861486cdd84c8eed6c4a9f120c0fff742e6c8211948"
+        },
+        {
+          "element": "FJ7469M",
+          "file": "FJ7469M_BP29910_FMA72659_Right straight gyrus.obj",
+          "sha256": "e8815236b093437b264412a5c6776def2e62f022f9eab6f19bf853f84d629045"
+        },
+        {
+          "element": "FJ7470",
+          "file": "FJ7470_BP20829_FMA72718_Left cingulate gyrus.obj",
+          "sha256": "fc45f2b5c6086d04bce56e6201c967121822b2999291ce92fdc88ef5a863b915"
+        },
+        {
+          "element": "FJ7470M",
+          "file": "FJ7470M_BP23974_FMA72717_Right cingulate gyrus.obj",
+          "sha256": "f253cd14553fded9c8e468eeb7338f0b9d3fd83654c9ee1d75ff000dad809e9f"
+        },
+        {
+          "element": "FJ7471",
+          "file": "FJ7471_BP29919_FMA72680_Left cuneus.obj",
+          "sha256": "73c145d98459fe3af73b2024b91630c90f5b70b2ec650e91b7b3ca3655b1274a"
+        },
+        {
+          "element": "FJ7471M",
+          "file": "FJ7471M_BP29915_FMA72679_Right cuneus.obj",
+          "sha256": "ca9aa9bd102eaaafb3e45942fc01c5ba6814141dafd244708a6615a35a93dc6c"
+        },
+        {
+          "element": "FJ7472",
+          "file": "FJ7472_BP20995_FMA72690_Left fusiform gyrus.obj",
+          "sha256": "b7010be8c87e1e9080258028c9a223408c02b7f1bcbf61bdfaa0d48715e53ad6"
+        },
+        {
+          "element": "FJ7472M",
+          "file": "FJ7472M_BP24018_FMA72689_Right fusiform gyrus.obj",
+          "sha256": "b9c10f3eee2fb2df89c7bc44aa2fc9ed8f83f357e79657e79ad754d0a3bdffcd"
+        },
+        {
+          "element": "FJ7473",
+          "file": "FJ7473_BP22696_FMA72688_Left inferior temporal gyrus.obj",
+          "sha256": "5c9dc83eb8bef81115e6699f105d2679a2fa980d07d142d9c0028a78861d194f"
+        },
+        {
+          "element": "FJ7473M",
+          "file": "FJ7473M_BP22176_FMA72687_Right inferior temporal gyrus.obj",
+          "sha256": "c6883a1604ad987b6d0254ee9699c3162c2f27151877610dcbd7d2c80f97c96d"
+        },
+        {
+          "element": "FJ7474",
+          "file": "FJ7474_BP29927_FMA72678_Left lateral occipital gyrus.obj",
+          "sha256": "c70d6edd2319f537e027e6a476af2d0d377d9f22e07a547174fae19d5b0a6108"
+        },
+        {
+          "element": "FJ7474M",
+          "file": "FJ7474M_BP29928_FMA72677_Right lateral occipital gyrus.obj",
+          "sha256": "e482b0fce22285a46de2242ca3ec6ebfb40a8000d9ad3f8f3d5c9590deb26266"
+        },
+        {
+          "element": "FJ7475",
+          "file": "FJ7475_BP29917_FMA72682_Left lingual gyrus.obj",
+          "sha256": "78efbe613c543f4b75b5775c9ac8ff9c2998f9028713e681bd8129156a78365a"
+        },
+        {
+          "element": "FJ7475M",
+          "file": "FJ7475M_BP29912_FMA72681_Right lingual gyrus.obj",
+          "sha256": "e0b3ee38b759259e3a1b5f5087e2f2a6eef761d9fa85e47e4dd3992d220c564e"
+        },
+        {
+          "element": "FJ7476",
+          "file": "FJ7476_BP22707_FMA72706_Left parahippocampal gyrus.obj",
+          "sha256": "0328cb7c089ef863c3ee899f048496a98ebb6cf5b439b6d83dba205f89948d05"
+        },
+        {
+          "element": "FJ7476M",
+          "file": "FJ7476M_BP22184_FMA72705_Right parahippocampal gyrus.obj",
+          "sha256": "541c9b6836ebcea582fbd4d78a98afa499a979edd0dd041f87f0b5c84e76a35e"
+        },
+        {
+          "element": "FJ7478",
+          "file": "FJ7478_BP29923_FMA72676_Left superior occipital gyrus.obj",
+          "sha256": "9a041dfa3d25991caa1f3863cfedd76c7300d3b9f38bedd5b064dc3b2ab5caf1"
+        },
+        {
+          "element": "FJ7478M",
+          "file": "FJ7478M_BP29921_FMA72675_Right superior occipital gyrus.obj",
+          "sha256": "0f31a80151c865b7650a1326af0faedadc6197e41949ed52919598697f0f572f"
+        },
+        {
+          "element": "FJ7479",
+          "file": "FJ7479_BP29914_FMA72684_Left superior temporal gyrus.obj",
+          "sha256": "81446a29e939e6afe5d1889d3dd564c43ef719e6a2fb955d917828a90a51e607"
+        },
+        {
+          "element": "FJ7479M",
+          "file": "FJ7479M_BP29913_FMA72683_Right superior temporal gyrus.obj",
+          "sha256": "161625f7a1434cb04b02c8b930781ec68c57d1fa00b51665f40d3a0393bc4f55"
+        },
+        {
+          "element": "FJ7481",
+          "file": "FJ7481_BP29932_FMA73539_Right substantia nigra.obj",
+          "sha256": "18eed2b7eba9bd335ef5085229b2a96d43c1286bbf1841ec25211b204f749536"
+        },
+        {
+          "element": "FJ7481M",
+          "file": "FJ7481M_BP29933_FMA73540_Left substantia nigra.obj",
+          "sha256": "b0b4fe36d3fcaa333c00a64c4e1b39e1ca71621c427ff18bb36abf0b2ae40731"
+        },
+        {
+          "element": "FJ7504",
+          "file": "FJ7504_BP19692_FMA242162_Left cerebral crus.obj",
+          "sha256": "9f885f9d035bcae08b6e942658c52afd9c31a8bffb531ccfc515b47f4ed78668"
+        },
+        {
+          "element": "FJ7504M",
+          "file": "FJ7504M_BP19691_FMA242160_Right cerebral crus.obj",
+          "sha256": "43bb889092c16ce48f32378f15ff9893a07df94b6bd748b7c0efec5614247f3a"
+        }
+      ]
+    },
+    {
+      "id": "pituitary-gland",
+      "structure": "pituitary",
+      "triangles": 300,
+      "sources": [
+        {
+          "element": "FJ1796",
+          "file": "FJ1796_BP23814_FMA13889_Pituitary gland.obj",
+          "sha256": "545f63719b069a73dedff8c54dc716546726ddbc837d818a6c77dda1a966e93c"
+        }
+      ]
+    },
+    {
+      "id": "pineal-gland",
+      "structure": "pineal",
+      "triangles": 200,
+      "sources": [
+        {
+          "element": "FJ1795",
+          "file": "FJ1795_BP21418_FMA62033_Pineal body.obj",
+          "sha256": "8438f756dc24c4aca4ea6db11a15a5bb33f2f5e4c12ba0a964175561a922d2a0"
+        }
+      ]
+    },
+    {
+      "id": "eyes",
+      "structure": "eye",
+      "triangles": 1200,
+      "sources": [
+        {
+          "element": "FJ1289",
+          "file": "FJ1289_BP23245_FMA58240_Left cornea.obj",
+          "sha256": "0b228cf8476976f9006f5a67b3d17395c02be0a821c1a1fa11946c102526e811"
+        },
+        {
+          "element": "FJ1317",
+          "file": "FJ1317_BP23104_FMA58272_Left sclera.obj",
+          "sha256": "26b8c2f961383915b00e0af369d2245e017a87373b7cffc0adefab7690488f92"
+        },
+        {
+          "element": "FJ1340",
+          "file": "FJ1340_BP23300_FMA58239_Right cornea.obj",
+          "sha256": "54355243527186388cb0639d8c0b93917f1fdf3561cc16e4ce8c79d46fd2f152"
+        },
+        {
+          "element": "FJ1368",
+          "file": "FJ1368_BP23243_FMA58271_Right sclera.obj",
+          "sha256": "d39f10554c9ea9964c3b0cc4a3c355f72c617cab2be07a4579070b7b9e07214f"
+        }
+      ]
+    },
+    {
+      "id": "nose",
+      "structure": "nose",
+      "triangles": 800,
+      "sources": [
+        {
+          "element": "FJ6613",
+          "file": "FJ6613_BP23366_FMA59513_Left lateral nasal cartilage.obj",
+          "sha256": "45d357bed42e5b0c92639b3d446757375604d8465651be8fdea5db884f0c5009"
+        },
+        {
+          "element": "FJ6615",
+          "file": "FJ6615_BP23348_FMA59512_Right lateral nasal cartilage.obj",
+          "sha256": "f90673e9e2e92d4eee18bda970c11986f08594eaa60a56e802c3d27f9db12881"
+        },
+        {
+          "element": "FJ6617",
+          "file": "FJ6617_BP23119_FMA59503_Septal nasal cartilage.obj",
+          "sha256": "a9e6ba4d0cc46adda5da313f722ee700c87034e200ab119818060639d832d8c6"
+        }
+      ]
+    },
+    {
+      "id": "tongue",
+      "structure": "tongue",
+      "triangles": 500,
+      "sources": [
+        {
+          "element": "FJ2761",
+          "file": "FJ2761_BP23790_FMA54640_Tongue.obj",
+          "sha256": "707d87fdd5b29147724d013b18f98e7eeab2d71bceec9490cf14784c63117e34"
+        }
+      ]
+    },
+    {
+      "id": "teeth",
+      "structure": "teeth",
+      "triangles": 2500,
+      "sources": [
+        {
+          "element": "FJ1254",
+          "file": "FJ1254_BP20238_FMA55704_Left first lower molar tooth.obj",
+          "sha256": "3359a5a626603a3d983a486a5481d133a4b94bc6cea9fbe9979b522b7f9945e9"
+        },
+        {
+          "element": "FJ1255",
+          "file": "FJ1255_BP23586_FMA55693_Left first lower premolar tooth.obj",
+          "sha256": "d08a5e3c119ff0630e41aa33da632be65e8a9ce2f49058440c98266f359b794e"
+        },
+        {
+          "element": "FJ1256",
+          "file": "FJ1256_BP23842_FMA55703_Left second lower molar tooth.obj",
+          "sha256": "569854154209a267d1c3c45bfcdbf96cede5d9abb36d79fdad65de0525c1282d"
+        },
+        {
+          "element": "FJ1257",
+          "file": "FJ1257_BP23362_FMA55692_Left second lower premolar tooth.obj",
+          "sha256": "c255d26e20a2e2e286fac4301f12a467f55e8147f05c2433f5eb5ef1192823be"
+        },
+        {
+          "element": "FJ1258",
+          "file": "FJ1258_BP20208_FMA57143_Left lower central incisor tooth.obj",
+          "sha256": "e8c2dc641de79ea7c12d25516e8b21447129adf244505562699df4c44efabe00"
+        },
+        {
+          "element": "FJ1259",
+          "file": "FJ1259_BP20093_FMA57141_Left lower lateral incisor tooth.obj",
+          "sha256": "989b57b7be508933b4b24a67b89d550e44cd15582b0b660a5c55834bc4882a81"
+        },
+        {
+          "element": "FJ1260",
+          "file": "FJ1260_BP23457_FMA55687_Left lower canine tooth.obj",
+          "sha256": "e9fb8c8cbac421957c1f53d6ce9f8037d17def7a1a0efee5270b755543e9d449"
+        },
+        {
+          "element": "FJ1261",
+          "file": "FJ1261_BP20252_FMA55699_Left first upper molar tooth.obj",
+          "sha256": "ef3a9e8a0a5f6e910a34b220e748669e6e8919aa917527151d8b918e4b592401"
+        },
+        {
+          "element": "FJ1262",
+          "file": "FJ1262_BP23649_FMA55690_Left first upper premolar tooth.obj",
+          "sha256": "9f0e6b624907758b778a1cd3051f3de91b5611775ec0cef60b063af853a3b58a"
+        },
+        {
+          "element": "FJ1263",
+          "file": "FJ1263_BP21638_FMA55700_Left second upper molar tooth.obj",
+          "sha256": "d1f79c5f1b744e4366d47a5a19e418c07560df8b465faed9c126e8fb6b9fb306"
+        },
+        {
+          "element": "FJ1264",
+          "file": "FJ1264_BP23393_FMA55691_Left second upper premolar tooth.obj",
+          "sha256": "31611d213c8c0c01918f21f9bd74a73c5d099ecbe567cb6a1605b50e334e6b2f"
+        },
+        {
+          "element": "FJ1265",
+          "file": "FJ1265_BP21643_FMA55682_Left upper central incisor tooth.obj",
+          "sha256": "840be28e64647ee17f8b690eadc32bdb95dfb4a819a36eebdf703c23a1fafc77"
+        },
+        {
+          "element": "FJ1266",
+          "file": "FJ1266_BP20094_FMA55683_Left upper lateral incisor tooth.obj",
+          "sha256": "f9f6e49004ae6478421a72aa6ddf75b73ebe7b4e5d541f75b67a80f4db092c0e"
+        },
+        {
+          "element": "FJ1267",
+          "file": "FJ1267_BP23596_FMA55799_Left upper canine tooth.obj",
+          "sha256": "b8f4b9f347c1e4c23eb5e0b278da9926753b631cc47655dc49da6f80074a22a3"
+        },
+        {
+          "element": "FJ1268",
+          "file": "FJ1268_BP20173_FMA55705_Right first lower molar tooth.obj",
+          "sha256": "6ab9e1bf1abe2cace3cada408f526617f097bcb0b8280149e609969ff6d4b179"
+        },
+        {
+          "element": "FJ1269",
+          "file": "FJ1269_BP23752_FMA55694_Right first lower premolar tooth.obj",
+          "sha256": "c31b59f62832048bf955d3b4f906616a3c5a024b2a1cfeab3d1ee61c376ca319"
+        },
+        {
+          "element": "FJ1270",
+          "file": "FJ1270_BP23827_FMA55706_Right second lower molar tooth.obj",
+          "sha256": "2a622e4bb5aebf0963abe8c367f0b4552c0bdcd76c50b58e46f2846e1a538ad6"
+        },
+        {
+          "element": "FJ1271",
+          "file": "FJ1271_BP23728_FMA55695_Right second lower premolar tooth.obj",
+          "sha256": "8c3cf1c58d16600014f73d61387b8ac07a3677e9059db1bc0e5ff0d42d48df63"
+        },
+        {
+          "element": "FJ1272",
+          "file": "FJ1272_BP20165_FMA57142_Right lower central incisor tooth.obj",
+          "sha256": "dac0438ac261b50b60bb5f887f7c3327f8170ed6c72c2a47e77ffc18c46f8db5"
+        },
+        {
+          "element": "FJ1273",
+          "file": "FJ1273_BP23835_FMA57140_Right lower lateral incisor tooth.obj",
+          "sha256": "304044ab44e68e9159d9b96f9db8fd5ef848cc397fabef3f45738461517d443d"
+        },
+        {
+          "element": "FJ1274",
+          "file": "FJ1274_BP23629_FMA55686_Right lower canine tooth.obj",
+          "sha256": "5a35f8630bcf3194d2f331f5177b7c2b9e0406a7774818cc10991234441f6b30"
+        },
+        {
+          "element": "FJ1275",
+          "file": "FJ1275_BP19601_FMA55697_Right second upper molar tooth.obj",
+          "sha256": "570f96e4522a62f6bae3cd99039772984f1f0555a97cadf91b6d42c861e7ead4"
+        },
+        {
+          "element": "FJ1276",
+          "file": "FJ1276_BP20230_FMA55698_Right first upper molar tooth.obj",
+          "sha256": "b12ecfe56b56eb525ca1da4b56b5cc1c606b916b64d6939211b1282955593eb8"
+        },
+        {
+          "element": "FJ1277",
+          "file": "FJ1277_BP23473_FMA55689_Right first upper premolar tooth.obj",
+          "sha256": "bc6376db5a376d456646fa8e28453901c3a26336f07357515e16b7820d7c06d3"
+        },
+        {
+          "element": "FJ1278",
+          "file": "FJ1278_BP23721_FMA55688_Right second upper premolar tooth.obj",
+          "sha256": "a1e366a64dc6d3c5074ff1d19681eff8248dfd5dc61d8f93d0309c56921d9c94"
+        },
+        {
+          "element": "FJ1279",
+          "file": "FJ1279_BP22758_FMA55681_Right upper central incisor tooth.obj",
+          "sha256": "861731e2e8d74b9813e7ac119f26500ce1e2dc7fe5841267f02b312115118032"
+        },
+        {
+          "element": "FJ1280",
+          "file": "FJ1280_BP23883_FMA55680_Right upper lateral incisor tooth.obj",
+          "sha256": "951c73bb833f9a30a8459a9dff9803147128e161db1ee093cc65cf1b88bc67ff"
+        },
+        {
+          "element": "FJ1281",
+          "file": "FJ1281_BP23581_FMA55798_Right upper canine tooth.obj",
+          "sha256": "32c4d39304c1750413e6e2b3d6907f6534760fe54351044cdef7e65391ae2596"
+        }
+      ]
+    },
+    {
+      "id": "salivary-glands",
+      "structure": "salivary-glands",
+      "triangles": 600,
+      "sources": [
+        {
+          "element": "FJ2765",
+          "file": "FJ2765_BP23722_FMA59805_Left sublingual gland.obj",
+          "sha256": "970c0dfe0bde1e9206b9c5d60a4f2d46e121e607351e45f44f2fd3a31dd4a857"
+        },
+        {
+          "element": "FJ2766",
+          "file": "FJ2766_BP23762_FMA59803_Left submandibular gland.obj",
+          "sha256": "710261df52af452a8cadbec961c8e9bdebdfb97b5fafa0d709f82a91a1eb59b9"
+        },
+        {
+          "element": "FJ2767",
+          "file": "FJ2767_BP23401_FMA59804_Right sublingual gland.obj",
+          "sha256": "1fd9e10f40654745b106f7208b168be5c4d854f8ab3a09ec2d54d1a647daaab2"
+        },
+        {
+          "element": "FJ2768",
+          "file": "FJ2768_BP23704_FMA59802_Right submandibular gland.obj",
+          "sha256": "777c0eea8b0ce55d89a945a2d59835041b58bed841bb10d537e7536102b99647"
+        }
+      ]
+    },
+    {
+      "id": "pharynx",
+      "structure": "pharynx",
+      "triangles": 1500,
+      "sources": [
+        {
+          "element": "FJ2740",
+          "file": "FJ2740_BP20100_FMA46636_Left inferior pharyngeal constrictor.obj",
+          "sha256": "e963fb507394357b5553e9e20e3d14d0a68c4d1e970bb2213c635bc7c396ed6a"
+        },
+        {
+          "element": "FJ2742",
+          "file": "FJ2742_BP23923_FMA46633_Right middle pharyngeal constrictor.obj",
+          "sha256": "67221b7d20e91fd67c9625231d800e2fc8634cf45ce5ee4fe356dcbe52c8ee2a"
+        },
+        {
+          "element": "FJ2747",
+          "file": "FJ2747_BP20320_FMA46632_Left superior pharyngeal constrictor.obj",
+          "sha256": "9e0cc24005866cbf4d0eec7f550de25d02aff90bbc53cde38124098779cebc92"
+        },
+        {
+          "element": "FJ2752",
+          "file": "FJ2752_BP23848_FMA46635_Right inferior pharyngeal constrictor.obj",
+          "sha256": "27f1fd0b5c3e27ce05266f6dfa19232da4fc5f844ee2b36de3b5ef5907d51b27"
+        },
+        {
+          "element": "FJ2754",
+          "file": "FJ2754_BP23937_FMA46634_Left middle pharyngeal constrictor.obj",
+          "sha256": "e68ae58e629d5bc434318d8e3ba418993f66c4a8ae2f73b9858d0ce4d094d5ba"
+        },
+        {
+          "element": "FJ2759",
+          "file": "FJ2759_BP20310_FMA46631_Right superior pharyngeal constrictor.obj",
+          "sha256": "44b702cd902357c4171608ee905658de85c9d0d5fa107549ec0ae6716c31dcee"
+        }
+      ]
+    },
+    {
+      "id": "larynx",
+      "structure": "larynx",
+      "triangles": 1200,
+      "sources": [
+        {
+          "element": "FJ2440",
+          "file": "FJ2440_BP22903_FMA9615_Cricoid cartilage.obj",
+          "sha256": "4621d2c2d7d804fc4c7becedadf5d3507ac344888a00ef69573c50841402e877"
+        },
+        {
+          "element": "FJ2773",
+          "file": "FJ2773_BP23027_FMA55118_Left cuneiform cartilage.obj",
+          "sha256": "774d5e7e0291235c14fec8dd1f8b5b47626aec9b76385dc89f4c2c51a4b4334e"
+        },
+        {
+          "element": "FJ2775",
+          "file": "FJ2775_BP23122_FMA55114_Left arytenoid cartilage.obj",
+          "sha256": "02eed5745be85712cd2ad3587c33e7308f1cebba1962c9c8b0bf90feeef146c4"
+        },
+        {
+          "element": "FJ2776",
+          "file": "FJ2776_BP23329_FMA55116_Left corniculate cartilage.obj",
+          "sha256": "7ff4fce3599f0486e472274f7d92c4c86ffc90b8e19f0c1167bf3b09d346ca24"
+        },
+        {
+          "element": "FJ2792",
+          "file": "FJ2792_BP22608_FMA55113_Right arytenoid cartilage.obj",
+          "sha256": "0b21781173a6de39a14ef7c56c4f171d6a0d6ebb87a1489ea46f3cc27d13d374"
+        },
+        {
+          "element": "FJ2793",
+          "file": "FJ2793_BP23108_FMA55115_Right corniculate cartilage.obj",
+          "sha256": "218c57b2d76014e88ba2b2d4a619755b5b5db7432b8d21c84d354a50cbb20583"
+        },
+        {
+          "element": "FJ2795",
+          "file": "FJ2795_BP23768_FMA55117_Right cuneiform cartilage.obj",
+          "sha256": "0ace0a3e69fe88acf2b00de3c30ae79ba4dab0e06d86d30ef7d1948736899c6c"
+        },
+        {
+          "element": "FJ2808",
+          "file": "FJ2808_BP22917_FMA55099_Thyroid cartilage.obj",
+          "sha256": "7ee325a7e90428925aa6885abb683d9e06df2fe13f8f35f398a2ae6de1ec2a21"
+        }
+      ]
+    },
+    {
+      "id": "thyroid-gland",
+      "structure": "thyroid",
+      "triangles": 800,
+      "sources": [
+        {
+          "element": "FJ3670",
+          "file": "FJ3670_BP21406_FMA49178_Isthmus of thyroid gland.obj",
+          "sha256": "798a3b54f78eb3cc20f118b914202855e003b252a7e479f022fe1c2d6b9b14c0"
+        },
+        {
+          "element": "FJ3671",
+          "file": "FJ3671_BP21433_FMA13369_Left lobe of thyroid gland.obj",
+          "sha256": "2a137c718b0f7f6150978730c78f9003db6dce5324e31ba5cb368d6ce7f57c58"
+        },
+        {
+          "element": "FJ3672",
+          "file": "FJ3672_BP19828_FMA13368_Right lobe of thyroid gland.obj",
+          "sha256": "579d28267ec22b2536878fe2c78947f812d60e3ce3b9e5621f1faab7ce6f63f2"
+        }
+      ]
+    },
+    {
+      "id": "parathyroid-glands",
+      "structure": "parathyroid",
+      "triangles": 300,
+      "sources": [
+        {
+          "element": "FJ3673",
+          "file": "FJ3673_BP21598_FMA55563_Left inferior parathyroid gland.obj",
+          "sha256": "28856a004c1398a05a667947cc0df0f01f2d02319b9fe0ad53fe4ffa7b49417a"
+        },
+        {
+          "element": "FJ3674",
+          "file": "FJ3674_BP23783_FMA55561_Left superior parathyroid gland.obj",
+          "sha256": "8c0fa01bc501ccca78d11bf3c4572160d96d1f284c171c64deb2992a1ea445fd"
+        },
+        {
+          "element": "FJ3675",
+          "file": "FJ3675_BP23812_FMA55562_Right inferior parathyroid gland.obj",
+          "sha256": "f8c9b50c20f355868e1b522ddb38cf8f25779afd40fc7505012361964ea1bc00"
+        },
+        {
+          "element": "FJ3676",
+          "file": "FJ3676_BP23811_FMA55560_Right superior parathyroid gland.obj",
+          "sha256": "aa3bd725d5702aeaab656f42c0d3c423b609628c00680a4be113c01e3d9c8d1a"
+        }
+      ]
+    },
+    {
+      "id": "thymus",
+      "structure": "thymus",
+      "triangles": 600,
+      "sources": [
+        {
+          "element": "FJ3150",
+          "file": "FJ3150_BP22421_FMA71195_Left lobe of thymus.obj",
+          "sha256": "12f2530f399897766f9d917c213eb638acc888b3558c30fe76dd65f912cb4707"
+        },
+        {
+          "element": "FJ3151",
+          "file": "FJ3151_BP23141_FMA71194_Right lobe of thymus.obj",
+          "sha256": "a258bf4c8f724d268d16e41d611e97c7ba5eead2dcbeba5366efef540c34b57c"
+        }
+      ]
+    },
+    {
+      "id": "esophagus",
+      "structure": "esophagus",
+      "triangles": 500,
+      "sources": [
+        {
+          "element": "FJ2563",
+          "file": "FJ2563_BP22674_FMA7131_Esophagus.obj",
+          "sha256": "4dd22252e8c28e1c6f2bbc6c2fc7ce6b9613518ff9cbd38f43cb856f189d3417"
+        }
+      ]
+    },
+    {
+      "id": "lungs",
+      "structure": "lungs",
+      "triangles": 6000,
+      "sources": [
+        {
+          "element": "FJ6595",
+          "file": "FJ6595_BP29727_FMA27368_Parenchyma of apicoposterior bronchopulmonary segment.obj",
+          "sha256": "7ea4893b69f3939ab0759329314e82e08b8843cdd5284f495e72c152ba99c501"
+        },
+        {
+          "element": "FJ6596",
+          "file": "FJ6596_BP29748_FMA27394_Parenchyma of left posterior basal bronchopulmonary segment.obj",
+          "sha256": "9118fad4b7ec3961f631e9c823bb2e26c3d0d4f22b7e4b84ca7a527ce3097bb2"
+        },
+        {
+          "element": "FJ6597",
+          "file": "FJ6597_BP29727_FMA27368_Parenchyma of apicoposterior bronchopulmonary segment.obj",
+          "sha256": "cdb94282a4b2eff1f5382f3807413e277323b242878f77e81de8defba87aa6e0"
+        },
+        {
+          "element": "FJ6598",
+          "file": "FJ6598_BP29733_FMA27374_Parenchyma of left anterior bronchopulmonary segment.obj",
+          "sha256": "bd5397777af624b53aec390f917b1943e993ca05523ccd052c3e2c0406a75523"
+        },
+        {
+          "element": "FJ6599",
+          "file": "FJ6599_BP29752_FMA27375_Parenchyma of superior lingular bronchopulmonary segment.obj",
+          "sha256": "29ed36210a5c1c838f75392b1613a1be7cabf6a652f67cdc0885237ca8375a3a"
+        },
+        {
+          "element": "FJ6600",
+          "file": "FJ6600_BP29730_FMA27376_Parenchyma of inferior lingular bronchopulmonary segment.obj",
+          "sha256": "75e86567fbaa11cc44a2b8762805634483ed65b2cce989f86cab4d6c5aa91daf"
+        },
+        {
+          "element": "FJ6601",
+          "file": "FJ6601_BP29750_FMA27386_Parenchyma of left superior bronchopulmonary segment.obj",
+          "sha256": "c8b7c7829ce551fe05164dd3ec36219683ae835c4d2d5d208d80d5d7056cce4c"
+        },
+        {
+          "element": "FJ6602",
+          "file": "FJ6602_BP29736_FMA27392_Parenchyma of left anterior basal bronchopulmonary segment.obj",
+          "sha256": "1e566045c052a67b15451bc8b19418c2002e0edd5a13d9888e508ce3e76306ef"
+        },
+        {
+          "element": "FJ6603",
+          "file": "FJ6603_BP29740_FMA27390_Parenchyma of left lateral basal bronchopulmonary segment.obj",
+          "sha256": "31cb5ac0e564a3fc261454cc6bbf92f9209af0a4c8dc6a8ffd5f66aee7cdadf6"
+        },
+        {
+          "element": "FJ6604",
+          "file": "FJ6604_BP29747_FMA27369_Parenchyma of right apical bronchopulmonary segment.obj",
+          "sha256": "1c7ce21579d68bfe40b634afe28fc1879119563b49f810a3f8be3487743c24ac"
+        },
+        {
+          "element": "FJ6605",
+          "file": "FJ6605_BP29757_FMA27393_Parenchyma of right posterior basal bronchopulmonary segment.obj",
+          "sha256": "34e470e53185584a1426de78f5acc10010d15613ef4bd1b6f621f0c3b847b14d"
+        },
+        {
+          "element": "FJ6606",
+          "file": "FJ6606_BP29759_FMA27371_Parenchyma of right posterior bronchopulmonary segment.obj",
+          "sha256": "93aed0947f6b07097b8ffa5919add13a43ac2ee28057fd71d1c33608dfe947db"
+        },
+        {
+          "element": "FJ6607",
+          "file": "FJ6607_BP29754_FMA27373_Parenchyma of right anterior bronchopulmonary segment.obj",
+          "sha256": "6974afbef91d64cd79f72ce4610817d410070d1c3dbefbf45e4534618de0eb9e"
+        },
+        {
+          "element": "FJ6608",
+          "file": "FJ6608_BP29731_FMA27452_Parenchyma of lateral bronchopulmonary segment.obj",
+          "sha256": "27532577854c67efca554e397a377f78028788f26b0f9a918ef2df5bc5279622"
+        },
+        {
+          "element": "FJ6609",
+          "file": "FJ6609_BP29735_FMA27448_Parenchyma of medial bronchopulmonary segment.obj",
+          "sha256": "03b2794808796e8370c11263c7a9a599779b7bac72e58387414c3c60d7a3a7c3"
+        },
+        {
+          "element": "FJ6610",
+          "file": "FJ6610_BP29745_FMA27385_Parenchyma of right superior bronchopulmonary segment.obj",
+          "sha256": "15d635ce8fd7c4ead1c9fe7d4c38ec33ce3187857c52fd83eea4b1d735a4b3c8"
+        },
+        {
+          "element": "FJ6611",
+          "file": "FJ6611_BP29753_FMA27391_Parenchyma of right anterior basal bronchopulmonary segment.obj",
+          "sha256": "f07524ff4d25a2473e6137f1153255be9e1f0b5793467a65aa08f8325a6c4547"
+        },
+        {
+          "element": "FJ6612",
+          "file": "FJ6612_BP29741_FMA27389_Parenchyma of right lateral basal bronchopulmonary segment.obj",
+          "sha256": "c92b62bcd36076479b00ae78cb094289cd68f54202f48389450f36db12500256"
+        }
+      ]
+    },
+    {
+      "id": "heart",
+      "structure": "heart",
+      "triangles": 3000,
+      "sources": [
+        {
+          "element": "FJ2422",
+          "file": "FJ2422_BP22494_FMA9466_Cavity of left ventricle.obj",
+          "sha256": "8c2835fee3fa28edbd202cb4ba1c1355db1598dfe2a76c92ebb15b0cc193339f"
+        },
+        {
+          "element": "FJ2423",
+          "file": "FJ2423_BP24005_FMA9291_Cavity of right ventricle.obj",
+          "sha256": "2ed3fc8bb0f6ae1b96208e210499b15c3edbf737a9cb6d6c7d393098b9949801"
+        },
+        {
+          "element": "FJ2428",
+          "file": "FJ2428_BP21837_FMA13884_Wall of ventricle.obj",
+          "sha256": "db5d6415f07c42b7b1af03f66190679595f8b6c4ff659b8d571ba8694afed75f"
+        },
+        {
+          "element": "FJ2438",
+          "file": "FJ2438_BP22747_FMA9531_Wall of left atrium.obj",
+          "sha256": "17544b1214ea0626f9564aeb42b5bb9d52a126f22237a499f8de0eca6073d8a7"
+        },
+        {
+          "element": "FJ2439",
+          "file": "FJ2439_BP21422_FMA9457_Wall of right atrium.obj",
+          "sha256": "85fddffea47ac61de11d29219fc4f32dfc857d17b3082929a3f048c57522c887"
+        }
+      ]
+    },
+    {
+      "id": "diaphragm",
+      "structure": "diaphragm",
+      "triangles": 2000,
+      "sources": [
+        {
+          "element": "FJ3131",
+          "file": "FJ3131_BP23131_FMA13295_Diaphragm.obj",
+          "sha256": "9a2e6094a858e985612a00b6f4e8203082ca7ebe4e167cc13200fb9ed8287b1c"
+        }
+      ]
+    },
+    {
+      "id": "liver",
+      "structure": "liver",
+      "triangles": 3000,
+      "sources": [
+        {
+          "element": "FJ2816",
+          "file": "FJ2816_BP23891_FMA13365_Caudate lobe of liver.obj",
+          "sha256": "40d49b0509bcc639a2f494da3b8570d4d240453208f12e7c05b7294e97ac5726"
+        },
+        {
+          "element": "FJ2818",
+          "file": "FJ2818_BP22945_FMA15739_Hepatovenous segment II.obj",
+          "sha256": "2e6eb4656aa3a3e1e1bfde1e259da6afd5b2797b5767d1bcf5616e538853d967"
+        },
+        {
+          "element": "FJ2819",
+          "file": "FJ2819_BP23896_FMA15741_Hepatovenous segment III.obj",
+          "sha256": "82ec45f966de3fdb2de31c7f19b9fb96ecaf52627e64429c8d17ff0d597771fc"
+        },
+        {
+          "element": "FJ2820",
+          "file": "FJ2820_BP22976_FMA15742_Hepatovenous segment IV.obj",
+          "sha256": "6e3ff56f2a6538a7964eb0a0764f45df2ef425a4921c11c93d399e33390e8d1b"
+        },
+        {
+          "element": "FJ2821",
+          "file": "FJ2821_BP22003_FMA15743_Hepatovenous segment V.obj",
+          "sha256": "db56694472aa9bb6171b1655dff06c1500d5630531f90a69d7afb4512871fd83"
+        },
+        {
+          "element": "FJ2822",
+          "file": "FJ2822_BP19699_FMA15744_Hepatovenous segment VI.obj",
+          "sha256": "56ef3fa5c1cf92e6e214a7023983036c7b3f4ad873d67734735ebc44a501dc4b"
+        },
+        {
+          "element": "FJ2823",
+          "file": "FJ2823_BP23025_FMA15746_Hepatovenous segment VIII.obj",
+          "sha256": "0766bcc9d81de542c375481d670304269b69f9fde5b9f5af13b4a65051bf3108"
+        },
+        {
+          "element": "FJ2824",
+          "file": "FJ2824_BP23025_FMA15746_Hepatovenous segment VIII.obj",
+          "sha256": "66a2c62871e57a187e156b3616fc8218ab0fc4205b1f9ed3ea51d6d6068921e5"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder",
+      "structure": "gallbladder",
+      "triangles": 400,
+      "sources": [
+        {
+          "element": "FJ2817",
+          "file": "FJ2817_BP23957_FMA7202_Gallbladder.obj",
+          "sha256": "55efafa50cd18bad67f0fc364cfefcfbcf887a689705ad1f0a5ef0d742e18ebc"
+        }
+      ]
+    },
+    {
+      "id": "stomach",
+      "structure": "stomach",
+      "triangles": 1200,
+      "sources": [
+        {
+          "element": "FJ2564",
+          "file": "FJ2564_BP22633_FMA7148_Stomach.obj",
+          "sha256": "7dbab763e256f4cbbbb38417cf0a306eb62a46ae177fa728a613476dd77a063b"
+        }
+      ]
+    },
+    {
+      "id": "spleen",
+      "structure": "spleen",
+      "triangles": 600,
+      "sources": [
+        {
+          "element": "FJ2561",
+          "file": "FJ2561_BP21570_FMA7196_Spleen.obj",
+          "sha256": "1c23d098fb67b5175b81aa899e46d7ef5721a511dc60efd64f194fce591db38b"
+        }
+      ]
+    },
+    {
+      "id": "pancreas",
+      "structure": "pancreas",
+      "triangles": 800,
+      "sources": [
+        {
+          "element": "FJ1895",
+          "file": "FJ1895_BP22966_FMA63120_Parenchyma of pancreas.obj",
+          "sha256": "bf9a56c2b1012be4b95c33a9b2acafeda92db56a1515ea7f37677449f8bb4793"
+        }
+      ]
+    },
+    {
+      "id": "adrenal-glands",
+      "structure": "adrenals",
+      "triangles": 500,
+      "sources": [
+        {
+          "element": "FJ3129",
+          "file": "FJ3129_BP22924_FMA15630_Left adrenal gland.obj",
+          "sha256": "bb76f6a00354e29ec48fc9a3448ddb78cefc68cb23d178d2039dfff5a4f511ba"
+        },
+        {
+          "element": "FJ3130",
+          "file": "FJ3130_BP23803_FMA15629_Right adrenal gland.obj",
+          "sha256": "657a496166291cbe2390aef7d55b3cc844fcae292317e8fca6a70d5bfa11ede7"
+        }
+      ]
+    },
+    {
+      "id": "kidneys",
+      "structure": "kidneys",
+      "triangles": 1200,
+      "sources": [
+        {
+          "element": "FJ3145",
+          "file": "FJ3145_BP21596_FMA7205_Left kidney.obj",
+          "sha256": "6284a5129713c3456d2d29ac4eaa450d68ea879a005d4abd84307cfd73541dcd"
+        },
+        {
+          "element": "FJ3147",
+          "file": "FJ3147_BP23801_FMA7204_Right kidney.obj",
+          "sha256": "df2a928327de5d6ec21987274d6af704d49d12306786c9a75469c5ee89070b2b"
+        }
+      ]
+    },
+    {
+      "id": "small-intestine",
+      "structure": "intestines",
+      "triangles": 5000,
+      "sources": [
+        {
+          "element": "FJ2573",
+          "file": "FJ2573_BP24104_FMA7206_Duodenum.obj",
+          "sha256": "4e864f74d938eca6d74a185539429c1d4bbb80a8b2add7f3662b34e406c85440"
+        },
+        {
+          "element": "FJ2574",
+          "file": "FJ2574_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "bd0866f49702a9701248bb239f548b0f57c8e0756dc801c76c12cee0ce992165"
+        },
+        {
+          "element": "FJ2575",
+          "file": "FJ2575_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "0b8f9d20cb8db1361f3ca18ac2fda58e14f933dab61ac6218d48f2ecf18aeec3"
+        },
+        {
+          "element": "FJ2576",
+          "file": "FJ2576_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "2ce78308407ac9793d1f0a681711d3ff1802253ab60867beb39eb3a480875b5b"
+        },
+        {
+          "element": "FJ2577",
+          "file": "FJ2577_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "c236c4293685fa579d3600ecdf54888443d74c00618567123469a9f741166e8f"
+        },
+        {
+          "element": "FJ2578",
+          "file": "FJ2578_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "2edf3b911e1f315b7d9deb645c1a0db606de3a4db78aafca1d6eaac68b6c5263"
+        },
+        {
+          "element": "FJ2579",
+          "file": "FJ2579_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "588739bd8f3719586d0f4c9b36031af990cf260441bd1c1ca045d6fd20cfc4de"
+        },
+        {
+          "element": "FJ2580",
+          "file": "FJ2580_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "aecae1f3ef51f5dcd867eb3cb8650bf09d48bf07d020fe10715ffecb1c80c75c"
+        },
+        {
+          "element": "FJ2581",
+          "file": "FJ2581_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "01810189074546a871fbe937eece5801d443cc5b07355a6cfd265354ff1d2435"
+        },
+        {
+          "element": "FJ2582",
+          "file": "FJ2582_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "5c813771f64e9f867d715b124f7ef145e79ff70ce6df22d678401d5f681edb16"
+        },
+        {
+          "element": "FJ2584",
+          "file": "FJ2584_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "15b0d0f7cad4d9f15ec3c9983e3f053f27706bc91614f5804e3c2c671819d358"
+        },
+        {
+          "element": "FJ2585",
+          "file": "FJ2585_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "4c6d5bbc1696335b3d9370b526ecf45d9ae7913d9cfdbf56eda5431c020033d1"
+        },
+        {
+          "element": "FJ2586",
+          "file": "FJ2586_BP22937_FMA14965_Middle part of ileum.obj",
+          "sha256": "876fb01167eb6603452d7235d9ed79e7f78c6a374f7ddd190188e3dce2be2603"
+        },
+        {
+          "element": "FJ2587",
+          "file": "FJ2587_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "b206d71913e488fb807c6e038f8ec2fd2d15119a8a1a7268b0e3471b66ba2802"
+        },
+        {
+          "element": "FJ2588",
+          "file": "FJ2588_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "96a4017bfdcb97dcbee9c3bd894ad41d2f7fcf3ad02a9fb46edf7c42e907e0c4"
+        },
+        {
+          "element": "FJ2589",
+          "file": "FJ2589_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "81e62be6a3e5ae267d61f06e840d9c12a69cfeea707b76e353114d28ee28b663"
+        },
+        {
+          "element": "FJ2590",
+          "file": "FJ2590_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "7442195288c12d56c4ad52b032be2c89a439f43c5914b7365b95e8fd2099635a"
+        },
+        {
+          "element": "FJ2591",
+          "file": "FJ2591_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "f3826032301d2cb0d8fc57b02d7ad445d0e4ab798313b85b3688d50a767a1d5f"
+        },
+        {
+          "element": "FJ2592",
+          "file": "FJ2592_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "bf9717fbc26bd87e1017f9f854a09751fdcd137c54a695ea2088e23e600a1b1d"
+        },
+        {
+          "element": "FJ2593",
+          "file": "FJ2593_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "53c1cf29192a3d552550519b616982aab9e4c8c34e5fb64f5e98b60d2b210cac"
+        },
+        {
+          "element": "FJ2594",
+          "file": "FJ2594_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "f6dd6d4909eb4a14c62c6312bf5a363842aa574c3c65e52526f5f43607347dd1"
+        },
+        {
+          "element": "FJ2595",
+          "file": "FJ2595_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "939bc15f7c7f0cba4fea081bd23568aaa3b8ceafeca5249e440b1ec0c041bbfe"
+        },
+        {
+          "element": "FJ2596",
+          "file": "FJ2596_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "b5c57d9d2a80e91425875e5354ba9527962a733dba6913767408451d2162acc5"
+        },
+        {
+          "element": "FJ2597",
+          "file": "FJ2597_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "59b946e20d6d89ddc48712aa005fb826321594fe4b0b02227ca35768185b81a1"
+        },
+        {
+          "element": "FJ2598",
+          "file": "FJ2598_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "111d0e770cdfc8bdac58535b8ce55689c9e14f2d2784818643f7bd869d6d1261"
+        },
+        {
+          "element": "FJ2599",
+          "file": "FJ2599_BP23004_FMA14966_Distal part of ileum.obj",
+          "sha256": "0a9c1759c7ec6d82593ec8180191517781fd6613084a4207eda82e58a5ff8275"
+        },
+        {
+          "element": "FJ2600",
+          "file": "FJ2600_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "7ea3bc2f95c0473711656b30754f370dc2648adb01713f8ec633567fbe011ecc"
+        },
+        {
+          "element": "FJ2601",
+          "file": "FJ2601_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "58f472b01fefe43958bbc5fdd3f0adab6b799a4ff4e4e703cb4b7451716d4c73"
+        },
+        {
+          "element": "FJ2602",
+          "file": "FJ2602_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "5d4a012758ae1762b04a3eb565092e8f76d4982718f0db2e958fb263e4ad0615"
+        },
+        {
+          "element": "FJ2603",
+          "file": "FJ2603_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "f457755fccfa3f979400e74d9ff5d4a060adeaf6a1eaf9303385f9acf9e85132"
+        },
+        {
+          "element": "FJ2604",
+          "file": "FJ2604_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "c31d9e4795f0376d3ca8421d4d864550e103be8537caa9c9d7db1ae076445cac"
+        },
+        {
+          "element": "FJ2605",
+          "file": "FJ2605_BP21558_FMA14964_Proximal part of ileum.obj",
+          "sha256": "b43b6e6a1bcec8963dde479c6813fa5b964b68707a380d66ab95c2b918544bc3"
+        },
+        {
+          "element": "FJ2606",
+          "file": "FJ2606_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "2b2372aacf3c014c1a8c2120740867b8424e8458328673069cd3eb3c4d06b554"
+        },
+        {
+          "element": "FJ2607",
+          "file": "FJ2607_BP23049_FMA16982_Middle part of jejunum.obj",
+          "sha256": "5c07bdc43e1cc1772007a0a8e9f3d0ce042fb909f8ca6436aecb2a7c7f5df91a"
+        },
+        {
+          "element": "FJ2608",
+          "file": "FJ2608_BP23049_FMA16982_Middle part of jejunum.obj",
+          "sha256": "01b45af97d3383bea3e64c0bac1815f052855b7ca974a72b7b61543cb9381631"
+        },
+        {
+          "element": "FJ2609",
+          "file": "FJ2609_BP23049_FMA16982_Middle part of jejunum.obj",
+          "sha256": "4c9a66684b9e2da4acedbb2d98c7ed240aeaf9fd88d86354fb9acad9ca7cda66"
+        },
+        {
+          "element": "FJ2610",
+          "file": "FJ2610_BP23049_FMA16982_Middle part of jejunum.obj",
+          "sha256": "26a820bd7906534046cd7421a2f6d7369856a731af1e941efc024dfd46f3677c"
+        },
+        {
+          "element": "FJ2611",
+          "file": "FJ2611_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "15949bc539dfdc9bf1fd38f7e0519c03c74b9b75bc7f6e695bf7ec351ea8979a"
+        },
+        {
+          "element": "FJ2612",
+          "file": "FJ2612_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "922dd4d23ed89fc5492fb69b172fdd6f4cde300b967403b52451dabb32437610"
+        },
+        {
+          "element": "FJ2613",
+          "file": "FJ2613_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "e9bf245e0c63947da66c6a78714eec707876c43769d744cbad2b0136986a6456"
+        },
+        {
+          "element": "FJ2614",
+          "file": "FJ2614_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "69b4901dd5865bfefa09c9878821c109db319e2df265eb7399feccfc04bc0506"
+        },
+        {
+          "element": "FJ2615",
+          "file": "FJ2615_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "e54fd310cfbeac54fead199c7d42d0e21bf7ad01f9b622bde8d5537e237619de"
+        },
+        {
+          "element": "FJ2616",
+          "file": "FJ2616_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "64051d49f38ff0dce48f555378dd617cab5394a2e3788b2918ec4494d7ca6656"
+        },
+        {
+          "element": "FJ2617",
+          "file": "FJ2617_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "d14b76f6be59f07acbd7c6baeae3bda5c97da2b3ffdd8ba28ed900e0660026f3"
+        },
+        {
+          "element": "FJ2618",
+          "file": "FJ2618_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "d4e50f4527ebac26058caeb725e246c3a07b9257bfe96c97731cab30cf8f1eef"
+        },
+        {
+          "element": "FJ2619",
+          "file": "FJ2619_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "fdc132c33a055fc208f0bedcd846750e4ae6ea51ac3b7fb9564b08586d2ff43e"
+        },
+        {
+          "element": "FJ2620",
+          "file": "FJ2620_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "2114715611081e19fc9705e10deee123295db90523afc96f343f604e3b3f4cf3"
+        },
+        {
+          "element": "FJ2621",
+          "file": "FJ2621_BP21888_FMA16983_Distal part of jejunum.obj",
+          "sha256": "34e64adbae1116ee1d056b94673a92912c9d0e109ecce0a9c16abbdd6e8256bc"
+        },
+        {
+          "element": "FJ2622",
+          "file": "FJ2622_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "72477f1944682e009d7a777a72d65047be37f41acca1294a19a24295b8230b16"
+        },
+        {
+          "element": "FJ2623",
+          "file": "FJ2623_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "11fe9e0e17d22f15ac8a0860130b8603ac2e965145452a9c012d928a75d470ac"
+        },
+        {
+          "element": "FJ2624",
+          "file": "FJ2624_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "ef749dfe6ab533d66cda0102aaebcdcda0ff2c70f2239f315c52e5e481ad2cae"
+        },
+        {
+          "element": "FJ2625",
+          "file": "FJ2625_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "9b3ad112afc3e5b0bd9a773cfbc202583c34214bcbc054e7b454b2d1f1d868fc"
+        },
+        {
+          "element": "FJ2626",
+          "file": "FJ2626_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "ae6743e0348d2e9c9797aece90fc10f54b5b925417a050f57dbb0b3f51b66b29"
+        },
+        {
+          "element": "FJ2627",
+          "file": "FJ2627_BP23892_FMA16981_Proximal part of jejunum.obj",
+          "sha256": "db316abd2922a3c22747a1e38b026879e7643ecfa5917f41658a820068f13efe"
+        },
+        {
+          "element": "FJ2628",
+          "file": "FJ2628_BP23049_FMA16982_Middle part of jejunum.obj",
+          "sha256": "2c3387559b666f0c6672cb39e81e6095130c1256fd56f390596393a4437bd9de"
+        }
+      ]
+    },
+    {
+      "id": "large-intestine",
+      "structure": "intestines",
+      "triangles": 2500,
+      "sources": [
+        {
+          "element": "FJ2566",
+          "file": "FJ2566_BP22851_FMA14545_Ascending colon.obj",
+          "sha256": "0724a484ff53f644d5c0104edcf23823ac723fd9d03ef7cea08678ff7e53c605"
+        },
+        {
+          "element": "FJ2567",
+          "file": "FJ2567_BP22849_FMA14547_Descending colon.obj",
+          "sha256": "c0fc65886d1e215e2b123c27d42fca1f49ef31605368bc38edde5d499169ce53"
+        },
+        {
+          "element": "FJ2571",
+          "file": "FJ2571_BP21902_FMA14544_Rectum.obj",
+          "sha256": "a2b702d4603176010fc1a6201b9f1910ca7d68ec8db76e33bcbc9c55edb5782b"
+        },
+        {
+          "element": "FJ2572",
+          "file": "FJ2572_BP23966_FMA14546_Transverse colon.obj",
+          "sha256": "20d64fe3057546ef1ab86149455b93cae3740424798962ae99fc44211a604922"
+        }
+      ]
+    },
+    {
+      "id": "appendix",
+      "structure": "appendix",
+      "triangles": 200,
+      "sources": [
+        {
+          "element": "FJ2565",
+          "file": "FJ2565_BP23696_FMA14542_Appendix.obj",
+          "sha256": "6b08aeecda3239f4224f92b8ceba642625f6463dc5a482fd886cacbb1fbfce18"
+        }
+      ]
+    },
+    {
+      "id": "bladder",
+      "structure": "bladder",
+      "triangles": 226,
+      "sources": [
+        {
+          "element": "FJ3149",
+          "file": "FJ3149_BP22630_FMA15900_Urinary bladder.obj",
+          "sha256": "d47502a715addeec165a69270c1b94bc1d079609877cf0463882b9a4375ca4e4"
+        }
+      ]
+    },
+    {
+      "id": "prostate",
+      "structure": "prostate",
+      "triangles": 300,
+      "sources": [
+        {
+          "element": "FJ3139",
+          "file": "FJ3139_BP21548_FMA9600_Prostate.obj",
+          "sha256": "7c5b9667404565e4321a27404bd95b22bc51dc3ebc7507a8b26212bc9d49d60e"
+        }
+      ]
+    },
+    {
+      "id": "spinal-cord",
+      "structure": "spinal-cord",
+      "triangles": 1200,
+      "sources": [
+        {
+          "element": "FJ4426",
+          "file": "FJ4426_BP29816_FMA242005_Neural tissue of spinal cord.obj",
+          "sha256": "16a3dbf5a0fbc6334df956071a8e27b4f538a9d1f18178919984df0856aa7053"
+        }
+      ]
+    },
+    {
+      "id": "skull",
+      "structure": "skeleton",
+      "triangles": 6000,
+      "sources": [
+        {
+          "element": "FJ2772",
+          "file": "FJ2772_BP22977_FMA52749_Hyoid bone.obj",
+          "sha256": "0e29dd64fd4bca2c4c6e2079bf6df138f033f11faf2d3702ab5788b7e3357d49"
+        },
+        {
+          "element": "FJ3200",
+          "file": "FJ3200_BP22997_FMA52734_Frontal bone.obj",
+          "sha256": "6a5a6c364c07703d53ff5da743babde5cceb5187023eb6fb56ac32cba02c057b"
+        },
+        {
+          "element": "FJ3263",
+          "file": "FJ3263_BP22607_FMA54738_Left inferior nasal concha.obj",
+          "sha256": "56d8ae2f36071f0187a243a9f9c064536a743583f9089ad88433441328885944"
+        },
+        {
+          "element": "FJ3265",
+          "file": "FJ3265_BP23042_FMA53646_Left lacrimal bone.obj",
+          "sha256": "c042fb00ea4945552703ea1960233145ce67da5313be3e2f980cd295d99719da"
+        },
+        {
+          "element": "FJ3269",
+          "file": "FJ3269_BP23755_FMA53650_Left maxilla.obj",
+          "sha256": "59b3ee93b5894c800594be3e7860488c65277f1177ae79744816aecb4b5e6da1"
+        },
+        {
+          "element": "FJ3273",
+          "file": "FJ3273_BP23315_FMA53656_Left palatine bone.obj",
+          "sha256": "aa5963fce152c007c00b767130923ce5912d026f16cb5454d6acb47082826299"
+        },
+        {
+          "element": "FJ3274",
+          "file": "FJ3274_BP23158_FMA52789_Left parietal bone.obj",
+          "sha256": "73652930ff6999709640f702a2db64b9549df21a84be6ffa33eac733f026d5d0"
+        },
+        {
+          "element": "FJ3281",
+          "file": "FJ3281_BP23760_FMA52739_Left temporal bone.obj",
+          "sha256": "d4e9a662ad120e5cdaa18a8aac1abc16b0fd239a0cdc69f4fadce4015bbfdac7"
+        },
+        {
+          "element": "FJ3289",
+          "file": "FJ3289_BP22817_FMA52748_Mandible.obj",
+          "sha256": "f0250d55be8e912e9465c55a4c966f9f3bed709f503d3069d3cd19479bbcfe2b"
+        },
+        {
+          "element": "FJ3309",
+          "file": "FJ3309_BP23972_FMA52735_Occipital bone.obj",
+          "sha256": "4447f4d6d6bb111465598b29fba900931226757a538df3c4d3ad6e66ef973577"
+        },
+        {
+          "element": "FJ3369",
+          "file": "FJ3369_BP23235_FMA54737_Right inferior nasal concha.obj",
+          "sha256": "04093e7f4a2527c20126e063f821cfe7ec9eb76d7e9610011311b4a874a54d8e"
+        },
+        {
+          "element": "FJ3371",
+          "file": "FJ3371_BP23129_FMA53645_Right lacrimal bone.obj",
+          "sha256": "6c0b8ef764ecaa4f9087961296afffcfdc8d87e6dc6baa6bd1255db04f812e20"
+        },
+        {
+          "element": "FJ3380",
+          "file": "FJ3380_BP23064_FMA52788_Right parietal bone.obj",
+          "sha256": "ef9812913a8593b50ae384955418c0c2339933740473e85b9e3b309a777ecf21"
+        },
+        {
+          "element": "FJ3386",
+          "file": "FJ3386_BP23685_FMA52738_Right temporal bone.obj",
+          "sha256": "ca1defb8b800c22dc3f9b6723a3b5e73dbdf847e1f9c0f4f10567225af22ec29"
+        },
+        {
+          "element": "FJ3392",
+          "file": "FJ3392_BP23110_FMA52892_Right zygomatic bone.obj",
+          "sha256": "81400b9ebe1b4cf54a9d6eeb6676681ffe4fd962e68350a38ec2349ba170928b"
+        },
+        {
+          "element": "FJ3394",
+          "file": "FJ3394_BP23082_FMA52736_Sphenoid bone.obj",
+          "sha256": "955ce48240d3037006bb724e1d39eb7b6939e15ce3ef53019a8058cfc19b99e4"
+        },
+        {
+          "element": "FJ6309",
+          "file": "FJ6309_BP23248_FMA52740_Ethmoid.obj",
+          "sha256": "ba08d5c389906c2dc7c5d956b32a5986f154fa692d10017b886b543a06b9475c"
+        },
+        {
+          "element": "FJ6376",
+          "file": "FJ6376_BP23042_FMA53646_Left lacrimal bone.obj",
+          "sha256": "4d5bf24640efdad48a7961a12ffd43cb138c6ce400cd7635c5d868d379bf5f01"
+        },
+        {
+          "element": "FJ6383",
+          "file": "FJ6383_BP23333_FMA53648_Left nasal bone.obj",
+          "sha256": "ebc3e68ab27e2db2edb2670796b1c6f27f15f00d2a28dfb66e238db0e1776316"
+        },
+        {
+          "element": "FJ6384",
+          "file": "FJ6384_BP23315_FMA53656_Left palatine bone.obj",
+          "sha256": "4ec1ba9cd254f9f8207a7f446c5c8ee9b74ccd9dc657119c5825e1e2dfd8c0d9"
+        },
+        {
+          "element": "FJ6397",
+          "file": "FJ6397_BP23337_FMA52893_Left zygomatic bone.obj",
+          "sha256": "8c2f6268384033dda1838e93f9193e1c953e67455e03bfe4bd3d7f2d496094b4"
+        },
+        {
+          "element": "FJ6465",
+          "file": "FJ6465_BP23129_FMA53645_Right lacrimal bone.obj",
+          "sha256": "ddbef17e66f25a8c762f8b25c121eeeb416f727d9587d74c68697a86b834bb11"
+        },
+        {
+          "element": "FJ6468",
+          "file": "FJ6468_BP23661_FMA53649_Right maxilla.obj",
+          "sha256": "3196db146176e19064a6268a2d87ddf1217f9e903f2f01f76acdd4b4a7b30695"
+        },
+        {
+          "element": "FJ6470",
+          "file": "FJ6470_BP23260_FMA53647_Right nasal bone.obj",
+          "sha256": "4bb561d5b081aa72739c846e7246fd6de22fa4301e148e6228d233cf62abc2d0"
+        },
+        {
+          "element": "FJ6471",
+          "file": "FJ6471_BP24091_FMA53655_Right palatine bone.obj",
+          "sha256": "4d6b5b45405f2ddefdd99f5e78115326074c080e6e481bb06716dcada4e9c08e"
+        },
+        {
+          "element": "FJ6486",
+          "file": "FJ6486_BP22288_FMA9710_Vomer.obj",
+          "sha256": "511883f99b87558eb8fbc59c2c1a7531640911e2ae95d67b8187f4b5456a78d5"
+        }
+      ]
+    },
+    {
+      "id": "spine",
+      "structure": "skeleton",
+      "triangles": 5000,
+      "sources": [
+        {
+          "element": "FJ3154",
+          "file": "FJ3154_BP23555_FMA10037_Tenth thoracic vertebra.obj",
+          "sha256": "b8322a72a3fc0e720e22fdbbdc81f04adaaa12a7ce5a11b76013e6f6e0e974c7"
+        },
+        {
+          "element": "FJ3155",
+          "file": "FJ3155_BP23648_FMA10059_Eleventh thoracic vertebra.obj",
+          "sha256": "f1734b5a82b3134f392b770255947569b8fb7fcefd152846a1102e7fa3c7b543"
+        },
+        {
+          "element": "FJ3156",
+          "file": "FJ3156_BP23373_FMA10081_Twelfth thoracic vertebra.obj",
+          "sha256": "396f459937f9afd71ee42ed17cad6b989842c6ec072a1401dc184bc292a0d68d"
+        },
+        {
+          "element": "FJ3157",
+          "file": "FJ3157_BP23647_FMA13072_First lumbar vertebra.obj",
+          "sha256": "3d5c43595140cf7e17d3698ec8d03568cacfeb6352b82d9cf2ed3a6ab097868f"
+        },
+        {
+          "element": "FJ3158",
+          "file": "FJ3158_BP23701_FMA9165_First thoracic vertebra.obj",
+          "sha256": "decdbc71af9e3ed2ec870ec51cb13074293ad95365e11d51a0429fcde4e7be86"
+        },
+        {
+          "element": "FJ3159",
+          "file": "FJ3159_BP23671_FMA13073_Second lumbar vertebra.obj",
+          "sha256": "f754ca81497dbf3d52a96d4243c74c692c6d3b4a5027db4d950bf6934e5a728a"
+        },
+        {
+          "element": "FJ3160",
+          "file": "FJ3160_BP23621_FMA9187_Second thoracic vertebra.obj",
+          "sha256": "a80babd2d3d511869c791607dad70939daf0ea8974f28a0a0c37278a94a832b9"
+        },
+        {
+          "element": "FJ3161",
+          "file": "FJ3161_BP23693_FMA12521_Third cervical vertebra.obj",
+          "sha256": "1fc32d22fd860e4fab228e2063a8a167ea2e85b14ad7570ac5c3a1d693df67e3"
+        },
+        {
+          "element": "FJ3162",
+          "file": "FJ3162_BP23454_FMA13074_Third lumbar vertebra.obj",
+          "sha256": "eefd71864836c9138d817d757932c987f94b0aff72fd825d92153052d4bf25b4"
+        },
+        {
+          "element": "FJ3163",
+          "file": "FJ3163_BP23513_FMA9209_Third thoracic vertebra.obj",
+          "sha256": "8e53609cdd7c5a49a1cbb9abd5e97a43e0a21a16708dcb71f085555010d190f8"
+        },
+        {
+          "element": "FJ3164",
+          "file": "FJ3164_BP23757_FMA12522_Fourth cervical vertebra.obj",
+          "sha256": "8a211a85a55ca6ed0466a7ff9505656f80677b8c3fdaf133026b750974089111"
+        },
+        {
+          "element": "FJ3165",
+          "file": "FJ3165_BP23680_FMA13075_Fourth lumbar vertebra.obj",
+          "sha256": "819bc08eef893a233a1292d76e9ba3c8d12151097526bca0624935dd10a95808"
+        },
+        {
+          "element": "FJ3166",
+          "file": "FJ3166_BP23564_FMA9248_Fourth thoracic vertebra.obj",
+          "sha256": "6b6d555c6132b5dd673e9b702a76574f2869462aace2bb3892cd8e38387ce0dc"
+        },
+        {
+          "element": "FJ3167",
+          "file": "FJ3167_BP23524_FMA12523_Fifth cervical vertebra.obj",
+          "sha256": "b5e0cb9386110c82189b036d56d8be640a29c7f56fa88cf922bce80c93a33825"
+        },
+        {
+          "element": "FJ3168",
+          "file": "FJ3168_BP23617_FMA13076_Fifth lumbar vertebra.obj",
+          "sha256": "91a45192b217738af6e18cd979907d858b8dc5ae30831c3d0edcc7c83bf112b0"
+        },
+        {
+          "element": "FJ3169",
+          "file": "FJ3169_BP23466_FMA9922_Fifth thoracic vertebra.obj",
+          "sha256": "2a06234c1a3837b3b643f0dd3af11843c85f6bd2a8ed29a011da31fea08d0682"
+        },
+        {
+          "element": "FJ3170",
+          "file": "FJ3170_BP24077_FMA12524_Sixth cervical vertebra.obj",
+          "sha256": "ca1c7507951b7a16bbd4286492391af0a4f60c8f07fb59a876f6526853ce9f60"
+        },
+        {
+          "element": "FJ3171",
+          "file": "FJ3171_BP24088_FMA9945_Sixth thoracic vertebra.obj",
+          "sha256": "082ac32fee22c34609758a61d58227d7dcd84220bf4264f8f110f64f2ebb3992"
+        },
+        {
+          "element": "FJ3172",
+          "file": "FJ3172_BP23626_FMA12525_Seventh cervical vertebra.obj",
+          "sha256": "20df76505e5d21ad9eac99e1dd241576a4411a3fa0d2c1d3dda7aa69a9f79f32"
+        },
+        {
+          "element": "FJ3173",
+          "file": "FJ3173_BP23615_FMA9968_Seventh thoracic vertebra.obj",
+          "sha256": "9f20e518e1a27a7c4be01a829bef7afda1a032cedf45c0fe165539a7df2edc8e"
+        },
+        {
+          "element": "FJ3174",
+          "file": "FJ3174_BP23727_FMA9991_Eighth thoracic vertebra.obj",
+          "sha256": "3f4f6575d9392332f5a8e04efdc2e1525fdd5d3ac1c3dac6b2f5f540d9833dad"
+        },
+        {
+          "element": "FJ3175",
+          "file": "FJ3175_BP23429_FMA10014_Ninth thoracic vertebra.obj",
+          "sha256": "41be91d8fd03e9894d868be28e931c66f5d805764bf143f91e8f8990c5784d15"
+        },
+        {
+          "element": "FJ3176",
+          "file": "FJ3176_BP23663_FMA12519_Atlas.obj",
+          "sha256": "0adae3222ad287eb367bbf83c1cd6fbcd7664f40a1d2536feb6d768d7518e6bf"
+        },
+        {
+          "element": "FJ3177",
+          "file": "FJ3177_BP23565_FMA12520_Axis.obj",
+          "sha256": "6cf7e5c7936a928dd6a53e177f05a1342be97fd4093b8cb0750ab958ad57fc55"
+        },
+        {
+          "element": "FJ3393",
+          "file": "FJ3393_BP22840_FMA16202_Sacrum.obj",
+          "sha256": "075790fa7c698f2128c83c9321167a19f67d09830cbc93b465619b4ac86bd7e6"
+        }
+      ]
+    },
+    {
+      "id": "rib-cage",
+      "structure": "skeleton",
+      "triangles": 5000,
+      "sources": [
+        {
+          "element": "FJ3153",
+          "file": "FJ3153_BP22299_FMA7488_Xiphoid process.obj",
+          "sha256": "78c5b7418f7a20e567c7fe238626febaa054faf623aa1fbda5d6f84d0906832d"
+        },
+        {
+          "element": "FJ3178",
+          "file": "FJ3178_BP22232_FMA7487_Body of sternum.obj",
+          "sha256": "2778645a031486a98f2e26be0c67f664f2de391a5e760427db96a403e676391f"
+        },
+        {
+          "element": "FJ3225",
+          "file": "FJ3225_BP23877_FMA8472_Left tenth rib.obj",
+          "sha256": "38da43831695ce20a30e75bfea67ef8b30d6d809acc06047e43cc669735764e9"
+        },
+        {
+          "element": "FJ3226",
+          "file": "FJ3226_BP22277_FMA8532_Left eleventh rib.obj",
+          "sha256": "a319bfed8a58a63a92b21360115816ea9d4d088a8e089ad67608db0f6ddd8ce7"
+        },
+        {
+          "element": "FJ3227",
+          "file": "FJ3227_BP22319_FMA8534_Left twelfth rib.obj",
+          "sha256": "6a67f81f9442f9ab46f685d0835904410a4e2d314d95258014a512374008da04"
+        },
+        {
+          "element": "FJ3228",
+          "file": "FJ3228_BP22221_FMA7987_Left first rib.obj",
+          "sha256": "6a19fc2a31580adbe8186e7df47dce050ee28ecd1ac61c0f4f594e764a3c794f"
+        },
+        {
+          "element": "FJ3229",
+          "file": "FJ3229_BP22527_FMA8012_Left second rib.obj",
+          "sha256": "6451db218e0d23b4f32350cb1704c5c6f4cc891826d25109368c685cd4ebd62a"
+        },
+        {
+          "element": "FJ3230",
+          "file": "FJ3230_BP22294_FMA8039_Left third rib.obj",
+          "sha256": "8690da802ef43712bb17dcbb35e33d7b210ebbfd365297b8516fee9fb07ab008"
+        },
+        {
+          "element": "FJ3231",
+          "file": "FJ3231_BP22488_FMA8148_Left fourth rib.obj",
+          "sha256": "62f81d0f6e799c759d048b0d7e4e6ea0ccf59eebc76deb8c5f4f4b93ebe56c7a"
+        },
+        {
+          "element": "FJ3232",
+          "file": "FJ3232_BP22285_FMA8093_Left fifth rib.obj",
+          "sha256": "134ed1994bcf99a0827baca7e4548b952ede8cebcd9c32ff9bba83694fe2af82"
+        },
+        {
+          "element": "FJ3233",
+          "file": "FJ3233_BP22298_FMA8202_Left sixth rib.obj",
+          "sha256": "4a9e0c4b951c18cad19c92f8e1d6bf900294e33e3197df0bf3ee470d5f740b03"
+        },
+        {
+          "element": "FJ3234",
+          "file": "FJ3234_BP22332_FMA8256_Left seventh rib.obj",
+          "sha256": "1cf8ddde6c1e25053e0d96d140abca16e21ca44004ea254bde2b74aec1bbd28c"
+        },
+        {
+          "element": "FJ3235",
+          "file": "FJ3235_BP23684_FMA8310_Left eighth rib.obj",
+          "sha256": "2fce674e4ab849da6c60fbeba69330ab2708c47b2dfeb7e63bcf31d8f0b8cd71"
+        },
+        {
+          "element": "FJ3236",
+          "file": "FJ3236_BP22343_FMA8391_Left ninth rib.obj",
+          "sha256": "a85a2feb2b1adf0d40c64daf505cce78277c3f0998df00dcaded3b58d7c35d46"
+        },
+        {
+          "element": "FJ3330",
+          "file": "FJ3330_BP22326_FMA8445_Right tenth rib.obj",
+          "sha256": "ad4dccb79323905d88a155253ddae8fb276fe0ab6302cd856530d08baafbdf82"
+        },
+        {
+          "element": "FJ3331",
+          "file": "FJ3331_BP22303_FMA8531_Right eleventh rib.obj",
+          "sha256": "29bf864f0504b20c290aa48abd9d655a6a8e5a563c1f80495c7ba2be16576ec1"
+        },
+        {
+          "element": "FJ3332",
+          "file": "FJ3332_BP22528_FMA8533_Right twelfth rib.obj",
+          "sha256": "136feff5b7a8a596c7a2b62bea426aaf6389a3da944a71a71790a4c2691ecfd8"
+        },
+        {
+          "element": "FJ3334",
+          "file": "FJ3334_BP22293_FMA7857_Right first rib.obj",
+          "sha256": "ea7d23529b902df78aa02faa1ced1929477c06f49ee941e4b2aae668330251ae"
+        },
+        {
+          "element": "FJ3336",
+          "file": "FJ3336_BP22251_FMA7882_Right second rib.obj",
+          "sha256": "c3c4acf9bf84f4b6bcde4dbf215c750da1f5c5cc68ab42e6c8b6693b11ea2fce"
+        },
+        {
+          "element": "FJ3338",
+          "file": "FJ3338_BP22334_FMA7909_Right third rib.obj",
+          "sha256": "e14e8eaaf3eaba8dc7c214dd8224ace97df68f56d31beb989e867076bc5c6096"
+        },
+        {
+          "element": "FJ3340",
+          "file": "FJ3340_BP22336_FMA7957_Right fourth rib.obj",
+          "sha256": "bedef7dd347f8668a2fd4de79d571cebad8a6cb306e179297ac9fa8aa5529fd3"
+        },
+        {
+          "element": "FJ3342",
+          "file": "FJ3342_BP22307_FMA8066_Right fifth rib.obj",
+          "sha256": "7375d50a05530a18c1b5684886d470c1799253b4cceffbcc93c0248545b3c8fc"
+        },
+        {
+          "element": "FJ3344",
+          "file": "FJ3344_BP22272_FMA8175_Right sixth rib.obj",
+          "sha256": "00c82e5fe46f58567578dd66ff98a570b8495ce1bef7f26392bdc201d84b3cc0"
+        },
+        {
+          "element": "FJ3346",
+          "file": "FJ3346_BP22330_FMA8229_Right seventh rib.obj",
+          "sha256": "b91e96dcb05423c614bec2e1a9309e2097dc3f4bee97248c894c04311b4632e7"
+        },
+        {
+          "element": "FJ3347",
+          "file": "FJ3347_BP23993_FMA8283_Right eighth rib.obj",
+          "sha256": "09b796b3987bd982a0d0bd986b7fd2bc6512ac88a96c83fd041b0c13cbf12674"
+        },
+        {
+          "element": "FJ3348",
+          "file": "FJ3348_BP23888_FMA8364_Right ninth rib.obj",
+          "sha256": "d9195a65a4ef628ce51c0f47ecaf76a3347ce195a5947bd888e5524ff9754456"
+        },
+        {
+          "element": "FJ6400",
+          "file": "FJ6400_BP22794_FMA7486_Manubrium.obj",
+          "sha256": "b0b7ec9a999c0ec146853d19000ed017c57684e5bb210a1e0bbe2e0807706767"
+        }
+      ]
+    },
+    {
+      "id": "arm-bones",
+      "structure": "skeleton",
+      "triangles": 2500,
+      "sources": [
+        {
+          "element": "FJ3237",
+          "file": "FJ3237_BP23283_FMA13323_Left clavicle.obj",
+          "sha256": "a7eda265732db6c87ab0fb8c8f78a274882ceca59510991b0e7b32078c08152f"
+        },
+        {
+          "element": "FJ3262",
+          "file": "FJ3262_BP24066_FMA23131_Left humerus.obj",
+          "sha256": "c9512362bc5bb07b29292a5444eda8be7f6f6a0959f59213a695bc6323aa0010"
+        },
+        {
+          "element": "FJ3279",
+          "file": "FJ3279_BP23279_FMA13396_Left scapula.obj",
+          "sha256": "87cebf8702718e03dd10afbee87a50abce47139802ff305c749b33f40d451fda"
+        },
+        {
+          "element": "FJ3286",
+          "file": "FJ3286_BP23154_FMA23468_Left ulna.obj",
+          "sha256": "58cf7a9d905ac649ff38bb8b75e5d9cb1c26dd11574052e70dd8d29766dee734"
+        },
+        {
+          "element": "FJ3349",
+          "file": "FJ3349_BP23239_FMA23464_Right radius.obj",
+          "sha256": "c04d4b27108c2a8764e0eb8c7b6505ff2b212e7993c5184a759f3f3a1ec305e6"
+        },
+        {
+          "element": "FJ3362",
+          "file": "FJ3362_BP23174_FMA13322_Right clavicle.obj",
+          "sha256": "ea1c86d112c0635759ecf6ca9633b023b87e16511f01d6ef165b98d729316970"
+        },
+        {
+          "element": "FJ3368",
+          "file": "FJ3368_BP23164_FMA23130_Right humerus.obj",
+          "sha256": "0ad8a599aa3189fe4085c3d2d9b51f38c4aa46dcc8491769b4d5a03fc5666e38"
+        },
+        {
+          "element": "FJ3384",
+          "file": "FJ3384_BP23090_FMA13395_Right scapula.obj",
+          "sha256": "3873c4310d32f3269af812eac978aa32292359f5bd4af7f7e422b7f87b835a6f"
+        },
+        {
+          "element": "FJ3391",
+          "file": "FJ3391_BP23195_FMA23467_Right ulna.obj",
+          "sha256": "dee852d107cd345be4461734f8155f01799352bacf4505471c4c1f82f676683b"
+        },
+        {
+          "element": "FJ6349",
+          "file": "FJ6349_BP23197_FMA23465_Left radius.obj",
+          "sha256": "53f422bbdf8e9c18e5391f7e87ca8708cbd2c002168651e4a37831368ea6b631"
+        },
+        {
+          "element": "FJ6373",
+          "file": "FJ6373_BP24066_FMA23131_Left humerus.obj",
+          "sha256": "fe3987aa1ce56130acc913ef5b7299000ae56ffa6d3f35e0e0c0b205ab457efe"
+        }
+      ]
+    },
+    {
+      "id": "hand-bones",
+      "structure": "skeleton",
+      "triangles": 3000,
+      "sources": [
+        {
+          "element": "FJ1245",
+          "file": "FJ1245_BP23964_FMA23725_Right trapezoid.obj",
+          "sha256": "2928efd126162e0bb515e65ad821f87b2638566a85c119d5a7eb5137fc5b1470"
+        },
+        {
+          "element": "FJ3183",
+          "file": "FJ3183_BP23969_FMA23953_Distal phalanx of left index finger.obj",
+          "sha256": "6150a7f7ea4e7be42732790cc1faf840a5ad61b1fa21b71641af7bf169620b08"
+        },
+        {
+          "element": "FJ3184",
+          "file": "FJ3184_BP21916_FMA23959_Distal phalanx of left little finger.obj",
+          "sha256": "c995e7ec14456c6853f6814d8b5ec244c78c1cc5aa718d8e7993d4143b7b761a"
+        },
+        {
+          "element": "FJ3186",
+          "file": "FJ3186_BP23915_FMA23955_Distal phalanx of left middle finger.obj",
+          "sha256": "cb807de4fad4b9f4ed954288e50c7ada19dc516a4332b7dc4771ea6148cbe47a"
+        },
+        {
+          "element": "FJ3187",
+          "file": "FJ3187_BP21666_FMA23957_Distal phalanx of left ring finger.obj",
+          "sha256": "4d5e4ece6e1d4741cd8ce2a4c6c4ed9c9a4fa77eeb9b63e9e3ed04edafd98b3f"
+        },
+        {
+          "element": "FJ3188",
+          "file": "FJ3188_BP21923_FMA23951_Distal phalanx of left thumb.obj",
+          "sha256": "d8c273fb164ea42d97c1fc630512412477944644043392dcb49fb3098440c09e"
+        },
+        {
+          "element": "FJ3193",
+          "file": "FJ3193_BP21690_FMA24460_Distal phalanx of right index finger.obj",
+          "sha256": "695dd129f6a0d303121bdfcfba17540ba93ad238644f335705eb9337c27f9fe5"
+        },
+        {
+          "element": "FJ3194",
+          "file": "FJ3194_BP21896_FMA24463_Distal phalanx of right little finger.obj",
+          "sha256": "1dd93b78f4b9b1bdca308125f0fd43f59a96619f71b2482ab7df8c9769625ac3"
+        },
+        {
+          "element": "FJ3196",
+          "file": "FJ3196_BP21955_FMA24461_Distal phalanx of right middle finger.obj",
+          "sha256": "2439441124099f09be9d9bf37bc711dcf3bcdb1cfae92ab26442165380019f42"
+        },
+        {
+          "element": "FJ3197",
+          "file": "FJ3197_BP22672_FMA24462_Distal phalanx of right ring finger.obj",
+          "sha256": "0281340147e48d4c0f51cf42f79522c9283859b2b297245f1f506d5fbadcf5d1"
+        },
+        {
+          "element": "FJ3198",
+          "file": "FJ3198_BP23933_FMA24459_Distal phalanx of right thumb.obj",
+          "sha256": "35699ef999a79d72ff18d9cf383db6e259c55cfc8f7a6f7cd07893b409984c23"
+        },
+        {
+          "element": "FJ3240",
+          "file": "FJ3240_BP23735_FMA24465_Left first metacarpal bone.obj",
+          "sha256": "0c3a399a2146f7c092fcece0889cee64d0b9a3513acb043ee6154af1cc5db8ad"
+        },
+        {
+          "element": "FJ3243",
+          "file": "FJ3243_BP23703_FMA24467_Left second metacarpal bone.obj",
+          "sha256": "a10476ad50c3bf2ada5b3fb1651cf6a60c32445f66e22ba53c840601f5f5cd50"
+        },
+        {
+          "element": "FJ3249",
+          "file": "FJ3249_BP23976_FMA24471_Left fourth metacarpal bone.obj",
+          "sha256": "c5bd536db6d99cca94cd570d97f0e9c9d8c6f33d58dd5c59683f3c4e9bbd3426"
+        },
+        {
+          "element": "FJ3252",
+          "file": "FJ3252_BP23700_FMA24473_Left fifth metacarpal bone.obj",
+          "sha256": "8a58f789ac3c4d4497c8ca6ee55ffc1969ee588f7ee38698a58e90382c9120ea"
+        },
+        {
+          "element": "FJ3257",
+          "file": "FJ3257_BP21759_FMA24447_Left capitate.obj",
+          "sha256": "af457c999e65eef635e82edf388c7d9c8cb6fc080b46e10feddcb19ea2a1fcb7"
+        },
+        {
+          "element": "FJ3261",
+          "file": "FJ3261_BP23940_FMA24449_Left hamate.obj",
+          "sha256": "83f398b7581b910da975681f79a4a74afa68f6c97bf2b984f366aa61daa5c448"
+        },
+        {
+          "element": "FJ3268",
+          "file": "FJ3268_BP21780_FMA24438_Left lunate.obj",
+          "sha256": "e40c68c097031fb7c486dc073e490a6cf5835c94d2e1a9473f9ffba041e25d21"
+        },
+        {
+          "element": "FJ3276",
+          "file": "FJ3276_BP21678_FMA24442_Left pisiform.obj",
+          "sha256": "dde00dcc98e11d009558440b91a375bf9ac3716461550d926658d46f3d322b1d"
+        },
+        {
+          "element": "FJ3278",
+          "file": "FJ3278_BP21685_FMA24436_Left scaphoid.obj",
+          "sha256": "b11e96eeb99b1b080d64c340488e4bf9f03f02e54c9a85294c3aee7f6f4470a8"
+        },
+        {
+          "element": "FJ3283",
+          "file": "FJ3283_BP21682_FMA24444_Left trapezium.obj",
+          "sha256": "03564653665cd2773767f11f2f9f4b073223c5210a3ec67fba60e17f77a53edd"
+        },
+        {
+          "element": "FJ3284",
+          "file": "FJ3284_BP21753_FMA24445_Left trapezoid.obj",
+          "sha256": "fa35609f59675f0616d46d4ea4cf21e8c2ae0a49d44d021cc11ac57d430e2f3e"
+        },
+        {
+          "element": "FJ3285",
+          "file": "FJ3285_BP23878_FMA24440_Left triquetral.obj",
+          "sha256": "d50d07375dd7fa4ebf1f10435d4e76598ee452e84e3794008806c91727a79278"
+        },
+        {
+          "element": "FJ3291",
+          "file": "FJ3291_BP23924_FMA23942_Middle phalanx of left ring finger.obj",
+          "sha256": "181d9d9470a26e52926dbb9c9306af2bb08735e6b69196d6f980154c9b187a8b"
+        },
+        {
+          "element": "FJ3292",
+          "file": "FJ3292_BP20655_FMA24457_Middle phalanx of right ring finger.obj",
+          "sha256": "43e83d74c320a2fe53ef5f86b2066eb3a5c222bc1d09e36b1b9ccd13611e2280"
+        },
+        {
+          "element": "FJ3296",
+          "file": "FJ3296_BP23918_FMA23938_Middle phalanx of left index finger.obj",
+          "sha256": "b357e9cf35dd2a245aac1f9ab72242e8c26d98fe8bd0ebc7f8324e090cacf4f8"
+        },
+        {
+          "element": "FJ3297",
+          "file": "FJ3297_BP21913_FMA23944_Middle phalanx of left little finger.obj",
+          "sha256": "11c31dbb07c322927cd810a585ea4f15a598da009c08ce119c45bb67915e1419"
+        },
+        {
+          "element": "FJ3299",
+          "file": "FJ3299_BP22657_FMA23940_Middle phalanx of left middle finger.obj",
+          "sha256": "83a06ba4129a59b064c1529834af4cf424e650d73a7d18a4da1866ae0e8c788b"
+        },
+        {
+          "element": "FJ3303",
+          "file": "FJ3303_BP20064_FMA24455_Middle phalanx of right index finger.obj",
+          "sha256": "f896e11f79bdad21aefa62461722c5656ea2d125296ee179a1731e8ec3469a60"
+        },
+        {
+          "element": "FJ3304",
+          "file": "FJ3304_BP21922_FMA24458_Middle phalanx of right little finger.obj",
+          "sha256": "e7c235041b4e0765a9cdff24ab0bb8fa720c476db1bdbec6cac48f17de73a3e5"
+        },
+        {
+          "element": "FJ3306",
+          "file": "FJ3306_BP21846_FMA24456_Middle phalanx of right middle finger.obj",
+          "sha256": "95b535c86d0a21220740102987df5073e879c40650fb6971230f47c63e1dc5d5"
+        },
+        {
+          "element": "FJ3313",
+          "file": "FJ3313_BP21883_FMA71915_Proximal phalanx of left index finger.obj",
+          "sha256": "fc330636e3539a4606a5d98ae316684ff520eeea91d511673609bea1870cbd7b"
+        },
+        {
+          "element": "FJ3316",
+          "file": "FJ3316_BP21937_FMA71908_Proximal phalanx of left middle finger.obj",
+          "sha256": "0e66d87b9e5b9897b3422432d8c14a41eda5882a121543e9c36a83fc22df9fae"
+        },
+        {
+          "element": "FJ3318",
+          "file": "FJ3318_BP21907_FMA65470_Proximal phalanx of left thumb.obj",
+          "sha256": "2161ba83158a62445cf9196716e364ba713cf7ea35dc4051e1b8cc2bd392acd3"
+        },
+        {
+          "element": "FJ3322",
+          "file": "FJ3322_BP21887_FMA24451_Proximal phalanx of right index finger.obj",
+          "sha256": "efb790246f7f0a46413b614a96a01743b2f071a899563da2e647a56abf16cc88"
+        },
+        {
+          "element": "FJ3323",
+          "file": "FJ3323_BP21904_FMA24454_Proximal phalanx of right little finger.obj",
+          "sha256": "4397b61d8e6ad97f6140ef1c6a0e8e768b25435f410c1a06201ccf8de3bbd3c3"
+        },
+        {
+          "element": "FJ3325",
+          "file": "FJ3325_BP21934_FMA24452_Proximal phalanx of right middle finger.obj",
+          "sha256": "fe50d15f221c18ba9951cb605c8f30745ff0448ebc4714af9c65dc1e3e6822ab"
+        },
+        {
+          "element": "FJ3326",
+          "file": "FJ3326_BP21866_FMA24453_Proximal phalanx of right ring finger.obj",
+          "sha256": "16644e4b745693ef0863444878d2219cbacfa038cf4e144696a3bbdc8328d256"
+        },
+        {
+          "element": "FJ3352",
+          "file": "FJ3352_BP23440_FMA24466_Right second metacarpal bone.obj",
+          "sha256": "efd05b0bfc32cdd7446395e111a776eac19aaae14ddb36a268c820c53b5b9fe5"
+        },
+        {
+          "element": "FJ3354",
+          "file": "FJ3354_BP23643_FMA24468_Right third metacarpal bone.obj",
+          "sha256": "323ba5aeeba06780a5d74d0b6310f525d914eaae31c1fa2bed468ab7dcb08d5e"
+        },
+        {
+          "element": "FJ3356",
+          "file": "FJ3356_BP23371_FMA24470_Right fourth metacarpal bone.obj",
+          "sha256": "9248cb33ea45ef48c69d04a06b8bac5f29a4b82cad0fbd3818a6ac292b98e9b9"
+        },
+        {
+          "element": "FJ3361",
+          "file": "FJ3361_BP21773_FMA24446_Right capitate.obj",
+          "sha256": "df7b715d057239199bf014e8d2fcb7ae0255e69978e5f0ff5adb084485167de0"
+        },
+        {
+          "element": "FJ3367",
+          "file": "FJ3367_BP23822_FMA24448_Right hamate.obj",
+          "sha256": "4249d3f73d0c5bf6c77f39b8bf4122a8d2285984267eed6d1e697ac1e8228e53"
+        },
+        {
+          "element": "FJ3374",
+          "file": "FJ3374_BP23841_FMA24437_Right lunate.obj",
+          "sha256": "e696638d33e10bd33293394d90d4e20e27b5c6a0240688ab80dbeba06c82c4e4"
+        },
+        {
+          "element": "FJ3382",
+          "file": "FJ3382_BP21756_FMA24441_Right pisiform.obj",
+          "sha256": "e1d59617164a40057a48c7bdf4cd8e0b0df565661ca83b090da80a0877591607"
+        },
+        {
+          "element": "FJ3383",
+          "file": "FJ3383_BP21772_FMA24435_Right scaphoid.obj",
+          "sha256": "83e115e4269b6b30900132898f599ef70eb73eb8605d9bfad83905fa34f29b76"
+        },
+        {
+          "element": "FJ3388",
+          "file": "FJ3388_BP20135_FMA24443_Right trapezium.obj",
+          "sha256": "bd7504ce6fb1fa12416c8ffcfd19cf751052e7960fc8de7af69fc943b1811073"
+        },
+        {
+          "element": "FJ3390",
+          "file": "FJ3390_BP21751_FMA24439_Right triquetral.obj",
+          "sha256": "aac53e48c673cd3f7691d1274d2fb9b4f260d7ed46b996be6a57fca73350ef63"
+        },
+        {
+          "element": "FJ6298",
+          "file": "FJ6298_BP21923_FMA23951_Distal phalanx of left thumb.obj",
+          "sha256": "e774766e78b21b2c7445ac572a4d6dc76d2fb5f271d7b806b52eb2dabbadef45"
+        },
+        {
+          "element": "FJ6307",
+          "file": "FJ6307_BP22672_FMA24462_Distal phalanx of right ring finger.obj",
+          "sha256": "42fc00413b0030701c53e0724d6f7f0dcc9ba57f5c4489788bd63b4933f961ef"
+        },
+        {
+          "element": "FJ6354",
+          "file": "FJ6354_BP23703_FMA24467_Left second metacarpal bone.obj",
+          "sha256": "3d6472d54d01ee9a13f5aa75f61e89e36f9892b5c85def18ee8cc0dcac7b40cd"
+        },
+        {
+          "element": "FJ6357",
+          "file": "FJ6357_BP23394_FMA24469_Left third metacarpal bone.obj",
+          "sha256": "8e33df780fcc679e12be30c5e1cda16946f5c4fec9953f73f830aabb94c785c1"
+        },
+        {
+          "element": "FJ6368",
+          "file": "FJ6368_BP21759_FMA24447_Left capitate.obj",
+          "sha256": "e4a923dfbd7ff9254b52c2abb348a4aa9bbc08093af0cdcf35da7c330beebb1a"
+        },
+        {
+          "element": "FJ6372",
+          "file": "FJ6372_BP23940_FMA24449_Left hamate.obj",
+          "sha256": "a4a3e5bced56806bbe0899e054b2acf4ae2b7e634b431d4444a524d0b1296b59"
+        },
+        {
+          "element": "FJ6379",
+          "file": "FJ6379_BP21780_FMA24438_Left lunate.obj",
+          "sha256": "826bc170704322486b339c88c39723a0dc35a941c0d0c494549ab8a31dca1973"
+        },
+        {
+          "element": "FJ6393",
+          "file": "FJ6393_BP21682_FMA24444_Left trapezium.obj",
+          "sha256": "1495226cdb8651877afc9e927e27ef8e7f700132d7158350c806ead841caf3f9"
+        },
+        {
+          "element": "FJ6395",
+          "file": "FJ6395_BP23878_FMA24440_Left triquetral.obj",
+          "sha256": "06a74e9efc59718a64cdf126d766256656c61d8463234023d4916eeaae6b020b"
+        },
+        {
+          "element": "FJ6401",
+          "file": "FJ6401_BP20655_FMA24457_Middle phalanx of right ring finger.obj",
+          "sha256": "1625e7f8a0e4dfbff549fb7e893d4e0d7c6a09086e4a2a4caa372a45765a9958"
+        },
+        {
+          "element": "FJ6408",
+          "file": "FJ6408_BP21846_FMA24456_Middle phalanx of right middle finger.obj",
+          "sha256": "182e9ee612cae353e774eb4d6e26f933f7b26970f8801035f16a60a3f241e37b"
+        },
+        {
+          "element": "FJ6414",
+          "file": "FJ6414_BP21907_FMA65470_Proximal phalanx of left thumb.obj",
+          "sha256": "3b0bb551b4552f49e7282cf9caacdb3f4771fe7ded80fce49df562233b3d2262"
+        },
+        {
+          "element": "FJ6419",
+          "file": "FJ6419_BP21904_FMA24454_Proximal phalanx of right little finger.obj",
+          "sha256": "e2d624a29dc1d8e73fd599f548c4e7beab085555dde0e60601a93c58a71d8784"
+        },
+        {
+          "element": "FJ6422",
+          "file": "FJ6422_BP21866_FMA24453_Proximal phalanx of right ring finger.obj",
+          "sha256": "a25851aebb23efffe3dc171852666911063703994e78fcba67e77208cfc7df95"
+        },
+        {
+          "element": "FJ6423",
+          "file": "FJ6423_BP23922_FMA24450_Proximal phalanx of right thumb.obj",
+          "sha256": "67526dceb7db7ca8e1dd9e4054a57936598c381908aad09f598fa43010d5c13a"
+        },
+        {
+          "element": "FJ6444",
+          "file": "FJ6444_BP23975_FMA24464_Right first metacarpal bone.obj",
+          "sha256": "f21f1fb9b2d9969d42e2c3c043e44270bda7d27e8df0c71355082cf62f75a09a"
+        },
+        {
+          "element": "FJ6452",
+          "file": "FJ6452_BP23729_FMA24472_Right fifth metacarpal bone.obj",
+          "sha256": "8d9caa02a03de69d6fdec2a2f6099c4e610b1115e1f5fb7c9f0350251dcc7519"
+        }
+      ]
+    },
+    {
+      "id": "hip-bones",
+      "structure": "skeleton",
+      "triangles": 1500,
+      "sources": [
+        {
+          "element": "FJ3152",
+          "file": "FJ3152_BP23294_FMA16586_Right hip bone.obj",
+          "sha256": "1ab3bfe0f8b279995928c27eec9e44c568d0eddf85765149cc942843df03c809"
+        },
+        {
+          "element": "FJ3288",
+          "file": "FJ3288_BP23152_FMA16587_Left hip bone.obj",
+          "sha256": "7f1304382fe7882e2172d5367ee996a363da872f0981bd889a0c7a820147d384"
+        }
+      ]
+    },
+    {
+      "id": "leg-bones",
+      "structure": "skeleton",
+      "triangles": 2500,
+      "sources": [
+        {
+          "element": "FJ3259",
+          "file": "FJ3259_BP23820_FMA24475_Left femur.obj",
+          "sha256": "caaeea4b7fd4ff7b5065b03a991c47e35a57f2aa7bac793f52b06a704c7eca53"
+        },
+        {
+          "element": "FJ3260",
+          "file": "FJ3260_BP24067_FMA24481_Left fibula.obj",
+          "sha256": "94d8f624931202824a1394bd12f583d8a3944c2a96ffd286c2d09d517c6e6120"
+        },
+        {
+          "element": "FJ3275",
+          "file": "FJ3275_BP23711_FMA24487_Left patella.obj",
+          "sha256": "2090a1b59431e36ce69dbfde88565053d6af126db63f29808c955b7aba8e1e3e"
+        },
+        {
+          "element": "FJ3282",
+          "file": "FJ3282_BP23963_FMA24478_Left tibia.obj",
+          "sha256": "38346f7a254ac8f574facdbed1099a7894b87ebee06d1151dcee41583680e5da"
+        },
+        {
+          "element": "FJ3365",
+          "file": "FJ3365_BP23346_FMA24474_Right femur.obj",
+          "sha256": "4ecf1a20a04bcf7963c23fde40e41bef9842c4a584337ea131c6a090bd53e9cb"
+        },
+        {
+          "element": "FJ3366",
+          "file": "FJ3366_BP23268_FMA24480_Right fibula.obj",
+          "sha256": "64272264d3aba3cd3226a1d2df47008c4f4375df52367be85df765dac83cdba6"
+        },
+        {
+          "element": "FJ3381",
+          "file": "FJ3381_BP23756_FMA24486_Right patella.obj",
+          "sha256": "0047f75b0dc301a7531323631e54500765dd323b2c4554d72e6cfc250e753c55"
+        },
+        {
+          "element": "FJ3387",
+          "file": "FJ3387_BP23960_FMA24477_Right tibia.obj",
+          "sha256": "5fe201dfb80da682439c70444d97c705b9b3079b340aec00406074a304688d61"
+        },
+        {
+          "element": "FJ6370",
+          "file": "FJ6370_BP23820_FMA24475_Left femur.obj",
+          "sha256": "a490ea9358561ca8007b31c3c2cf7d2b8ff8d4492a827d0529e5f316f2b808be"
+        },
+        {
+          "element": "FJ6371",
+          "file": "FJ6371_BP24067_FMA24481_Left fibula.obj",
+          "sha256": "e1e1933ab881746068fedb3bed366819df230e3e3f2566db5b51b82b4501d9c5"
+        },
+        {
+          "element": "FJ6386",
+          "file": "FJ6386_BP23711_FMA24487_Left patella.obj",
+          "sha256": "571fac5669aa2b9ab718624eb3643cc94986c31970dbd7132041aee555a5318f"
+        },
+        {
+          "element": "FJ6479",
+          "file": "FJ6479_BP23960_FMA24477_Right tibia.obj",
+          "sha256": "a724c7d10552b7536047ca37384ee94714a35f6284477253726df28ae77e4084"
+        }
+      ]
+    },
+    {
+      "id": "foot-bones",
+      "structure": "skeleton",
+      "triangles": 3000,
+      "sources": [
+        {
+          "element": "FJ1228",
+          "file": "FJ1228_BP23488_FMA45097_Sesamoid bone of right foot.obj",
+          "sha256": "a04445914d12f1b36e12737abe1142781b2eb366c81cc23dd0e39a860e2cb33d"
+        },
+        {
+          "element": "FJ1232",
+          "file": "FJ1232_BP23488_FMA45097_Sesamoid bone of right foot.obj",
+          "sha256": "692af49e55b130065ac68eacab865c363052f06c97ac087e6dafed241e5e1252"
+        },
+        {
+          "element": "FJ3179",
+          "file": "FJ3179_BP21928_FMA32653_Distal phalanx of left second toe.obj",
+          "sha256": "84e1886835b3df8f88af41cc4ae6c1a1a0ca3044d0f70ad7f22a8631cfd98f07"
+        },
+        {
+          "element": "FJ3180",
+          "file": "FJ3180_BP21935_FMA32655_Distal phalanx of left third toe.obj",
+          "sha256": "44eeeeb7a9ec5eb4da82c5c2880fe10ced28a6da63ca66f2d77cc7b942f9d62a"
+        },
+        {
+          "element": "FJ3181",
+          "file": "FJ3181_BP21950_FMA32657_Distal phalanx of left fourth toe.obj",
+          "sha256": "a48734a7aa2682fd2c2e7c9bec2fea58f0c1a0853e4f405b9a62719b0e140b81"
+        },
+        {
+          "element": "FJ3182",
+          "file": "FJ3182_BP23971_FMA32651_Distal phalanx of left big toe.obj",
+          "sha256": "e74c5aa9126c21fe5ad41f778a639dbbb0e042d8bbd0992bd55243a4d343600b"
+        },
+        {
+          "element": "FJ3189",
+          "file": "FJ3189_BP21864_FMA32652_Distal phalanx of right second toe.obj",
+          "sha256": "48f4b9353efc75c4d49cffad8809f0afe5509ecb8d44e8e56a17bb2c7ad41bb5"
+        },
+        {
+          "element": "FJ3190",
+          "file": "FJ3190_BP23850_FMA32654_Distal phalanx of right third toe.obj",
+          "sha256": "c0b58e40b39e22e8b6293003258f00de24717d18f4fe03e06be9132daf03114f"
+        },
+        {
+          "element": "FJ3191",
+          "file": "FJ3191_BP21925_FMA32656_Distal phalanx of right fourth toe.obj",
+          "sha256": "a19004a28f51cac5ea3361389af6a53fe0ec82f7ba56005724155bdcc52836bc"
+        },
+        {
+          "element": "FJ3192",
+          "file": "FJ3192_BP21927_FMA32650_Distal phalanx of right big toe.obj",
+          "sha256": "0638859a053e0f7a13eb1bc79ecee6c1800b20d133221fbf339459f0c5187d39"
+        },
+        {
+          "element": "FJ3195",
+          "file": "FJ3195_BP21926_FMA32658_Distal phalanx of right little toe.obj",
+          "sha256": "632626d89aee3e43f61e172d23923699fe2fbfebd2707d3ee98386014ef38370"
+        },
+        {
+          "element": "FJ3241",
+          "file": "FJ3241_BP23618_FMA24508_Left first metatarsal bone.obj",
+          "sha256": "4b72c66cbdee72b349a7af076b77f770383eb25baf36be85a2ab0b6a3a80d26d"
+        },
+        {
+          "element": "FJ3244",
+          "file": "FJ3244_BP23753_FMA24510_Left second metatarsal bone.obj",
+          "sha256": "599e5091f55e95ade3c741bcb8f90d2d917d6d57adcbdd5a14025a0fde36182a"
+        },
+        {
+          "element": "FJ3247",
+          "file": "FJ3247_BP23506_FMA24512_Left third metatarsal bone.obj",
+          "sha256": "21dc51e3072ee1186c9f57fd59ed77a3203d728c681dc1d1966b94ed08e04c80"
+        },
+        {
+          "element": "FJ3250",
+          "file": "FJ3250_BP23526_FMA24514_Left fourth metatarsal bone.obj",
+          "sha256": "3dabc6566e907570aa8535bc4b7c77e5546b7a7f81886097ccd6bae771450b77"
+        },
+        {
+          "element": "FJ3253",
+          "file": "FJ3253_BP23673_FMA24516_Left fifth metatarsal bone.obj",
+          "sha256": "93efa633121ca1edc3a288889236368bfaa1ad7648a670f8e0a43c852ca67dcd"
+        },
+        {
+          "element": "FJ3256",
+          "file": "FJ3256_BP23796_FMA24498_Left calcaneus.obj",
+          "sha256": "fd76df3ee64615b681f23cea5e18e7f62e4246dcfa4ffc2d463074ffe877a9af"
+        },
+        {
+          "element": "FJ3264",
+          "file": "FJ3264_BP20273_FMA24524_Left intermediate cuneiform bone.obj",
+          "sha256": "35384e460ea22de93f9d642ac34015bac73bafe03f23c2b1f9ac08efcc96b343"
+        },
+        {
+          "element": "FJ3267",
+          "file": "FJ3267_BP23844_FMA24526_Left lateral cuneiform bone.obj",
+          "sha256": "800d5c6d4dc9de239836b7d52b22f74a065e5b3935dcb7f31232c5795e03c4fb"
+        },
+        {
+          "element": "FJ3270",
+          "file": "FJ3270_BP23738_FMA45098_Sesamoid bone of left foot.obj",
+          "sha256": "bb2fc0cf69329d276d0272d2537e225ca73ad35e4b0d9ba71016883128b5ec69"
+        },
+        {
+          "element": "FJ3280",
+          "file": "FJ3280_BP23443_FMA24483_Left talus.obj",
+          "sha256": "64cedd57d301c3560dac1b22a7d2cf6ef26b6658d3bdf467faf7521fa8600e0f"
+        },
+        {
+          "element": "FJ3293",
+          "file": "FJ3293_BP21870_FMA32643_Middle phalanx of left second toe.obj",
+          "sha256": "d4b78cfedcf2183479c8f44b8bab638242a2dc6d58a911d6aece62a143c78d87"
+        },
+        {
+          "element": "FJ3294",
+          "file": "FJ3294_BP21664_FMA32645_Middle phalanx of left third toe.obj",
+          "sha256": "40cd64e40f1d7a4639da857ad2a46c80d041605b8322601a842d52b8a38f0f6c"
+        },
+        {
+          "element": "FJ3295",
+          "file": "FJ3295_BP21930_FMA32647_Middle phalanx of left fourth toe.obj",
+          "sha256": "9af692aa44ca3ef6c3224707fc979b0a47f63ef369a5b7d12d22be05eb111ffd"
+        },
+        {
+          "element": "FJ3298",
+          "file": "FJ3298_BP21689_FMA230988_Middle phalanx of left little toe.obj",
+          "sha256": "4c3cd3bb65f237806ccbb1b36d8b66ac930da3face4ed13e4d8c7ab3b70fe751"
+        },
+        {
+          "element": "FJ3300",
+          "file": "FJ3300_BP21966_FMA32642_Middle phalanx of right second toe.obj",
+          "sha256": "f70741748609cfab75ff560afc041b08cd739c3f77205af445fda2b45fab9509"
+        },
+        {
+          "element": "FJ3301",
+          "file": "FJ3301_BP21691_FMA32644_Middle phalanx of right third toe.obj",
+          "sha256": "3f533febd8853a7fe8912c9b80faac21501dfb2a24a326165c693fe0f622b663"
+        },
+        {
+          "element": "FJ3302",
+          "file": "FJ3302_BP21929_FMA32646_Middle phalanx of right fourth toe.obj",
+          "sha256": "f247094bde17cdfaa08c0c01d96a77a6d713b1441792ebd2a0ddd4c820fbfa07"
+        },
+        {
+          "element": "FJ3305",
+          "file": "FJ3305_BP21890_FMA230986_Middle phalanx of right little toe.obj",
+          "sha256": "229399f5143def5a16cee27ffaa5341bd19cc913dd1d67d825d9db408e0c141d"
+        },
+        {
+          "element": "FJ3307",
+          "file": "FJ3307_BP23683_FMA24501_Navicular bone of left foot.obj",
+          "sha256": "d54b4d83671d4bcaa989c7b4ba4383845e0d3a4aa32e609b34ca4eaef60275cf"
+        },
+        {
+          "element": "FJ3308",
+          "file": "FJ3308_BP24109_FMA24500_Navicular bone of right foot.obj",
+          "sha256": "a70b3da9585e667b40e7123d353909d557a0a1e8047b899d900f81bc926b29aa"
+        },
+        {
+          "element": "FJ3310",
+          "file": "FJ3310_BP21948_FMA43253_Proximal phalanx of right big toe.obj",
+          "sha256": "b05d0c7141727d5788308c2b77df4b6580e49166476d0b669cc6470ab0fd6f80"
+        },
+        {
+          "element": "FJ3312",
+          "file": "FJ3312_BP23880_FMA32639_Proximal phalanx of left fourth toe.obj",
+          "sha256": "d215f05dfd30a169abd8b951f6316228d019a1e2d4819d9dab980e79b229edba"
+        },
+        {
+          "element": "FJ3315",
+          "file": "FJ3315_BP21965_FMA32641_Proximal phalanx of left little toe.obj",
+          "sha256": "90e2818f48f88c193f651e40dc2ba737f8644c2e909db446eb0171ac2da8800e"
+        },
+        {
+          "element": "FJ3319",
+          "file": "FJ3319_BP21897_FMA32634_Proximal phalanx of right second toe.obj",
+          "sha256": "b18efb71399070be96ccc33b9461694282956da3ce7f9b73f9dcacfd726332f1"
+        },
+        {
+          "element": "FJ3320",
+          "file": "FJ3320_BP21918_FMA32636_Proximal phalanx of right third toe.obj",
+          "sha256": "d143c85506c23ead3a72eda2e1b3def22cfea467a4a5a9c420fc822b5a5e9b08"
+        },
+        {
+          "element": "FJ3321",
+          "file": "FJ3321_BP21914_FMA32638_Proximal phalanx of right fourth toe.obj",
+          "sha256": "9a83ce22d6258e140891c7fcfe37b3269d64dbf2449aa8e19e459416a82fb9e4"
+        },
+        {
+          "element": "FJ3324",
+          "file": "FJ3324_BP21863_FMA32640_Proximal phalanx of right little toe.obj",
+          "sha256": "226cc5f4400e7a4377eee4cebc15b47b6839ab7f071ea3d39d908348551a376a"
+        },
+        {
+          "element": "FJ3329",
+          "file": "FJ3329_BP23919_FMA43254_Proximal phalanx of left big toe.obj",
+          "sha256": "957d646080408d9add5551bbcda6bf0f5f64e39dccd9739a44d5791b85535ede"
+        },
+        {
+          "element": "FJ3353",
+          "file": "FJ3353_BP23620_FMA24509_Right second metatarsal bone.obj",
+          "sha256": "6ae56110ac985f4bb37d15de00d0d6b94e0d6fe1b82ac7b6aab5a9250cb44e48"
+        },
+        {
+          "element": "FJ3355",
+          "file": "FJ3355_BP23610_FMA24511_Right third metatarsal bone.obj",
+          "sha256": "8e2ab66b5264d3523f0d2e399c15e708ef7b6ad8c960809b7dc6bf376450bf86"
+        },
+        {
+          "element": "FJ3357",
+          "file": "FJ3357_BP23640_FMA24513_Right fourth metatarsal bone.obj",
+          "sha256": "660c220f477a06bdd929e4d5f1864b47fcc763449944c1e89a5e27567e8092f8"
+        },
+        {
+          "element": "FJ3359",
+          "file": "FJ3359_BP23705_FMA24515_Right fifth metatarsal bone.obj",
+          "sha256": "b11fc0b2474a1c87d645eecdc6ea1bb578579eb05056f2543e6d6f8e92e8f199"
+        },
+        {
+          "element": "FJ3364",
+          "file": "FJ3364_BP24103_FMA24528_Right cuboid bone.obj",
+          "sha256": "d2becafc6b01ea7bd1a555ce65a018c488e813f8109bb22cb04cd97a174c1844"
+        },
+        {
+          "element": "FJ3370",
+          "file": "FJ3370_BP20141_FMA24523_Right intermediate cuneiform bone.obj",
+          "sha256": "8eb94f2285ff05aeebe6515f19cf032c72a5941311dab660fcf184d92a58d5eb"
+        },
+        {
+          "element": "FJ3373",
+          "file": "FJ3373_BP23823_FMA24525_Right lateral cuneiform bone.obj",
+          "sha256": "4112bc89a676cf474144c5b31b316d66a11abf10fbf3de11763adf0fcc40902d"
+        },
+        {
+          "element": "FJ3377",
+          "file": "FJ3377_BP21781_FMA24521_Right medial cuneiform bone.obj",
+          "sha256": "baa8f420ebd5246b67eb275678a93cf8afc870cae5717362c704ed7b4905c268"
+        },
+        {
+          "element": "FJ6305",
+          "file": "FJ6305_BP21926_FMA32658_Distal phalanx of right little toe.obj",
+          "sha256": "68b8f1bf9a50ab633b27fd0d58495276c1c9ac512009f039404c3c20431f90e3"
+        },
+        {
+          "element": "FJ6355",
+          "file": "FJ6355_BP23753_FMA24510_Left second metatarsal bone.obj",
+          "sha256": "387f59b60ca5f9f0f0844f5dc5b3f7ccf01a414a3b1fa12a2a5e87bce5970a1c"
+        },
+        {
+          "element": "FJ6358",
+          "file": "FJ6358_BP23506_FMA24512_Left third metatarsal bone.obj",
+          "sha256": "bbcad2f39dc8810238cb2791ea137045495685b642bb434bef5cd9bad570d994"
+        },
+        {
+          "element": "FJ6361",
+          "file": "FJ6361_BP23526_FMA24514_Left fourth metatarsal bone.obj",
+          "sha256": "adf0e41b0c18d2f83b5b825db307304bcf088f4dc5ffe7dbe9510ab17c8dd0cb"
+        },
+        {
+          "element": "FJ6367",
+          "file": "FJ6367_BP23796_FMA24498_Left calcaneus.obj",
+          "sha256": "85660d5372a6ee28262956b6646650385f62bd8d8a52201db7c907985371d988"
+        },
+        {
+          "element": "FJ6369",
+          "file": "FJ6369_BP23392_FMA24529_Left cuboid bone.obj",
+          "sha256": "64dccfe0febec60b3cafdcb2371c2118086ad285648333c032d1e1602f0a092f"
+        },
+        {
+          "element": "FJ6375",
+          "file": "FJ6375_BP20273_FMA24524_Left intermediate cuneiform bone.obj",
+          "sha256": "ec049b57e1430d54ea6799c9abf2171fb5dc2dffaea43ce09492384a74a24e26"
+        },
+        {
+          "element": "FJ6377",
+          "file": "FJ6377_BP23738_FMA45098_Sesamoid bone of left foot.obj",
+          "sha256": "1136e646f95f45177d05244f34f54a0a7bd8c68974c25b32440c6a35771b1343"
+        },
+        {
+          "element": "FJ6381",
+          "file": "FJ6381_BP23738_FMA45098_Sesamoid bone of left foot.obj",
+          "sha256": "2d12ef1cf6a5146c8cc5aba17ca53c9105a53b8672e12ce5df4a22d49b396292"
+        },
+        {
+          "element": "FJ6382",
+          "file": "FJ6382_BP21821_FMA24522_Left medial cuneiform bone.obj",
+          "sha256": "b83c8543ef25dc96877ea98769aacada1cbb1f668aa24a7fe2e0b28fa51ff266"
+        },
+        {
+          "element": "FJ6403",
+          "file": "FJ6403_BP21691_FMA32644_Middle phalanx of right third toe.obj",
+          "sha256": "fcddeed34e16a7e13dd3ef6a29524121988b6b2d1ed9905823934dea77aaa5ff"
+        },
+        {
+          "element": "FJ6407",
+          "file": "FJ6407_BP21890_FMA230986_Middle phalanx of right little toe.obj",
+          "sha256": "c548060d0792799bf341f1880a27508b5a9006d6299691f5c805c3c695fb33f0"
+        },
+        {
+          "element": "FJ6409",
+          "file": "FJ6409_BP23683_FMA24501_Navicular bone of left foot.obj",
+          "sha256": "86534b782176d547f884fddcc3eac0b0505b62808a9139ed87941cc078f47fc1"
+        },
+        {
+          "element": "FJ6415",
+          "file": "FJ6415_BP21897_FMA32634_Proximal phalanx of right second toe.obj",
+          "sha256": "b21bcaf540e39a9f53a18e9caa14c947149b2bb0a497f95ebc7eeda9cc660a4a"
+        },
+        {
+          "element": "FJ6416",
+          "file": "FJ6416_BP21918_FMA32636_Proximal phalanx of right third toe.obj",
+          "sha256": "e0dc380420c1711f419050cce3b36f8aa19a199beca89f3f4e69ebabc2c6631f"
+        },
+        {
+          "element": "FJ6445",
+          "file": "FJ6445_BP23412_FMA24507_Right first metatarsal bone.obj",
+          "sha256": "56e3048c80b15f51a995f4cd66bae34c9f0b7c9975ac7f511741e213e90ee6b4"
+        },
+        {
+          "element": "FJ6454",
+          "file": "FJ6454_BP23541_FMA24497_Right calcaneus.obj",
+          "sha256": "a267a44641616bb7cb33e2dea3a2d05cdb72c620743955b017861a4a3d1ef741"
+        },
+        {
+          "element": "FJ6477",
+          "file": "FJ6477_BP23520_FMA24482_Right talus.obj",
+          "sha256": "09cd9e46b7ed5e2a1ff3cae6b56462df8b513154c5a5cb3b9515275066160e96"
+        }
+      ]
+    },
+    {
+      "id": "muscles",
+      "structure": "muscles",
+      "triangles": 12000,
+      "sources": [
+        {
+          "element": "FJ1402",
+          "file": "FJ1402_BP20455_FMA22456_Right adductor longus.obj",
+          "sha256": "fad5cf59de41d34264aa79069976ad42b3547553309b5b64d1c571e59b4e66b0"
+        },
+        {
+          "element": "FJ1402M",
+          "file": "FJ1402M_BP22532_FMA22457_Left adductor longus.obj",
+          "sha256": "e504fda0126fc71113193099a96735fe585399de69b4b5f194e15d0372c91f58"
+        },
+        {
+          "element": "FJ1418",
+          "file": "FJ1418_BP23934_FMA22328_Right gluteus maximus.obj",
+          "sha256": "c7ca6a5c9115acf205e63b5e3883703cc8aecec8bbe4265ba9e03515e45fa156"
+        },
+        {
+          "element": "FJ1418M",
+          "file": "FJ1418M_BP23939_FMA22329_Left gluteus maximus.obj",
+          "sha256": "3a603626e6d2288204bb99527a33d845f129a62ede12bc8cd25f1390271d81b0"
+        },
+        {
+          "element": "FJ1433",
+          "file": "FJ1433_BP23176_FMA38928_Right rectus femoris.obj",
+          "sha256": "7bf5630bd43fac0ebdda64483a18d23210b0209d0a235ed87ae5ab0b8bcaa3f0"
+        },
+        {
+          "element": "FJ1433M",
+          "file": "FJ1433M_BP23766_FMA38929_Left rectus femoris.obj",
+          "sha256": "219d9704a843490c7c9d120008458f1255cf83062d3b4442ac1e778260206249"
+        },
+        {
+          "element": "FJ1434",
+          "file": "FJ1434_BP23764_FMA22354_Right sartorius.obj",
+          "sha256": "381aff1370ddf6367768f16ac4dc90da220e43eef7e0740ffffa5ff7a81d4ddc"
+        },
+        {
+          "element": "FJ1434M",
+          "file": "FJ1434M_BP20388_FMA22355_Left sartorius.obj",
+          "sha256": "cf8af0cac1797ebc435e020f509f3e1bd415059c8459f78381478a8851d3c3eb"
+        },
+        {
+          "element": "FJ1436",
+          "file": "FJ1436_BP19761_FMA22358_Right semitendinosus.obj",
+          "sha256": "ca3441a1222f48308572c319fe970829758969bc73bea9fb593beaa1fad017b2"
+        },
+        {
+          "element": "FJ1436M",
+          "file": "FJ1436M_BP22061_FMA22359_Left semitendinosus.obj",
+          "sha256": "688559edc116524a740d27c3a88b625c3e338868a5fcf304ae82bf20df3b1cf6"
+        },
+        {
+          "element": "FJ1437",
+          "file": "FJ1437_BP20851_FMA22558_Right soleus.obj",
+          "sha256": "52586d6404297e4ecbda7a94fdbaafd2b1406132099a347258cd1148ed8b8981"
+        },
+        {
+          "element": "FJ1437M",
+          "file": "FJ1437M_BP20918_FMA22559_Left soleus.obj",
+          "sha256": "1d3774b03e779ccc07e1aa7bc718e6c3675f9b9a44d80f452cc9550c88585133"
+        },
+        {
+          "element": "FJ1439",
+          "file": "FJ1439_BP20542_FMA22544_Right tibialis anterior.obj",
+          "sha256": "43dfb2f95a79be5501f7cc7604fc188172d348f4fb2387ea69e81c7d619a5067"
+        },
+        {
+          "element": "FJ1439M",
+          "file": "FJ1439M_BP22485_FMA22545_Left tibialis anterior.obj",
+          "sha256": "6420bc598e4a35e5eb7bd0056afad22b012214fe81d602452942089859fcfb12"
+        },
+        {
+          "element": "FJ1442",
+          "file": "FJ1442_BP23150_FMA38930_Right vastus lateralis.obj",
+          "sha256": "edc372c0d364a005050295fabd587ffacb26f3d6019edbc0bffdf31bc4dcb456"
+        },
+        {
+          "element": "FJ1442M",
+          "file": "FJ1442M_BP23367_FMA38931_Left vastus lateralis.obj",
+          "sha256": "d110cbc015ed185e2571a4594ae808c325e04341991e664071a0448ec34856b2"
+        },
+        {
+          "element": "FJ1443",
+          "file": "FJ1443_BP20583_FMA38932_Right vastus medialis.obj",
+          "sha256": "e095eb6f0af1051cfbcff18abee57994bc65997097676731eb2ff067c5264d3d"
+        },
+        {
+          "element": "FJ1443M",
+          "file": "FJ1443M_BP23244_FMA38933_Left vastus medialis.obj",
+          "sha256": "d233fe2f8214a8860f79e868616e26701095f841a204f3e371d7d5eb386d1816"
+        },
+        {
+          "element": "FJ1452",
+          "file": "FJ1452_BP22075_FMA13336_Right external oblique.obj",
+          "sha256": "40209881f7675ff3859d361bf6f2d38e30d7fddf57dab5ef8e08cf5dc6382d31"
+        },
+        {
+          "element": "FJ1452M",
+          "file": "FJ1452M_BP22276_FMA13337_Left external oblique.obj",
+          "sha256": "9dc21d7e410b0009340de99fe854d8b0c690ddd6655b2bb4bc1bc999cc278ca8"
+        },
+        {
+          "element": "FJ1459",
+          "file": "FJ1459_BP22464_FMA13398_Right serratus anterior.obj",
+          "sha256": "865a605b4ca288d15b4afcb46b82ce73e80c9efaf8d8dc648f55eeccfdbc5697"
+        },
+        {
+          "element": "FJ1459M",
+          "file": "FJ1459M_BP21658_FMA13399_Left serratus anterior.obj",
+          "sha256": "713aba92436764394d8464b96552bedbf3c8a0c0107c8832c8152a9265ebc34d"
+        },
+        {
+          "element": "FJ1487",
+          "file": "FJ1487_BP20916_FMA38486_Right brachioradialis.obj",
+          "sha256": "0a4375bf9541a299d4469d41303dd2bea29318193697bf0132ea908695da753f"
+        },
+        {
+          "element": "FJ1487M",
+          "file": "FJ1487M_BP22692_FMA38487_Left brachioradialis.obj",
+          "sha256": "8191b7fbebeb5ae55b5056a768737a74506baac27138ee4b407b3ae400cbd019"
+        },
+        {
+          "element": "FJ1573",
+          "file": "FJ1573_BP23424_FMA13409_Left sternocleidomastoid.obj",
+          "sha256": "493c1f9ee694f93f0e01942b37ee5a6818376392dcbfda05c15617b10dcce04b"
+        },
+        {
+          "element": "FJ1595",
+          "file": "FJ1595_BP23713_FMA13408_Right sternocleidomastoid.obj",
+          "sha256": "68aa1699ff0687b116d28d97b990fc7c66124abc32e8c9a261dd63b88bee4757"
+        },
+        {
+          "element": "FJ3953",
+          "file": "FJ3953_BP29133_FMA53105_Left masseteric nerve.obj",
+          "sha256": "a48bd762e1328199f01b85ca0d4acdde7240da0557fe81dbda080af5bd2d5ee7"
+        },
+        {
+          "element": "FJ3987",
+          "file": "FJ3987_BP29127_FMA53104_Right masseteric nerve.obj",
+          "sha256": "74c93dcd7b7cde15193c6df645ac0820e1988ef7dc21f0bee9f6c0af8ccaf568"
+        },
+        {
+          "element": "FJ5187",
+          "file": "FJ5187_BP28863_FMA50814_Right sternocleidomastoid vein.obj",
+          "sha256": "055d7a6977413ceb53e5a1825f4b827b07c98cbf6413dbfbd8c77cc1caac5636"
+        }
+      ]
+    },
+    {
+      "id": "vessels",
+      "structure": "vessels",
+      "triangles": 4000,
+      "sources": [
+        {
+          "element": "FJ2086",
+          "file": "FJ2086_BP22017_FMA77381_Left popliteal artery.obj",
+          "sha256": "e5179b8abf361b35d00fe42def164ea43e8b3e4a5f3aef8ab487cd9958a6893b"
+        },
+        {
+          "element": "FJ2170",
+          "file": "FJ2170_BP20536_FMA77380_Right popliteal artery.obj",
+          "sha256": "af87bf9096eb32020fab5d4e286d7f9de07f83b362c3770d581902f952dede09"
+        },
+        {
+          "element": "FJ2216",
+          "file": "FJ2216_BP22518_FMA22656_Left axillary artery.obj",
+          "sha256": "0c7899cd1aadc005dba7432fd3a09197236505519e99882635ebedd04b1c8c6b"
+        },
+        {
+          "element": "FJ2219",
+          "file": "FJ2219_BP22410_FMA22692_Left brachial artery.obj",
+          "sha256": "abfcf16be0c40edab3f9865444ceca142d6a39c91f2bce23ea5f9583419c4986"
+        },
+        {
+          "element": "FJ2268",
+          "file": "FJ2268_BP20364_FMA22655_Right axillary artery.obj",
+          "sha256": "c76630b53f0c84b99d3fcc6b689374916f91a8689ed62d55b8b9a878b1ce250d"
+        },
+        {
+          "element": "FJ2271",
+          "file": "FJ2271_BP23743_FMA22691_Right brachial artery.obj",
+          "sha256": "6b69f0550d5c614befbb5f4584def210d552c8b9c8ba8e6074d4f759de6bd8fb"
+        },
+        {
+          "element": "FJ2275",
+          "file": "FJ2275_BP23743_FMA22691_Right brachial artery.obj",
+          "sha256": "9a2c842f46cef54d18db65c3d296731a98480a8d8b8f3d493181ae5cfafc2a1f"
+        },
+        {
+          "element": "FJ2294",
+          "file": "FJ2294_BP23743_FMA22691_Right brachial artery.obj",
+          "sha256": "cdf2302d3c47686b36e5eb095a86264d2a682f334ac1aff8744246ee81aad756"
+        },
+        {
+          "element": "FJ2310",
+          "file": "FJ2310_BP23743_FMA22691_Right brachial artery.obj",
+          "sha256": "0301f1d6eece6cfbc42ecc90d7caf3b261514c00fa00c55e506adbf816bd8ff1"
+        },
+        {
+          "element": "FJ2966",
+          "file": "FJ2966_BP23682_FMA8612_Pulmonary trunk.obj",
+          "sha256": "21cd36edc646954c795e8bd658f97448953b3e09d3e0c8b78f78711d7c9ef776"
+        },
+        {
+          "element": "FJ3411",
+          "file": "FJ3411_BP23913_FMA3768_Arch of aorta.obj",
+          "sha256": "6b72258bcc413abbcf6193e11575933d08f3ba960b52a7b8462a7b0ccb4607eb"
+        },
+        {
+          "element": "FJ3413",
+          "file": "FJ3413_BP20272_FMA3736_Ascending aorta.obj",
+          "sha256": "6903aed5746a4e210ebd7c0a15bba69707b2ef29398b97903bc2815c2f82c2bc"
+        },
+        {
+          "element": "FJ3427",
+          "file": "FJ3427_BP23707_FMA3784_Descending aorta.obj",
+          "sha256": "5d461cda0a71eaa0136f3a13bf1938ad7660ee3e4cc1750eb4ac865c91ba4668"
+        },
+        {
+          "element": "FJ3441",
+          "file": "FJ3441_BP23720_FMA10951_Inferior vena cava.obj",
+          "sha256": "22cee979046d6ade5883a10e2eca4b08222403e7e1adf5802973a21ee6b44b97"
+        },
+        {
+          "element": "FJ3645",
+          "file": "FJ3645_BP23624_FMA4720_Superior vena cava.obj",
+          "sha256": "48a2c870ff2dbb3f6eef1817cf0ebf57501c78f0726787d3a40424178095e902"
+        },
+        {
+          "element": "FJ3659",
+          "file": "FJ3659_BP23720_FMA10951_Inferior vena cava.obj",
+          "sha256": "e795b17885e03eb14174a527ebc0467b003fd1dc3e5b96c7a327e21b3dc4fe5b"
+        }
+      ]
+    },
+    {
+      "id": "nerves",
+      "structure": "nerves",
+      "triangles": 2500,
+      "sources": [
+        {
+          "element": "FJ3926",
+          "file": "FJ3926_BP29477_FMA18157_Trunk of left vagus nerve.obj",
+          "sha256": "d9a723878f9fc77ca8e82778dcbd08a40fc27b5d3880c404f30747f854d3074c"
+        },
+        {
+          "element": "FJ4024",
+          "file": "FJ4024_BP29476_FMA18151_Trunk of right vagus nerve.obj",
+          "sha256": "be374d656c6ec642a93681673744d0330b06d70a84d0dd53bcd3dcde870284df"
+        },
+        {
+          "element": "FJ4172",
+          "file": "FJ4172_BP29806_FMA37071_Left radial nerve.obj",
+          "sha256": "a6cd726af7026964e340fdae14c1dc22a8c8fbe0ed8996c937709e83a4cef909"
+        },
+        {
+          "element": "FJ4224",
+          "file": "FJ4224_BP29809_FMA37068_Left median nerve.obj",
+          "sha256": "0005af3008aa7ae05d1c8900bd559458f897d89fc99c4899323195af81ba99e3"
+        },
+        {
+          "element": "FJ4225",
+          "file": "FJ4225_BP29815_FMA37066_Left musculocutaneous nerve.obj",
+          "sha256": "33bcb8e18b548e418eaef9905d8639382498628b0937a2faba4b43b2d257e303"
+        },
+        {
+          "element": "FJ4240",
+          "file": "FJ4240_BP29806_FMA37071_Left radial nerve.obj",
+          "sha256": "b7bbc22a41bcfc72af2c1a9b6fedd888e372d784887ef4d7400f079e678f698d"
+        },
+        {
+          "element": "FJ4258",
+          "file": "FJ4258_BP29812_FMA37321_Left ulnar nerve.obj",
+          "sha256": "e83c41c5d566d299f56e4e68ae45022fa7b41a649e4a2a6e4de1cc6ba17ad38f"
+        }
+      ]
+    }
+  ]
+}

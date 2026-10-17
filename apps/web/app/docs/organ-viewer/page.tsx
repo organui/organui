@@ -34,6 +34,7 @@ export const kidneyModel: OrganModel = {
 
 const handle = `const viewer = useRef<OrganViewerHandle>(null)
 // viewer.current?.setView("Posterior")
+// viewer.current?.focus(["cortex"], 0.4) // glide to fit, at 40%
 // viewer.current?.zoom(0.85)   // below 1 zooms in
 // viewer.current?.rotate(0.2)  // radians around the target
 // viewer.current?.reset()
@@ -105,7 +106,9 @@ export default async function Page() {
           otherwise the viewer reports that the model is incomplete. View
           directions point from the model towards the camera, with +x the
           patient&apos;s left, +y superior and +z anterior. A view with{" "}
-          <code>structureIds</code> frames only those structures.
+          <code>structureIds</code> frames only those structures. A structure
+          with an <code>opacity</code> below 1, such as skin over the organs,
+          rests as a translucent shell and turns solid when selected.
         </p>
       </section>
       <section className="flex flex-col gap-4">
@@ -123,8 +126,11 @@ export default async function Page() {
           Each named view fits the model to 80% of the stage from its direction.
           Rotating leaves the named view, and <code>onViewChange</code> reports{" "}
           <code>null</code>; zooming does not. Drag or the arrow keys rotate;
-          scroll, pinch, plus and minus zoom. Motion damping is off when the
-          user prefers reduced motion.
+          scroll, pinch, plus and minus zoom. <code>focus</code> glides the
+          camera to fit the given structures, or named nodes inside them, from
+          its current direction; its optional fill sets how much of the stage
+          they take. Motion damping and the glide are off when the user prefers
+          reduced motion.
         </p>
       </section>
       <section className="flex flex-col gap-4">

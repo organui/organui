@@ -1,3 +1,4 @@
+import type * as React from "react"
 import Link from "next/link"
 import { GitHubIcon } from "@/components/social-icons"
 import { buttonVariants } from "@workspace/ui/components/button"
@@ -7,11 +8,30 @@ import { cn } from "@workspace/ui/lib/utils"
 const link =
   "rounded-md text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
 
-// Shared by the docs and the blocks gallery.
-export function SiteHeader() {
+// Shared by the docs and the blocks gallery. The homepage floats it, bare,
+// over the body model.
+export function SiteHeader({
+  floating = false,
+  actions,
+}: {
+  floating?: boolean
+  actions?: React.ReactNode
+}) {
   return (
-    <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-5 sm:px-10">
+    <header
+      className={cn(
+        "z-10",
+        floating
+          ? "fixed inset-x-0 top-0"
+          : "sticky top-0 border-b bg-background/95 backdrop-blur"
+      )}
+    >
+      <div
+        className={cn(
+          "mx-auto flex h-14 max-w-6xl items-center gap-6",
+          floating ? "px-4 sm:px-6" : "px-5 sm:px-10"
+        )}
+      >
         <Link
           href="/"
           className="flex items-center gap-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-ring"
@@ -25,16 +45,19 @@ export function SiteHeader() {
         <Link href="/blocks" className={link}>
           Blocks
         </Link>
-        <a
-          href="https://github.com/organui/organui"
-          aria-label="OrganUI on GitHub"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "icon" }),
-            "ml-auto size-10"
-          )}
-        >
-          <GitHubIcon />
-        </a>
+        <div className="ml-auto flex items-center gap-1">
+          {actions}
+          <a
+            href="https://github.com/organui/organui"
+            aria-label="OrganUI on GitHub"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              "size-10"
+            )}
+          >
+            <GitHubIcon />
+          </a>
+        </div>
       </div>
     </header>
   )
