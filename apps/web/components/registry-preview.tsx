@@ -3,6 +3,7 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
+import { VitalSigns } from "@workspace/registry/vital-signs"
 import { OrganPreview } from "@/components/organ-preview"
 
 function AnatomyTreePreview() {
@@ -21,6 +22,20 @@ function AnatomyTreePreview() {
   )
 }
 
+function VitalSignsPreview() {
+  return (
+    <VitalSigns
+      readings={{
+        heartRate: 112,
+        systolic: 118,
+        diastolic: 76,
+        spo2: 97,
+        temperature: 38.4,
+      }}
+    />
+  )
+}
+
 function OrganViewerPreview() {
   return <OrganPreview name="heart" organ="Heart" />
 }
@@ -30,6 +45,7 @@ function OrganViewerPreview() {
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
   "organ-viewer": OrganViewerPreview,
+  "vital-signs": VitalSignsPreview,
 }
 
 export function RegistryPreview({
