@@ -1,8 +1,25 @@
 {
   "extends": "@workspace/typescript-config/nextjs.json",
   "compilerOptions": {
+    // Registry blocks import the files they ship where the CLI installs them.
     "paths": {
+      "@/components/ui/anatomy-tree": [
+        "../../packages/registry/registry/base-nova/anatomy-tree/anatomy-tree.tsx"
+      ],
+      "@/components/organ-explorer": [
+        "../../packages/registry/registry/base-nova/blocks/explorer-01/components/organ-explorer.tsx"
+      ],
+      "@/components/anatomy-workspace": [
+        "../../packages/registry/registry/base-nova/blocks/explorer-02/components/anatomy-workspace.tsx"
+      ],
+      "@/components/organ-switcher": [
+        "../../packages/registry/registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx"
+      ],
       "@/components/ui/*": ["../../packages/ui/src/components/*"],
+      "@/components/*": [
+        "./components/*",
+        "../../packages/registry/registry/base-nova/organ-viewer/*"
+      ],
       "@/*": ["./*"]
     },
     "plugins": [

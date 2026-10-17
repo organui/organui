@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { OrganExplorer } from "@/components/organ-explorer"
+import { OrganExplorer } from "@workspace/registry/blocks/explorer-01/components/organ-explorer"
 import { organModels } from "@/lib/organ-models"
 import {
   codeBlock,
@@ -135,9 +135,13 @@ const data = organAnatomyNodes(${exportName})
           <Link href="/docs/anatomy-tree" className="underline">
             anatomy tree
           </Link>{" "}
-          for the explorer layout behind the Anatomy button above. Both share
-          structure IDs, so one piece of state drives selection and visibility
-          in each.
+          for the explorer layout behind the Anatomy button above, or install
+          that layout whole as the{" "}
+          <Link href="/blocks#explorer-01" className="underline">
+            Explorer 01 block
+          </Link>
+          . Both share structure IDs, so one piece of state drives selection and
+          visibility in each.
         </p>
         <pre
           tabIndex={0}

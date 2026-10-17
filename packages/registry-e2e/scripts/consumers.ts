@@ -17,7 +17,7 @@ const server = Bun.serve({
   fetch(request) {
     const name = new URL(request.url).pathname.split("/").at(-1) ?? ""
     const file = Bun.file(resolve(registry, name))
-    if (!/^[a-z-]+\.json$/.test(name))
+    if (!/^[a-z0-9-]+\.json$/.test(name))
       return new Response(null, { status: 404 })
     return file
       .exists()
@@ -64,6 +64,21 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+// Vite has no file routing, so the CLI skips block pages there; these stand in
+// for them. Next.js serves the installed pages at the same paths.
+const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
+import { AnatomyWorkspace } from "@/components/anatomy-workspace"
+import { OrganSwitcher } from "@/components/organ-switcher"
+import { heartModel } from "@/components/heart"
+import { kidneysModel } from "@/components/kidneys"
+import { pancreasModel } from "@/components/pancreas"
+import { stomachModel } from "@/components/stomach"
+export default function BlockHarness({path}:{path:string}){
+ if(path==="/workspace")return <AnatomyWorkspace model={heartModel}/>
+ return <main style={{padding:24}}><h1>{path==="/organs"?"Organs":"Heart"}</h1>{path==="/organs"?<OrganSwitcher models={[heartModel,kidneysModel,stomachModel,pancreasModel]}/>:<OrganExplorer model={heartModel}/>}</main>
+}`
+const blocks = ["explorer-01", "explorer-02", "explorer-03"]
+const pages = ["explorer", "workspace", "organs"]
 // Deliberately use distinct theme values to detect accidental theme overwrites.
 const css = `@import "tailwindcss";
 @theme inline { --color-background:var(--background);--color-foreground:var(--foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-border:var(--border);--color-ring:var(--ring); }
@@ -179,8 +194,9 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import "./globals.css";createRoot(document.getElementById("root")!).render(location.pathname==="/organ"?<OrganHarness/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
+      await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
         dir,
         "vite.config.ts",
@@ -213,6 +229,30 @@ try {
       ],
       dir
     )
+    // Blocks reuse the files installed above. Without RSC, shadcn 4.21 strips
+    // "use client" from every other file it writes (a global regex keeps its
+    // lastIndex), so a reinstall differs and prompts; overwrite instead.
+    for (const block of blocks)
+      await run(
+        [
+          "node",
+          shadcn,
+          "add",
+          ...(framework === "vite"
+            ? [`@organui/${block}`, "--overwrite"]
+            : [`http://127.0.0.1:${server.port}/${block}.json`]),
+          "--yes",
+        ],
+        dir
+      )
+    // Pages install only where the framework has file routing.
+    for (const page of pages) {
+      const installed = await Bun.file(
+        resolve(dir, `src/app/${page}/page.tsx`)
+      ).exists()
+      if (installed !== (framework === "next"))
+        throw new Error(`Unexpected ${page} page in ${framework}`)
+    }
     const viewer = await readFile(
       resolve(dir, "src/components/organ-viewer.tsx"),
       "utf8"

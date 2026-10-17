@@ -178,7 +178,7 @@ test("homepage explorer links support keyboard navigation without overflow", asy
   expect(errors).toEqual([])
 })
 
-test("registry index lists every catalog item inside the docs layout", async ({
+test("registry index lists every component inside the docs layout", async ({
   page,
   request,
 }, info) => {
@@ -191,7 +191,10 @@ test("registry index lists every catalog item inside the docs layout", async ({
   await expect(
     page.getByRole("heading", { name: "Components", level: 1 })
   ).toBeVisible()
-  for (const item of catalog.items) {
+  // Blocks are listed on /blocks.
+  for (const item of catalog.items.filter(
+    ({ type }) => type !== "registry:block"
+  )) {
     const title = item.title ?? item.name
     await expect(
       page
@@ -338,4 +341,69 @@ test("a model that fails to load explains itself and retries", async ({
   await expect(alert).toContainText("HTTP 404")
   await alert.getByRole("button", { name: "Try again" }).click()
   await expect.poll(() => requests).toBe(2)
+})
+
+test("blocks gallery previews and installs every block", async ({
+  page,
+  request,
+}, info) => {
+  // Each block preview is its own page with a WebGL scene.
+  test.setTimeout(90_000)
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.route(heartModel.src, (route) =>
+    route.fulfill({
+      body: Buffer.from(fixtureGlb(heartModel.structures.map(({ id }) => id))),
+      contentType: "model/gltf-binary",
+    })
+  )
+  const blocks = registrySchema
+    .parse(await (await request.get("/r/registry.json")).json())
+    .items.filter(({ type }) => type === "registry:block")
+  expect(blocks.length).toBeGreaterThan(0)
+  await page.goto("/docs")
+  await page.getByRole("link", { name: "Blocks", exact: true }).first().click()
+  await expect(page).toHaveURL(/\/blocks$/)
+  await expect(
+    page.getByRole("heading", { name: "Blocks", level: 1 })
+  ).toBeVisible()
+  for (const block of blocks) {
+    const title = block.title ?? block.name
+    const section = page.getByRole("region", { name: title, exact: true })
+    await expect(section).toHaveAttribute("id", block.name)
+    await expect(
+      section.getByRole("region", { name: `Install ${title}`, exact: true })
+    ).toHaveText(
+      `bunx shadcn@4.21.0 add https://organui.com/r/${block.name}.json`
+    )
+    const preview = section.getByTitle(`${title} preview`)
+    await preview.scrollIntoViewIfNeeded()
+    await expect(
+      preview.contentFrame().getByRole("toolbar", { name: "View controls" })
+    ).toBeVisible()
+    const item = registryItemSchema.parse(
+      await (await request.get(`/r/${block.name}.json`)).json()
+    )
+    const installedPage = item.files?.find(
+      ({ type }) => type === "registry:page"
+    )
+    // The gallery shows each block's own files and links the shared ones.
+    await section
+      .getByText(installedPage?.target ?? "", { exact: true })
+      .click()
+    await expect(
+      section.getByRole("region", { name: `${installedPage?.target} source` })
+    ).toHaveText(installedPage?.content ?? "")
+  }
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  // axe merges framed pages into this one, so their own main and header read
+  // as duplicate landmarks. block.spec.ts scans the installed pages alone.
+  const axe = await new AxeBuilder({ page }).exclude("iframe").analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({ path: info.outputPath("blocks.png"), fullPage: true })
+  expect(errors).toEqual([])
 })

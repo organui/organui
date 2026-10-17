@@ -6,9 +6,23 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     // Items import shadcn components from the consumer's ui alias. Here that
-    // alias points at the base-nova copies the docs site installs.
+    // alias points at the base-nova copies the docs site installs. Blocks
+    // import the other files they ship where the CLI installs them.
     "paths": {
-      "@/components/ui/*": ["../ui/src/components/*"]
+      "@/components/ui/anatomy-tree": [
+        "./registry/base-nova/anatomy-tree/anatomy-tree.tsx"
+      ],
+      "@/components/organ-explorer": [
+        "./registry/base-nova/blocks/explorer-01/components/organ-explorer.tsx"
+      ],
+      "@/components/anatomy-workspace": [
+        "./registry/base-nova/blocks/explorer-02/components/anatomy-workspace.tsx"
+      ],
+      "@/components/organ-switcher": [
+        "./registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx"
+      ],
+      "@/components/ui/*": ["../ui/src/components/*"],
+      "@/components/*": ["./registry/base-nova/organ-viewer/*"]
     }
   },
   "include": ["registry", "scripts", "tests"]

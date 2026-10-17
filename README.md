@@ -49,6 +49,24 @@ repository under its own licence (CC BY-SA 2.1 JP, CC BY-SA 4.0, CC BY 4.0 or
 CC0, per organ) and loads from a commit-pinned jsDelivr URL; the viewer shows
 its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
 
+## Blocks
+
+Blocks are whole layouts built from those pieces, following shadcn's
+`registry:block` convention: a page plus the components it needs.
+
+| Block         | Layout                                                                       |
+| ------------- | ---------------------------------------------------------------------------- |
+| `explorer-01` | Viewer with an anatomy panel that docks beside it, or opens as a sheet       |
+| `explorer-02` | Full-height workspace: tree sidebar and a card to hide or isolate structures |
+| `explorer-03` | One viewer switching between several organs                                  |
+
+```bash
+bunx shadcn@4.21.0 add https://organui.com/r/explorer-01.json
+```
+
+In Next.js this adds a page at `app/explorer/page.tsx`; other frameworks get
+the components only. Previews are at [organui.com/blocks](https://organui.com/blocks).
+
 ## Repository
 
 | Path                    | Contents                                                          |

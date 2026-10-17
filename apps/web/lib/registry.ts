@@ -6,15 +6,54 @@ export const shadcn = "shadcn@4.21.0"
 
 // The registry catalog is the single source for what the docs list, so a new
 // item appears in the sidebar and the index once it has a page at its href.
-export const registryItems = catalog.items.map((item) => ({
-  name: item.name,
-  organ: "categories" in item && item.categories?.includes("organ") === true,
-  title: item.title ?? item.name,
-  description: item.description,
-  href: `/docs/${item.name}`,
-  json: `/r/${item.name}.json`,
-  install: `bunx ${shadcn} add ${site.url}/r/${item.name}.json`,
-}))
+// Blocks are listed on /blocks instead.
+export const registryItems = catalog.items
+  .filter((item) => item.type !== "registry:block")
+  .map((item) => ({
+    name: item.name,
+    organ: "categories" in item && item.categories?.includes("organ") === true,
+    title: item.title ?? item.name,
+    description: item.description,
+    href: `/docs/${item.name}`,
+    json: `/r/${item.name}.json`,
+    install: `bunx ${shadcn} add ${site.url}/r/${item.name}.json`,
+  }))
+
+// Where the CLI writes each file, relative to a Next.js app with the default
+// aliases. Pages only install in frameworks with file routing.
+function installedPath(file: { path: string; type: string; target?: string }) {
+  if (file.target) return file.target
+  const name = file.path.split("/").at(-1)
+  return file.type === "registry:ui"
+    ? `components/ui/${name}`
+    : `components/${name}`
+}
+
+// Files a block shares with component items are documented on the first
+// item that ships them, such as organ-viewer.tsx on the organ viewer.
+const shared = new Map<string, string>()
+for (const item of catalog.items)
+  if (item.type !== "registry:block")
+    for (const { path } of item.files)
+      if (!shared.has(path)) shared.set(path, item.name)
+
+export const registryBlocks = catalog.items
+  .filter((item) => item.type === "registry:block")
+  .map((item) => ({
+    name: item.name,
+    title: item.title ?? item.name,
+    description: item.description,
+    href: `/blocks#${item.name}`,
+    view: `/view/${item.name}`,
+    json: `/r/${item.name}.json`,
+    install: `bunx ${shadcn} add ${site.url}/r/${item.name}.json`,
+    files: item.files.map((file) => ({
+      path: file.path,
+      installed: installedPath(file),
+      // The registry item that documents a shared file, if any.
+      item: shared.get(file.path) ?? null,
+    })),
+  }))
 
 export const registryNamespace = JSON.stringify(
   { registries: { "@organui": `${site.url}/r/{name}.json` } },

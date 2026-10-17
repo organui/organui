@@ -976,6 +976,152 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "explorer-01",
+      "type": "registry:block",
+      "title": "Explorer 01",
+      "description": "An organ viewer with an anatomy panel that docks beside it on wide screens and opens as a sheet on phones. Heart model licensed CC BY 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "input",
+        "progress",
+        "select",
+        "sheet",
+        "toggle",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/explorer-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/explorer/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/explorer-01/components/organ-explorer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "categories": ["explorer"]
+    },
+    {
+      "name": "explorer-02",
+      "type": "registry:block",
+      "title": "Explorer 02",
+      "description": "A full-height anatomy workspace with the tree in a sidebar and a details card to hide or isolate the selected structure. Heart model licensed CC BY 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "card",
+        "input",
+        "progress",
+        "select",
+        "sheet",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/explorer-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/workspace/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/explorer-02/components/anatomy-workspace.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "categories": ["explorer"]
+    },
+    {
+      "name": "explorer-03",
+      "type": "registry:block",
+      "title": "Explorer 03",
+      "description": "One viewer that switches between several organs from a menu, here the heart, kidneys, stomach and pancreas. Models licensed CC BY 4.0 and CC BY-SA 2.1 JP.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/explorer-03/page.tsx",
+          "type": "registry:page",
+          "target": "app/organs/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/kidneys.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/stomach.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/pancreas.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": ["explorer"]
     }
   ]
 }

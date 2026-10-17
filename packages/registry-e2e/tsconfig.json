@@ -9,7 +9,20 @@
     "moduleResolution": "Bundler",
     // Matches packages/registry, so its shadcn imports resolve here too.
     "paths": {
-      "@/components/ui/*": ["../ui/src/components/*"]
+      "@/components/ui/anatomy-tree": [
+        "../registry/registry/base-nova/anatomy-tree/anatomy-tree.tsx"
+      ],
+      "@/components/organ-explorer": [
+        "../registry/registry/base-nova/blocks/explorer-01/components/organ-explorer.tsx"
+      ],
+      "@/components/anatomy-workspace": [
+        "../registry/registry/base-nova/blocks/explorer-02/components/anatomy-workspace.tsx"
+      ],
+      "@/components/organ-switcher": [
+        "../registry/registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx"
+      ],
+      "@/components/ui/*": ["../ui/src/components/*"],
+      "@/components/*": ["../registry/registry/base-nova/organ-viewer/*"]
     }
   },
   "include": ["scripts", "tests", "playwright.config.ts"]

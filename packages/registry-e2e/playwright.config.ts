@@ -30,7 +30,7 @@ export default defineConfig({
     },
     {
       name: "next-desktop",
-      testMatch: "**/{anatomy,organ}.spec.ts",
+      testMatch: "**/{anatomy,organ,block}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4318",
         viewport: { width: 1280, height: 900 },
@@ -38,7 +38,7 @@ export default defineConfig({
     },
     {
       name: "vite-mobile",
-      testMatch: "**/{anatomy,organ}.spec.ts",
+      testMatch: "**/{anatomy,organ,block}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4319",
         viewport: { width: 390, height: 844 },

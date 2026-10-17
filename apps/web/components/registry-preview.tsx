@@ -3,7 +3,7 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
-import { OrganPreview } from "@/components/organ-explorer"
+import { OrganPreview } from "@/components/organ-preview"
 
 function AnatomyTreePreview() {
   const [selectedId, setSelectedId] = useState<string | null>("lv")

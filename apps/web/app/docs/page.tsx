@@ -73,6 +73,13 @@ export default function Page() {
           <code>bunx {shadcn} add organui/organui/&lt;name&gt;</code> installs
           straight from source.
         </p>
+        <p>
+          For whole layouts, such as a viewer with its anatomy panel, see the{" "}
+          <Link href="/blocks" className="underline">
+            blocks
+          </Link>
+          .
+        </p>
       </section>
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Registry</h2>

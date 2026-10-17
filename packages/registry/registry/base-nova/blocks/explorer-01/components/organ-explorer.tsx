@@ -1,21 +1,22 @@
 "use client"
 
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react"
-import { PanelRightIcon } from "lucide-react"
-import { AnatomyTree } from "@workspace/registry/anatomy-tree"
-import {
-  OrganViewer,
-  organAnatomyNodes,
-  organDefaultVisibility,
-  type OrganModel,
-} from "@workspace/registry/organ-viewer/organ-viewer"
+import * as React from "react"
+import { cn } from "cn"
+
+import { AnatomyTree } from "@/components/ui/anatomy-tree"
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@workspace/ui/components/sheet"
-import { Toggle } from "@workspace/ui/components/toggle"
+} from "@/components/ui/sheet"
+import { Toggle } from "@/components/ui/toggle"
+import {
+  OrganViewer,
+  organAnatomyNodes,
+  organDefaultVisibility,
+  type OrganModel,
+} from "@/components/organ-viewer"
 
 // Matches the lg breakpoint where the panel fits beside the viewer.
 const WIDE = "(min-width: 64rem)"
@@ -25,28 +26,34 @@ function subscribeWide(onChange: () => void) {
   return () => query.removeEventListener("change", onChange)
 }
 
-// The pairing documented on every organ page: the anatomy tree drives the
-// viewer, and picks in 3D flow back to the tree. Like the explorers, the
-// panel starts closed so the 3D view stands alone. Phones open it as a sheet.
-export function OrganExplorer({ model }: { model: OrganModel }) {
-  const [data] = useState(() => organAnatomyNodes(model))
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [visibility, setVisibility] = useState(() =>
+// The anatomy tree drives the viewer, and picks in 3D flow back to the tree.
+// Like the explorers, the panel starts closed so the 3D view stands alone.
+// Phones open it as a sheet.
+export function OrganExplorer({
+  model,
+  className,
+}: {
+  model: OrganModel
+  className?: string
+}) {
+  const [data] = React.useState(() => organAnatomyNodes(model))
+  const [selectedId, setSelectedId] = React.useState<string | null>(null)
+  const [visibility, setVisibility] = React.useState(() =>
     organDefaultVisibility(model)
   )
-  const [view, setView] = useState<string | null>(model.defaultView)
+  const [view, setView] = React.useState<string | null>(model.defaultView)
   const selected = model.structures.find(({ id }) => id === selectedId)
-  const [open, setOpen] = useState(false)
-  const wide = useSyncExternalStore(
+  const [open, setOpen] = React.useState(false)
+  const wide = React.useSyncExternalStore(
     subscribeWide,
     () => matchMedia(WIDE).matches,
     () => true
   )
-  const panel = useId()
-  const panelRef = useRef<HTMLDivElement>(null)
-  const sheetRef = useRef<HTMLDivElement>(null)
-  const toggle = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
+  const panel = React.useId()
+  const panelRef = React.useRef<HTMLDivElement>(null)
+  const sheetRef = React.useRef<HTMLDivElement>(null)
+  const toggle = React.useRef<HTMLButtonElement>(null)
+  React.useEffect(() => {
     if (open && wide)
       panelRef.current?.querySelector<HTMLElement>("input")?.focus()
   }, [open, wide])
@@ -71,11 +78,11 @@ export function OrganExplorer({ model }: { model: OrganModel }) {
   )
   return (
     <div
-      className={
-        open && wide
-          ? "grid grid-cols-[minmax(0,1fr)_18rem] gap-4"
-          : "grid gap-4"
-      }
+      className={cn(
+        "grid gap-4",
+        open && wide && "grid-cols-[minmax(0,1fr)_18rem]",
+        className
+      )}
     >
       <div className="flex min-w-0 flex-col gap-3">
         <OrganViewer
@@ -100,7 +107,21 @@ export function OrganExplorer({ model }: { model: OrganModel }) {
             aria-controls={open && wide ? panel : undefined}
             className="shrink-0"
           >
-            <PanelRightIcon data-icon="inline-start" />
+            <svg
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              data-icon="inline-start"
+            >
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M15 3v18" />
+            </svg>
             Anatomy
           </Toggle>
         </div>
@@ -138,28 +159,5 @@ export function OrganExplorer({ model }: { model: OrganModel }) {
         </SheetContent>
       </Sheet>
     </div>
-  )
-}
-
-// Index previews download a model only on request: thirty WebGL scenes on one
-// page would exceed browser context limits and several hundred megabytes.
-export function OrganPreview({ name, organ }: { name: string; organ: string }) {
-  const [model, setModel] = useState<OrganModel | null>(null)
-  const [pending, setPending] = useState(false)
-  if (model)
-    return <OrganViewer model={model} controls={false} className="h-72" />
-  return (
-    <button
-      type="button"
-      disabled={pending}
-      onClick={async () => {
-        setPending(true)
-        const { organModels } = await import("@/lib/organ-models")
-        setModel(await organModels[name]!())
-      }}
-      className="flex h-72 w-full items-center justify-center rounded-xl border border-dashed text-sm text-muted-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
-    >
-      {pending ? "Loading…" : `Load the ${organ.toLowerCase()} in 3D`}
-    </button>
   )
 }

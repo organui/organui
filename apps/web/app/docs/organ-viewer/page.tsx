@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { OrganExplorer } from "@/components/organ-explorer"
+import { OrganExplorer } from "@workspace/registry/blocks/explorer-01/components/organ-explorer"
 import { organModels } from "@/lib/organ-models"
 import { codeBlock, docsMetadata, registryItems, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
