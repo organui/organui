@@ -17,7 +17,7 @@
     "test": "bun test tests"
   },
   "dependencies": {
-    "@base-ui/react": "^1.8.0",
+    "@base-ui/react": "^1.9.0",
     "cn": "^0.4.0",
     "three": "^0.186.0"
   },
@@ -26,16 +26,16 @@
     "react-dom": "^19"
   },
   "devDependencies": {
-    "@types/bun": "1.4.2",
+    "@types/bun": "1.4.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.186.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "eslint": "^9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "shadcn": "4.21.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "shadcn": "4.21.5",
     "typescript": "^5"
   },
   "license": "MIT"
