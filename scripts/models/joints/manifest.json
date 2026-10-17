@@ -1,0 +1,1417 @@
+{
+  "inputs": [
+    {
+      "name": "Joints100",
+      "path": "Resources/Models/FBX/Joints100.fbx",
+      "sha256": "f4ba7a910cdaef99e31530f368628780d9f06b5d77853f8b721f47f67137e823",
+      "bytes": 9804796
+    },
+    {
+      "name": "SkeletalSystem100",
+      "path": "Resources/Models/FBX/SkeletalSystem100.fbx",
+      "sha256": "294a649765cd060a62a4095da52b9c8ef2d97769aa447e196448aa5f7d596dea",
+      "bytes": 41339660
+    }
+  ],
+  "commit": "6c7f9016bd5899ac8edafd31b9900c151df42ed6",
+  "glb": {
+    "bytes": 2919668,
+    "sha256": "e479848045124931c547505442628ce4178f5a88bb09cb697d85cdd6b3bf0d81",
+    "triangles": 224456,
+    "sourceTriangles": 956713
+  },
+  "structures": {
+    "articular-capsule-of-temporomandibular-joint": {
+      "triangles": 774,
+      "sources": [
+        "Articular_capsule_of_temporomandibular_jointl",
+        "Articular_capsule_of_temporomandibular_jointr"
+      ]
+    },
+    "articular-disc-of-temporomandibular-joint": {
+      "triangles": 528,
+      "sources": [
+        "Articular_disc_of_temporomandibular_jointl",
+        "Articular_disc_of_temporomandibular_jointr"
+      ]
+    },
+    "lateral-temporomandibular-ligament": {
+      "triangles": 152,
+      "sources": [
+        "Lateral_temporomandibular_ligamentl",
+        "Lateral_temporomandibular_ligamentr"
+      ]
+    },
+    "sphenomandibular-ligament": {
+      "triangles": 376,
+      "sources": ["Sphenomandibular_ligamentl", "Sphenomandibular_ligamentr"]
+    },
+    "stylomandibular-ligament": {
+      "triangles": 88,
+      "sources": ["Stylomandibular_ligamentl", "Stylomandibular_ligamentr"]
+    },
+    "pterygospinous-ligament": {
+      "triangles": 24,
+      "sources": ["Pterygospinous_ligamentl", "Pterygospinous_ligamentr"]
+    },
+    "stylohyoid-ligament": {
+      "triangles": 744,
+      "sources": ["Stylohyoid_ligamentl", "Stylohyoid_ligamentr"]
+    },
+    "median-thyrohyoid-ligament": {
+      "triangles": 504,
+      "sources": ["Median_thyrohyoid_ligament"]
+    },
+    "lateral-thyrohyoid-ligament": {
+      "triangles": 704,
+      "sources": [
+        "Lateral_thyrohyoid_ligamentl",
+        "Lateral_thyrohyoid_ligamentr"
+      ]
+    },
+    "quadrangular-membrane": {
+      "triangles": 816,
+      "sources": ["Quadrangular_membranel", "Quadrangular_membraner"]
+    },
+    "median-cricothyroid-ligament": {
+      "triangles": 449,
+      "sources": ["Median_cricothyroid_ligament"]
+    },
+    "cricopharyngeal-ligament": {
+      "triangles": 1043,
+      "sources": ["Cricopharyngeal_ligamentl", "Cricopharyngeal_ligamentr"]
+    },
+    "anterior-longitudinal-ligament": {
+      "triangles": 3696,
+      "sources": ["Anterior_longitudinal_ligament"]
+    },
+    "posterior-longitudinal-ligament": {
+      "triangles": 3438,
+      "sources": ["Posterior_longitudinal_ligament"]
+    },
+    "ligamenta-flava": {
+      "triangles": 3368,
+      "sources": ["Ligamenta_flava"]
+    },
+    "interspinous-ligaments": {
+      "triangles": 584,
+      "sources": ["Interspinous_ligaments"]
+    },
+    "supraspinous-ligament": {
+      "triangles": 872,
+      "sources": ["Supraspinous_ligament"]
+    },
+    "nuchal-ligament": {
+      "triangles": 645,
+      "sources": ["Nuchal_ligament"]
+    },
+    "intertransverse-ligaments": {
+      "triangles": 6852,
+      "sources": ["Intertransverse_ligamentsl", "Intertransverse_ligamentsr"]
+    },
+    "intercornual-ligament": {
+      "triangles": 112,
+      "sources": ["Intercornual_ligamentl", "Intercornual_ligamentr"]
+    },
+    "cervical-intervertebral-discs": {
+      "triangles": 2416,
+      "sources": [
+        "Intervertebral_disc_C2-C3",
+        "Intervertebral_disc_C3-C4",
+        "Intervertebral_disc_C4-C5",
+        "Intervertebral_disc_C5-C6",
+        "Intervertebral_disc_C6-C7",
+        "Intervertebral_disc_C7-T1"
+      ]
+    },
+    "thoracic-intervertebral-discs": {
+      "triangles": 6444,
+      "sources": [
+        "Intervertebral_disc_T1-T2",
+        "Intervertebral_disc_T2-T3",
+        "Intervertebral_disc_T3-T4",
+        "Intervertebral_disc_T4-T5",
+        "Intervertebral_disc_T5-T6",
+        "Intervertebral_disc_T6-T7",
+        "Intervertebral_disc_T7-T8",
+        "Intervertebral_disc_T8-T9",
+        "Intervertebral_disc_T9-T10",
+        "Intervertebral_disc_T10-T11",
+        "Intervertebral_disc_T11-T12",
+        "Intervertebral_disc_T12-L1"
+      ]
+    },
+    "lumbar-intervertebral-discs": {
+      "triangles": 2720,
+      "sources": [
+        "Intervertebral_disc_L1-L2",
+        "Intervertebral_disc_L2-L3",
+        "Intervertebral_disc_L3-L4",
+        "Intervertebral_disc_L4-L5",
+        "Intervertebral_disc_L5-S1"
+      ]
+    },
+    "sacrococcygeal-symphysis": {
+      "triangles": 146,
+      "sources": ["Sacrococcygeal_symphysis"]
+    },
+    "radiate-ligament-of-head-of-rib": {
+      "triangles": 3708,
+      "sources": [
+        "Radiate_ligament_of_head_of_ribl",
+        "Radiate_ligament_of_head_of_ribr"
+      ]
+    },
+    "intra-articular-ligament-of-head-of-rib": {
+      "triangles": 216,
+      "sources": [
+        "Intra-articular_ligament_of_head_of_rib",
+        "Intra-articular_ligament_of_head_of_ribr"
+      ]
+    },
+    "costotransverse-ligament": {
+      "triangles": 792,
+      "sources": ["Costotransverse_ligamentl", "Costotransverse_ligamentr"]
+    },
+    "external-intercostal-membrane": {
+      "triangles": 3772,
+      "sources": [
+        "External_intercostal_membranel",
+        "External_intercostal_membraner"
+      ]
+    },
+    "internal-intercostal-membrane": {
+      "triangles": 3548,
+      "sources": [
+        "Internal_intercostal_membranel",
+        "Internal_intercostal_membraner"
+      ]
+    },
+    "articular-capsule-of-sternoclavicular-joint": {
+      "triangles": 1206,
+      "sources": [
+        "Articular_capsule_of_sternoclavicular_jointl",
+        "Articular_capsule_of_sternoclavicular_jointr"
+      ]
+    },
+    "articular-disc-of-sternoclavicular-joint": {
+      "triangles": 352,
+      "sources": [
+        "Articular_disc_of_sternoclavicular_jointl",
+        "Articular_disc_of_sternoclavicular_jointr"
+      ]
+    },
+    "anterior-sternoclavicular-ligament": {
+      "triangles": 352,
+      "sources": [
+        "Anterior_sternoclavicular_ligamentl",
+        "Anterior_sternoclavicular_ligamentr"
+      ]
+    },
+    "posterior-sternoclavicular-ligament": {
+      "triangles": 272,
+      "sources": [
+        "Posterior_sternoclavicular_ligamentl",
+        "Posterior_sternoclavicular_ligamentr"
+      ]
+    },
+    "interclavicular-ligament": {
+      "triangles": 160,
+      "sources": ["Interclavicular_ligamentl", "Interclavicular_ligamentr"]
+    },
+    "costoclavicular-ligament": {
+      "triangles": 24,
+      "sources": ["Costoclavicular_ligamentl", "Costoclavicular_ligamentr"]
+    },
+    "articular-capsule-of-acromioclavicular-joint": {
+      "triangles": 1134,
+      "sources": [
+        "Articular_capsule_of_acromioclavicular_jointl",
+        "Articular_capsule_of_acromioclavicular_jointr"
+      ]
+    },
+    "articular-disc-of-acromioclavicular-joint": {
+      "triangles": 352,
+      "sources": [
+        "Articular_disc_of_acromioclavicular_jointl",
+        "Articular_disc_of_acromioclavicular_jointr"
+      ]
+    },
+    "acromioclavicular-ligament": {
+      "triangles": 364,
+      "sources": ["Acromioclavicular_ligamentl", "Acromioclavicular_ligamentr"]
+    },
+    "conoid-ligament": {
+      "triangles": 112,
+      "sources": ["Conoid_ligamentl", "Conoid_ligamentr"]
+    },
+    "trapezoid-ligament": {
+      "triangles": 112,
+      "sources": ["Trapezoid_ligamentl", "Trapezoid_ligamentr"]
+    },
+    "coraco-acromial-ligament": {
+      "triangles": 24,
+      "sources": ["Coraco-acromial_ligamentl", "Coraco-acromial_ligamentr"]
+    },
+    "superior-transverse-scapular-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Superior_transverse_scapular_ligamentl",
+        "Superior_transverse_scapular_ligamentr"
+      ]
+    },
+    "inferior-transverse-scapular-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Inferior_transverse_scapular_ligamentl",
+        "Inferior_transverse_scapular_ligamentr"
+      ]
+    },
+    "articular-capsule-of-glenohumeral-joint": {
+      "triangles": 1886,
+      "sources": [
+        "Articular_capsule_of_glenohumeral_jointl",
+        "Articular_capsule_of_glenohumeral_jointr"
+      ]
+    },
+    "glenoid-labrum": {
+      "triangles": 572,
+      "sources": ["Glenoid_labruml", "Glenoid_labrumr"]
+    },
+    "superior-glenohumeral-ligament": {
+      "triangles": 400,
+      "sources": [
+        "Superior_glenohumeral_ligamentl",
+        "Superior_glenohumeral_ligamentr"
+      ]
+    },
+    "middle-glenohumeral-ligament": {
+      "triangles": 460,
+      "sources": [
+        "Middle_glenohumeral_ligamentl",
+        "Middle_glenohumeral_ligamentr"
+      ]
+    },
+    "inferior-glenohumeral-ligament": {
+      "triangles": 416,
+      "sources": [
+        "Inferior_glenohumeral_ligamentl",
+        "Inferior_glenohumeral_ligamentr"
+      ]
+    },
+    "coracohumeral-ligament": {
+      "triangles": 400,
+      "sources": ["Coracohumeral_ligamentl", "Coracohumeral_ligamentr"]
+    },
+    "transverse-humeral-ligament": {
+      "triangles": 274,
+      "sources": [
+        "Transverse_humeral_ligamentl",
+        "Transverse_humeral_ligamentr"
+      ]
+    },
+    "articular-capsule-of-elbow-joint": {
+      "triangles": 2200,
+      "sources": [
+        "Articular_capsule_of_elbow_jointl",
+        "Articular_capsule_of_elbow_jointr"
+      ]
+    },
+    "ulnar-collateral-ligament": {
+      "triangles": 304,
+      "sources": ["Ulnar_collateral_ligamentl", "Ulnar_collateral_ligamentr"]
+    },
+    "radial-collateral-ligament": {
+      "triangles": 192,
+      "sources": ["Radial_collateral_ligamentl", "Radial_collateral_ligamentr"]
+    },
+    "annular-ligament-of-radius": {
+      "triangles": 616,
+      "sources": ["Annular_ligament_of_radiusl", "Annular_ligament_of_radiusr"]
+    },
+    "quadrate-ligament": {
+      "triangles": 24,
+      "sources": ["Quadrate_ligamentl", "Quadrate_ligamentr"]
+    },
+    "interosseous-membrane-of-forearm": {
+      "triangles": 2044,
+      "sources": [
+        "Interosseous_membrane_of_forearml",
+        "Interosseous_membrane_of_forearmr"
+      ]
+    },
+    "oblique-cord": {
+      "triangles": 24,
+      "sources": ["Oblique_cordl", "Oblique_cordr"]
+    },
+    "articular-disc-of-distal-radio-ulnar-joint": {
+      "triangles": 56,
+      "sources": [
+        "Articular_disc_of_distal_radio-ulnar_jointl",
+        "Articular_disc_of_distal_radio-ulnar_jointr"
+      ]
+    },
+    "palmar-radio-ulnar-ligament": {
+      "triangles": 160,
+      "sources": [
+        "Palmar_radio-ulnar_ligamentl",
+        "Palmar_radio-ulnar_ligamentr"
+      ]
+    },
+    "dorsal-radio-ulnar-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Dorsal_radio-ulnar_ligamentl",
+        "Dorsal_radio-ulnar_ligamentr"
+      ]
+    },
+    "articular-capsule-of-radiocarpal-joint": {
+      "triangles": 1137,
+      "sources": [
+        "Articular_capsule_of_radiocarpal_jointl",
+        "Articular_capsule_of_radiocarpal_jointr"
+      ]
+    },
+    "radial-collateral-ligament-of-wrist-joint": {
+      "triangles": 212,
+      "sources": [
+        "Radial_collateral_ligament_of_wrist_jointl",
+        "Radial_collateral_ligament_of_wrist_jointr"
+      ]
+    },
+    "ulnar-collateral-ligament-of-wrist-joint": {
+      "triangles": 256,
+      "sources": [
+        "Ulnar_collateral_ligament_of_wrist_jointl",
+        "Ulnar_collateral_ligament_of_wrist_jointr"
+      ]
+    },
+    "dorsal-radiocarpal-ligament": {
+      "triangles": 446,
+      "sources": [
+        "Dorsal_radiocarpal_ligamentl",
+        "Dorsal_radiocarpal_ligamentr"
+      ]
+    },
+    "radioscaphocapitate-ligament": {
+      "triangles": 40,
+      "sources": [
+        "Radioscaphocapitate_ligamentl",
+        "Radioscaphocapitate_ligamentr"
+      ]
+    },
+    "radiocapitate-ligament": {
+      "triangles": 24,
+      "sources": ["Radiocapitate_ligamentl", "Radiocapitate_ligamentr"]
+    },
+    "ulnolunate-ligament": {
+      "triangles": 208,
+      "sources": ["Ulnolunate_ligamentl", "Ulnolunate_ligamentr"]
+    },
+    "ulnotriquetral-ligament": {
+      "triangles": 112,
+      "sources": ["Ulnotriquetral_ligamentl", "Ulnotriquetral_ligamentr"]
+    },
+    "ulnocapitate-ligament": {
+      "triangles": 256,
+      "sources": ["Ulnocapitate_ligamentl", "Ulnocapitate_ligamentr"]
+    },
+    "ulnopisiform-ligament": {
+      "triangles": 24,
+      "sources": ["Ulnopisiform_ligament", "Ulnopisiform_ligamentl"]
+    },
+    "dorsal-ulnocarpal-ligament": {
+      "triangles": 240,
+      "sources": ["Dorsal_ulnocarpal_ligamentl", "Dorsal_ulnocarpal_ligamentr"]
+    },
+    "radiate-carpal-ligament": {
+      "triangles": 460,
+      "sources": ["Radiate_carpal_ligamentl", "Radiate_carpal_ligamentr"]
+    },
+    "dorsal-intercarpal-ligaments": {
+      "triangles": 528,
+      "sources": [
+        "Dorsal_intercarpal_ligamentsl",
+        "Dorsal_intercarpal_ligamentsr"
+      ]
+    },
+    "dorsal-scaphotriquetral-ligament": {
+      "triangles": 208,
+      "sources": [
+        "Dorsal_scaphotriquetral_ligamentl",
+        "Dorsal_scaphotriquetral_ligamentr"
+      ]
+    },
+    "palmar-scaphotriquetral-ligament": {
+      "triangles": 264,
+      "sources": [
+        "Palmar_scaphotriquetral_ligamentl",
+        "Palmar_scaphotriquetral_ligamentr"
+      ]
+    },
+    "scapholunate-interosseous-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Scapholunate_interosseous_ligamentl",
+        "Scapholunate_interosseous_ligamentr"
+      ]
+    },
+    "lunotriquetral-interosseous-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Lunotriquetral_interosseous_ligamentl",
+        "Lunotriquetral_interosseous_ligamentr"
+      ]
+    },
+    "palmar-lunotriquetral-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Palmar_lunotriquetral_ligamentl",
+        "Palmar_lunotriquetral_ligamentr"
+      ]
+    },
+    "scaphocapitate-ligament": {
+      "triangles": 24,
+      "sources": ["Scaphocapitate_ligamentl", "Scaphocapitate_ligamentr"]
+    },
+    "triquetrocapitate-ligament": {
+      "triangles": 40,
+      "sources": ["Triquetrocapitate_ligamentl", "Triquetrocapitate_ligamentr"]
+    },
+    "triquetrohamate-ligament": {
+      "triangles": 24,
+      "sources": ["Triquetrohamate_ligamentl", "Triquetrohamate_ligamentr"]
+    },
+    "scaphotrapeziotrapezoidal-ligament": {
+      "triangles": 280,
+      "sources": [
+        "Scaphotrapeziotrapezoidal_ligamentl",
+        "Scaphotrapeziotrapezoidal_ligamentr"
+      ]
+    },
+    "trapeziotrapezoidal-interosseous-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Trapeziotrapezoidal_interosseous_ligamentl",
+        "Trapeziotrapezoidal_interosseous_ligamentr"
+      ]
+    },
+    "trapezoideocapitate-interosseous-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Trapezoideocapitate_interosseous_ligamentl",
+        "Trapezoideocapitate_interosseous_ligamentr"
+      ]
+    },
+    "palmar-trapezoideocapitate-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Palmar_trapezoideocapitate_ligamentl",
+        "Palmar_trapezoideocapitate_ligamentr"
+      ]
+    },
+    "capitohamate-interosseous-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Capitohamate_interosseous_ligamentl",
+        "Capitohamate_interosseous_ligamentr"
+      ]
+    },
+    "palmar-capitohamate-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Palmar_capitohamate_ligamentl",
+        "Palmar_capitohamate_ligamentr"
+      ]
+    },
+    "pisotriquetral-ligament": {
+      "triangles": 404,
+      "sources": ["Pisotriquetral_ligamentl", "Pisotriquetral_ligamentr"]
+    },
+    "pisohamate-ligament": {
+      "triangles": 24,
+      "sources": ["Pisohamate_ligamentl", "Pisohamate_ligamentr"]
+    },
+    "pisometacarpal-ligament": {
+      "triangles": 24,
+      "sources": ["Pisometacarpal_ligamentl", "Pisometacarpal_ligamentr"]
+    },
+    "palmar-carpometacarpal-ligaments": {
+      "triangles": 568,
+      "sources": [
+        "Palmar_carpometacarpal_ligamentsl",
+        "Palmar_carpometacarpal_ligamentsr"
+      ]
+    },
+    "dorsal-carpometacarpal-ligaments": {
+      "triangles": 296,
+      "sources": [
+        "Dorsal_carpometacarpal_ligamentsl",
+        "Dorsal_carpometacarpal_ligamentsr"
+      ]
+    },
+    "palmar-metacarpal-ligaments": {
+      "triangles": 96,
+      "sources": [
+        "Palmar_metacarpal_ligamentsl",
+        "Palmar_metacarpal_ligamentsr"
+      ]
+    },
+    "dorsal-metacarpal-ligaments": {
+      "triangles": 96,
+      "sources": [
+        "Dorsal_metacarpal_ligamentsl",
+        "Dorsal_metacarpal_ligamentsr"
+      ]
+    },
+    "interosseous-metacarpal-ligaments": {
+      "triangles": 96,
+      "sources": [
+        "Interosseous_metacarpal_ligamentsl",
+        "Interosseous_metacarpal_ligamentsr"
+      ]
+    },
+    "articular-capsules-of-metacarpophalangeal-joints": {
+      "triangles": 1374,
+      "sources": [
+        "Articular_capsules_of_metacarpophalangeal_jointsl",
+        "Articular_capsules_of_metacarpophalangeal_jointsr"
+      ]
+    },
+    "collateral-metacarpophalangeal-ligaments": {
+      "triangles": 1372,
+      "sources": [
+        "Collateral_metacarpophalangeal_ligamentsl",
+        "Collateral_metacarpophalangeal_ligamentsr"
+      ]
+    },
+    "deep-transverse-metacarpal-ligament": {
+      "triangles": 120,
+      "sources": [
+        "Deep_transverse_metacarpal_ligamentl",
+        "Deep_transverse_metacarpal_ligamentr"
+      ]
+    },
+    "articular-capsules-of-proximal-interphalangeal-joints": {
+      "triangles": 1166,
+      "sources": [
+        "Articular_capsules_of_proximal_interphalangeal_jointsl",
+        "Articular_capsules_of_proximal_interphalangeal_jointsr"
+      ]
+    },
+    "articular-capsules-of-distal-interphalangeal-joints": {
+      "triangles": 1724,
+      "sources": [
+        "Articular_capsules_of_distal_interphalangeal_jointsl",
+        "Articular_capsules_of_distal_interphalangeal_jointsr"
+      ]
+    },
+    "collateral-interphalangeal-ligaments-of-hand": {
+      "triangles": 1732,
+      "sources": [
+        "Collateral_interphalangeal_ligaments_of_handl",
+        "Collateral_interphalangeal_ligaments_of_handr"
+      ]
+    },
+    "palmar-interphalangeal-ligaments": {
+      "triangles": 1576,
+      "sources": [
+        "Palmar_interphalangeal_ligamentsl",
+        "Palmar_interphalangeal_ligamentsr"
+      ]
+    },
+    "anterior-sacro-iliac-ligament": {
+      "triangles": 976,
+      "sources": [
+        "Anterior_sacro-iliac_ligamentl",
+        "Anterior_sacro-iliac_ligamentr"
+      ]
+    },
+    "interosseous-sacro-iliac-ligament": {
+      "triangles": 400,
+      "sources": [
+        "Interosseous_sacro-iliac_ligamentl",
+        "Interosseous_sacro-iliac_ligamentr"
+      ]
+    },
+    "posterior-sacro-iliac-ligament": {
+      "triangles": 1391,
+      "sources": [
+        "Posterior_sacro-iliac_ligamentl",
+        "Posterior_sacro-iliac_ligamentr"
+      ]
+    },
+    "iliolumbar-ligament": {
+      "triangles": 224,
+      "sources": ["Iliolumbar_ligamentl", "Iliolumbar_ligamentr"]
+    },
+    "sacrotuberous-ligament": {
+      "triangles": 1246,
+      "sources": ["Sacrotuberous_ligamentl", "Sacrotuberous_ligamentr"]
+    },
+    "sacrospinous-ligament": {
+      "triangles": 560,
+      "sources": ["Sacrospinous_ligamentl", "Sacrospinous_ligamentr"]
+    },
+    "obturator-membrane": {
+      "triangles": 780,
+      "sources": ["Obturator_membranel", "Obturator_membraner"]
+    },
+    "pubic-symphysis": {
+      "triangles": 434,
+      "sources": ["Pubic_symphysis", "Interpubic_disc"]
+    },
+    "superior-pubic-ligament": {
+      "triangles": 96,
+      "sources": ["Superior_pubic_ligament"]
+    },
+    "inferior-pubic-ligament": {
+      "triangles": 96,
+      "sources": ["Inferior_pubic_ligament"]
+    },
+    "articular-capsule-of-hip-joint": {
+      "triangles": 1334,
+      "sources": [
+        "Articular_capsule_of_hip_jointl",
+        "Articular_capsule_of_hip_jointr"
+      ]
+    },
+    "acetabular-labrum": {
+      "triangles": 988,
+      "sources": ["Acetabular_labruml", "Acetabular_labrumr"]
+    },
+    "transverse-acetabular-ligament": {
+      "triangles": 576,
+      "sources": [
+        "Transverse_acetabular_ligamentl",
+        "Transverse_acetabular_ligamentr"
+      ]
+    },
+    "ligament-of-head-of-femur": {
+      "triangles": 725,
+      "sources": ["Ligament_of_head_of_femurl", "Ligament_of_head_of_femurr"]
+    },
+    "descending-part-of-iliofemoral-ligament": {
+      "triangles": 952,
+      "sources": [
+        "Descending_part_of_iliofemoral_ligamentl",
+        "Descending_part_of_iliofemoral_ligamentr"
+      ]
+    },
+    "transverse-part-of-iliofemoral-ligament": {
+      "triangles": 704,
+      "sources": [
+        "Transverse_part_of_iliofemoral_ligamentl",
+        "Transverse_part_of_iliofemoral_ligamentr"
+      ]
+    },
+    "pubofemoral-ligament": {
+      "triangles": 784,
+      "sources": ["Pubofemoral_ligamentl", "Pubofemoral_ligamentr"]
+    },
+    "ischiofemoral-ligament": {
+      "triangles": 684,
+      "sources": ["Ischiofemoral_ligamentl", "Ischiofemoral_ligamentr"]
+    },
+    "zona-orbicularis": {
+      "triangles": 744,
+      "sources": ["Zona_orbicularisl", "Zona_orbicularisr"]
+    },
+    "frenula-capsulae": {
+      "triangles": 802,
+      "sources": ["Frenula_capsulael", "Frenula_capsulaer"]
+    },
+    "articular-capsule-of-knee-joint": {
+      "triangles": 1669,
+      "sources": [
+        "Articular_capsule_of_knee_jointl",
+        "Articular_capsule_of_knee_jointr"
+      ]
+    },
+    "anterior-cruciate-ligament": {
+      "triangles": 1368,
+      "sources": ["Anterior_cruciate_ligamentl", "Anterior_cruciate_ligamentr"]
+    },
+    "posterior-cruciate-ligament": {
+      "triangles": 580,
+      "sources": [
+        "Posterior_cruciate_ligamentl",
+        "Posterior_cruciate_ligamentr"
+      ]
+    },
+    "medial-meniscus": {
+      "triangles": 568,
+      "sources": ["Medial_meniscusl", "Medial_meniscusr"]
+    },
+    "lateral-meniscus": {
+      "triangles": 644,
+      "sources": ["Lateral_meniscusl", "Lateral_meniscusr"]
+    },
+    "transverse-ligament-of-knee": {
+      "triangles": 378,
+      "sources": [
+        "Transverse_ligament_of_kneel",
+        "Transverse_ligament_of_kneer"
+      ]
+    },
+    "anterior-meniscotibial-ligament-medial-meniscus": {
+      "triangles": 256,
+      "sources": [
+        "Anterior_meniscotibial_ligament_(Medial_meniscus)l",
+        "Anterior_meniscotibial_ligament_(Medial_meniscus)r"
+      ]
+    },
+    "posterior-meniscotibial-ligament-medial-meniscus": {
+      "triangles": 544,
+      "sources": [
+        "Posterior_meniscotibial_ligament_(Medial_meniscus)l",
+        "Posterior_meniscotibial_ligament_(Medial_meniscus)r"
+      ]
+    },
+    "anterior-meniscotibial-ligament-lateral-meniscus": {
+      "triangles": 396,
+      "sources": [
+        "Anterior_meniscotibial_ligament_(Lateral_meniscus)l",
+        "Anterior_meniscotibial_ligament_(Lateral_meniscus)r"
+      ]
+    },
+    "posterior-meniscotibial-ligament-lateral-meniscus": {
+      "triangles": 336,
+      "sources": [
+        "Posterior_meniscotibial_ligament_(Lateral_meniscus)l",
+        "Posterior_meniscotibial_ligament_(Lateral_meniscus)r"
+      ]
+    },
+    "superficial-part-of-tibial-collateral-ligament": {
+      "triangles": 594,
+      "sources": [
+        "Superficial_part_of_tibial_collateral_ligamentl",
+        "Superficial_part_of_tibial_collateral_ligamentr"
+      ]
+    },
+    "deep-part-of-tibial-collateral-ligament": {
+      "triangles": 512,
+      "sources": [
+        "Deep_part_of_tibial_collateral_ligamentl",
+        "Deep_part_of_tibial_collateral_ligamentr"
+      ]
+    },
+    "fibular-collateral-ligament": {
+      "triangles": 160,
+      "sources": [
+        "Fibular_collateral_ligamentl",
+        "Fibular_collateral_ligamentr"
+      ]
+    },
+    "oblique-popliteal-ligament": {
+      "triangles": 736,
+      "sources": ["Oblique_popliteal_ligamentl", "Oblique_popliteal_ligamentr"]
+    },
+    "arcuate-popliteal-ligament": {
+      "triangles": 1056,
+      "sources": ["Arcuate_popliteal_ligamentl", "Arcuate_popliteal_ligamentr"]
+    },
+    "popliteofibular-ligament": {
+      "triangles": 516,
+      "sources": ["Popliteofibular_ligamentl", "Popliteofibular_ligamentr"]
+    },
+    "meniscopatellar-ligament": {
+      "triangles": 304,
+      "sources": ["Meniscopatellar_ligamentl", "Meniscopatellar_ligamentr"]
+    },
+    "infrapatellar-fat-pad": {
+      "triangles": 376,
+      "sources": ["Infrapatellar_fat_padl", "Infrapatellar_fat_padr"]
+    },
+    "articular-capsule-of-superior-tibiofibular-joint": {
+      "triangles": 672,
+      "sources": [
+        "Articular_capsule_of_superior_tibiofibular_jointl",
+        "Articular_capsule_of_superior_tibiofibular_jointr"
+      ]
+    },
+    "anterior-ligament-of-fibular-head": {
+      "triangles": 208,
+      "sources": [
+        "Anterior_ligament_of_fibular_headl",
+        "Anterior_ligament_of_fibular_headr"
+      ]
+    },
+    "posterior-ligament-of-fibular-head": {
+      "triangles": 352,
+      "sources": [
+        "Posterior_ligament_of_fibular_headl",
+        "Posterior_ligament_of_fibular_headr"
+      ]
+    },
+    "interosseous-membrane-of-leg": {
+      "triangles": 3528,
+      "sources": [
+        "Interosseous_membrane_of_legl",
+        "Interosseous_membrane_of_legr"
+      ]
+    },
+    "anterior-tibiofibular-ligament": {
+      "triangles": 408,
+      "sources": [
+        "Anterior_tibiofibular_ligamentl",
+        "Anterior_tibiofibular_ligamentr"
+      ]
+    },
+    "posterior-tibiofibular-ligament": {
+      "triangles": 388,
+      "sources": [
+        "Posterior_tibiofibular_ligamentl",
+        "Posterior_tibiofibular_ligamentr"
+      ]
+    },
+    "transverse-tibiofibular-ligament": {
+      "triangles": 208,
+      "sources": [
+        "Transverse_tibiofibular_ligamentl",
+        "Transverse_tibiofibular_ligamentr"
+      ]
+    },
+    "anterior-talofibular-ligament": {
+      "triangles": 64,
+      "sources": [
+        "Anterior_talofibular_ligamentl",
+        "Anterior_talofibular_ligamentr"
+      ]
+    },
+    "calcaneofibular-ligament": {
+      "triangles": 64,
+      "sources": ["Calcaneofibular_ligamentl", "Calcaneofibular_ligamentr"]
+    },
+    "posterior-talofibular-ligament": {
+      "triangles": 64,
+      "sources": [
+        "Posterior_talofibular_ligamentl",
+        "Posterior_talofibular_ligamentr"
+      ]
+    },
+    "tibionavicular-ligament": {
+      "triangles": 396,
+      "sources": ["Tibionavicular_ligamentl", "Tibionavicular_ligamentr"]
+    },
+    "tibiocalcaneal-ligament": {
+      "triangles": 112,
+      "sources": ["Tibiocalcaneal_ligamentl", "Tibiocalcaneal_ligamentr"]
+    },
+    "posterior-tibiotalar-ligament": {
+      "triangles": 112,
+      "sources": [
+        "Posterior_tibiotalar_ligamentl",
+        "Posterior_tibiotalar_ligamentr"
+      ]
+    },
+    "talocalcaneal-interosseous-ligament": {
+      "triangles": 592,
+      "sources": [
+        "Talocalcaneal_interosseous_ligamentl",
+        "Talocalcaneal_interosseous_ligamentr"
+      ]
+    },
+    "anterior-talocalcaneal-ligament": {
+      "triangles": 208,
+      "sources": [
+        "Anterior_talocalcaneal_ligamentl",
+        "Anterior_talocalcaneal_ligamentr"
+      ]
+    },
+    "lateral-talocalcaneal-ligament": {
+      "triangles": 112,
+      "sources": [
+        "Lateral_talocalcaneal_ligamentl",
+        "Lateral_talocalcaneal_ligamentr"
+      ]
+    },
+    "medial-talocalcaneal-ligament": {
+      "triangles": 256,
+      "sources": [
+        "Medial_talocalcaneal_ligamentl",
+        "Medial_talocalcaneal_ligamentr"
+      ]
+    },
+    "posterior-talocalcaneal-ligament": {
+      "triangles": 160,
+      "sources": [
+        "Posterior_talocalcaneal_ligamentl",
+        "Posterior_talocalcaneal_ligamentr"
+      ]
+    },
+    "talonavicular-ligament": {
+      "triangles": 272,
+      "sources": ["Talonavicular_ligamentl", "Talonavicular_ligamentr"]
+    },
+    "plantar-calcaneonavicular-ligament": {
+      "triangles": 64,
+      "sources": [
+        "Plantar_calcaneonavicular_ligamentl",
+        "Plantar_calcaneonavicular_ligamentr"
+      ]
+    },
+    "calcaneonavicular-ligament": {
+      "triangles": 192,
+      "sources": ["Calcaneonavicular_ligamentl", "Calcaneonavicular_ligamentr"]
+    },
+    "calcaneocuboid-ligament": {
+      "triangles": 64,
+      "sources": ["Calcaneocuboid_ligamentl", "Calcaneocuboid_ligamentr"]
+    },
+    "dorsal-calcaneocuboid-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Dorsal_calcaneocuboid_ligamentl",
+        "Dorsal_calcaneocuboid_ligamentr"
+      ]
+    },
+    "plantar-calcaneocuboid-ligament": {
+      "triangles": 272,
+      "sources": [
+        "Plantar_calcaneocuboid_ligamentl",
+        "Plantar_calcaneocuboid_ligamentr"
+      ]
+    },
+    "long-plantar-ligament": {
+      "triangles": 1376,
+      "sources": ["Long_plantar_ligamentl", "Long_plantar_ligamentr"]
+    },
+    "dorsal-cuboideonavicular-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Dorsal_cuboideonavicular_ligamentl",
+        "Dorsal_cuboideonavicular_ligamentr"
+      ]
+    },
+    "plantar-cuboideonavicular-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Plantar_cuboideonavicular_ligamentl",
+        "Plantar_cuboideonavicular_ligamentr"
+      ]
+    },
+    "dorsal-cuneonavicular-ligaments": {
+      "triangles": 120,
+      "sources": [
+        "Dorsal_cuneonavicular_ligamentsl",
+        "Dorsal_cuneonavicular_ligamentsr"
+      ]
+    },
+    "plantar-cuneonavicular-ligaments": {
+      "triangles": 104,
+      "sources": [
+        "Plantar_cuneonavicular_ligamentsl",
+        "Plantar_cuneonavicular_ligamentsr"
+      ]
+    },
+    "dorsal-intercuneiform-ligaments": {
+      "triangles": 48,
+      "sources": [
+        "Dorsal_intercuneiform_ligamentsl",
+        "Dorsal_intercuneiform_ligamentsr"
+      ]
+    },
+    "plantar-intercuneiform-ligaments": {
+      "triangles": 48,
+      "sources": [
+        "Plantar_intercuneiform_ligamentsl",
+        "Plantar_intercuneiform_ligamentsr"
+      ]
+    },
+    "intercuneiform-interosseous-ligaments": {
+      "triangles": 48,
+      "sources": [
+        "Intercuneiform_interosseous_ligamentsl",
+        "Intercuneiform_interosseous_ligamentsr"
+      ]
+    },
+    "dorsal-cuneocuboid-ligament": {
+      "triangles": 24,
+      "sources": [
+        "Dorsal_cuneocuboid_ligamentl",
+        "Dorsal_cuneocuboid_ligamentr"
+      ]
+    },
+    "plantar-cuneocuboid-ligament": {
+      "triangles": 190,
+      "sources": [
+        "Plantar_cuneocuboid_ligamentl",
+        "Plantar_cuneocuboid_ligamentr"
+      ]
+    },
+    "cuneocuboid-interosseous-ligament": {
+      "triangles": 160,
+      "sources": [
+        "Cuneocuboid_interosseous_ligamentl",
+        "Cuneocuboid_interosseous_ligamentr"
+      ]
+    },
+    "dorsal-tarsometatarsal-ligaments": {
+      "triangles": 780,
+      "sources": [
+        "Dorsal_tarsometatarsal_ligamentsl",
+        "Dorsal_tarsometatarsal_ligamentsr"
+      ]
+    },
+    "plantar-tarsometatarsal-ligaments": {
+      "triangles": 200,
+      "sources": [
+        "Plantar_tarsometatarsal_ligamentsl",
+        "Plantar_tarsometatarsal_ligamentsr"
+      ]
+    },
+    "cuneometatarsal-interosseous-ligaments": {
+      "triangles": 72,
+      "sources": [
+        "Cuneometatarsal_interosseous_ligamentsl",
+        "Cuneometatarsal_interosseous_ligamentsr"
+      ]
+    },
+    "dorsal-metatarsal-ligaments": {
+      "triangles": 112,
+      "sources": [
+        "Dorsal_metatarsal_ligamentsl",
+        "Dorsal_metatarsal_ligamentsr"
+      ]
+    },
+    "plantar-metatarsal-ligaments": {
+      "triangles": 96,
+      "sources": [
+        "Plantar_metatarsal_ligamentsl",
+        "Plantar_metatarsal_ligamentsr"
+      ]
+    },
+    "metatarsal-interosseous-ligaments": {
+      "triangles": 96,
+      "sources": [
+        "Metatarsal_interosseous_ligamentsl",
+        "Metatarsal_interosseous_ligamentsr"
+      ]
+    },
+    "intersesamoid-ligament": {
+      "triangles": 112,
+      "sources": ["Intersesamoid_ligamentl", "Intersesamoid_ligamentr"]
+    },
+    "articular-capsules-of-metatarsophalangeal-joints": {
+      "triangles": 1352,
+      "sources": [
+        "Articular_capsules_of_metatarsophalangeal_jointsl",
+        "Articular_capsules_of_metatarsophalangeal_jointsr"
+      ]
+    },
+    "collateral-metatarsophalangeal-ligaments": {
+      "triangles": 1132,
+      "sources": [
+        "Collateral_metatarsophalangeal_ligamentsl",
+        "Collateral_metatarsophalangeal_ligamentsr"
+      ]
+    },
+    "plantar-metatarsophalangeal-ligaments": {
+      "triangles": 988,
+      "sources": [
+        "Plantar_metatarsophalangeal_ligamentsl",
+        "Plantar_metatarsophalangeal_ligamentsr"
+      ]
+    },
+    "deep-transverse-metatarsal-ligament": {
+      "triangles": 304,
+      "sources": [
+        "Deep_transverse_metatarsal_ligamentl",
+        "Deep_transverse_metatarsal_ligamentr"
+      ]
+    },
+    "articular-capsule-of-interphalangeal-joint-of-great-toe": {
+      "triangles": 616,
+      "sources": [
+        "Articular_capsule_of_interphalangeal_joint_of_great_toel",
+        "Articular_capsule_of_interphalangeal_joint_of_great_toer"
+      ]
+    },
+    "articular-capsules-of-proximal-interphalangeal-joints-of-foot": {
+      "triangles": 900,
+      "sources": [
+        "Articular_capsules_of_proximal_interphalangeal_joints_of_footl",
+        "Articular_capsules_of_proximal_interphalangeal_joints_of_footr"
+      ]
+    },
+    "articular-capsules-of-distal-interphalangeal-joints-of-foot": {
+      "triangles": 903,
+      "sources": [
+        "Articular_capsules_of_distal_interphalangeal_joints_of_footl",
+        "Articular_capsules_of_distal_interphalangeal_joints_of_footr"
+      ]
+    },
+    "collateral-interphalangeal-ligaments-of-foot": {
+      "triangles": 1144,
+      "sources": [
+        "Collateral_interphalangeal_ligaments_of_footl",
+        "Collateral_interphalangeal_ligaments_of_footr"
+      ]
+    },
+    "plantar-interphalangeal-ligaments": {
+      "triangles": 1096,
+      "sources": [
+        "Plantar_interphalangeal_ligamentsl",
+        "Plantar_interphalangeal_ligamentsr"
+      ]
+    },
+    "skull-hyoid-and-larynx": {
+      "triangles": 15117,
+      "sources": [
+        "Hyoid_bone",
+        "Mandible",
+        "Parietal_bonel",
+        "Palatine_bonel",
+        "Lacrimal_bonel",
+        "Nasal_boner",
+        "Temporal_bonel",
+        "Ethmoid_bone",
+        "Maxillar",
+        "Zygomatic_bonel",
+        "Occipital_bone",
+        "Inferior_nasal_concha_bonel",
+        "Lacrimal_boner",
+        "Vomer",
+        "Maxillal",
+        "Parietal_boner",
+        "Nasal_bonel",
+        "Frontal_bone",
+        "Palatine_boner",
+        "Sphenoid_bone",
+        "Zygomatic_boner",
+        "Temporal_boner",
+        "Inferior_nasal_concha_boner",
+        "Arytenoid_cartilagel",
+        "Arytenoid_cartilager",
+        "Thyroid_cartilage",
+        "Corniculate_cartilager",
+        "Corniculate_cartilagel",
+        "Cricoid_cartilage"
+      ]
+    },
+    "vertebrae": {
+      "triangles": 13130,
+      "sources": [
+        "Sacrum",
+        "Vertebra_C6",
+        "Vertebra_C3",
+        "Axis_(C2)",
+        "Vertebra_C7",
+        "Vertebra_C4",
+        "Atlas_(C1)",
+        "Vertebra_C5",
+        "Vertebra_L5",
+        "Vertebra_L3",
+        "Vertebra_L4",
+        "Vertebra_L2",
+        "Vertebra_L1",
+        "Vertebra_T5",
+        "Vertebra_T11",
+        "Vertebra_T1",
+        "Vertebra_T6",
+        "Vertebra_T3",
+        "Vertebra_T4",
+        "Vertebra_T12",
+        "Vertebra_T7",
+        "Vertebra_T8",
+        "Vertebra_T9",
+        "Vertebra_T10",
+        "Vertebra_T2",
+        "Coccyx"
+      ]
+    },
+    "thoracic-cage": {
+      "triangles": 20111,
+      "sources": [
+        "Costal_cartilage_of_sixth_ribl",
+        "Costal_cartilage_of_fifth_ribr",
+        "Costal_cartilage_of_ninth_ribr",
+        "Costal_cartilage_of_sixth_ribr",
+        "Costal_cartilage_of_second_ribl",
+        "Costal_cartilage_of_fourth_ribl",
+        "Costal_cartilage_of_fifth_ribl",
+        "Costal_cartilage_of_seventh_ribl",
+        "Costal_cartilage_of_ninth_ribl",
+        "Costal_cartilage_of_fourth_ribr",
+        "Costal_cartilage_of_second_ribr",
+        "Costal_cartilage_of_tenth_ribr",
+        "Costal_cartilage_of_first_ribr",
+        "Costal_cartilage_of_eighth_ribr",
+        "Costal_cartilage_of_third_ribr",
+        "Costal_cartilage_of_seventh_ribr",
+        "Costal_cartilage_of_third_ribl",
+        "Costal_cartilage_of_first_ribl",
+        "Costal_cartilage_of_tenth_ribl",
+        "Costal_cartilage_of_eighth_ribl",
+        "Fourth_ribl",
+        "First_ribl",
+        "Fifth_ribl",
+        "Fifth_ribr",
+        "First_ribr",
+        "Third_ribl",
+        "Third_ribr",
+        "Seventh_ribr",
+        "Fourth_ribr",
+        "Seventh_ribl",
+        "Second_ribl",
+        "Sixth_ribl",
+        "Second_ribr",
+        "Sixth_ribr",
+        "Eighth_ribl",
+        "Tenth_ribr",
+        "Ninth_ribl",
+        "Ninth_ribr",
+        "Eighth_ribr",
+        "Twelfth_ribl",
+        "Twelfth_ribr",
+        "Eleventh_ribl",
+        "Eleventh_ribr",
+        "Tenth_ribl",
+        "Manubrium_of_sternum",
+        "Body_of_sternum",
+        "Xiphoid_process"
+      ]
+    },
+    "bones-of-shoulder-girdle-and-arm": {
+      "triangles": 23538,
+      "sources": [
+        "Ulnal",
+        "Proximal_phalanx_of_fifth_finger_of_handr",
+        "Proximal_phalanx_of_second_finger_of_handl",
+        "Distal_phalanx_of_fifth_finger_of_handl",
+        "Proximal_phalanx_of_first_finger_of_handr",
+        "Proximal_phalanx_of_second_finger_of_handr",
+        "Fifth_metacarpal_bonel",
+        "Scaphoid_bonel",
+        "Proximal_phalanx_of_third_finger_of_handr",
+        "Middle_phalanx_of_fourth_finger_of_handr",
+        "Humerusr",
+        "Distal_phalanx_of_fourth_finger_of_handl",
+        "Middle_phalanx_of_second_finger_of_handl",
+        "Trapezium_bonel",
+        "Third_metacarpal_bonel",
+        "Fourth_metacarpal_boner",
+        "Second_metacarpal_boner",
+        "Fourth_metacarpal_bonel",
+        "Lunate_boner",
+        "Middle_phalanx_of_fifth_finger_of_handr",
+        "Triquetrum_boner",
+        "Scaphoid_boner",
+        "First_metacarpal_boner",
+        "Middle_phalanx_of_third_finger_of_handl",
+        "Capitate_bonel",
+        "Middle_phalanx_of_fourth_finger_of_handl",
+        "Proximal_phalanx_of_fourth_finger_of_handr",
+        "Trapezoid_bonel",
+        "Lunate_bonel",
+        "Distal_phalanx_of_fourth_finger_of_handr",
+        "Distal_phalanx_of_first_finger_of_handl",
+        "Hamate_bonel",
+        "Ulnar",
+        "Distal_phalanx_of_third_finger_of_handl",
+        "Middle_phalanx_of_second_finger_of_handr",
+        "Radiusl",
+        "Capitate_boner",
+        "Fifth_metacarpal_boner",
+        "Proximal_phalanx_of_first_finger_of_handl",
+        "Pisiform_boner",
+        "First_metacarpal_bonel",
+        "Pisiform_bonel",
+        "Proximal_phalanx_of_fifth_finger_of_handl",
+        "Second_metacarpal_bonel",
+        "Distal_phalanx_of_first_finger_of_handr",
+        "Humerusl",
+        "Triquetrum_bonel",
+        "Third_metacarpal_boner",
+        "Distal_phalanx_of_fifth_finger_of_handr",
+        "Distal_phalanx_of_second_finger_of_handr",
+        "Proximal_phalanx_of_fourth_finger_of_handl",
+        "Hamate_boner",
+        "Trapezoid_boner",
+        "Distal_phalanx_of_third_finger_of_handr",
+        "Distal_phalanx_of_second_finger_of_handl",
+        "Trapezium_boner",
+        "Proximal_phalanx_of_third_finger_of_handl",
+        "Middle_phalanx_of_fifth_finger_of_handl",
+        "Radiusr",
+        "Middle_phalanx_of_third_finger_of_handr",
+        "Scapular",
+        "Scapulal",
+        "Clavicler",
+        "Claviclel"
+      ]
+    },
+    "hip-bones": {
+      "triangles": 1156,
+      "sources": ["Hip_boner", "Hip_bonel"]
+    },
+    "bones-of-leg-and-foot": {
+      "triangles": 25316,
+      "sources": [
+        "Tibiar",
+        "Patellal",
+        "Tibial",
+        "Sesamoid_bones_of_footl",
+        "Sesamoid_bones_of_footr",
+        "Proximal_phalanx_of_third_finger_of_footl",
+        "Proximal_phalanx_of_fourth_finger_of_footl",
+        "Distal_phalanx_of_third_finger_of_footr",
+        "Middle_phalanx_of_third_finger_of_footl",
+        "Middle_phalanx_of_fifth_finger_of_footr",
+        "Proximal_phalanx_of_first_finger_of_footr",
+        "Middle_phalanx_of_third_finger_of_footr",
+        "Proximal_phalanx_of_second_finger_of_footl",
+        "Distal_phalanx_of_second_finger_of_footr",
+        "Middle_phalanx_of_fifth_finger_of_footl",
+        "Distal_phalanx_of_first_finger_of_footr",
+        "Proximal_phalanx_of_fifth_finger_of_footl",
+        "Distal_phalanx_of_fifth_finger_of_footl",
+        "Middle_phalanx_of_fourth_finger_of_footr",
+        "Distal_phalanx_of_fourth_finger_of_footl",
+        "Distal_phalanx_of_second_finger_of_footl",
+        "Proximal_phalanx_of_third_finger_of_footr",
+        "Distal_phalanx_of_fifth_finger_of_footr",
+        "Distal_phalanx_of_fourth_finger_of_footr",
+        "Distal_phalanx_of_third_finger_of_footl",
+        "Proximal_phalanx_of_fifth_finger_of_footr",
+        "Proximal_phalanx_of_first_finger_of_footl",
+        "Middle_phalanx_of_second_finger_of_footr",
+        "Middle_phalanx_of_second_finger_of_footl",
+        "Proximal_phalanx_of_fourth_finger_of_footr",
+        "Distal_phalanx_of_first_finger_of_footl",
+        "Proximal_phalanx_of_second_finger_of_footr",
+        "Middle_phalanx_of_fourth_finger_of_footl",
+        "Fourth_metatarsal_bonel",
+        "Fifth_metatarsal_boner",
+        "First_metatarsal_boner",
+        "Second_metatarsal_bonel",
+        "Third_metatarsal_boner",
+        "Third_metatarsal_bonel",
+        "First_metatarsal_bonel",
+        "Fourth_metatarsal_boner",
+        "Second_metatarsal_boner",
+        "Fifth_metatarsal_bonel",
+        "Intermediate_cuneiform_bonel",
+        "Talusr",
+        "Lateral_cuneiform_bonel",
+        "Intermediate_cuneiform_boner",
+        "Cuboid_bonel",
+        "Calcaneusl",
+        "Medial_cuneiform_bonel",
+        "Cuboid_boner",
+        "Navicular_boner",
+        "Medial_cuneiform_boner",
+        "Talusl",
+        "Navicular_bonel",
+        "Calcaneusr",
+        "Lateral_cuneiform_boner",
+        "Patellar",
+        "Femurl",
+        "Fibulal",
+        "Fibular",
+        "Femurr"
+      ]
+    }
+  }
+}
