@@ -33,7 +33,8 @@ replace the font license.
 ## Anatomy assets
 
 The independent organ explorer repositories document their source-specific
-anatomy asset licenses and attribution. Models for organs without an explorer
-live in `apps/web/public/models`, each with an `<organ>.ATTRIBUTION.md` beside
-it; they keep their own licenses (BodyParts3D meshes: CC BY-SA 2.1 Japan).
-Those notices are unaffected by the website code license.
+anatomy asset licenses and attribution. Models hosted from
+`apps/web/public/models/` keep their own licenses (for example, the nerves
+model is CC BY-SA 4.0), documented in the `<organ>.ATTRIBUTION.md` file beside
+each GLB or, for nerves, in `models/nerves/ATTRIBUTION.md`. Those notices are
+unaffected by the website code license.
