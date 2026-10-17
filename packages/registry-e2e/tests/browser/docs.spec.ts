@@ -129,16 +129,25 @@ test("homepage body navigator finds, zooms to and opens every organ", async ({
   )
   await page.goto("/")
   const viewer = page.getByRole("region", { name: "Interactive human body" })
-  await expect(viewer.getByRole("toolbar")).toBeVisible({ timeout: 30_000 })
+  // The body fills the page under a floating header; the organ list stays
+  // behind the find button.
+  await expect(viewer.getByText("Drag to rotate")).toBeVisible({
+    timeout: 30_000,
+  })
+  await expect(viewer.getByRole("toolbar")).toHaveCount(0)
   const list = page.getByRole("navigation", { name: "Organ components" })
+  await expect(list).toHaveCount(0)
+  const find = page.getByRole("button", { name: "Find an organ" })
+  await find.click()
+  const search = page.getByRole("searchbox", { name: "Search organs" })
+  await expect(search).toBeFocused()
   await expect(list.getByRole("button")).toHaveCount(organs.length)
   for (const organ of organs)
     await expect(
       list.getByRole("button", { name: organ.title, exact: true })
-    ).toBeVisible()
+    ).toBeAttached()
 
-  // Searching narrows the list; picking glides the camera off the named view.
-  const search = page.getByRole("searchbox", { name: "Search organs" })
+  // Searching narrows the list; picking closes it and shows the card.
   await search.fill("pitu")
   await expect(list.getByRole("button")).toHaveCount(1)
   await search.press("Tab")
@@ -150,11 +159,9 @@ test("homepage body navigator finds, zooms to and opens every organ", async ({
     )
   ).toBeGreaterThan(0)
   await page.keyboard.press("Enter")
-  await expect(pituitary).toHaveAttribute("aria-pressed", "true")
-  await expect(viewer.getByRole("combobox", { name: "View" })).toContainText(
-    "Custom view"
-  )
-  const card = page.getByRole("complementary", { name: "Organs" })
+  await expect(list).toHaveCount(0)
+  await expect(find).toBeFocused()
+  const card = page.getByRole("complementary", { name: "Selected organ" })
   await expect(
     card.getByRole("heading", { name: "Pituitary", level: 2 })
   ).toBeVisible()
@@ -162,17 +169,16 @@ test("homepage body navigator finds, zooms to and opens every organ", async ({
     card.getByRole("link", { name: "Open the pituitary component" })
   ).toHaveAttribute("href", "/docs/pituitary")
 
-  // Closing the card returns the camera to the whole body.
-  await search.fill("")
+  // Escape closes the finder; the close button clears the card.
+  await find.click()
+  await page.keyboard.press("Escape")
+  await expect(list).toHaveCount(0)
+  await expect(find).toBeFocused()
   await card.getByRole("button", { name: "Close" }).click()
-  await expect(
-    card.getByRole("heading", { name: "Pituitary", level: 2 })
-  ).toHaveCount(0)
-  await expect(viewer.getByRole("combobox", { name: "View" })).toContainText(
-    "Anterior"
-  )
+  await expect(card.getByRole("heading")).toHaveCount(0)
 
   // Organs with a standalone explorer link to it too.
+  await find.click()
   await list.getByRole("button", { name: "Heart", exact: true }).click()
   await expect(
     card.getByRole("link", { name: "Heart explorer on GitHub" })

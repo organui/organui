@@ -7,11 +7,24 @@ import { cn } from "@workspace/ui/lib/utils"
 const link =
   "rounded-md text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
 
-// Shared by the docs and the blocks gallery.
-export function SiteHeader() {
+// Shared by the docs and the blocks gallery. The homepage floats it over the
+// body model as a pill.
+export function SiteHeader({ floating = false }: { floating?: boolean }) {
   return (
-    <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-5 sm:px-10">
+    <header
+      className={cn(
+        "z-10 bg-background/95 backdrop-blur",
+        floating
+          ? "fixed inset-x-3 top-3 mx-auto max-w-3xl rounded-xl border bg-background/80 shadow-sm sm:inset-x-6"
+          : "sticky top-0 border-b"
+      )}
+    >
+      <div
+        className={cn(
+          "mx-auto flex h-14 max-w-6xl items-center gap-6",
+          floating ? "px-4" : "px-5 sm:px-10"
+        )}
+      >
         <Link
           href="/"
           className="flex items-center gap-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-ring"
