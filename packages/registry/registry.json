@@ -358,6 +358,37 @@
       ]
     },
     {
+      "name": "joints",
+      "type": "registry:component",
+      "title": "Joints",
+      "description": "The joints and ligaments of the whole body, from Z-Anatomy: 197 selectable structures and 9 named views. Model licensed CC BY-SA 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/joints.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "kidneys",
       "type": "registry:component",
       "title": "Kidneys",
@@ -544,6 +575,37 @@
       ]
     },
     {
+      "name": "nerves",
+      "type": "registry:component",
+      "title": "Nerves",
+      "description": "The peripheral nerves of the whole body, from the cranial nerves to the plexuses of the arms and legs: 41 selectable structures and 6 named views. Model licensed CC BY-SA 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/nerves.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "nose",
       "type": "registry:component",
       "title": "Nose",
@@ -606,6 +668,37 @@
       ]
     },
     {
+      "name": "parathyroid",
+      "type": "registry:component",
+      "title": "Parathyroid",
+      "description": "The four parathyroid glands on the back of the thyroid: 9 selectable structures and 5 named views. Model licensed CC BY-SA 2.1 JP.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/parathyroid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "pharynx",
       "type": "registry:component",
       "title": "Pharynx",
@@ -663,6 +756,37 @@
         },
         {
           "path": "registry/base-nova/organ-viewer/prostate.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "salivary-glands",
+      "type": "registry:component",
+      "title": "Salivary glands",
+      "description": "The major salivary glands, from Z-Anatomy: 15 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/salivary-glands.tsx",
           "type": "registry:component"
         }
       ]
@@ -1004,6 +1128,37 @@
         },
         {
           "path": "registry/base-nova/organ-viewer/vessels.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "vestibular",
+      "type": "registry:component",
+      "title": "Vestibular system",
+      "description": "The inner ear's balance organs: the vestibule and three semicircular canals, with the cochlea and vestibular nerve. 6 selectable structures and 4 named views. Model licensed CC BY-SA 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/vestibular.tsx",
           "type": "registry:component"
         }
       ]

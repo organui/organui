@@ -65,7 +65,7 @@ export type OrganView = {
 
 export type OrganModel = {
   name: string
-  /** GLB URL. Each organ points at a commit-pinned file in its explorer repository. */
+  /** GLB URL: a commit-pinned file in the organ's explorer repository, or one served by organui.com. */
   src: string
   /** Expected size in bytes, for progress when the server sends no length. */
   bytes?: number
@@ -474,10 +474,6 @@ export function OrganViewer({
     const center = new Box3().setFromPoints(points).getCenter(new Vector3())
     const radius =
       new Box3().setFromObject(scene).getSize(new Vector3()).length() / 2
-    camera.near = radius / 100
-    camera.far = radius * 20
-    orbit.minDistance = radius * 1.25
-    orbit.maxDistance = radius * 6
     const framing = new Map(
       latest.current.model.views.map((entry) => {
         const subset = entry.structureIds?.flatMap((id) => meshes.get(id) ?? [])
@@ -488,6 +484,19 @@ export function OrganViewer({
         return [entry.name, { entry, framed, target }]
       })
     )
+    // Views of a few structures, such as the head of a whole-body model, may
+    // come closer than the whole model allows.
+    const closest = Math.min(
+      radius,
+      ...[...framing.values()].map(
+        ({ framed }) =>
+          new Box3().setFromPoints(framed).getSize(new Vector3()).length() / 2
+      )
+    )
+    camera.near = closest / 100
+    camera.far = radius * 20
+    orbit.minDistance = closest * 1.25
+    orbit.maxDistance = radius * 6
 
     let dirty = true
     const render = () => (dirty = true)

@@ -2,7 +2,8 @@ import type { NextConfig } from "next"
 
 // Workspace packages are transpiled automatically by Next.js 16.
 const nextConfig: NextConfig = {
-  // Organ components installed in other apps load these models cross-origin.
+  // Organ models built in this repository load into installed viewers on
+  // other origins, so they need CORS.
   async headers() {
     return [
       {
