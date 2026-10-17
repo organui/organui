@@ -69,6 +69,11 @@ const vitalsHarness = `import { VitalSigns } from "@/components/ui/vital-signs"
 export default function VitalsHarness(){
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed vital signs</h1><VitalSigns readings={{heartRate:112,systolic:150,diastolic:76,spo2:null,temperature:38.6}} description="Example readings"/><VitalSigns title="Fahrenheit" temperatureUnit="fahrenheit" ranges={{spo2:{low:88,high:92}}} vitals={["temperature","spo2","respiratoryRate"]} readings={{temperature:98.6,spo2:90,respiratoryRate:8}}/></main>
 }`
+// Lab results hold no state, so the Next.js page renders them on the server.
+const labHarness = `import { LabResultsTable } from "@/components/lab-results"
+export default function LabHarness(){
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed lab results</h1><LabResultsTable caption="Electrolytes" results={[{id:"k",name:"Potassium",value:6.4,unit:"mmol/L",decimals:1,referenceRange:{low:3.5,high:5.1,criticalHigh:6},history:[{value:4.2,date:"2026-01-12"},{value:6.4,date:"2026-10-01"}]},{id:"na",name:"Sodium",value:140,unit:"mmol/L",referenceRange:{low:135,high:145}}]}/></main>
+}`
 // The molecule harness loads the docs site's crambin sample from its own origin.
 const moleculeHarness = `"use client"
 import { useState } from "react"
@@ -183,6 +188,7 @@ try {
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
     await put(dir, "src/vitals-harness.tsx", vitalsHarness)
+    await put(dir, "src/lab-harness.tsx", labHarness)
     await put(dir, "src/molecule-harness.tsx", moleculeHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
@@ -209,6 +215,11 @@ try {
       )
       await put(
         dir,
+        "src/app/lab/page.tsx",
+        'export {default} from "../../lab-harness"'
+      )
+      await put(
+        dir,
         "src/app/molecule/page.tsx",
         'export {default} from "../../molecule-harness"'
       )
@@ -227,7 +238,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import VitalsHarness from "./vitals-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -258,6 +269,18 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/lab-results"
+          : `http://127.0.0.1:${server.port}/lab-results.json`,
         "--yes",
       ],
       dir
