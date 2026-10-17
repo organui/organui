@@ -44,6 +44,18 @@ async function expectLocalModel(file: string, model: OrganModel) {
   )
 }
 
+// Registry dependencies such as select resolve to the consumer's own style,
+// and the viewer uses Base UI's render prop, so every item that ships it says
+// so when it installs.
+test("every item with the viewer names the Base UI requirement", () => {
+  const items = registry.items.filter((item) =>
+    item.files.some(({ path }) => path.endsWith("/organ-viewer.tsx"))
+  )
+  expect(items.length).toBeGreaterThan(organItems.length)
+  for (const item of items)
+    expect("docs" in item ? item.docs : "").toContain("Base UI styles")
+})
+
 for (const item of organItems) {
   test(`${item.name} describes a consistent, attributed model`, async () => {
     const module = await import(new URL(`${item.name}.tsx`, directory).href)
@@ -75,6 +87,10 @@ for (const item of organItems) {
     expect(model.attribution.source).toStartWith("https://github.com/organui/")
     expect(model.attribution.licenseUrl).toStartWith("https://")
     expect(item.description).toContain(model.attribution.license)
+    // The CLI prints docs after install: where the model loads from at
+    // runtime and under which licence.
+    expect(item.docs).toContain(new URL(model.src).host)
+    expect(item.docs).toContain(model.attribution.license)
     const nodes = organAnatomyNodes(model)
     expect(
       nodes.flatMap(({ children }) => children.map(({ id }) => id)).sort()

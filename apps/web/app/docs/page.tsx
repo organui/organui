@@ -55,8 +55,11 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">Set up</h2>
         <p>
           Start from a React 19 project configured with shadcn, Tailwind CSS 4
-          and the Base UI / Nova theme. To install components by name, add the
-          OrganUI namespace to <code>components.json</code>.
+          and one of shadcn&apos;s Base UI styles, such as{" "}
+          <code>base-nova</code>. The organ viewer composes shadcn&apos;s
+          tooltip and button with Base UI&apos;s <code>render</code> prop, so it
+          does not work with the Radix styles. To install components by name,
+          add the OrganUI namespace to <code>components.json</code>.
         </p>
         <pre
           tabIndex={0}

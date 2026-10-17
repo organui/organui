@@ -42,6 +42,8 @@ export default async function Page() {
             (<code>bunx {shadcn} add @organui/explorer-01</code>), or from
             GitHub (<code>bunx {shadcn} add organui/organui/explorer-01</code>
             ). Pages install in Next.js; other frameworks get the components.
+            Like the organ viewer, blocks need one of shadcn&apos;s Base UI
+            styles.
           </p>
         </header>
         {blocks.map((block) => (
