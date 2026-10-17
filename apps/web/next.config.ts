@@ -2,7 +2,8 @@ import type { NextConfig } from "next"
 
 // Workspace packages are transpiled automatically by Next.js 16.
 const nextConfig: NextConfig = {
-  // Registry items load hosted models from organui.com/models on any site.
+  // Organ models built in this repository load into installed viewers on
+  // other origins, so they need CORS.
   async headers() {
     return [
       {

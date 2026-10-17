@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/LluisV/Z-Anatomy",
+  "commit": "6c7f9016bd5899ac8edafd31b9900c151df42ed6",
+  "files": [
+    {
+      "name": "Joints100",
+      "path": "Resources/Models/FBX/Joints100.fbx",
+      "url": "https://raw.githubusercontent.com/LluisV/Z-Anatomy/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX/Joints100.fbx",
+      "gitBlob": "9db06d20217f4f42999dcfdf31b1f6af78dc7794",
+      "sha256": "f4ba7a910cdaef99e31530f368628780d9f06b5d77853f8b721f47f67137e823",
+      "bytes": 9804796
+    },
+    {
+      "name": "SkeletalSystem100",
+      "path": "Resources/Models/FBX/SkeletalSystem100.fbx",
+      "url": "https://raw.githubusercontent.com/LluisV/Z-Anatomy/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX/SkeletalSystem100.fbx",
+      "gitBlob": "7c62e45211bf3992bb7239170343e06e2b073865",
+      "sha256": "294a649765cd060a62a4095da52b9c8ef2d97769aa447e196448aa5f7d596dea",
+      "bytes": 41339660
+    }
+  ]
+}

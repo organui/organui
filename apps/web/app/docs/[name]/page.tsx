@@ -10,6 +10,7 @@ import {
   registryNamespace,
   shadcn,
 } from "@/lib/registry"
+import { site } from "@/lib/site"
 
 type Props = { params: Promise<{ name: string }> }
 
@@ -44,9 +45,10 @@ export default async function Page({ params }: Props) {
   if (!found) notFound()
   const { item, load } = found
   const model = await load()
-  // Models hosted by organui.com load from this site's public/models.
-  const hosted = model.src.startsWith("/models/")
-  const download = hosted ? `https://organui.com${model.src}` : model.src
+  // Models built in this repository load from the site itself (see
+  // organ-models.ts); give readers the public address.
+  const hosted = model.src.startsWith("/")
+  const src = hosted ? new URL(model.src, site.url).href : model.src
   const organ = name.split("-")
   const pascal = organ.map((word) => word[0]!.toUpperCase() + word.slice(1))
   const component = pascal.join("")
@@ -77,8 +79,8 @@ const data = organAnatomyNodes(${exportName})
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          The {model.name.toLowerCase()}
-          {hosted ? "" : " from the OrganUI explorer"}, ready to drop into your
+          The {model.name.toLowerCase()} from{" "}
+          {hosted ? "OrganUI" : "the OrganUI explorer"}, ready to drop into your
           app: {model.structures.length} selectable structures and{" "}
           {model.views.length} named views, built on the{" "}
           <Link href="/docs/organ-viewer" className="underline">
@@ -173,15 +175,14 @@ const data = organAnatomyNodes(${exportName})
         </p>
         <p>
           {hosted
-            ? "The GLB is hosted on organui.com from the OrganUI repository"
-            : "The GLB loads from a commit-pinned copy in the explorer repository"}
-          , where its{" "}
+            ? "The GLB is built in the OrganUI repository and served by organui.com, and its"
+            : "The GLB loads from a commit-pinned copy in the explorer repository, where its"}{" "}
           <a className="underline" href={model.attribution.source}>
             provenance and changes
           </a>{" "}
           are documented. To serve it yourself, download it from{" "}
-          <a className="break-all underline" href={download}>
-            {download}
+          <a className="break-all underline" href={src}>
+            {src}
           </a>{" "}
           and pass the new URL as <code>src</code>.
         </p>
