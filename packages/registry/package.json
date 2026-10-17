@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./anatomy-tree": "./registry/base-nova/anatomy-tree/anatomy-tree.tsx",
+    "./lab-results": "./registry/base-nova/lab-results/lab-results.tsx",
     "./organ-viewer/*": "./registry/base-nova/organ-viewer/*.tsx",
     "./blocks/*": "./registry/base-nova/blocks/*.tsx",
     "./registry.json": "./registry.json",
