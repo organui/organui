@@ -9,7 +9,8 @@ OrganUI distributes editable source through a shadcn-compatible registry. The fi
 - `packages/registry/registry.json` declares catalog metadata, npm dependencies and the `registry:ui` file. The shadcn CLI chooses the destination from the consumer's `components.json` UI alias. There are no registry dependencies, global styles or theme overrides.
 - `packages/registry/scripts/build.ts` clears `packages/registry/dist`, runs the pinned `shadcn build registry.json --output dist`, then validates the catalog and every generated item against the installed shadcn schema, checks that the output holds exactly the catalog and one file per item, and rejects private imports.
 - `apps/web/scripts/stage-registry.ts` owns copying those artifacts into `apps/web/public/r`, resolving them through the `@workspace/registry/dist/*` export of its workspace dependency rather than a sibling path. The site serves `/r/registry.json` and `/r/anatomy-tree.json` as static assets.
-- `apps/web/app/docs/anatomy-tree` contains the documentation and state-only live example. The homepage only adds a discovery link; this change does not adopt the separate homepage proposal.
+- `apps/web/app/docs/layout.tsx` is the shared documentation layout: a site header, a sidebar on desktop and a menu on mobile. `apps/web/lib/registry.ts` reads `packages/registry/registry.json` (exported as `@workspace/registry/registry.json`) so the sidebar and the `/docs` index list every catalog item with its install command; each item needs a page at `apps/web/app/docs/<name>`, which the browser suite checks.
+- `apps/web/app/docs/anatomy-tree` contains the documentation and state-only live example. The homepage only adds a discovery link to `/docs`.
 - Future versioned runtime packages should be introduced only when a shared, stable runtime contract is justified. This registry is source distribution, not an npm anatomy runtime. The four organ repositories remain independent.
 
 ## Component decisions

@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Link from "next/link"
+import { registryNamespace, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 import { Example } from "./example"
 
@@ -30,11 +30,6 @@ export const metadata: Metadata = {
     ],
   },
 }
-const registries = JSON.stringify(
-  { registries: { "@organui": `${site.url}/r/{name}.json` } },
-  null,
-  2
-)
 const usage = `"use client"
 import { useState } from "react"
 import { AnatomyTree } from "@/components/ui/anatomy-tree"
@@ -53,11 +48,8 @@ export function Panel() {
 }`
 export default function Page() {
   return (
-    <main className="mx-auto max-w-5xl space-y-10 px-5 py-10 sm:px-10">
+    <div className="space-y-10">
       <header className="space-y-4">
-        <Link href="/" className="text-sm text-muted-foreground underline">
-          OrganUI
-        </Link>
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
           Components / Anatomy
         </p>
@@ -80,12 +72,12 @@ export default function Page() {
           aria-label="Installation command"
           className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
         >
-          {`bunx shadcn@4.21.0 add ${site.url}/r/anatomy-tree.json`}
+          {`bunx ${shadcn} add ${site.url}/r/anatomy-tree.json`}
         </pre>
         <p>
           To install by name, add the OrganUI namespace to{" "}
           <code>components.json</code> and run{" "}
-          <code>bunx shadcn@4.21.0 add @organui/anatomy-tree</code>.
+          <code>bunx {shadcn} add @organui/anatomy-tree</code>.
         </p>
         <pre
           tabIndex={0}
@@ -93,7 +85,7 @@ export default function Page() {
           aria-label="Registry namespace configuration"
           className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
         >
-          {registries}
+          {registryNamespace}
         </pre>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory and adds
@@ -188,6 +180,6 @@ export default function Page() {
           screen-reader usability audit.
         </p>
       </section>
-    </main>
+    </div>
   )
 }

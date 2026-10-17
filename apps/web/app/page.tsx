@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { explorers, site } from "@/lib/site"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
@@ -27,6 +28,12 @@ export default function Page() {
           <span>organui</span>
         </h1>
         <p>The interfaces healthcare deserves.</p>
+        <Link
+          href="/docs"
+          className="font-medium underline underline-offset-4 hover:text-muted-foreground"
+        >
+          Browse components
+        </Link>
         <nav aria-label="3D anatomy explorers">
           <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             {explorers.map((explorer) => (

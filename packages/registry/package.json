@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./anatomy-tree": "./registry/base-nova/anatomy-tree/anatomy-tree.tsx",
+    "./registry.json": "./registry.json",
     "./dist/*": "./dist/*"
   },
   "scripts": {

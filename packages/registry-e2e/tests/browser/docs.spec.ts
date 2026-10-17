@@ -164,3 +164,60 @@ test("homepage explorer links support keyboard navigation without overflow", asy
   })
   expect(errors).toEqual([])
 })
+
+test("registry index lists every catalog item inside the docs layout", async ({
+  page,
+  request,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  const catalog = registrySchema.parse(
+    await (await request.get("/r/registry.json")).json()
+  )
+  await page.goto("/docs")
+  await expect(
+    page.getByRole("heading", { name: "Components", level: 1 })
+  ).toBeVisible()
+  for (const item of catalog.items) {
+    const title = item.title ?? item.name
+    await expect(
+      page.getByRole("heading", { name: title, level: 3 }).getByRole("link")
+    ).toHaveAttribute("href", `/docs/${item.name}`)
+    await expect(
+      page.getByRole("region", { name: `Install ${title}` })
+    ).toHaveText(
+      `bunx shadcn@4.21.0 add https://organui.com/r/${item.name}.json`
+    )
+    expect((await request.get(`/docs/${item.name}`)).ok()).toBe(true)
+  }
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({ path: info.outputPath("index.png"), fullPage: true })
+
+  const docs = page.getByRole("navigation", { name: "Documentation" })
+  if ((page.viewportSize()?.width ?? 0) < 768) {
+    await expect(docs).toBeHidden()
+    await page.getByText("Menu", { exact: true }).click()
+  }
+  await expect(
+    docs.getByRole("link", { name: "Introduction" })
+  ).toHaveAttribute("aria-current", "page")
+  await docs.getByRole("link", { name: "Anatomy tree" }).click()
+  await expect(page).toHaveURL(/\/docs\/anatomy-tree$/)
+  await expect(
+    page.getByRole("heading", { name: "Anatomy tree", level: 1 })
+  ).toBeVisible()
+  if ((page.viewportSize()?.width ?? 0) < 768) {
+    await expect(docs).toBeHidden()
+    await page.getByText("Menu", { exact: true }).click()
+  }
+  await expect(
+    docs.getByRole("link", { name: "Anatomy tree" })
+  ).toHaveAttribute("aria-current", "page")
+  expect(errors).toEqual([])
+})
