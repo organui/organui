@@ -48,6 +48,24 @@
       ]
     },
     {
+      "name": "dermatome-map",
+      "type": "registry:component",
+      "title": "Dermatome map",
+      "description": "Front and back body map of the skin each spinal nerve supplies, C2 to S4-5, with ISNCSCI key sensory points.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/base-nova/dermatome-map/dermatome-map.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "adrenals",
       "type": "registry:component",
       "title": "Adrenals",

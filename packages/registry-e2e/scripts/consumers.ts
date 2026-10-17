@@ -64,6 +64,13 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+const dermatomeHarness = `"use client"
+import { useState } from "react"
+import { DermatomeMap, type DermatomeId } from "@/components/dermatome-map"
+export default function DermatomeHarness(){
+ const [selectedId,select]=useState<DermatomeId|null>(null)
+ return <main style={{maxWidth:960,margin:"auto",padding:20}}><h1>Installed dermatome map</h1><DermatomeMap selectedId={selectedId} onSelectionChange={select} colors={{L4:"rgb(10, 20, 30)"}}/><output aria-label="Selected">{selectedId??"none"}</output><button onClick={()=>select("T10")}>Select T10</button></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -167,6 +174,7 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/dermatome-harness.tsx", dermatomeHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -178,6 +186,11 @@ try {
         dir,
         "src/app/organ/page.tsx",
         'export {default} from "../../organ-harness"'
+      )
+      await put(
+        dir,
+        "src/app/dermatome/page.tsx",
+        'export {default} from "../../dermatome-harness"'
       )
       await put(
         dir,
@@ -194,7 +207,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/dermatome"?<DermatomeHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -225,6 +238,18 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/dermatome-map"
+          : `http://127.0.0.1:${server.port}/dermatome-map.json`,
         "--yes",
       ],
       dir
@@ -262,6 +287,15 @@ try {
       (framework === "next" && !viewer.includes('"use client"'))
     )
       throw new Error("Invalid installed organ viewer")
+    const dermatomeMap = await readFile(
+      resolve(dir, "src/components/dermatome-map.tsx"),
+      "utf8"
+    )
+    if (
+      dermatomeMap.includes("@workspace/") ||
+      (framework === "next" && !dermatomeMap.includes('"use client"'))
+    )
+      throw new Error("Invalid installed dermatome map")
     const installed = await readFile(
       resolve(dir, "src/components/ui/anatomy-tree.tsx"),
       "utf8"
