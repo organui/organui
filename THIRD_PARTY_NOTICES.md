@@ -38,3 +38,14 @@ anatomy asset licenses and attribution. Models hosted from
 model is CC BY-SA 4.0), documented in the `<organ>.ATTRIBUTION.md` file beside
 each GLB or, for nerves, in `models/nerves/ATTRIBUTION.md`. Those notices are
 unaffected by the website code license.
+
+## Growth reference data
+
+The growth chart's `growth-standards.ts` holds LMS parameters of the
+[WHO Child Growth Standards](https://www.who.int/tools/child-growth-standards)
+(WHO Multicentre Growth Reference Study Group, 2006), © World Health
+Organization. They were sampled by month from the daily tables in WHO's
+[anthro](https://github.com/WorldHealthOrganization/anthro) package by
+`packages/registry/scripts/prepare-growth-standards.ts`, which records the
+commit and file hashes. No anthro code is included. Cite WHO as the source when
+redistributing the values; the OrganUI MIT license does not apply to them.

@@ -1,0 +1,485 @@
+"use client"
+
+import * as React from "react"
+import { cn } from "cn"
+
+import { growthStandards, type GrowthTable } from "./growth-standards"
+
+export type GrowthMeasure = "weight" | "length" | "head"
+export type GrowthSex = "female" | "male"
+export type GrowthMeasurement = {
+  /** Age in months, from 0 to 60. Use `ageInMonths` to convert dates. */
+  ageMonths: number
+  /** Kilograms for weight, centimetres for length and head circumference. */
+  value: number
+}
+export type GrowthChartProps = {
+  measure: GrowthMeasure
+  sex: GrowthSex
+  measurements?: readonly GrowthMeasurement[]
+  /** Percentile curves to draw, between 0 and 100. Defaults to WHO's set. */
+  percentiles?: readonly number[]
+  /** Age range shown, in months, within 0 to 60. Defaults to 0 to 24. */
+  ageRange?: readonly [number, number]
+  label?: string
+  className?: string
+}
+
+export const growthMeasures: Record<
+  GrowthMeasure,
+  { label: string; unit: string }
+> = {
+  weight: { label: "Weight-for-age", unit: "kg" },
+  length: { label: "Length/height-for-age", unit: "cm" },
+  head: { label: "Head circumference-for-age", unit: "cm" },
+}
+const defaultPercentiles = [3, 15, 50, 85, 97]
+const daysPerMonth = 30.4375
+
+/** Age in months between two dates, as the WHO standards count it. */
+export function ageInMonths(birth: Date, measured: Date) {
+  return (measured.getTime() - birth.getTime()) / 86_400_000 / daysPerMonth
+}
+
+function table(measure: GrowthMeasure, sex: GrowthSex, ageMonths: number) {
+  // The standards switch from recumbent length to standing height at 24
+  // months, so the curve steps down there by about 0.7 cm.
+  if (measure === "length")
+    return growthStandards[ageMonths < 24 ? "length" : "height"][sex]
+  return growthStandards[measure][sex]
+}
+
+/**
+ * The WHO LMS parameters at an age in months, interpolated linearly between
+ * months. Returns null outside 0 to 60 months.
+ */
+export function growthLms(
+  measure: GrowthMeasure,
+  sex: GrowthSex,
+  ageMonths: number
+): [number, number, number] | null {
+  if (!(ageMonths >= 0 && ageMonths <= 60)) return null
+  const { start, lms }: GrowthTable = table(measure, sex, ageMonths)
+  const position = ageMonths - start
+  const lower = Math.min(Math.floor(position), lms.length - 2)
+  const t = position - lower
+  const a = lms[lower]!
+  const b = lms[lower + 1]!
+  return [0, 1, 2].map((i) => a[i]! + (b[i]! - a[i]!) * t) as [
+    number,
+    number,
+    number,
+  ]
+}
+
+function lmsValue([l, m, s]: [number, number, number], z: number) {
+  return l === 0 ? m * Math.exp(s * z) : m * (1 + l * s * z) ** (1 / l)
+}
+
+/**
+ * The z-score of a measurement. Weight beyond ±3 SD uses WHO's restricted
+ * extrapolation, which keeps the skewed tail from compressing extreme values.
+ * Returns null outside 0 to 60 months or for a non-positive value.
+ */
+export function growthZScore(
+  measure: GrowthMeasure,
+  sex: GrowthSex,
+  ageMonths: number,
+  value: number
+) {
+  const lms = growthLms(measure, sex, ageMonths)
+  if (!lms || !(value > 0)) return null
+  const [l, m, s] = lms
+  const z = l === 0 ? Math.log(value / m) / s : ((value / m) ** l - 1) / (l * s)
+  if (measure !== "weight" || Math.abs(z) <= 3) return z
+  const sd3 = lmsValue(lms, 3 * Math.sign(z))
+  const sd2 = lmsValue(lms, 2 * Math.sign(z))
+  return 3 * Math.sign(z) + (value - sd3) / Math.abs(sd3 - sd2)
+}
+
+/** The standard normal cumulative distribution, as a percentile. */
+export function zToPercentile(z: number) {
+  // Abramowitz and Stegun 7.1.26, accurate to 1.5e-7.
+  const x = Math.abs(z) / Math.SQRT2
+  const t = 1 / (1 + 0.3275911 * x)
+  const erf =
+    1 -
+    ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) *
+      t +
+      0.254829592) *
+      t *
+      Math.exp(-x * x)
+  return 50 * (1 + Math.sign(z) * erf)
+}
+
+/** The z-score of a percentile between 0 and 100, exclusive. */
+export function percentileToZ(percentile: number) {
+  let low = -8
+  let high = 8
+  for (let i = 0; i < 60; i++) {
+    const mid = (low + high) / 2
+    if (zToPercentile(mid) < percentile) low = mid
+    else high = mid
+  }
+  return (low + high) / 2
+}
+
+/** The measurement at a percentile and age, or null outside 0 to 60 months. */
+export function growthValueAt(
+  measure: GrowthMeasure,
+  sex: GrowthSex,
+  ageMonths: number,
+  percentile: number
+) {
+  const lms = growthLms(measure, sex, ageMonths)
+  return lms ? lmsValue(lms, percentileToZ(percentile)) : null
+}
+
+/** Formats a percentile as "34th", "<0.1st" or ">99.9th". */
+export function formatPercentile(percentile: number) {
+  if (percentile < 0.1) return "<0.1st"
+  if (percentile > 99.9) return ">99.9th"
+  const rounded =
+    percentile < 1 || percentile > 99
+      ? Math.round(percentile * 10) / 10
+      : Math.round(percentile)
+  const whole = Math.floor(rounded)
+  const suffix =
+    rounded !== whole || (whole % 100 >= 11 && whole % 100 <= 13)
+      ? "th"
+      : (["th", "st", "nd", "rd"][whole % 10] ?? "th")
+  return `${rounded}${suffix}`
+}
+
+export function formatAge(ageMonths: number) {
+  const months = Math.round(ageMonths * 10) / 10
+  if (months < 24) return `${months} ${months === 1 ? "month" : "months"}`
+  const years = Math.floor(months / 12)
+  const rest = Math.round((months - years * 12) * 10) / 10
+  return rest ? `${years} y ${rest} mo` : `${years} years`
+}
+
+const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 })
+
+function niceStep(span: number, count: number) {
+  const raw = span / count
+  const power = 10 ** Math.floor(Math.log10(raw))
+  const step = [1, 2, 5, 10].find((f) => f * power >= raw)!
+  return step * power
+}
+
+function useWidth(fallback: number) {
+  const ref = React.useRef<HTMLDivElement>(null)
+  const [width, setWidth] = React.useState(fallback)
+  React.useLayoutEffect(() => {
+    const element = ref.current
+    if (!element) return
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry) setWidth(Math.round(entry.contentRect.width))
+    })
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+  return [ref, width] as const
+}
+
+const margin = { top: 12, right: 40, bottom: 40, left: 44 }
+
+export function GrowthChart({
+  measure,
+  sex,
+  measurements = [],
+  percentiles = defaultPercentiles,
+  ageRange = [0, 24],
+  label,
+  className,
+}: GrowthChartProps) {
+  const id = React.useId()
+  const [ref, width] = useWidth(640)
+  const [active, setActive] = React.useState<number | null>(null)
+  const { unit } = growthMeasures[measure]
+  const title =
+    label ??
+    `${growthMeasures[measure].label}, ${sex === "female" ? "girls" : "boys"}`
+  const from = Math.max(0, Math.min(ageRange[0], 60))
+  const to = Math.max(from + 1, Math.min(ageRange[1], 60))
+  const height = Math.round(Math.min(Math.max(width * 0.62, 260), 420))
+  const plotWidth = Math.max(width - margin.left - margin.right, 1)
+  const plotHeight = height - margin.top - margin.bottom
+  const sorted = [...percentiles]
+    .filter((p) => p > 0 && p < 100)
+    .sort((a, b) => a - b)
+
+  // Length switches to height at 24 months, so each curve has a segment on
+  // either side of it.
+  const segments: [number, number][] =
+    measure !== "length" || from >= 24
+      ? [[from, to]]
+      : to > 24
+        ? [
+            [from, 24 - 1e-9],
+            [24, to],
+          ]
+        : // A range ending by 24 months stays on the length standard.
+          [[from, Math.min(to, 24 - 1e-9)]]
+  const samples = segments.map(([start, end]) => {
+    const ages = [start]
+    for (let age = Math.floor(start) + 1; age < end; age++) ages.push(age)
+    ages.push(end)
+    return ages
+  })
+  const curves = sorted.map((percentile) =>
+    samples.map((ages) =>
+      ages.map((age) => ({
+        age,
+        value: growthValueAt(measure, sex, age, percentile)!,
+      }))
+    )
+  )
+  const points = measurements
+    .map((measurement, index) => ({
+      ...measurement,
+      index,
+      z: growthZScore(measure, sex, measurement.ageMonths, measurement.value),
+    }))
+    .filter(
+      ({ ageMonths, z }) => z !== null && ageMonths >= from && ageMonths <= to
+    )
+    .sort((a, b) => a.ageMonths - b.ageMonths)
+
+  const values = [
+    ...curves.flat(2).map(({ value }) => value),
+    ...points.map(({ value }) => value),
+  ]
+  const low = Math.min(...values)
+  const high = Math.max(...values)
+  const step = niceStep(high - low, Math.max(3, Math.round(plotHeight / 48)))
+  const yMin = Math.floor((low - (high - low) * 0.04) / step) * step
+  const yMax = Math.ceil((high + (high - low) * 0.04) / step) * step
+  const x = (age: number) =>
+    margin.left + ((age - from) / (to - from)) * plotWidth
+  const y = (value: number) =>
+    margin.top + (1 - (value - yMin) / (yMax - yMin)) * plotHeight
+  // Months read best in steps that divide a year.
+  const xRaw = (to - from) / Math.max(2, Math.round(plotWidth / 56))
+  const xStep = [1, 2, 3, 6, 12].find((step) => step >= xRaw) ?? 12
+  const xTicks: number[] = []
+  for (let age = Math.ceil(from / xStep) * xStep; age <= to; age += xStep)
+    xTicks.push(age)
+  const yTicks: number[] = []
+  for (let value = yMin; value <= yMax + step / 2; value += step)
+    yTicks.push(Number(value.toFixed(6)))
+  const path = (line: { age: number; value: number }[]) =>
+    line
+      .map(
+        ({ age, value }, i) =>
+          `${i ? "L" : "M"}${x(age).toFixed(1)},${y(value).toFixed(1)}`
+      )
+      .join("")
+  // Bands pair the outermost curves inwards, such as 3rd–97th and 15th–85th.
+  const bands = sorted.slice(0, Math.floor(sorted.length / 2)).map((_, i) =>
+    curves[i]!.map((lower, segment) => {
+      const upper = curves[sorted.length - 1 - i]![segment]!
+      return `${path(lower)}${path([...upper].reverse()).replace("M", "L")}Z`
+    })
+  )
+  const describe = (point: (typeof points)[number]) =>
+    `${formatAge(point.ageMonths)}: ${number.format(point.value)} ${unit}, ${formatPercentile(zToPercentile(point.z!))} percentile`
+  const current = points.find(({ index }) => index === active)
+
+  return (
+    <figure className={cn("flex flex-col gap-3", className)}>
+      <figcaption id={`${id}-title`} className="text-sm font-medium">
+        {title}
+      </figcaption>
+      <div ref={ref} className="relative w-full">
+        <svg
+          role="group"
+          aria-labelledby={`${id}-title`}
+          aria-describedby={`${id}-description`}
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          className="block overflow-visible text-[11px] select-none"
+          onPointerLeave={() => setActive(null)}
+        >
+          <desc id={`${id}-description`}>
+            WHO percentile curves from {formatAge(from)} to {formatAge(to)} with{" "}
+            {points.length}{" "}
+            {points.length === 1 ? "measurement" : "measurements"}. The table
+            after the chart lists every measurement.
+          </desc>
+          <g aria-hidden="true">
+            {yTicks.map((value) => (
+              <g key={value}>
+                <line
+                  x1={margin.left}
+                  x2={margin.left + plotWidth}
+                  y1={y(value)}
+                  y2={y(value)}
+                  className="stroke-border"
+                />
+                <text
+                  x={margin.left - 8}
+                  y={y(value)}
+                  dy="0.32em"
+                  textAnchor="end"
+                  className="fill-muted-foreground tabular-nums"
+                >
+                  {number.format(value)}
+                </text>
+              </g>
+            ))}
+            {xTicks.map((age) => (
+              <g key={age}>
+                <line
+                  x1={x(age)}
+                  x2={x(age)}
+                  y1={margin.top}
+                  y2={margin.top + plotHeight}
+                  className="stroke-border opacity-60"
+                />
+                <text
+                  x={x(age)}
+                  y={margin.top + plotHeight + 16}
+                  textAnchor="middle"
+                  className="fill-muted-foreground tabular-nums"
+                >
+                  {age}
+                </text>
+              </g>
+            ))}
+            <text
+              x={margin.left + plotWidth / 2}
+              y={height - 4}
+              textAnchor="middle"
+              className="fill-muted-foreground"
+            >
+              Age (months)
+            </text>
+            <text
+              transform={`translate(10 ${margin.top + plotHeight / 2}) rotate(-90)`}
+              textAnchor="middle"
+              className="fill-muted-foreground"
+            >
+              {unit}
+            </text>
+            {bands.flat().map((d, i) => (
+              <path key={i} d={d} className="fill-primary opacity-[0.07]" />
+            ))}
+            {curves.map((curve, i) =>
+              curve.map((line, segment) => (
+                <path
+                  key={`${i}-${segment}`}
+                  d={path(line)}
+                  fill="none"
+                  strokeWidth={sorted[i] === 50 ? 1.75 : 1}
+                  className="stroke-muted-foreground"
+                />
+              ))
+            )}
+            {curves.map((curve, i) => {
+              const end = curve.at(-1)!.at(-1)!
+              return (
+                <text
+                  key={sorted[i]}
+                  x={margin.left + plotWidth + 6}
+                  y={y(end.value)}
+                  dy="0.32em"
+                  className="fill-muted-foreground tabular-nums"
+                >
+                  {formatPercentile(sorted[i]!)}
+                </text>
+              )
+            })}
+            {points.length > 1 && (
+              <path
+                d={path(
+                  points.map(({ ageMonths, value }) => ({
+                    age: ageMonths,
+                    value,
+                  }))
+                )}
+                fill="none"
+                strokeWidth={2}
+                className="stroke-primary"
+              />
+            )}
+            {current && (
+              <line
+                x1={x(current.ageMonths)}
+                x2={x(current.ageMonths)}
+                y1={margin.top}
+                y2={margin.top + plotHeight}
+                className="stroke-primary opacity-40"
+                strokeDasharray="3 3"
+              />
+            )}
+          </g>
+          {points.map((point) => (
+            <circle
+              key={point.index}
+              cx={x(point.ageMonths)}
+              cy={y(point.value)}
+              r={active === point.index ? 6 : 4.5}
+              tabIndex={0}
+              role="img"
+              aria-label={describe(point)}
+              strokeWidth={2}
+              className="cursor-default fill-primary stroke-background outline-none focus-visible:stroke-ring focus-visible:stroke-[3]"
+              onPointerEnter={() => setActive(point.index)}
+              onFocus={() => setActive(point.index)}
+              onBlur={() => setActive(null)}
+            />
+          ))}
+        </svg>
+        {current && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute z-10 w-max -translate-x-1/2 -translate-y-full rounded-md border bg-popover px-2.5 py-1.5 text-xs text-popover-foreground shadow-md"
+            style={{
+              left: Math.min(
+                Math.max(x(current.ageMonths), 80),
+                Math.max(width - 80, 80)
+              ),
+              top: y(current.value) - 10,
+            }}
+          >
+            <p className="font-medium">
+              {number.format(current.value)} {unit}
+            </p>
+            <p className="text-muted-foreground">
+              {formatAge(current.ageMonths)} ·{" "}
+              {formatPercentile(zToPercentile(current.z!))} percentile
+            </p>
+            <p className="text-muted-foreground">
+              z-score {current.z! >= 0 ? "+" : "−"}
+              {Math.abs(current.z!).toFixed(2)}
+            </p>
+          </div>
+        )}
+      </div>
+      <table className="sr-only">
+        <caption>{title}: measurements</caption>
+        <thead>
+          <tr>
+            <th scope="col">Age</th>
+            <th scope="col">Value ({unit})</th>
+            <th scope="col">Percentile</th>
+            <th scope="col">Z-score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {points.map((point) => (
+            <tr key={point.index}>
+              <td>{formatAge(point.ageMonths)}</td>
+              <td>{number.format(point.value)}</td>
+              <td>{formatPercentile(zToPercentile(point.z!))}</td>
+              <td>{point.z!.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
+  )
+}

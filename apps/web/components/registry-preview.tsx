@@ -3,6 +3,7 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
+import { GrowthChart } from "@workspace/registry/growth-chart"
 import { OrganPreview } from "@/components/organ-preview"
 
 function AnatomyTreePreview() {
@@ -25,10 +26,28 @@ function OrganViewerPreview() {
   return <OrganPreview name="heart" organ="Heart" />
 }
 
+function GrowthChartPreview() {
+  return (
+    <GrowthChart
+      measure="weight"
+      sex="female"
+      measurements={[
+        { ageMonths: 0, value: 3.2 },
+        { ageMonths: 4, value: 6.3 },
+        { ageMonths: 9, value: 8.0 },
+        { ageMonths: 15, value: 9.5 },
+        { ageMonths: 24, value: 11.3 },
+      ]}
+      className="mx-auto max-w-2xl"
+    />
+  )
+}
+
 // Live previews on the registry index, keyed by registry item name. The
 // browser suite requires one for every catalog item.
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
+  "growth-chart": GrowthChartPreview,
   "organ-viewer": OrganViewerPreview,
 }
 

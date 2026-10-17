@@ -64,6 +64,13 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+const growthHarness = `"use client"
+import { useState } from "react"
+import { GrowthChart, type GrowthMeasure } from "@/components/ui/growth-chart"
+export default function GrowthHarness(){
+ const [measure,setMeasure]=useState<GrowthMeasure>("weight")
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed growth chart</h1><GrowthChart measure={measure} sex="female" measurements={(measure==="weight"?[5,8.9,10.6]:[57,74,82]).map((value,i)=>({ageMonths:[2,12,20][i]!,value}))}/><button onClick={()=>setMeasure("length")}>Show length</button></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -167,6 +174,7 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/growth-harness.tsx", growthHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -178,6 +186,11 @@ try {
         dir,
         "src/app/organ/page.tsx",
         'export {default} from "../../organ-harness"'
+      )
+      await put(
+        dir,
+        "src/app/growth/page.tsx",
+        'export {default} from "../../growth-harness"'
       )
       await put(
         dir,
@@ -194,7 +207,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import GrowthHarness from "./growth-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/growth"?<GrowthHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -225,6 +238,18 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/growth-chart"
+          : `http://127.0.0.1:${server.port}/growth-chart.json`,
         "--yes",
       ],
       dir
@@ -271,6 +296,18 @@ try {
       (framework === "next" && !installed.includes('"use client"'))
     )
       throw new Error("Invalid installed source")
+    const growth = await readFile(
+      resolve(dir, "src/components/ui/growth-chart.tsx"),
+      "utf8"
+    )
+    if (
+      growth.includes("@workspace/") ||
+      !growth.includes('from "./growth-standards"') ||
+      !(await Bun.file(
+        resolve(dir, "src/components/ui/growth-standards.ts")
+      ).exists())
+    )
+      throw new Error("Invalid installed growth chart")
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)
