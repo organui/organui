@@ -3,6 +3,13 @@ import type { OrganModel } from "@workspace/registry/organ-viewer/organ-viewer"
 // One loader per organ registry item, so pages and previews only download the
 // structure data of the organ they show. An organ item missing here has no
 // docs page, which the browser suite catches.
+// Models hosted on organui.com load from this site's own public/models, so
+// previews and local runs show the copy in the same commit.
+const local = (model: OrganModel): OrganModel => ({
+  ...model,
+  src: model.src.replace("https://organui.com/models/", "/models/"),
+})
+
 export const organModels: Record<string, () => Promise<OrganModel>> = {
   adrenals: () =>
     import("@workspace/registry/organ-viewer/adrenals").then(
@@ -79,6 +86,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   prostate: () =>
     import("@workspace/registry/organ-viewer/prostate").then(
       (module) => module.prostateModel
+    ),
+  "salivary-glands": () =>
+    import("@workspace/registry/organ-viewer/salivary-glands").then((module) =>
+      local(module.salivaryGlandsModel)
     ),
   skeleton: () =>
     import("@workspace/registry/organ-viewer/skeleton").then(

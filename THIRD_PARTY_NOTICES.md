@@ -32,7 +32,8 @@ replace the font license.
 
 ## Anatomy assets
 
-This website branch contains no bundled anatomy meshes or screenshot previews.
-The independent organ explorer repositories document their source-specific
+Anatomy meshes hosted from `apps/web/public/models` keep their own licenses,
+documented in the `<organ>.ATTRIBUTION.md` file beside each GLB. The
+independent organ explorer repositories document their source-specific
 anatomy asset licenses and attribution. Those notices are unaffected by the
 website code license.
