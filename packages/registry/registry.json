@@ -48,6 +48,48 @@
       ]
     },
     {
+      "name": "molecule-viewer",
+      "type": "registry:component",
+      "title": "Molecule viewer",
+      "description": "Load a PDB or mmCIF structure and explore it as a cartoon, ball and stick or spacefill model, with residue selection and a sequence strip.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": ["alert", "button", "select", "tooltip"],
+      "categories": ["molecular"],
+      "files": [
+        {
+          "path": "registry/base-nova/molecule-viewer/molecule-viewer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dna-helix",
+      "type": "registry:component",
+      "title": "DNA helix",
+      "description": "A procedural B-DNA double helix built from a sequence, with selectable base pairs and both strands listed below.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": ["alert", "button", "tooltip"],
+      "categories": ["molecular"],
+      "files": [
+        {
+          "path": "registry/base-nova/dna-helix/dna-helix.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "adrenals",
       "type": "registry:component",
       "title": "Adrenals",
