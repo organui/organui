@@ -26,6 +26,7 @@
       "type": "registry:component",
       "title": "Organ viewer",
       "description": "Rotate, frame and select the structures of a GLB anatomy model, with ghosting and named views.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. Serve your GLB with CORS; the viewer shows model.attribution as its credit.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -52,6 +53,7 @@
       "type": "registry:component",
       "title": "Adrenals",
       "description": "The adrenals from the OrganUI adrenals explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The adrenals model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -83,6 +85,7 @@
       "type": "registry:component",
       "title": "Appendix",
       "description": "The vermiform appendix with the cecum, terminal ileum, iliac vessels and the muscles behind it: 7 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The appendix model loads at runtime from organui.com under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -114,6 +117,7 @@
       "type": "registry:component",
       "title": "Bladder",
       "description": "The bladder from the OrganUI bladder explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The bladder model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -145,6 +149,7 @@
       "type": "registry:component",
       "title": "Brain",
       "description": "The brain from the OrganUI brain explorer: 19 selectable structures and 6 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The brain model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -176,6 +181,7 @@
       "type": "registry:component",
       "title": "Breast",
       "description": "Both breasts from the HuBMAP Human Reference Atlas: 16 selectable structures and 3 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The breast model loads at runtime from organui.com under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -207,6 +213,7 @@
       "type": "registry:component",
       "title": "Diaphragm",
       "description": "The diaphragm with the structures that pass through it and the organs above and below: 13 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The diaphragm model loads at runtime from organui.com under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -238,6 +245,7 @@
       "type": "registry:component",
       "title": "Ear",
       "description": "The ear from the OrganUI ear explorer: 16 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The ear model loads at runtime from cdn.jsdelivr.net under CC BY-SA 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -269,6 +277,7 @@
       "type": "registry:component",
       "title": "Esophagus",
       "description": "The esophagus from the OrganUI esophagus explorer: 17 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The esophagus model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -300,6 +309,7 @@
       "type": "registry:component",
       "title": "Eye",
       "description": "The eye from the OrganUI eye explorer: 21 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The eye model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -331,6 +341,7 @@
       "type": "registry:component",
       "title": "Gallbladder",
       "description": "The gallbladder from the OrganUI gallbladder explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The gallbladder model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -362,6 +373,7 @@
       "type": "registry:component",
       "title": "Hair",
       "description": "A hair follicle in a cut-away plug of scalp, from an original OrganUI schematic model: 14 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The hair model loads at runtime from organui.com under CC0 1.0.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -393,6 +405,7 @@
       "type": "registry:component",
       "title": "Heart",
       "description": "The heart from the OrganUI heart explorer: 11 selectable structures and 3 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The heart model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -424,6 +437,7 @@
       "type": "registry:component",
       "title": "Intestines",
       "description": "The intestines from the OrganUI intestines explorer: 11 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The intestines model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -455,6 +469,7 @@
       "type": "registry:component",
       "title": "Joints",
       "description": "The joints and ligaments of the whole body, from Z-Anatomy: 197 selectable structures and 9 named views. Model licensed CC BY-SA 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The joints model loads at runtime from organui.com under CC BY-SA 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -486,6 +501,7 @@
       "type": "registry:component",
       "title": "Kidneys",
       "description": "The kidneys from the OrganUI kidneys explorer: 6 selectable structures and 4 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The kidneys model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -517,6 +533,7 @@
       "type": "registry:component",
       "title": "Larynx",
       "description": "The larynx from the OrganUI larynx explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The larynx model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -548,6 +565,7 @@
       "type": "registry:component",
       "title": "Liver",
       "description": "The liver from the OrganUI liver explorer: 7 selectable structures and 5 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The liver model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -579,6 +597,7 @@
       "type": "registry:component",
       "title": "Lungs",
       "description": "The lungs from the OrganUI lungs explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The lungs model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -610,6 +629,7 @@
       "type": "registry:component",
       "title": "Lymph node",
       "description": "The lymph node from the OrganUI lymph node explorer: 7 selectable structures and 3 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The lymph node model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -641,6 +661,7 @@
       "type": "registry:component",
       "title": "Muscles",
       "description": "The muscles from the OrganUI muscles explorer: 177 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The muscles model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -672,6 +693,7 @@
       "type": "registry:component",
       "title": "Nails",
       "description": "A fingertip halved through the nail, from an original OrganUI schematic model: 14 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The nail model loads at runtime from organui.com under CC0 1.0.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -703,6 +725,7 @@
       "type": "registry:component",
       "title": "Nerves",
       "description": "The peripheral nerves of the whole body, from the cranial nerves to the plexuses of the arms and legs: 41 selectable structures and 6 named views. Model licensed CC BY-SA 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The nerves model loads at runtime from organui.com under CC BY-SA 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -734,6 +757,7 @@
       "type": "registry:component",
       "title": "Nose",
       "description": "The nose from the OrganUI nose explorer: 22 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The nose model loads at runtime from cdn.jsdelivr.net under CC BY-SA 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -765,6 +789,7 @@
       "type": "registry:component",
       "title": "Pancreas",
       "description": "The pancreas from the OrganUI pancreas explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The pancreas model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -796,6 +821,7 @@
       "type": "registry:component",
       "title": "Parathyroid",
       "description": "The four parathyroid glands on the back of the thyroid: 9 selectable structures and 5 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The parathyroid model loads at runtime from organui.com under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -827,6 +853,7 @@
       "type": "registry:component",
       "title": "Pharynx",
       "description": "The pharynx from the OrganUI pharynx explorer: 20 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The pharynx model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -858,6 +885,7 @@
       "type": "registry:component",
       "title": "Pineal",
       "description": "The pineal gland and its neighbours deep in the brain: the epithalamus, thalami, midbrain tectum and deep veins. 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The pineal gland model loads at runtime from organui.com under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -889,6 +917,7 @@
       "type": "registry:component",
       "title": "Pituitary",
       "description": "The pituitary gland in its setting: the hypothalamus above it, the optic chiasm, its portal blood supply, the cavernous sinus and the sphenoid bone. 19 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The pituitary gland model loads at runtime from organui.com under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -920,6 +949,7 @@
       "type": "registry:component",
       "title": "Prostate",
       "description": "The prostate from the OrganUI prostate explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The prostate model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -951,6 +981,7 @@
       "type": "registry:component",
       "title": "Salivary glands",
       "description": "The major salivary glands, from Z-Anatomy: 15 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The salivary glands model loads at runtime from organui.com under CC BY-SA 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -982,6 +1013,7 @@
       "type": "registry:component",
       "title": "Skeleton",
       "description": "The skeleton from the OrganUI skeleton explorer: 242 selectable structures and 8 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The skeleton model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1013,6 +1045,7 @@
       "type": "registry:component",
       "title": "Skin",
       "description": "The skin from the OrganUI skin explorer: 13 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The skin model loads at runtime from cdn.jsdelivr.net under CC0 1.0.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1044,6 +1077,7 @@
       "type": "registry:component",
       "title": "Spinal cord",
       "description": "The spinal cord from the OrganUI spinal cord explorer: 63 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The spinal cord model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1075,6 +1109,7 @@
       "type": "registry:component",
       "title": "Spleen",
       "description": "The spleen from the OrganUI spleen explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The spleen model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1106,6 +1141,7 @@
       "type": "registry:component",
       "title": "Stomach",
       "description": "The stomach from the OrganUI stomach explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The stomach model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1137,6 +1173,7 @@
       "type": "registry:component",
       "title": "Teeth",
       "description": "The teeth from the OrganUI teeth explorer: 33 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The teeth model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1168,6 +1205,7 @@
       "type": "registry:component",
       "title": "Thymus",
       "description": "The thymus from the OrganUI thymus explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The thymus model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1199,6 +1237,7 @@
       "type": "registry:component",
       "title": "Thyroid",
       "description": "The thyroid from the OrganUI thyroid explorer: 18 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The thyroid model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1230,6 +1269,7 @@
       "type": "registry:component",
       "title": "Tongue",
       "description": "The tongue from the OrganUI tongue explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The tongue model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1261,6 +1301,7 @@
       "type": "registry:component",
       "title": "Uterus",
       "description": "The uterus from the OrganUI uterus explorer: 27 selectable structures and 3 named views. Model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The uterus model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1292,6 +1333,7 @@
       "type": "registry:component",
       "title": "Vessels",
       "description": "The vessels from the OrganUI vessels explorer: 51 selectable structures and 6 named views. Model licensed CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The vessels model loads at runtime from cdn.jsdelivr.net under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1323,6 +1365,7 @@
       "type": "registry:component",
       "title": "Vestibular system",
       "description": "The inner ear's balance organs: the vestibule and three semicircular canals, with the cochlea and vestibular nerve. 6 selectable structures and 4 named views. Model licensed CC BY-SA 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The vestibular system model loads at runtime from organui.com under CC BY-SA 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1354,6 +1397,7 @@
       "type": "registry:block",
       "title": "Explorer 01",
       "description": "An organ viewer with an anatomy panel that docks beside it on wide screens and opens as a sheet on phones. Heart model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The heart model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1401,6 +1445,7 @@
       "type": "registry:block",
       "title": "Explorer 02",
       "description": "A full-height anatomy workspace with the tree in a sidebar and a details card to hide or isolate the selected structure. Heart model licensed CC BY 4.0.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. The heart model loads at runtime from cdn.jsdelivr.net under CC BY 4.0. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
@@ -1448,6 +1493,7 @@
       "type": "registry:block",
       "title": "Explorer 03",
       "description": "One viewer that switches between several organs from a menu, here the heart, kidneys, stomach and pancreas. Models licensed CC BY 4.0 and CC BY-SA 2.1 JP.",
+      "docs": "Needs one of shadcn's Base UI styles, such as base-nova: the viewer's toolbar uses Base UI's render prop, which Radix styles do not have. Models load at runtime from cdn.jsdelivr.net: heart and kidneys under CC BY 4.0; stomach and pancreas under CC BY-SA 2.1 JP. The viewer shows the credit its licence asks for; if you pass attribution={false}, show it yourself.",
       "dependencies": [
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",

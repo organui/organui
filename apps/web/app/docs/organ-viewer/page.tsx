@@ -82,8 +82,8 @@ export default async function Page() {
           The source installs into your components directory and adds three.js,
           plus shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
           <code>progress</code>, <code>select</code> and <code>tooltip</code>{" "}
-          for its controls. It uses your theme tokens and installs no global
-          styles.
+          for its controls, which need one of shadcn&apos;s Base UI styles. It
+          uses your theme tokens and installs no global styles.
         </p>
         <a className="underline" href="/r/organ-viewer.json">
           View registry item JSON
