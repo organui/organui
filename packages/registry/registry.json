@@ -203,6 +203,37 @@
       ]
     },
     {
+      "name": "cell",
+      "type": "registry:component",
+      "title": "Cell",
+      "description": "An animal cell with a quarter cut away, from an original OrganUI schematic model: 15 selectable organelles and structures and 4 named views. Model licensed CC0 1.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "diaphragm",
       "type": "registry:component",
       "title": "Diaphragm",

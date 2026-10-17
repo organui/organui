@@ -31,7 +31,8 @@ installs straight from source (append `#<commit>` to pin a version). See
 ## Organs
 
 Every organ is a registry item named after it: `heart`, `brain`,
-`spinal-cord`, `nerves` and so on.
+`spinal-cord`, `nerves` and so on. The same viewer shows an animal cell's
+organelles as `cell`.
 
 ```bash
 bunx shadcn@4.21.0 add https://organui.com/r/heart.json
