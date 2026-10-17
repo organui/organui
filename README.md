@@ -28,6 +28,21 @@ a GitHub registry, so `bunx shadcn@4.21.0 add organui/organui/anatomy-tree`
 installs straight from source (append `#<commit>` to pin a version). See
 [the anatomy tree documentation](https://organui.com/docs/anatomy-tree).
 
+## Organ viewers
+
+Every OrganUI 3D explorer is also a registry item, named after its repository:
+`heart-viewer`, `brain-viewer`, `spinal-cord-viewer` and so on, 30 in all.
+
+```bash
+bunx shadcn@4.21.0 add https://organui.com/r/heart-viewer.json
+```
+
+Each one installs the shared `organ-viewer.tsx` (three.js) plus the organ's
+structures, views and model credit. The GLB itself stays in the explorer
+repository under its own licence (CC BY-SA 2.1 JP, CC BY-SA 4.0, CC BY 4.0 or
+CC0, per organ) and loads from a commit-pinned jsDelivr URL; the viewer shows
+its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
+
 ## Repository
 
 | Path                    | Contents                                                          |

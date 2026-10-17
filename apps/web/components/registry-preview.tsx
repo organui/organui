@@ -3,6 +3,7 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
+import { OrganPreview } from "@/components/organ-explorer"
 
 function AnatomyTreePreview() {
   const [selectedId, setSelectedId] = useState<string | null>("lv")
@@ -20,28 +21,39 @@ function AnatomyTreePreview() {
   )
 }
 
+function OrganViewerPreview() {
+  return <OrganPreview name="heart-viewer" organ="Heart" />
+}
+
 // Live previews on the registry index, keyed by registry item name. The
 // browser suite requires one for every catalog item.
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
+  "organ-viewer": OrganViewerPreview,
 }
 
 export function RegistryPreview({
   name,
   title,
+  organ,
 }: {
   name: string
   title: string
+  organ: boolean
 }) {
   const Preview = previews[name]
-  if (!Preview) return null
+  if (!organ && !Preview) return null
   return (
     <div
       role="region"
       aria-label={`${title} preview`}
       className="rounded-lg border bg-muted/30 p-4"
     >
-      <Preview />
+      {organ ? (
+        <OrganPreview name={name} organ={title.replace(/ viewer$/, "")} />
+      ) : (
+        Preview && <Preview />
+      )}
     </div>
   )
 }

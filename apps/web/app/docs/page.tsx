@@ -91,7 +91,11 @@ export default function Page() {
                 </Link>
               </h3>
               <p className="text-muted-foreground">{item.description}</p>
-              <RegistryPreview name={item.name} title={item.title} />
+              <RegistryPreview
+                name={item.name}
+                title={item.title}
+                organ={item.organ}
+              />
               <pre
                 tabIndex={0}
                 role="region"

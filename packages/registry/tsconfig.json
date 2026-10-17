@@ -1,5 +1,10 @@
 {
   "extends": "@workspace/typescript-config/react-library.json",
-  "compilerOptions": { "types": ["bun"] },
+  // Registry source is copied into apps that resolve imports like a bundler.
+  "compilerOptions": {
+    "types": ["bun"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  },
   "include": ["registry", "scripts", "tests"]
 }

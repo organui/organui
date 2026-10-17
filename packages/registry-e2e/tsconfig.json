@@ -1,5 +1,12 @@
 {
   "extends": "@workspace/typescript-config/base.json",
-  "compilerOptions": { "types": ["bun"], "noEmit": true },
+  // Tests import registry source, which resolves imports like a bundler.
+  "compilerOptions": {
+    "types": ["bun"],
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  },
   "include": ["scripts", "tests", "playwright.config.ts"]
 }

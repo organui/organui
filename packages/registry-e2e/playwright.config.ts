@@ -5,7 +5,12 @@ export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: true,
   retries: 0,
-  use: { browserName: "chromium", trace: "retain-on-failure" },
+  use: {
+    browserName: "chromium",
+    trace: "retain-on-failure",
+    // Headless Chromium only offers WebGL through SwiftShader when asked.
+    launchOptions: { args: ["--enable-unsafe-swiftshader"] },
+  },
   projects: [
     {
       name: "docs-desktop",
@@ -25,7 +30,7 @@ export default defineConfig({
     },
     {
       name: "next-desktop",
-      testMatch: "**/anatomy.spec.ts",
+      testMatch: "**/{anatomy,organ}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4318",
         viewport: { width: 1280, height: 900 },
@@ -33,7 +38,7 @@ export default defineConfig({
     },
     {
       name: "vite-mobile",
-      testMatch: "**/anatomy.spec.ts",
+      testMatch: "**/{anatomy,organ}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4319",
         viewport: { width: 390, height: 844 },

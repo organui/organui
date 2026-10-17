@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./anatomy-tree": "./registry/base-nova/anatomy-tree/anatomy-tree.tsx",
+    "./organ-viewer/*": "./registry/base-nova/organ-viewer/*.tsx",
     "./registry.json": "./registry.json",
     "./dist/*": "./dist/*"
   },
@@ -12,11 +13,12 @@
     "build": "bun scripts/build.ts",
     "lint": "eslint registry --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test": "bun test tests/model.test.ts"
+    "test": "bun test tests"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
-    "cn": "^0.4.0"
+    "cn": "^0.4.0",
+    "three": "^0.186.0"
   },
   "peerDependencies": {
     "react": "^19",
@@ -26,6 +28,7 @@
     "@types/bun": "1.4.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "eslint": "^9",
