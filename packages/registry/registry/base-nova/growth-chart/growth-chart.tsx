@@ -213,12 +213,15 @@ export function GrowthChart({
   // Length switches to height at 24 months, so each curve has a segment on
   // either side of it.
   const segments: [number, number][] =
-    measure === "length" && from < 24 && to > 24
-      ? [
-          [from, 24 - 1e-9],
-          [24, to],
-        ]
-      : [[from, to]]
+    measure !== "length" || from >= 24
+      ? [[from, to]]
+      : to > 24
+        ? [
+            [from, 24 - 1e-9],
+            [24, to],
+          ]
+        : // A range ending at 24 months stays on the length standard.
+          [[from, 24 - 1e-9]]
   const samples = segments.map(([start, end]) => {
     const ages = [start]
     for (let age = Math.floor(start) + 1; age < end; age++) ages.push(age)
