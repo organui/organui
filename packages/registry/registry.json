@@ -57,6 +57,25 @@
       "docs": "ECG trace docs: https://organui.com/docs/ecg-trace"
     },
     {
+      "name": "body-map",
+      "type": "registry:ui",
+      "title": "Body map",
+      "description": "Pick regions on a front and back body outline to record where pain or symptoms are.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/base-nova/body-map/body-map.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Body map docs: https://organui.com/docs/body-map"
+    },
+    {
       "name": "organ-viewer",
       "type": "registry:component",
       "title": "Organ viewer",

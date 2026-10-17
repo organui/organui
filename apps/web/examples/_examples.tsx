@@ -61,6 +61,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "body-map-demo": {
+    title: "Body map",
+    file: "body-map-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./body-map-demo")
+      return <Example />
+    },
+  },
   "ecg-trace-demo": {
     title: "ECG trace",
     file: "ecg-trace-demo.tsx",

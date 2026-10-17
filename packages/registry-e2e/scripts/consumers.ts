@@ -155,6 +155,15 @@ export default function DermatomeHarness(){
  const [selectedId,select]=useState<DermatomeId|null>(null)
  return <main style={{maxWidth:960,margin:"auto",padding:20}}><h1>Installed dermatome map</h1><DermatomeMap selectedId={selectedId} onSelectionChange={select} colors={{L4:"rgb(10, 20, 30)"}}/><output aria-label="Selected">{selectedId??"none"}</output><button onClick={()=>select("T10")}>Select T10</button></main>
 }`
+// The body map inside a form, so the hidden inputs are checked too.
+const bodyMapHarness = `"use client"
+import { useState } from "react"
+import { BodyMap } from "@/components/ui/body-map"
+export default function BodyMapHarness(){
+ const [value,setValue]=useState<string[]>([])
+ const [submitted,setSubmitted]=useState("")
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed body map</h1><form onSubmit={(event)=>{event.preventDefault();setSubmitted(new FormData(event.currentTarget).getAll("regions").join(","))}}><BodyMap label="Where does it hurt?" value={value} onValueChange={setValue} name="regions"/><button type="submit">Submit</button></form><output aria-label="Value">{value.join(",")}</output><output aria-label="Submitted">{submitted}</output><button onClick={()=>setValue(["gone","neck"])}>Unknown ID</button></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -281,6 +290,7 @@ try {
     await put(dir, "src/molecule-harness.tsx", source(moleculeHarness))
     await put(dir, "src/medication-harness.tsx", source(medicationHarness))
     await put(dir, "src/ecg-harness.tsx", source(ecgHarness))
+    await put(dir, "src/body-map-harness.tsx", source(bodyMapHarness))
     await put(dir, "src/dermatome-harness.tsx", source(dermatomeHarness))
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
@@ -332,6 +342,11 @@ try {
       )
       await put(
         dir,
+        "src/app/body-map/page.tsx",
+        'export {default} from "../../body-map-harness"'
+      )
+      await put(
+        dir,
         "src/app/layout.tsx",
         'import "../globals.css"; export const metadata = {title:"Anatomy tree consumer"}; export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}'
       )
@@ -345,7 +360,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(
@@ -480,6 +495,7 @@ try {
       "vital-signs",
       "ecg-trace",
       "dermatome-map",
+      "body-map",
     ])
       await run(
         [
@@ -534,6 +550,7 @@ try {
       "medication-schedule",
       "ecg-trace",
       "dermatome-map",
+      "body-map",
     ]) {
       const installed = await readFile(
         resolve(dir, `${uiDir}/${name}.tsx`),
