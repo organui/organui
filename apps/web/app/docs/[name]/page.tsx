@@ -66,6 +66,8 @@ const data = organAnatomyNodes(${exportName})
 //   visibility={visibility} onVisibilityChange={show} />
 // <${component} selectedId={selectedId} onSelectionChange={select}
 //   visibility={visibility} />`
+  // Models the site ships come from organ-models.ts as same-origin paths.
+  const selfServed = model.src.startsWith("/")
   return (
     <div className="flex flex-col gap-10">
       <header className="flex flex-col gap-4">
@@ -74,9 +76,10 @@ const data = organAnatomyNodes(${exportName})
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          The {model.name.toLowerCase()} from the OrganUI explorer, ready to
-          drop into your app: {model.structures.length} selectable structures
-          and {model.views.length} named views, built on the{" "}
+          The {model.name.toLowerCase()} from{" "}
+          {selfServed ? "OrganUI" : "the OrganUI explorer"}, ready to drop into
+          your app: {model.structures.length} selectable structures and{" "}
+          {model.views.length} named views, built on the{" "}
           <Link href="/docs/organ-viewer" className="underline">
             organ viewer
           </Link>
@@ -168,8 +171,9 @@ const data = organAnatomyNodes(${exportName})
           elsewhere.
         </p>
         <p>
-          The GLB loads from a commit-pinned copy in the explorer repository,
-          where its{" "}
+          {selfServed
+            ? "The GLB is built and served by this site, and its "
+            : "The GLB loads from a commit-pinned copy in the explorer repository, where its "}
           <a className="underline" href={model.attribution.source}>
             provenance and changes
           </a>{" "}

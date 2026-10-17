@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/hubmapconsortium/ccf-3d-reference-object-library",
+  "commit": "f1a3a63f110e27ff0736047d52d04dba5d3087f9",
+  "crosswalk": {
+    "repository": "https://github.com/hubmapconsortium/ccf-releases",
+    "commit": "b036a91aaf7234f462b1249d4a5f4fb0e982f412",
+    "path": "v2.0/models/asct-b-3d-models-crosswalk.csv",
+    "doi": "https://doi.org/10.48539/HBM595.JNGT.446",
+    "sha256": "3c39c2d13d5e44562e7ce291fc4d1111279cef6c92eeefc2b68e20013d0b7f80"
+  },
+  "files": [
+    {
+      "side": "left",
+      "path": "VH_Female/v1.3/VH_F_mammary_gland_L.glb",
+      "sha256": "5181797d8b669580d0243684ce10e61657881178c9bd56b4ba338547ecb1099e",
+      "title": "3D Reference Organ for Breast (mammary gland), Female left, v1.0",
+      "doi": "https://doi.org/10.48539/HBM378.VWZG.633"
+    },
+    {
+      "side": "right",
+      "path": "VH_Female/v1.3/VH_F_mammary_gland_R.glb",
+      "sha256": "7fb6c2dd90190a80dbcca487e3aaa27cc801d1c66a205840ea36a6c851082ff0",
+      "title": "3D Reference Organ for Breast (mammary gland), Female right, v1.0",
+      "doi": "https://doi.org/10.48539/HBM989.SNHP.535"
+    }
+  ]
+}

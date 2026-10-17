@@ -141,6 +141,37 @@
       ]
     },
     {
+      "name": "breast",
+      "type": "registry:component",
+      "title": "Breast",
+      "description": "Both breasts from the HuBMAP Human Reference Atlas: 16 selectable structures and 3 named views. Model licensed CC BY 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/breast.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "ear",
       "type": "registry:component",
       "title": "Ear",

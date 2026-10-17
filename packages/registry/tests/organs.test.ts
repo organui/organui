@@ -11,6 +11,7 @@ const directory = new URL(
   "../registry/base-nova/organ-viewer/",
   import.meta.url
 )
+const siteModels = new URL("../../../apps/web/public/models/", import.meta.url)
 const organItems = registry.items.filter(
   (item) => "categories" in item && item.categories?.includes("organ")
 )
@@ -45,11 +46,36 @@ for (const item of organItems) {
       for (const id of view.structureIds ?? []) expect(ids).toContain(id)
     }
     for (const id of model.hiddenIds ?? []) expect(ids).toContain(id)
-    // Models stay in their explorer repositories, pinned to a full commit.
+    // Models stay in their explorer repositories, pinned to a full commit, or
+    // ship with the site and are served from organui.com/models.
     expect(model.src).toMatch(
-      /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$/
+      /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$|^https:\/\/organui\.com\/models\/[a-z-]+\.glb$/
     )
     expect(model.attribution.source).toStartWith("https://github.com/organui/")
+    if (model.src.startsWith("https://organui.com/")) {
+      expect(model.attribution.source).toStartWith(
+        "https://github.com/organui/organui/"
+      )
+      const file = model.src.replace("https://organui.com/models/", "")
+      const glb = new Uint8Array(
+        await Bun.file(new URL(file, siteModels)).arrayBuffer()
+      )
+      expect(glb.byteLength).toBe(model.bytes!)
+      const view = new DataView(glb.buffer)
+      expect(view.getUint32(0, true)).toBe(0x46546c67)
+      const json = JSON.parse(
+        new TextDecoder().decode(
+          glb.subarray(20, 20 + view.getUint32(12, true))
+        )
+      ) as { nodes: { name?: string }[] }
+      const names = json.nodes.map(({ name }) => name)
+      for (const id of ids) expect(names).toContain(id)
+      expect(
+        await Bun.file(
+          new URL(file.replace(/\.glb$/, ".ATTRIBUTION.md"), siteModels)
+        ).exists()
+      ).toBe(true)
+    }
     expect(model.attribution.licenseUrl).toStartWith("https://")
     expect(item.description).toContain(model.attribution.license)
     const nodes = organAnatomyNodes(model)

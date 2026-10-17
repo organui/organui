@@ -16,6 +16,12 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/brain").then(
       (module) => module.brainModel
     ),
+  // Served by this site, so docs and previews load it from the same origin.
+  breast: () =>
+    import("@workspace/registry/organ-viewer/breast").then((module) => ({
+      ...module.breastModel,
+      src: "/models/breast.glb",
+    })),
   ear: () =>
     import("@workspace/registry/organ-viewer/ear").then(
       (module) => module.earModel

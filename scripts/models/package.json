@@ -1,0 +1,14 @@
+{
+  "name": "organui-model-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Prepares anatomy models that OrganUI serves itself. Not a workspace, so the site never installs these.",
+  "scripts": {
+    "breast": "bun breast.ts"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.5.0",
+    "@gltf-transform/functions": "4.5.0",
+    "meshoptimizer": "0.22.0"
+  }
+}
