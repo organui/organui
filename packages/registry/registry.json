@@ -48,6 +48,24 @@
       ]
     },
     {
+      "name": "medication-schedule",
+      "type": "registry:ui",
+      "title": "Medication schedule",
+      "description": "A daily dosing timeline with dose tracking and interaction warnings from data you provide.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "registryDependencies": ["alert", "button"],
+      "files": [
+        {
+          "path": "registry/base-nova/medication-schedule/medication-schedule.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "adrenals",
       "type": "registry:component",
       "title": "Adrenals",
