@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Button } from "@base-ui/react/button"
+import { cn } from "cn"
 
 export type AnatomyNode = {
   id: string
@@ -176,7 +177,7 @@ export function AnatomyTree({
   onVisibilityChange,
   defaultExpandedIds = [],
   label = "Anatomy",
-  className = "",
+  className,
 }: AnatomyTreeProps) {
   const index = React.useMemo(() => anatomyIndex(data), [data])
   const [expanded, setExpanded] = React.useState(
@@ -256,7 +257,10 @@ export function AnatomyTree({
   }
   return (
     <section
-      className={`rounded-xl border bg-background p-4 text-foreground ${className}`}
+      className={cn(
+        "rounded-xl border bg-background p-4 text-foreground",
+        className
+      )}
     >
       <label htmlFor={searchId} className="mb-2 block text-sm font-medium">
         Search {label.toLocaleLowerCase()}
@@ -361,7 +365,7 @@ export function AnatomyTree({
                 if (event.key === "Enter") activate(node)
                 if (event.key === " ") toggleVisibility(node)
               }}
-              className="my-1 flex min-h-10 items-center gap-1 rounded-md px-2 text-sm outline-offset-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring aria-selected:bg-accent aria-selected:font-semibold"
+              className="my-1 flex min-h-10 items-center gap-1 rounded-md px-2 text-sm outline-offset-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring aria-selected:bg-accent aria-selected:font-semibold aria-selected:text-accent-foreground"
               style={{ paddingInlineStart: `${(level - 1) * 1.25 + 0.5}rem` }}
             >
               {branch ? (
@@ -373,7 +377,7 @@ export function AnatomyTree({
                     focus(node.id)
                     toggleExpanded(node.id)
                   }}
-                  className="size-8 shrink-0 rounded hover:bg-accent"
+                  className="size-8 shrink-0 rounded hover:bg-accent hover:text-accent-foreground"
                 >
                   {open ? "−" : "+"}
                 </Button>

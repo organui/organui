@@ -48,8 +48,8 @@ export function Panel() {
 }`
 export default function Page() {
   return (
-    <div className="space-y-10">
-      <header className="space-y-4">
+    <div className="flex flex-col gap-10">
+      <header className="flex flex-col gap-4">
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
           Components / Anatomy
         </p>
@@ -60,7 +60,7 @@ export default function Page() {
         </p>
       </header>
       <Example />
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <p>
           In a React 19 project configured with shadcn, Tailwind CSS 4, and the
@@ -97,7 +97,7 @@ export default function Page() {
           View registry item JSON
         </a>
       </section>
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Connect your state</h2>
         <pre
           tabIndex={0}
@@ -115,7 +115,7 @@ export default function Page() {
           to highlight your viewer.
         </p>
       </section>
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Visibility and search</h2>
         <p>
           Visibility is controlled by a map of leaf IDs to booleans. Missing
@@ -133,7 +133,7 @@ export default function Page() {
           remains unchanged even when its row is filtered out.
         </p>
       </section>
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Keyboard and data updates</h2>
         <p>
           Tab enters the search field, then the tree as one tab stop. Up/Down
@@ -162,7 +162,7 @@ export default function Page() {
           <code>color</code> to show a matching swatch before its label.
         </p>
       </section>
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Customize</h2>
         <p>
           Set <code>label</code> for the accessible tree name and search label,{" "}

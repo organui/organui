@@ -23,7 +23,9 @@ Or register the namespace once in `components.json`:
 }
 ```
 
-and run `bunx shadcn@4.21.0 add @organui/anatomy-tree`. See
+and run `bunx shadcn@4.21.0 add @organui/anatomy-tree`. The repository is also
+a GitHub registry, so `bunx shadcn@4.21.0 add organui/organui/anatomy-tree`
+installs straight from source (append `#<commit>` to pin a version). See
 [the anatomy tree documentation](https://organui.com/docs/anatomy-tree).
 
 ## Repository

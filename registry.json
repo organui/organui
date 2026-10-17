@@ -1,0 +1,6 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "organui",
+  "homepage": "https://organui.com",
+  "include": ["packages/registry/registry.json"]
+}

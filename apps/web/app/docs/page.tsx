@@ -39,8 +39,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="space-y-10">
-      <header className="space-y-4">
+    <div className="flex flex-col gap-10">
+      <header className="flex flex-col gap-4">
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
           Getting started
         </p>
@@ -51,7 +51,7 @@ export default function Page() {
           you own and edit it.
         </p>
       </header>
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Set up</h2>
         <p>
           Start from a React 19 project configured with shadcn, Tailwind CSS 4
@@ -68,16 +68,19 @@ export default function Page() {
         </pre>
         <p>
           Then run <code>bunx {shadcn} add @organui/&lt;name&gt;</code>, or
-          install any item by its full URL as listed below.
+          install any item by its full URL as listed below. The repository is
+          also a GitHub registry:{" "}
+          <code>bunx {shadcn} add organui/organui/&lt;name&gt;</code> installs
+          straight from source.
         </p>
       </section>
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Registry</h2>
         <ul className="grid gap-4">
           {registryItems.map((item) => (
             <li
               key={item.name}
-              className="min-w-0 space-y-3 rounded-xl border p-5"
+              className="flex min-w-0 flex-col gap-3 rounded-xl border p-5"
             >
               <h3 className="text-lg font-semibold">
                 <Link

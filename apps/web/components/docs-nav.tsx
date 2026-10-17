@@ -16,13 +16,13 @@ export function DocsNav({
 }) {
   const pathname = usePathname()
   return (
-    <nav aria-label="Documentation" className="space-y-6 text-sm">
+    <nav aria-label="Documentation" className="flex flex-col gap-6 text-sm">
       {sections.map((section) => (
-        <div key={section.title} className="space-y-1">
+        <div key={section.title} className="flex flex-col gap-1">
           <h2 className="px-2 text-xs font-medium text-muted-foreground">
             {section.title}
           </h2>
-          <ul className="space-y-0.5">
+          <ul className="flex flex-col gap-0.5">
             {section.items.map((item) => {
               const active = pathname === item.href
               return (
