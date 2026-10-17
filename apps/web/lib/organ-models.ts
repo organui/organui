@@ -124,4 +124,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/vessels").then(
       (module) => module.vesselsModel
     ),
+  // Hosted by this site; the published item points at organui.com.
+  vestibular: () =>
+    import("@workspace/registry/organ-viewer/vestibular").then((module) => ({
+      ...module.vestibularModel,
+      src: "/models/vestibular.glb",
+    })),
 }
