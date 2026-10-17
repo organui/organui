@@ -1,8 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { Button } from "@base-ui/react/button"
 import { cn } from "cn"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export type AnatomyNode = {
   id: string
@@ -265,13 +267,13 @@ export function AnatomyTree({
       <label htmlFor={searchId} className="mb-2 block text-sm font-medium">
         Search {label.toLocaleLowerCase()}
       </label>
-      <input
+      <Input
         ref={search}
         id={searchId}
         type="search"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        className="mb-3 w-full rounded-md border bg-background px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+        className="mb-3"
       />
       <p id={helpId} className="mb-3 text-xs text-muted-foreground">
         {groupsExpand
@@ -365,11 +367,13 @@ export function AnatomyTree({
                 if (event.key === "Enter") activate(node)
                 if (event.key === " ") toggleVisibility(node)
               }}
-              className="my-1 flex min-h-10 items-center gap-1 rounded-md px-2 text-sm outline-offset-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring aria-selected:bg-accent aria-selected:font-semibold aria-selected:text-accent-foreground"
+              className="group/row my-1 flex min-h-10 items-center gap-1 rounded-md px-2 text-sm outline-offset-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring aria-selected:bg-accent aria-selected:font-semibold aria-selected:text-accent-foreground"
               style={{ paddingInlineStart: `${(level - 1) * 1.25 + 0.5}rem` }}
             >
               {branch ? (
                 <Button
+                  variant="ghost"
+                  size="icon"
                   tabIndex={-1}
                   aria-label={`${open ? "Collapse" : "Expand"} ${node.label}`}
                   disabled={searching}
@@ -377,7 +381,7 @@ export function AnatomyTree({
                     focus(node.id)
                     toggleExpanded(node.id)
                   }}
-                  className="size-8 shrink-0 rounded hover:bg-accent hover:text-accent-foreground"
+                  className="hover:bg-accent hover:text-accent-foreground"
                 >
                   {open ? "−" : "+"}
                 </Button>
@@ -385,12 +389,14 @@ export function AnatomyTree({
                 <span className="w-8 shrink-0" />
               )}
               <Button
+                variant="ghost"
                 tabIndex={-1}
                 onClick={() => {
                   focus(node.id)
                   activate(node)
                 }}
-                className="flex min-w-0 flex-1 items-center gap-2 py-2 text-start break-words"
+                // The row carries hover and selection styling.
+                className="h-auto min-w-0 flex-1 justify-start gap-2 px-0 py-2 text-start font-normal break-words whitespace-normal group-aria-selected/row:font-semibold hover:bg-transparent hover:text-inherit dark:hover:bg-transparent"
               >
                 {node.color && (
                   <span
@@ -402,6 +408,8 @@ export function AnatomyTree({
                 <span className="min-w-0">{node.label}</span>
               </Button>
               <Button
+                variant="outline"
+                size="xs"
                 tabIndex={-1}
                 // Starts with the visible state so voice control can target it.
                 aria-label={`${state}: ${checked === true ? "hide" : "show"} ${node.label}`}
@@ -409,7 +417,6 @@ export function AnatomyTree({
                   focus(node.id)
                   toggleVisibility(node)
                 }}
-                className="shrink-0 rounded border px-2 py-1 text-xs"
               >
                 {state}
               </Button>

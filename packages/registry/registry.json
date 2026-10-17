@@ -8,8 +8,8 @@
       "type": "registry:ui",
       "title": "Anatomy tree",
       "description": "Search, select and control visibility in hierarchical anatomy data.",
-      "dependencies": ["@base-ui/react@^1.8.0", "cn@^0.4.0"],
-      "registryDependencies": [],
+      "dependencies": ["cn@^0.4.0"],
+      "registryDependencies": ["button", "input"],
       "files": [
         {
           "path": "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
@@ -24,7 +24,13 @@
       "description": "Rotate, frame and select the structures of a GLB anatomy model, with ghosting and named views.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "files": [
         {
           "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
@@ -39,7 +45,13 @@
       "description": "The adrenals from the OrganUI adrenals explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -59,7 +71,13 @@
       "description": "The bladder from the OrganUI bladder explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -79,7 +97,13 @@
       "description": "The brain from the OrganUI brain explorer: 19 selectable structures and 6 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -99,7 +123,13 @@
       "description": "The ear from the OrganUI ear explorer: 16 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -119,7 +149,13 @@
       "description": "The esophagus from the OrganUI esophagus explorer: 17 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -139,7 +175,13 @@
       "description": "The eye from the OrganUI eye explorer: 21 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -159,7 +201,13 @@
       "description": "The gallbladder from the OrganUI gallbladder explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -179,7 +227,13 @@
       "description": "The heart from the OrganUI heart explorer: 11 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -199,7 +253,13 @@
       "description": "The intestines from the OrganUI intestines explorer: 11 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -219,7 +279,13 @@
       "description": "The kidneys from the OrganUI kidneys explorer: 6 selectable structures and 4 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -239,7 +305,13 @@
       "description": "The larynx from the OrganUI larynx explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -259,7 +331,13 @@
       "description": "The liver from the OrganUI liver explorer: 7 selectable structures and 5 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -279,7 +357,13 @@
       "description": "The lungs from the OrganUI lungs explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -299,7 +383,13 @@
       "description": "The lymph node from the OrganUI lymph node explorer: 7 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -319,7 +409,13 @@
       "description": "The muscles from the OrganUI muscles explorer: 177 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -339,7 +435,13 @@
       "description": "The nose from the OrganUI nose explorer: 22 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -359,7 +461,13 @@
       "description": "The pancreas from the OrganUI pancreas explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -379,7 +487,13 @@
       "description": "The pharynx from the OrganUI pharynx explorer: 20 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -399,7 +513,13 @@
       "description": "The prostate from the OrganUI prostate explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -419,7 +539,13 @@
       "description": "The skeleton from the OrganUI skeleton explorer: 242 selectable structures and 8 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -439,7 +565,13 @@
       "description": "The skin from the OrganUI skin explorer: 13 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -459,7 +591,13 @@
       "description": "The spinal cord from the OrganUI spinal cord explorer: 63 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -479,7 +617,13 @@
       "description": "The spleen from the OrganUI spleen explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -499,7 +643,13 @@
       "description": "The stomach from the OrganUI stomach explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -519,7 +669,13 @@
       "description": "The teeth from the OrganUI teeth explorer: 33 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -539,7 +695,13 @@
       "description": "The thymus from the OrganUI thymus explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -559,7 +721,13 @@
       "description": "The thyroid from the OrganUI thyroid explorer: 18 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -579,7 +747,13 @@
       "description": "The tongue from the OrganUI tongue explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -599,7 +773,13 @@
       "description": "The uterus from the OrganUI uterus explorer: 27 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {
@@ -619,7 +799,13 @@
       "description": "The vessels from the OrganUI vessels explorer: 51 selectable structures and 6 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
       "categories": ["organ"],
       "files": [
         {

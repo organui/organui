@@ -88,10 +88,11 @@ export default function Page() {
           {registryNamespace}
         </pre>
         <p className="text-sm text-muted-foreground">
-          The source installs into your configured UI directory and adds
-          @base-ui/react. It uses your existing theme tokens; it installs no
-          global styles, registry dependencies, or 3D packages. Tested
-          configurations are documented in the repository.
+          The source installs into your configured UI directory, along with
+          shadcn&apos;s <code>button</code> and <code>input</code> if you do not
+          have them yet. It uses your existing theme tokens; it installs no
+          global styles or 3D packages. Tested configurations are documented in
+          the repository.
         </p>
         <a className="underline" href="/r/anatomy-tree.json">
           View registry item JSON
@@ -174,10 +175,10 @@ export default function Page() {
         </p>
         <p className="text-sm text-muted-foreground">
           Designed for small to medium in-memory trees. No virtualization, lazy
-          loading, drag and drop, multiselection, or viewer implementation. Base
-          UI buttons are a direct dependency; compatibility with Radix-based
-          presets is not claimed. Keyboard/browser checks do not replace a
-          screen-reader usability audit.
+          loading, drag and drop, multiselection, or viewer implementation.
+          Built on shadcn&apos;s Base UI components; compatibility with
+          Radix-based presets is not claimed. Keyboard/browser checks do not
+          replace a screen-reader usability audit.
         </p>
       </section>
     </div>

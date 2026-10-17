@@ -271,13 +271,28 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   // The panel starts closed; opening it moves focus to its search field.
+  // Phones get a sheet, which covers the viewer until it is closed.
+  const phone = (page.viewportSize()?.width ?? 0) < 1024
   await expect(page.getByRole("tree")).toHaveCount(0)
   const anatomy = page.getByRole("button", { name: "Anatomy", exact: true })
+  await expect(anatomy).toHaveAttribute("aria-pressed", "false")
   await anatomy.click()
+  // A modal sheet hides the rest of the page, the toggle included.
+  if (phone)
+    await expect(
+      page.getByRole("dialog", { name: "Heart anatomy" })
+    ).toBeVisible()
+  else await expect(anatomy).toHaveAttribute("aria-pressed", "true")
   await expect(page.getByRole("searchbox")).toBeFocused()
   await page.getByRole("button", { name: "Left atrium", exact: true }).click()
+  if (phone) {
+    await page.keyboard.press("Escape")
+    await expect(page.getByRole("dialog")).toHaveCount(0)
+    await expect(anatomy).toBeFocused()
+  }
   await expect(page.getByRole("status").last()).toContainText("Left atrium:")
   await viewer.click()
+  if (phone) await anatomy.click()
   await expect(
     page.getByRole("treeitem", { name: "Right atrium", exact: true })
   ).toHaveAttribute("aria-selected", "true")
@@ -285,6 +300,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   await page.keyboard.press("Escape")
   await expect(page.getByRole("tree")).toHaveCount(0)
   await expect(anatomy).toBeFocused()
+  await expect(anatomy).toHaveAttribute("aria-pressed", "false")
   await expect(
     page.getByRole("region", { name: "Installation command" })
   ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/heart.json")

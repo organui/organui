@@ -4,7 +4,12 @@
   "compilerOptions": {
     "types": ["bun"],
     "module": "ESNext",
-    "moduleResolution": "Bundler"
+    "moduleResolution": "Bundler",
+    // Items import shadcn components from the consumer's ui alias. Here that
+    // alias points at the base-nova copies the docs site installs.
+    "paths": {
+      "@/components/ui/*": ["../ui/src/components/*"]
+    }
   },
   "include": ["registry", "scripts", "tests"]
 }

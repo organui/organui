@@ -74,6 +74,9 @@ try {
     await rm(dir, { recursive: true, force: true })
     await mkdir(dir, { recursive: true })
     const dependencies = {
+      // shadcn init installs the configured icon library, which shadcn's own
+      // components (such as select) import.
+      "lucide-react": "1.47.0",
       react: "19.2.4",
       "react-dom": "19.2.4",
       tailwindcss: "4.2.2",

@@ -25,6 +25,23 @@ import {
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 export type OrganStructure = {
   /** Mesh name, or `userData.structureId`, of the structure in the GLB. */
   id: string
@@ -259,8 +276,33 @@ const iconProps = {
   "aria-hidden": true,
 }
 
-const button =
-  "inline-flex size-8 items-center justify-center rounded-md text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring disabled:opacity-50"
+function ToolbarButton({
+  label,
+  onClick,
+  children,
+}: {
+  label: string
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={label}
+            onClick={onClick}
+          />
+        }
+      >
+        {children}
+      </TooltipTrigger>
+      <TooltipContent side="bottom">{label}</TooltipContent>
+    </Tooltip>
+  )
+}
 
 export function OrganViewer({
   model,
@@ -700,89 +742,81 @@ export function OrganViewer({
         and minus to zoom. Click a structure to select it.
       </p>
       {message ? (
-        <div
-          role="alert"
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center"
-        >
-          <p className="font-medium">{message.title}</p>
-          <p className="max-w-sm text-muted-foreground">{message.text}</p>
-          <button
-            type="button"
-            onClick={retry}
-            className="rounded-md border bg-background px-3 py-1.5 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            Try again
-          </button>
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <Alert className="max-w-sm">
+            <svg {...iconProps}>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4M12 16h.01" />
+            </svg>
+            <AlertTitle>{message.title}</AlertTitle>
+            <AlertDescription>
+              <p>{message.text}</p>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={retry}
+                className="mt-3 text-foreground"
+              >
+                Try again
+              </Button>
+            </AlertDescription>
+          </Alert>
         </div>
       ) : !scene ? (
         <div
           role="status"
           className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6"
         >
-          <progress
+          <Progress
             value={progress}
-            max={100}
             aria-label={`Loading ${model.name.toLowerCase()} model`}
-            className="h-1.5 w-40 overflow-hidden rounded-full accent-foreground"
+            className="w-40"
           />
           <p className="text-muted-foreground">{progress}% · Loading anatomy</p>
         </div>
       ) : null}
       {engine && controls && (
-        <div
-          role="toolbar"
-          aria-label="View controls"
-          className="absolute top-2 right-2 flex items-center gap-0.5 rounded-lg border bg-background/90 p-1 shadow-sm backdrop-blur"
-        >
-          <select
-            aria-label="View"
-            value={view ?? ""}
-            onChange={(event) => engine.setView(event.target.value)}
-            className="h-8 rounded-md bg-transparent px-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
+        <TooltipProvider>
+          <div
+            role="toolbar"
+            aria-label="View controls"
+            className="absolute top-2 right-2 flex items-center gap-0.5 rounded-lg border bg-background/90 p-1 shadow-sm backdrop-blur"
           >
-            {view === null && (
-              <option value="" disabled>
-                Custom view
-              </option>
-            )}
-            {model.views.map(({ name }) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          <button
-            type="button"
-            aria-label="Zoom in"
-            className={button}
-            onClick={() => engine.zoom(0.85)}
-          >
-            <svg {...iconProps}>
-              <path d="M5 12h14M12 5v14" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            aria-label="Zoom out"
-            className={button}
-            onClick={() => engine.zoom(1.18)}
-          >
-            <svg {...iconProps}>
-              <path d="M5 12h14" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            aria-label="Reset view"
-            className={button}
-            onClick={() => engine.reset()}
-          >
-            <svg {...iconProps}>
-              <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
-              <path d="M3 3v5h5" />
-            </svg>
-          </button>
-        </div>
+            <Select
+              value={view}
+              onValueChange={(next) => {
+                if (next) engine.setView(next)
+              }}
+            >
+              <SelectTrigger aria-label="View" className="border-transparent">
+                <SelectValue placeholder="Custom view" />
+              </SelectTrigger>
+              <SelectContent>
+                {model.views.map(({ name }) => (
+                  <SelectItem key={name} value={name}>
+                    {name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <ToolbarButton label="Zoom in" onClick={() => engine.zoom(0.85)}>
+              <svg {...iconProps}>
+                <path d="M5 12h14M12 5v14" />
+              </svg>
+            </ToolbarButton>
+            <ToolbarButton label="Zoom out" onClick={() => engine.zoom(1.18)}>
+              <svg {...iconProps}>
+                <path d="M5 12h14" />
+              </svg>
+            </ToolbarButton>
+            <ToolbarButton label="Reset view" onClick={() => engine.reset()}>
+              <svg {...iconProps}>
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                <path d="M3 3v5h5" />
+              </svg>
+            </ToolbarButton>
+          </div>
+        </TooltipProvider>
       )}
       {engine && !interacted && (
         <p

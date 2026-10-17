@@ -112,8 +112,9 @@ const data = organAnatomyNodes(${exportName})
         </pre>
         <p className="text-sm text-muted-foreground">
           This adds <code>organ-viewer.tsx</code> and <code>{name}.tsx</code> to
-          your components directory and installs three.js. Installing a second
-          organ reuses the same <code>organ-viewer.tsx</code>.
+          your components directory and installs three.js and the shadcn
+          components the viewer&apos;s controls use. Installing a second organ
+          reuses the same <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>
           View registry item JSON

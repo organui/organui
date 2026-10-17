@@ -79,8 +79,11 @@ export default async function Page() {
           {`bunx ${shadcn} add ${site.url}/r/organ-viewer.json`}
         </pre>
         <p className="text-sm text-muted-foreground">
-          The source installs into your components directory and adds three.js.
-          It uses your theme tokens and installs no global styles.
+          The source installs into your components directory and adds three.js,
+          plus shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
+          <code>progress</code>, <code>select</code> and <code>tooltip</code>{" "}
+          for its controls. It uses your theme tokens and installs no global
+          styles.
         </p>
         <a className="underline" href="/r/organ-viewer.json">
           View registry item JSON

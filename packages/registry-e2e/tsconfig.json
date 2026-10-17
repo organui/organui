@@ -6,7 +6,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "module": "ESNext",
-    "moduleResolution": "Bundler"
+    "moduleResolution": "Bundler",
+    // Matches packages/registry, so its shadcn imports resolve here too.
+    "paths": {
+      "@/components/ui/*": ["../ui/src/components/*"]
+    }
   },
   "include": ["scripts", "tests", "playwright.config.ts"]
 }
