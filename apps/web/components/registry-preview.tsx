@@ -3,6 +3,7 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
+import { BodyMap } from "@workspace/registry/body-map"
 import { OrganPreview } from "@/components/organ-preview"
 
 function AnatomyTreePreview() {
@@ -21,6 +22,17 @@ function AnatomyTreePreview() {
   )
 }
 
+function BodyMapPreview() {
+  const [value, setValue] = useState<string[]>(["left-shoulder"])
+  return (
+    <BodyMap
+      value={value}
+      onValueChange={setValue}
+      className="mx-auto max-w-md"
+    />
+  )
+}
+
 function OrganViewerPreview() {
   return <OrganPreview name="heart" organ="Heart" />
 }
@@ -29,6 +41,7 @@ function OrganViewerPreview() {
 // browser suite requires one for every catalog item.
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
+  "body-map": BodyMapPreview,
   "organ-viewer": OrganViewerPreview,
 }
 

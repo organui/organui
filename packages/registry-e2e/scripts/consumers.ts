@@ -64,6 +64,15 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+// The body map inside a form, so the hidden inputs are checked too.
+const bodyMapHarness = `"use client"
+import { useState } from "react"
+import { BodyMap } from "@/components/ui/body-map"
+export default function BodyMapHarness(){
+ const [value,setValue]=useState<string[]>([])
+ const [submitted,setSubmitted]=useState("")
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed body map</h1><form onSubmit={(event)=>{event.preventDefault();setSubmitted(new FormData(event.currentTarget).getAll("regions").join(","))}}><BodyMap label="Where does it hurt?" value={value} onValueChange={setValue} name="regions"/><button type="submit">Submit</button></form><output aria-label="Value">{value.join(",")}</output><output aria-label="Submitted">{submitted}</output><button onClick={()=>setValue(["gone","neck"])}>Unknown ID</button></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -167,6 +176,7 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/body-map-harness.tsx", bodyMapHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -178,6 +188,11 @@ try {
         dir,
         "src/app/organ/page.tsx",
         'export {default} from "../../organ-harness"'
+      )
+      await put(
+        dir,
+        "src/app/body-map/page.tsx",
+        'export {default} from "../../body-map-harness"'
       )
       await put(
         dir,
@@ -194,7 +209,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BodyMapHarness from "./body-map-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/body-map"?<BodyMapHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -225,6 +240,18 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/body-map"
+          : `http://127.0.0.1:${server.port}/body-map.json`,
         "--yes",
       ],
       dir
@@ -271,6 +298,15 @@ try {
       (framework === "next" && !installed.includes('"use client"'))
     )
       throw new Error("Invalid installed source")
+    const bodyMap = await readFile(
+      resolve(dir, "src/components/ui/body-map.tsx"),
+      "utf8"
+    )
+    if (
+      bodyMap.includes("@workspace/") ||
+      (framework === "next" && !bodyMap.includes('"use client"'))
+    )
+      throw new Error("Invalid installed body map")
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)
