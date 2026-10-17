@@ -40,6 +40,13 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/intestines").then(
       (module) => module.intestinesModel
     ),
+  // Served by this site rather than an explorer repository, so docs load it
+  // same-origin.
+  joints: () =>
+    import("@workspace/registry/organ-viewer/joints").then((module) => ({
+      ...module.jointsModel,
+      src: "/models/joints.glb",
+    })),
   kidneys: () =>
     import("@workspace/registry/organ-viewer/kidneys").then(
       (module) => module.kidneysModel
@@ -64,6 +71,13 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/muscles").then(
       (module) => module.musclesModel
     ),
+  // Models built in this repository are served by the website itself, so
+  // previews and local builds load them from the same origin.
+  nerves: () =>
+    import("@workspace/registry/organ-viewer/nerves").then((module) => ({
+      ...module.nervesModel,
+      src: "/models/nerves.glb",
+    })),
   nose: () =>
     import("@workspace/registry/organ-viewer/nose").then(
       (module) => module.noseModel

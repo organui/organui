@@ -32,7 +32,9 @@ replace the font license.
 
 ## Anatomy assets
 
-This website branch contains no bundled anatomy meshes or screenshot previews.
 The independent organ explorer repositories document their source-specific
-anatomy asset licenses and attribution. Those notices are unaffected by the
-website code license.
+anatomy asset licenses and attribution. Models built in this repository live in
+`apps/web/public/models/`, and each one's source, changes and license are in
+`models/<organ>/ATTRIBUTION.md`. They keep their own licenses (for example,
+the nerves model is CC BY-SA 4.0), which the website code license does not
+replace.
