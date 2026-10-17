@@ -64,6 +64,16 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+const medicationHarness = `"use client"
+import { useState } from "react"
+import { MedicationSchedule, type DoseStatus } from "@/components/ui/medication-schedule"
+const medications=[{id:"levo",name:"Levothyroxine",dose:"75 mcg",times:["07:00"]},{id:"calcium",name:"Calcium",times:["08:00","20:00"]},{id:"weekly",name:"Weekly tablet",times:["12:00"],days:[1]}]
+const interactions=[{id:"levo-calcium",medicationIds:["levo","calcium"],severity:"moderate" as const,summary:"Calcium reduces absorption.",separationHours:4},{id:"weekly-levo",medicationIds:["weekly","levo"],severity:"major" as const,summary:"Example warning."}]
+export default function MedicationHarness(){
+ const [date,setDate]=useState("2026-10-19")
+ const [doseStatus,setDoseStatus]=useState<Record<string,DoseStatus>>({})
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed medication schedule</h1><MedicationSchedule medications={medications} interactions={interactions} date={date} onDateChange={setDate} doseStatus={doseStatus} onDoseStatusChange={setDoseStatus} now="09:30"/><output aria-label="Date">{date}</output><output aria-label="Dose status">{JSON.stringify(doseStatus)}</output></main>
+}`
 // The molecule harness loads the docs site's crambin sample from its own origin.
 const moleculeHarness = `"use client"
 import { useState } from "react"
@@ -178,6 +188,7 @@ try {
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
     await put(dir, "src/molecule-harness.tsx", moleculeHarness)
+    await put(dir, "src/medication-harness.tsx", medicationHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -203,6 +214,11 @@ try {
       )
       await put(
         dir,
+        "src/app/medication/page.tsx",
+        'export {default} from "../../medication-harness"'
+      )
+      await put(
+        dir,
         "src/app/layout.tsx",
         'import "../globals.css"; export const metadata = {title:"Anatomy tree consumer"}; export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}'
       )
@@ -216,7 +232,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import MedicationHarness from "./medication-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/medication"?<MedicationHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -247,6 +263,18 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/medication-schedule"
+          : `http://127.0.0.1:${server.port}/medication-schedule.json`,
         "--yes",
       ],
       dir
@@ -301,15 +329,17 @@ try {
       )
         throw new Error(`Invalid installed ${name}`)
     }
-    const installed = await readFile(
-      resolve(dir, "src/components/ui/anatomy-tree.tsx"),
-      "utf8"
-    )
-    if (
-      installed.includes("@workspace/") ||
-      (framework === "next" && !installed.includes('"use client"'))
-    )
-      throw new Error("Invalid installed source")
+    for (const name of ["anatomy-tree", "medication-schedule"]) {
+      const installed = await readFile(
+        resolve(dir, `src/components/ui/${name}.tsx`),
+        "utf8"
+      )
+      if (
+        installed.includes("@workspace/") ||
+        (framework === "next" && !installed.includes('"use client"'))
+      )
+        throw new Error(`Invalid installed ${name} source`)
+    }
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)

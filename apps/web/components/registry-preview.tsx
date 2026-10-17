@@ -4,6 +4,15 @@ import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
 import { OrganPreview } from "@/components/organ-preview"
+import {
+  MedicationSchedule,
+  type DoseStatus,
+} from "@workspace/registry/medication-schedule"
+import {
+  exampleDate,
+  exampleInteractions,
+  exampleMedications,
+} from "@/lib/medication-example"
 import { Example as DnaHelixExample } from "@/app/docs/dna-helix/example"
 import { Example as MoleculeExample } from "@/app/docs/molecule-viewer/example"
 
@@ -35,11 +44,28 @@ function DnaHelixPreview() {
   return <DnaHelixExample compact />
 }
 
+function MedicationSchedulePreview() {
+  const [doseStatus, setDoseStatus] = useState<Record<string, DoseStatus>>({
+    [`levothyroxine@${exampleDate}T07:00`]: "taken",
+  })
+  return (
+    <MedicationSchedule
+      medications={exampleMedications}
+      interactions={exampleInteractions}
+      date={exampleDate}
+      doseStatus={doseStatus}
+      onDoseStatusChange={setDoseStatus}
+      className="mx-auto max-w-xl bg-background"
+    />
+  )
+}
+
 // Live previews on the registry index, keyed by registry item name. The
 // browser suite requires one for every catalog item.
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
   "organ-viewer": OrganViewerPreview,
+  "medication-schedule": MedicationSchedulePreview,
   "molecule-viewer": MoleculeViewerPreview,
   "dna-helix": DnaHelixPreview,
 }
