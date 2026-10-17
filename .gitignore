@@ -49,3 +49,6 @@ apps/web/public/r/
 .consumers/
 playwright-report/
 test-results/
+
+# model build cache
+.asset-cache

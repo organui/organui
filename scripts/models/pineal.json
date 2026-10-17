@@ -1,0 +1,119 @@
+{
+  "structures": {
+    "pineal-gland": [
+      {
+        "element": "FJ1795",
+        "file": "FJ1795_BP21418_FMA62033_Pineal body.obj",
+        "sha256": "8438f756dc24c4aca4ea6db11a15a5bb33f2f5e4c12ba0a964175561a922d2a0"
+      }
+    ],
+    "habenula": [
+      {
+        "element": "FJ1743",
+        "file": "FJ1743_BP22971_FMA62032_Habenula.obj",
+        "sha256": "ccb7f0eff4dba0ec780f0580830045e52f67915a65f15598ac53e7751fa6b663"
+      }
+    ],
+    "left-stria-medullaris": [
+      {
+        "element": "FJ1777",
+        "file": "FJ1777_BP23489_FMA73414_Left stria medullaris of thalamus.obj",
+        "sha256": "25764b594e07c24c0f70c81aa401ea0f3fa6edd976e397c736d3f1672273a33c"
+      }
+    ],
+    "right-stria-medullaris": [
+      {
+        "element": "FJ1824",
+        "file": "FJ1824_BP23630_FMA73413_Right stria medullaris of thalamus.obj",
+        "sha256": "7fb9f6a8c3c6ac40ba152b1e2376e1715b61788d3fa72a2a1f059e8eba210282"
+      }
+    ],
+    "posterior-commissure": [
+      {
+        "element": "FJ1799",
+        "file": "FJ1799_BP22899_FMA62072_Posterior commissure.obj",
+        "sha256": "416714570db67582c972814bc95784144b26df73163ff805be99ae687e8d8462"
+      }
+    ],
+    "left-thalamus": [
+      {
+        "element": "FJ1782",
+        "file": "FJ1782_BP21462_FMA258716_Left thalamus.obj",
+        "sha256": "5ec986cc2be7519115ac6e1dfc8679de7164d56dbbae32ded69d584cb3fddf63"
+      }
+    ],
+    "right-thalamus": [
+      {
+        "element": "FJ1827",
+        "file": "FJ1827_BP21533_FMA258714_Right thalamus.obj",
+        "sha256": "9b4d914f47a49a2c77a0bb99e84fa11494a1dba124120a5646e2615d38527756"
+      }
+    ],
+    "superior-colliculi": [
+      {
+        "element": "FJ1779",
+        "file": "FJ1779_BP20130_FMA73423_Left superior colliculus.obj",
+        "sha256": "20fa477d93d095efe6995e420755e8d72ea494bf0928e7d3ad380d5a599fa55f"
+      },
+      {
+        "element": "FJ1826",
+        "file": "FJ1826_BP22114_FMA73422_Right superior colliculus.obj",
+        "sha256": "76b599400e911f82360e5760e3c62663dc5335b4b67321583ce5846770847690"
+      }
+    ],
+    "inferior-colliculi": [
+      {
+        "element": "FJ1762",
+        "file": "FJ1762_BP22120_FMA73435_Left inferior colliculus.obj",
+        "sha256": "70be6021611e7c6915b81766efc5af20756bfd6672bdeee06de335a7745f723a"
+      },
+      {
+        "element": "FJ1810",
+        "file": "FJ1810_BP23935_FMA73434_Right inferior colliculus.obj",
+        "sha256": "7d3edffaaa8fd68f3463b78cf918fe170f75bdce56a7f964790eb90a79045c5c"
+      }
+    ],
+    "third-ventricle": [
+      {
+        "element": "FJ1730",
+        "file": "FJ1730_BP24045_FMA78454_Third ventricle.obj",
+        "sha256": "e6b1afeb42e66e0d0ea61a455d400a56b97818d7b839c315817930a4105467b1"
+      }
+    ],
+    "cerebral-aqueduct": [
+      {
+        "element": "FJ1738",
+        "file": "FJ1738_BP22739_FMA78467_Cerebral aqueduct.obj",
+        "sha256": "09bce4c609f50506708e9a4ed3ab70f2fb4d4ea8de1ef92340fa8fa35ab31021"
+      }
+    ],
+    "right-internal-cerebral-vein": [
+      {
+        "element": "FJ4690",
+        "file": "FJ4690_BP28702_FMA51004_Right internal cerebral vein.obj",
+        "sha256": "c4e3fb792aba5eeef4ca47168665dd1df2ea1ce207607e9e4c3109af51068ed6"
+      }
+    ],
+    "great-cerebral-vein": [
+      {
+        "element": "FJ4654",
+        "file": "FJ4654_BP28758_FMA50994_Right great cerebral vein.obj",
+        "sha256": "5995f3d7f9726596d3c06cc684e91da0ee61a2db36798333ef64d8970b73c5cb"
+      }
+    ],
+    "straight-sinus": [
+      {
+        "element": "FJ4705",
+        "file": "FJ4705_BP28864_FMA50769_Straight sinus.obj",
+        "sha256": "04bcac80a2cec50ff262706aa2e023c918248ed38729169eeb6ebfdd8ced80a7"
+      }
+    ],
+    "corpus-callosum": [
+      {
+        "element": "FJ1742",
+        "file": "FJ1742_BP21574_FMA86464_Corpus callosum.obj",
+        "sha256": "e7bed983960e969cf952245cc16cdd7a21b3c19705500f6c044a909a4fe28045"
+      }
+    ]
+  }
+}

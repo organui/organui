@@ -3,8 +3,8 @@ import type { OrganModel } from "@workspace/registry/organ-viewer/organ-viewer"
 // One loader per organ registry item, so pages and previews only download the
 // structure data of the organ they show. An organ item missing here has no
 // docs page, which the browser suite catches.
-// Models hosted by OrganUI load from this deployment, so previews and
-// development work without the production domain.
+// Models hosted on organui.com load from this site's own public/models, so
+// previews and local runs show the copy in the same commit.
 const local = (model: OrganModel): OrganModel => ({
   ...model,
   src: model.src.replace("https://organui.com/models/", "/models/"),
@@ -15,6 +15,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/adrenals").then(
       (module) => module.adrenalsModel
     ),
+  appendix: () =>
+    import("@workspace/registry/organ-viewer/appendix").then((module) =>
+      local(module.appendixModel)
+    ),
   bladder: () =>
     import("@workspace/registry/organ-viewer/bladder").then(
       (module) => module.bladderModel
@@ -22,6 +26,14 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   brain: () =>
     import("@workspace/registry/organ-viewer/brain").then(
       (module) => module.brainModel
+    ),
+  breast: () =>
+    import("@workspace/registry/organ-viewer/breast").then((module) =>
+      local(module.breastModel)
+    ),
+  diaphragm: () =>
+    import("@workspace/registry/organ-viewer/diaphragm").then((module) =>
+      local(module.diaphragmModel)
     ),
   ear: () =>
     import("@workspace/registry/organ-viewer/ear").then(
@@ -51,6 +63,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/intestines").then(
       (module) => module.intestinesModel
     ),
+  joints: () =>
+    import("@workspace/registry/organ-viewer/joints").then((module) =>
+      local(module.jointsModel)
+    ),
   kidneys: () =>
     import("@workspace/registry/organ-viewer/kidneys").then(
       (module) => module.kidneysModel
@@ -79,6 +95,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/nails").then((module) =>
       local(module.nailsModel)
     ),
+  nerves: () =>
+    import("@workspace/registry/organ-viewer/nerves").then((module) =>
+      local(module.nervesModel)
+    ),
   nose: () =>
     import("@workspace/registry/organ-viewer/nose").then(
       (module) => module.noseModel
@@ -87,13 +107,29 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/pancreas").then(
       (module) => module.pancreasModel
     ),
+  parathyroid: () =>
+    import("@workspace/registry/organ-viewer/parathyroid").then((module) =>
+      local(module.parathyroidModel)
+    ),
   pharynx: () =>
     import("@workspace/registry/organ-viewer/pharynx").then(
       (module) => module.pharynxModel
     ),
+  pineal: () =>
+    import("@workspace/registry/organ-viewer/pineal").then((module) =>
+      local(module.pinealModel)
+    ),
+  pituitary: () =>
+    import("@workspace/registry/organ-viewer/pituitary").then((module) =>
+      local(module.pituitaryModel)
+    ),
   prostate: () =>
     import("@workspace/registry/organ-viewer/prostate").then(
       (module) => module.prostateModel
+    ),
+  "salivary-glands": () =>
+    import("@workspace/registry/organ-viewer/salivary-glands").then((module) =>
+      local(module.salivaryGlandsModel)
     ),
   skeleton: () =>
     import("@workspace/registry/organ-viewer/skeleton").then(
@@ -138,5 +174,9 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   vessels: () =>
     import("@workspace/registry/organ-viewer/vessels").then(
       (module) => module.vesselsModel
+    ),
+  vestibular: () =>
+    import("@workspace/registry/organ-viewer/vestibular").then((module) =>
+      local(module.vestibularModel)
     ),
 }
