@@ -83,7 +83,7 @@ const data = organAnatomyNodes(${exportName})
           .
         </p>
       </header>
-      <OrganExplorer model={model} />
+      <OrganExplorer key={name} model={model} />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <pre
