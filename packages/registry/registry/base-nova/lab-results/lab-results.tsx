@@ -288,7 +288,7 @@ export function LabSparkline({
       width={sparkWidth}
       height={sparkHeight}
       className={cn(
-        "h-auto w-16 overflow-visible text-muted-foreground @sm:w-24",
+        "h-auto w-12 overflow-visible text-muted-foreground @xs:w-16 @sm:w-24",
         className
       )}
     >
@@ -387,7 +387,7 @@ export function LabResultsTable({
                 <TableCell className="whitespace-normal">
                   <span
                     className={cn(
-                      "whitespace-nowrap tabular-nums",
+                      "tabular-nums",
                       isAbnormal(flag) && "font-semibold"
                     )}
                   >
