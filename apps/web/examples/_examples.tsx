@@ -103,6 +103,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "dermatome-map-demo": {
+    title: "Dermatome map",
+    file: "dermatome-map-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./dermatome-map-demo")
+      return <Example />
+    },
+  },
   "lab-results-demo": {
     title: "Lab results table",
     file: "lab-results-demo.tsx",

@@ -6,6 +6,7 @@
   "exports": {
     "./anatomy-tree": "./registry/base-nova/anatomy-tree/anatomy-tree.tsx",
     "./ecg-trace": "./registry/base-nova/ecg-trace/ecg-trace.tsx",
+    "./dermatome-map": "./registry/base-nova/dermatome-map/dermatome-map.tsx",
     "./medication-schedule": "./registry/base-nova/medication-schedule/medication-schedule.tsx",
     "./lab-results": "./registry/base-nova/lab-results/lab-results.tsx",
     "./vital-signs": "./registry/base-nova/vital-signs/vital-signs.tsx",

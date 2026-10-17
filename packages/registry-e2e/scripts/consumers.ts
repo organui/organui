@@ -148,6 +148,13 @@ export default function EcgHarness(){
  const stream = useMemo(()=>syntheticEcgStream({heartRate:90}),[])
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed ECG trace</h1><EcgTrace samples={recording} label="Recorded ECG"/><EcgTrace stream={stream} label="Live ECG"/></main>
 }`
+const dermatomeHarness = `"use client"
+import { useState } from "react"
+import { DermatomeMap, type DermatomeId } from "@/components/ui/dermatome-map"
+export default function DermatomeHarness(){
+ const [selectedId,select]=useState<DermatomeId|null>(null)
+ return <main style={{maxWidth:960,margin:"auto",padding:20}}><h1>Installed dermatome map</h1><DermatomeMap selectedId={selectedId} onSelectionChange={select} colors={{L4:"rgb(10, 20, 30)"}}/><output aria-label="Selected">{selectedId??"none"}</output><button onClick={()=>select("T10")}>Select T10</button></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -274,6 +281,7 @@ try {
     await put(dir, "src/molecule-harness.tsx", source(moleculeHarness))
     await put(dir, "src/medication-harness.tsx", source(medicationHarness))
     await put(dir, "src/ecg-harness.tsx", source(ecgHarness))
+    await put(dir, "src/dermatome-harness.tsx", source(dermatomeHarness))
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -314,6 +322,11 @@ try {
       )
       await put(
         dir,
+        "src/app/dermatome/page.tsx",
+        'export {default} from "../../dermatome-harness"'
+      )
+      await put(
+        dir,
         "src/app/ecg/page.tsx",
         'export {default} from "../../ecg-harness"'
       )
@@ -332,7 +345,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(
@@ -466,6 +479,7 @@ try {
       "dna-helix",
       "vital-signs",
       "ecg-trace",
+      "dermatome-map",
     ])
       await run(
         [
@@ -515,7 +529,12 @@ try {
       )
         throw new Error(`Invalid installed ${name}`)
     }
-    for (const name of ["anatomy-tree", "medication-schedule", "ecg-trace"]) {
+    for (const name of [
+      "anatomy-tree",
+      "medication-schedule",
+      "ecg-trace",
+      "dermatome-map",
+    ]) {
       const installed = await readFile(
         resolve(dir, `${uiDir}/${name}.tsx`),
         "utf8"

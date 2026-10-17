@@ -90,6 +90,21 @@ import { EcgTrace, syntheticEcg } from "@/components/ui/ecg-trace"
 
 See [the ECG trace documentation](https://organui.com/docs/ecg-trace).
 
+## Dermatome map
+
+`dermatome-map` draws the front and back of the body split into the 28 ISNCSCI
+sensory levels (C2 to S4-5). A level is chosen from the body or a keyboard list,
+and shows its area and key sensory point. It is SVG only, a simplified
+illustration, and not a clinical tool.
+
+```tsx
+import { DermatomeMap } from "@/components/ui/dermatome-map"
+
+;<DermatomeMap selectedId={level} onSelectionChange={setLevel} />
+```
+
+See [the dermatome map documentation](https://organui.com/docs/dermatome-map).
+
 ## Blocks
 
 Blocks are whole layouts built from those pieces, following shadcn's
