@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { RegistryPreview } from "@/components/registry-preview"
 import { registryItems, registryNamespace, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -76,6 +77,7 @@ export default function Page() {
                 </Link>
               </h3>
               <p className="text-muted-foreground">{item.description}</p>
+              <RegistryPreview name={item.name} title={item.title} />
               <pre
                 tabIndex={0}
                 role="region"

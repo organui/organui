@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { AnatomyTree, type AnatomyNode } from "@workspace/registry/anatomy-tree"
 
-const data: AnatomyNode[] = [
+export const data: AnatomyNode[] = [
   {
     id: "heart",
     label: "Heart",

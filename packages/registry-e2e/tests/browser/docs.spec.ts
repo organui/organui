@@ -188,6 +188,11 @@ test("registry index lists every catalog item inside the docs layout", async ({
     ).toHaveText(
       `bunx shadcn@4.21.0 add https://organui.com/r/${item.name}.json`
     )
+    await expect(
+      page
+        .getByRole("region", { name: `${title} preview` })
+        .locator(":scope > *")
+    ).toBeVisible()
     expect((await request.get(`/docs/${item.name}`)).ok()).toBe(true)
   }
   expect(
