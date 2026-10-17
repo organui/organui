@@ -45,10 +45,35 @@ for (const item of organItems) {
       for (const id of view.structureIds ?? []) expect(ids).toContain(id)
     }
     for (const id of model.hiddenIds ?? []) expect(ids).toContain(id)
-    // Models stay in their explorer repositories, pinned to a full commit.
-    expect(model.src).toMatch(
-      /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$/
+    // Models stay in their explorer repositories, pinned to a full commit,
+    // or are hosted by organui.com from apps/web/public/models.
+    const hosted = model.src.match(
+      /^https:\/\/organui\.com\/models\/([a-z-]+\.glb)$/
     )
+    if (hosted) {
+      expect(model.attribution.source).toStartWith(
+        "https://github.com/organui/organui/"
+      )
+      const bytes = new Uint8Array(
+        await Bun.file(
+          new URL(
+            `../../../apps/web/public/models/${hosted[1]}`,
+            import.meta.url
+          )
+        ).arrayBuffer()
+      )
+      expect(bytes.byteLength).toBe(model.bytes!)
+      const view = new DataView(bytes.buffer)
+      const gltf = JSON.parse(
+        new TextDecoder().decode(
+          bytes.subarray(20, 20 + view.getUint32(12, true))
+        )
+      ) as { nodes: { name: string }[] }
+      expect(gltf.nodes.map(({ name }) => name)).toEqual(ids)
+    } else
+      expect(model.src).toMatch(
+        /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$/
+      )
     expect(model.attribution.source).toStartWith("https://github.com/organui/")
     expect(model.attribution.licenseUrl).toStartWith("https://")
     expect(item.description).toContain(model.attribution.license)

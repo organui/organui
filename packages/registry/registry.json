@@ -606,6 +606,68 @@
       ]
     },
     {
+      "name": "pineal",
+      "type": "registry:component",
+      "title": "Pineal",
+      "description": "The pineal gland and its neighbours deep in the brain: the epithalamus, thalami, midbrain tectum and deep veins. 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/pineal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pituitary",
+      "type": "registry:component",
+      "title": "Pituitary",
+      "description": "The pituitary gland in its setting: the hypothalamus above it, the optic chiasm, its portal blood supply, the cavernous sinus and the sphenoid bone. 19 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/pituitary.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "prostate",
       "type": "registry:component",
       "title": "Prostate",

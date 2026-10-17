@@ -32,7 +32,8 @@ replace the font license.
 
 ## Anatomy assets
 
-This website branch contains no bundled anatomy meshes or screenshot previews.
-The independent organ explorer repositories document their source-specific
-anatomy asset licenses and attribution. Those notices are unaffected by the
-website code license.
+Most organ components load their meshes from the independent organ explorer
+repositories, which document their source-specific anatomy asset licenses and
+attribution. Models hosted by this website live in `apps/web/public/models/`,
+each with an `<organ>.ATTRIBUTION.md` naming its source and license. Those
+notices are unaffected by the website code license.
