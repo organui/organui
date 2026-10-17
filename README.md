@@ -30,8 +30,8 @@ installs straight from source (append `#<commit>` to pin a version). See
 
 ## Organs
 
-Every OrganUI 3D explorer is also a registry item named after its organ:
-`heart`, `brain`, `spinal-cord` and so on, 30 in all.
+Every organ is a registry item named after it: `heart`, `brain`,
+`spinal-cord`, `nerves` and so on.
 
 ```bash
 bunx shadcn@4.21.0 add https://organui.com/r/heart.json
@@ -46,8 +46,10 @@ import { Heart } from "@/components/heart"
 Each one installs the shared `organ-viewer.tsx` (three.js) plus the organ's
 structures, views and model credit. The GLB itself stays in the explorer
 repository under its own licence (CC BY-SA 2.1 JP, CC BY-SA 4.0, CC BY 4.0 or
-CC0, per organ) and loads from a commit-pinned jsDelivr URL; the viewer shows
-its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
+CC0, per organ) and loads from a commit-pinned jsDelivr URL; organs without an
+explorer repository, such as `nerves` and `parathyroid`, are built in this
+repository and served from `organui.com/models/`, with an attribution file for
+each model. The viewer shows its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
 
 ## Blocks
 
@@ -76,6 +78,7 @@ the components only. Previews are at [organui.com/blocks](https://organui.com/bl
 | `packages/registry-e2e` | Generated Next.js/Vite consumers and Playwright browser tests     |
 | `packages/ui`           | Private website foundation (theme, internal components)           |
 | `packages/*-config`     | Shared ESLint and TypeScript configuration                        |
+| `models`                | Build scripts and attribution for organ models kept in this repo  |
 
 ## Develop
 

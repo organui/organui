@@ -27,6 +27,23 @@ test("every organ file has exactly one registry item with the shared viewer", as
     ])
 })
 
+// A model built in this repository must be committed, match the size the
+// item declares and name one node after each structure.
+async function expectLocalModel(file: string, model: OrganModel) {
+  const glb = await Bun.file(
+    new URL(`../../../apps/web/public/models/${file}`, import.meta.url)
+  ).arrayBuffer()
+  expect(glb.byteLength).toBe(model.bytes!)
+  const view = new DataView(glb)
+  expect(view.getUint32(0, true)).toBe(0x46546c67)
+  const json = JSON.parse(
+    new TextDecoder().decode(new Uint8Array(glb, 20, view.getUint32(12, true)))
+  ) as { nodes: { name: string }[] }
+  expect(json.nodes.map(({ name }) => name).sort()).toEqual(
+    model.structures.map(({ id }) => id).sort()
+  )
+}
+
 for (const item of organItems) {
   test(`${item.name} describes a consistent, attributed model`, async () => {
     const module = await import(new URL(`${item.name}.tsx`, directory).href)
@@ -45,10 +62,16 @@ for (const item of organItems) {
       for (const id of view.structureIds ?? []) expect(ids).toContain(id)
     }
     for (const id of model.hiddenIds ?? []) expect(ids).toContain(id)
-    // Models stay in their explorer repositories, pinned to a full commit.
-    expect(model.src).toMatch(
-      /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$/
+    // Models stay in their explorer repositories, pinned to a full commit,
+    // or are built here and served by the website (see models/).
+    const local = model.src.match(
+      /^https:\/\/organui\.com\/models\/([a-z-]+\.glb)$/
     )
+    if (local) await expectLocalModel(local[1]!, model)
+    else
+      expect(model.src).toMatch(
+        /^https:\/\/cdn\.jsdelivr\.net\/gh\/organui\/[a-z-]+-3d@[0-9a-f]{40}\/public\/models\/[a-z-]+\.glb$/
+      )
     expect(model.attribution.source).toStartWith("https://github.com/organui/")
     expect(model.attribution.licenseUrl).toStartWith("https://")
     expect(item.description).toContain(model.attribution.license)
