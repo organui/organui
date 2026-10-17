@@ -141,6 +141,6 @@ export const tongueModel: OrganModel = {
   },
 }
 
-export function TongueViewer(props: Omit<OrganViewerProps, "model">) {
+export function Tongue(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={tongueModel} {...props} />
 }

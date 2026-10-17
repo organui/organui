@@ -28,13 +28,19 @@ a GitHub registry, so `bunx shadcn@4.21.0 add organui/organui/anatomy-tree`
 installs straight from source (append `#<commit>` to pin a version). See
 [the anatomy tree documentation](https://organui.com/docs/anatomy-tree).
 
-## Organ viewers
+## Organs
 
-Every OrganUI 3D explorer is also a registry item, named after its repository:
-`heart-viewer`, `brain-viewer`, `spinal-cord-viewer` and so on, 30 in all.
+Every OrganUI 3D explorer is also a registry item named after its organ:
+`heart`, `brain`, `spinal-cord` and so on, 30 in all.
 
 ```bash
-bunx shadcn@4.21.0 add https://organui.com/r/heart-viewer.json
+bunx shadcn@4.21.0 add https://organui.com/r/heart.json
+```
+
+```tsx
+import { Heart } from "@/components/heart"
+
+;<Heart className="h-[32rem]" />
 ```
 
 Each one installs the shared `organ-viewer.tsx` (three.js) plus the organ's

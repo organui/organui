@@ -33,9 +33,9 @@
       ]
     },
     {
-      "name": "adrenals-viewer",
+      "name": "adrenals",
       "type": "registry:component",
-      "title": "Adrenals viewer",
+      "title": "Adrenals",
       "description": "The adrenals from the OrganUI adrenals explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -47,15 +47,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/adrenals-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/adrenals.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "bladder-viewer",
+      "name": "bladder",
       "type": "registry:component",
-      "title": "Bladder viewer",
+      "title": "Bladder",
       "description": "The bladder from the OrganUI bladder explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -67,15 +67,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/bladder-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/bladder.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "brain-viewer",
+      "name": "brain",
       "type": "registry:component",
-      "title": "Brain viewer",
+      "title": "Brain",
       "description": "The brain from the OrganUI brain explorer: 19 selectable structures and 6 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -87,15 +87,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/brain-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/brain.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "ear-viewer",
+      "name": "ear",
       "type": "registry:component",
-      "title": "Ear viewer",
+      "title": "Ear",
       "description": "The ear from the OrganUI ear explorer: 16 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -107,15 +107,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/ear-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/ear.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "esophagus-viewer",
+      "name": "esophagus",
       "type": "registry:component",
-      "title": "Esophagus viewer",
+      "title": "Esophagus",
       "description": "The esophagus from the OrganUI esophagus explorer: 17 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -127,15 +127,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/esophagus-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/esophagus.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "eye-viewer",
+      "name": "eye",
       "type": "registry:component",
-      "title": "Eye viewer",
+      "title": "Eye",
       "description": "The eye from the OrganUI eye explorer: 21 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -147,15 +147,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/eye-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/eye.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "gallbladder-viewer",
+      "name": "gallbladder",
       "type": "registry:component",
-      "title": "Gallbladder viewer",
+      "title": "Gallbladder",
       "description": "The gallbladder from the OrganUI gallbladder explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -167,15 +167,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/gallbladder-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/gallbladder.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "heart-viewer",
+      "name": "heart",
       "type": "registry:component",
-      "title": "Heart viewer",
+      "title": "Heart",
       "description": "The heart from the OrganUI heart explorer: 11 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -187,15 +187,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/heart-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/heart.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "intestines-viewer",
+      "name": "intestines",
       "type": "registry:component",
-      "title": "Intestines viewer",
+      "title": "Intestines",
       "description": "The intestines from the OrganUI intestines explorer: 11 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -207,15 +207,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/intestines-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/intestines.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "kidneys-viewer",
+      "name": "kidneys",
       "type": "registry:component",
-      "title": "Kidneys viewer",
+      "title": "Kidneys",
       "description": "The kidneys from the OrganUI kidneys explorer: 6 selectable structures and 4 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -227,15 +227,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/kidneys-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/kidneys.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "larynx-viewer",
+      "name": "larynx",
       "type": "registry:component",
-      "title": "Larynx viewer",
+      "title": "Larynx",
       "description": "The larynx from the OrganUI larynx explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -247,15 +247,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/larynx-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/larynx.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "liver-viewer",
+      "name": "liver",
       "type": "registry:component",
-      "title": "Liver viewer",
+      "title": "Liver",
       "description": "The liver from the OrganUI liver explorer: 7 selectable structures and 5 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -267,15 +267,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/liver-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/liver.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "lungs-viewer",
+      "name": "lungs",
       "type": "registry:component",
-      "title": "Lungs viewer",
+      "title": "Lungs",
       "description": "The lungs from the OrganUI lungs explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -287,15 +287,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/lungs-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/lungs.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "lymph-viewer",
+      "name": "lymph",
       "type": "registry:component",
-      "title": "Lymph node viewer",
+      "title": "Lymph node",
       "description": "The lymph node from the OrganUI lymph node explorer: 7 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -307,15 +307,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/lymph-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/lymph.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "muscles-viewer",
+      "name": "muscles",
       "type": "registry:component",
-      "title": "Muscles viewer",
+      "title": "Muscles",
       "description": "The muscles from the OrganUI muscles explorer: 177 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -327,15 +327,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/muscles-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/muscles.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "nose-viewer",
+      "name": "nose",
       "type": "registry:component",
-      "title": "Nose viewer",
+      "title": "Nose",
       "description": "The nose from the OrganUI nose explorer: 22 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -347,15 +347,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/nose-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/nose.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "pancreas-viewer",
+      "name": "pancreas",
       "type": "registry:component",
-      "title": "Pancreas viewer",
+      "title": "Pancreas",
       "description": "The pancreas from the OrganUI pancreas explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -367,15 +367,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pancreas-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/pancreas.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "pharynx-viewer",
+      "name": "pharynx",
       "type": "registry:component",
-      "title": "Pharynx viewer",
+      "title": "Pharynx",
       "description": "The pharynx from the OrganUI pharynx explorer: 20 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -387,15 +387,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pharynx-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/pharynx.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "prostate-viewer",
+      "name": "prostate",
       "type": "registry:component",
-      "title": "Prostate viewer",
+      "title": "Prostate",
       "description": "The prostate from the OrganUI prostate explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -407,15 +407,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/prostate-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/prostate.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "skeleton-viewer",
+      "name": "skeleton",
       "type": "registry:component",
-      "title": "Skeleton viewer",
+      "title": "Skeleton",
       "description": "The skeleton from the OrganUI skeleton explorer: 242 selectable structures and 8 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -427,15 +427,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/skeleton-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/skeleton.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "skin-viewer",
+      "name": "skin",
       "type": "registry:component",
-      "title": "Skin viewer",
+      "title": "Skin",
       "description": "The skin from the OrganUI skin explorer: 13 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -447,15 +447,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/skin-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/skin.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "spinal-cord-viewer",
+      "name": "spinal-cord",
       "type": "registry:component",
-      "title": "Spinal cord viewer",
+      "title": "Spinal cord",
       "description": "The spinal cord from the OrganUI spinal cord explorer: 63 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -467,15 +467,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/spinal-cord-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/spinal-cord.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "spleen-viewer",
+      "name": "spleen",
       "type": "registry:component",
-      "title": "Spleen viewer",
+      "title": "Spleen",
       "description": "The spleen from the OrganUI spleen explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -487,15 +487,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/spleen-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/spleen.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "stomach-viewer",
+      "name": "stomach",
       "type": "registry:component",
-      "title": "Stomach viewer",
+      "title": "Stomach",
       "description": "The stomach from the OrganUI stomach explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -507,15 +507,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/stomach-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/stomach.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "teeth-viewer",
+      "name": "teeth",
       "type": "registry:component",
-      "title": "Teeth viewer",
+      "title": "Teeth",
       "description": "The teeth from the OrganUI teeth explorer: 33 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -527,15 +527,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/teeth-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/teeth.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "thymus-viewer",
+      "name": "thymus",
       "type": "registry:component",
-      "title": "Thymus viewer",
+      "title": "Thymus",
       "description": "The thymus from the OrganUI thymus explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -547,15 +547,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/thymus-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/thymus.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "thyroid-viewer",
+      "name": "thyroid",
       "type": "registry:component",
-      "title": "Thyroid viewer",
+      "title": "Thyroid",
       "description": "The thyroid from the OrganUI thyroid explorer: 18 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -567,15 +567,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/thyroid-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/thyroid.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "tongue-viewer",
+      "name": "tongue",
       "type": "registry:component",
-      "title": "Tongue viewer",
+      "title": "Tongue",
       "description": "The tongue from the OrganUI tongue explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -587,15 +587,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/tongue-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/tongue.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "uterus-viewer",
+      "name": "uterus",
       "type": "registry:component",
-      "title": "Uterus viewer",
+      "title": "Uterus",
       "description": "The uterus from the OrganUI uterus explorer: 27 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -607,15 +607,15 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/uterus-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/uterus.tsx",
           "type": "registry:component"
         }
       ]
     },
     {
-      "name": "vessels-viewer",
+      "name": "vessels",
       "type": "registry:component",
-      "title": "Vessels viewer",
+      "title": "Vessels",
       "description": "The vessels from the OrganUI vessels explorer: 51 selectable structures and 6 named views. Model licensed CC BY-SA 2.1 JP.",
       "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
       "devDependencies": ["@types/three@^0.186.0"],
@@ -627,7 +627,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/vessels-viewer.tsx",
+          "path": "registry/base-nova/organ-viewer/vessels.tsx",
           "type": "registry:component"
         }
       ]

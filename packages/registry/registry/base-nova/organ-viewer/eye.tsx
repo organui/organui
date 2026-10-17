@@ -204,6 +204,6 @@ export const eyeModel: OrganModel = {
   },
 }
 
-export function EyeViewer(props: Omit<OrganViewerProps, "model">) {
+export function Eye(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={eyeModel} {...props} />
 }

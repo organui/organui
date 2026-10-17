@@ -43,7 +43,7 @@ export const docsNav: DocsNavSection[] = [
       .map(({ title, href }) => ({ title, href })),
   },
   {
-    title: "Organ viewers",
+    title: "Organs",
     items: registryItems
       .filter(({ organ }) => organ)
       .map(({ title, href }) => ({ title, href })),

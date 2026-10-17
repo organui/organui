@@ -141,6 +141,6 @@ export const thymusModel: OrganModel = {
   },
 }
 
-export function ThymusViewer(props: Omit<OrganViewerProps, "model">) {
+export function Thymus(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={thymusModel} {...props} />
 }

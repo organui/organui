@@ -178,6 +178,6 @@ export const thyroidModel: OrganModel = {
   },
 }
 
-export function ThyroidViewer(props: Omit<OrganViewerProps, "model">) {
+export function Thyroid(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={thyroidModel} {...props} />
 }

@@ -197,6 +197,6 @@ export const pharynxModel: OrganModel = {
   },
 }
 
-export function PharynxViewer(props: Omit<OrganViewerProps, "model">) {
+export function Pharynx(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={pharynxModel} {...props} />
 }

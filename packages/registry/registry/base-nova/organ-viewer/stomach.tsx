@@ -109,6 +109,6 @@ export const stomachModel: OrganModel = {
   },
 }
 
-export function StomachViewer(props: Omit<OrganViewerProps, "model">) {
+export function Stomach(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={stomachModel} {...props} />
 }

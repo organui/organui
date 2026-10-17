@@ -250,6 +250,6 @@ export const uterusModel: OrganModel = {
   },
 }
 
-export function UterusViewer(props: Omit<OrganViewerProps, "model">) {
+export function Uterus(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={uterusModel} {...props} />
 }

@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
-import { heartModel } from "@workspace/registry/organ-viewer/heart-viewer"
+import { heartModel } from "@workspace/registry/organ-viewer/heart"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 
 test("documentation interaction, styling and registry serving", async ({
@@ -264,9 +264,9 @@ test("organ pages pair the viewer with the anatomy tree", async ({
       contentType: "model/gltf-binary",
     })
   )
-  await page.goto("/docs/heart-viewer")
+  await page.goto("/docs/heart")
   await expect(
-    page.getByRole("heading", { name: "Heart viewer", level: 1 })
+    page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
@@ -287,7 +287,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   await expect(anatomy).toBeFocused()
   await expect(
     page.getByRole("region", { name: "Installation command" })
-  ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/heart-viewer.json")
+  ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/heart.json")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -297,11 +297,11 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   expect(axe.violations).toEqual([])
   await page.screenshot({ path: info.outputPath("organ.png"), fullPage: true })
   const item = registryItemSchema.parse(
-    await (await request.get("/r/heart-viewer.json")).json()
+    await (await request.get("/r/heart.json")).json()
   )
   expect(item.files?.map((file) => file.path)).toEqual([
     "registry/base-nova/organ-viewer/organ-viewer.tsx",
-    "registry/base-nova/organ-viewer/heart-viewer.tsx",
+    "registry/base-nova/organ-viewer/heart.tsx",
   ])
   expect(errors).toEqual([])
 })
@@ -314,7 +314,7 @@ test("a model that fails to load explains itself and retries", async ({
     requests++
     return route.fulfill({ status: 404 })
   })
-  await page.goto("/docs/heart-viewer")
+  await page.goto("/docs/heart")
   const alert = page
     .getByRole("region", { name: "Interactive heart model" })
     .getByRole("alert")

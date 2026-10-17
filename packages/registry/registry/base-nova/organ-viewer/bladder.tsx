@@ -133,6 +133,6 @@ export const bladderModel: OrganModel = {
   },
 }
 
-export function BladderViewer(props: Omit<OrganViewerProps, "model">) {
+export function Bladder(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={bladderModel} {...props} />
 }

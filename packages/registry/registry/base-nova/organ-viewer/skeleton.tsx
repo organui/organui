@@ -2167,6 +2167,6 @@ export const skeletonModel: OrganModel = {
   },
 }
 
-export function SkeletonViewer(props: Omit<OrganViewerProps, "model">) {
+export function Skeleton(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={skeletonModel} {...props} />
 }

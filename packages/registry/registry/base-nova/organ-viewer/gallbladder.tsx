@@ -156,6 +156,6 @@ export const gallbladderModel: OrganModel = {
   },
 }
 
-export function GallbladderViewer(props: Omit<OrganViewerProps, "model">) {
+export function Gallbladder(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={gallbladderModel} {...props} />
 }

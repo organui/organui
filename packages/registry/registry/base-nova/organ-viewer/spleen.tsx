@@ -109,6 +109,6 @@ export const spleenModel: OrganModel = {
   },
 }
 
-export function SpleenViewer(props: Omit<OrganViewerProps, "model">) {
+export function Spleen(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={spleenModel} {...props} />
 }

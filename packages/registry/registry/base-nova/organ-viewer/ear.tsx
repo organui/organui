@@ -165,6 +165,6 @@ export const earModel: OrganModel = {
   },
 }
 
-export function EarViewer(props: Omit<OrganViewerProps, "model">) {
+export function Ear(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={earModel} {...props} />
 }

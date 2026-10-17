@@ -44,9 +44,9 @@ export default async function Page({ params }: Props) {
   if (!found) notFound()
   const { item, load } = found
   const model = await load()
-  const organ = name.replace(/-viewer$/, "").split("-")
+  const organ = name.split("-")
   const pascal = organ.map((word) => word[0]!.toUpperCase() + word.slice(1))
-  const component = `${pascal.join("")}Viewer`
+  const component = pascal.join("")
   const exportName = `${organ[0]}${pascal.slice(1).join("")}Model`
   const usage = `"use client"
 import { useState } from "react"
@@ -70,7 +70,7 @@ const data = organAnatomyNodes(${exportName})
     <div className="flex flex-col gap-10">
       <header className="flex flex-col gap-4">
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Organ viewers
+          Components / Organs
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">

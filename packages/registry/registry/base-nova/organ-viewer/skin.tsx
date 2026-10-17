@@ -141,6 +141,6 @@ export const skinModel: OrganModel = {
   },
 }
 
-export function SkinViewer(props: Omit<OrganViewerProps, "model">) {
+export function Skin(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={skinModel} {...props} />
 }

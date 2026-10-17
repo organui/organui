@@ -4,124 +4,124 @@ import type { OrganModel } from "@workspace/registry/organ-viewer/organ-viewer"
 // structure data of the organ they show. An organ item missing here has no
 // docs page, which the browser suite catches.
 export const organModels: Record<string, () => Promise<OrganModel>> = {
-  "adrenals-viewer": () =>
-    import("@workspace/registry/organ-viewer/adrenals-viewer").then(
+  adrenals: () =>
+    import("@workspace/registry/organ-viewer/adrenals").then(
       (module) => module.adrenalsModel
     ),
-  "bladder-viewer": () =>
-    import("@workspace/registry/organ-viewer/bladder-viewer").then(
+  bladder: () =>
+    import("@workspace/registry/organ-viewer/bladder").then(
       (module) => module.bladderModel
     ),
-  "brain-viewer": () =>
-    import("@workspace/registry/organ-viewer/brain-viewer").then(
+  brain: () =>
+    import("@workspace/registry/organ-viewer/brain").then(
       (module) => module.brainModel
     ),
-  "ear-viewer": () =>
-    import("@workspace/registry/organ-viewer/ear-viewer").then(
+  ear: () =>
+    import("@workspace/registry/organ-viewer/ear").then(
       (module) => module.earModel
     ),
-  "esophagus-viewer": () =>
-    import("@workspace/registry/organ-viewer/esophagus-viewer").then(
+  esophagus: () =>
+    import("@workspace/registry/organ-viewer/esophagus").then(
       (module) => module.esophagusModel
     ),
-  "eye-viewer": () =>
-    import("@workspace/registry/organ-viewer/eye-viewer").then(
+  eye: () =>
+    import("@workspace/registry/organ-viewer/eye").then(
       (module) => module.eyeModel
     ),
-  "gallbladder-viewer": () =>
-    import("@workspace/registry/organ-viewer/gallbladder-viewer").then(
+  gallbladder: () =>
+    import("@workspace/registry/organ-viewer/gallbladder").then(
       (module) => module.gallbladderModel
     ),
-  "heart-viewer": () =>
-    import("@workspace/registry/organ-viewer/heart-viewer").then(
+  heart: () =>
+    import("@workspace/registry/organ-viewer/heart").then(
       (module) => module.heartModel
     ),
-  "intestines-viewer": () =>
-    import("@workspace/registry/organ-viewer/intestines-viewer").then(
+  intestines: () =>
+    import("@workspace/registry/organ-viewer/intestines").then(
       (module) => module.intestinesModel
     ),
-  "kidneys-viewer": () =>
-    import("@workspace/registry/organ-viewer/kidneys-viewer").then(
+  kidneys: () =>
+    import("@workspace/registry/organ-viewer/kidneys").then(
       (module) => module.kidneysModel
     ),
-  "larynx-viewer": () =>
-    import("@workspace/registry/organ-viewer/larynx-viewer").then(
+  larynx: () =>
+    import("@workspace/registry/organ-viewer/larynx").then(
       (module) => module.larynxModel
     ),
-  "liver-viewer": () =>
-    import("@workspace/registry/organ-viewer/liver-viewer").then(
+  liver: () =>
+    import("@workspace/registry/organ-viewer/liver").then(
       (module) => module.liverModel
     ),
-  "lungs-viewer": () =>
-    import("@workspace/registry/organ-viewer/lungs-viewer").then(
+  lungs: () =>
+    import("@workspace/registry/organ-viewer/lungs").then(
       (module) => module.lungsModel
     ),
-  "lymph-viewer": () =>
-    import("@workspace/registry/organ-viewer/lymph-viewer").then(
+  lymph: () =>
+    import("@workspace/registry/organ-viewer/lymph").then(
       (module) => module.lymphModel
     ),
-  "muscles-viewer": () =>
-    import("@workspace/registry/organ-viewer/muscles-viewer").then(
+  muscles: () =>
+    import("@workspace/registry/organ-viewer/muscles").then(
       (module) => module.musclesModel
     ),
-  "nose-viewer": () =>
-    import("@workspace/registry/organ-viewer/nose-viewer").then(
+  nose: () =>
+    import("@workspace/registry/organ-viewer/nose").then(
       (module) => module.noseModel
     ),
-  "pancreas-viewer": () =>
-    import("@workspace/registry/organ-viewer/pancreas-viewer").then(
+  pancreas: () =>
+    import("@workspace/registry/organ-viewer/pancreas").then(
       (module) => module.pancreasModel
     ),
-  "pharynx-viewer": () =>
-    import("@workspace/registry/organ-viewer/pharynx-viewer").then(
+  pharynx: () =>
+    import("@workspace/registry/organ-viewer/pharynx").then(
       (module) => module.pharynxModel
     ),
-  "prostate-viewer": () =>
-    import("@workspace/registry/organ-viewer/prostate-viewer").then(
+  prostate: () =>
+    import("@workspace/registry/organ-viewer/prostate").then(
       (module) => module.prostateModel
     ),
-  "skeleton-viewer": () =>
-    import("@workspace/registry/organ-viewer/skeleton-viewer").then(
+  skeleton: () =>
+    import("@workspace/registry/organ-viewer/skeleton").then(
       (module) => module.skeletonModel
     ),
-  "skin-viewer": () =>
-    import("@workspace/registry/organ-viewer/skin-viewer").then(
+  skin: () =>
+    import("@workspace/registry/organ-viewer/skin").then(
       (module) => module.skinModel
     ),
-  "spinal-cord-viewer": () =>
-    import("@workspace/registry/organ-viewer/spinal-cord-viewer").then(
+  "spinal-cord": () =>
+    import("@workspace/registry/organ-viewer/spinal-cord").then(
       (module) => module.spinalCordModel
     ),
-  "spleen-viewer": () =>
-    import("@workspace/registry/organ-viewer/spleen-viewer").then(
+  spleen: () =>
+    import("@workspace/registry/organ-viewer/spleen").then(
       (module) => module.spleenModel
     ),
-  "stomach-viewer": () =>
-    import("@workspace/registry/organ-viewer/stomach-viewer").then(
+  stomach: () =>
+    import("@workspace/registry/organ-viewer/stomach").then(
       (module) => module.stomachModel
     ),
-  "teeth-viewer": () =>
-    import("@workspace/registry/organ-viewer/teeth-viewer").then(
+  teeth: () =>
+    import("@workspace/registry/organ-viewer/teeth").then(
       (module) => module.teethModel
     ),
-  "thymus-viewer": () =>
-    import("@workspace/registry/organ-viewer/thymus-viewer").then(
+  thymus: () =>
+    import("@workspace/registry/organ-viewer/thymus").then(
       (module) => module.thymusModel
     ),
-  "thyroid-viewer": () =>
-    import("@workspace/registry/organ-viewer/thyroid-viewer").then(
+  thyroid: () =>
+    import("@workspace/registry/organ-viewer/thyroid").then(
       (module) => module.thyroidModel
     ),
-  "tongue-viewer": () =>
-    import("@workspace/registry/organ-viewer/tongue-viewer").then(
+  tongue: () =>
+    import("@workspace/registry/organ-viewer/tongue").then(
       (module) => module.tongueModel
     ),
-  "uterus-viewer": () =>
-    import("@workspace/registry/organ-viewer/uterus-viewer").then(
+  uterus: () =>
+    import("@workspace/registry/organ-viewer/uterus").then(
       (module) => module.uterusModel
     ),
-  "vessels-viewer": () =>
-    import("@workspace/registry/organ-viewer/vessels-viewer").then(
+  vessels: () =>
+    import("@workspace/registry/organ-viewer/vessels").then(
       (module) => module.vesselsModel
     ),
 }

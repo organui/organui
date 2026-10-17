@@ -1,7 +1,7 @@
 import { mkdir, writeFile, readFile, rm } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { heartModel } from "@workspace/registry/organ-viewer/heart-viewer"
+import { heartModel } from "@workspace/registry/organ-viewer/heart"
 import { fixtureGlb } from "./fixture-glb.js"
 const out = resolve(import.meta.dirname, "../.consumers")
 const shadcn = resolve(
@@ -55,14 +55,14 @@ export default function Harness(){
 // The organ harness loads a local stand-in GLB instead of the real model.
 const organHarness = `"use client"
 import { useRef, useState } from "react"
-import { HeartViewer } from "@/components/heart-viewer"
+import { Heart } from "@/components/heart"
 import type { OrganViewerHandle } from "@/components/organ-viewer"
 export default function OrganHarness(){
  const viewer=useRef<OrganViewerHandle>(null)
  const [selectedId,select]=useState<string|null>(null)
  const [view,setView]=useState<string|null>("Anterior")
  const [visibility,show]=useState<Record<string,boolean>>({})
- return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart viewer</h1><HeartViewer ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
 // Deliberately use distinct theme values to detect accidental theme overwrites.
 const css = `@import "tailwindcss";
@@ -204,8 +204,8 @@ try {
         shadcn,
         "add",
         framework === "vite"
-          ? "@organui/heart-viewer"
-          : `http://127.0.0.1:${server.port}/heart-viewer.json`,
+          ? "@organui/heart"
+          : `http://127.0.0.1:${server.port}/heart.json`,
         "--yes",
       ],
       dir

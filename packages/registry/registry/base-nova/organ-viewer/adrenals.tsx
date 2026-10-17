@@ -133,6 +133,6 @@ export const adrenalsModel: OrganModel = {
   },
 }
 
-export function AdrenalsViewer(props: Omit<OrganViewerProps, "model">) {
+export function Adrenals(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={adrenalsModel} {...props} />
 }

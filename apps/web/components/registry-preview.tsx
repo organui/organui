@@ -22,7 +22,7 @@ function AnatomyTreePreview() {
 }
 
 function OrganViewerPreview() {
-  return <OrganPreview name="heart-viewer" organ="Heart" />
+  return <OrganPreview name="heart" organ="Heart" />
 }
 
 // Live previews on the registry index, keyed by registry item name. The
@@ -50,7 +50,7 @@ export function RegistryPreview({
       className="rounded-lg border bg-muted/30 p-4"
     >
       {organ ? (
-        <OrganPreview name={name} organ={title.replace(/ viewer$/, "")} />
+        <OrganPreview name={name} organ={title} />
       ) : (
         Preview && <Preview />
       )}

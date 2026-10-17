@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 
-// Installed heart viewer, loading the stand-in GLB written by the consumer
+// Installed heart component, loading the stand-in GLB written by the consumer
 // script: the right atrium is the box in the middle of every fitted view.
 test.beforeEach(async ({ page }) => {
   await page.goto("/organ")

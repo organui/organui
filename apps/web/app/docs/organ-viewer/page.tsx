@@ -40,7 +40,7 @@ const handle = `const viewer = useRef<OrganViewerHandle>(null)
 <OrganViewer ref={viewer} model={kidneyModel} />`
 
 export default async function Page() {
-  const heart = await organModels["heart-viewer"]!()
+  const heart = await organModels.heart!()
   const organs = registryItems.filter(({ organ }) => organ)
   return (
     <div className="flex flex-col gap-10">
@@ -64,7 +64,7 @@ export default async function Page() {
             <span key={item.name}>
               {index > 0 && ", "}
               <Link href={item.href} className="underline">
-                {item.title.replace(/ viewer$/, "").toLowerCase()}
+                {item.title.toLowerCase()}
               </Link>
             </span>
           ))}

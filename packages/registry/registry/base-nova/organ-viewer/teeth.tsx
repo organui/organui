@@ -301,6 +301,6 @@ export const teethModel: OrganModel = {
   },
 }
 
-export function TeethViewer(props: Omit<OrganViewerProps, "model">) {
+export function Teeth(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={teethModel} {...props} />
 }

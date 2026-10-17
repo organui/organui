@@ -213,6 +213,6 @@ export const noseModel: OrganModel = {
   },
 }
 
-export function NoseViewer(props: Omit<OrganViewerProps, "model">) {
+export function Nose(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={noseModel} {...props} />
 }

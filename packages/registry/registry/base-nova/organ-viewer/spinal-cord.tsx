@@ -541,6 +541,6 @@ export const spinalCordModel: OrganModel = {
   },
 }
 
-export function SpinalCordViewer(props: Omit<OrganViewerProps, "model">) {
+export function SpinalCord(props: Omit<OrganViewerProps, "model">) {
   return <OrganViewer model={spinalCordModel} {...props} />
 }
