@@ -339,3 +339,32 @@ test("a model that fails to load explains itself and retries", async ({
   await alert.getByRole("button", { name: "Try again" }).click()
   await expect.poll(() => requests).toBe(2)
 })
+
+test("a model the site serves itself loads from its own origin", async ({
+  page,
+  request,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text())
+  })
+  // Installs in other apps fetch organui.com/models cross-origin.
+  const model = await request.get("/models/breast.glb")
+  expect(model.ok()).toBe(true)
+  expect(model.headers()["access-control-allow-origin"]).toBe("*")
+  const loaded = page.waitForResponse(
+    (response) =>
+      new URL(response.url()).pathname === "/models/breast.glb" && response.ok()
+  )
+  await page.goto("/docs/breast")
+  await loaded
+  const viewer = page.getByRole("region", { name: "Interactive breast model" })
+  await expect(viewer.getByRole("toolbar")).toBeVisible()
+  await expect(viewer.getByRole("alert")).toHaveCount(0)
+  await expect(
+    viewer.getByRole("link", { name: "CC BY 4.0", exact: true })
+  ).toBeVisible()
+  await page.screenshot({ path: info.outputPath("breast.png"), fullPage: true })
+  expect(errors).toEqual([])
+})

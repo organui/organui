@@ -1,0 +1,1373 @@
+{
+  "dataset": "Z-Anatomy",
+  "license": "CC-BY-SA-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "basedOn": {
+    "dataset": "BodyParts3D / Anatomography",
+    "license": "CC-BY-SA-2.1-JP",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en"
+  },
+  "credit": "Z-Anatomy (CC BY-SA 4.0), based in part on BodyParts3D, © The Database Center for Life Science (CC BY-SA 2.1 Japan). Adapted by OrganUI.",
+  "retrieved": "2026-10-17",
+  "source": {
+    "repository": "https://github.com/LluisV/Z-Anatomy",
+    "commit": "6c7f9016bd5899ac8edafd31b9900c151df42ed6",
+    "file": {
+      "name": "NervousSystem100",
+      "path": "Resources/Models/FBX/NervousSystem100.fbx",
+      "url": "https://raw.githubusercontent.com/LluisV/Z-Anatomy/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX/NervousSystem100.fbx",
+      "gitBlob": "4ec6e3cb2a1ba821aca02c1d523ac614fdf41a02",
+      "sha256": "3ea1aad64956cad27348a27b8fb50494b7cc307c6bc77bee0810ec2a67dff2b1",
+      "bytes": 53887724
+    }
+  },
+  "transform": {
+    "sourceBoundsCm": {
+      "min": [-33.374114990234375, 0.6879639029502869, -11.231090545654297],
+      "max": [33.374122619628906, 166.4425506591797, 13.0259370803833]
+    },
+    "centerCm": [0.000003814697265625, 83.56525728106499, 0.897423267364502],
+    "scale": 0.04,
+    "axes": "[x, y, z]"
+  },
+  "simplification": {
+    "ratio": 0.15,
+    "error": 0.003,
+    "lockBorder": true,
+    "sourceTriangles": 1210718
+  },
+  "runtime": {
+    "file": "nerves.glb",
+    "bytes": 3478352,
+    "sha256": "25b8ee488a5d405149586c96c921bc75ec153cff76c929eea731170f5bbc63ab"
+  },
+  "omittedLabelPins": 23,
+  "structures": [
+    {
+      "id": "olfactory-nerves",
+      "runtimeTriangles": 8086,
+      "objects": [
+        {
+          "object": "Olfactory_nerve_(I)r",
+          "vertices": 13524,
+          "triangles": 26956
+        },
+        {
+          "object": "Olfactory_nerve_(I)l",
+          "vertices": 13524,
+          "triangles": 26956
+        }
+      ]
+    },
+    {
+      "id": "optic-nerves",
+      "runtimeTriangles": 524,
+      "objects": [
+        { "object": "Optic_nerve_(II)l", "vertices": 876, "triangles": 1748 },
+        { "object": "Optic_nerve_(II)r", "vertices": 876, "triangles": 1748 }
+      ]
+    },
+    {
+      "id": "oculomotor-nerves",
+      "runtimeTriangles": 2634,
+      "objects": [
+        {
+          "object": "Oculomotor_nerve_(III)r",
+          "vertices": 4404,
+          "triangles": 8780
+        },
+        {
+          "object": "Oculomotor_nerve_(III)l",
+          "vertices": 4404,
+          "triangles": 8780
+        }
+      ]
+    },
+    {
+      "id": "trochlear-nerves",
+      "runtimeTriangles": 1128,
+      "objects": [
+        {
+          "object": "Trochlear_nerve_(IV)r",
+          "vertices": 1884,
+          "triangles": 3764
+        },
+        {
+          "object": "Trochlear_nerve_(IV)l",
+          "vertices": 1884,
+          "triangles": 3764
+        }
+      ]
+    },
+    {
+      "id": "trigeminal-nerves",
+      "runtimeTriangles": 16974,
+      "objects": [
+        {
+          "object": "Trigeminal_nerve_(V)r",
+          "vertices": 1176,
+          "triangles": 2344
+        },
+        {
+          "object": "Anterior_division_of_mandibular_nervel",
+          "vertices": 300,
+          "triangles": 596
+        },
+        { "object": "Buccal_nervel", "vertices": 1320, "triangles": 2632 },
+        { "object": "Mandibular_nervej", "vertices": 8, "triangles": 12 },
+        {
+          "object": "Anterior_division_of_mandibular_nerver",
+          "vertices": 300,
+          "triangles": 596
+        },
+        { "object": "Buccal_nerver", "vertices": 1320, "triangles": 2632 },
+        {
+          "object": "Posterior_division_of_mandibular_nervel",
+          "vertices": 444,
+          "triangles": 884
+        },
+        { "object": "Lingual_nervel", "vertices": 1308, "triangles": 2612 },
+        {
+          "object": "Inferior_alveolar_nervel",
+          "vertices": 8496,
+          "triangles": 16944
+        },
+        { "object": "Mental_nervel", "vertices": 1308, "triangles": 2652 },
+        {
+          "object": "Nerve_to_mylohyoid_musclel",
+          "vertices": 1752,
+          "triangles": 3496
+        },
+        {
+          "object": "Posterior_division_of_mandibular_nerver",
+          "vertices": 444,
+          "triangles": 884
+        },
+        {
+          "object": "Inferior_alveolar_nerver",
+          "vertices": 8496,
+          "triangles": 16944
+        },
+        { "object": "Mental_nerver", "vertices": 1308, "triangles": 2652 },
+        {
+          "object": "Nerve_to_mylohyoid_muscler",
+          "vertices": 1752,
+          "triangles": 3496
+        },
+        { "object": "Lingual_nerver", "vertices": 1308, "triangles": 2612 },
+        {
+          "object": "Sensory_root_of_trigeminal_nerver",
+          "vertices": 1378,
+          "triangles": 2752
+        },
+        { "object": "Maxillary_nerver", "vertices": 3948, "triangles": 7876 },
+        {
+          "object": "Meningeal_branch_of_maxillary_nerver",
+          "vertices": 3060,
+          "triangles": 6108
+        },
+        { "object": "Ophthalmic_nerver", "vertices": 3372, "triangles": 6724 },
+        {
+          "object": "Motor_root_of_trigeminal_nerver",
+          "vertices": 482,
+          "triangles": 960
+        },
+        {
+          "object": "Trigeminal_nerve_(V)l",
+          "vertices": 1176,
+          "triangles": 2344
+        },
+        { "object": "Maxillary_nervel", "vertices": 3948, "triangles": 7876 },
+        {
+          "object": "Meningeal_branch_of_maxillary_nervel",
+          "vertices": 3060,
+          "triangles": 6108
+        },
+        {
+          "object": "Sensory_root_of_trigeminal_nervel",
+          "vertices": 1378,
+          "triangles": 2752
+        },
+        {
+          "object": "Motor_root_of_trigeminal_nervel",
+          "vertices": 482,
+          "triangles": 960
+        },
+        { "object": "Ophthalmic_nervel", "vertices": 3372, "triangles": 6724 }
+      ]
+    },
+    {
+      "id": "abducens-nerves",
+      "runtimeTriangles": 1480,
+      "objects": [
+        {
+          "object": "Abducens_nerve_(VI)l",
+          "vertices": 2472,
+          "triangles": 4936
+        },
+        {
+          "object": "Abducens_nerve_(VI)r",
+          "vertices": 2472,
+          "triangles": 4936
+        }
+      ]
+    },
+    {
+      "id": "facial-nerves",
+      "runtimeTriangles": 8718,
+      "objects": [
+        {
+          "object": "Facial_nerve_(VII)r",
+          "vertices": 13680,
+          "triangles": 27312
+        },
+        { "object": "Chorda_tympanir", "vertices": 876, "triangles": 1748 },
+        {
+          "object": "Facial_nerve_(VII)l",
+          "vertices": 13680,
+          "triangles": 27312
+        },
+        { "object": "Chorda_tympanil", "vertices": 876, "triangles": 1748 }
+      ]
+    },
+    {
+      "id": "vestibulocochlear-nerves",
+      "runtimeTriangles": 2332,
+      "objects": [
+        {
+          "object": "Vestibulocochlear_nerve_(VIII)l",
+          "vertices": 888,
+          "triangles": 1768
+        },
+        { "object": "Cochlear_nervel", "vertices": 444, "triangles": 884 },
+        { "object": "Vestibular_nervel", "vertices": 2352, "triangles": 4688 },
+        {
+          "object": "Vestibulocochlear_nerve_(VIII)r",
+          "vertices": 888,
+          "triangles": 1768
+        },
+        { "object": "Cochlear_nerve", "vertices": 881, "triangles": 1758 },
+        { "object": "Vestibular_nerver", "vertices": 2352, "triangles": 4688 }
+      ]
+    },
+    {
+      "id": "glossopharyngeal-nerves",
+      "runtimeTriangles": 4016,
+      "objects": [
+        {
+          "object": "Glossopharyngeal_nerve_(IX)r",
+          "vertices": 6708,
+          "triangles": 13388
+        },
+        {
+          "object": "Glossopharyngeal_nerve_(IX)l",
+          "vertices": 6708,
+          "triangles": 13388
+        }
+      ]
+    },
+    {
+      "id": "vagus-nerves",
+      "runtimeTriangles": 9068,
+      "objects": [
+        { "object": "Vagus_nerve_(X)l", "vertices": 7284, "triangles": 14536 },
+        { "object": "Vagus_nerve_(X)r", "vertices": 23004, "triangles": 45920 }
+      ]
+    },
+    {
+      "id": "accessory-nerves",
+      "runtimeTriangles": 4614,
+      "objects": [
+        {
+          "object": "Accessory_nerve_(XI)l",
+          "vertices": 7704,
+          "triangles": 15384
+        },
+        {
+          "object": "Accessory_nerve_(XI)r",
+          "vertices": 7704,
+          "triangles": 15384
+        }
+      ]
+    },
+    {
+      "id": "hypoglossal-nerves",
+      "runtimeTriangles": 4886,
+      "objects": [
+        {
+          "object": "Hypoglossal_nerve_(XII)l",
+          "vertices": 8160,
+          "triangles": 16288
+        },
+        {
+          "object": "Hypoglossal_nerve_(XII)r",
+          "vertices": 8160,
+          "triangles": 16288
+        }
+      ]
+    },
+    {
+      "id": "spinal-nerve-roots",
+      "runtimeTriangles": 4304,
+      "objects": [
+        { "object": "Spinal_ganglionl", "vertices": 882, "triangles": 1680 },
+        { "object": "Spinal_ganglionr", "vertices": 882, "triangles": 1680 },
+        {
+          "object": "Posterior_root_of_spinal_nervel",
+          "vertices": 3276,
+          "triangles": 6048
+        },
+        {
+          "object": "Anterior_root_of_spinal_nerver",
+          "vertices": 3564,
+          "triangles": 6624
+        },
+        {
+          "object": "Posterior_root_of_spinal_nerver",
+          "vertices": 3276,
+          "triangles": 6048
+        },
+        {
+          "object": "Anterior_root_of_spinal_nervel",
+          "vertices": 3564,
+          "triangles": 6624
+        }
+      ]
+    },
+    {
+      "id": "cauda-equina",
+      "runtimeTriangles": 2072,
+      "objects": [
+        { "object": "Cauda_equina", "vertices": 7128, "triangles": 13824 }
+      ]
+    },
+    {
+      "id": "intercostal-nerves",
+      "runtimeTriangles": 15464,
+      "objects": [
+        {
+          "object": "Intercostal_nervesl",
+          "vertices": 25908,
+          "triangles": 51552
+        },
+        {
+          "object": "Intercostal_nervesr",
+          "vertices": 25908,
+          "triangles": 51552
+        }
+      ]
+    },
+    {
+      "id": "sympathetic-trunks",
+      "runtimeTriangles": 22544,
+      "objects": [
+        {
+          "object": "Sympathetic_nervesr",
+          "vertices": 12468,
+          "triangles": 24480
+        },
+        {
+          "object": "Sympathetic_trunkl",
+          "vertices": 12684,
+          "triangles": 25328
+        },
+        {
+          "object": "Ganglia_of_sympathetic_trunkl",
+          "vertices": 12708,
+          "triangles": 25344
+        },
+        {
+          "object": "Sympathetic_trunkr",
+          "vertices": 12684,
+          "triangles": 25328
+        },
+        {
+          "object": "Ganglia_of_sympathetic_trunkr",
+          "vertices": 12708,
+          "triangles": 25344
+        },
+        {
+          "object": "Sympathetic_nervesl",
+          "vertices": 12468,
+          "triangles": 24480
+        }
+      ]
+    },
+    {
+      "id": "iliohypogastric-ilio-inguinal-nerves",
+      "runtimeTriangles": 1640,
+      "objects": [
+        {
+          "object": "Ilio-inguinal_nerver",
+          "vertices": 1884,
+          "triangles": 3744
+        },
+        {
+          "object": "Iliohypogastric_nerver",
+          "vertices": 888,
+          "triangles": 1728
+        },
+        {
+          "object": "Iliohypogastric_nervel",
+          "vertices": 888,
+          "triangles": 1728
+        },
+        {
+          "object": "Ilio-inguinal_nervel",
+          "vertices": 1884,
+          "triangles": 3744
+        }
+      ]
+    },
+    {
+      "id": "brachial-plexus",
+      "runtimeTriangles": 2764,
+      "objects": [
+        {
+          "object": "Posterior_cord_of_brachial_plexusl",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Posterior_cord_of_brachial_plexusr",
+          "vertices": 300,
+          "triangles": 576
+        },
+        { "object": "Subclavian_nerver", "vertices": 444, "triangles": 864 },
+        { "object": "Subclavian_nervel", "vertices": 444, "triangles": 864 },
+        {
+          "object": "Middle_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Posterior_division_of_middle_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Anterior_division_of_middle_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Inferior_trunk_of_brachial_plexusl",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Anterior_division_of_inferior_trunk_of_brachial_plexusl",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Posterior_division_of_inferior_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Inferior_trunk_of_brachial_plexusr",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Posterior_division_of_inferior_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Anterior_division_of_inferior_trunk_of_brachial_plexusr",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Middle_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Anterior_division_of_middle_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Posterior_division_of_middle_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Superior_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Posterior_division_of_superior_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Anterior_division_of_superior_trunk_of_brachial_plexusr",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Superior_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Anterior_division_of_superior_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Posterior_division_of_superior_trunk_of_brachial_plexusl",
+          "vertices": 156,
+          "triangles": 288
+        },
+        {
+          "object": "Roots_of_brachial_plexusr",
+          "vertices": 2388,
+          "triangles": 4608
+        },
+        {
+          "object": "Roots_of_brachial_plexusl",
+          "vertices": 2388,
+          "triangles": 4608
+        }
+      ]
+    },
+    {
+      "id": "dorsal-scapular-nerves",
+      "runtimeTriangles": 776,
+      "objects": [
+        {
+          "object": "Dorsal_scapular_nerver",
+          "vertices": 1308,
+          "triangles": 2592
+        },
+        {
+          "object": "Dorsal_scapular_nervel",
+          "vertices": 1308,
+          "triangles": 2592
+        }
+      ]
+    },
+    {
+      "id": "long-thoracic-nerves",
+      "runtimeTriangles": 1208,
+      "objects": [
+        {
+          "object": "Long_thoracic_nerver",
+          "vertices": 2040,
+          "triangles": 4032
+        },
+        {
+          "object": "Long_thoracic_nervel",
+          "vertices": 2040,
+          "triangles": 4032
+        }
+      ]
+    },
+    {
+      "id": "suprascapular-nerves",
+      "runtimeTriangles": 1468,
+      "objects": [
+        {
+          "object": "Suprascapular_nerver",
+          "vertices": 2508,
+          "triangles": 4896
+        },
+        {
+          "object": "Suprascapular_nervel",
+          "vertices": 2508,
+          "triangles": 4896
+        }
+      ]
+    },
+    {
+      "id": "pectoral-nerves",
+      "runtimeTriangles": 2764,
+      "objects": [
+        {
+          "object": "Medial_pectoral_nerver",
+          "vertices": 1032,
+          "triangles": 2016
+        },
+        {
+          "object": "Medial_pectoral_nervel",
+          "vertices": 1032,
+          "triangles": 2016
+        },
+        {
+          "object": "Lateral_pectoral_nerver",
+          "vertices": 3660,
+          "triangles": 7200
+        },
+        {
+          "object": "Lateral_pectoral_nervel",
+          "vertices": 3660,
+          "triangles": 7200
+        }
+      ]
+    },
+    {
+      "id": "subscapular-nerves",
+      "runtimeTriangles": 950,
+      "objects": [
+        {
+          "object": "Inferior_subscapular_nerver",
+          "vertices": 1032,
+          "triangles": 2016
+        },
+        {
+          "object": "Superior_subscapular_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Inferior_subscapular_nervel",
+          "vertices": 1032,
+          "triangles": 2016
+        },
+        {
+          "object": "Superior_subscapular_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        }
+      ]
+    },
+    {
+      "id": "thoracodorsal-nerves",
+      "runtimeTriangles": 1382,
+      "objects": [
+        {
+          "object": "Thoracodorsal_nervel",
+          "vertices": 2340,
+          "triangles": 4608
+        },
+        {
+          "object": "Thoracodorsal_nerver",
+          "vertices": 2340,
+          "triangles": 4608
+        }
+      ]
+    },
+    {
+      "id": "axillary-nerves",
+      "runtimeTriangles": 1296,
+      "objects": [
+        { "object": "Axillary_nerver", "vertices": 588, "triangles": 1152 },
+        {
+          "object": "Superior_lateral_brachial_cutaneous_nerver",
+          "vertices": 1020,
+          "triangles": 2016
+        },
+        {
+          "object": "Muscular_branches_of_axillary_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        { "object": "Axillary_nervel", "vertices": 588, "triangles": 1152 },
+        {
+          "object": "Superior_lateral_brachial_cutaneous_nervel",
+          "vertices": 1020,
+          "triangles": 2016
+        },
+        {
+          "object": "Muscular_branches_of_axillary_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        }
+      ]
+    },
+    {
+      "id": "musculocutaneous-nerves",
+      "runtimeTriangles": 950,
+      "objects": [
+        {
+          "object": "Musculocutaneous_nerver",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "Lateral_antebrachial_cutaneous_nerver",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Musculocutaneous_nervel",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "Lateral_antebrachial_cutaneous_nervel",
+          "vertices": 876,
+          "triangles": 1728
+        }
+      ]
+    },
+    {
+      "id": "radial-nerves",
+      "runtimeTriangles": 8898,
+      "objects": [
+        { "object": "Radial_nerver", "vertices": 1164, "triangles": 2304 },
+        {
+          "object": "Inferior_lateral_brachial_cutaneous_nerver",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Superficial_branch_of_radial_nerver",
+          "vertices": 2208,
+          "triangles": 4320
+        },
+        {
+          "object": "Dorsal_digital_branches_of_radial_nerver",
+          "vertices": 6852,
+          "triangles": 13536
+        },
+        {
+          "object": "Deep_branch_of_radial_nerver",
+          "vertices": 1020,
+          "triangles": 2016
+        },
+        {
+          "object": "Posterior_interosseous_nerve_of_forearmr",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Posterior_antebrachial_cutaneous_nerver",
+          "vertices": 1308,
+          "triangles": 2592
+        },
+        {
+          "object": "Muscular_branches_of_radial_nerver",
+          "vertices": 1356,
+          "triangles": 2592
+        },
+        { "object": "Radial_nervel", "vertices": 1164, "triangles": 2304 },
+        {
+          "object": "Muscular_branches_of_radial_nervel",
+          "vertices": 1356,
+          "triangles": 2592
+        },
+        {
+          "object": "Posterior_antebrachial_cutaneous_nervel",
+          "vertices": 1308,
+          "triangles": 2592
+        },
+        {
+          "object": "Inferior_lateral_brachial_cutaneous_nervel",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Deep_branch_of_radial_nervel",
+          "vertices": 1020,
+          "triangles": 2016
+        },
+        {
+          "object": "Posterior_interosseous_nerve_of_forearml",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Superficial_branch_of_radial_nervel",
+          "vertices": 2208,
+          "triangles": 4320
+        },
+        {
+          "object": "Dorsal_digital_branches_of_radial_nervel",
+          "vertices": 6852,
+          "triangles": 13536
+        }
+      ]
+    },
+    {
+      "id": "median-nerves",
+      "runtimeTriangles": 6824,
+      "objects": [
+        { "object": "Median_nervel", "vertices": 2604, "triangles": 5184 },
+        {
+          "object": "Anterior_interosseous_nerve_of_forearml",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "(Communicating_branch_of_median_nerve_with_ulnar_nerve)l",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Palmar_branch_of_median_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Muscular_branches_of_median_nervel",
+          "vertices": 624,
+          "triangles": 1152
+        },
+        {
+          "object": "Common_palmar_digital_branches_of_median_nervel",
+          "vertices": 1188,
+          "triangles": 2304
+        },
+        {
+          "object": "Proper_palmar_digital_branches_of_median_nervel",
+          "vertices": 5556,
+          "triangles": 10944
+        },
+        { "object": "Median_nerver", "vertices": 2604, "triangles": 5184 },
+        {
+          "object": "Palmar_branch_of_median_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Muscular_branches_of_median_nerver",
+          "vertices": 624,
+          "triangles": 1152
+        },
+        {
+          "object": "Common_palmar_digital_branches_of_median_nerver",
+          "vertices": 1188,
+          "triangles": 2304
+        },
+        {
+          "object": "Proper_palmar_digital_branches_of_median_nerver",
+          "vertices": 5556,
+          "triangles": 10944
+        },
+        {
+          "object": "(Communicating_branch_of_median_nerve_with_ulnar_nerve)r",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Anterior_interosseous_nerve_of_forearmr",
+          "vertices": 732,
+          "triangles": 1440
+        }
+      ]
+    },
+    {
+      "id": "ulnar-nerves",
+      "runtimeTriangles": 6302,
+      "objects": [
+        { "object": "Ulnar_nerver", "vertices": 1596, "triangles": 3168 },
+        {
+          "object": "Deep_branch_of_ulnar_nerver",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "Palmar_branch_of_ulnar_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Dorsal_branch_of_ulnar_nerver",
+          "vertices": 744,
+          "triangles": 1440
+        },
+        {
+          "object": "Dorsal_digital_branches_of_ulnar_nerver",
+          "vertices": 2484,
+          "triangles": 4896
+        },
+        {
+          "object": "Superficial_branch_of_ulnar_nerver",
+          "vertices": 444,
+          "triangles": 864
+        },
+        {
+          "object": "Common_palmar_digital_branches_of_ulnar_nerver",
+          "vertices": 600,
+          "triangles": 1728
+        },
+        {
+          "object": "Proper_palmar_digital_branches_of_ulnar_nerver",
+          "vertices": 2916,
+          "triangles": 5760
+        },
+        {
+          "object": "Muscular_branches_of_ulnar_nerver",
+          "vertices": 312,
+          "triangles": 576
+        },
+        { "object": "Ulnar_nervel", "vertices": 1596, "triangles": 3168 },
+        {
+          "object": "Palmar_branch_of_ulnar_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Muscular_branches_of_ulnar_nervel",
+          "vertices": 312,
+          "triangles": 576
+        },
+        {
+          "object": "Deep_branch_of_ulnar_nervel",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "Dorsal_branch_of_ulnar_nervel",
+          "vertices": 744,
+          "triangles": 1440
+        },
+        {
+          "object": "Dorsal_digital_branches_of_ulnar_nervel",
+          "vertices": 2484,
+          "triangles": 4896
+        },
+        {
+          "object": "Superficial_branch_of_ulnar_nervel",
+          "vertices": 444,
+          "triangles": 864
+        },
+        {
+          "object": "Common_palmar_digital_branches_of_ulnar_nervel",
+          "vertices": 600,
+          "triangles": 1728
+        },
+        {
+          "object": "Proper_palmar_digital_branches_of_ulnar_nervel",
+          "vertices": 2916,
+          "triangles": 5760
+        }
+      ]
+    },
+    {
+      "id": "medial-cutaneous-nerves",
+      "runtimeTriangles": 2160,
+      "objects": [
+        {
+          "object": "Medial_antebrachial_cutaneous_nervel",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Posterior_branch_of_medial_antebrachial_cutaneous_nervel",
+          "vertices": 1164,
+          "triangles": 2304
+        },
+        {
+          "object": "Anterior_branch_of_medial_antebrachial_cutaneous_nervel",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "Medial_brachial_cutaneous_nervel",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Medial_brachial_cutaneous_nerver",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Medial_antebrachial_cutaneous_nerver",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Anterior_branch_of_medial_antebrachial_cutaneous_nerver",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        {
+          "object": "Posterior_branch_of_medial_antebrachial_cutaneous_nerver",
+          "vertices": 1164,
+          "triangles": 2304
+        }
+      ]
+    },
+    {
+      "id": "femoral-nerves",
+      "runtimeTriangles": 3974,
+      "objects": [
+        { "object": "Femoral_nerver", "vertices": 2052, "triangles": 4032 },
+        {
+          "object": "Anterior_cutaneous_branches_of_femoral_nerver",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        { "object": "Saphenous_nerver", "vertices": 3360, "triangles": 6624 },
+        {
+          "object": "Medial_crural_cutaneous_branches_of_saphenous_nerver",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Infrapatellar_branch_of_saphenous_nerver",
+          "vertices": 300,
+          "triangles": 576
+        },
+        { "object": "Femoral_nervel", "vertices": 2052, "triangles": 4032 },
+        {
+          "object": "Anterior_cutaneous_branches_of_femoral_nervel",
+          "vertices": 732,
+          "triangles": 1440
+        },
+        { "object": "Saphenous_nervel", "vertices": 3360, "triangles": 6624 },
+        {
+          "object": "Infrapatellar_branch_of_saphenous_nervel",
+          "vertices": 300,
+          "triangles": 576
+        },
+        {
+          "object": "Medial_crural_cutaneous_branches_of_saphenous_nervel",
+          "vertices": 300,
+          "triangles": 576
+        }
+      ]
+    },
+    {
+      "id": "lateral-femoral-cutaneous-nerves",
+      "runtimeTriangles": 1382,
+      "objects": [
+        {
+          "object": "Lateral_femoral_cutaneous_nervel",
+          "vertices": 2340,
+          "triangles": 4608
+        },
+        {
+          "object": "Lateral_femoral_cutaneous_nerver",
+          "vertices": 2340,
+          "triangles": 4608
+        }
+      ]
+    },
+    {
+      "id": "obturator-nerves",
+      "runtimeTriangles": 1900,
+      "objects": [
+        { "object": "Obturator_nerver", "vertices": 1764, "triangles": 3456 },
+        {
+          "object": "Posterior_branch_of_obturator_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Anterior_branch_of_obturator_nerver",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        { "object": "Obturator_nervel", "vertices": 1764, "triangles": 3456 },
+        {
+          "object": "Posterior_branch_of_obturator_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Anterior_branch_of_obturator_nervel",
+          "vertices": 876,
+          "triangles": 1728
+        }
+      ]
+    },
+    {
+      "id": "genitofemoral-nerves",
+      "runtimeTriangles": 1554,
+      "objects": [
+        { "object": "Genitofemoral_nerver", "vertices": 456, "triangles": 864 },
+        {
+          "object": "Genital_branch_of_genitofemoral_nerver",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Femoral_branch_of_genitofemoral_nerver",
+          "vertices": 1320,
+          "triangles": 2592
+        },
+        { "object": "Genitofemoral_nervel", "vertices": 456, "triangles": 864 },
+        {
+          "object": "Genital_branch_of_genitofemoral_nervel",
+          "vertices": 876,
+          "triangles": 1728
+        },
+        {
+          "object": "Femoral_branch_of_genitofemoral_nervel",
+          "vertices": 1320,
+          "triangles": 2592
+        }
+      ]
+    },
+    {
+      "id": "superior-gluteal-nerves",
+      "runtimeTriangles": 1036,
+      "objects": [
+        {
+          "object": "Superior_gluteal_nervel",
+          "vertices": 1764,
+          "triangles": 3456
+        },
+        {
+          "object": "Superior_gluteal_nerver",
+          "vertices": 1764,
+          "triangles": 3456
+        }
+      ]
+    },
+    {
+      "id": "hip-rotator-nerves",
+      "runtimeTriangles": 1728,
+      "objects": [
+        {
+          "object": "Nerve_to_quadratus_femoris_musclel",
+          "vertices": 2208,
+          "triangles": 4320
+        },
+        {
+          "object": "Nerve_to_piriformis_muscler",
+          "vertices": 744,
+          "triangles": 1440
+        },
+        {
+          "object": "Nerve_to_piriformis_musclel",
+          "vertices": 744,
+          "triangles": 1440
+        },
+        {
+          "object": "Nerve_to_quadratus_femoris_muscler",
+          "vertices": 2208,
+          "triangles": 4320
+        }
+      ]
+    },
+    {
+      "id": "posterior-femoral-cutaneous-nerves",
+      "runtimeTriangles": 2418,
+      "objects": [
+        {
+          "object": "Posterior_root_of_posterior_femoral_cutaneous_nervel",
+          "vertices": 2052,
+          "triangles": 4032
+        },
+        {
+          "object": "Posterior_femoral_cutaneous_nerver",
+          "vertices": 1332,
+          "triangles": 2592
+        },
+        {
+          "object": "Posterior_root_of_posterior_femoral_cutaneous_nerver",
+          "vertices": 2052,
+          "triangles": 4032
+        },
+        {
+          "object": "Anterior_root_of_posterior_femoral_cutaneous_nerver",
+          "vertices": 756,
+          "triangles": 1440
+        },
+        {
+          "object": "Posterior_femoral_cutaneous_nervel",
+          "vertices": 1332,
+          "triangles": 2592
+        },
+        {
+          "object": "Anterior_root_of_posterior_femoral_cutaneous_nervel",
+          "vertices": 756,
+          "triangles": 1440
+        }
+      ]
+    },
+    {
+      "id": "pudendal-nerves",
+      "runtimeTriangles": 1122,
+      "objects": [
+        { "object": "Pudendal_nerver", "vertices": 1908, "triangles": 3744 },
+        { "object": "Pudendal_nervel", "vertices": 1908, "triangles": 3744 }
+      ]
+    },
+    {
+      "id": "sciatic-nerves",
+      "runtimeTriangles": 1468,
+      "objects": [
+        { "object": "Sciatic_nervel", "vertices": 2484, "triangles": 4896 },
+        { "object": "Sciatic_nerver", "vertices": 2484, "triangles": 4896 }
+      ]
+    },
+    {
+      "id": "tibial-nerves",
+      "runtimeTriangles": 7862,
+      "objects": [
+        { "object": "Tibial_nervel", "vertices": 1308, "triangles": 2592 },
+        {
+          "object": "Lateral_plantar_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Common_plantar_digital_branches_of_lateral_plantar_nervel",
+          "vertices": 756,
+          "triangles": 1440
+        },
+        {
+          "object": "Proper_plantar_digital_branches_of_lateral_plantar_nervel",
+          "vertices": 3804,
+          "triangles": 7488
+        },
+        {
+          "object": "Medial_plantar_nervel",
+          "vertices": 600,
+          "triangles": 1152
+        },
+        {
+          "object": "Common_plantar_digital_branches_of_medial_plantar_nervel",
+          "vertices": 900,
+          "triangles": 1728
+        },
+        {
+          "object": "Proper_plantar_digital_branches_of_medial_plantar_nervel",
+          "vertices": 3228,
+          "triangles": 6336
+        },
+        {
+          "object": "Medial_sural_cutaneous_nervel",
+          "vertices": 156,
+          "triangles": 288
+        },
+        { "object": "Sural_nervel", "vertices": 2052, "triangles": 4032 },
+        { "object": "Tibial_nerver", "vertices": 1308, "triangles": 2592 },
+        {
+          "object": "Lateral_plantar_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Common_plantar_digital_branches_of_lateral_plantar_nerver",
+          "vertices": 756,
+          "triangles": 1440
+        },
+        {
+          "object": "Proper_plantar_digital_branches_of_lateral_plantar_nerver",
+          "vertices": 3804,
+          "triangles": 7488
+        },
+        {
+          "object": "Medial_plantar_nerver",
+          "vertices": 600,
+          "triangles": 1152
+        },
+        {
+          "object": "Common_plantar_digital_branches_of_medial_plantar_nerve",
+          "vertices": 900,
+          "triangles": 1728
+        },
+        {
+          "object": "Proper_plantar_digital_branches_of_medial_plantar_nerver",
+          "vertices": 3228,
+          "triangles": 6336
+        },
+        {
+          "object": "Medial_sural_cutaneous_nerver",
+          "vertices": 156,
+          "triangles": 288
+        },
+        { "object": "Sural_nerver", "vertices": 2052, "triangles": 4032 }
+      ]
+    },
+    {
+      "id": "common-fibular-nerves",
+      "runtimeTriangles": 8898,
+      "objects": [
+        {
+          "object": "Common_fibular_nervel",
+          "vertices": 1020,
+          "triangles": 2016
+        },
+        {
+          "object": "Superficial_fibular_nervel",
+          "vertices": 1596,
+          "triangles": 3168
+        },
+        {
+          "object": "Intermediate_dorsal_cutaneous_nerve_of_footl",
+          "vertices": 1320,
+          "triangles": 2592
+        },
+        {
+          "object": "Medial_dorsal_cutaneous_nerve_of_footl",
+          "vertices": 2064,
+          "triangles": 4032
+        },
+        {
+          "object": "Dorsal_digital_branches_of_superficial_fibular_nervel",
+          "vertices": 4260,
+          "triangles": 8352
+        },
+        {
+          "object": "Sural_communicating_branch_of_common_fibular_nervel",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Deep_fibular_nervel",
+          "vertices": 2172,
+          "triangles": 4320
+        },
+        {
+          "object": "Muscular_branches_of_deep_fibular_nervel",
+          "vertices": 444,
+          "triangles": 864
+        },
+        {
+          "object": "Dorsal_digital_branches_of_deep_fibular_nervel",
+          "vertices": 1608,
+          "triangles": 3168
+        },
+        {
+          "object": "Common_fibular_nerver",
+          "vertices": 1020,
+          "triangles": 2016
+        },
+        {
+          "object": "Superficial_fibular_nerver",
+          "vertices": 1596,
+          "triangles": 3168
+        },
+        {
+          "object": "Medial_dorsal_cutaneous_nerve_of_footr",
+          "vertices": 2064,
+          "triangles": 4032
+        },
+        {
+          "object": "Intermediate_dorsal_cutaneous_nerve_of_footr",
+          "vertices": 1320,
+          "triangles": 2592
+        },
+        {
+          "object": "Dorsal_digital_branches_of_superficial_fibular_nerver",
+          "vertices": 4260,
+          "triangles": 8352
+        },
+        {
+          "object": "Sural_communicating_branch_of_common_fibular_nerver",
+          "vertices": 588,
+          "triangles": 1152
+        },
+        {
+          "object": "Deep_fibular_nerver",
+          "vertices": 2172,
+          "triangles": 4320
+        },
+        {
+          "object": "Muscular_branches_of_deep_fibular_nerver",
+          "vertices": 444,
+          "triangles": 864
+        },
+        {
+          "object": "Dorsal_digital_branches_of_deep_fibular_nerver",
+          "vertices": 1608,
+          "triangles": 3168
+        }
+      ]
+    }
+  ]
+}

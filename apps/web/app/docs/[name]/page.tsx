@@ -10,6 +10,7 @@ import {
   registryNamespace,
   shadcn,
 } from "@/lib/registry"
+import { site } from "@/lib/site"
 
 type Props = { params: Promise<{ name: string }> }
 
@@ -44,6 +45,10 @@ export default async function Page({ params }: Props) {
   if (!found) notFound()
   const { item, load } = found
   const model = await load()
+  // Models built in this repository load from the site itself (see
+  // organ-models.ts); give readers the public address.
+  const hosted = model.src.startsWith("/")
+  const src = hosted ? new URL(model.src, site.url).href : model.src
   const organ = name.split("-")
   const pascal = organ.map((word) => word[0]!.toUpperCase() + word.slice(1))
   const component = pascal.join("")
@@ -74,9 +79,10 @@ const data = organAnatomyNodes(${exportName})
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          The {model.name.toLowerCase()} from the OrganUI explorer, ready to
-          drop into your app: {model.structures.length} selectable structures
-          and {model.views.length} named views, built on the{" "}
+          The {model.name.toLowerCase()} from{" "}
+          {hosted ? "OrganUI" : "the OrganUI explorer"}, ready to drop into your
+          app: {model.structures.length} selectable structures and{" "}
+          {model.views.length} named views, built on the{" "}
           <Link href="/docs/organ-viewer" className="underline">
             organ viewer
           </Link>
@@ -168,14 +174,15 @@ const data = organAnatomyNodes(${exportName})
           elsewhere.
         </p>
         <p>
-          The GLB loads from a commit-pinned copy in the explorer repository,
-          where its{" "}
+          {hosted
+            ? "The GLB is built in the OrganUI repository and served by organui.com, and its"
+            : "The GLB loads from a commit-pinned copy in the explorer repository, where its"}{" "}
           <a className="underline" href={model.attribution.source}>
             provenance and changes
           </a>{" "}
           are documented. To serve it yourself, download it from{" "}
-          <a className="break-all underline" href={model.src}>
-            {model.src}
+          <a className="break-all underline" href={src}>
+            {src}
           </a>{" "}
           and pass the new URL as <code>src</code>.
         </p>
