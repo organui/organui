@@ -40,6 +40,13 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/organ-viewer/intestines").then(
       (module) => module.intestinesModel
     ),
+  // Served by this site rather than an explorer repository, so docs load it
+  // same-origin.
+  joints: () =>
+    import("@workspace/registry/organ-viewer/joints").then((module) => ({
+      ...module.jointsModel,
+      src: "/models/joints.glb",
+    })),
   kidneys: () =>
     import("@workspace/registry/organ-viewer/kidneys").then(
       (module) => module.kidneysModel

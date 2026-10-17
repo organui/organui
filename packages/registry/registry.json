@@ -327,6 +327,37 @@
       ]
     },
     {
+      "name": "joints",
+      "type": "registry:component",
+      "title": "Joints",
+      "description": "The joints and ligaments of the whole body, from Z-Anatomy: 197 selectable structures and 9 named views. Model licensed CC BY-SA 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/joints.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "kidneys",
       "type": "registry:component",
       "title": "Kidneys",
