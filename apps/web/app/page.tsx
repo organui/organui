@@ -4,7 +4,6 @@ import { bodyPlaces } from "@/lib/body"
 import { registryItems } from "@/lib/registry"
 
 import { BodyNavigator } from "@/components/body-navigator"
-import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
   title: { absolute: site.title },
@@ -33,7 +32,6 @@ const organs = registryItems
 export default function Page() {
   return (
     <>
-      <SiteHeader floating />
       <main>
         <h1 className="sr-only">
           OrganUI: the interfaces healthcare deserves. Pick an organ on the body

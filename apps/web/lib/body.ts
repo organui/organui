@@ -246,8 +246,8 @@ export const bodyPlaces: Record<string, BodyPlace> = {
   },
 }
 
-// Body systems that would hide the organs are drawn only once picked.
-export const bodyLayers = ["muscles", "vessels", "nerves"] as const
+// Body systems that would crowd the organs are drawn only once picked.
+export const bodyLayers = ["skeleton", "muscles", "vessels", "nerves"] as const
 
 const structure = (
   id: string,

@@ -20,6 +20,7 @@ import {
 import { Input } from "@workspace/ui/components/input"
 import { cn } from "@workspace/ui/lib/utils"
 
+import { SiteHeader } from "@/components/site-header"
 import { bodyLayers, bodyModel, bodyRegions, type BodyPlace } from "@/lib/body"
 
 export type BodyOrgan = BodyPlace & {
@@ -92,19 +93,24 @@ export function BodyNavigator({ organs }: { organs: readonly BodyOrgan[] }) {
         label="Interactive human body"
         className="h-full rounded-none border-0 bg-transparent"
       />
-      <div className="absolute top-20 right-3 flex flex-col items-end gap-2 sm:right-6">
-        <Button
-          ref={finderButton}
-          variant="outline"
-          size="icon-lg"
-          aria-label="Find an organ"
-          aria-expanded={finding}
-          aria-controls={finderId}
-          onClick={() => (finding ? closeFinder() : setFinding(true))}
-          className="bg-background/80 shadow-sm backdrop-blur"
-        >
-          <SearchIcon />
-        </Button>
+      <SiteHeader
+        floating
+        actions={
+          <Button
+            ref={finderButton}
+            variant="ghost"
+            size="icon"
+            aria-label="Find an organ"
+            aria-expanded={finding}
+            aria-controls={finderId}
+            onClick={() => (finding ? closeFinder() : setFinding(true))}
+            className="size-10"
+          >
+            <SearchIcon />
+          </Button>
+        }
+      />
+      <div className="absolute top-14 right-4 sm:right-6">
         {finding && (
           <div
             id={finderId}
@@ -181,7 +187,7 @@ export function BodyNavigator({ organs }: { organs: readonly BodyOrgan[] }) {
         className="absolute inset-x-3 bottom-14 empty:hidden sm:right-auto sm:left-6 sm:w-80"
       >
         {organ && (
-          <Card size="sm" className="bg-background/95 shadow-lg backdrop-blur">
+          <Card size="sm" className="bg-background/90 shadow-sm backdrop-blur">
             <CardHeader>
               <CardTitle>
                 <h2 className="text-base">{organ.title}</h2>

@@ -1,3 +1,4 @@
+import type * as React from "react"
 import Link from "next/link"
 import { GitHubIcon } from "@/components/social-icons"
 import { buttonVariants } from "@workspace/ui/components/button"
@@ -7,22 +8,28 @@ import { cn } from "@workspace/ui/lib/utils"
 const link =
   "rounded-md text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
 
-// Shared by the docs and the blocks gallery. The homepage floats it over the
-// body model as a pill.
-export function SiteHeader({ floating = false }: { floating?: boolean }) {
+// Shared by the docs and the blocks gallery. The homepage floats it, bare,
+// over the body model.
+export function SiteHeader({
+  floating = false,
+  actions,
+}: {
+  floating?: boolean
+  actions?: React.ReactNode
+}) {
   return (
     <header
       className={cn(
-        "z-10 bg-background/95 backdrop-blur",
+        "z-10",
         floating
-          ? "fixed inset-x-3 top-3 mx-auto max-w-3xl rounded-xl border bg-background/80 shadow-sm sm:inset-x-6"
-          : "sticky top-0 border-b"
+          ? "fixed inset-x-0 top-0"
+          : "sticky top-0 border-b bg-background/95 backdrop-blur"
       )}
     >
       <div
         className={cn(
           "mx-auto flex h-14 max-w-6xl items-center gap-6",
-          floating ? "px-4" : "px-5 sm:px-10"
+          floating ? "px-4 sm:px-6" : "px-5 sm:px-10"
         )}
       >
         <Link
@@ -38,16 +45,19 @@ export function SiteHeader({ floating = false }: { floating?: boolean }) {
         <Link href="/blocks" className={link}>
           Blocks
         </Link>
-        <a
-          href="https://github.com/organui/organui"
-          aria-label="OrganUI on GitHub"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "icon" }),
-            "ml-auto size-10"
-          )}
-        >
-          <GitHubIcon />
-        </a>
+        <div className="ml-auto flex items-center gap-1">
+          {actions}
+          <a
+            href="https://github.com/organui/organui"
+            aria-label="OrganUI on GitHub"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              "size-10"
+            )}
+          >
+            <GitHubIcon />
+          </a>
+        </div>
       </div>
     </header>
   )
