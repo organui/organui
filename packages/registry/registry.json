@@ -513,6 +513,37 @@
       ]
     },
     {
+      "name": "nerves",
+      "type": "registry:component",
+      "title": "Nerves",
+      "description": "The peripheral nerves of the whole body, from the cranial nerves to the plexuses of the arms and legs: 41 selectable structures and 6 named views. Model licensed CC BY-SA 4.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/nerves.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "nose",
       "type": "registry:component",
       "title": "Nose",
