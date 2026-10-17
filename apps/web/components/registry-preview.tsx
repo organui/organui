@@ -3,6 +3,7 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
+import { EcgTrace, syntheticEcg } from "@workspace/registry/ecg-trace"
 import { OrganPreview } from "@/components/organ-preview"
 import { Example as DnaHelixExample } from "@/app/docs/dna-helix/example"
 import { Example as MoleculeExample } from "@/app/docs/molecule-viewer/example"
@@ -23,6 +24,12 @@ function AnatomyTreePreview() {
   )
 }
 
+const ecgPreview = syntheticEcg({ duration: 4 })
+
+function EcgTracePreview() {
+  return <EcgTrace samples={ecgPreview} label="Preview ECG" />
+}
+
 function OrganViewerPreview() {
   return <OrganPreview name="heart" organ="Heart" />
 }
@@ -39,6 +46,7 @@ function DnaHelixPreview() {
 // browser suite requires one for every catalog item.
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
+  "ecg-trace": EcgTracePreview,
   "organ-viewer": OrganViewerPreview,
   "molecule-viewer": MoleculeViewerPreview,
   "dna-helix": DnaHelixPreview,

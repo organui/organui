@@ -72,6 +72,20 @@ The docs site serves a small sample, crambin (PDB 1CRN, CC0), at
 `organui.com/models/crambin.pdb`. See [the molecule viewer](https://organui.com/docs/molecule-viewer)
 and [DNA helix](https://organui.com/docs/dna-helix) documentation.
 
+## ECG trace
+
+`ecg-trace` draws a recorded trace or a live stream as a rhythm strip on
+standard ECG paper (25 mm/s, 10 mm/mV), with P, QRS and T labelled and a
+synthetic sinus rhythm for demos. It is SVG only and not for diagnostic use.
+
+```tsx
+import { EcgTrace, syntheticEcg } from "@/components/ui/ecg-trace"
+
+;<EcgTrace samples={syntheticEcg({ heartRate: 72 })} sampleRate={250} />
+```
+
+See [the ECG trace documentation](https://organui.com/docs/ecg-trace).
+
 ## Blocks
 
 Blocks are whole layouts built from those pieces, following shadcn's
