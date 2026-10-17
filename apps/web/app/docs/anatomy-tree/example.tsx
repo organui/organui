@@ -1,31 +1,8 @@
 "use client"
 import { useState } from "react"
-import { AnatomyTree, type AnatomyNode } from "@workspace/registry/anatomy-tree"
+import { anatomyExampleData as data } from "@/lib/examples"
+import { AnatomyTree } from "@workspace/registry/anatomy-tree"
 
-export const data: AnatomyNode[] = [
-  {
-    id: "heart",
-    label: "Heart",
-    children: [
-      {
-        id: "left",
-        label: "Left heart",
-        children: [
-          { id: "la", label: "Left atrium" },
-          { id: "lv", label: "Left ventricle" },
-        ],
-      },
-      {
-        id: "right",
-        label: "Right heart",
-        children: [
-          { id: "ra", label: "Right atrium" },
-          { id: "rv", label: "Right ventricle" },
-        ],
-      },
-    ],
-  },
-]
 export function Example() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [visibility, setVisibility] = useState<Record<string, boolean>>({})

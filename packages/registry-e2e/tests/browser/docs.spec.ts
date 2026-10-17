@@ -212,6 +212,12 @@ test("registry index lists every catalog item inside the docs layout", async ({
   await expect(
     docs.getByRole("link", { name: "Introduction" })
   ).toHaveAttribute("aria-current", "page")
+  if ((page.viewportSize()?.width ?? 0) < 768) {
+    // Tapping the current page still closes the menu.
+    await docs.getByRole("link", { name: "Introduction" }).click()
+    await expect(docs).toBeHidden()
+    await page.getByText("Menu", { exact: true }).click()
+  }
   await docs.getByRole("link", { name: "Anatomy tree" }).click()
   await expect(page).toHaveURL(/\/docs\/anatomy-tree$/)
   await expect(

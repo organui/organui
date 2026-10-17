@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { registryNamespace, shadcn } from "@/lib/registry"
+import { codeBlock, registryNamespace, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 import { Example } from "./example"
 
@@ -70,7 +70,7 @@ export default function Page() {
           tabIndex={0}
           role="region"
           aria-label="Installation command"
-          className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+          className={codeBlock}
         >
           {`bunx ${shadcn} add ${site.url}/r/anatomy-tree.json`}
         </pre>
@@ -83,7 +83,7 @@ export default function Page() {
           tabIndex={0}
           role="region"
           aria-label="Registry namespace configuration"
-          className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+          className={codeBlock}
         >
           {registryNamespace}
         </pre>
@@ -103,7 +103,7 @@ export default function Page() {
           tabIndex={0}
           role="region"
           aria-label="State wiring example"
-          className="overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+          className={codeBlock}
         >
           {usage}
         </pre>

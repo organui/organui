@@ -7,7 +7,7 @@ export const shadcn = "shadcn@4.21.0"
 // item appears in the sidebar and the index once it has a page at its href.
 export const registryItems = catalog.items.map((item) => ({
   name: item.name,
-  title: item.title,
+  title: item.title ?? item.name,
   description: item.description,
   href: `/docs/${item.name}`,
   json: `/r/${item.name}.json`,
@@ -20,7 +20,16 @@ export const registryNamespace = JSON.stringify(
   2
 )
 
-export const docsNav = [
+// Shared style for the scrollable, focusable code regions on docs pages.
+export const codeBlock =
+  "overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
+
+export type DocsNavSection = {
+  title: string
+  items: { title: string; href: string }[]
+}
+
+export const docsNav: DocsNavSection[] = [
   {
     title: "Getting started",
     items: [{ title: "Introduction", href: "/docs" }],

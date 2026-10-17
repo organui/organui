@@ -1,7 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { RegistryPreview } from "@/components/registry-preview"
-import { registryItems, registryNamespace, shadcn } from "@/lib/registry"
+import {
+  codeBlock,
+  registryItems,
+  registryNamespace,
+  shadcn,
+} from "@/lib/registry"
 import { site } from "@/lib/site"
 
 const description =
@@ -21,10 +26,16 @@ export const metadata: Metadata = {
       { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    site: "@organui",
+    title: "Components — OrganUI",
+    description,
+    images: [
+      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
+    ],
+  },
 }
-
-const codeBlock =
-  "overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
 
 export default function Page() {
   return (

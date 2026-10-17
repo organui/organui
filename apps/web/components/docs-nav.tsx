@@ -1,15 +1,23 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import { usePathname } from "next/navigation"
-import { docsNav } from "@/lib/registry"
+import type { DocsNavSection } from "@/lib/registry"
 import { cn } from "@workspace/ui/lib/utils"
 
-export function DocsNav() {
+// Sections come from the server layout so the catalog stays out of the client bundle.
+export function DocsNav({
+  sections,
+  onNavigate,
+}: {
+  sections: DocsNavSection[]
+  onNavigate?: () => void
+}) {
   const pathname = usePathname()
   return (
     <nav aria-label="Documentation" className="space-y-6 text-sm">
-      {docsNav.map((section) => (
+      {sections.map((section) => (
         <div key={section.title} className="space-y-1">
           <h2 className="px-2 text-xs font-medium text-muted-foreground">
             {section.title}
@@ -21,6 +29,7 @@ export function DocsNav() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "block rounded-md px-2 py-1.5 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring",
@@ -39,16 +48,19 @@ export function DocsNav() {
   )
 }
 
-// Keyed by path so the menu closes after a client-side navigation.
-export function MobileDocsNav() {
-  const pathname = usePathname()
+export function MobileDocsNav({ sections }: { sections: DocsNavSection[] }) {
+  const [open, setOpen] = useState(false)
   return (
-    <details key={pathname} className="group border-b py-3 md:hidden">
+    <details
+      open={open}
+      onToggle={(event) => setOpen(event.currentTarget.open)}
+      className="border-b py-3 md:hidden"
+    >
       <summary className="cursor-pointer rounded-md px-2 py-1.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-ring">
         Menu
       </summary>
       <div className="pt-3 pb-1">
-        <DocsNav />
+        <DocsNav sections={sections} onNavigate={() => setOpen(false)} />
       </div>
     </details>
   )

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type ComponentType } from "react"
-import { data } from "@/app/docs/anatomy-tree/example"
+import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
 
 function AnatomyTreePreview() {
