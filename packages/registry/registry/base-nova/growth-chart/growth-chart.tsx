@@ -220,8 +220,8 @@ export function GrowthChart({
             [from, 24 - 1e-9],
             [24, to],
           ]
-        : // A range ending at 24 months stays on the length standard.
-          [[from, 24 - 1e-9]]
+        : // A range ending by 24 months stays on the length standard.
+          [[from, Math.min(to, 24 - 1e-9)]]
   const samples = segments.map(([start, end]) => {
     const ages = [start]
     for (let age = Math.floor(start) + 1; age < end; age++) ages.push(age)
