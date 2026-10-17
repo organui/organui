@@ -8,7 +8,11 @@
       "type": "registry:ui",
       "title": "Anatomy tree",
       "description": "Search, select and control visibility in hierarchical anatomy data.",
-      "dependencies": ["cn@^0.4.0"],
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "registryDependencies": ["button", "input"],
       "files": [
         {
@@ -22,7 +26,12 @@
       "type": "registry:component",
       "title": "Organ viewer",
       "description": "Rotate, frame and select the structures of a GLB anatomy model, with ghosting and named views.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -43,7 +52,12 @@
       "type": "registry:component",
       "title": "Adrenals",
       "description": "The adrenals from the OrganUI adrenals explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -69,7 +83,12 @@
       "type": "registry:component",
       "title": "Bladder",
       "description": "The bladder from the OrganUI bladder explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -95,7 +114,12 @@
       "type": "registry:component",
       "title": "Brain",
       "description": "The brain from the OrganUI brain explorer: 19 selectable structures and 6 named views. Model licensed CC BY 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -121,7 +145,12 @@
       "type": "registry:component",
       "title": "Ear",
       "description": "The ear from the OrganUI ear explorer: 16 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -147,7 +176,12 @@
       "type": "registry:component",
       "title": "Esophagus",
       "description": "The esophagus from the OrganUI esophagus explorer: 17 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -173,7 +207,12 @@
       "type": "registry:component",
       "title": "Eye",
       "description": "The eye from the OrganUI eye explorer: 21 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -199,7 +238,12 @@
       "type": "registry:component",
       "title": "Gallbladder",
       "description": "The gallbladder from the OrganUI gallbladder explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -225,7 +269,12 @@
       "type": "registry:component",
       "title": "Heart",
       "description": "The heart from the OrganUI heart explorer: 11 selectable structures and 3 named views. Model licensed CC BY 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -251,7 +300,12 @@
       "type": "registry:component",
       "title": "Intestines",
       "description": "The intestines from the OrganUI intestines explorer: 11 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -277,7 +331,12 @@
       "type": "registry:component",
       "title": "Kidneys",
       "description": "The kidneys from the OrganUI kidneys explorer: 6 selectable structures and 4 named views. Model licensed CC BY 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -303,7 +362,12 @@
       "type": "registry:component",
       "title": "Larynx",
       "description": "The larynx from the OrganUI larynx explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -329,7 +393,12 @@
       "type": "registry:component",
       "title": "Liver",
       "description": "The liver from the OrganUI liver explorer: 7 selectable structures and 5 named views. Model licensed CC BY 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -355,7 +424,12 @@
       "type": "registry:component",
       "title": "Lungs",
       "description": "The lungs from the OrganUI lungs explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -381,7 +455,12 @@
       "type": "registry:component",
       "title": "Lymph node",
       "description": "The lymph node from the OrganUI lymph node explorer: 7 selectable structures and 3 named views. Model licensed CC BY 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -407,7 +486,12 @@
       "type": "registry:component",
       "title": "Muscles",
       "description": "The muscles from the OrganUI muscles explorer: 177 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -433,7 +517,12 @@
       "type": "registry:component",
       "title": "Nose",
       "description": "The nose from the OrganUI nose explorer: 22 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -459,7 +548,12 @@
       "type": "registry:component",
       "title": "Pancreas",
       "description": "The pancreas from the OrganUI pancreas explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -485,7 +579,12 @@
       "type": "registry:component",
       "title": "Pharynx",
       "description": "The pharynx from the OrganUI pharynx explorer: 20 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -511,7 +610,12 @@
       "type": "registry:component",
       "title": "Prostate",
       "description": "The prostate from the OrganUI prostate explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -537,7 +641,12 @@
       "type": "registry:component",
       "title": "Skeleton",
       "description": "The skeleton from the OrganUI skeleton explorer: 242 selectable structures and 8 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -563,7 +672,12 @@
       "type": "registry:component",
       "title": "Skin",
       "description": "The skin from the OrganUI skin explorer: 13 selectable structures and 3 named views. Model licensed CC0 1.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -589,7 +703,12 @@
       "type": "registry:component",
       "title": "Spinal cord",
       "description": "The spinal cord from the OrganUI spinal cord explorer: 63 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -615,7 +734,12 @@
       "type": "registry:component",
       "title": "Spleen",
       "description": "The spleen from the OrganUI spleen explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -641,7 +765,12 @@
       "type": "registry:component",
       "title": "Stomach",
       "description": "The stomach from the OrganUI stomach explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -667,7 +796,12 @@
       "type": "registry:component",
       "title": "Teeth",
       "description": "The teeth from the OrganUI teeth explorer: 33 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -693,7 +827,12 @@
       "type": "registry:component",
       "title": "Thymus",
       "description": "The thymus from the OrganUI thymus explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -719,7 +858,12 @@
       "type": "registry:component",
       "title": "Thyroid",
       "description": "The thyroid from the OrganUI thyroid explorer: 18 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -745,7 +889,12 @@
       "type": "registry:component",
       "title": "Tongue",
       "description": "The tongue from the OrganUI tongue explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -771,7 +920,12 @@
       "type": "registry:component",
       "title": "Uterus",
       "description": "The uterus from the OrganUI uterus explorer: 27 selectable structures and 3 named views. Model licensed CC BY 4.0.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
@@ -797,7 +951,12 @@
       "type": "registry:component",
       "title": "Vessels",
       "description": "The vessels from the OrganUI vessels explorer: 51 selectable structures and 6 named views. Model licensed CC BY-SA 2.1 JP.",
-      "dependencies": ["three@^0.186.0", "cn@^0.4.0"],
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
         "alert",
