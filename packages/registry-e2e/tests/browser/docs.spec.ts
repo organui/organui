@@ -270,12 +270,21 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   ).toBeVisible()
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
+  // The panel starts closed; opening it moves focus to its search field.
+  await expect(page.getByRole("tree")).toHaveCount(0)
+  const anatomy = page.getByRole("button", { name: "Anatomy", exact: true })
+  await anatomy.click()
+  await expect(page.getByRole("searchbox")).toBeFocused()
   await page.getByRole("button", { name: "Left atrium", exact: true }).click()
   await expect(page.getByRole("status").last()).toContainText("Left atrium:")
   await viewer.click()
   await expect(
     page.getByRole("treeitem", { name: "Right atrium", exact: true })
   ).toHaveAttribute("aria-selected", "true")
+  await page.getByRole("searchbox").focus()
+  await page.keyboard.press("Escape")
+  await expect(page.getByRole("tree")).toHaveCount(0)
+  await expect(anatomy).toBeFocused()
   await expect(
     page.getByRole("region", { name: "Installation command" })
   ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/heart-viewer.json")

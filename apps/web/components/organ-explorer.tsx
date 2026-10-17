@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
 import {
   OrganViewer,
@@ -10,7 +10,8 @@ import {
 } from "@workspace/registry/organ-viewer/organ-viewer"
 
 // The pairing documented on every organ page: the anatomy tree drives the
-// viewer, and picks in 3D flow back to the tree.
+// viewer, and picks in 3D flow back to the tree. Like the explorers, the
+// panel starts closed so the 3D view stands alone.
 export function OrganExplorer({ model }: { model: OrganModel }) {
   const [data] = useState(() => organAnatomyNodes(model))
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -19,8 +20,23 @@ export function OrganExplorer({ model }: { model: OrganModel }) {
   )
   const [view, setView] = useState<string | null>(model.defaultView)
   const selected = model.structures.find(({ id }) => id === selectedId)
+  const [open, setOpen] = useState(false)
+  const panel = useId()
+  const panelRef = useRef<HTMLDivElement>(null)
+  const toggle = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (open) panelRef.current?.querySelector<HTMLElement>("input")?.focus()
+  }, [open])
+  const close = () => {
+    setOpen(false)
+    toggle.current?.focus()
+  }
   return (
-    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
+    <div
+      className={
+        open ? "grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]" : "grid gap-4"
+      }
+    >
       <div className="flex min-w-0 flex-col gap-3">
         <OrganViewer
           model={model}
@@ -30,25 +46,47 @@ export function OrganExplorer({ model }: { model: OrganModel }) {
           onViewChange={setView}
           className="h-[28rem]"
         />
-        <p className="text-sm text-muted-foreground" role="status">
-          {selected
-            ? `${selected.label}: ${selected.description ?? selected.group}`
-            : `View: ${view ?? "Custom view"}. Select a structure in 3D or in the tree.`}
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <p className="text-sm text-muted-foreground" role="status">
+            {selected
+              ? `${selected.label}: ${selected.description ?? selected.group}`
+              : `View: ${view ?? "Custom view"}. Select a structure to learn about it.`}
+          </p>
+          <button
+            ref={toggle}
+            type="button"
+            aria-expanded={open}
+            aria-controls={panel}
+            onClick={() => (open ? close() : setOpen(true))}
+            className="shrink-0 rounded-md border px-3 py-1.5 text-sm hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
+          >
+            Anatomy
+          </button>
+        </div>
       </div>
-      <AnatomyTree
-        data={data}
-        selectedId={selectedId}
-        onSelectionChange={setSelectedId}
-        visibility={visibility}
-        onVisibilityChange={setVisibility}
-        label={`${model.name} anatomy`}
-        // Small organs open fully; the skeleton and muscles start collapsed.
-        defaultExpandedIds={
-          model.structures.length <= 40 ? data.map(({ id }) => id) : []
-        }
-        className="max-h-[28rem] overflow-auto"
-      />
+      {open && (
+        <div
+          id={panel}
+          ref={panelRef}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") close()
+          }}
+        >
+          <AnatomyTree
+            data={data}
+            selectedId={selectedId}
+            onSelectionChange={setSelectedId}
+            visibility={visibility}
+            onVisibilityChange={setVisibility}
+            label={`${model.name} anatomy`}
+            // Small organs open fully; the skeleton and muscles start collapsed.
+            defaultExpandedIds={
+              model.structures.length <= 40 ? data.map(({ id }) => id) : []
+            }
+            className="max-h-[28rem] overflow-auto"
+          />
+        </div>
+      )}
     </div>
   )
 }

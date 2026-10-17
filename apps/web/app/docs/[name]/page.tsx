@@ -134,8 +134,9 @@ const data = organAnatomyNodes(${exportName})
           <Link href="/docs/anatomy-tree" className="underline">
             anatomy tree
           </Link>{" "}
-          for the explorer layout shown above. Both share structure IDs, so one
-          piece of state drives selection and visibility in each.
+          for the explorer layout behind the Anatomy button above. Both share
+          structure IDs, so one piece of state drives selection and visibility
+          in each.
         </p>
         <pre
           tabIndex={0}
