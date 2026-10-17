@@ -1,0 +1,1 @@
+`1a8o.pdb` and `1a8o.cif` are PDB entry [1A8O](https://www.rcsb.org/structure/1A8O) (HIV capsid C-terminal domain), CC0 1.0 wwPDB data, from Biopython's `Tests/PDB` copies. They keep only the records the parser reads (header, title, secondary structure and coordinates), so the parser tests can compare both formats of the same entry.

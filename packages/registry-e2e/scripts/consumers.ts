@@ -69,6 +69,16 @@ const vitalsHarness = `import { VitalSigns } from "@/components/ui/vital-signs"
 export default function VitalsHarness(){
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed vital signs</h1><VitalSigns readings={{heartRate:112,systolic:150,diastolic:76,spo2:null,temperature:38.6}} description="Example readings"/><VitalSigns title="Fahrenheit" temperatureUnit="fahrenheit" ranges={{spo2:{low:88,high:92}}} vitals={["temperature","spo2","respiratoryRate"]} readings={{temperature:98.6,spo2:90,respiratoryRate:8}}/></main>
 }`
+// The molecule harness loads the docs site's crambin sample from its own origin.
+const moleculeHarness = `"use client"
+import { useState } from "react"
+import { MoleculeViewer } from "@/components/molecule-viewer"
+import { DnaHelix } from "@/components/dna-helix"
+export default function MoleculeHarness(){
+ const [residue,setResidue]=useState<string|null>(null)
+ const [pair,setPair]=useState<number|null>(null)
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed molecules</h1><MoleculeViewer src="/crambin.pdb" selectedId={residue} onSelectionChange={setResidue}/><output aria-label="Residue">{residue??"none"}</output><button onClick={()=>setResidue("A:3")}>Select Cys 3</button><DnaHelix sequence="ATGC" selectedIndex={pair} onSelectionChange={setPair} autoRotate={false}/><output aria-label="Pair">{pair??"none"}</output></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -173,10 +183,17 @@ try {
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
     await put(dir, "src/vitals-harness.tsx", vitalsHarness)
+    await put(dir, "src/molecule-harness.tsx", moleculeHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
       fixtureGlb(heartModel.structures.map(({ id }) => id))
+    )
+    await writeFile(
+      resolve(dir, "public/crambin.pdb"),
+      await readFile(
+        fileURLToPath(import.meta.resolve("web/public/models/crambin.pdb"))
+      )
     )
     if (framework === "next") {
       await put(dir, "src/app/page.tsx", 'export {default} from "../harness"')
@@ -189,6 +206,11 @@ try {
         dir,
         "src/app/vitals/page.tsx",
         'export {default} from "../../vitals-harness"'
+      )
+      await put(
+        dir,
+        "src/app/molecule/page.tsx",
+        'export {default} from "../../molecule-harness"'
       )
       await put(
         dir,
@@ -205,7 +227,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import VitalsHarness from "./vitals-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -240,18 +262,21 @@ try {
       ],
       dir
     )
-    await run(
-      [
-        "node",
-        shadcn,
-        "add",
-        framework === "vite"
-          ? "@organui/vital-signs"
-          : `http://127.0.0.1:${server.port}/vital-signs.json`,
-        "--yes",
-      ],
-      dir
-    )
+    // These share shadcn components installed above; see the note on blocks
+    // below for why Vite overwrites.
+    for (const item of ["molecule-viewer", "dna-helix", "vital-signs"])
+      await run(
+        [
+          "node",
+          shadcn,
+          "add",
+          ...(framework === "vite"
+            ? [`@organui/${item}`, "--overwrite"]
+            : [`http://127.0.0.1:${server.port}/${item}.json`]),
+          "--yes",
+        ],
+        dir
+      )
     // Blocks reuse the files installed above. Without RSC, shadcn 4.21 strips
     // "use client" from every other file it writes (a global regex keeps its
     // lastIndex), so a reinstall differs and prompts; overwrite instead.
@@ -276,15 +301,17 @@ try {
       if (installed !== (framework === "next"))
         throw new Error(`Unexpected ${page} page in ${framework}`)
     }
-    const viewer = await readFile(
-      resolve(dir, "src/components/organ-viewer.tsx"),
-      "utf8"
-    )
-    if (
-      viewer.includes("@workspace/") ||
-      (framework === "next" && !viewer.includes('"use client"'))
-    )
-      throw new Error("Invalid installed organ viewer")
+    for (const name of ["organ-viewer", "molecule-viewer", "dna-helix"]) {
+      const viewer = await readFile(
+        resolve(dir, `src/components/${name}.tsx`),
+        "utf8"
+      )
+      if (
+        viewer.includes("@workspace/") ||
+        (framework === "next" && !viewer.includes('"use client"'))
+      )
+        throw new Error(`Invalid installed ${name}`)
+    }
     const installed = await readFile(
       resolve(dir, "src/components/ui/anatomy-tree.tsx"),
       "utf8"

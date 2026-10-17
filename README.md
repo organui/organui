@@ -51,6 +51,27 @@ explorer repository, such as `nerves` and `parathyroid`, are built in this
 repository and served from `organui.com/models/`, with an attribution file for
 each model. The viewer shows its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
 
+## Molecules
+
+`molecule-viewer` opens a PDB or mmCIF structure (by URL or text) as a cartoon,
+ball and stick or spacefill model, with residue selection and a sequence
+strip; it parses the file itself and needs only three.js. `dna-helix` draws a
+B-DNA double helix from a sequence, with selectable base pairs.
+
+```bash
+bunx shadcn@4.21.0 add https://organui.com/r/molecule-viewer.json
+```
+
+```tsx
+import { MoleculeViewer } from "@/components/molecule-viewer"
+
+;<MoleculeViewer src="https://files.rcsb.org/download/1CRN.cif" />
+```
+
+The docs site serves a small sample, crambin (PDB 1CRN, CC0), at
+`organui.com/models/crambin.pdb`. See [the molecule viewer](https://organui.com/docs/molecule-viewer)
+and [DNA helix](https://organui.com/docs/dna-helix) documentation.
+
 ## Blocks
 
 Blocks are whole layouts built from those pieces, following shadcn's
