@@ -436,3 +436,36 @@ test("a model the site serves itself loads from its own origin", async ({
   await page.screenshot({ path: info.outputPath("breast.png"), fullPage: true })
   expect(errors).toEqual([])
 })
+
+test("the ECG trace page runs a live strip at the chosen rate", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/docs/ecg-trace")
+  await expect(
+    page.getByRole("heading", { name: "ECG trace", level: 1 })
+  ).toBeVisible()
+  const live = page.getByRole("img", { name: /^Live ECG,/ })
+  await expect(live).toHaveAccessibleName(/about 72 beats per minute, live$/, {
+    timeout: 10_000,
+  })
+  await page.getByRole("button", { name: "Fast 110", exact: true }).click()
+  await expect(
+    page.getByRole("button", { name: "Fast 110", exact: true })
+  ).toHaveAttribute("aria-pressed", "true")
+  await expect(live).toHaveAccessibleName(/about 110 beats per minute, live$/, {
+    timeout: 10_000,
+  })
+  await expect(
+    page.getByRole("img", { name: /^Recorded ECG,/ })
+  ).toHaveAccessibleName(/about 72 beats per minute$/)
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  expect(errors).toEqual([])
+})

@@ -22,6 +22,24 @@
       ]
     },
     {
+      "name": "ecg-trace",
+      "type": "registry:ui",
+      "title": "ECG trace",
+      "description": "A recorded or live ECG rhythm strip on standard paper, with labelled P, QRS and T waves. Not for diagnostic use.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/base-nova/ecg-trace/ecg-trace.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "organ-viewer",
       "type": "registry:component",
       "title": "Organ viewer",

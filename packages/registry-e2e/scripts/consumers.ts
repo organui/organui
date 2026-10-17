@@ -64,6 +64,15 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+// The ECG harness pairs a recorded strip with a live synthetic stream.
+const ecgHarness = `"use client"
+import { useMemo } from "react"
+import { EcgTrace, syntheticEcg, syntheticEcgStream } from "@/components/ui/ecg-trace"
+const recording = syntheticEcg({ duration: 5 })
+export default function EcgHarness(){
+ const stream = useMemo(()=>syntheticEcgStream({heartRate:90}),[])
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed ECG trace</h1><EcgTrace samples={recording} label="Recorded ECG"/><EcgTrace stream={stream} label="Live ECG"/></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -167,6 +176,7 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/ecg-harness.tsx", ecgHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -178,6 +188,11 @@ try {
         dir,
         "src/app/organ/page.tsx",
         'export {default} from "../../organ-harness"'
+      )
+      await put(
+        dir,
+        "src/app/ecg/page.tsx",
+        'export {default} from "../../ecg-harness"'
       )
       await put(
         dir,
@@ -194,7 +209,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import EcgHarness from "./ecg-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -225,6 +240,18 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/ecg-trace"
+          : `http://127.0.0.1:${server.port}/ecg-trace.json`,
         "--yes",
       ],
       dir
@@ -262,6 +289,15 @@ try {
       (framework === "next" && !viewer.includes('"use client"'))
     )
       throw new Error("Invalid installed organ viewer")
+    const ecg = await readFile(
+      resolve(dir, "src/components/ui/ecg-trace.tsx"),
+      "utf8"
+    )
+    if (
+      ecg.includes("@workspace/") ||
+      (framework === "next" && !ecg.includes('"use client"'))
+    )
+      throw new Error("Invalid installed ECG trace")
     const installed = await readFile(
       resolve(dir, "src/components/ui/anatomy-tree.tsx"),
       "utf8"

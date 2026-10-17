@@ -51,6 +51,20 @@ explorer repository, such as `nerves` and `parathyroid`, are built in this
 repository and served from `organui.com/models/`, with an attribution file for
 each model. The viewer shows its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
 
+## ECG trace
+
+`ecg-trace` draws a recorded trace or a live stream as a rhythm strip on
+standard ECG paper (25 mm/s, 10 mm/mV), with P, QRS and T labelled and a
+synthetic sinus rhythm for demos. It is SVG only and not for diagnostic use.
+
+```tsx
+import { EcgTrace, syntheticEcg } from "@/components/ui/ecg-trace"
+
+;<EcgTrace samples={syntheticEcg({ heartRate: 72 })} sampleRate={250} />
+```
+
+See [the ECG trace documentation](https://organui.com/docs/ecg-trace).
+
 ## Blocks
 
 Blocks are whole layouts built from those pieces, following shadcn's
