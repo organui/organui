@@ -265,6 +265,37 @@
       ]
     },
     {
+      "name": "hair",
+      "type": "registry:component",
+      "title": "Hair",
+      "description": "A hair follicle in a cut-away plug of scalp, from an original OrganUI schematic model: 14 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/hair.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "heart",
       "type": "registry:component",
       "title": "Heart",
@@ -508,6 +539,37 @@
         },
         {
           "path": "registry/base-nova/organ-viewer/muscles.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "nails",
+      "type": "registry:component",
+      "title": "Nails",
+      "description": "A fingertip halved through the nail, from an original OrganUI schematic model: 14 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "devDependencies": ["@types/three@^0.186.0"],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "tooltip"
+      ],
+      "categories": ["organ"],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/organ-viewer/nails.tsx",
           "type": "registry:component"
         }
       ]

@@ -30,8 +30,8 @@ installs straight from source (append `#<commit>` to pin a version). See
 
 ## Organs
 
-Every OrganUI 3D explorer is also a registry item named after its organ:
-`heart`, `brain`, `spinal-cord` and so on, 30 in all.
+Every organ is a registry item named after it: `heart`, `brain`,
+`spinal-cord`, `nails` and so on.
 
 ```bash
 bunx shadcn@4.21.0 add https://organui.com/r/heart.json
@@ -47,7 +47,9 @@ Each one installs the shared `organ-viewer.tsx` (three.js) plus the organ's
 structures, views and model credit. The GLB itself stays in the explorer
 repository under its own licence (CC BY-SA 2.1 JP, CC BY-SA 4.0, CC BY 4.0 or
 CC0, per organ) and loads from a commit-pinned jsDelivr URL; the viewer shows
-its credit. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
+its credit. Organs without an explorer repository, such as hair and nails, load
+their GLB from `organui.com/models/`, with an `<organ>.ATTRIBUTION.md` beside
+it in `apps/web/public/models/`. See [the organ viewer documentation](https://organui.com/docs/organ-viewer).
 
 ## Repository
 
