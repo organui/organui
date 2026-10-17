@@ -6,6 +6,7 @@
   "exports": {
     "./anatomy-tree": "./registry/base-nova/anatomy-tree/anatomy-tree.tsx",
     "./lab-results": "./registry/base-nova/lab-results/lab-results.tsx",
+    "./vital-signs": "./registry/base-nova/vital-signs/vital-signs.tsx",
     "./organ-viewer/*": "./registry/base-nova/organ-viewer/*.tsx",
     "./molecule-viewer": "./registry/base-nova/molecule-viewer/molecule-viewer.tsx",
     "./dna-helix": "./registry/base-nova/dna-helix/dna-helix.tsx",

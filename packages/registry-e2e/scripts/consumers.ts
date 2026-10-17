@@ -64,6 +64,11 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+// No client directive: the panel has no state, so Next.js renders it on the server.
+const vitalsHarness = `import { VitalSigns } from "@/components/ui/vital-signs"
+export default function VitalsHarness(){
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed vital signs</h1><VitalSigns readings={{heartRate:112,systolic:150,diastolic:76,spo2:null,temperature:38.6}} description="Example readings"/><VitalSigns title="Fahrenheit" temperatureUnit="fahrenheit" ranges={{spo2:{low:88,high:92}}} vitals={["temperature","spo2","respiratoryRate"]} readings={{temperature:98.6,spo2:90,respiratoryRate:8}}/></main>
+}`
 // Lab results hold no state, so the Next.js page renders them on the server.
 const labHarness = `import { LabResultsTable } from "@/components/lab-results"
 export default function LabHarness(){
@@ -182,6 +187,7 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/vitals-harness.tsx", vitalsHarness)
     await put(dir, "src/lab-harness.tsx", labHarness)
     await put(dir, "src/molecule-harness.tsx", moleculeHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
@@ -201,6 +207,11 @@ try {
         dir,
         "src/app/organ/page.tsx",
         'export {default} from "../../organ-harness"'
+      )
+      await put(
+        dir,
+        "src/app/vitals/page.tsx",
+        'export {default} from "../../vitals-harness"'
       )
       await put(
         dir,
@@ -227,7 +238,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -276,7 +287,7 @@ try {
     )
     // These share shadcn components installed above; see the note on blocks
     // below for why Vite overwrites.
-    for (const item of ["molecule-viewer", "dna-helix"])
+    for (const item of ["molecule-viewer", "dna-helix", "vital-signs"])
       await run(
         [
           "node",
@@ -333,6 +344,15 @@ try {
       (framework === "next" && !installed.includes('"use client"'))
     )
       throw new Error("Invalid installed source")
+    const vitals = await readFile(
+      resolve(dir, "src/components/ui/vital-signs.tsx"),
+      "utf8"
+    )
+    if (
+      vitals.includes("@workspace/") ||
+      !vitals.includes("@/components/ui/card")
+    )
+      throw new Error("Invalid installed vital signs")
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)

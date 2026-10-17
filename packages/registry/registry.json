@@ -22,6 +22,20 @@
       ]
     },
     {
+      "name": "vital-signs",
+      "type": "registry:ui",
+      "title": "Vital signs",
+      "description": "Heart rate, blood pressure, SpO₂ and temperature, each flagged against a configurable normal range.",
+      "dependencies": ["cn@^0.4.0"],
+      "registryDependencies": ["card"],
+      "files": [
+        {
+          "path": "registry/base-nova/vital-signs/vital-signs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "organ-viewer",
       "type": "registry:component",
       "title": "Organ viewer",
