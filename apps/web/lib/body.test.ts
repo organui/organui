@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import catalog from "@workspace/registry/registry.json"
-import { bodyModel, bodyPlaces } from "./body"
+import { bodyLayers, bodyModel, bodyPlaces } from "./body"
 
 const models = new URL("../public/models/", import.meta.url)
 
@@ -36,8 +36,19 @@ describe("homepage body model", () => {
       const node = nodes.find(({ name }) => name === id)
       expect(node?.children?.length).toBeGreaterThan(0)
     }
+    // A frame on a hidden layer must show it, or the camera glides to
+    // nothing.
+    const owner = (id: string) =>
+      nodes.find(({ children }) =>
+        children?.some((child) => nodes[child]!.name === id)
+      )?.name ?? id
     for (const place of Object.values(bodyPlaces))
-      for (const id of place.frame ?? []) expect(names).toContain(id)
+      for (const id of place.frame ?? []) {
+        expect(names).toContain(id)
+        const layer = owner(id)
+        if ((bodyLayers as readonly string[]).includes(layer))
+          expect(place.show ?? []).toContain(layer)
+      }
   })
 
   test("credits the model", async () => {

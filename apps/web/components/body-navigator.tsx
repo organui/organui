@@ -59,7 +59,10 @@ export function BodyNavigator({ organs }: { organs: readonly BodyOrgan[] }) {
   const visibility = React.useMemo(
     () => ({
       ...Object.fromEntries(
-        bodyLayers.map((layer) => [layer, layer === selected])
+        bodyLayers.map((layer) => [
+          layer,
+          layer === selected || organ?.show?.includes(layer) === true,
+        ])
       ),
       skin: !selected || selected === "skin" || selected === "hair",
       ...Object.fromEntries((organ?.hide ?? []).map((id) => [id, false])),

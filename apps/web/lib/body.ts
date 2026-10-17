@@ -31,6 +31,8 @@ export type BodyPlace = {
   fill?: number
   /** Structures hidden while picked, when they bury the organ. */
   hide?: readonly string[]
+  /** Hidden layers shown while picked, such as bones the frame relies on. */
+  show?: readonly string[]
   /** Set when the organ is not drawn on the body model. */
   note?: string
 }
@@ -60,6 +62,7 @@ export const bodyPlaces: Record<string, BodyPlace> = {
     region: "Chest",
     summary: "Fat, ducts and milk-making lobes on the front of the chest.",
     frame: ["rib-cage"],
+    show: ["skeleton"],
     note: "This body model is male, so the breast component shows the HuBMAP female breasts instead.",
   },
   diaphragm: {
@@ -104,6 +107,7 @@ export const bodyPlaces: Record<string, BodyPlace> = {
     region: "Whole body",
     summary: "Where bones meet, held together by capsules and ligaments.",
     frame: ["skeleton"],
+    show: ["skeleton"],
     note: "Joint ligaments are not drawn on this body; the component shows them all.",
   },
   kidneys: {
@@ -141,6 +145,7 @@ export const bodyPlaces: Record<string, BodyPlace> = {
     summary:
       "Hard plates of keratin protecting the tips of the fingers and toes.",
     frame: ["hand-bones"],
+    show: ["skeleton"],
     note: "Nails are not drawn on this body; the component shows a fingertip.",
   },
   nerves: {
@@ -231,6 +236,7 @@ export const bodyPlaces: Record<string, BodyPlace> = {
     region: "Pelvis",
     summary: "The womb, where a pregnancy grows.",
     frame: ["bladder", "hip-bones"],
+    show: ["skeleton"],
     note: "This body model is male, so the uterus component shows its own female model.",
   },
   vessels: {
