@@ -64,6 +64,19 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+// The image harness shows the generated phantom and type-checks the DICOM reader.
+const imageHarness = `"use client"
+import { useState } from "react"
+import { ImageViewer, ctWindowPresets, type ImageWindow } from "@/components/image-viewer"
+import { parseDicom } from "@/lib/dicom"
+import { createHeadPhantom } from "@/lib/head-phantom"
+const phantom = createHeadPhantom()
+export const readDicom: (buffer: ArrayBuffer) => { width: number } = parseDicom
+export default function ImageHarness(){
+ const [slice,setSlice]=useState(15)
+ const [window,setWindow]=useState<ImageWindow|null>(null)
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed image viewer</h1><ImageViewer {...phantom} label="Head phantom" presets={ctWindowPresets} slice={slice} onSliceChange={setSlice} onWindowChange={setWindow}/><output aria-label="Slice">{slice}</output><output aria-label="Window">{window?\`\${window.width}/\${window.center}\`:"default"}</output></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -167,6 +180,7 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/image-harness.tsx", imageHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -178,6 +192,11 @@ try {
         dir,
         "src/app/organ/page.tsx",
         'export {default} from "../../organ-harness"'
+      )
+      await put(
+        dir,
+        "src/app/image/page.tsx",
+        'export {default} from "../../image-harness"'
       )
       await put(
         dir,
@@ -194,7 +213,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import ImageHarness from "./image-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -225,6 +244,19 @@ try {
         framework === "vite"
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        // Shared shadcn files differ on reinstall in Vite (see the blocks below).
+        ...(framework === "vite"
+          ? ["@organui/image-viewer", "--overwrite"]
+          : [`http://127.0.0.1:${server.port}/image-viewer.json`]),
         "--yes",
       ],
       dir
@@ -271,6 +303,17 @@ try {
       (framework === "next" && !installed.includes('"use client"'))
     )
       throw new Error("Invalid installed source")
+    for (const file of [
+      "components/image-viewer.tsx",
+      "lib/dicom.ts",
+      "lib/head-phantom.ts",
+    ])
+      if (
+        (await readFile(resolve(dir, "src", file), "utf8")).includes(
+          "@workspace/"
+        )
+      )
+        throw new Error(`Invalid installed ${file}`)
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)

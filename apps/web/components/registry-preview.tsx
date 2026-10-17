@@ -3,6 +3,8 @@
 import { useState, type ComponentType } from "react"
 import { anatomyExampleData as data } from "@/lib/examples"
 import { AnatomyTree } from "@workspace/registry/anatomy-tree"
+import { ImageViewer, ctWindowPresets } from "@workspace/registry/image-viewer"
+import { createHeadPhantom } from "@workspace/registry/image-viewer/head-phantom"
 import { OrganPreview } from "@/components/organ-preview"
 
 function AnatomyTreePreview() {
@@ -21,6 +23,19 @@ function AnatomyTreePreview() {
   )
 }
 
+function ImageViewerPreview() {
+  const [phantom] = useState(() => createHeadPhantom())
+  return (
+    <ImageViewer
+      {...phantom}
+      presets={ctWindowPresets}
+      defaultSlice={15}
+      label="Head phantom"
+      className="h-80"
+    />
+  )
+}
+
 function OrganViewerPreview() {
   return <OrganPreview name="heart" organ="Heart" />
 }
@@ -29,6 +44,7 @@ function OrganViewerPreview() {
 // browser suite requires one for every catalog item.
 const previews: Record<string, ComponentType> = {
   "anatomy-tree": AnatomyTreePreview,
+  "image-viewer": ImageViewerPreview,
   "organ-viewer": OrganViewerPreview,
 }
 
