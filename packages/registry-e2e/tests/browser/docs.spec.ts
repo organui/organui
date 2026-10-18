@@ -598,6 +598,9 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
         "No matching anatomy."
       )
       await page.getByRole("searchbox").fill("")
+      // Filtering is deferred. Wait for the tree's tab stop to return before
+      // pressing Tab, otherwise a slower render legitimately skips the tree.
+      await expect(page.getByRole("treeitem")).toHaveCount(7)
       await page.getByRole("searchbox").press("Tab")
       const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
       await expect(heart).toBeFocused()
