@@ -365,6 +365,15 @@ test("organ pages pair the viewer with the anatomy tree", async ({
       () => document.documentElement.scrollWidth <= window.innerWidth
     )
   ).toBe(true)
+  const api = page.getByRole("table", { name: "Heart props" })
+  await api.focus()
+  await expect(api).toBeFocused()
+  if ((page.viewportSize()?.width ?? 0) < 768) {
+    await api.press("ArrowRight")
+    await expect
+      .poll(() => api.evaluate((table) => table.parentElement!.scrollLeft))
+      .toBeGreaterThan(0)
+  }
   const axe = await new AxeBuilder({ page }).analyze()
   expect(axe.violations).toEqual([])
   await page.screenshot({ path: info.outputPath("organ.png"), fullPage: true })

@@ -81,7 +81,10 @@ export function OrganApi({ component }: { component: string }) {
         Import <code>{component}Props</code> from the same file as{" "}
         <code>{component}</code>. The organ model is already configured.
       </p>
-      <Table>
+      <Table
+        tabIndex={0}
+        className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+      >
         <TableCaption>{component} props</TableCaption>
         <TableHeader>
           <TableRow>
