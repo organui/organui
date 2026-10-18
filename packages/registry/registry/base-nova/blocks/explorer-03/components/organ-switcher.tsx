@@ -6,6 +6,7 @@ import { cn } from "cn"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -50,11 +51,13 @@ export function OrganSwitcher({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {models.map(({ name }) => (
-              <SelectItem key={name} value={name}>
-                {name}
-              </SelectItem>
-            ))}
+            <SelectGroup>
+              {models.map(({ name }) => (
+                <SelectItem key={name} value={name}>
+                  {name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
           </SelectContent>
         </Select>
       </div>

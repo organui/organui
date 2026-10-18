@@ -1,10 +1,39 @@
 "use client"
 
 import * as React from "react"
+import { Button as ButtonPrimitive } from "@base-ui/react/button"
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+
+// These controls belong to the tree row: its hover and selection surface
+// stays on the treeitem, independent of the consumer's Button variants.
+const treeButtonVariants = cva(
+  "inline-flex shrink-0 items-center justify-center rounded-md text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        expand: "size-8 hover:bg-accent hover:text-accent-foreground",
+        label:
+          "min-w-0 flex-1 justify-start gap-2 py-2 text-start font-normal break-words whitespace-normal group-aria-selected/row:font-semibold",
+      },
+    },
+  }
+)
+
+function TreeButton({
+  variant,
+  ...props
+}: Omit<ButtonPrimitive.Props, "className"> &
+  VariantProps<typeof treeButtonVariants>) {
+  return (
+    <ButtonPrimitive className={treeButtonVariants({ variant })} {...props} />
+  )
+}
 
 export type AnatomyNode = {
   id: string
@@ -264,17 +293,20 @@ export function AnatomyTree({
         className
       )}
     >
-      <label htmlFor={searchId} className="mb-2 block text-sm font-medium">
-        Search {label.toLocaleLowerCase()}
-      </label>
-      <Input
-        ref={search}
-        id={searchId}
-        type="search"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        className="mb-3"
-      />
+      <FieldGroup className="mb-3">
+        <Field>
+          <FieldLabel htmlFor={searchId}>
+            Search {label.toLocaleLowerCase()}
+          </FieldLabel>
+          <Input
+            ref={search}
+            id={searchId}
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </Field>
+      </FieldGroup>
       <p id={helpId} className="mb-3 text-xs text-muted-foreground">
         {groupsExpand
           ? "Arrows navigate and expand. Enter selects, or expands a group. Space toggles visibility."
@@ -371,9 +403,8 @@ export function AnatomyTree({
               style={{ paddingInlineStart: `${(level - 1) * 1.25 + 0.5}rem` }}
             >
               {branch ? (
-                <Button
-                  variant="ghost"
-                  size="icon"
+                <TreeButton
+                  variant="expand"
                   tabIndex={-1}
                   aria-label={`${open ? "Collapse" : "Expand"} ${node.label}`}
                   disabled={searching}
@@ -381,22 +412,19 @@ export function AnatomyTree({
                     focus(node.id)
                     toggleExpanded(node.id)
                   }}
-                  className="hover:bg-accent hover:text-accent-foreground"
                 >
                   {open ? "−" : "+"}
-                </Button>
+                </TreeButton>
               ) : (
                 <span className="w-8 shrink-0" />
               )}
-              <Button
-                variant="ghost"
+              <TreeButton
+                variant="label"
                 tabIndex={-1}
                 onClick={() => {
                   focus(node.id)
                   activate(node)
                 }}
-                // The row carries hover and selection styling.
-                className="h-auto min-w-0 flex-1 justify-start gap-2 px-0 py-2 text-start font-normal break-words whitespace-normal group-aria-selected/row:font-semibold hover:bg-transparent hover:text-inherit dark:hover:bg-transparent"
               >
                 {node.color && (
                   <span
@@ -406,7 +434,7 @@ export function AnatomyTree({
                   />
                 )}
                 <span className="min-w-0">{node.label}</span>
-              </Button>
+              </TreeButton>
               <Button
                 variant="outline"
                 size="xs"
@@ -425,9 +453,13 @@ export function AnatomyTree({
         })}
       </div>
       {!rows.length && (
-        <p role="status" className="py-4 text-sm text-muted-foreground">
-          {data.length ? "No matching anatomy." : "No anatomy available."}
-        </p>
+        <Empty role="status">
+          <EmptyHeader>
+            <EmptyDescription>
+              {data.length ? "No matching anatomy." : "No anatomy available."}
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       )}
     </section>
   )

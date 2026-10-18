@@ -2,6 +2,7 @@
 import { useId, useState } from "react"
 import { DnaHelix } from "@workspace/registry/dna-helix"
 import { Input } from "@workspace/ui/components/input"
+import { Field, FieldGroup, FieldLabel } from "@workspace/ui/components/field"
 
 export function Example({ compact = false }: { compact?: boolean }) {
   const [sequence, setSequence] = useState("ATGCGTACCTGAGCTTAACGGATC")
@@ -20,21 +21,20 @@ export function Example({ compact = false }: { compact?: boolean }) {
   if (compact) return helix
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2">
-        <label htmlFor={field} className="text-sm font-medium">
-          Sequence, 5′ to 3′
-        </label>
-        <Input
-          id={field}
-          value={sequence}
-          spellCheck={false}
-          className="font-mono uppercase"
-          onChange={(event) => {
-            setSequence(event.target.value)
-            setSelectedIndex(null)
-          }}
-        />
-      </div>
+      <FieldGroup>
+        <Field>
+          <FieldLabel htmlFor={field}>Sequence, 5′ to 3′</FieldLabel>
+          <Input
+            id={field}
+            value={sequence}
+            spellCheck={false}
+            onChange={(event) => {
+              setSequence(event.target.value)
+              setSelectedIndex(null)
+            }}
+          />
+        </Field>
+      </FieldGroup>
       {helix}
       <p className="text-sm" role="status">
         Selected pair: {selectedIndex === null ? "none" : selectedIndex + 1}

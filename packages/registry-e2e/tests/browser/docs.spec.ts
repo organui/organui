@@ -554,6 +554,16 @@ test("the ECG trace page runs a live strip at the chosen rate", async ({
   await expect(live).toHaveAccessibleName(/about 110 beats per minute, live$/, {
     timeout: 10_000,
   })
+  // Re-activating the current choice must not leave the monitor unselected.
+  const fast = page.getByRole("button", { name: "Fast 110", exact: true })
+  await fast.click()
+  await expect(fast).toHaveAttribute("aria-pressed", "true")
+  await fast.press("ArrowLeft")
+  const normal = page.getByRole("button", { name: "Normal 72", exact: true })
+  await expect(normal).toBeFocused()
+  await normal.press("Space")
+  await expect(normal).toHaveAttribute("aria-pressed", "true")
+  await expect(fast).toHaveAttribute("aria-pressed", "false")
   await expect(
     page.getByRole("img", { name: /^Recorded ECG,/ })
   ).toHaveAccessibleName(/about 72 beats per minute$/)
@@ -564,5 +574,57 @@ test("the ECG trace page runs a live strip at the chosen rate", async ({
   ).toBe(true)
   const axe = await new AxeBuilder({ page }).analyze()
   expect(axe.violations).toEqual([])
+  expect(errors).toEqual([])
+})
+
+test("tree, sequence field and option groups remain usable in dark mode", async ({
+  page,
+}, info) => {
+  test.setTimeout(60_000)
+  await page.emulateMedia({ colorScheme: "dark" })
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  for (const name of [
+    "anatomy-tree",
+    "dna-helix",
+    "ecg-trace",
+    "vital-signs",
+  ]) {
+    await page.goto(`/docs/${name}`)
+    await expect(page.locator("html")).toHaveClass(/dark/)
+    if (name === "anatomy-tree") {
+      await page.getByRole("searchbox").fill("no such structure")
+      await expect(page.getByRole("status").first()).toContainText(
+        "No matching anatomy."
+      )
+      await page.getByRole("searchbox").fill("")
+      await page.getByRole("searchbox").press("Tab")
+      const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
+      await expect(heart).toBeFocused()
+      await heart.press("Enter")
+      await expect(heart).toHaveAttribute("aria-selected", "true")
+    } else if (name === "dna-helix") {
+      const sequence = page.getByRole("textbox", { name: "Sequence, 5′ to 3′" })
+      await sequence.fill("ATGC")
+      await expect(sequence).toHaveValue("ATGC")
+    } else {
+      const choice = page.getByRole("button", {
+        name: name === "ecg-trace" ? "Fast 110" : "Low oxygen",
+        exact: true,
+      })
+      await choice.click()
+      await expect(choice).toHaveAttribute("aria-pressed", "true")
+    }
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth
+      )
+    ).toBe(true)
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+    await page.screenshot({
+      path: info.outputPath(`${name}-dark.png`),
+      fullPage: true,
+    })
+  }
   expect(errors).toEqual([])
 })

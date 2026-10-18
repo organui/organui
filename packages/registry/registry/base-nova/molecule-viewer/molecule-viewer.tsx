@@ -35,6 +35,7 @@ import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -1766,13 +1767,15 @@ export function MoleculeViewer({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.entries(moleculeRepresentations).map(
-                      ([value, name]) => (
-                        <SelectItem key={value} value={value}>
-                          {name}
-                        </SelectItem>
-                      )
-                    )}
+                    <SelectGroup>
+                      {Object.entries(moleculeRepresentations).map(
+                        ([value, name]) => (
+                          <SelectItem key={value} value={value}>
+                            {name}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
                 <Select
@@ -1791,13 +1794,15 @@ export function MoleculeViewer({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.entries(moleculeColorSchemes).map(
-                      ([value, name]) => (
-                        <SelectItem key={value} value={value}>
-                          {name}
-                        </SelectItem>
-                      )
-                    )}
+                    <SelectGroup>
+                      {Object.entries(moleculeColorSchemes).map(
+                        ([value, name]) => (
+                          <SelectItem key={value} value={value}>
+                            {name}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
                 {/* Narrow stages pinch to zoom; the menus need the room. */}

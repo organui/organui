@@ -13,7 +13,7 @@
         "class-variance-authority@^0.7.1",
         "cn@^0.4.0"
       ],
-      "registryDependencies": ["button", "input"],
+      "registryDependencies": ["button", "empty", "field", "input"],
       "files": [
         {
           "path": "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
@@ -145,7 +145,7 @@
         "class-variance-authority@^0.7.1",
         "cn@^0.4.0"
       ],
-      "registryDependencies": ["alert", "button"],
+      "registryDependencies": ["alert", "button", "empty"],
       "files": [
         {
           "path": "registry/base-nova/medication-schedule/medication-schedule.tsx",
@@ -1470,6 +1470,8 @@
       "registryDependencies": [
         "alert",
         "button",
+        "empty",
+        "field",
         "input",
         "progress",
         "select",
@@ -1518,6 +1520,8 @@
         "alert",
         "button",
         "card",
+        "empty",
+        "field",
         "input",
         "progress",
         "select",

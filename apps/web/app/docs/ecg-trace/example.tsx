@@ -1,6 +1,9 @@
 "use client"
 import { useMemo, useState } from "react"
-import { Button } from "@/components/ui/button"
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@workspace/ui/components/toggle-group"
 import {
   EcgTrace,
   syntheticEcg,
@@ -22,23 +25,25 @@ export function Example() {
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="font-medium">Live monitor</h2>
-          <div
-            role="group"
+          <ToggleGroup
             aria-label="Synthetic heart rate"
-            className="flex gap-2"
+            variant="outline"
+            size="sm"
+            spacing={2}
+            value={[String(heartRate)]}
+            onValueChange={(values) => {
+              if (values[0] !== undefined) setHeartRate(Number(values[0]))
+            }}
           >
             {rates.map((rate) => (
-              <Button
+              <ToggleGroupItem
                 key={rate.heartRate}
-                variant={rate.heartRate === heartRate ? "secondary" : "outline"}
-                size="sm"
-                aria-pressed={rate.heartRate === heartRate}
-                onClick={() => setHeartRate(rate.heartRate)}
+                value={String(rate.heartRate)}
               >
                 {rate.label} {rate.heartRate}
-              </Button>
+              </ToggleGroupItem>
             ))}
-          </div>
+          </ToggleGroup>
         </div>
         <EcgTrace stream={stream} label="Live ECG" />
       </div>

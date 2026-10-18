@@ -5,6 +5,7 @@ import { cn } from "cn"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
 
 export type Medication = {
   id: string
@@ -348,7 +349,11 @@ export function MedicationSchedule({
       )}
 
       {doses.length === 0 ? (
-        <p className="text-sm text-muted-foreground">No doses on this day.</p>
+        <Empty role="status">
+          <EmptyHeader>
+            <EmptyDescription>No doses on this day.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       ) : (
         <>
           {/* A visual summary; the dose list below carries the same facts. */}

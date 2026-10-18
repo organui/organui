@@ -1,6 +1,9 @@
 "use client"
 import { useState } from "react"
-import { Button } from "@workspace/ui/components/button"
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@workspace/ui/components/toggle-group"
 import { VitalSigns, type VitalReadings } from "@workspace/registry/vital-signs"
 
 // Original example readings, not patient data.
@@ -61,23 +64,24 @@ export function Example() {
   const [scenario, setScenario] = useState(scenarios[0]!)
   return (
     <div className="flex flex-col gap-4">
-      <div
-        role="group"
+      <ToggleGroup
         aria-label="Example readings"
-        className="flex flex-wrap gap-2"
+        variant="outline"
+        size="sm"
+        spacing={2}
+        className="flex-wrap"
+        value={[scenario.name]}
+        onValueChange={(values) => {
+          const next = scenarios.find((entry) => entry.name === values[0])
+          if (next) setScenario(next)
+        }}
       >
         {scenarios.map((entry) => (
-          <Button
-            key={entry.name}
-            variant={entry === scenario ? "default" : "outline"}
-            size="sm"
-            aria-pressed={entry === scenario}
-            onClick={() => setScenario(entry)}
-          >
+          <ToggleGroupItem key={entry.name} value={entry.name}>
             {entry.name}
-          </Button>
+          </ToggleGroupItem>
         ))}
-      </div>
+      </ToggleGroup>
       <VitalSigns
         readings={scenario.readings}
         description={`${scenario.name} example`}

@@ -31,6 +31,7 @@ import { Progress } from "@/components/ui/progress"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -801,11 +802,13 @@ export function OrganViewer({
                 <SelectValue placeholder="Custom view" />
               </SelectTrigger>
               <SelectContent>
-                {model.views.map(({ name }) => (
-                  <SelectItem key={name} value={name}>
-                    {name}
-                  </SelectItem>
-                ))}
+                <SelectGroup>
+                  {model.views.map(({ name }) => (
+                    <SelectItem key={name} value={name}>
+                      {name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
             <ToolbarButton label="Zoom in" onClick={() => engine.zoom(0.85)}>

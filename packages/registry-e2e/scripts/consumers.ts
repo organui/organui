@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { heartModel } from "@workspace/registry/organ-viewer/heart"
 import { fixtureGlb } from "./fixture-glb.js"
+import { githubConsumer } from "./github-consumer.js"
 const out = resolve(import.meta.dirname, "../.consumers")
 const shadcn = resolve(
   import.meta.dirname,
@@ -125,6 +126,16 @@ const css = `@import "tailwindcss";
 try {
   for (const framework of ["next", "vite"]) {
     const dir = resolve(out, framework)
+    // Exercise both a different prefix and independent component/UI folders.
+    const customAliases = framework === "vite"
+    const componentDir = customAliases ? "src/widgets" : "src/components"
+    const uiDir = customAliases ? "src/primitives" : "src/components/ui"
+    const source = (value: string) =>
+      customAliases
+        ? value
+            .replaceAll("@/components/ui/", "~/primitives/")
+            .replaceAll("@/components/", "~/widgets/")
+        : value
     await rm(dir, { recursive: true, force: true })
     await mkdir(dir, { recursive: true })
     const dependencies = {
@@ -170,7 +181,7 @@ try {
         esModuleInterop: true,
         allowJs: true,
         resolveJsonModule: true,
-        paths: { "@/*": ["./src/*"] },
+        paths: { [customAliases ? "~/*" : "@/*"]: ["./src/*"] },
         ...(framework === "next" ? { plugins: [{ name: "next" }] } : {}),
       },
       include: ["src", "next-env.d.ts", ".next/types/**/*.ts"],
@@ -190,13 +201,21 @@ try {
       registries: {
         "@organui": `http://127.0.0.1:${server.port}/{name}.json`,
       },
-      aliases: {
-        components: "@/components",
-        ui: "@/components/ui",
-        utils: "@/lib/utils",
-        lib: "@/lib",
-        hooks: "@/hooks",
-      },
+      aliases: customAliases
+        ? {
+            components: "~/widgets",
+            ui: "~/primitives",
+            utils: "~/support/utils",
+            lib: "~/support",
+            hooks: "~/hooks",
+          }
+        : {
+            components: "@/components",
+            ui: "@/components/ui",
+            utils: "@/lib/utils",
+            lib: "@/lib",
+            hooks: "@/hooks",
+          },
     })
     await put(dir, "src/globals.css", css)
     await put(
@@ -204,13 +223,13 @@ try {
       "postcss.config.mjs",
       "export default {plugins:{'@tailwindcss/postcss':{}}}"
     )
-    await put(dir, "src/harness.tsx", harness)
-    await put(dir, "src/organ-harness.tsx", organHarness)
-    await put(dir, "src/vitals-harness.tsx", vitalsHarness)
-    await put(dir, "src/lab-harness.tsx", labHarness)
-    await put(dir, "src/molecule-harness.tsx", moleculeHarness)
-    await put(dir, "src/medication-harness.tsx", medicationHarness)
-    await put(dir, "src/ecg-harness.tsx", ecgHarness)
+    await put(dir, "src/harness.tsx", source(harness))
+    await put(dir, "src/organ-harness.tsx", source(organHarness))
+    await put(dir, "src/vitals-harness.tsx", source(vitalsHarness))
+    await put(dir, "src/lab-harness.tsx", source(labHarness))
+    await put(dir, "src/molecule-harness.tsx", source(moleculeHarness))
+    await put(dir, "src/medication-harness.tsx", source(medicationHarness))
+    await put(dir, "src/ecg-harness.tsx", source(ecgHarness))
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -271,11 +290,11 @@ try {
         "src/main.tsx",
         'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
-      await put(dir, "src/block-harness.tsx", blockHarness)
+      await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(
         dir,
         "vite.config.ts",
-        'import {defineConfig} from "vite";import {fileURLToPath} from "node:url";export default defineConfig({resolve:{alias:{"@":fileURLToPath(new URL("./src",import.meta.url))}},esbuild:{jsx:"automatic"}})'
+        'import {defineConfig} from "vite";import {fileURLToPath} from "node:url";export default defineConfig({resolve:{alias:{"~":fileURLToPath(new URL("./src",import.meta.url))}},esbuild:{jsx:"automatic"}})'
       )
     }
     await run(["bun", "install"], dir)
@@ -374,39 +393,44 @@ try {
     }
     for (const name of ["organ-viewer", "molecule-viewer", "dna-helix"]) {
       const viewer = await readFile(
-        resolve(dir, `src/components/${name}.tsx`),
+        resolve(dir, `${componentDir}/${name}.tsx`),
         "utf8"
       )
       if (
         viewer.includes("@workspace/") ||
+        (customAliases && viewer.includes('from "@/')) ||
         (framework === "next" && !viewer.includes('"use client"'))
       )
         throw new Error(`Invalid installed ${name}`)
     }
     for (const name of ["anatomy-tree", "medication-schedule", "ecg-trace"]) {
       const installed = await readFile(
-        resolve(dir, `src/components/ui/${name}.tsx`),
+        resolve(dir, `${uiDir}/${name}.tsx`),
         "utf8"
       )
       if (
         installed.includes("@workspace/") ||
+        (customAliases && installed.includes('from "@/')) ||
         (framework === "next" && !installed.includes('"use client"'))
       )
         throw new Error(`Invalid installed ${name} source`)
     }
     const vitals = await readFile(
-      resolve(dir, "src/components/ui/vital-signs.tsx"),
+      resolve(dir, `${uiDir}/vital-signs.tsx`),
       "utf8"
     )
     if (
       vitals.includes("@workspace/") ||
-      !vitals.includes("@/components/ui/card")
+      !vitals.includes(
+        customAliases ? "~/primitives/card" : "@/components/ui/card"
+      )
     )
       throw new Error("Invalid installed vital signs")
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)
   }
+  await githubConsumer(resolve(out, "github"), shadcn)
 } finally {
   server.stop()
 }

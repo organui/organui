@@ -89,10 +89,10 @@ export default function Page() {
         </pre>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, along with
-          shadcn&apos;s <code>button</code> and <code>input</code> if you do not
-          have them yet. It uses your existing theme tokens; it installs no
-          global styles or 3D packages. Tested configurations are documented in
-          the repository.
+          shadcn&apos;s <code>button</code>, <code>input</code>,{" "}
+          <code>field</code> and <code>empty</code> if you do not have them yet.
+          It uses your existing theme tokens; it installs no global styles or 3D
+          packages. Tested configurations are documented in the repository.
         </p>
         <a className="underline" href="/r/anatomy-tree.json">
           View registry item JSON
