@@ -37,6 +37,12 @@ async function run(command: string[], cwd: string, declineOverwrites = false) {
     timeout: 180_000,
   })
   let pending = ""
+  let inputClosed = false
+  const closeInput = () => {
+    if (!inputClosed) child.stdin.end()
+    inputClosed = true
+  }
+  if (!declineOverwrites) closeInput()
   async function forward(
     stream: ReadableStream<Uint8Array>,
     output: NodeJS.WriteStream
@@ -49,11 +55,19 @@ async function run(command: string[], cwd: string, declineOverwrites = false) {
       output.write(chunk)
       if (declineOverwrites) {
         pending += decoder.decode(chunk, { stream: true })
-        if (pending.includes("Would you like to overwrite?")) {
+        if (
+          !inputClosed &&
+          pending.includes("Would you like to overwrite?") &&
+          pending.includes("(y/N)")
+        ) {
           child.stdin.write("n\n")
           child.stdin.flush()
           pending = ""
         }
+        // prompts leaves stdin flowing after an answer. Close it once the CLI
+        // reports its final file summary so the process can actually exit.
+        if (/\b(?:Created|Updated|Skipped) \d+ files?/.test(pending))
+          closeInput()
       }
     }
   }
@@ -61,7 +75,7 @@ async function run(command: string[], cwd: string, declineOverwrites = false) {
     forward(child.stdout, process.stdout),
     forward(child.stderr, process.stderr),
   ])
-  child.stdin.end()
+  closeInput()
   if (await child.exited) throw new Error(`${command.join(" ")} failed`)
 }
 
