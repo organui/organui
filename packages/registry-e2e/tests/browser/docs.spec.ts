@@ -437,6 +437,38 @@ test("a model the site serves itself loads from its own origin", async ({
   expect(errors).toEqual([])
 })
 
+test("vital signs example switches readings and states each status", async ({
+  page,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/docs/vital-signs")
+  await expect(
+    page.getByRole("heading", { name: "Vital signs", level: 1 })
+  ).toBeVisible()
+  const panel = page.getByRole("region", { name: "Vital signs", exact: true })
+  const spo2 = panel.locator('[data-vital="spo2"]')
+  await expect(spo2).toHaveAttribute("data-status", "normal")
+  await page.getByRole("button", { name: "Low oxygen", exact: true }).click()
+  await expect(
+    page.getByRole("button", { name: "Low oxygen", exact: true })
+  ).toHaveAttribute("aria-pressed", "true")
+  await expect(spo2).toHaveAttribute("data-status", "low")
+  await expect(spo2).toContainText("89%Low")
+  await expect(
+    page.getByRole("region", { name: "Installation command" })
+  ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/vital-signs.json")
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({ path: info.outputPath("vitals.png"), fullPage: true })
+  expect(errors).toEqual([])
+})
+
 test("lab results flag values in words and fit a phone", async ({
   page,
   request,
