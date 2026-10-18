@@ -302,7 +302,9 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   })
   await withoutControls.scrollIntoViewIfNeeded()
   await expect(
-    withoutControls.getByRole("region", { name: "Interactive heart model" })
+    withoutControls.getByRole("region", {
+      name: "Heart without controls example",
+    })
   ).toBeVisible()
   await expect(withoutControls.getByRole("toolbar")).toHaveCount(0)
   await withoutControls
@@ -397,7 +399,7 @@ test("a model that fails to load explains itself and retries", async ({
   })
   await page.goto("/docs/heart")
   const alert = page
-    .getByRole("region", { name: "Interactive heart model" })
+    .getByRole("region", { name: "Heart default example" })
     .getByRole("alert")
   await expect(alert).toContainText("The heart model couldn’t load")
   await expect(alert).toContainText("HTTP 404")
@@ -489,7 +491,7 @@ test("a model the site serves itself loads from its own origin", async ({
   )
   await page.goto("/docs/breast")
   await loaded
-  const viewer = page.getByRole("region", { name: "Interactive breast model" })
+  const viewer = page.getByRole("region", { name: "Breast default example" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
   await expect(

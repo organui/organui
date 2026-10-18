@@ -15,6 +15,7 @@ function ControlledExample({ model }: { model: OrganModel }) {
     <div className="flex flex-col gap-3">
       <OrganViewer
         model={model}
+        label={`${model.name} controlled selection example`}
         selectedId={selectedId}
         onSelectionChange={setSelectedId}
         className="h-[28rem]"
@@ -44,12 +45,12 @@ import { ${modelExport} } from "@/components/${name}"`
   const defaultCode = `${imports}
 
 export function DefaultExample() {
-  return <${tag}${modelProp} className="h-[28rem]" />
+  return <${tag}${modelProp} label="${model.name} default example" className="h-[28rem]" />
 }`
   const withoutControls = `${imports}
 
 export function WithoutControlsExample() {
-  return <${tag}${modelProp} controls={false} className="h-[28rem]" />
+  return <${tag}${modelProp} label="${model.name} without controls example" controls={false} className="h-[28rem]" />
 }`
   const controlledImports = viewer
     ? imports
@@ -65,6 +66,7 @@ export function ControlledExample() {
   return (
     <div className="flex flex-col gap-3">
       <${tag}${modelProp}
+        label="${model.name} controlled selection example"
         selectedId={selectedId}
         onSelectionChange={setSelectedId}
         className="h-[28rem]"
@@ -87,7 +89,13 @@ export function AnatomyExample() {
     {
       name: `${exampleName}-demo`,
       title: viewer ? "Organ viewer" : model.name,
-      preview: <OrganViewer model={model} className="h-[28rem]" />,
+      preview: (
+        <OrganViewer
+          model={model}
+          label={`${model.name} default example`}
+          className="h-[28rem]"
+        />
+      ),
       code: defaultCode,
     },
     {
@@ -96,7 +104,12 @@ export function AnatomyExample() {
       description:
         "Hide the built-in view, zoom, and reset controls while keeping camera interaction and attribution.",
       preview: (
-        <OrganViewer model={model} controls={false} className="h-[28rem]" />
+        <OrganViewer
+          model={model}
+          label={`${model.name} without controls example`}
+          controls={false}
+          className="h-[28rem]"
+        />
       ),
       code: withoutControls,
     },
