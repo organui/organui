@@ -436,3 +436,68 @@ test("a model the site serves itself loads from its own origin", async ({
   await page.screenshot({ path: info.outputPath("breast.png"), fullPage: true })
   expect(errors).toEqual([])
 })
+
+test("lab results flag values in words and fit a phone", async ({
+  page,
+  request,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/docs/lab-results")
+  const table = page
+    .getByRole("region", { name: "Lab results example" })
+    .getByRole("table")
+  const row = (name: string) =>
+    table.getByRole("row").filter({
+      has: page.getByRole("rowheader", { name: new RegExp(`^${name}`) }),
+    })
+  await expect(row("Potassium")).toContainText("Critical high")
+  await expect(row("Glucose, fasting")).toContainText("High")
+  await expect(row("Sodium")).toContainText("Low")
+  await expect(row("Creatinine")).toContainText("Normal")
+  // A lab-reported flag wins over a text result that cannot be compared.
+  await expect(row("Urine protein")).toContainText("Normal")
+  await expect(
+    row("Glucose, fasting").getByRole("img", {
+      name: "Glucose, fasting trend, 4 results from Oct 6, 2025 to Oct 1, 2026: 92 to 118 mg/dL, rising",
+    })
+  ).toBeVisible()
+  await expect(row("HDL cholesterol")).toContainText("No earlier results")
+  // Below 32rem the range moves under the test name instead of scrolling.
+  const narrow = (page.viewportSize()?.width ?? 0) < 768
+  await expect(
+    table.getByRole("columnheader", { name: "Reference range" })
+  ).toBeVisible({ visible: !narrow })
+  await expect(row("Sodium").getByText("Range: 135–145 mmol/L")).toBeVisible({
+    visible: narrow,
+  })
+  for (const path of ["/docs/lab-results", "/docs"]) {
+    await page.goto(path)
+    expect(
+      await page.evaluate(() =>
+        [
+          document.documentElement,
+          ...document.querySelectorAll("[data-slot=lab-results] > *"),
+        ].every((element) => element.scrollWidth <= element.clientWidth)
+      )
+    ).toBe(true)
+  }
+  await page.goto("/docs/lab-results")
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({
+    path: info.outputPath("lab-results.png"),
+    fullPage: true,
+  })
+  const item = registryItemSchema.parse(
+    await (await request.get("/r/lab-results.json")).json()
+  )
+  expect(item.registryDependencies).toEqual(["table"])
+  expect(item.files?.[0]?.content).toBe(
+    await readFile(
+      new URL(import.meta.resolve("@workspace/registry/lab-results")),
+      "utf8"
+    )
+  )
+  expect(errors).toEqual([])
+})
