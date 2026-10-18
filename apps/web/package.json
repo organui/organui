@@ -15,11 +15,11 @@
   "dependencies": {
     "@workspace/registry": "workspace:*",
     "@workspace/ui": "workspace:*",
-    "lucide-react": "^1.47.0",
-    "next": "16.3.3",
+    "lucide-react": "^1.57.0",
+    "next": "16.4.2",
     "next-themes": "^0.4.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "shiki": "4.5.0"
   },
   "devDependencies": {
