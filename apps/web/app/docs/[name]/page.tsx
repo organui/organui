@@ -67,14 +67,9 @@ export function ${component}Demo() {
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          The {model.name.toLowerCase()} from{" "}
-          {hosted ? "OrganUI" : "the OrganUI explorer"}, ready to drop into your
-          app: {model.structures.length} selectable structures and{" "}
-          {model.views.length} named views, built on the{" "}
-          <Link href="/docs/organ-viewer" className="underline">
-            organ viewer
-          </Link>
-          .
+          An interactive 3D {model.name.toLowerCase()} with{" "}
+          {model.structures.length} selectable structures and{" "}
+          {model.views.length} named views.
         </p>
       </header>
       <ComponentPreview key={name} name={`${name}-demo`} />
