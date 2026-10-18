@@ -4,6 +4,7 @@
   "tasks": {
     "consumers": {
       "dependsOn": ["@workspace/registry#build"],
+      "env": ["REGISTRY_GITHUB_REF"],
       "cache": false
     },
     "test:browser": {

@@ -1,8 +1,9 @@
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
+import catalog from "@workspace/registry/registry.json"
 
-// This deliberately installs the published GitHub source, not the local HTTP
-// build. The Next/Vite consumers above test the current working tree.
+// Install through the GitHub source-registry path, independently of HTTP JSON.
+// CI pins the PR commit; local runs without a ref smoke-test the default branch.
 export async function githubConsumer(directory: string, cli: string) {
   await rm(directory, { recursive: true, force: true })
   await mkdir(resolve(directory, "src"), { recursive: true })
@@ -72,6 +73,25 @@ export async function githubConsumer(directory: string, cli: string) {
   })
   const css = '@import "tailwindcss";\n'
   await put("src/globals.css", css)
+  const ref = process.env.REGISTRY_GITHUB_REF
+  if (ref && !/^[0-9a-f]{40}$/.test(ref))
+    throw new Error("REGISTRY_GITHUB_REF must be a full commit SHA")
+  const organs = catalog.items.filter(
+    (item) => "categories" in item && item.categories?.includes("organ")
+  )
+  if (ref)
+    await put(
+      "src/all-organs.tsx",
+      organs
+        .map(({ name }) => {
+          const component = name
+            .split("-")
+            .map((word) => word[0]!.toUpperCase() + word.slice(1))
+            .join("")
+          return `import { ${component}, type ${component}Props } from "@/components/${name}"\nexport function ${component}Demo(props: ${component}Props) { return <${component} {...props} /> }`
+        })
+        .join("\n")
+    )
   await put(
     "src/smoke.tsx",
     `import { AnatomyTree } from "@/components/ui/anatomy-tree"
@@ -85,8 +105,10 @@ export function Smoke() {
     "node",
     cli,
     "add",
-    "organui/organui/anatomy-tree",
-    "organui/organui/heart",
+    ...[
+      "anatomy-tree",
+      ...(ref ? organs.map(({ name }) => name) : ["heart"]),
+    ].map((name) => `organui/organui/${name}${ref ? `#${ref}` : ""}`),
     "--yes",
   ])
   // These imports force the root registry include and the shared organ file
