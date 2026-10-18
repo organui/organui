@@ -1,6 +1,6 @@
+import { ComponentPreview } from "@/components/component-preview"
 import Link from "next/link"
-import { OrganDemo, OrganExamples } from "@/components/organ-examples"
-import { organModels } from "@/lib/organ-models"
+import { OrganExamples } from "@/components/organ-examples"
 import { codeBlock, docsMetadata, registryItems, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -40,7 +40,6 @@ const handle = `const viewer = useRef<OrganViewerHandle>(null)
 <OrganViewer ref={viewer} model={kidneyModel} />`
 
 export default async function Page() {
-  const heart = await organModels.heart!()
   const organs = registryItems.filter(({ organ }) => organ)
   return (
     <div className="flex flex-col gap-10">
@@ -55,7 +54,7 @@ export default async function Page() {
           and emphasis.
         </p>
       </header>
-      <OrganDemo name="heart" model={heart} viewer />
+      <ComponentPreview name="organ-viewer-demo" />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation
@@ -112,7 +111,7 @@ export default async function Page() {
           <code>structureIds</code> frames only those structures.
         </p>
       </section>
-      <OrganExamples name="heart" model={heart} viewer />
+      <OrganExamples name="organ-viewer" />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Behaviour</h2>
         <p>

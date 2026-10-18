@@ -1,8 +1,7 @@
-import { ComponentViewer } from "@/components/component-viewer"
+import { ComponentPreview } from "@/components/component-preview"
 import type { Metadata } from "next"
 import { codeBlock, registryNamespace, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
-import { Example } from "./example"
 
 const description =
   "An accessible anatomy tree component for selecting structures and controlling visibility in healthcare interfaces."
@@ -60,12 +59,7 @@ export default function Page() {
           your viewer shows. Bring your own data and rendering engine.
         </p>
       </header>
-      <ComponentViewer
-        name="anatomy-tree-demo"
-        title="Anatomy tree"
-        preview={<Example />}
-        code={usage}
-      />
+      <ComponentPreview name="anatomy-tree-demo" />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation

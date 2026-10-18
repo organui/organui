@@ -716,15 +716,27 @@ test("component previews reveal copyable code without resetting the demo", async
   await reveal.press("Enter")
   const snippet = example.getByLabel("Anatomy tree code")
   await expect(snippet).toBeFocused()
-  await expect(snippet).toContainText(
-    'import { AnatomyTree } from "@/components/ui/anatomy-tree"'
+  const expectedSource = (
+    await readFile(
+      new URL(
+        "examples/anatomy-tree-demo.tsx",
+        import.meta.resolve("web/package.json")
+      ),
+      "utf8"
+    )
   )
+    .replaceAll(
+      "@workspace/registry/anatomy-tree",
+      "@/components/ui/anatomy-tree"
+    )
+    .trimEnd()
+  await expect(snippet).toHaveText(expectedSource, { useInnerText: false })
   await expect(example.getByRole("tree")).toBeVisible()
   await expect(state).toHaveText("Selected: lv")
   await example.getByRole("button", { name: "Copy", exact: true }).click()
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-    .toBe(await snippet.textContent())
+    .toBe(expectedSource)
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth

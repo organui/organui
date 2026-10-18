@@ -1,4 +1,4 @@
-import { ComponentViewer } from "@/components/component-viewer"
+import { ComponentPreview } from "@/components/component-preview"
 import {
   codeBlock,
   docsMetadata,
@@ -6,7 +6,6 @@ import {
   shadcn,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
-import { Example } from "./example"
 
 export const metadata = docsMetadata(
   "DNA helix",
@@ -42,12 +41,7 @@ export default function Page() {
           its complement. Built procedurally, so there is no model to download.
         </p>
       </header>
-      <ComponentViewer
-        name="dna-helix-demo"
-        title="DNA helix"
-        preview={<Example />}
-        code={usage}
-      />
+      <ComponentPreview name="dna-helix-demo" />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation

@@ -1,7 +1,8 @@
+import { ComponentPreview } from "@/components/component-preview"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { OrganDemo, OrganExamples } from "@/components/organ-examples"
+import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
 import {
   codeBlock,
@@ -89,7 +90,7 @@ const data = organAnatomyNodes(${exportName})
           .
         </p>
       </header>
-      <OrganDemo key={name} name={name} model={model} />
+      <ComponentPreview key={name} name={`${name}-demo`} />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation
@@ -162,7 +163,7 @@ const data = organAnatomyNodes(${exportName})
           {tree}
         </pre>
       </section>
-      <OrganExamples key={`${name}-examples`} name={name} model={model} />
+      <OrganExamples key={`${name}-examples`} name={name} />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Views</h2>
         <p>

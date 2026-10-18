@@ -1,6 +1,4 @@
-import { ComponentViewer } from "@/components/component-viewer"
-import { LabResultsTable } from "@workspace/registry/lab-results"
-import { labResultsExampleData } from "@/lib/examples"
+import { ComponentPreview } from "@/components/component-preview"
 import {
   codeBlock,
   docsMetadata,
@@ -60,23 +58,7 @@ export default function Page() {
           never depend on color alone.
         </p>
       </header>
-      <ComponentViewer
-        name="lab-results-demo"
-        title="Lab results table"
-        preview={
-          <div
-            role="region"
-            aria-label="Lab results example"
-            className="rounded-xl border p-4"
-          >
-            <LabResultsTable
-              results={labResultsExampleData}
-              caption="Illustrative values, not patient data"
-            />
-          </div>
-        }
-        code={usage}
-      />
+      <ComponentPreview name="lab-results-demo" />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation

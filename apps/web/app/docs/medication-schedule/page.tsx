@@ -1,4 +1,4 @@
-import { ComponentViewer } from "@/components/component-viewer"
+import { ComponentPreview } from "@/components/component-preview"
 import {
   codeBlock,
   docsMetadata,
@@ -6,7 +6,6 @@ import {
   shadcn,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
-import { Example } from "./example"
 
 export const metadata = docsMetadata(
   "Medication schedule",
@@ -57,12 +56,7 @@ export default function Page() {
           one taken or skipped and warnings for interactions you supply.
         </p>
       </header>
-      <ComponentViewer
-        name="medication-schedule-demo"
-        title="Medication schedule"
-        preview={<Example />}
-        code={usage}
-      />
+      <ComponentPreview name="medication-schedule-demo" />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation

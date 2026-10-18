@@ -1,4 +1,4 @@
-import { ComponentViewer } from "@/components/component-viewer"
+import { ComponentPreview } from "@/components/component-preview"
 import {
   codeBlock,
   docsMetadata,
@@ -6,7 +6,6 @@ import {
   shadcn,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
-import { Example } from "./example"
 
 export const metadata = docsMetadata(
   "Vital signs",
@@ -51,12 +50,7 @@ export default function Page() {
           written out with its own icon, so it never depends on colour.
         </p>
       </header>
-      <ComponentViewer
-        name="vital-signs-demo"
-        title="Vital signs"
-        preview={<Example />}
-        code={usage}
-      />
+      <ComponentPreview name="vital-signs-demo" />
       <section className="flex flex-col gap-4">
         <h2 id="installation" className="text-2xl font-semibold">
           Installation

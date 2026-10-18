@@ -19,8 +19,8 @@ import {
   exampleInteractions,
   exampleMedications,
 } from "@/lib/medication-example"
-import { Example as DnaHelixExample } from "@/app/docs/dna-helix/example"
-import { Example as MoleculeExample } from "@/app/docs/molecule-viewer/example"
+import { Example as DnaHelixExample } from "@/examples/dna-helix-demo"
+import { Example as MoleculeExample } from "@/examples/molecule-viewer-demo"
 
 function AnatomyTreePreview() {
   const [selectedId, setSelectedId] = useState<string | null>("lv")
