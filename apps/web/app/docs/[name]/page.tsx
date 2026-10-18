@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { OrganExamples } from "@/components/organ-examples"
+import { OrganDemo, OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
 import {
   codeBlock,
@@ -89,9 +89,11 @@ const data = organAnatomyNodes(${exportName})
           .
         </p>
       </header>
-      <OrganExamples key={name} name={name} model={model} />
+      <OrganDemo key={name} name={name} model={model} />
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Install</h2>
+        <h2 id="installation" className="text-2xl font-semibold">
+          Installation
+        </h2>
         <pre
           tabIndex={0}
           role="region"
@@ -127,7 +129,9 @@ const data = organAnatomyNodes(${exportName})
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
+        <h2 id="usage" className="text-2xl font-semibold">
+          Usage
+        </h2>
         <pre
           tabIndex={0}
           role="region"
@@ -141,7 +145,7 @@ const data = organAnatomyNodes(${exportName})
           <Link href="/docs/anatomy-tree" className="underline">
             anatomy tree
           </Link>{" "}
-          for the With Anatomy Panel example above, or install that layout whole
+          for the With Anatomy Panel example below, or install that layout whole
           as the{" "}
           <Link href="/blocks#explorer-01" className="underline">
             Explorer 01 block
@@ -158,6 +162,7 @@ const data = organAnatomyNodes(${exportName})
           {tree}
         </pre>
       </section>
+      <OrganExamples key={`${name}-examples`} name={name} model={model} />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Views</h2>
         <p>

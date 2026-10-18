@@ -61,29 +61,26 @@ export default function Page() {
         </p>
       </header>
       <ComponentViewer
+        name="lab-results-demo"
         title="Lab results table"
-        examples={[
-          {
-            id: "default",
-            label: "Default",
-            preview: (
-              <div
-                role="region"
-                aria-label="Lab results example"
-                className="rounded-xl border p-4"
-              >
-                <LabResultsTable
-                  results={labResultsExampleData}
-                  caption="Illustrative values, not patient data"
-                />
-              </div>
-            ),
-            code: usage,
-          },
-        ]}
+        preview={
+          <div
+            role="region"
+            aria-label="Lab results example"
+            className="rounded-xl border p-4"
+          >
+            <LabResultsTable
+              results={labResultsExampleData}
+              caption="Illustrative values, not patient data"
+            />
+          </div>
+        }
+        code={usage}
       />
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Install</h2>
+        <h2 id="installation" className="text-2xl font-semibold">
+          Installation
+        </h2>
         <p>
           In a React 19 project configured with shadcn, Tailwind CSS 4, and the
           Base UI / Nova theme, run the command below.
@@ -122,7 +119,9 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
+        <h2 id="usage" className="text-2xl font-semibold">
+          Usage
+        </h2>
         <pre
           tabIndex={0}
           role="region"

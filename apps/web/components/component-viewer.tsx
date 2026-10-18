@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, type ReactNode } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
+import { Button } from "@workspace/ui/components/button"
 import {
   CodeBlock,
   CodeBlockActions,
@@ -9,87 +10,95 @@ import {
   CodeBlockHeader,
   CodeBlockTitle,
 } from "@workspace/ui/components/code-block"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@workspace/ui/components/tabs"
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@workspace/ui/components/toggle-group"
 
-export type ComponentExample = {
-  id: string
-  label: string
-  description?: string
+// One named demo per preview, matching shadcn's ComponentPreview structure.
+export function ComponentViewer({
+  name,
+  title,
+  preview,
+  code,
+  lazy = false,
+}: {
+  name: string
+  title: string
   preview: ReactNode
   code: string
-}
-
-// Components supply examples; this shell owns their navigation and code view.
-// Only the active preview mounts, including when examples contain WebGL scenes.
-export function ComponentViewer({
-  title,
-  examples,
-}: {
-  title: string
-  examples: readonly [ComponentExample, ...ComponentExample[]]
+  lazy?: boolean
 }) {
-  const [selected, setSelected] = useState(examples[0].id)
-  const example = examples.find(({ id }) => id === selected) ?? examples[0]
+  const [codeVisible, setCodeVisible] = useState(false)
+  const [previewVisible, setPreviewVisible] = useState(!lazy)
+  const viewport = useRef<HTMLDivElement>(null)
+  const source = useRef<HTMLPreElement>(null)
+
+  useEffect(() => {
+    if (!lazy || !viewport.current) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some(({ isIntersecting }) => isIntersecting)) {
+          setPreviewVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "160px" }
+    )
+    observer.observe(viewport.current)
+    return () => observer.disconnect()
+  }, [lazy])
+
+  useEffect(() => {
+    if (codeVisible) source.current?.focus()
+  }, [codeVisible])
 
   return (
-    <div role="group" aria-label={`${title} examples`} className="min-w-0">
-      <div className="flex min-w-0 flex-col gap-4">
-        {examples.length > 1 && (
-          <ToggleGroup
-            aria-label={`${title} example`}
-            variant="outline"
-            size="sm"
-            spacing={2}
-            className="max-w-full flex-wrap"
-            value={[example.id]}
-            onValueChange={(values) => {
-              if (values[0]) setSelected(values[0])
-            }}
-          >
-            {examples.map(({ id, label }) => (
-              <ToggleGroupItem key={id} value={id}>
-                {label}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+    <div
+      role="group"
+      aria-label={`${title} example`}
+      data-slot="component-preview"
+      data-example={name}
+      className="min-w-0 overflow-hidden rounded-2xl border"
+    >
+      <div ref={viewport} data-slot="preview" className="min-w-0 p-4 sm:p-6">
+        {!lazy || previewVisible ? (
+          preview
+        ) : (
+          <div aria-hidden="true" className="h-[28rem]" />
         )}
-        {example.description && (
-          <p className="text-sm text-muted-foreground">{example.description}</p>
-        )}
-        <Tabs defaultValue="preview" className="min-w-0">
-          <TabsList aria-label={`${title} preview and code`}>
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <div key={example.id} className="min-w-0">
-              {example.preview}
-            </div>
-          </TabsContent>
-          <TabsContent value="code">
-            <CodeBlock>
-              <CodeBlockHeader>
-                <CodeBlockTitle>{example.label} usage</CodeBlockTitle>
-                <CodeBlockActions>
-                  <CodeBlockCopyButton value={example.code} />
-                </CodeBlockActions>
-              </CodeBlockHeader>
-              <CodeBlockContent aria-label={`${example.label} code`}>
-                {example.code}
-              </CodeBlockContent>
-            </CodeBlock>
-          </TabsContent>
-        </Tabs>
       </div>
+      {codeVisible ? (
+        <CodeBlock className="rounded-none border-x-0 border-b-0">
+          <CodeBlockHeader>
+            <CodeBlockTitle>{name}.tsx</CodeBlockTitle>
+            <CodeBlockActions>
+              <CodeBlockCopyButton value={code} />
+            </CodeBlockActions>
+          </CodeBlockHeader>
+          <CodeBlockContent
+            ref={source}
+            aria-label={`${title} code`}
+            className="max-h-72"
+          >
+            {code}
+          </CodeBlockContent>
+        </CodeBlock>
+      ) : (
+        <div className="relative overflow-hidden border-t bg-muted/30">
+          <pre
+            aria-hidden="true"
+            className="pointer-events-none overflow-hidden p-4 font-mono text-xs text-muted-foreground"
+          >
+            {code.split("\n").slice(0, 3).join("\n")}
+          </pre>
+          <div className="absolute inset-0 flex items-center justify-center bg-linear-to-t from-background via-background/70 to-transparent">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCodeVisible(true)}
+            >
+              View Code
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

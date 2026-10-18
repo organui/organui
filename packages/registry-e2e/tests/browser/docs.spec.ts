@@ -277,29 +277,62 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   await expect(
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
-  const examples = page.getByRole("group", { name: "Heart examples" })
+  const demo = page.getByRole("group", { name: "Heart example", exact: true })
   await expect(
-    examples.getByRole("button", { name: "Basic", exact: true })
-  ).toHaveAttribute("aria-pressed", "true")
-  await examples.getByRole("tab", { name: "Code", exact: true }).click()
-  await expect(examples.locator("canvas")).toHaveCount(0)
-  await expect(examples.getByLabel("Basic code")).toContainText(
+    demo.getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  await demo.getByRole("button", { name: "View Code", exact: true }).click()
+  await expect(demo.getByLabel("Heart code")).not.toContainText(
     "controls={false}"
   )
-  await examples
-    .getByRole("button", { name: "Interactive", exact: true })
-    .click()
-  await expect(examples.getByLabel("Interactive code")).toContainText(
-    "onSelectionChange={setSelectedId}"
+  // Revealing code preserves the live default demo and its context.
+  await expect(demo.locator("canvas")).toHaveCount(1)
+  const headings = await page
+    .getByRole("heading", { level: 2 })
+    .allTextContents()
+  expect(headings.indexOf("Installation")).toBeLessThan(
+    headings.indexOf("Usage")
   )
-  await examples.getByRole("tab", { name: "Preview", exact: true }).click()
+  expect(headings.indexOf("Usage")).toBeLessThan(
+    headings.indexOf("Without Controls")
+  )
+  const withoutControls = page.getByRole("group", {
+    name: "Heart Without Controls example",
+    exact: true,
+  })
+  await withoutControls.scrollIntoViewIfNeeded()
   await expect(
-    examples.getByRole("toolbar", { name: "View controls" })
+    withoutControls.getByRole("region", { name: "Interactive heart model" })
   ).toBeVisible()
-  await examples
-    .getByRole("button", { name: "With Anatomy Panel", exact: true })
+  await expect(withoutControls.getByRole("toolbar")).toHaveCount(0)
+  await withoutControls
+    .getByRole("button", { name: "View Code", exact: true })
     .click()
-  const viewer = page.getByRole("region", { name: "Interactive heart model" })
+  await expect(
+    withoutControls.getByLabel("Heart Without Controls code")
+  ).toContainText("controls={false}")
+  const controlled = page.getByRole("group", {
+    name: "Heart Controlled Selection example",
+    exact: true,
+  })
+  await controlled.scrollIntoViewIfNeeded()
+  await expect(
+    controlled.getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  await controlled
+    .getByRole("button", { name: "View Code", exact: true })
+    .click()
+  await expect(
+    controlled.getByLabel("Heart Controlled Selection code")
+  ).toContainText("onSelectionChange={setSelectedId}")
+  const examples = page.getByRole("group", {
+    name: "Heart With Anatomy Panel example",
+    exact: true,
+  })
+  await examples.scrollIntoViewIfNeeded()
+  const viewer = examples.getByRole("region", {
+    name: "Interactive heart model",
+  })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(examples.locator("canvas")).toHaveCount(1)
   // The panel starts closed; opening it moves focus to its search field.
@@ -456,7 +489,6 @@ test("a model the site serves itself loads from its own origin", async ({
   )
   await page.goto("/docs/breast")
   await loaded
-  await page.getByRole("button", { name: "Interactive", exact: true }).click()
   const viewer = page.getByRole("region", { name: "Interactive breast model" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
@@ -662,36 +694,35 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
   expect(errors).toEqual([])
 })
 
-test("component examples share keyboard-accessible preview and code views", async ({
+test("component previews reveal copyable code without resetting the demo", async ({
   page,
   context,
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"])
   await page.goto("/docs/anatomy-tree")
-  const examples = page.getByRole("group", { name: "Anatomy tree examples" })
-  const preview = examples.getByRole("tab", { name: "Preview", exact: true })
-  const code = examples.getByRole("tab", { name: "Code", exact: true })
-  await expect(examples.getByRole("tree")).toBeVisible()
-  await preview.focus()
-  await preview.press("ArrowRight")
-  await expect(code).toBeFocused()
-  // Arrow keys move focus; Enter activates the tab without eagerly loading scenes.
-  await expect(code).toHaveAttribute("aria-selected", "false")
-  await code.press("Enter")
-  await expect(code).toHaveAttribute("aria-selected", "true")
-  await expect(examples.getByRole("tree")).toHaveCount(0)
-  const snippet = examples.getByLabel("Default code")
+  const example = page.getByRole("group", {
+    name: "Anatomy tree example",
+    exact: true,
+  })
+  await example
+    .getByRole("button", { name: "Left ventricle", exact: true })
+    .click()
+  const state = example.getByRole("status")
+  await expect(state).toHaveText("Selected: lv")
+  const reveal = example.getByRole("button", { name: "View Code", exact: true })
+  await reveal.focus()
+  await reveal.press("Enter")
+  const snippet = example.getByLabel("Anatomy tree code")
+  await expect(snippet).toBeFocused()
   await expect(snippet).toContainText(
     'import { AnatomyTree } from "@/components/ui/anatomy-tree"'
   )
-  await examples.getByRole("button", { name: "Copy", exact: true }).click()
+  await expect(example.getByRole("tree")).toBeVisible()
+  await expect(state).toHaveText("Selected: lv")
+  await example.getByRole("button", { name: "Copy", exact: true }).click()
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
     .toBe(await snippet.textContent())
-  await code.press("ArrowLeft")
-  await preview.press("Enter")
-  await expect(preview).toHaveAttribute("aria-selected", "true")
-  await expect(examples.getByRole("tree")).toBeVisible()
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth

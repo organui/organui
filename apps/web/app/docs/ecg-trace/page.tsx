@@ -56,18 +56,15 @@ export default function Page() {
         </p>
       </header>
       <ComponentViewer
+        name="ecg-trace-demo"
         title="ECG trace"
-        examples={[
-          {
-            id: "default",
-            label: "Default",
-            preview: <Example />,
-            code: synthetic,
-          },
-        ]}
+        preview={<Example />}
+        code={synthetic}
       />
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Install</h2>
+        <h2 id="installation" className="text-2xl font-semibold">
+          Installation
+        </h2>
         <pre
           tabIndex={0}
           role="region"
@@ -98,7 +95,9 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Recorded traces</h2>
+        <h2 id="usage" className="text-2xl font-semibold">
+          Usage
+        </h2>
         <pre
           tabIndex={0}
           role="region"

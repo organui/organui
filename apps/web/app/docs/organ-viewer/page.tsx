@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { OrganExamples } from "@/components/organ-examples"
+import { OrganDemo, OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
 import { codeBlock, docsMetadata, registryItems, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
@@ -55,9 +55,11 @@ export default async function Page() {
           and emphasis.
         </p>
       </header>
-      <OrganExamples name="heart" model={heart} />
+      <OrganDemo name="heart" model={heart} viewer />
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Install</h2>
+        <h2 id="installation" className="text-2xl font-semibold">
+          Installation
+        </h2>
         <p>
           Most apps want a ready-made organ:{" "}
           {organs.map((item, index) => (
@@ -90,7 +92,9 @@ export default async function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Describe a model</h2>
+        <h2 id="usage" className="text-2xl font-semibold">
+          Usage
+        </h2>
         <pre
           tabIndex={0}
           role="region"
@@ -108,6 +112,7 @@ export default async function Page() {
           <code>structureIds</code> frames only those structures.
         </p>
       </section>
+      <OrganExamples name="heart" model={heart} viewer />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Behaviour</h2>
         <p>
