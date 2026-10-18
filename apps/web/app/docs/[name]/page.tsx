@@ -2,6 +2,7 @@ import { ComponentPreview } from "@/components/component-preview"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { OrganApi } from "@/components/organ-api"
 import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
 import {
@@ -53,25 +54,11 @@ export default async function Page({ params }: Props) {
   const organ = name.split("-")
   const pascal = organ.map((word) => word[0]!.toUpperCase() + word.slice(1))
   const component = pascal.join("")
-  const exportName = `${organ[0]}${pascal.slice(1).join("")}Model`
-  const usage = `"use client"
-import { useState } from "react"
-import { ${component} } from "@/components/${name}"
+  const usage = `import { ${component} } from "@/components/${name}"
 
-export function ${pascal.join("")}Panel() {
-  const [selectedId, select] = useState<string | null>(null)
-  return <${component} selectedId={selectedId}
-    onSelectionChange={select} className="h-[32rem]" />
+export function ${component}Demo() {
+  return <${component} />
 }`
-  const tree = `import { AnatomyTree } from "@/components/ui/anatomy-tree"
-import { organAnatomyNodes } from "@/components/organ-viewer"
-import { ${exportName} } from "@/components/${name}"
-
-const data = organAnatomyNodes(${exportName})
-// <AnatomyTree data={data} selectedId={selectedId} onSelectionChange={select}
-//   visibility={visibility} onVisibilityChange={show} />
-// <${component} selectedId={selectedId} onSelectionChange={select}
-//   visibility={visibility} />`
   return (
     <div className="flex flex-col gap-10">
       <header className="flex flex-col gap-4">
@@ -146,7 +133,7 @@ const data = organAnatomyNodes(${exportName})
           <Link href="/docs/anatomy-tree" className="underline">
             anatomy tree
           </Link>{" "}
-          for the With Anatomy Panel example below, or install that layout whole
+          as shown below. For a complete explorer with a mobile sheet, install
           as the{" "}
           <Link href="/blocks#explorer-01" className="underline">
             Explorer 01 block
@@ -154,16 +141,9 @@ const data = organAnatomyNodes(${exportName})
           . Both share structure IDs, so one piece of state drives selection and
           visibility in each.
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Anatomy tree pairing"
-          className={codeBlock}
-        >
-          {tree}
-        </pre>
       </section>
       <OrganExamples key={`${name}-examples`} name={name} />
+      <OrganApi component={component} />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Views</h2>
         <p>

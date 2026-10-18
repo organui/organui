@@ -1,14 +1,56 @@
 import { cache, type ReactNode } from "react"
-import { organModels } from "@/lib/organ-models"
-import { registryItems } from "@/lib/registry"
+import { organExamples } from "./_organs"
 
 type ExampleDefinition = {
   title: string
+  lazy?: boolean
   file: string
   render: () => Promise<ReactNode>
 }
 
 const examples: Record<string, ExampleDefinition> = {
+  "organ-viewer-demo": {
+    title: "Organ viewer",
+    file: "organ-viewer-demo.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./organ-viewer-demo")
+      return <Example />
+    },
+  },
+  "organ-viewer-without-controls": {
+    title: "Organ viewer Without Controls",
+    file: "organ-viewer-without-controls.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./organ-viewer-without-controls")
+      return <Example />
+    },
+  },
+  "organ-viewer-controlled": {
+    title: "Organ viewer Controlled Selection",
+    file: "organ-viewer-controlled.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./organ-viewer-controlled")
+      return <Example />
+    },
+  },
+  "organ-viewer-with-anatomy": {
+    title: "Organ viewer With Anatomy Panel",
+    file: "organ-viewer-with-anatomy.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./organ-viewer-with-anatomy")
+      return <Example />
+    },
+  },
+  ...Object.fromEntries(
+    Object.entries(organExamples).map(([name, item]) => [
+      name,
+      { ...item, lazy: true },
+    ])
+  ),
   "anatomy-tree-demo": {
     title: "Anatomy tree",
     file: "anatomy-tree-demo.tsx",
@@ -73,21 +115,18 @@ export const organExampleVariants = [
     title: "Without Controls",
     description:
       "Hide the built-in view, zoom, and reset controls while keeping camera interaction and attribution.",
-    load: () => import("./organ-without-controls"),
   },
   {
     suffix: "controlled",
     title: "Controlled Selection",
     description:
       "Connect selection to your application state with selectedId and onSelectionChange.",
-    load: () => import("./organ-controlled"),
   },
   {
     suffix: "with-anatomy",
     title: "With Anatomy Panel",
     description:
-      "Install the Explorer 01 block to add a responsive anatomy panel with shared selection and visibility.",
-    load: () => import("./organ-with-anatomy"),
+      "Pair this component with AnatomyTree for shared selection and visibility. For a complete layout with a mobile sheet, see the Explorer 01 block.",
   },
 ] as const
 
@@ -100,28 +139,8 @@ export const getRegistryExample = cache(async (name: string) => {
       title: definition.title,
       file: definition.file,
       component: await definition.render(),
-      lazy: false,
+      lazy: definition.lazy ?? false,
     }
 
-  const variants = [
-    { suffix: "demo", title: "", load: () => import("./organ-demo") },
-    ...organExampleVariants,
-  ]
-  const variant = variants.find(({ suffix }) => name.endsWith(`-${suffix}`))
-  if (!variant) return null
-  const itemName = name.slice(0, -variant.suffix.length - 1)
-  const organ = itemName === "organ-viewer" ? "heart" : itemName
-  if (!registryItems.some((item) => item.organ && item.name === organ))
-    return null
-  const load = organModels[organ]
-  if (!load) return null
-  const [model, { Example }] = await Promise.all([load(), variant.load()])
-  const title = itemName === "organ-viewer" ? "Organ viewer" : model.name
-  return {
-    name,
-    title: variant.title ? `${title} ${variant.title}` : title,
-    file: `organ-${variant.suffix}.tsx`,
-    component: <Example model={model} />,
-    lazy: true,
-  }
+  return null
 })

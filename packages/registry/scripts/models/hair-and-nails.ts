@@ -12,8 +12,8 @@ import {
 } from "three"
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js"
 import type { OrganModel } from "../../registry/base-nova/organ-viewer/organ-viewer"
-import { hairModel } from "../../registry/base-nova/organ-viewer/hair"
-import { nailsModel } from "../../registry/base-nova/organ-viewer/nails"
+import { hairModel } from "../../registry/base-nova/hair/hair"
+import { nailsModel } from "../../registry/base-nova/nails/nails"
 
 // Original, schematic hair follicle and fingertip models generated from code.
 // Nothing is measured or traced from a scan: proportions are chosen for
@@ -805,17 +805,14 @@ function glb(
 }
 
 const models = new URL("../../../../apps/web/public/models/", import.meta.url)
-const organs = new URL(
-  "../../registry/base-nova/organ-viewer/",
-  import.meta.url
-)
+const organs = new URL("../../registry/base-nova/", import.meta.url)
 for (const [name, model, builders] of [
   ["hair", hairModel, hair],
   ["nails", nailsModel, nails],
 ] as const) {
   const output = glb(model, builders)
   await writeFile(new URL(`${name}.glb`, models), output)
-  const file = new URL(`${name}.tsx`, organs)
+  const file = new URL(`${name}/${name}.tsx`, organs)
   const source = await readFile(file, "utf8")
   await writeFile(
     file,

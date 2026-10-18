@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
-import { heartModel } from "@workspace/registry/organ-viewer/heart"
+import { heartModel } from "@workspace/registry/heart"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 
 test("documentation interaction, styling and registry serving", async ({
@@ -282,6 +282,10 @@ test("organ pages pair the viewer with the anatomy tree", async ({
     demo.getByRole("toolbar", { name: "View controls" })
   ).toBeVisible()
   await demo.getByRole("button", { name: "View Code", exact: true }).click()
+  await expect(demo.getByLabel("Heart code")).toContainText(
+    'from "@/components/heart"'
+  )
+  await expect(demo.getByLabel("Heart code")).toContainText("<Heart")
   await expect(demo.getByLabel("Heart code")).not.toContainText(
     "controls={false}"
   )
@@ -333,41 +337,26 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   })
   await examples.scrollIntoViewIfNeeded()
   const viewer = examples.getByRole("region", {
-    name: "Interactive heart model",
+    name: "Heart with anatomy example",
   })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(examples.locator("canvas")).toHaveCount(1)
-  // The panel starts closed; opening it moves focus to its search field.
-  // Phones get a sheet, which covers the viewer until it is closed.
-  const phone = (page.viewportSize()?.width ?? 0) < 1024
-  await expect(page.getByRole("tree")).toHaveCount(0)
-  const anatomy = page.getByRole("button", { name: "Anatomy", exact: true })
-  await expect(anatomy).toHaveAttribute("aria-pressed", "false")
-  await anatomy.click()
-  // A modal sheet hides the rest of the page, the toggle included.
-  if (phone)
-    await expect(
-      page.getByRole("dialog", { name: "Heart anatomy" })
-    ).toBeVisible()
-  else await expect(anatomy).toHaveAttribute("aria-pressed", "true")
-  await expect(page.getByRole("searchbox")).toBeFocused()
-  await page.getByRole("button", { name: "Left atrium", exact: true }).click()
-  if (phone) {
-    await page.keyboard.press("Escape")
-    await expect(page.getByRole("dialog")).toHaveCount(0)
-    await expect(anatomy).toBeFocused()
-  }
-  await expect(page.getByRole("status").last()).toContainText("Left atrium:")
-  await viewer.click()
-  if (phone) await anatomy.click()
+  const tree = examples.getByRole("tree", { name: "Heart anatomy" })
+  await expect(tree).toBeVisible()
+  await examples
+    .getByRole("button", { name: "Left atrium", exact: true })
+    .click()
   await expect(
-    page.getByRole("treeitem", { name: "Right atrium", exact: true })
+    tree.getByRole("treeitem", { name: "Left atrium", exact: true })
   ).toHaveAttribute("aria-selected", "true")
-  await page.getByRole("searchbox").focus()
-  await page.keyboard.press("Escape")
-  await expect(page.getByRole("tree")).toHaveCount(0)
-  await expect(anatomy).toBeFocused()
-  await expect(anatomy).toHaveAttribute("aria-pressed", "false")
+  await viewer.click()
+  await expect(
+    tree.getByRole("treeitem", { name: "Right atrium", exact: true })
+  ).toHaveAttribute("aria-selected", "true")
+  await examples.getByRole("button", { name: "View Code", exact: true }).click()
+  await expect(
+    examples.getByLabel("Heart With Anatomy Panel code")
+  ).toContainText("<Heart")
   await expect(
     page.getByRole("region", { name: "Installation command" })
   ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/heart.json")
@@ -384,7 +373,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   )
   expect(item.files?.map((file) => file.path)).toEqual([
     "registry/base-nova/organ-viewer/organ-viewer.tsx",
-    "registry/base-nova/organ-viewer/heart.tsx",
+    "registry/base-nova/heart/heart.tsx",
   ])
   expect(errors).toEqual([])
 })
@@ -472,7 +461,7 @@ test("blocks gallery previews and installs every block", async ({
   expect(errors).toEqual([])
 })
 
-test("a model the site serves itself loads from its own origin", async ({
+test("a public organ component loads its attributed hosted model", async ({
   page,
   request,
 }, info) => {
@@ -480,6 +469,15 @@ test("a model the site serves itself loads from its own origin", async ({
   page.on("pageerror", (error) => errors.push(error.message))
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text())
+  })
+  // The public Breast component uses its canonical model URL. Serve the
+  // committed asset in this test instead of fetching the deployed website.
+  await page.route("https://organui.com/models/breast.glb", async (route) => {
+    const response = await request.get("/models/breast.glb")
+    await route.fulfill({
+      body: await response.body(),
+      contentType: "model/gltf-binary",
+    })
   })
   // Installs in other apps fetch organui.com/models cross-origin.
   const model = await request.get("/models/breast.glb")

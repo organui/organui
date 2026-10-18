@@ -206,7 +206,7 @@ for (const organ of process.argv.slice(2)) {
     new URL(`${organ}.json`, import.meta.url)
   ).json()
   const module = await import(
-    `../../packages/registry/registry/base-nova/organ-viewer/${organ}.tsx`
+    `../../packages/registry/registry/base-nova/${organ}/${organ}.tsx`
   )
   const model = Object.values(module).find(
     (value) => typeof value === "object"

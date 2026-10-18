@@ -23,7 +23,7 @@ Object.assign(globalThis, { window: globalThis, self: globalThis })
 const here = new URL("./", import.meta.url)
 const output = new URL("../../apps/web/public/models/nerves.glb", here)
 const item = new URL(
-  "../../packages/registry/registry/base-nova/organ-viewer/nerves.tsx",
+  "../../packages/registry/registry/base-nova/nerves/nerves.tsx",
   here
 )
 const cache = new URL("../node_modules/.cache/z-anatomy/", here)

@@ -19,10 +19,7 @@ const readExampleSource = cache(async (file: string) => {
   const source = await readFile(join(process.cwd(), "examples", file), "utf8")
   return source
     .replaceAll("@workspace/ui/components/", "@/components/ui/")
-    .replaceAll(
-      "@workspace/registry/organ-viewer/organ-viewer",
-      "@/components/organ-viewer"
-    )
+    .replaceAll("@workspace/registry/organ-viewer", "@/components/organ-viewer")
     .replaceAll(
       "@workspace/registry/blocks/explorer-01/components/organ-explorer",
       "@/components/organ-explorer"

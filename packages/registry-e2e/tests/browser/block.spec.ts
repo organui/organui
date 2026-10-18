@@ -1,9 +1,9 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
-import { heartModel } from "@workspace/registry/organ-viewer/heart"
-import { kidneysModel } from "@workspace/registry/organ-viewer/kidneys"
-import { pancreasModel } from "@workspace/registry/organ-viewer/pancreas"
-import { stomachModel } from "@workspace/registry/organ-viewer/stomach"
+import { heartModel } from "@workspace/registry/heart"
+import { kidneysModel } from "@workspace/registry/kidneys"
+import { pancreasModel } from "@workspace/registry/pancreas"
+import { stomachModel } from "@workspace/registry/stomach"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 
 // Installed blocks: Next.js serves the pages the CLI installed, Vite a harness

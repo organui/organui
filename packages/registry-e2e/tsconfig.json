@@ -21,6 +21,108 @@
       "@/components/organ-switcher": [
         "../registry/registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx"
       ],
+      "@/components/adrenals": [
+        "../registry/registry/base-nova/adrenals/adrenals.tsx"
+      ],
+      "@/components/appendix": [
+        "../registry/registry/base-nova/appendix/appendix.tsx"
+      ],
+      "@/components/bladder": [
+        "../registry/registry/base-nova/bladder/bladder.tsx"
+      ],
+      "@/components/brain": ["../registry/registry/base-nova/brain/brain.tsx"],
+      "@/components/breast": [
+        "../registry/registry/base-nova/breast/breast.tsx"
+      ],
+      "@/components/diaphragm": [
+        "../registry/registry/base-nova/diaphragm/diaphragm.tsx"
+      ],
+      "@/components/ear": ["../registry/registry/base-nova/ear/ear.tsx"],
+      "@/components/esophagus": [
+        "../registry/registry/base-nova/esophagus/esophagus.tsx"
+      ],
+      "@/components/eye": ["../registry/registry/base-nova/eye/eye.tsx"],
+      "@/components/gallbladder": [
+        "../registry/registry/base-nova/gallbladder/gallbladder.tsx"
+      ],
+      "@/components/hair": ["../registry/registry/base-nova/hair/hair.tsx"],
+      "@/components/heart": ["../registry/registry/base-nova/heart/heart.tsx"],
+      "@/components/intestines": [
+        "../registry/registry/base-nova/intestines/intestines.tsx"
+      ],
+      "@/components/joints": [
+        "../registry/registry/base-nova/joints/joints.tsx"
+      ],
+      "@/components/kidneys": [
+        "../registry/registry/base-nova/kidneys/kidneys.tsx"
+      ],
+      "@/components/larynx": [
+        "../registry/registry/base-nova/larynx/larynx.tsx"
+      ],
+      "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/lungs": ["../registry/registry/base-nova/lungs/lungs.tsx"],
+      "@/components/lymph": ["../registry/registry/base-nova/lymph/lymph.tsx"],
+      "@/components/muscles": [
+        "../registry/registry/base-nova/muscles/muscles.tsx"
+      ],
+      "@/components/nails": ["../registry/registry/base-nova/nails/nails.tsx"],
+      "@/components/nerves": [
+        "../registry/registry/base-nova/nerves/nerves.tsx"
+      ],
+      "@/components/nose": ["../registry/registry/base-nova/nose/nose.tsx"],
+      "@/components/pancreas": [
+        "../registry/registry/base-nova/pancreas/pancreas.tsx"
+      ],
+      "@/components/parathyroid": [
+        "../registry/registry/base-nova/parathyroid/parathyroid.tsx"
+      ],
+      "@/components/pharynx": [
+        "../registry/registry/base-nova/pharynx/pharynx.tsx"
+      ],
+      "@/components/pineal": [
+        "../registry/registry/base-nova/pineal/pineal.tsx"
+      ],
+      "@/components/pituitary": [
+        "../registry/registry/base-nova/pituitary/pituitary.tsx"
+      ],
+      "@/components/prostate": [
+        "../registry/registry/base-nova/prostate/prostate.tsx"
+      ],
+      "@/components/salivary-glands": [
+        "../registry/registry/base-nova/salivary-glands/salivary-glands.tsx"
+      ],
+      "@/components/skeleton": [
+        "../registry/registry/base-nova/skeleton/skeleton.tsx"
+      ],
+      "@/components/skin": ["../registry/registry/base-nova/skin/skin.tsx"],
+      "@/components/spinal-cord": [
+        "../registry/registry/base-nova/spinal-cord/spinal-cord.tsx"
+      ],
+      "@/components/spleen": [
+        "../registry/registry/base-nova/spleen/spleen.tsx"
+      ],
+      "@/components/stomach": [
+        "../registry/registry/base-nova/stomach/stomach.tsx"
+      ],
+      "@/components/teeth": ["../registry/registry/base-nova/teeth/teeth.tsx"],
+      "@/components/thymus": [
+        "../registry/registry/base-nova/thymus/thymus.tsx"
+      ],
+      "@/components/thyroid": [
+        "../registry/registry/base-nova/thyroid/thyroid.tsx"
+      ],
+      "@/components/tongue": [
+        "../registry/registry/base-nova/tongue/tongue.tsx"
+      ],
+      "@/components/uterus": [
+        "../registry/registry/base-nova/uterus/uterus.tsx"
+      ],
+      "@/components/vessels": [
+        "../registry/registry/base-nova/vessels/vessels.tsx"
+      ],
+      "@/components/vestibular": [
+        "../registry/registry/base-nova/vestibular/vestibular.tsx"
+      ],
       "@/components/ui/*": ["../ui/src/components/*"],
       "@/components/*": ["../registry/registry/base-nova/organ-viewer/*"]
     }

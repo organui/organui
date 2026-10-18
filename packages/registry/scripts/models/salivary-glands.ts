@@ -13,7 +13,7 @@ import {
 } from "three"
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js"
 import { mergeVertices } from "three/addons/utils/BufferGeometryUtils.js"
-import { salivaryGlandsModel } from "../../registry/base-nova/organ-viewer/salivary-glands"
+import { salivaryGlandsModel } from "../../registry/base-nova/salivary-glands/salivary-glands"
 
 // FBXLoader only touches these globals for texture loading, which these files don't use.
 Object.assign(globalThis, { window: globalThis, self: globalThis })

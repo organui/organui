@@ -1,25 +1,9 @@
 # Documentation examples
 
-These files are the live demos and the displayed source. They are separate from
-`packages/registry`, which distributes installable components.
+Named demos live here, separately from installable registry components. Pages reference a name through `ComponentPreview`; `ComponentSource` reads the same file and rewrites workspace imports to consumer paths for display and copy.
 
-To add a demo:
+Each organ has its own `*-demo.tsx`, `*-without-controls.tsx`, `*-controlled.tsx` and `*-with-anatomy.tsx`. These import the public component (`Heart`, `Brain`, etc.) and accept no injected model. `_organs.tsx` explicitly registers their imports, source filenames and titles. Keep that map and the corresponding files in sync; registry tests check all 42 organs.
 
-1. Add an example file exporting `Example`.
-2. Register its name, title, source filename, and lazy import in `_registry.tsx`.
-3. Render `<ComponentPreview name="your-demo" />` in a documentation page.
+The `organ-viewer-*.tsx` files demonstrate the standalone `OrganViewer` API with an explicit model import. They are used only on the Organ viewer page. `With Anatomy Panel` on an organ page composes that organ and `AnatomyTree` directly; full explorer layouts with a mobile sheet remain installable blocks.
 
-The shared preview resolves the component by name, reads its real source file,
-and renders the preview and source through the adapted shadcn helpers. Workspace
-imports are rewritten for display. Example-data imports remain explicit; readers
-can replace those fixtures with their own data.
-
-Organ demos share four recipe files, parameterized by the registry model. Names
-such as `heart-demo` and `heart-controlled` resolve to the corresponding recipe
-and model. They use the same preview as every other component. Only the heavy
-3D demos defer mounting until near the viewport.
-
-Upstream reference: shadcn/ui commit
-`daaf156ee00ed91cc7e6bdd937c1b4973152d141`, particularly
-`apps/v4/components/component-preview.tsx`, `component-preview-tabs.tsx`,
-`component-source.tsx`, and `registry/bases/base/examples/_registry.ts`.
+The private examples registry is documentation infrastructure. It is not included in consumer installations. Heavy previews mount near the viewport through `DeferredPreview`.

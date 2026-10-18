@@ -21,6 +21,66 @@
       "@/components/organ-switcher": [
         "./registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx"
       ],
+      "@/components/adrenals": ["./registry/base-nova/adrenals/adrenals.tsx"],
+      "@/components/appendix": ["./registry/base-nova/appendix/appendix.tsx"],
+      "@/components/bladder": ["./registry/base-nova/bladder/bladder.tsx"],
+      "@/components/brain": ["./registry/base-nova/brain/brain.tsx"],
+      "@/components/breast": ["./registry/base-nova/breast/breast.tsx"],
+      "@/components/diaphragm": [
+        "./registry/base-nova/diaphragm/diaphragm.tsx"
+      ],
+      "@/components/ear": ["./registry/base-nova/ear/ear.tsx"],
+      "@/components/esophagus": [
+        "./registry/base-nova/esophagus/esophagus.tsx"
+      ],
+      "@/components/eye": ["./registry/base-nova/eye/eye.tsx"],
+      "@/components/gallbladder": [
+        "./registry/base-nova/gallbladder/gallbladder.tsx"
+      ],
+      "@/components/hair": ["./registry/base-nova/hair/hair.tsx"],
+      "@/components/heart": ["./registry/base-nova/heart/heart.tsx"],
+      "@/components/intestines": [
+        "./registry/base-nova/intestines/intestines.tsx"
+      ],
+      "@/components/joints": ["./registry/base-nova/joints/joints.tsx"],
+      "@/components/kidneys": ["./registry/base-nova/kidneys/kidneys.tsx"],
+      "@/components/larynx": ["./registry/base-nova/larynx/larynx.tsx"],
+      "@/components/liver": ["./registry/base-nova/liver/liver.tsx"],
+      "@/components/lungs": ["./registry/base-nova/lungs/lungs.tsx"],
+      "@/components/lymph": ["./registry/base-nova/lymph/lymph.tsx"],
+      "@/components/muscles": ["./registry/base-nova/muscles/muscles.tsx"],
+      "@/components/nails": ["./registry/base-nova/nails/nails.tsx"],
+      "@/components/nerves": ["./registry/base-nova/nerves/nerves.tsx"],
+      "@/components/nose": ["./registry/base-nova/nose/nose.tsx"],
+      "@/components/pancreas": ["./registry/base-nova/pancreas/pancreas.tsx"],
+      "@/components/parathyroid": [
+        "./registry/base-nova/parathyroid/parathyroid.tsx"
+      ],
+      "@/components/pharynx": ["./registry/base-nova/pharynx/pharynx.tsx"],
+      "@/components/pineal": ["./registry/base-nova/pineal/pineal.tsx"],
+      "@/components/pituitary": [
+        "./registry/base-nova/pituitary/pituitary.tsx"
+      ],
+      "@/components/prostate": ["./registry/base-nova/prostate/prostate.tsx"],
+      "@/components/salivary-glands": [
+        "./registry/base-nova/salivary-glands/salivary-glands.tsx"
+      ],
+      "@/components/skeleton": ["./registry/base-nova/skeleton/skeleton.tsx"],
+      "@/components/skin": ["./registry/base-nova/skin/skin.tsx"],
+      "@/components/spinal-cord": [
+        "./registry/base-nova/spinal-cord/spinal-cord.tsx"
+      ],
+      "@/components/spleen": ["./registry/base-nova/spleen/spleen.tsx"],
+      "@/components/stomach": ["./registry/base-nova/stomach/stomach.tsx"],
+      "@/components/teeth": ["./registry/base-nova/teeth/teeth.tsx"],
+      "@/components/thymus": ["./registry/base-nova/thymus/thymus.tsx"],
+      "@/components/thyroid": ["./registry/base-nova/thyroid/thyroid.tsx"],
+      "@/components/tongue": ["./registry/base-nova/tongue/tongue.tsx"],
+      "@/components/uterus": ["./registry/base-nova/uterus/uterus.tsx"],
+      "@/components/vessels": ["./registry/base-nova/vessels/vessels.tsx"],
+      "@/components/vestibular": [
+        "./registry/base-nova/vestibular/vestibular.tsx"
+      ],
       "@/components/ui/*": ["../ui/src/components/*"],
       "@/components/*": ["./registry/base-nova/organ-viewer/*"]
     }

@@ -179,7 +179,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/adrenals.tsx",
+          "path": "registry/base-nova/adrenals/adrenals.tsx",
           "type": "registry:component"
         }
       ]
@@ -210,7 +210,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/appendix.tsx",
+          "path": "registry/base-nova/appendix/appendix.tsx",
           "type": "registry:component"
         }
       ]
@@ -241,7 +241,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/bladder.tsx",
+          "path": "registry/base-nova/bladder/bladder.tsx",
           "type": "registry:component"
         }
       ]
@@ -272,7 +272,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/brain.tsx",
+          "path": "registry/base-nova/brain/brain.tsx",
           "type": "registry:component"
         }
       ]
@@ -303,7 +303,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/breast.tsx",
+          "path": "registry/base-nova/breast/breast.tsx",
           "type": "registry:component"
         }
       ]
@@ -334,7 +334,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/diaphragm.tsx",
+          "path": "registry/base-nova/diaphragm/diaphragm.tsx",
           "type": "registry:component"
         }
       ]
@@ -365,7 +365,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/ear.tsx",
+          "path": "registry/base-nova/ear/ear.tsx",
           "type": "registry:component"
         }
       ]
@@ -396,7 +396,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/esophagus.tsx",
+          "path": "registry/base-nova/esophagus/esophagus.tsx",
           "type": "registry:component"
         }
       ]
@@ -427,7 +427,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/eye.tsx",
+          "path": "registry/base-nova/eye/eye.tsx",
           "type": "registry:component"
         }
       ]
@@ -458,7 +458,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/gallbladder.tsx",
+          "path": "registry/base-nova/gallbladder/gallbladder.tsx",
           "type": "registry:component"
         }
       ]
@@ -489,7 +489,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/hair.tsx",
+          "path": "registry/base-nova/hair/hair.tsx",
           "type": "registry:component"
         }
       ]
@@ -520,7 +520,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "path": "registry/base-nova/heart/heart.tsx",
           "type": "registry:component"
         }
       ]
@@ -551,7 +551,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/intestines.tsx",
+          "path": "registry/base-nova/intestines/intestines.tsx",
           "type": "registry:component"
         }
       ]
@@ -582,7 +582,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/joints.tsx",
+          "path": "registry/base-nova/joints/joints.tsx",
           "type": "registry:component"
         }
       ]
@@ -613,7 +613,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/kidneys.tsx",
+          "path": "registry/base-nova/kidneys/kidneys.tsx",
           "type": "registry:component"
         }
       ]
@@ -644,7 +644,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/larynx.tsx",
+          "path": "registry/base-nova/larynx/larynx.tsx",
           "type": "registry:component"
         }
       ]
@@ -675,7 +675,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/liver.tsx",
+          "path": "registry/base-nova/liver/liver.tsx",
           "type": "registry:component"
         }
       ]
@@ -706,7 +706,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/lungs.tsx",
+          "path": "registry/base-nova/lungs/lungs.tsx",
           "type": "registry:component"
         }
       ]
@@ -737,7 +737,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/lymph.tsx",
+          "path": "registry/base-nova/lymph/lymph.tsx",
           "type": "registry:component"
         }
       ]
@@ -768,7 +768,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/muscles.tsx",
+          "path": "registry/base-nova/muscles/muscles.tsx",
           "type": "registry:component"
         }
       ]
@@ -799,7 +799,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/nails.tsx",
+          "path": "registry/base-nova/nails/nails.tsx",
           "type": "registry:component"
         }
       ]
@@ -830,7 +830,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/nerves.tsx",
+          "path": "registry/base-nova/nerves/nerves.tsx",
           "type": "registry:component"
         }
       ]
@@ -861,7 +861,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/nose.tsx",
+          "path": "registry/base-nova/nose/nose.tsx",
           "type": "registry:component"
         }
       ]
@@ -892,7 +892,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pancreas.tsx",
+          "path": "registry/base-nova/pancreas/pancreas.tsx",
           "type": "registry:component"
         }
       ]
@@ -923,7 +923,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/parathyroid.tsx",
+          "path": "registry/base-nova/parathyroid/parathyroid.tsx",
           "type": "registry:component"
         }
       ]
@@ -954,7 +954,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pharynx.tsx",
+          "path": "registry/base-nova/pharynx/pharynx.tsx",
           "type": "registry:component"
         }
       ]
@@ -985,7 +985,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pineal.tsx",
+          "path": "registry/base-nova/pineal/pineal.tsx",
           "type": "registry:component"
         }
       ]
@@ -1016,7 +1016,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pituitary.tsx",
+          "path": "registry/base-nova/pituitary/pituitary.tsx",
           "type": "registry:component"
         }
       ]
@@ -1047,7 +1047,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/prostate.tsx",
+          "path": "registry/base-nova/prostate/prostate.tsx",
           "type": "registry:component"
         }
       ]
@@ -1078,7 +1078,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/salivary-glands.tsx",
+          "path": "registry/base-nova/salivary-glands/salivary-glands.tsx",
           "type": "registry:component"
         }
       ]
@@ -1109,7 +1109,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/skeleton.tsx",
+          "path": "registry/base-nova/skeleton/skeleton.tsx",
           "type": "registry:component"
         }
       ]
@@ -1140,7 +1140,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/skin.tsx",
+          "path": "registry/base-nova/skin/skin.tsx",
           "type": "registry:component"
         }
       ]
@@ -1171,7 +1171,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/spinal-cord.tsx",
+          "path": "registry/base-nova/spinal-cord/spinal-cord.tsx",
           "type": "registry:component"
         }
       ]
@@ -1202,7 +1202,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/spleen.tsx",
+          "path": "registry/base-nova/spleen/spleen.tsx",
           "type": "registry:component"
         }
       ]
@@ -1233,7 +1233,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/stomach.tsx",
+          "path": "registry/base-nova/stomach/stomach.tsx",
           "type": "registry:component"
         }
       ]
@@ -1264,7 +1264,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/teeth.tsx",
+          "path": "registry/base-nova/teeth/teeth.tsx",
           "type": "registry:component"
         }
       ]
@@ -1295,7 +1295,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/thymus.tsx",
+          "path": "registry/base-nova/thymus/thymus.tsx",
           "type": "registry:component"
         }
       ]
@@ -1326,7 +1326,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/thyroid.tsx",
+          "path": "registry/base-nova/thyroid/thyroid.tsx",
           "type": "registry:component"
         }
       ]
@@ -1357,7 +1357,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/tongue.tsx",
+          "path": "registry/base-nova/tongue/tongue.tsx",
           "type": "registry:component"
         }
       ]
@@ -1388,7 +1388,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/uterus.tsx",
+          "path": "registry/base-nova/uterus/uterus.tsx",
           "type": "registry:component"
         }
       ]
@@ -1419,7 +1419,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/vessels.tsx",
+          "path": "registry/base-nova/vessels/vessels.tsx",
           "type": "registry:component"
         }
       ]
@@ -1450,7 +1450,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/vestibular.tsx",
+          "path": "registry/base-nova/vestibular/vestibular.tsx",
           "type": "registry:component"
         }
       ]
@@ -1494,7 +1494,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "path": "registry/base-nova/heart/heart.tsx",
           "type": "registry:component"
         },
         {
@@ -1543,7 +1543,7 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "path": "registry/base-nova/heart/heart.tsx",
           "type": "registry:component"
         },
         {
@@ -1587,19 +1587,19 @@
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/heart.tsx",
+          "path": "registry/base-nova/heart/heart.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/kidneys.tsx",
+          "path": "registry/base-nova/kidneys/kidneys.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/stomach.tsx",
+          "path": "registry/base-nova/stomach/stomach.tsx",
           "type": "registry:component"
         },
         {
-          "path": "registry/base-nova/organ-viewer/pancreas.tsx",
+          "path": "registry/base-nova/pancreas/pancreas.tsx",
           "type": "registry:component"
         }
       ],

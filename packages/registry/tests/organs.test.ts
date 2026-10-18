@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { readdir } from "node:fs/promises"
+import { readFile, readdir } from "node:fs/promises"
 import registry from "../registry.json"
 import {
   organAnatomyNodes,
@@ -7,24 +7,22 @@ import {
   type OrganModel,
 } from "../registry/base-nova/organ-viewer/organ-viewer"
 
-const directory = new URL(
-  "../registry/base-nova/organ-viewer/",
-  import.meta.url
-)
+const directory = new URL("../registry/base-nova/", import.meta.url)
 const organItems = registry.items.filter(
   (item) => "categories" in item && item.categories?.includes("organ")
 )
 
 test("every organ file has exactly one registry item with the shared viewer", async () => {
-  const files = (await readdir(directory))
-    .filter((file) => file !== "organ-viewer.tsx")
-    .sort()
-  expect(organItems.map(({ name }) => `${name}.tsx`).sort()).toEqual(files)
-  for (const item of organItems)
+  const folders = await readdir(directory)
+  expect(organItems).toHaveLength(42)
+  for (const item of organItems) {
+    expect(folders).toContain(item.name)
+    expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
       "registry/base-nova/organ-viewer/organ-viewer.tsx",
-      `registry/base-nova/organ-viewer/${item.name}.tsx`,
+      `registry/base-nova/${item.name}/${item.name}.tsx`,
     ])
+  }
 })
 
 // A model built in this repository must be committed, match the size the
@@ -46,7 +44,9 @@ async function expectLocalModel(file: string, model: OrganModel) {
 
 for (const item of organItems) {
   test(`${item.name} describes a consistent, attributed model`, async () => {
-    const module = await import(new URL(`${item.name}.tsx`, directory).href)
+    const module = await import(
+      new URL(`${item.name}/${item.name}.tsx`, directory).href
+    )
     const model = Object.values(module).find(
       (value) => typeof value === "object"
     ) as OrganModel
@@ -84,3 +84,63 @@ for (const item of organItems) {
     ])
   })
 }
+
+// Exercise the public wrappers: every export binds its own model while forwarding
+// the consumer's callbacks, ref, source, controls and visibility to the renderer.
+test("all organ public components preserve their model and consumer props", async () => {
+  const { OrganViewer } =
+    await import("../registry/base-nova/organ-viewer/organ-viewer")
+  for (const item of organItems) {
+    const name = item.name
+      .split("-")
+      .map((word) => word[0]!.toUpperCase() + word.slice(1))
+      .join("")
+    const module = await import(
+      new URL(`${item.name}/${item.name}.tsx`, directory).href
+    )
+    const Component = module[name]
+    expect(typeof Component).toBe("function")
+    const model = Object.values(module).find(
+      (value) => typeof value === "object"
+    )
+    const props = {
+      controls: false,
+      src: "/custom.glb",
+      selectedId: "example",
+      visibility: { example: false },
+      onSelectionChange: () => {},
+      ref: { current: null },
+      className: "h-96",
+    }
+    const element = Component(props)
+    expect(element.type).toBe(OrganViewer)
+    expect(element.props).toEqual({ model, ...props })
+    expect(Component({}).props.controls).toBeUndefined()
+  }
+})
+
+test("each organ has public-component demos and a concrete example registry entry", async () => {
+  const examples = new URL("../../../apps/web/examples/", import.meta.url)
+  const definitions = await readFile(new URL("_organs.tsx", examples), "utf8")
+  for (const item of organItems) {
+    const component = item.name
+      .split("-")
+      .map((word) => word[0]!.toUpperCase() + word.slice(1))
+      .join("")
+    for (const suffix of [
+      "demo",
+      "without-controls",
+      "controlled",
+      "with-anatomy",
+    ]) {
+      const name = `${item.name}-${suffix}`
+      expect(definitions).toContain(`"${name}":`)
+      expect(definitions).toContain(`import("./${name}")`)
+      const source = await readFile(new URL(`${name}.tsx`, examples), "utf8")
+      expect(source).toContain(`from "@workspace/registry/${item.name}"`)
+      expect(source).toContain(`<${component}`)
+      expect(source).not.toContain("<OrganViewer")
+      expect(source).not.toContain("{ model }")
+    }
+  }
+})
