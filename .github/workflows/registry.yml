@@ -42,7 +42,7 @@ jobs:
       - run: bunx playwright install --with-deps chromium
         working-directory: packages/registry-e2e
       # Turbo generates the consumers and reuses the cached website build.
-      - run: bun run test:browser
+      - run: bun run test:browser --log-order=stream
         env:
           REGISTRY_GITHUB_REF: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

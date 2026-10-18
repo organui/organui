@@ -33,24 +33,34 @@ async function run(command: string[], cwd: string, declineOverwrites = false) {
     cwd,
     stdin: "pipe",
     stdout: "pipe",
-    stderr: "inherit",
+    stderr: "pipe",
+    timeout: 180_000,
   })
-  const decoder = new TextDecoder()
   let pending = ""
-  const reader = child.stdout.getReader()
-  while (true) {
-    const { done, value: chunk } = await reader.read()
-    if (done) break
-    process.stdout.write(chunk)
-    if (declineOverwrites) {
-      pending += decoder.decode(chunk, { stream: true })
-      if (pending.includes("Would you like to overwrite?")) {
-        child.stdin.write("n\n")
-        child.stdin.flush()
-        pending = ""
+  async function forward(
+    stream: ReadableStream<Uint8Array>,
+    output: NodeJS.WriteStream
+  ) {
+    const decoder = new TextDecoder()
+    const reader = stream.getReader()
+    while (true) {
+      const { done, value: chunk } = await reader.read()
+      if (done) break
+      output.write(chunk)
+      if (declineOverwrites) {
+        pending += decoder.decode(chunk, { stream: true })
+        if (pending.includes("Would you like to overwrite?")) {
+          child.stdin.write("n\n")
+          child.stdin.flush()
+          pending = ""
+        }
       }
     }
   }
+  await Promise.all([
+    forward(child.stdout, process.stdout),
+    forward(child.stderr, process.stderr),
+  ])
   child.stdin.end()
   if (await child.exited) throw new Error(`${command.join(" ")} failed`)
 }
