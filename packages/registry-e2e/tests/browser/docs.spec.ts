@@ -223,9 +223,13 @@ test("registry index lists every component inside the docs layout", async ({
   await page.screenshot({ path: info.outputPath("index.png"), fullPage: true })
 
   const docs = page.getByRole("navigation", { name: "Documentation" })
+  const menu = page.getByRole("button", { name: "Menu", exact: true })
   if ((page.viewportSize()?.width ?? 0) < 768) {
     await expect(docs).toBeHidden()
-    await page.getByText("Menu", { exact: true }).click()
+    await expect(menu).toHaveAttribute("aria-expanded", "false")
+    await menu.focus()
+    await menu.press("Enter")
+    await expect(menu).toHaveAttribute("aria-expanded", "true")
   }
   await expect(
     docs.getByRole("link", { name: "Introduction" })
@@ -234,7 +238,8 @@ test("registry index lists every component inside the docs layout", async ({
     // Tapping the current page still closes the menu.
     await docs.getByRole("link", { name: "Introduction" }).click()
     await expect(docs).toBeHidden()
-    await page.getByText("Menu", { exact: true }).click()
+    await expect(menu).toHaveAttribute("aria-expanded", "false")
+    await menu.click()
   }
   await docs.getByRole("link", { name: "Anatomy tree" }).click()
   await expect(page).toHaveURL(/\/docs\/anatomy-tree$/)
@@ -243,7 +248,8 @@ test("registry index lists every component inside the docs layout", async ({
   ).toBeVisible()
   if ((page.viewportSize()?.width ?? 0) < 768) {
     await expect(docs).toBeHidden()
-    await page.getByText("Menu", { exact: true }).click()
+    await expect(menu).toHaveAttribute("aria-expanded", "false")
+    await menu.click()
   }
   await expect(
     docs.getByRole("link", { name: "Anatomy tree" })

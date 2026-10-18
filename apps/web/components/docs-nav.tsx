@@ -4,6 +4,12 @@ import Link from "next/link"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import type { DocsNavSection } from "@/lib/registry"
+import { Button } from "@workspace/ui/components/button"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@workspace/ui/components/collapsible"
 import { cn } from "@workspace/ui/lib/utils"
 
 // Sections come from the server layout so the catalog stays out of the client bundle.
@@ -51,17 +57,19 @@ export function DocsNav({
 export function MobileDocsNav({ sections }: { sections: DocsNavSection[] }) {
   const [open, setOpen] = useState(false)
   return (
-    <details
+    <Collapsible
       open={open}
-      onToggle={(event) => setOpen(event.currentTarget.open)}
+      onOpenChange={setOpen}
       className="border-b py-3 md:hidden"
     >
-      <summary className="cursor-pointer rounded-md px-2 py-1.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-ring">
+      <CollapsibleTrigger
+        render={<Button variant="ghost" className="w-full justify-start" />}
+      >
         Menu
-      </summary>
-      <div className="pt-3 pb-1">
+      </CollapsibleTrigger>
+      <CollapsibleContent className="pt-3 pb-1">
         <DocsNav sections={sections} onNavigate={() => setOpen(false)} />
-      </div>
-    </details>
+      </CollapsibleContent>
+    </Collapsible>
   )
 }
