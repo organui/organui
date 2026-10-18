@@ -17,7 +17,7 @@ const props = {
   },
   selectedId: {
     type: "string | null",
-    default: "Uncontrolled",
+    default: "null",
     description: "Control the selected structure ID.",
   },
   onSelectionChange: {
