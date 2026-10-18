@@ -4,7 +4,7 @@ import { cache } from "react"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import { getRegistryExample } from "@/examples/_registry"
-import { highlightCode } from "@workspace/ui/lib/highlighter"
+import { highlightCode } from "@/lib/highlight-code"
 import {
   CodeBlock,
   CodeBlockActions,
@@ -48,7 +48,7 @@ export async function ComponentSource({
   const code = maxLines
     ? fullCode.split("\n").slice(0, maxLines).join("\n")
     : fullCode
-  const lines = await highlightCode(code, "tsx")
+  const lines = await highlightCode(code)
   return (
     <CodeBlock className="rounded-none border-x-0 border-b-0">
       {!maxLines && (
