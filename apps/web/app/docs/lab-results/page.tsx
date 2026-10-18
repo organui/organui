@@ -1,3 +1,4 @@
+import { ComponentViewer } from "@/components/component-viewer"
 import { LabResultsTable } from "@workspace/registry/lab-results"
 import { labResultsExampleData } from "@/lib/examples"
 import {
@@ -59,16 +60,28 @@ export default function Page() {
           never depend on color alone.
         </p>
       </header>
-      <div
-        role="region"
-        aria-label="Lab results example"
-        className="rounded-xl border p-4"
-      >
-        <LabResultsTable
-          results={labResultsExampleData}
-          caption="Illustrative values, not patient data"
-        />
-      </div>
+      <ComponentViewer
+        title="Lab results table"
+        examples={[
+          {
+            id: "default",
+            label: "Default",
+            preview: (
+              <div
+                role="region"
+                aria-label="Lab results example"
+                className="rounded-xl border p-4"
+              >
+                <LabResultsTable
+                  results={labResultsExampleData}
+                  caption="Illustrative values, not patient data"
+                />
+              </div>
+            ),
+            code: usage,
+          },
+        ]}
+      />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <p>

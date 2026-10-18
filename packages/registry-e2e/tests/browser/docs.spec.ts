@@ -277,8 +277,31 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   await expect(
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
+  const examples = page.getByRole("region", { name: "Heart examples" })
+  await expect(
+    examples.getByRole("button", { name: "Basic", exact: true })
+  ).toHaveAttribute("aria-pressed", "true")
+  await examples.getByRole("tab", { name: "Code", exact: true }).click()
+  await expect(examples.locator("canvas")).toHaveCount(0)
+  await expect(examples.getByLabel("Basic code")).toContainText(
+    "controls={false}"
+  )
+  await examples
+    .getByRole("button", { name: "Interactive", exact: true })
+    .click()
+  await expect(examples.getByLabel("Interactive code")).toContainText(
+    "onSelectionChange={setSelectedId}"
+  )
+  await examples.getByRole("tab", { name: "Preview", exact: true }).click()
+  await expect(
+    examples.getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  await examples
+    .getByRole("button", { name: "With Anatomy Panel", exact: true })
+    .click()
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
+  await expect(examples.locator("canvas")).toHaveCount(1)
   // The panel starts closed; opening it moves focus to its search field.
   // Phones get a sheet, which covers the viewer until it is closed.
   const phone = (page.viewportSize()?.width ?? 0) < 1024
@@ -636,4 +659,42 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
     })
   }
   expect(errors).toEqual([])
+})
+
+test("component examples share keyboard-accessible preview and code views", async ({
+  page,
+  context,
+}) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"])
+  await page.goto("/docs/anatomy-tree")
+  const examples = page.getByRole("region", { name: "Anatomy tree examples" })
+  const preview = examples.getByRole("tab", { name: "Preview", exact: true })
+  const code = examples.getByRole("tab", { name: "Code", exact: true })
+  await expect(examples.getByRole("tree")).toBeVisible()
+  await preview.focus()
+  await preview.press("ArrowRight")
+  await expect(code).toBeFocused()
+  // Arrow keys move focus; Enter activates the tab without eagerly loading scenes.
+  await expect(code).toHaveAttribute("aria-selected", "false")
+  await code.press("Enter")
+  await expect(code).toHaveAttribute("aria-selected", "true")
+  await expect(examples.getByRole("tree")).toHaveCount(0)
+  const snippet = examples.getByLabel("Default code")
+  await expect(snippet).toContainText(
+    'import { AnatomyTree } from "@/components/ui/anatomy-tree"'
+  )
+  await examples.getByRole("button", { name: "Copy", exact: true }).click()
+  await expect
+    .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+    .toBe(await snippet.textContent())
+  await code.press("ArrowLeft")
+  await preview.press("Enter")
+  await expect(preview).toHaveAttribute("aria-selected", "true")
+  await expect(examples.getByRole("tree")).toBeVisible()
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { OrganExplorer } from "@workspace/registry/blocks/explorer-01/components/organ-explorer"
+import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
 import { codeBlock, docsMetadata, registryItems, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
@@ -55,7 +55,7 @@ export default async function Page() {
           and emphasis.
         </p>
       </header>
-      <OrganExplorer model={heart} />
+      <OrganExamples name="heart" model={heart} />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <p>

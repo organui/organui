@@ -1,3 +1,4 @@
+import { ComponentViewer } from "@/components/component-viewer"
 import type { Metadata } from "next"
 import { codeBlock, registryNamespace, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
@@ -59,7 +60,17 @@ export default function Page() {
           your viewer shows. Bring your own data and rendering engine.
         </p>
       </header>
-      <Example />
+      <ComponentViewer
+        title="Anatomy tree"
+        examples={[
+          {
+            id: "default",
+            label: "Default",
+            preview: <Example />,
+            code: usage,
+          },
+        ]}
+      />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <p>

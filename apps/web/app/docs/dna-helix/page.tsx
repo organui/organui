@@ -1,3 +1,4 @@
+import { ComponentViewer } from "@/components/component-viewer"
 import {
   codeBlock,
   docsMetadata,
@@ -41,7 +42,17 @@ export default function Page() {
           its complement. Built procedurally, so there is no model to download.
         </p>
       </header>
-      <Example />
+      <ComponentViewer
+        title="DNA helix"
+        examples={[
+          {
+            id: "default",
+            label: "Default",
+            preview: <Example />,
+            code: usage,
+          },
+        ]}
+      />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <pre

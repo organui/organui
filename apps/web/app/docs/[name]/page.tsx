@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { OrganExplorer } from "@workspace/registry/blocks/explorer-01/components/organ-explorer"
+import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
 import {
   codeBlock,
@@ -89,7 +89,7 @@ const data = organAnatomyNodes(${exportName})
           .
         </p>
       </header>
-      <OrganExplorer key={name} model={model} />
+      <OrganExamples key={name} name={name} model={model} />
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Install</h2>
         <pre
@@ -141,8 +141,8 @@ const data = organAnatomyNodes(${exportName})
           <Link href="/docs/anatomy-tree" className="underline">
             anatomy tree
           </Link>{" "}
-          for the explorer layout behind the Anatomy button above, or install
-          that layout whole as the{" "}
+          for the With Anatomy Panel example above, or install that layout whole
+          as the{" "}
           <Link href="/blocks#explorer-01" className="underline">
             Explorer 01 block
           </Link>
