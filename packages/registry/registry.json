@@ -22,6 +22,20 @@
       ]
     },
     {
+      "name": "vital-signs",
+      "type": "registry:ui",
+      "title": "Vital signs",
+      "description": "Heart rate, blood pressure, SpO₂ and temperature, each flagged against a configurable normal range.",
+      "dependencies": ["cn@^0.4.0"],
+      "registryDependencies": ["card"],
+      "files": [
+        {
+          "path": "registry/base-nova/vital-signs/vital-signs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "ecg-trace",
       "type": "registry:ui",
       "title": "ECG trace",
@@ -104,6 +118,38 @@
         {
           "path": "registry/base-nova/dna-helix/dna-helix.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "lab-results",
+      "type": "registry:component",
+      "title": "Lab results table",
+      "description": "Lab values flagged against the reference ranges you pass, with text and icon flags and a trend sparkline.",
+      "dependencies": ["cn@^0.4.0"],
+      "registryDependencies": ["table"],
+      "files": [
+        {
+          "path": "registry/base-nova/lab-results/lab-results.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "medication-schedule",
+      "type": "registry:ui",
+      "title": "Medication schedule",
+      "description": "A daily dosing timeline with dose tracking and interaction warnings from data you provide.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.4.0"
+      ],
+      "registryDependencies": ["alert", "button"],
+      "files": [
+        {
+          "path": "registry/base-nova/medication-schedule/medication-schedule.tsx",
+          "type": "registry:ui"
         }
       ]
     },

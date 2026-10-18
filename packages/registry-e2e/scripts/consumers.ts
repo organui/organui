@@ -64,6 +64,26 @@ export default function OrganHarness(){
  const [visibility,show]=useState<Record<string,boolean>>({})
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
 }`
+// No client directive: the panel has no state, so Next.js renders it on the server.
+const vitalsHarness = `import { VitalSigns } from "@/components/ui/vital-signs"
+export default function VitalsHarness(){
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed vital signs</h1><VitalSigns readings={{heartRate:112,systolic:150,diastolic:76,spo2:null,temperature:38.6}} description="Example readings"/><VitalSigns title="Fahrenheit" temperatureUnit="fahrenheit" ranges={{spo2:{low:88,high:92}}} vitals={["temperature","spo2","respiratoryRate"]} readings={{temperature:98.6,spo2:90,respiratoryRate:8}}/></main>
+}`
+// Lab results hold no state, so the Next.js page renders them on the server.
+const labHarness = `import { LabResultsTable } from "@/components/lab-results"
+export default function LabHarness(){
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed lab results</h1><LabResultsTable caption="Electrolytes" results={[{id:"k",name:"Potassium",value:6.4,unit:"mmol/L",decimals:1,referenceRange:{low:3.5,high:5.1,criticalHigh:6},history:[{value:4.2,date:"2026-01-12"},{value:6.4,date:"2026-10-01"}]},{id:"na",name:"Sodium",value:140,unit:"mmol/L",referenceRange:{low:135,high:145}}]}/></main>
+}`
+const medicationHarness = `"use client"
+import { useState } from "react"
+import { MedicationSchedule, type DoseStatus } from "@/components/ui/medication-schedule"
+const medications=[{id:"levo",name:"Levothyroxine",dose:"75 mcg",times:["07:00"]},{id:"calcium",name:"Calcium",times:["08:00","20:00"]},{id:"weekly",name:"Weekly tablet",times:["12:00"],days:[1]}]
+const interactions=[{id:"levo-calcium",medicationIds:["levo","calcium"],severity:"moderate" as const,summary:"Calcium reduces absorption.",separationHours:4},{id:"weekly-levo",medicationIds:["weekly","levo"],severity:"major" as const,summary:"Example warning."}]
+export default function MedicationHarness(){
+ const [date,setDate]=useState("2026-10-19")
+ const [doseStatus,setDoseStatus]=useState<Record<string,DoseStatus>>({})
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed medication schedule</h1><MedicationSchedule medications={medications} interactions={interactions} date={date} onDateChange={setDate} doseStatus={doseStatus} onDoseStatusChange={setDoseStatus} now="09:30"/><output aria-label="Date">{date}</output><output aria-label="Dose status">{JSON.stringify(doseStatus)}</output></main>
+}`
 // The molecule harness loads the docs site's crambin sample from its own origin.
 const moleculeHarness = `"use client"
 import { useState } from "react"
@@ -186,7 +206,10 @@ try {
     )
     await put(dir, "src/harness.tsx", harness)
     await put(dir, "src/organ-harness.tsx", organHarness)
+    await put(dir, "src/vitals-harness.tsx", vitalsHarness)
+    await put(dir, "src/lab-harness.tsx", labHarness)
     await put(dir, "src/molecule-harness.tsx", moleculeHarness)
+    await put(dir, "src/medication-harness.tsx", medicationHarness)
     await put(dir, "src/ecg-harness.tsx", ecgHarness)
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
@@ -208,8 +231,23 @@ try {
       )
       await put(
         dir,
+        "src/app/vitals/page.tsx",
+        'export {default} from "../../vitals-harness"'
+      )
+      await put(
+        dir,
+        "src/app/lab/page.tsx",
+        'export {default} from "../../lab-harness"'
+      )
+      await put(
+        dir,
         "src/app/molecule/page.tsx",
         'export {default} from "../../molecule-harness"'
+      )
+      await put(
+        dir,
+        "src/app/medication/page.tsx",
+        'export {default} from "../../medication-harness"'
       )
       await put(
         dir,
@@ -231,7 +269,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BlockHarness from "./block-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/ecg"?<EcgHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", blockHarness)
       await put(
@@ -266,9 +304,38 @@ try {
       ],
       dir
     )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/lab-results"
+          : `http://127.0.0.1:${server.port}/lab-results.json`,
+        "--yes",
+      ],
+      dir
+    )
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        framework === "vite"
+          ? "@organui/medication-schedule"
+          : `http://127.0.0.1:${server.port}/medication-schedule.json`,
+        "--yes",
+      ],
+      dir
+    )
     // These share shadcn components installed above; see the note on blocks
     // below for why Vite overwrites.
-    for (const item of ["molecule-viewer", "dna-helix"])
+    for (const item of [
+      "molecule-viewer",
+      "dna-helix",
+      "vital-signs",
+      "ecg-trace",
+    ])
       await run(
         [
           "node",
@@ -281,18 +348,6 @@ try {
         ],
         dir
       )
-    await run(
-      [
-        "node",
-        shadcn,
-        "add",
-        ...(framework === "vite"
-          ? ["@organui/ecg-trace", "--overwrite"]
-          : [`http://127.0.0.1:${server.port}/ecg-trace.json`]),
-        "--yes",
-      ],
-      dir
-    )
     // Blocks reuse the files installed above. Without RSC, shadcn 4.21 strips
     // "use client" from every other file it writes (a global regex keeps its
     // lastIndex), so a reinstall differs and prompts; overwrite instead.
@@ -328,24 +383,26 @@ try {
       )
         throw new Error(`Invalid installed ${name}`)
     }
-    const ecg = await readFile(
-      resolve(dir, "src/components/ui/ecg-trace.tsx"),
+    for (const name of ["anatomy-tree", "medication-schedule", "ecg-trace"]) {
+      const installed = await readFile(
+        resolve(dir, `src/components/ui/${name}.tsx`),
+        "utf8"
+      )
+      if (
+        installed.includes("@workspace/") ||
+        (framework === "next" && !installed.includes('"use client"'))
+      )
+        throw new Error(`Invalid installed ${name} source`)
+    }
+    const vitals = await readFile(
+      resolve(dir, "src/components/ui/vital-signs.tsx"),
       "utf8"
     )
     if (
-      ecg.includes("@workspace/") ||
-      (framework === "next" && !ecg.includes('"use client"'))
+      vitals.includes("@workspace/") ||
+      !vitals.includes("@/components/ui/card")
     )
-      throw new Error("Invalid installed ECG trace")
-    const installed = await readFile(
-      resolve(dir, "src/components/ui/anatomy-tree.tsx"),
-      "utf8"
-    )
-    if (
-      installed.includes("@workspace/") ||
-      (framework === "next" && !installed.includes('"use client"'))
-    )
-      throw new Error("Invalid installed source")
+      throw new Error("Invalid installed vital signs")
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
     await run(["bun", "run", "build"], dir)
