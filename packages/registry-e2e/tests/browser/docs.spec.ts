@@ -277,7 +277,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   await expect(
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
-  const examples = page.getByRole("region", { name: "Heart examples" })
+  const examples = page.getByRole("group", { name: "Heart examples" })
   await expect(
     examples.getByRole("button", { name: "Basic", exact: true })
   ).toHaveAttribute("aria-pressed", "true")
@@ -456,6 +456,7 @@ test("a model the site serves itself loads from its own origin", async ({
   )
   await page.goto("/docs/breast")
   await loaded
+  await page.getByRole("button", { name: "Interactive", exact: true }).click()
   const viewer = page.getByRole("region", { name: "Interactive breast model" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
@@ -667,7 +668,7 @@ test("component examples share keyboard-accessible preview and code views", asyn
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"])
   await page.goto("/docs/anatomy-tree")
-  const examples = page.getByRole("region", { name: "Anatomy tree examples" })
+  const examples = page.getByRole("group", { name: "Anatomy tree examples" })
   const preview = examples.getByRole("tab", { name: "Preview", exact: true })
   const code = examples.getByRole("tab", { name: "Code", exact: true })
   await expect(examples.getByRole("tree")).toBeVisible()

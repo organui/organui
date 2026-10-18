@@ -41,7 +41,7 @@ export function ComponentViewer({
   const example = examples.find(({ id }) => id === selected) ?? examples[0]
 
   return (
-    <section aria-label={`${title} examples`} className="min-w-0">
+    <div role="group" aria-label={`${title} examples`} className="min-w-0">
       <div className="flex min-w-0 flex-col gap-4">
         {examples.length > 1 && (
           <ToggleGroup
@@ -90,6 +90,6 @@ export function ComponentViewer({
           </TabsContent>
         </Tabs>
       </div>
-    </section>
+    </div>
   )
 }
