@@ -81,7 +81,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Organ viewer docs: https://organui.com/docs/organ-viewer"
+      "docs": "Organ viewer docs: https://organui.com/docs/organ-viewer. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing."
     },
     {
       "name": "molecule-viewer",
@@ -103,7 +103,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Molecule viewer docs: https://organui.com/docs/molecule-viewer"
+      "docs": "Molecule viewer docs: https://organui.com/docs/molecule-viewer. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing."
     },
     {
       "name": "dna-helix",
@@ -125,7 +125,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "DNA helix docs: https://organui.com/docs/dna-helix"
+      "docs": "DNA helix docs: https://organui.com/docs/dna-helix. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing."
     },
     {
       "name": "lab-results",

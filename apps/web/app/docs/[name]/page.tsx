@@ -104,7 +104,8 @@ export function ${component}Demo() {
             organ viewer
           </Link>
           , adds <code>organ-viewer.tsx</code>, three.js and the shadcn
-          components the viewer&apos;s controls use. Every organ shares that one{" "}
+          components the viewer&apos;s controls use, which need one of
+          shadcn&apos;s Base UI styles. Every organ shares that one{" "}
           <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>

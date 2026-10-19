@@ -117,6 +117,21 @@ test("every item links its documentation after install", () => {
   }
 })
 
+// Registry dependencies such as tooltip install in the consumer's own style,
+// and Base UI's render prop does nothing on the Radix styles, so items that
+// use it say so after install. Organs and blocks inherit it from the viewer.
+test("items that use Base UI's render prop name the requirement", async () => {
+  for (const item of registry.items) {
+    const sources = await Promise.all(
+      item.files.map(({ path }) =>
+        readFile(new URL(`../${path}`, import.meta.url), "utf8")
+      )
+    )
+    if (sources.some((source) => source.includes("render={")))
+      expect(item.docs).toContain("Base UI styles")
+  }
+})
+
 // Consumers install the ranges items declare, so each range has to accept the
 // version these tests run against. A bump here without the items fails.
 test("item dependency ranges accept the versions the registry is tested with", () => {

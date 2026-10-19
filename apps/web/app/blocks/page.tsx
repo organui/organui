@@ -42,7 +42,8 @@ export default async function Page() {
               OrganUI namespace
             </Link>{" "}
             to <code>components.json</code> first. Pages install in Next.js;
-            other frameworks get the components.
+            other frameworks get the components. Like the organ viewer, blocks
+            need one of shadcn&apos;s Base UI styles.
           </p>
         </header>
         {blocks.map((block) => (

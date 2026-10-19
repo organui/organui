@@ -71,8 +71,10 @@ export default function Page() {
         <p className="text-sm text-muted-foreground">
           The source installs into your components directory and adds three.js,
           plus shadcn&apos;s <code>alert</code>, <code>button</code> and{" "}
-          <code>tooltip</code>. It uses your theme tokens and installs no global
-          styles.
+          <code>tooltip</code>. Its buttons are composed with Base UI&apos;s{" "}
+          <code>render</code> prop, so it needs one of shadcn&apos;s Base UI
+          styles, such as <code>base-nova</code>; on a Radix style its buttons
+          do nothing. It uses your theme tokens and installs no global styles.
         </p>
         <a className="underline" href="/r/dna-helix.json">
           View registry item JSON
