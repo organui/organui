@@ -36,14 +36,9 @@ export default async function Page() {
             swap the organ and change the layout.
           </p>
           <p className="text-sm text-muted-foreground">
-            Blocks install the OrganUI components they use as dependencies, so
-            add the{" "}
-            <Link href="/docs/installation#namespace" className="underline">
-              OrganUI namespace
-            </Link>{" "}
-            to <code>components.json</code> first. Pages install in Next.js;
-            other frameworks get the components. Like the organ viewer, blocks
-            need{" "}
+            Blocks install the OrganUI components they use as dependencies.
+            Pages install in Next.js; other frameworks get the components. Like
+            the organ viewer, blocks need{" "}
             <Link href="/docs/base-ui" className="underline">
               one of shadcn&apos;s Base UI styles
             </Link>

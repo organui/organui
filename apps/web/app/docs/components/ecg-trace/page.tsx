@@ -1,6 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
 import { DocsPager } from "@/components/docs-pager"
-import Link from "next/link"
 import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -65,12 +64,7 @@ export default function Page() {
           {`bunx ${shadcn} add ${site.url}/r/ecg-trace.json`}
         </pre>
         <p>
-          With the{" "}
-          <Link href="/docs/installation#namespace" className="underline">
-            @organui namespace
-          </Link>{" "}
-          configured, <code>bunx {shadcn} add @organui/ecg-trace</code> works
-          too.
+          Or by name: <code>bunx {shadcn} add @organui/ecg-trace</code>.
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, with

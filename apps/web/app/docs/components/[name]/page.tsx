@@ -78,15 +78,7 @@ export function ${component}Demo() {
         <h2 id="installation" className="text-2xl font-semibold">
           Installation
         </h2>
-        <p>
-          {item.organ ? "Organs depend" : "It depends"} on the shared organ
-          viewer, so {item.organ ? "they install" : "it installs"} by name
-          through the{" "}
-          <Link href="/docs/installation#namespace" className="underline">
-            @organui namespace
-          </Link>
-          . With it configured, run:
-        </p>
+        <p>Run:</p>
         <pre
           tabIndex={0}
           role="region"

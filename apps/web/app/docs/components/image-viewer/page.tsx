@@ -75,12 +75,7 @@ export default function Page() {
           {`bunx ${shadcn} add ${site.url}/r/image-viewer.json`}
         </pre>
         <p>
-          With the{" "}
-          <Link href="/docs/installation#namespace" className="underline">
-            @organui namespace
-          </Link>{" "}
-          configured, <code>bunx {shadcn} add @organui/image-viewer</code> works
-          too.
+          Or by name: <code>bunx {shadcn} add @organui/image-viewer</code>.
         </p>
         <p className="text-sm text-muted-foreground">
           The viewer installs into your configured UI directory, with the DICOM

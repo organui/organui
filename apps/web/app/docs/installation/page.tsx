@@ -10,7 +10,7 @@ import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
   "Installation",
-  "Set up a project for OrganUI, add the @organui namespace and install components.",
+  "Set up a project for OrganUI and install components by name or address.",
   "/docs/installation"
 )
 
@@ -63,21 +63,13 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="namespace" className="text-2xl font-semibold">
-          The @organui namespace
+        <h2 id="add-components" className="text-2xl font-semibold">
+          Add components
         </h2>
         <p>
-          Register the namespace once in <code>components.json</code>:
+          <code>@organui</code> is listed in shadcn&apos;s registry directory,
+          so the CLI knows it without any setup. Install any item by name:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Registry namespace configuration"
-          className={codeBlock}
-        >
-          {registryNamespace}
-        </pre>
-        <p>Then install any item by name:</p>
         <pre
           tabIndex={0}
           role="region"
@@ -87,19 +79,8 @@ export default function Page() {
           {`bunx ${shadcn} add @organui/heart`}
         </pre>
         <p>
-          Organs, the cell and blocks depend on other OrganUI items, such as the
-          shared organ viewer, and name them as <code>@organui/…</code>, so they
-          need the namespace. The CLI installs those dependencies, and the
-          shadcn components they use, in the same run.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <h2 id="by-url" className="text-2xl font-semibold">
-          Install by URL
-        </h2>
-        <p>
-          Items without OrganUI dependencies also install from their address,
-          with no configuration:
+          Or by its address, which works the same, including for items that
+          depend on other OrganUI items:
         </p>
         <pre
           tabIndex={0}
@@ -107,16 +88,36 @@ export default function Page() {
           aria-label="Install by URL"
           className={codeBlock}
         >
-          {`bunx ${shadcn} add ${site.url}/r/anatomy-tree.json`}
+          {`bunx ${shadcn} add ${site.url}/r/heart.json`}
         </pre>
         <p>
-          Each component page shows the command for that item. The full catalog
-          is served at{" "}
+          The CLI installs each item&apos;s dependencies in the same run: other
+          OrganUI items, such as the shared organ viewer behind every organ, and
+          the shadcn components they use. Each component page shows its command,
+          and the full catalog is served at{" "}
           <a className="underline" href="/r/registry.json">
             /r/registry.json
           </a>
           .
         </p>
+      </section>
+      <section className="flex flex-col gap-4">
+        <h2 id="namespace" className="text-2xl font-semibold">
+          Register the namespace (optional)
+        </h2>
+        <p>
+          To pin the registry address, point it at a copy you host, or use a
+          shadcn CLI older than the directory, add the namespace to{" "}
+          <code>components.json</code> yourself:
+        </p>
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="Registry namespace configuration"
+          className={codeBlock}
+        >
+          {registryNamespace}
+        </pre>
       </section>
       <section className="flex flex-col gap-4">
         <h2 id="from-github" className="text-2xl font-semibold">
@@ -125,7 +126,7 @@ export default function Page() {
         <p>
           The repository is also a GitHub registry, so items install straight
           from source. Append <code>#&lt;commit&gt;</code> to pin a version;
-          OrganUI dependencies still resolve through the namespace.
+          OrganUI dependencies still resolve through <code>@organui</code>.
         </p>
         <pre
           tabIndex={0}

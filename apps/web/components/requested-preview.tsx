@@ -7,7 +7,8 @@ import { Spinner } from "@workspace/ui/components/spinner"
 
 // A heavy example loaded in the browser only when asked for, for pages that
 // list many of them: dozens of WebGL scenes would exceed browser context
-// limits, and rendering them on the server would put every model in the page.
+// limits, rendering them on the server would put every model in the page, and
+// generated data such as the image viewer's phantom costs main-thread time.
 export function RequestedPreview({ name }: { name: string }) {
   const [preview, setPreview] = useState<ReactNode>(null)
   const [pending, setPending] = useState(false)
@@ -28,7 +29,8 @@ export function RequestedPreview({ name }: { name: string }) {
       {pending && <Spinner data-icon="inline-start" aria-hidden="true" />}
       {pending
         ? "Loading…"
-        : `Load the ${definition.title.toLowerCase()} in 3D`}
+        : (definition.loadLabel ??
+          `Load the ${definition.title.toLowerCase()} in 3D`)}
     </Button>
   )
 }

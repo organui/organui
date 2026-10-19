@@ -5,7 +5,8 @@ import { site } from "@/lib/site"
 export const shadcn = "shadcn@4.22.1"
 
 // Items that depend on other OrganUI items, such as an organ on the viewer,
-// resolve them through the @organui namespace, so they install by name.
+// are shown installing by name; shadcn's registry directory resolves
+// @organui without configuration.
 function install(item: { name: string; registryDependencies?: string[] }) {
   return item.registryDependencies?.some((name) => name.startsWith("@organui/"))
     ? `bunx ${shadcn} add @organui/${item.name}`
@@ -126,8 +127,7 @@ export const guides: (NavLink & { description: string })[] = [
   {
     title: "Installation",
     href: "/docs/installation",
-    description:
-      "Set up a project, add the @organui namespace and install components.",
+    description: "Set up a project and install components by name or address.",
   },
   {
     title: "Theming",

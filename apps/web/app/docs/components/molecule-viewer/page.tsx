@@ -61,12 +61,7 @@ export default function Page() {
           {`bunx ${shadcn} add ${site.url}/r/molecule-viewer.json`}
         </pre>
         <p>
-          With the{" "}
-          <Link href="/docs/installation#namespace" className="underline">
-            @organui namespace
-          </Link>{" "}
-          configured, <code>bunx {shadcn} add @organui/molecule-viewer</code>{" "}
-          works too.
+          Or by name: <code>bunx {shadcn} add @organui/molecule-viewer</code>.
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your components directory and adds three.js,

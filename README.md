@@ -7,29 +7,26 @@ through a [shadcn](https://ui.shadcn.com)-compatible registry at
 ## Install a component
 
 In a React 19 project configured with shadcn, Tailwind CSS 4 and one of
-shadcn's Base UI styles, register the namespace once in `components.json`:
+shadcn's Base UI styles:
 
-```json
-{
-  "registries": {
-    "@organui": "https://organui.com/r/{name}.json"
-  }
-}
+```bash
+bunx shadcn@4.22.1 add @organui/anatomy-tree
 ```
 
-and run `bunx shadcn@4.22.1 add @organui/anatomy-tree`. Items without OrganUI
-dependencies also install by URL, and the repository is a GitHub registry
+`@organui` is in shadcn's registry directory, so this needs no
+`components.json` entry; `bunx shadcn@4.22.1 add https://organui.com/r/anatomy-tree.json`
+works the same. The repository is also a GitHub registry
 (`bunx shadcn@4.22.1 add organui/organui/anatomy-tree`). The
-[installation guide](https://organui.com/docs/installation) covers each, with
-[theming](https://organui.com/docs/theming) and the
-[Base UI requirement](https://organui.com/docs/base-ui).
+[installation guide](https://organui.com/docs/installation) covers each, the
+optional manual namespace entry, [theming](https://organui.com/docs/theming)
+and the [Base UI requirement](https://organui.com/docs/base-ui).
 
 ## Organs
 
 Every organ is a registry item named after it: `heart`, `brain`,
 `spinal-cord`, `nerves` and so on. The same viewer shows an animal cell's
 organelles as `cell`. Organs and the cell depend on `@organui/organ-viewer`,
-so register the namespace above first.
+which the CLI installs with them.
 
 ```bash
 bunx shadcn@4.22.1 add @organui/heart

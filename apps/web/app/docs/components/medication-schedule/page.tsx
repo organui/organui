@@ -74,12 +74,8 @@ export default function Page() {
           {`bunx ${shadcn} add ${site.url}/r/medication-schedule.json`}
         </pre>
         <p>
-          With the{" "}
-          <Link href="/docs/installation#namespace" className="underline">
-            @organui namespace
-          </Link>{" "}
-          configured,{" "}
-          <code>bunx {shadcn} add @organui/medication-schedule</code> works too.
+          Or by name:{" "}
+          <code>bunx {shadcn} add @organui/medication-schedule</code>.
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, along with

@@ -19,8 +19,12 @@ export function GitHubLink() {
   )
 }
 
+// A count this small reads as a warning rather than social proof, so below
+// it the link shows the icon alone.
+const minimumStars = 50
+
 // Fetched at most daily, as shadcn/ui's site does. Without an answer, such as
-// when the API rate-limits a build, the link shows the icon alone.
+// when the API rate-limits a build, the link shows the icon alone too.
 async function StarsCount() {
   const stars = await fetch(`https://api.github.com/repos/${site.repo}`, {
     next: { revalidate: 86400 },
@@ -32,7 +36,7 @@ async function StarsCount() {
     )
     .then((json) => json?.stargazers_count)
     .catch(() => undefined)
-  if (typeof stars !== "number") return null
+  if (typeof stars !== "number" || stars < minimumStars) return null
   const count =
     stars >= 1000
       ? `${(stars / 1000).toFixed(stars >= 10000 ? 0 : 1)}k`

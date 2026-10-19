@@ -6,6 +6,8 @@ import { organExamples } from "./_organs"
 export type ExampleDefinition = {
   title: string
   lazy?: boolean
+  /** The load-on-request button's text, for lazy examples that aren't 3D. */
+  loadLabel?: string
   file: string
   render: () => Promise<ReactNode>
 }
@@ -117,6 +119,10 @@ export const examples: Record<string, ExampleDefinition> = {
   "image-viewer-demo": {
     title: "Medical image viewer",
     file: "image-viewer-demo.tsx",
+    // Generating the head phantom blocks the main thread for 70–170 ms on a
+    // laptop, several times that on a phone, so index cards wait for a click.
+    lazy: true,
+    loadLabel: "Load the medical image viewer",
     render: async () => {
       const { Example } = await import("./image-viewer-demo")
       return <Example />
