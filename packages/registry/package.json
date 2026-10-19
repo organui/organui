@@ -12,6 +12,7 @@
     "./image-viewer": "./registry/base-nova/image-viewer/image-viewer.tsx",
     "./image-viewer/*": "./registry/base-nova/image-viewer/*.ts",
     "./lab-results": "./registry/base-nova/lab-results/lab-results.tsx",
+    "./growth-chart": "./registry/base-nova/growth-chart/growth-chart.tsx",
     "./vital-signs": "./registry/base-nova/vital-signs/vital-signs.tsx",
     "./molecule-viewer": "./registry/base-nova/molecule-viewer/molecule-viewer.tsx",
     "./dna-helix": "./registry/base-nova/dna-helix/dna-helix.tsx",

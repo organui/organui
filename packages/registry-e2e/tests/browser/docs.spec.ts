@@ -678,6 +678,78 @@ test("the ECG trace page runs a live strip at the chosen rate", async ({
   expect(errors).toEqual([])
 })
 
+// Made-up tables in WHO's anthro layout, served in place of WHO's files so the
+// test neither fetches nor depends on the real standards.
+function anthroTable(median: (day: number) => number, loh = false) {
+  const lines = [`sex\tage\tl\tm\ts${loh ? "\tloh" : ""}`]
+  for (const sex of [1, 2])
+    for (let day = 0; day <= 1856; day++)
+      lines.push(
+        [
+          sex,
+          day,
+          1,
+          median(day),
+          0.1,
+          ...(loh ? [day < 731 ? "L" : "H"] : []),
+        ].join("\t")
+      )
+  return lines.join("\n")
+}
+
+test("the growth chart demo loads its tables and switches measures", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  const tables: Record<string, string> = {
+    "weianthro.txt": anthroTable((day) => 3.2 + day / 120),
+    "lenanthro.txt": anthroTable((day) => 50 + day / 30, true),
+    "hcanthro.txt": anthroTable((day) => 34 + day / 150),
+  }
+  await page.route(
+    "https://raw.githubusercontent.com/WorldHealthOrganization/anthro/**",
+    (route) => {
+      const name = new URL(route.request().url()).pathname.split("/").at(-1)!
+      return tables[name]
+        ? route.fulfill({
+            body: tables[name],
+            headers: { "access-control-allow-origin": "*" },
+          })
+        : route.abort()
+    }
+  )
+  await page.goto("/docs/growth-chart")
+  await expect(
+    page.getByRole("heading", { name: "Growth chart", level: 1 })
+  ).toBeVisible()
+  const chart = page.getByRole("group", { name: "Weight-for-age, girls" })
+  const points = chart.getByRole("img", { name: /^\d+ months?: / })
+  await expect(points).toHaveCount(10)
+  await page.getByRole("button", { name: "Boys", exact: true }).click()
+  await page.getByRole("button", { name: "Head", exact: true }).click()
+  await expect(
+    page.getByRole("group", { name: "Head circumference-for-age, boys" })
+  ).toBeVisible()
+  await page.getByRole("button", { name: "Length/height", exact: true }).click()
+  await page.getByRole("button", { name: "0–5 years", exact: true }).click()
+  const length = page.getByRole("group", {
+    name: "Length/height-for-age, boys",
+  })
+  await length.getByRole("img", { name: /^6 months: 65\.5 cm, / }).focus()
+  await expect(
+    length.getByRole("img", { name: /^6 months: 65\.5 cm, / })
+  ).toBeFocused()
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  expect(errors).toEqual([])
+})
+
 test("tree, sequence field and option groups remain usable in dark mode", async ({
   page,
 }, info) => {

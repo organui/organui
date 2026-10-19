@@ -172,4 +172,12 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "growth-chart-demo": {
+    title: "Growth chart",
+    file: "growth-chart-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./growth-chart-demo")
+      return <Example />
+    },
+  },
 }

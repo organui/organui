@@ -34,7 +34,7 @@ export default defineConfig({
     {
       name: "next-desktop",
       testMatch:
-        "**/{anatomy,organ,block,body-map,dermatome,ecg,image,lab,medication,molecule,vitals}.spec.ts",
+        "**/{anatomy,organ,block,body-map,dermatome,ecg,growth,image,lab,medication,molecule,vitals}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4318",
         viewport: { width: 1280, height: 900 },
@@ -43,7 +43,7 @@ export default defineConfig({
     {
       name: "vite-mobile",
       testMatch:
-        "**/{anatomy,organ,block,body-map,dermatome,ecg,image,lab,medication,molecule,vitals}.spec.ts",
+        "**/{anatomy,organ,block,body-map,dermatome,ecg,growth,image,lab,medication,molecule,vitals}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4319",
         viewport: { width: 390, height: 844 },

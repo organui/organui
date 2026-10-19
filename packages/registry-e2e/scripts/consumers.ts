@@ -130,6 +130,13 @@ export default function MedicationHarness(){
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed medication schedule</h1><MedicationSchedule medications={medications} interactions={interactions} date={date} onDateChange={setDate} doseStatus={doseStatus} onDoseStatusChange={setDoseStatus} now="09:30"/><output aria-label="Date">{date}</output><output aria-label="Dose status">{JSON.stringify(doseStatus)}</output></main>
 }`
 // The molecule harness loads the docs site's crambin sample from its own origin.
+// Made-up LMS tables stand in for the WHO standards, which are not redistributed.
+const growthHarness = `import { GrowthChart, type GrowthTable } from "@/components/ui/growth-chart"
+const table=(offset:number):GrowthTable=>({start:0,lms:Array.from({length:25},(_,month)=>[0.2,3.2+offset+0.45*month-0.006*month*month,0.12] as const)})
+export default function GrowthHarness(){
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed growth chart</h1><GrowthChart standards={{weight:{female:table(0),male:table(0.3)}}} measure="weight" sex="female" measurements={[{ageMonths:0,value:3.1},{ageMonths:6,value:5.6},{ageMonths:12,value:8.9}]}/></main>
+}`
+
 const moleculeHarness = `"use client"
 import { useState } from "react"
 import { MoleculeViewer } from "@/components/molecule-viewer"
@@ -303,6 +310,7 @@ try {
     await put(dir, "src/molecule-harness.tsx", source(moleculeHarness))
     await put(dir, "src/medication-harness.tsx", source(medicationHarness))
     await put(dir, "src/ecg-harness.tsx", source(ecgHarness))
+    await put(dir, "src/growth-harness.tsx", source(growthHarness))
     await put(dir, "src/body-map-harness.tsx", source(bodyMapHarness))
     await put(dir, "src/dermatome-harness.tsx", source(dermatomeHarness))
     // Its lib files install by target, under src/lib whatever the aliases.
@@ -364,6 +372,11 @@ try {
       )
       await put(
         dir,
+        "src/app/growth/page.tsx",
+        'export {default} from "../../growth-harness"'
+      )
+      await put(
+        dir,
         "src/app/body-map/page.tsx",
         'export {default} from "../../body-map-harness"'
       )
@@ -387,7 +400,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import GrowthHarness from "./growth-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/growth"?<GrowthHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(
@@ -527,6 +540,7 @@ try {
       "dermatome-map",
       "body-map",
       "image-viewer",
+      "growth-chart",
     ])
       await run(
         [
@@ -583,6 +597,7 @@ try {
       "dermatome-map",
       "body-map",
       "image-viewer",
+      "growth-chart",
     ]) {
       const installed = await readFile(
         resolve(dir, `${uiDir}/${name}.tsx`),
