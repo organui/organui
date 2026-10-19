@@ -192,10 +192,7 @@ export default function Page() {
         </p>
         <p>
           The{" "}
-          <a
-            className="underline"
-            href="https://www.cdc.gov/growthcharts/"
-          >
+          <a className="underline" href="https://www.cdc.gov/growthcharts/">
             CDC 2000 growth charts
           </a>{" "}
           publish LMS files for ages 2 to 20 years by half month. Resample them
