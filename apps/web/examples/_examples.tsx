@@ -53,6 +53,43 @@ export const examples: Record<string, ExampleDefinition> = {
       { ...item, lazy: true },
     ])
   ),
+  // The cell is built on the organ viewer but is not an organ.
+  "cell-demo": {
+    title: "Cell",
+    file: "cell-demo.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./cell-demo")
+      return <Example />
+    },
+  },
+  "cell-without-controls": {
+    title: "Cell Without Controls",
+    file: "cell-without-controls.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./cell-without-controls")
+      return <Example />
+    },
+  },
+  "cell-controlled": {
+    title: "Cell Controlled Selection",
+    file: "cell-controlled.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./cell-controlled")
+      return <Example />
+    },
+  },
+  "cell-with-anatomy": {
+    title: "Cell With Anatomy Panel",
+    file: "cell-with-anatomy.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./cell-with-anatomy")
+      return <Example />
+    },
+  },
   "anatomy-tree-demo": {
     title: "Anatomy tree",
     file: "anatomy-tree-demo.tsx",

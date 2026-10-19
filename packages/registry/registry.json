@@ -312,6 +312,21 @@
       "docs": "Breast docs: https://organui.com/docs/breast. The model is licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); keep the viewer's credit visible."
     },
     {
+      "name": "cell",
+      "type": "registry:component",
+      "title": "Cell",
+      "description": "An animal cell with a quarter cut away, from an original OrganUI schematic model: 15 selectable organelles and structures and 4 named views. Model licensed CC0 1.0.",
+      "registryDependencies": ["@organui/organ-viewer"],
+      "categories": ["cell"],
+      "files": [
+        {
+          "path": "registry/base-nova/cell/cell.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Cell docs: https://organui.com/docs/cell. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
+    },
+    {
       "name": "diaphragm",
       "type": "registry:component",
       "title": "Diaphragm",

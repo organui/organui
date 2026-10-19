@@ -80,7 +80,9 @@ export async function githubConsumer(directory: string, cli: string) {
   if (ref && !/^[0-9a-f]{40}$/.test(ref))
     throw new Error("REGISTRY_GITHUB_REF must be a full commit SHA")
   const organs = catalog.items.filter(
-    (item) => "categories" in item && item.categories?.includes("organ")
+    (item) =>
+      "categories" in item &&
+      (item.categories?.includes("organ") || item.categories?.includes("cell"))
   )
   if (ref)
     await put(

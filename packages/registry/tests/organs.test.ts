@@ -8,15 +8,23 @@ import {
 } from "../registry/base-nova/organ-viewer/organ-viewer"
 
 const directory = new URL("../registry/base-nova/", import.meta.url)
+// Items built on the shared viewer: the organs, and the cell.
 const organItems = registry.items.filter(
-  (item) => "categories" in item && item.categories?.includes("organ")
+  (item) =>
+    "categories" in item &&
+    (item.categories?.includes("organ") || item.categories?.includes("cell"))
 )
 
 // Like shadcn's charts on `chart`, each organ ships only its own file and
 // depends on the shared viewer item.
 test("every organ file has exactly one registry item that depends on the viewer", async () => {
   const folders = await readdir(directory)
-  expect(organItems).toHaveLength(42)
+  expect(
+    organItems.filter(({ categories }) => categories?.includes("organ"))
+  ).toHaveLength(42)
+  expect(
+    organItems.filter(({ categories }) => categories?.includes("cell"))
+  ).toHaveLength(1)
   for (const item of organItems) {
     expect(folders).toContain(item.name)
     expect(item.type).toBe("registry:component")
@@ -126,7 +134,11 @@ test("all organ public components preserve their model and consumer props", asyn
 
 test("each organ has public-component demos and a concrete example registry entry", async () => {
   const examples = new URL("../../../apps/web/examples/", import.meta.url)
-  const definitions = await readFile(new URL("_organs.tsx", examples), "utf8")
+  // Organs register their demos in _organs.tsx, the cell in _examples.tsx.
+  const definitions = [
+    await readFile(new URL("_organs.tsx", examples), "utf8"),
+    await readFile(new URL("_examples.tsx", examples), "utf8"),
+  ].join("\n")
   for (const item of organItems) {
     const component = item.name
       .split("-")

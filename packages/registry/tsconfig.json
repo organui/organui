@@ -26,6 +26,7 @@
       "@/components/bladder": ["./registry/base-nova/bladder/bladder.tsx"],
       "@/components/brain": ["./registry/base-nova/brain/brain.tsx"],
       "@/components/breast": ["./registry/base-nova/breast/breast.tsx"],
+      "@/components/cell": ["./registry/base-nova/cell/cell.tsx"],
       "@/components/diaphragm": [
         "./registry/base-nova/diaphragm/diaphragm.tsx"
       ],

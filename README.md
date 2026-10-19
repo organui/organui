@@ -32,7 +32,8 @@ that depend on other OrganUI items still resolve those through the namespace). S
 ## Organs
 
 Every organ is a registry item named after it: `heart`, `brain`,
-`spinal-cord`, `nerves` and so on. Organs depend on `@organui/organ-viewer`,
+`spinal-cord`, `nerves` and so on. The same viewer shows an animal cell's
+organelles as `cell`. Organs and the cell depend on `@organui/organ-viewer`,
 so register the namespace above first.
 
 ```bash

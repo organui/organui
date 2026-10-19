@@ -20,6 +20,11 @@ export const registryItems = catalog.items
   .map((item) => ({
     name: item.name,
     organ: "categories" in item && item.categories?.includes("organ") === true,
+    // Items built on the organ viewer with a model: organs and the cell.
+    model:
+      "categories" in item &&
+      (item.categories?.includes("organ") ||
+        item.categories?.includes("cell")) === true,
     title: item.title ?? item.name,
     description: item.description,
     href: `/docs/${item.name}`,

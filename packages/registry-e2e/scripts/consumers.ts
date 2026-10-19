@@ -455,7 +455,10 @@ try {
       )
     )
     const organs = catalog.items.filter(
-      (item) => "categories" in item && item.categories?.includes("organ")
+      (item) =>
+        "categories" in item &&
+        (item.categories?.includes("organ") ||
+          item.categories?.includes("cell"))
     )
     // Install all organs together through the real CLI and compile their public
     // APIs. Next uses URLs; Vite also exercises a namespace and custom aliases.

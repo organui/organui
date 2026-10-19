@@ -19,12 +19,12 @@ export const dynamicParams = false
 
 export function generateStaticParams() {
   return registryItems
-    .filter(({ organ }) => organ)
+    .filter(({ model }) => model)
     .map(({ name }) => ({ name }))
 }
 
 function itemFor(name: string) {
-  const item = registryItems.find((entry) => entry.organ && entry.name === name)
+  const item = registryItems.find((entry) => entry.model && entry.name === name)
   const load = organModels[name]
   return item && load ? { item, load } : null
 }
@@ -62,7 +62,7 @@ export function ${component}Demo() {
     <div className="flex flex-col gap-10">
       <header className="flex flex-col gap-4">
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Organs
+          {item.organ ? "Components / Organs" : "Components"}
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
@@ -77,8 +77,9 @@ export function ${component}Demo() {
           Installation
         </h2>
         <p>
-          Organs depend on the shared organ viewer, which installs through the
-          OrganUI namespace. Add it to <code>components.json</code>:
+          {item.organ ? "Organs depend" : "It depends"} on the shared organ
+          viewer, which installs through the OrganUI namespace. Add it to{" "}
+          <code>components.json</code>:
         </p>
         <pre
           tabIndex={0}
@@ -105,7 +106,7 @@ export function ${component}Demo() {
           </Link>
           , adds <code>organ-viewer.tsx</code>, three.js and the shadcn
           components the viewer&apos;s controls use, which need one of
-          shadcn&apos;s Base UI styles. Every organ shares that one{" "}
+          shadcn&apos;s Base UI styles. Every organ and the cell share that one{" "}
           <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>

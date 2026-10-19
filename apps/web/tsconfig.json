@@ -30,6 +30,9 @@
       "@/components/breast": [
         "../../packages/registry/registry/base-nova/breast/breast.tsx"
       ],
+      "@/components/cell": [
+        "../../packages/registry/registry/base-nova/cell/cell.tsx"
+      ],
       "@/components/diaphragm": [
         "../../packages/registry/registry/base-nova/diaphragm/diaphragm.tsx"
       ],
