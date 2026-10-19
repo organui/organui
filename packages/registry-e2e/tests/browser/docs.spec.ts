@@ -252,7 +252,9 @@ test("component index lists every component inside the docs layout", async ({
   }
   // Organs are their own section of the index, which the header links to.
   const organSection = page.getByRole("region", { name: "Organs", exact: true })
-  await expect(organSection).toHaveAttribute("id", "organs")
+  await expect(
+    organSection.getByRole("heading", { name: "Organs", level: 2 })
+  ).toHaveAttribute("id", "organs")
   for (const item of organs)
     await expect(
       organSection.getByRole("heading", {

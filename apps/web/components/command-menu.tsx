@@ -27,7 +27,7 @@ export function CommandMenu() {
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (
-        (event.key === "k" && (event.metaKey || event.ctrlKey)) ||
+        (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) ||
         (event.key === "/" && !isTypingTarget(event.target))
       ) {
         event.preventDefault()
