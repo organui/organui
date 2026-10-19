@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import systems from "@workspace/registry/body-systems.json"
 import catalog from "@workspace/registry/registry.json"
 import { site } from "@/lib/site"
 
@@ -32,21 +33,9 @@ export type ComponentGroupId = (typeof componentGroups)[number]["id"]
 
 // The /organs gallery's sections, in order. Each organ carries exactly one
 // of these as a registry category (a registry test checks it).
-export const bodySystems = [
-  { id: "nervous", title: "Nervous" },
-  { id: "senses", title: "Special senses" },
-  { id: "endocrine", title: "Endocrine" },
-  { id: "cardiovascular", title: "Cardiovascular" },
-  { id: "lymphatic", title: "Lymphatic & immune" },
-  { id: "respiratory", title: "Respiratory" },
-  { id: "digestive", title: "Digestive" },
-  { id: "urinary", title: "Urinary" },
-  { id: "reproductive", title: "Reproductive" },
-  { id: "musculoskeletal", title: "Musculoskeletal" },
-  { id: "integumentary", title: "Integumentary" },
-] as const
+export const bodySystems = systems
 
-export type BodySystem = (typeof bodySystems)[number]
+export type BodySystem = (typeof systems)[number]
 
 function systemOf(categories: readonly string[]) {
   if (!categories.includes("organ")) return undefined

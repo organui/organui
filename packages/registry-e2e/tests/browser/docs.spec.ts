@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
+import bodySystems from "@workspace/registry/body-systems.json"
 import { heartModel } from "@workspace/registry/heart"
 import { kidneysModel } from "@workspace/registry/kidneys"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
@@ -445,7 +446,7 @@ test("the organs gallery groups every organ by system and opens one scene at a t
   await expect(page.locator("canvas")).toHaveCount(0)
   const systems = page.getByRole("navigation", { name: "Body systems" })
   const chips = await systems.getByRole("link").allTextContents()
-  expect(chips).toHaveLength(11)
+  expect(chips).toEqual(bodySystems.map(({ title }) => title))
   let listed = 0
   for (const title of chips) {
     const section = page.getByRole("region", { name: title, exact: true })

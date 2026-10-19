@@ -18,6 +18,7 @@
     "./dna-helix": "./registry/base-nova/dna-helix/dna-helix.tsx",
     "./blocks/*": "./registry/base-nova/blocks/*.tsx",
     "./registry.json": "./registry.json",
+    "./body-systems.json": "./body-systems.json",
     "./dist/*": "./dist/*",
     "./organ-viewer": "./registry/base-nova/organ-viewer/organ-viewer.tsx",
     "./adrenals": "./registry/base-nova/adrenals/adrenals.tsx",

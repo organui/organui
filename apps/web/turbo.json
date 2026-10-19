@@ -8,10 +8,14 @@
     },
     "build": {
       "dependsOn": ["^build", "stage-registry"],
-      "env": ["VERCEL_ENV", "ORGANUI_THUMBNAILS"]
+      "env": ["VERCEL_ENV"]
     },
     "dev": {
-      "dependsOn": ["stage-registry"]
+      "dependsOn": ["stage-registry"],
+      "env": ["ORGANUI_THUMBNAILS", "NODE_ENV"]
+    },
+    "test": {
+      "dependsOn": ["transit"]
     }
   }
 }

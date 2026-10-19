@@ -2,6 +2,7 @@ import { expect, test } from "bun:test"
 import { readFile } from "node:fs/promises"
 import { basename } from "node:path"
 import packageJson from "../package.json"
+import bodySystems from "../body-systems.json"
 import registry from "../registry.json"
 
 const blocks = registry.items.filter((item) => item.type === "registry:block")
@@ -138,22 +139,11 @@ test("every component belongs to one docs group", () => {
   }
 })
 
-// The /organs gallery groups organs by body system (apps/web/lib/registry.ts),
-// so each organ needs exactly one and nothing else may have one.
+// The /organs gallery groups organs by body system, in the order and with the
+// labels of body-systems.json, so each organ needs exactly one and nothing
+// else may have one.
 test("every organ belongs to one body system", () => {
-  const systems = [
-    "nervous",
-    "senses",
-    "endocrine",
-    "cardiovascular",
-    "lymphatic",
-    "respiratory",
-    "digestive",
-    "urinary",
-    "reproductive",
-    "musculoskeletal",
-    "integumentary",
-  ]
+  const systems = bodySystems.map(({ id }) => id)
   for (const item of registry.items) {
     const categories: readonly string[] =
       "categories" in item ? item.categories : []
@@ -161,6 +151,14 @@ test("every organ belongs to one body system", () => {
       categories.filter((category) => systems.includes(category))
     ).toHaveLength(categories.includes("organ") ? 1 : 0)
   }
+  // Every system has organs, and no id repeats.
+  expect(new Set(systems).size).toBe(systems.length)
+  for (const system of systems)
+    expect(
+      registry.items.some(
+        (item) => "categories" in item && item.categories.includes(system)
+      )
+    ).toBe(true)
 })
 
 // Registry dependencies such as tooltip install in the consumer's own style,

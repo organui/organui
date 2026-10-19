@@ -7,10 +7,13 @@ import { OrganViewer } from "@workspace/registry/organ-viewer"
 type Props = { params: Promise<{ name: string }> }
 
 // A bare organ at its default view, for scripts/organ-thumbnails.ts to
-// screenshot. It renders without the model credit, so it exists only when the
-// script builds the site with ORGANUI_THUMBNAILS=1; the public site has no
-// such pages, and the gallery credits every thumbnail.
-const enabled = process.env.ORGANUI_THUMBNAILS === "1"
+// screenshot. It renders without the model credit, so it exists only under
+// `next dev` with ORGANUI_THUMBNAILS=1, as the script runs it. A production
+// build has no such pages even with the variable set; the gallery credits
+// every thumbnail.
+const enabled =
+  process.env.ORGANUI_THUMBNAILS === "1" &&
+  process.env.NODE_ENV === "development"
 
 export const dynamicParams = false
 
