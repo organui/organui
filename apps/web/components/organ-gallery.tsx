@@ -74,8 +74,24 @@ export function OrganPreview({
         aria-hidden="true"
         className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-md border bg-background/90 px-2 py-1 text-xs font-medium backdrop-blur"
       >
-        {pending && <Spinner className="size-3" />}
-        {pending ? "Loading…" : "View in 3D"}
+        {pending ? (
+          <Spinner className="size-3" />
+        ) : (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            className="size-3"
+          >
+            <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z" />
+            <path d="m4 7.5 8 4.5 8-4.5M12 12v9" />
+          </svg>
+        )}
+        {/* Part of the button's name, so the visible text matches it. */}
+        3D
       </span>
     </button>
   )

@@ -368,11 +368,13 @@ test("the header links each section and searches the whole site", async ({
   await expect(
     page.getByRole("heading", { name: "Organs", level: 1 })
   ).toBeVisible()
+  // Choosing a link closes the phone menu, so reopen it to read the header.
+  if (narrow)
+    await page.getByRole("button", { name: "Menu", exact: true }).click()
   await expect(
-    page
-      .getByRole("navigation", { name: "Main" })
-      .getByRole("link", { name: "Organs", exact: true })
+    main.getByRole("link", { name: "Organs", exact: true })
   ).toHaveAttribute("aria-current", "page")
+  if (narrow) await page.keyboard.press("Escape")
   await expect(
     page.getByRole("link", { name: "GitHub repository", exact: false })
   ).toHaveAttribute("href", "https://github.com/organui/organui")
