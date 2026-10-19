@@ -724,7 +724,7 @@ test("the growth chart demo loads its tables and switches measures", async ({
     page.getByRole("heading", { name: "Growth chart", level: 1 })
   ).toBeVisible()
   const chart = page.getByRole("group", { name: "Weight-for-age, girls" })
-  const points = chart.getByRole("img", { name: /^\d+ months?: / })
+  const points = chart.getByRole("img", { name: /^\d+ (months?|years): / })
   await expect(points).toHaveCount(10)
   await page.getByRole("button", { name: "Boys", exact: true }).click()
   await page.getByRole("button", { name: "Head", exact: true }).click()
