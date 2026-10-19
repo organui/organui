@@ -129,7 +129,7 @@
     },
     {
       "name": "lab-results",
-      "type": "registry:component",
+      "type": "registry:ui",
       "title": "Lab results table",
       "description": "Lab values flagged against the reference ranges you pass, with text and icon flags and a trend sparkline.",
       "dependencies": ["cn@^0.4.0"],
@@ -137,7 +137,7 @@
       "files": [
         {
           "path": "registry/base-nova/lab-results/lab-results.tsx",
-          "type": "registry:component"
+          "type": "registry:ui"
         }
       ],
       "docs": "Lab results table docs: https://organui.com/docs/lab-results"

@@ -31,6 +31,28 @@ test("there are blocks and their names do not clash with components", () => {
   for (const { name } of blocks) expect(componentNames.has(name)).toBe(false)
 })
 
+// Clinical widgets composed from shadcn primitives install beside them in
+// components/ui; three.js scenes, the organs among them, install in components.
+test("item types follow whether the item is a three.js scene", async () => {
+  for (const item of components) {
+    const sources = await Promise.all(
+      item.files.map((file) =>
+        readFile(new URL(`../${file.path}`, import.meta.url), "utf8")
+      )
+    )
+    const scene = sources.some(
+      (source) =>
+        source.includes('from "three"') ||
+        source.includes('from "@/components/organ-viewer"')
+    )
+    expect([item.name, item.type]).toEqual([
+      item.name,
+      scene ? "registry:component" : "registry:ui",
+    ])
+    for (const file of item.files) expect(file.type).toBe(item.type)
+  }
+})
+
 // As in shadcn, an item ships only its own files and reaches every other item
 // through registryDependencies.
 test("no two items ship the same file", () => {

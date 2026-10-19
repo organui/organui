@@ -13,7 +13,7 @@ export const metadata = docsMetadata(
   "/docs/lab-results"
 )
 
-const usage = `import { LabResultsTable, type LabResult } from "@/components/lab-results"
+const usage = `import { LabResultsTable, type LabResult } from "@/components/ui/lab-results"
 
 const results: LabResult[] = [
   {
@@ -91,7 +91,7 @@ export default function Page() {
           {registryNamespace}
         </pre>
         <p className="text-sm text-muted-foreground">
-          The source installs into your components directory, along with
+          The source installs into your UI components directory, along with
           shadcn&apos;s <code>table</code> if you do not have it yet. It holds
           no state and uses no hooks, so it renders in server and client
           components alike.
