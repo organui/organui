@@ -24,7 +24,7 @@ export function Example() {
         onDoseStatusChange={setDoseStatus}
         now="10:15"
       />
-      <aside className="rounded-xl border bg-muted/30 p-5">
+      <div className="rounded-xl border bg-muted/30 p-5">
         <h2 className="mb-3 font-medium">Your app state</h2>
         <p className="text-sm text-muted-foreground">
           Step through the days or mark doses taken or skipped. These callbacks
@@ -45,7 +45,7 @@ export function Example() {
           Illustrative example data, not a treatment plan or a complete list of
           interactions.
         </p>
-      </aside>
+      </div>
     </div>
   )
 }

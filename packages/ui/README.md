@@ -1,7 +1,7 @@
 # Shared UI
 
 This package contains all 63 source-bearing components from the official shadcn
-Base UI registry installed with CLI 4.21.0, using the project's `base-nova` style
+Base UI registry installed with CLI 4.22.1, using the project's `base-nova` style
 and Lucide icons. Components are available through `@workspace/ui/components/*`.
 The official `form` registry entry contains no source files; forms compose
 `Field`, `FieldGroup`, and the appropriate controls.

@@ -16,7 +16,7 @@ export function SiteHeader() {
           href="/"
           className="flex items-center gap-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-ring"
         >
-          <OrganUIMark className="h-6 w-6" />
+          <OrganUIMark className="size-6" />
           organui
         </Link>
         <Link href="/docs" className={link}>

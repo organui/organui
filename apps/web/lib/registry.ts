@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import catalog from "@workspace/registry/registry.json"
 import { site } from "@/lib/site"
 
-export const shadcn = "shadcn@4.21.0"
+export const shadcn = "shadcn@4.22.1"
 
 // The registry catalog is the single source for what the docs list, so a new
 // item appears in the sidebar and the index once it has a page at its href.

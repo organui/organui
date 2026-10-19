@@ -793,13 +793,20 @@ export function OrganViewer({
             className="absolute top-2 right-2 flex items-center gap-0.5 rounded-lg border bg-background/90 p-1 shadow-sm backdrop-blur"
           >
             <Select
+              items={[
+                { label: "Custom view", value: null },
+                ...model.views.map(({ name }) => ({
+                  label: name,
+                  value: name,
+                })),
+              ]}
               value={view}
               onValueChange={(next) => {
                 if (next) engine.setView(next)
               }}
             >
               <SelectTrigger aria-label="View" className="border-transparent">
-                <SelectValue placeholder="Custom view" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>

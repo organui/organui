@@ -2,6 +2,7 @@ import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { blockFiles } from "@/lib/blocks"
 import { codeBlock, docsMetadata, registryBlocks, shadcn } from "@/lib/registry"
+import { cn } from "@workspace/ui/lib/utils"
 
 export const metadata = docsMetadata(
   "Blocks",
@@ -112,7 +113,7 @@ export default async function Page() {
                           tabIndex={0}
                           role="region"
                           aria-label={`${file.installed} source`}
-                          className={`${codeBlock} mt-2 max-h-[32rem]`}
+                          className={cn(codeBlock, "mt-2 max-h-[32rem]")}
                         >
                           {block.sources.get(file.path)}
                         </pre>

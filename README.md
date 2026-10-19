@@ -10,7 +10,7 @@ In a React 19 project configured with shadcn, Tailwind CSS 4 and the Base UI
 preset:
 
 ```bash
-bunx shadcn@4.21.0 add https://organui.com/r/anatomy-tree.json
+bunx shadcn@4.22.1 add https://organui.com/r/anatomy-tree.json
 ```
 
 Or register the namespace once in `components.json`:
@@ -23,8 +23,8 @@ Or register the namespace once in `components.json`:
 }
 ```
 
-and run `bunx shadcn@4.21.0 add @organui/anatomy-tree`. The repository is also
-a GitHub registry, so `bunx shadcn@4.21.0 add organui/organui/anatomy-tree`
+and run `bunx shadcn@4.22.1 add @organui/anatomy-tree`. The repository is also
+a GitHub registry, so `bunx shadcn@4.22.1 add organui/organui/anatomy-tree`
 installs straight from source (append `#<commit>` to pin a version). See
 [the anatomy tree documentation](https://organui.com/docs/anatomy-tree).
 
@@ -34,7 +34,7 @@ Every organ is a registry item named after it: `heart`, `brain`,
 `spinal-cord`, `nerves` and so on.
 
 ```bash
-bunx shadcn@4.21.0 add https://organui.com/r/heart.json
+bunx shadcn@4.22.1 add https://organui.com/r/heart.json
 ```
 
 ```tsx
@@ -59,7 +59,7 @@ strip; it parses the file itself and needs only three.js. `dna-helix` draws a
 B-DNA double helix from a sequence, with selectable base pairs.
 
 ```bash
-bunx shadcn@4.21.0 add https://organui.com/r/molecule-viewer.json
+bunx shadcn@4.22.1 add https://organui.com/r/molecule-viewer.json
 ```
 
 ```tsx
@@ -98,7 +98,7 @@ Blocks are whole layouts built from those pieces, following shadcn's
 | `explorer-03` | One viewer switching between several organs                                  |
 
 ```bash
-bunx shadcn@4.21.0 add https://organui.com/r/explorer-01.json
+bunx shadcn@4.22.1 add https://organui.com/r/explorer-01.json
 ```
 
 In Next.js this adds a page at `app/explorer/page.tsx`; other frameworks get

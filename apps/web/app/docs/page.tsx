@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { RegistryPreview } from "@/components/registry-preview"
+import { ComponentPreview } from "@/components/component-preview"
 import {
   codeBlock,
   registryItems,
@@ -98,10 +98,15 @@ export default function Page() {
                 </Link>
               </h3>
               <p className="text-muted-foreground">{item.description}</p>
-              <RegistryPreview
-                name={item.name}
-                title={item.title}
-                organ={item.organ}
+              {/* The card already frames the preview, so the example renders
+                  without its own border and padding. */}
+              <ComponentPreview
+                name={`${item.name}-demo`}
+                hideCode
+                defer="click"
+                aria-label={`${item.title} preview`}
+                className="rounded-none border-0"
+                previewClassName="h-auto p-0 sm:p-0 *:w-full *:min-w-0"
               />
               <pre
                 tabIndex={0}

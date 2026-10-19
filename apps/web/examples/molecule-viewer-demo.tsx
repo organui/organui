@@ -30,7 +30,7 @@ export function Example({ compact = false }: { compact?: boolean }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_16rem]">
       {viewer}
-      <aside className="rounded-xl border bg-muted/30 p-5">
+      <div className="rounded-xl border bg-muted/30 p-5">
         <h2 className="mb-3 font-medium">Your app state</h2>
         <p className="text-sm text-muted-foreground">
           Pick a residue on the model or in the sequence. The callback gives its
@@ -52,7 +52,7 @@ export function Example({ compact = false }: { compact?: boolean }) {
         <p className="mt-4 text-xs text-muted-foreground">
           Crambin, PDB 1CRN (Hendrickson and Teeter), CC0.
         </p>
-      </aside>
+      </div>
     </div>
   )
 }

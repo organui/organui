@@ -42,7 +42,7 @@ test("documentation interaction, styling and registry serving", async ({
   ).toBe(true)
   const command = page.getByRole("region", { name: "Installation command" })
   await expect(command).toHaveText(
-    "bunx shadcn@4.21.0 add https://organui.com/r/anatomy-tree.json"
+    "bunx shadcn@4.22.1 add https://organui.com/r/anatomy-tree.json"
   )
   await command.focus()
   await expect(command).toBeFocused()
@@ -182,6 +182,8 @@ test("registry index lists every component inside the docs layout", async ({
   page,
   request,
 }, info) => {
+  // One check per catalog item plus an axe scan of every preview on the page.
+  test.setTimeout(60_000)
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   const catalog = registrySchema.parse(
@@ -204,11 +206,11 @@ test("registry index lists every component inside the docs layout", async ({
     await expect(
       page.getByRole("region", { name: `Install ${title}`, exact: true })
     ).toHaveText(
-      `bunx shadcn@4.21.0 add https://organui.com/r/${item.name}.json`
+      `bunx shadcn@4.22.1 add https://organui.com/r/${item.name}.json`
     )
     await expect(
       page
-        .getByRole("region", { name: `${title} preview`, exact: true })
+        .getByRole("group", { name: `${title} preview`, exact: true })
         .locator(":scope > *")
     ).toBeVisible()
     expect((await request.get(`/docs/${item.name}`)).ok()).toBe(true)
@@ -359,7 +361,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   ).toContainText("<Heart")
   await expect(
     page.getByRole("region", { name: "Installation command" })
-  ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/heart.json")
+  ).toHaveText("bunx shadcn@4.22.1 add https://organui.com/r/heart.json")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -436,7 +438,7 @@ test("blocks gallery previews and installs every block", async ({
     await expect(
       section.getByRole("region", { name: `Install ${title}`, exact: true })
     ).toHaveText(
-      `bunx shadcn@4.21.0 add https://organui.com/r/${block.name}.json`
+      `bunx shadcn@4.22.1 add https://organui.com/r/${block.name}.json`
     )
     const preview = section.getByTitle(`${title} preview`)
     await preview.scrollIntoViewIfNeeded()
@@ -528,7 +530,7 @@ test("vital signs example switches readings and states each status", async ({
   await expect(spo2).toContainText("89%Low")
   await expect(
     page.getByRole("region", { name: "Installation command" })
-  ).toHaveText("bunx shadcn@4.21.0 add https://organui.com/r/vital-signs.json")
+  ).toHaveText("bunx shadcn@4.22.1 add https://organui.com/r/vital-signs.json")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth

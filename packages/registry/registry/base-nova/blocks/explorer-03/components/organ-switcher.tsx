@@ -40,6 +40,7 @@ export function OrganSwitcher({
           </p>
         </div>
         <Select
+          items={models.map(({ name }) => ({ label: name, value: name }))}
           value={model.name}
           onValueChange={(next) => {
             if (!next) return

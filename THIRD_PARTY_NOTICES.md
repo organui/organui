@@ -20,7 +20,7 @@ packages retain their own accompanying licenses as well.
 | lucide-react               | 1.47.0            | ISC, with inherited icon notices in its LICENSE |
 | class-variance-authority   | 0.7.1             | Apache-2.0                                      |
 | cn                         | 0.4.0             | MIT                                             |
-| shadcn                     | 4.21.0            | MIT                                             |
+| shadcn                     | 4.22.1            | MIT                                             |
 | tw-animate-css             | 1.4.0             | MIT                                             |
 
 ## Fonts

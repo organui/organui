@@ -5,6 +5,15 @@ import { cn } from "cn"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
 
 export type Medication = {
@@ -269,20 +278,19 @@ export function MedicationSchedule({
       conflictsFor.set(dose.key, [...(conflictsFor.get(dose.key) ?? []), other])
 
   return (
-    <section
+    <Card
+      role="region"
       aria-labelledby={heading}
-      className={cn("flex flex-col gap-5 rounded-xl border p-4", className)}
+      className={cn("w-full", className)}
     >
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs text-muted-foreground">{label}</p>
-          <p id={heading} className="font-medium">
-            <span className="sr-only">{label}, </span>
-            {title}
-          </p>
-        </div>
+      <CardHeader>
+        <CardDescription>{label}</CardDescription>
+        <CardTitle id={heading}>
+          <span className="sr-only">{label}, </span>
+          {title}
+        </CardTitle>
         {onDateChange && (
-          <div className="flex shrink-0 gap-1">
+          <CardAction className="flex gap-1">
             <Button
               variant="outline"
               size="icon-sm"
@@ -299,221 +307,227 @@ export function MedicationSchedule({
             >
               <Chevron direction="right" />
             </Button>
-          </div>
+          </CardAction>
         )}
-      </div>
+      </CardHeader>
 
-      {active.length > 0 && (
-        <div className="flex flex-col gap-2">
-          {active.map((interaction) => {
-            const close = conflicts.filter(
-              (conflict) => conflict.interaction === interaction
-            )
-            return (
-              // shadcn's destructive variant tints the description below
-              // AA contrast, so major warnings mark the border and title.
-              <Alert
-                key={interaction.id}
-                data-severity={interaction.severity}
-                className={cn(
-                  interaction.severity === "major" && "border-destructive"
-                )}
-              >
-                <AlertTitle
-                  className={cn(
-                    interaction.severity === "major" && "text-destructive"
-                  )}
-                >
-                  {severityLabel[interaction.severity]} interaction:{" "}
-                  {names(interaction.medicationIds, index)}
-                </AlertTitle>
-                <AlertDescription>
-                  {interaction.summary}
-                  {interaction.separationHours
-                    ? ` Keep doses at least ${hours(interaction.separationHours)} apart.`
-                    : ""}
-                  {close.length > 0 &&
-                    ` ${close
-                      .map(
-                        ({ doses: [a, b] }) =>
-                          `${a.medication.name} at ${a.time} and ${b.medication.name} at ${b.time}`
-                      )
-                      .join(
-                        "; "
-                      )} ${close.length === 1 ? "is" : "are"} closer than that.`}
-                </AlertDescription>
-              </Alert>
-            )
-          })}
-        </div>
-      )}
-
-      {doses.length === 0 ? (
-        <Empty role="status">
-          <EmptyHeader>
-            <EmptyDescription>No doses on this day.</EmptyDescription>
-          </EmptyHeader>
-        </Empty>
-      ) : (
-        <>
-          {/* A visual summary; the dose list below carries the same facts. */}
-          <div aria-hidden="true" className="flex flex-col gap-2">
-            <div className="relative h-4 text-[0.7rem] text-muted-foreground sm:ml-[9.25rem]">
-              {[0, 6, 12, 18, 24].map((hour) => (
-                <span
-                  key={hour}
-                  className={cn(
-                    "absolute top-0",
-                    hour === 0
-                      ? "left-0"
-                      : hour === 24
-                        ? "right-0"
-                        : "-translate-x-1/2"
-                  )}
-                  style={
-                    hour % 24 ? { left: `${(hour / 24) * 100}%` } : undefined
-                  }
-                >
-                  {String(hour).padStart(2, "0")}:00
-                </span>
-              ))}
-            </div>
-            {scheduled.map((medication) => (
-              <div
-                key={medication.id}
-                className="grid gap-1 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:gap-3"
-              >
-                <span className="truncate text-xs font-medium">
-                  {medication.name}
-                </span>
-                <div className="relative h-7 rounded-md bg-muted/50">
-                  {[25, 50, 75].map((left) => (
-                    <span
-                      key={left}
-                      className="absolute inset-y-0 w-px bg-border"
-                      style={{ left: `${left}%` }}
-                    />
-                  ))}
-                  {nowMinutes !== null && (
-                    <span
-                      data-now=""
-                      className="absolute -inset-y-1 w-0.5 rounded-full bg-foreground"
-                      style={{ left: `${(nowMinutes / day) * 100}%` }}
-                    />
-                  )}
-                  {doses
-                    .filter((dose) => dose.medication === medication)
-                    .map((dose) => {
-                      const status = Object.hasOwn(doseStatus, dose.key)
-                        ? doseStatus[dose.key]
-                        : undefined
-                      return (
-                        <span
-                          key={dose.key}
-                          data-dose={dose.key}
-                          data-status={status ?? "todo"}
-                          className={cn(
-                            "absolute top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background",
-                            status === "skipped" && "opacity-40",
-                            conflictsFor.has(dose.key) &&
-                              "ring-2 ring-destructive"
-                          )}
-                          style={{
-                            left: `${(dose.minutes / day) * 100}%`,
-                            background:
-                              status === "taken"
-                                ? "var(--color-muted-foreground)"
-                                : (medication.color ?? "currentColor"),
-                          }}
-                        />
-                      )
-                    })}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <ol aria-label="Doses" className="flex flex-col divide-y">
-            {doses.map((dose) => {
-              const status = Object.hasOwn(doseStatus, dose.key)
-                ? doseStatus[dose.key]
-                : undefined
-              const text = statusLabel[status ?? "todo"]
-              const close = conflictsFor.get(dose.key)
-              const { medication } = dose
+      <CardContent className="flex flex-col gap-5">
+        {active.length > 0 && (
+          <div className="flex flex-col gap-2">
+            {active.map((interaction) => {
+              const close = conflicts.filter(
+                (conflict) => conflict.interaction === interaction
+              )
               return (
-                <li
-                  key={dose.key}
-                  className="flex items-center gap-3 py-2 first:pt-0 last:pb-0"
-                >
-                  <time className="w-11 shrink-0 text-sm tabular-nums">
-                    {dose.time}
-                  </time>
-                  <span
-                    aria-hidden="true"
-                    className="size-2.5 shrink-0 rounded-full"
-                    style={{ background: medication.color ?? "currentColor" }}
-                  />
-                  <div className="min-w-0 flex-1">
-                    <p
-                      className={cn(
-                        "text-sm font-medium",
-                        status === "skipped" &&
-                          "text-muted-foreground line-through"
-                      )}
-                    >
-                      {medication.name}
-                      {medication.dose && (
-                        <span className="font-normal text-muted-foreground">
-                          {" "}
-                          {medication.dose}
-                        </span>
-                      )}
-                    </p>
-                    {medication.instructions && (
-                      <p className="text-xs text-muted-foreground">
-                        {medication.instructions}
-                      </p>
-                    )}
-                    {close && (
-                      <p className="text-xs text-destructive">
-                        Within the separation window of{" "}
-                        {close
-                          .map(
-                            (other) =>
-                              `${other.medication.name} at ${other.time}`
-                          )
-                          .join(", ")}
-                      </p>
-                    )}
-                  </div>
-                  {onDoseStatusChange ? (
-                    <Button
-                      variant={status ? "secondary" : "outline"}
-                      size="sm"
-                      className="w-20"
-                      aria-label={`${medication.name} at ${dose.time}: ${text}`}
-                      onClick={() =>
-                        onDoseStatusChange(nextDoseStatus(doseStatus, dose.key))
-                      }
-                    >
-                      {text}
-                    </Button>
-                  ) : (
-                    <span className="text-xs text-muted-foreground">
-                      {text}
-                    </span>
+                // shadcn's destructive variant tints the description below
+                // AA contrast, so major warnings mark the border and title.
+                <Alert
+                  key={interaction.id}
+                  data-severity={interaction.severity}
+                  className={cn(
+                    interaction.severity === "major" && "border-destructive"
                   )}
-                </li>
+                >
+                  <AlertTitle
+                    className={cn(
+                      interaction.severity === "major" && "text-destructive"
+                    )}
+                  >
+                    {severityLabel[interaction.severity]} interaction:{" "}
+                    {names(interaction.medicationIds, index)}
+                  </AlertTitle>
+                  <AlertDescription>
+                    {interaction.summary}
+                    {interaction.separationHours
+                      ? ` Keep doses at least ${hours(interaction.separationHours)} apart.`
+                      : ""}
+                    {close.length > 0 &&
+                      ` ${close
+                        .map(
+                          ({ doses: [a, b] }) =>
+                            `${a.medication.name} at ${a.time} and ${b.medication.name} at ${b.time}`
+                        )
+                        .join(
+                          "; "
+                        )} ${close.length === 1 ? "is" : "are"} closer than that.`}
+                  </AlertDescription>
+                </Alert>
               )
             })}
-          </ol>
-        </>
-      )}
+          </div>
+        )}
+
+        {doses.length === 0 ? (
+          <Empty role="status">
+            <EmptyHeader>
+              <EmptyDescription>No doses on this day.</EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        ) : (
+          <>
+            {/* A visual summary; the dose list below carries the same facts. */}
+            <div aria-hidden="true" className="flex flex-col gap-2">
+              <div className="relative h-4 text-[0.7rem] text-muted-foreground sm:ml-[9.25rem]">
+                {[0, 6, 12, 18, 24].map((hour) => (
+                  <span
+                    key={hour}
+                    className={cn(
+                      "absolute top-0",
+                      hour === 0
+                        ? "left-0"
+                        : hour === 24
+                          ? "right-0"
+                          : "-translate-x-1/2"
+                    )}
+                    style={
+                      hour % 24 ? { left: `${(hour / 24) * 100}%` } : undefined
+                    }
+                  >
+                    {String(hour).padStart(2, "0")}:00
+                  </span>
+                ))}
+              </div>
+              {scheduled.map((medication) => (
+                <div
+                  key={medication.id}
+                  className="grid gap-1 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:gap-3"
+                >
+                  <span className="truncate text-xs font-medium">
+                    {medication.name}
+                  </span>
+                  <div className="relative h-7 rounded-md bg-muted/50">
+                    {[25, 50, 75].map((left) => (
+                      <span
+                        key={left}
+                        className="absolute inset-y-0 w-px bg-border"
+                        style={{ left: `${left}%` }}
+                      />
+                    ))}
+                    {nowMinutes !== null && (
+                      <span
+                        data-now=""
+                        className="absolute -inset-y-1 w-0.5 rounded-full bg-foreground"
+                        style={{ left: `${(nowMinutes / day) * 100}%` }}
+                      />
+                    )}
+                    {doses
+                      .filter((dose) => dose.medication === medication)
+                      .map((dose) => {
+                        const status = Object.hasOwn(doseStatus, dose.key)
+                          ? doseStatus[dose.key]
+                          : undefined
+                        return (
+                          <span
+                            key={dose.key}
+                            data-dose={dose.key}
+                            data-status={status ?? "todo"}
+                            className={cn(
+                              "absolute top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background",
+                              status === "skipped" && "opacity-40",
+                              conflictsFor.has(dose.key) &&
+                                "ring-2 ring-destructive"
+                            )}
+                            style={{
+                              left: `${(dose.minutes / day) * 100}%`,
+                              background:
+                                status === "taken"
+                                  ? "var(--color-muted-foreground)"
+                                  : (medication.color ?? "currentColor"),
+                            }}
+                          />
+                        )
+                      })}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <ol aria-label="Doses" className="flex flex-col divide-y">
+              {doses.map((dose) => {
+                const status = Object.hasOwn(doseStatus, dose.key)
+                  ? doseStatus[dose.key]
+                  : undefined
+                const text = statusLabel[status ?? "todo"]
+                const close = conflictsFor.get(dose.key)
+                const { medication } = dose
+                return (
+                  <li
+                    key={dose.key}
+                    className="flex items-center gap-3 py-2 first:pt-0 last:pb-0"
+                  >
+                    <time className="w-11 shrink-0 text-sm tabular-nums">
+                      {dose.time}
+                    </time>
+                    <span
+                      aria-hidden="true"
+                      className="size-2.5 shrink-0 rounded-full"
+                      style={{ background: medication.color ?? "currentColor" }}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p
+                        className={cn(
+                          "text-sm font-medium",
+                          status === "skipped" &&
+                            "text-muted-foreground line-through"
+                        )}
+                      >
+                        {medication.name}
+                        {medication.dose && (
+                          <span className="font-normal text-muted-foreground">
+                            {" "}
+                            {medication.dose}
+                          </span>
+                        )}
+                      </p>
+                      {medication.instructions && (
+                        <p className="text-xs text-muted-foreground">
+                          {medication.instructions}
+                        </p>
+                      )}
+                      {close && (
+                        <p className="text-xs text-destructive">
+                          Within the separation window of{" "}
+                          {close
+                            .map(
+                              (other) =>
+                                `${other.medication.name} at ${other.time}`
+                            )
+                            .join(", ")}
+                        </p>
+                      )}
+                    </div>
+                    {onDoseStatusChange ? (
+                      <Button
+                        variant={status ? "secondary" : "outline"}
+                        size="sm"
+                        className="w-20"
+                        aria-label={`${medication.name} at ${dose.time}: ${text}`}
+                        onClick={() =>
+                          onDoseStatusChange(
+                            nextDoseStatus(doseStatus, dose.key)
+                          )
+                        }
+                      >
+                        {text}
+                      </Button>
+                    ) : (
+                      <span className="text-xs text-muted-foreground">
+                        {text}
+                      </span>
+                    )}
+                  </li>
+                )
+              })}
+            </ol>
+          </>
+        )}
+      </CardContent>
 
       {disclaimer !== null && (
-        <p className="text-xs text-muted-foreground">{disclaimer}</p>
+        <CardFooter>
+          <p className="text-xs text-muted-foreground">{disclaimer}</p>
+        </CardFooter>
       )}
-    </section>
+    </Card>
   )
 }

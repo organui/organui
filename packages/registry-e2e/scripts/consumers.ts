@@ -479,7 +479,7 @@ try {
         ],
         dir
       )
-    // Blocks reuse the files installed above. Without RSC, shadcn 4.21 strips
+    // Blocks reuse the files installed above. Without RSC, shadcn (4.21–4.22) strips
     // "use client" from every other file it writes (a global regex keeps its
     // lastIndex), so a reinstall differs and prompts; overwrite instead.
     for (const block of blocks)

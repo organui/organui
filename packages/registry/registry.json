@@ -145,7 +145,7 @@
         "class-variance-authority@^0.7.1",
         "cn@^0.4.0"
       ],
-      "registryDependencies": ["alert", "button", "empty"],
+      "registryDependencies": ["alert", "button", "card", "empty"],
       "files": [
         {
           "path": "registry/base-nova/medication-schedule/medication-schedule.tsx",

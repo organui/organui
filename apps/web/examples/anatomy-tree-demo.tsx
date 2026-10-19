@@ -16,7 +16,7 @@ export function Example() {
         onVisibilityChange={setVisibility}
         defaultExpandedIds={["heart", "left", "right"]}
       />
-      <aside className="rounded-xl border bg-muted/30 p-5">
+      <div className="rounded-xl border bg-muted/30 p-5">
         <h2 className="mb-3 font-medium">Your viewer state</h2>
         <p className="text-sm text-muted-foreground">
           Select a structure or change its visibility. These callbacks can drive
@@ -37,7 +37,7 @@ export function Example() {
           Original, simplified example data. No patient data, models, or
           clinical validation.
         </p>
-      </aside>
+      </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { getRegistryExample } from "@/examples/_registry"
 import { ComponentPreviewTabs } from "@/components/component-preview-tabs"
 import { ComponentSource } from "@/components/component-source"
 import { DeferredPreview } from "@/components/deferred-preview"
+import { RequestedPreview } from "@/components/requested-preview"
 
 export async function ComponentPreview({
   name,
@@ -12,6 +13,7 @@ export async function ComponentPreview({
   hideCode = false,
   previewClassName = "h-auto *:w-full *:min-w-0",
   caption,
+  defer = "visible",
   ...props
 }: Omit<ComponentProps<"div">, "children"> & {
   name: string
@@ -19,6 +21,8 @@ export async function ComponentPreview({
   hideCode?: boolean
   previewClassName?: string
   caption?: string
+  /** When a heavy (3D) example loads: on scroll, or on request. */
+  defer?: "visible" | "click"
 }) {
   const item = await getRegistryExample(name)
   if (!item)
@@ -37,13 +41,21 @@ export async function ComponentPreview({
       hideCode={hideCode}
       component={
         item.lazy ? (
-          <DeferredPreview>{item.component}</DeferredPreview>
+          defer === "click" ? (
+            <RequestedPreview name={name} />
+          ) : (
+            <DeferredPreview>{item.component}</DeferredPreview>
+          )
         ) : (
           item.component
         )
       }
-      source={<ComponentSource name={name} />}
-      sourcePreview={<ComponentSource name={name} maxLines={3} />}
+      // Server elements passed as props are rendered into the page even when
+      // unused, so hidden code is never built.
+      source={hideCode ? null : <ComponentSource name={name} />}
+      sourcePreview={
+        hideCode ? null : <ComponentSource name={name} maxLines={3} />
+      }
       {...props}
     />
   )
