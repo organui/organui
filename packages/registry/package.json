@@ -65,27 +65,27 @@
     "test": "bun test tests"
   },
   "dependencies": {
-    "@base-ui/react": "^1.8.0",
+    "@base-ui/react": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
-    "three": "^0.186.0"
+    "three": "^0.186.1"
   },
   "peerDependencies": {
     "react": "^19",
     "react-dom": "^19"
   },
   "devDependencies": {
-    "@types/bun": "1.4.2",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/bun": "1.4.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/three": "^0.186.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
-    "eslint": "^9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "eslint": "^9.39.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "shadcn": "4.22.1",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   },
   "license": "MIT"
 }

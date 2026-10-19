@@ -10,12 +10,12 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.11.0",
-    "@playwright/test": "1.58.2",
-    "@types/bun": "1.4.2",
+    "@playwright/test": "1.64.1",
+    "@types/bun": "1.4.3",
     "@workspace/registry": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "shadcn": "4.22.1",
-    "typescript": "^5",
+    "typescript": "^5.9.3",
     "web": "workspace:*"
   },
   "license": "MIT"
