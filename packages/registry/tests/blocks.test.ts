@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test"
 import { readFile } from "node:fs/promises"
 import { basename } from "node:path"
+import packageJson from "../package.json"
 import registry from "../registry.json"
 
 const blocks = registry.items.filter((item) => item.type === "registry:block")
@@ -114,6 +115,23 @@ test("every item links its documentation after install", () => {
         : `${item.title} docs: https://organui.com/docs/${item.name}`
     expect(item.docs).toStartWith(page)
   }
+})
+
+// Consumers install the ranges items declare, so each range has to accept the
+// version these tests run against. A bump here without the items fails.
+test("item dependency ranges accept the versions the registry is tested with", () => {
+  const tested: Record<string, string> = packageJson.dependencies
+  for (const item of registry.items)
+    for (const dependency of item.dependencies ?? []) {
+      const at = dependency.lastIndexOf("@")
+      const name = dependency.slice(0, at)
+      expect(tested[name]).toBeDefined()
+      const version = tested[name]!.replace(/^\^/, "")
+      expect(
+        Bun.semver.satisfies(version, dependency.slice(at + 1)),
+        `${item.name}: ${dependency} rejects ${name}@${version}`
+      ).toBe(true)
+    }
 })
 
 for (const block of blocks) {

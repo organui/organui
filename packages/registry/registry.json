@@ -11,7 +11,7 @@
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "registryDependencies": ["button", "empty", "field", "input"],
       "files": [
@@ -27,7 +27,7 @@
       "type": "registry:ui",
       "title": "Vital signs",
       "description": "Heart rate, blood pressure, SpO₂ and temperature, each flagged against a configurable normal range.",
-      "dependencies": ["cn@^0.4.0"],
+      "dependencies": ["cn@^0.5.0"],
       "registryDependencies": ["card"],
       "files": [
         {
@@ -45,7 +45,7 @@
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "registryDependencies": ["button"],
       "files": [
@@ -65,7 +65,7 @@
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": [
@@ -92,7 +92,7 @@
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": ["alert", "button", "select", "tooltip"],
@@ -114,7 +114,7 @@
         "three@^0.186.0",
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "devDependencies": ["@types/three@^0.186.0"],
       "registryDependencies": ["alert", "button", "tooltip"],
@@ -132,7 +132,7 @@
       "type": "registry:ui",
       "title": "Lab results table",
       "description": "Lab values flagged against the reference ranges you pass, with text and icon flags and a trend sparkline.",
-      "dependencies": ["cn@^0.4.0"],
+      "dependencies": ["cn@^0.5.0"],
       "registryDependencies": ["table"],
       "files": [
         {
@@ -150,7 +150,7 @@
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "registryDependencies": ["alert", "button", "card", "empty"],
       "files": [
@@ -799,7 +799,7 @@
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "registryDependencies": [
         "sheet",
@@ -830,7 +830,7 @@
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "registryDependencies": [
         "button",
@@ -862,7 +862,7 @@
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
-        "cn@^0.4.0"
+        "cn@^0.5.0"
       ],
       "registryDependencies": [
         "select",
