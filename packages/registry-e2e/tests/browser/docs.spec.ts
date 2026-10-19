@@ -15,7 +15,7 @@ test("documentation interaction, styling and registry serving", async ({
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text())
   })
-  await page.goto("/docs/anatomy-tree")
+  await page.goto("/docs/components/anatomy-tree")
   await expect(
     page.getByRole("heading", { name: "Anatomy tree", exact: true })
   ).toBeVisible()
@@ -92,7 +92,7 @@ test("documentation interaction, styling and registry serving", async ({
 test("accessibility scan covers expanded, mixed and filtered states", async ({
   page,
 }, info) => {
-  await page.goto("/docs/anatomy-tree")
+  await page.goto("/docs/components/anatomy-tree")
   for (const state of ["expanded", "mixed", "filtered"]) {
     if (state === "mixed")
       await page
@@ -180,27 +180,36 @@ test("homepage explorer links support keyboard navigation without overflow", asy
 })
 
 // The scan of every preview is its own test, so neither needs a long timeout.
-test("registry index passes an accessibility scan without overflow", async ({
+test("guides and the component index pass an accessibility scan without overflow", async ({
   page,
 }, info) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  await page.goto("/docs")
-  await expect(
-    page.getByRole("heading", { name: "Components", level: 1 })
-  ).toBeVisible()
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth
-    )
-  ).toBe(true)
-  const axe = await new AxeBuilder({ page }).analyze()
-  expect(axe.violations).toEqual([])
+  for (const [path, title] of [
+    ["/docs", "Introduction"],
+    ["/docs/installation", "Installation"],
+    ["/docs/theming", "Theming"],
+    ["/docs/base-ui", "Base UI"],
+    ["/docs/licences", "Licences"],
+    ["/docs/components", "Components"],
+  ] as const) {
+    await page.goto(path)
+    await expect(
+      page.getByRole("heading", { name: title, level: 1 })
+    ).toBeVisible()
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= window.innerWidth
+      )
+    ).toBe(true)
+    const axe = await new AxeBuilder({ page }).analyze()
+    expect(axe.violations).toEqual([])
+  }
   await page.screenshot({ path: info.outputPath("index.png"), fullPage: true })
   expect(errors).toEqual([])
 })
 
-test("registry index lists every component inside the docs layout", async ({
+test("component index lists every component inside the docs layout", async ({
   page,
   request,
 }) => {
@@ -209,7 +218,7 @@ test("registry index lists every component inside the docs layout", async ({
   const catalog = registrySchema.parse(
     await (await request.get("/r/registry.json")).json()
   )
-  await page.goto("/docs")
+  await page.goto("/docs/components")
   await expect(
     page.getByRole("heading", { name: "Components", level: 1 })
   ).toBeVisible()
@@ -217,13 +226,16 @@ test("registry index lists every component inside the docs layout", async ({
   const components = catalog.items.filter(
     ({ type }) => type !== "registry:block"
   )
+  const organs = components.filter(({ categories }) =>
+    categories?.includes("organ")
+  )
   for (const item of components) {
     const title = item.title ?? item.name
     await expect(
       page
         .getByRole("heading", { name: title, level: 3, exact: true })
         .getByRole("link")
-    ).toHaveAttribute("href", `/docs/${item.name}`)
+    ).toHaveAttribute("href", `/docs/components/${item.name}`)
     await expect(
       page.getByRole("region", { name: `Install ${title}`, exact: true })
     ).toHaveText(
@@ -238,14 +250,26 @@ test("registry index lists every component inside the docs layout", async ({
         .locator(":scope > *")
     ).toBeVisible()
   }
+  // Organs are their own section of the index, which the header links to.
+  const organSection = page.getByRole("region", { name: "Organs", exact: true })
+  await expect(organSection).toHaveAttribute("id", "organs")
+  for (const item of organs)
+    await expect(
+      organSection.getByRole("heading", {
+        name: item.title ?? item.name,
+        level: 3,
+        exact: true,
+      })
+    ).toBeVisible()
   const pages = await Promise.all(
-    components.map(({ name }) => request.get(`/docs/${name}`))
+    components.map(({ name }) => request.get(`/docs/components/${name}`))
   )
   expect(pages.map((response) => response.ok())).not.toContain(false)
 
   const docs = page.getByRole("navigation", { name: "Documentation" })
   const menu = page.getByRole("button", { name: "Menu", exact: true })
-  if ((page.viewportSize()?.width ?? 0) < 768) {
+  const narrow = (page.viewportSize()?.width ?? 0) < 768
+  if (narrow) {
     await expect(docs).toBeHidden()
     await expect(menu).toHaveAttribute("aria-expanded", "false")
     await menu.focus()
@@ -253,21 +277,40 @@ test("registry index lists every component inside the docs layout", async ({
     await expect(menu).toHaveAttribute("aria-expanded", "true")
   }
   await expect(
-    docs.getByRole("link", { name: "Introduction" })
+    docs.getByRole("link", { name: "Components", exact: true })
   ).toHaveAttribute("aria-current", "page")
-  if ((page.viewportSize()?.width ?? 0) < 768) {
+  // The sidebar lists every component except the organs, which are one link.
+  for (const item of components) {
+    const link = docs.getByRole("link", {
+      name: item.title ?? item.name,
+      exact: true,
+    })
+    if (organs.includes(item)) await expect(link).toHaveCount(0)
+    else
+      await expect(link).toHaveAttribute(
+        "href",
+        `/docs/components/${item.name}`
+      )
+  }
+  await expect(
+    docs.getByRole("link", {
+      name: `Browse all ${organs.length} organs`,
+      exact: true,
+    })
+  ).toHaveAttribute("href", "/docs/components#organs")
+  if (narrow) {
     // Tapping the current page still closes the menu.
-    await docs.getByRole("link", { name: "Introduction" }).click()
+    await docs.getByRole("link", { name: "Components", exact: true }).click()
     await expect(docs).toBeHidden()
     await expect(menu).toHaveAttribute("aria-expanded", "false")
     await menu.click()
   }
   await docs.getByRole("link", { name: "Anatomy tree" }).click()
-  await expect(page).toHaveURL(/\/docs\/anatomy-tree$/)
+  await expect(page).toHaveURL(/\/docs\/components\/anatomy-tree$/)
   await expect(
     page.getByRole("heading", { name: "Anatomy tree", level: 1 })
   ).toBeVisible()
-  if ((page.viewportSize()?.width ?? 0) < 768) {
+  if (narrow) {
     await expect(docs).toBeHidden()
     await expect(menu).toHaveAttribute("aria-expanded", "false")
     await menu.click()
@@ -275,6 +318,91 @@ test("registry index lists every component inside the docs layout", async ({
   await expect(
     docs.getByRole("link", { name: "Anatomy tree" })
   ).toHaveAttribute("aria-current", "page")
+  expect(errors).toEqual([])
+})
+
+// Items installed from v0.3.0 and earlier print /docs/<name> after install.
+test("old component addresses redirect permanently", async ({ request }) => {
+  const catalog = registrySchema.parse(
+    await (await request.get("/r/registry.json")).json()
+  )
+  for (const { name, type } of catalog.items) {
+    if (type === "registry:block") continue
+    const response = await request.get(`/docs/${name}`, { maxRedirects: 0 })
+    expect(response.status()).toBe(308)
+    expect(
+      new URL(response.headers().location!, "http://localhost").pathname
+    ).toBe(`/docs/components/${name}`)
+  }
+})
+
+test("the header links each section and searches the whole site", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  let indexRequests = 0
+  page.on("request", (request) => {
+    if (new URL(request.url()).pathname === "/search.json") indexRequests++
+  })
+  await page.goto("/")
+  const narrow = (page.viewportSize()?.width ?? 0) < 768
+  const main = page.getByRole("navigation", { name: "Main" })
+  if (narrow)
+    await page.getByRole("button", { name: "Menu", exact: true }).click()
+  await expect(main.getByRole("link")).toHaveText([
+    "Docs",
+    "Components",
+    "Organs",
+    "Blocks",
+  ])
+  await main.getByRole("link", { name: "Organs", exact: true }).click()
+  await expect(page).toHaveURL(/\/docs\/components#organs$/)
+  await expect(
+    page.getByRole("main").getByRole("heading", { name: "Organs", level: 2 })
+  ).toBeInViewport()
+  await expect(
+    page.getByRole("link", { name: "GitHub repository", exact: false })
+  ).toHaveAttribute("href", "https://github.com/organui/organui")
+
+  // Pages don't fetch the index until search opens.
+  expect(indexRequests).toBe(0)
+  await page.keyboard.press("ControlOrMeta+K")
+  const dialog = page.getByRole("dialog", { name: "Search" })
+  await expect(dialog).toBeVisible()
+  await expect.poll(() => indexRequests).toBe(1)
+  const input = dialog.getByRole("combobox")
+  // Organs are searchable though the sidebar leaves them out.
+  await input.fill("spinal")
+  await expect(
+    dialog.getByRole("option", { name: /Spinal cord/ })
+  ).toBeVisible()
+  await input.fill("licen")
+  await expect(dialog.getByRole("option", { name: /Licences/ })).toBeVisible()
+  await input.fill("explorer 02")
+  await expect(
+    dialog.getByRole("option", { name: /Explorer 02/ })
+  ).toBeVisible()
+  await input.fill("vital")
+  await dialog.getByRole("option", { name: /^Vital signs/ }).click()
+  await expect(page).toHaveURL(/\/docs\/components\/vital-signs$/)
+  await expect(dialog).toBeHidden()
+  await expect(
+    page.getByRole("heading", { name: "Vital signs", level: 1 })
+  ).toBeVisible()
+
+  await page.getByRole("button", { name: /^Search…/ }).click()
+  await expect(dialog).toBeVisible()
+  await page.keyboard.press("Escape")
+  await expect(dialog).toBeHidden()
+  expect(indexRequests).toBe(1)
+
+  // The theme toggle switches the document between light and dark.
+  const dark = () =>
+    page.evaluate(() => document.documentElement.classList.contains("dark"))
+  const before = await dark()
+  await page.getByRole("button", { name: "Toggle theme" }).click()
+  await expect.poll(dark).toBe(!before)
   expect(errors).toEqual([])
 })
 
@@ -294,7 +422,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
       contentType: "model/gltf-binary",
     })
   )
-  await page.goto("/docs/heart")
+  await page.goto("/docs/components/heart")
   await expect(
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
@@ -416,7 +544,7 @@ test("a model that fails to load explains itself and retries", async ({
     requests++
     return route.fulfill({ status: 404 })
   })
-  await page.goto("/docs/heart")
+  await page.goto("/docs/components/heart")
   const alert = page
     .getByRole("region", { name: "Heart default example" })
     .getByRole("alert")
@@ -445,7 +573,12 @@ test("blocks gallery previews and installs every block", async ({
     .items.filter(({ type }) => type === "registry:block")
   expect(blocks.length).toBeGreaterThan(0)
   await page.goto("/docs")
-  await page.getByRole("link", { name: "Blocks", exact: true }).first().click()
+  if ((page.viewportSize()?.width ?? 0) < 768)
+    await page.getByRole("button", { name: "Menu", exact: true }).click()
+  await page
+    .getByRole("navigation", { name: "Main" })
+    .getByRole("link", { name: "Blocks", exact: true })
+    .click()
   await expect(page).toHaveURL(/\/blocks$/)
   await expect(
     page.getByRole("heading", { name: "Blocks", level: 1 })
@@ -478,7 +611,7 @@ test("blocks gallery previews and installs every block", async ({
           })
         ).toHaveAttribute(
           "href",
-          `/docs/${dependency.replace("@organui/", "")}`
+          `/docs/components/${dependency.replace("@organui/", "")}`
         )
     await section
       .getByText(installedPage?.target ?? "", { exact: true })
@@ -526,7 +659,7 @@ test("a public organ component loads its attributed hosted model", async ({
     (response) =>
       new URL(response.url()).pathname === "/models/breast.glb" && response.ok()
   )
-  await page.goto("/docs/breast")
+  await page.goto("/docs/components/breast")
   await loaded
   const viewer = page.getByRole("region", { name: "Breast default example" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
@@ -543,7 +676,7 @@ test("vital signs example switches readings and states each status", async ({
 }, info) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  await page.goto("/docs/vital-signs")
+  await page.goto("/docs/components/vital-signs")
   await expect(
     page.getByRole("heading", { name: "Vital signs", level: 1 })
   ).toBeVisible()
@@ -576,7 +709,7 @@ test("lab results flag values in words and fit a phone", async ({
 }, info) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  await page.goto("/docs/lab-results")
+  await page.goto("/docs/components/lab-results")
   const table = page
     .getByRole("region", { name: "Lab results example" })
     .getByRole("table")
@@ -604,7 +737,7 @@ test("lab results flag values in words and fit a phone", async ({
   await expect(row("Sodium").getByText("Range: 135–145 mmol/L")).toBeVisible({
     visible: narrow,
   })
-  for (const path of ["/docs/lab-results", "/docs"]) {
+  for (const path of ["/docs/components/lab-results", "/docs/components"]) {
     await page.goto(path)
     expect(
       await page.evaluate(() =>
@@ -615,7 +748,7 @@ test("lab results flag values in words and fit a phone", async ({
       )
     ).toBe(true)
   }
-  await page.goto("/docs/lab-results")
+  await page.goto("/docs/components/lab-results")
   const axe = await new AxeBuilder({ page }).analyze()
   expect(axe.violations).toEqual([])
   await page.screenshot({
@@ -640,7 +773,7 @@ test("the ECG trace page runs a live strip at the chosen rate", async ({
 }) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  await page.goto("/docs/ecg-trace")
+  await page.goto("/docs/components/ecg-trace")
   await expect(
     page.getByRole("heading", { name: "ECG trace", level: 1 })
   ).toBeVisible()
@@ -719,7 +852,7 @@ test("the growth chart demo loads its tables and switches measures", async ({
         : route.abort()
     }
   )
-  await page.goto("/docs/growth-chart")
+  await page.goto("/docs/components/growth-chart")
   await expect(
     page.getByRole("heading", { name: "Growth chart", level: 1 })
   ).toBeVisible()
@@ -763,7 +896,7 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
     "ecg-trace",
     "vital-signs",
   ]) {
-    await page.goto(`/docs/${name}`)
+    await page.goto(`/docs/components/${name}`)
     await expect(page.locator("html")).toHaveClass(/dark/)
     if (name === "anatomy-tree") {
       await page.getByRole("searchbox").fill("no such structure")
@@ -810,7 +943,7 @@ test("component previews reveal copyable code without resetting the demo", async
   context,
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"])
-  await page.goto("/docs/anatomy-tree")
+  await page.goto("/docs/components/anatomy-tree")
   const example = page.getByRole("group", {
     name: "Anatomy tree example",
     exact: true,
@@ -862,7 +995,7 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text())
   })
-  await page.goto("/docs/image-viewer")
+  await page.goto("/docs/components/image-viewer")
   const state = page.getByRole("status").filter({ hasText: "Slice" })
   await expect(state).toHaveText("Slice 16 of 32 · Window 80 / level 40")
   const stage = page.getByRole("region", { name: "Head phantom" })

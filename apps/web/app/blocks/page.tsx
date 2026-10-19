@@ -20,16 +20,16 @@ export default async function Page() {
   return (
     <div className="min-h-svh">
       <SiteHeader />
-      <main className="mx-auto flex max-w-6xl flex-col gap-12 px-5 py-10 sm:px-10">
+      <main className="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-10 sm:px-6">
         <header className="flex flex-col gap-4">
           <h1 className="text-4xl font-semibold tracking-tight">Blocks</h1>
           <p className="max-w-2xl text-lg text-muted-foreground">
             Ready-made layouts built from the{" "}
-            <Link href="/docs/organ-viewer" className="underline">
+            <Link href="/docs/components/organ-viewer" className="underline">
               organ viewer
             </Link>{" "}
             and the{" "}
-            <Link href="/docs/anatomy-tree" className="underline">
+            <Link href="/docs/components/anatomy-tree" className="underline">
               anatomy tree
             </Link>
             . Each block installs its page and components as source, so you can
@@ -38,12 +38,16 @@ export default async function Page() {
           <p className="text-sm text-muted-foreground">
             Blocks install the OrganUI components they use as dependencies, so
             add the{" "}
-            <Link href="/docs" className="underline">
+            <Link href="/docs/installation#namespace" className="underline">
               OrganUI namespace
             </Link>{" "}
             to <code>components.json</code> first. Pages install in Next.js;
             other frameworks get the components. Like the organ viewer, blocks
-            need one of shadcn&apos;s Base UI styles.
+            need{" "}
+            <Link href="/docs/base-ui" className="underline">
+              one of shadcn&apos;s Base UI styles
+            </Link>
+            .
           </p>
         </header>
         {blocks.map((block) => (
@@ -120,7 +124,10 @@ export default async function Page() {
               <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
                 {block.uses.map((name) => (
                   <li key={name}>
-                    <Link href={`/docs/${name}`} className="underline">
+                    <Link
+                      href={`/docs/components/${name}`}
+                      className="underline"
+                    >
                       {name}
                     </Link>
                   </li>

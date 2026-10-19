@@ -1,8 +1,12 @@
 // Brand glyphs are kept separate from the page layout.
-export function GitHubIcon() {
+export function GitHubIcon({
+  className = "size-[22px]",
+}: {
+  className?: string
+}) {
   return (
     <svg
-      className="size-[22px]"
+      className={className}
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"

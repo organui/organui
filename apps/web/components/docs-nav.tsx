@@ -1,28 +1,26 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
 import { usePathname } from "next/navigation"
 import type { DocsNavSection } from "@/lib/registry"
-import { Button } from "@workspace/ui/components/button"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@workspace/ui/components/collapsible"
 import { cn } from "@workspace/ui/lib/utils"
 
-// Sections come from the server layout so the catalog stays out of the client bundle.
+// Sections come from the server so the catalog stays out of the client bundle.
 export function DocsNav({
   sections,
   onNavigate,
+  className,
 }: {
   sections: DocsNavSection[]
   onNavigate?: () => void
+  className?: string
 }) {
   const pathname = usePathname()
   return (
-    <nav aria-label="Documentation" className="flex flex-col gap-6 text-sm">
+    <nav
+      aria-label="Documentation"
+      className={cn("flex flex-col gap-6 text-sm", className)}
+    >
       {sections.map((section) => (
         <div key={section.title} className="flex flex-col gap-1">
           <h2 className="px-2 text-xs font-medium text-muted-foreground">
@@ -51,25 +49,5 @@ export function DocsNav({
         </div>
       ))}
     </nav>
-  )
-}
-
-export function MobileDocsNav({ sections }: { sections: DocsNavSection[] }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <Collapsible
-      open={open}
-      onOpenChange={setOpen}
-      className="border-b py-3 md:hidden"
-    >
-      <CollapsibleTrigger
-        render={<Button variant="ghost" className="w-full justify-start" />}
-      >
-        Menu
-      </CollapsibleTrigger>
-      <CollapsibleContent className="pt-3 pb-1">
-        <DocsNav sections={sections} onNavigate={() => setOpen(false)} />
-      </CollapsibleContent>
-    </Collapsible>
   )
 }

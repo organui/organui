@@ -4,6 +4,8 @@ export const site = {
   title: "OrganUI — The interfaces healthcare deserves.",
   description: "Interfaces for healthcare and life sciences.",
   socialImage: "/opengraph-image",
+  repo: "organui/organui",
+  repository: "https://github.com/organui/organui",
 } as const
 
 // Standalone 3D anatomy explorers, each in its own repository.

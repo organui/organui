@@ -112,8 +112,29 @@ test("every item links its documentation after install", () => {
     const page =
       item.type === "registry:block"
         ? `${item.title}: https://organui.com/blocks#${item.name}`
-        : `${item.title} docs: https://organui.com/docs/${item.name}`
+        : `${item.title} docs: https://organui.com/docs/components/${item.name}`
     expect(item.docs).toStartWith(page)
+  }
+})
+
+// The docs sidebar and index group components by these categories
+// (apps/web/lib/registry.ts), so each component needs exactly one.
+test("every component belongs to one docs group", () => {
+  const groups = [
+    "clinical",
+    "imaging",
+    "molecular",
+    "cell",
+    "anatomy",
+    "organ",
+  ]
+  for (const item of registry.items) {
+    if (item.type === "registry:block") continue
+    const categories: readonly string[] =
+      "categories" in item ? item.categories : []
+    expect(
+      categories.filter((category) => groups.includes(category))
+    ).toHaveLength(1)
   }
 })
 

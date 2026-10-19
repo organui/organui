@@ -1,41 +1,19 @@
-import type { Metadata } from "next"
 import Link from "next/link"
-import { ComponentPreview } from "@/components/component-preview"
+import { DocsPager } from "@/components/docs-pager"
 import {
-  codeBlock,
+  componentGroups,
+  docsMetadata,
+  guides,
+  organs,
+  registryBlocks,
   registryItems,
-  registryNamespace,
-  shadcn,
 } from "@/lib/registry"
-import { site } from "@/lib/site"
 
-const description =
-  "Editable healthcare interface components distributed through a shadcn registry."
-
-export const metadata: Metadata = {
-  title: "Components",
-  description,
-  alternates: { canonical: "/docs" },
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: "Components — OrganUI",
-    description,
-    url: "/docs",
-    images: [
-      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@organui",
-    title: "Components — OrganUI",
-    description,
-    images: [
-      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
-    ],
-  },
-}
+export const metadata = docsMetadata(
+  "Introduction",
+  "Editable healthcare interface components distributed through a shadcn registry.",
+  "/docs"
+)
 
 export default function Page() {
   return (
@@ -44,92 +22,81 @@ export default function Page() {
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
           Getting started
         </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Components</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Introduction</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          OrganUI components are distributed as source through a
-          shadcn-compatible registry. Each one installs into your project, where
-          you own and edit it.
+          OrganUI is a set of interface components for healthcare and life
+          sciences: 3D anatomy, clinical charts, molecules and medical images.
         </p>
       </header>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Set up</h2>
+        <h2 id="source-you-own" className="text-2xl font-semibold">
+          Source you own
+        </h2>
         <p>
-          Start from a React 19 project configured with shadcn, Tailwind CSS 4
-          and the Base UI / Nova theme. To install components by name, add the
-          OrganUI namespace to <code>components.json</code>.
-        </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Registry namespace configuration"
-          className={codeBlock}
-        >
-          {registryNamespace}
-        </pre>
-        <p>
-          Then run <code>bunx {shadcn} add @organui/&lt;name&gt;</code>, or
-          install any item by its full URL as listed below. The repository is
-          also a GitHub registry:{" "}
-          <code>bunx {shadcn} add organui/organui/&lt;name&gt;</code> installs
-          straight from source.
+          OrganUI is not a package you import. Like shadcn/ui, each component is
+          distributed as source through a shadcn-compatible registry: the shadcn
+          CLI copies it into your project, with the shadcn components it builds
+          on, and from then on it is your code to read and change.
         </p>
         <p>
-          For whole layouts, such as a viewer with its anatomy panel, see the{" "}
-          <Link href="/blocks" className="underline">
-            blocks
-          </Link>
-          .
+          The registry has {registryItems.length} components and{" "}
+          {registryBlocks.length} blocks.{" "}
+          {componentGroups
+            .map(
+              ({ id, title }) =>
+                `${title}: ${registryItems.filter((item) => item.group === id).length}`
+            )
+            .join(", ")}
+          , of which {organs.length} are organs built on one shared 3D viewer.
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 className="text-2xl font-semibold">Registry</h2>
-        <ul className="grid gap-4">
-          {registryItems.map((item) => (
-            <li
-              key={item.name}
-              className="flex min-w-0 flex-col gap-3 rounded-xl border p-5"
-            >
-              <h3 className="text-lg font-semibold">
-                <Link
-                  href={item.href}
-                  className="underline-offset-4 hover:underline"
-                >
-                  {item.title}
-                </Link>
-              </h3>
-              <p className="text-muted-foreground">{item.description}</p>
-              {/* The card already frames the preview, so the example renders
-                  without its own border and padding. */}
-              <ComponentPreview
-                name={`${item.name}-demo`}
-                hideCode
-                defer="click"
-                aria-label={`${item.title} preview`}
-                className="rounded-none border-0"
-                previewClassName="h-auto p-0 sm:p-0 *:w-full *:min-w-0"
-              />
-              <pre
-                tabIndex={0}
-                role="region"
-                aria-label={`Install ${item.title}`}
-                className={codeBlock}
-              >
-                {item.install}
-              </pre>
-              <a className="text-sm underline" href={item.json}>
-                {item.name}.json
-              </a>
+        <h2 id="where-to-start" className="text-2xl font-semibold">
+          Where to start
+        </h2>
+        <ul className="flex flex-col gap-3">
+          {guides.slice(1).map((guide) => (
+            <li key={guide.href}>
+              <Link href={guide.href} className="font-medium underline">
+                {guide.title}
+              </Link>
+              <span className="text-muted-foreground">
+                {" "}
+                — {guide.description}
+              </span>
             </li>
           ))}
+          <li>
+            <Link href="/docs/components" className="font-medium underline">
+              Components
+            </Link>
+            <span className="text-muted-foreground">
+              {" "}
+              — every component with a preview and its install command.
+            </span>
+          </li>
+          <li>
+            <Link href="/blocks" className="font-medium underline">
+              Blocks
+            </Link>
+            <span className="text-muted-foreground">
+              {" "}
+              — whole layouts, such as a viewer with its anatomy panel.
+            </span>
+          </li>
         </ul>
-        <p className="text-sm text-muted-foreground">
-          The full catalog is served at{" "}
-          <a className="underline" href="/r/registry.json">
-            /r/registry.json
-          </a>
-          .
+      </section>
+      <section className="flex flex-col gap-4">
+        <h2 id="not-a-medical-device" className="text-2xl font-semibold">
+          Not a medical device
+        </h2>
+        <p>
+          The components, models and sample data are for education, prototyping
+          and interfaces around clinical software. None of them is a medical
+          device, and none is meant for diagnosis or clinical decisions.
         </p>
       </section>
+      <DocsPager href="/docs" />
     </div>
   )
 }

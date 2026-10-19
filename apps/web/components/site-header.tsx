@@ -1,40 +1,40 @@
 import Link from "next/link"
-import { GitHubIcon } from "@/components/social-icons"
-import { buttonVariants } from "@workspace/ui/components/button"
+import { CommandMenu } from "@/components/command-menu"
+import { GitHubLink } from "@/components/github-link"
+import { MainNav } from "@/components/main-nav"
+import { MobileNav } from "@/components/mobile-nav"
+import { ModeSwitcher } from "@/components/mode-switcher"
+import { docsNav, mainNav } from "@/lib/registry"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
-import { cn } from "@workspace/ui/lib/utils"
 
-const link =
-  "rounded-md text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
-
-// Shared by the docs and the blocks gallery.
+// Shared by every page. Laid out after shadcn/ui's site header: navigation,
+// then search, the repository and the theme toggle.
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-5 sm:px-10">
+    <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur">
+      <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:px-6">
+        <MobileNav items={mainNav} sections={docsNav} className="md:hidden" />
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-ring"
+          className="mr-2 flex items-center gap-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-ring"
         >
           <OrganUIMark className="size-6" />
           organui
         </Link>
-        <Link href="/docs" className={link}>
-          Components
-        </Link>
-        <Link href="/blocks" className={link}>
-          Blocks
-        </Link>
-        <a
-          href="https://github.com/organui/organui"
-          aria-label="OrganUI on GitHub"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "icon" }),
-            "ml-auto size-10"
-          )}
-        >
-          <GitHubIcon />
-        </a>
+        <MainNav items={mainNav} className="hidden md:flex" />
+        <div className="ml-auto flex items-center gap-1 sm:gap-2">
+          <CommandMenu />
+          <div
+            aria-hidden="true"
+            className="hidden h-4 w-px bg-border sm:block"
+          />
+          <GitHubLink />
+          <div
+            aria-hidden="true"
+            className="hidden h-4 w-px bg-border sm:block"
+          />
+          <ModeSwitcher />
+        </div>
       </div>
     </header>
   )
