@@ -5,6 +5,9 @@ export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: true,
   retries: 0,
+  // Each worker renders WebGL in software. CI runs the suite in parallel;
+  // locally one worker keeps a laptop usable (see AGENTS.md).
+  workers: process.env.CI ? undefined : 1,
   use: {
     browserName: "chromium",
     trace: "retain-on-failure",

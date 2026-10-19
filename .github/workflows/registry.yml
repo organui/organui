@@ -3,6 +3,8 @@ on:
   pull_request:
   push:
     branches: [master]
+  # Run any branch without opening a PR: gh workflow run registry.yml --ref <branch>
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
