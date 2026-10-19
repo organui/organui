@@ -41,8 +41,9 @@ unaffected by the website code license.
 
 ## Growth standards
 
-The `growth-chart` item ships no growth data; applications pass the reference
-tables. The documentation demo fetches the WHO Child Growth Standards at
+The `growth-chart` item ships no growth data and no code that downloads it;
+applications pass the reference tables. Only this website's demo, in
+`apps/web/lib/who-growth-standards.ts`, fetches the WHO Child Growth Standards at
 runtime from WHO's [anthro](https://github.com/WorldHealthOrganization/anthro)
 repository, pinned to a commit. Those tables are © World Health Organization,
 distributed in that package under

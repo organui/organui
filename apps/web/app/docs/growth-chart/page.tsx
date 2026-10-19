@@ -13,13 +13,10 @@ export const metadata = docsMetadata(
   "/docs/growth-chart"
 )
 
-const usage = `"use client"
-import { useEffect, useState } from "react"
-import {
+const usage = `import {
   GrowthChart,
   ageInMonths,
-  loadWhoGrowthStandards,
-  type GrowthStandards,
+  growthStandardsFromAnthro,
 } from "@/components/ui/growth-chart"
 
 const birth = new Date("2024-03-02")
@@ -28,12 +25,9 @@ const visits = [
   { date: new Date("2025-03-05"), kg: 9.1 },
 ]
 
-export function WeightChart() {
-  const [standards, setStandards] = useState<GrowthStandards | null>(null)
-  useEffect(() => {
-    loadWhoGrowthStandards().then(setStandards)
-  }, [])
-  if (!standards) return null
+// weightTable is the text of a weight-for-age table you host yourself.
+export function WeightChart({ weightTable }: { weightTable: string }) {
+  const standards = growthStandardsFromAnthro({ weight: weightTable })
   return (
     <GrowthChart
       standards={standards}
@@ -155,25 +149,27 @@ export default function Page() {
           from 24, so the WHO curve steps down by about 0.7 cm at two years,
           where children start being measured standing.
         </p>
+        <h3 className="text-lg font-semibold">Where to get the tables</h3>
         <p>
-          <code>loadWhoGrowthStandards</code> downloads the{" "}
+          The{" "}
           <a
             className="underline"
             href="https://www.who.int/tools/child-growth-standards"
           >
             WHO Child Growth Standards
           </a>{" "}
-          (birth to 5 years) from the daily tables in WHO&apos;s{" "}
+          (birth to 5 years) are published by WHO, and its{" "}
           <a
             className="underline"
             href="https://github.com/WorldHealthOrganization/anthro"
           >
             anthro
           </a>{" "}
-          package, pinned to one commit, and samples them by month as WHO&apos;s
-          monthly tables do. <code>growthStandardsFromAnthro</code> does the
-          same for tables you host yourself. The example above loads them that
-          way.
+          package carries them as daily tables in{" "}
+          <code>data-raw/growthstandards</code> (<code>weianthro.txt</code>,{" "}
+          <code>lenanthro.txt</code> and <code>hcanthro.txt</code>). Host copies
+          yourself and pass their text to <code>growthStandardsFromAnthro</code>
+          , which samples them by month as WHO&apos;s monthly tables do.
         </p>
         <p>
           The tables are © World Health Organization. The anthro package
@@ -192,7 +188,24 @@ export default function Page() {
             copyright policy
           </a>{" "}
           requires its permission for commercial use of its materials. Check
-          those terms before you load them, or bundle them, in your product.
+          those terms before you use them in your product.
+        </p>
+        <p>
+          The{" "}
+          <a
+            className="underline"
+            href="https://www.cdc.gov/growthcharts/"
+          >
+            CDC 2000 growth charts
+          </a>{" "}
+          publish LMS files for ages 2 to 20 years by half month. Resample them
+          to whole months and pass them as <code>standards</code> yourself;
+          check CDC&apos;s terms for your use as well.
+        </p>
+        <p>
+          The example above fetches WHO&apos;s tables from WHO&apos;s repository
+          at runtime, with a loader that lives on this site only. The installed
+          component contains no data and makes no network requests.
         </p>
         <pre
           tabIndex={0}
@@ -202,10 +215,6 @@ export default function Page() {
         >
           {own}
         </pre>
-        <p>
-          Any LMS reference works the same way, such as the CDC 2000 growth
-          charts for older children, once it is resampled to whole months.
-        </p>
       </section>
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Percentiles and z-scores</h2>

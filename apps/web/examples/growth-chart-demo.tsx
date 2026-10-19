@@ -6,11 +6,11 @@ import {
 } from "@workspace/ui/components/toggle-group"
 import {
   GrowthChart,
-  loadWhoGrowthStandards,
   type GrowthMeasure,
   type GrowthSex,
   type GrowthStandards,
 } from "@workspace/registry/growth-chart"
+import { loadWhoGrowthStandards } from "@/lib/who-growth-standards"
 
 // A fictional child's visits, written for this example.
 const ages = [0, 1, 2, 4, 6, 9, 12, 15, 18, 24]
@@ -52,7 +52,7 @@ export function Example() {
   const [measure, setMeasure] = useState<GrowthMeasure>("weight")
   const [sex, setSex] = useState<GrowthSex>("female")
   const [range, setRange] = useState<"24" | "60">("24")
-  // WHO's tables are fetched from WHO's own repository, under WHO's terms.
+  // This site fetches WHO's tables from WHO's repository; the item has none.
   useEffect(() => {
     loadWhoGrowthStandards().then(setStandards, () => setFailed(true))
   }, [])

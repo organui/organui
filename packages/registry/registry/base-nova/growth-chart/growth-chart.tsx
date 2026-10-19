@@ -12,7 +12,7 @@ export type GrowthTable = { start: number; lms: readonly GrowthLms[] }
 export type GrowthStandard = Readonly<Record<GrowthSex, GrowthTable>>
 /**
  * The reference tables the chart draws. You supply and license them: see the
- * docs for loading the WHO Child Growth Standards. `length` is recumbent
+ * docs for where to get WHO or CDC tables. `length` is recumbent
  * length, used below 24 months; `height` is standing height, used from 24.
  */
 export type GrowthStandards = Readonly<{
@@ -184,19 +184,6 @@ export function formatAge(ageMonths: number) {
   return rest ? `${years} y ${rest} mo` : `${years} years`
 }
 
-/**
- * WHO's daily LMS tables in its anthro R package, pinned to one commit. They
- * are WHO's data, distributed in that package under GPL-3: check that their
- * terms suit your use before loading them.
- */
-export const whoAnthroTables = {
-  weight:
-    "https://raw.githubusercontent.com/WorldHealthOrganization/anthro/b776d8a12b1c97369c748b561159fd2ec4f4db58/data-raw/growthstandards/weianthro.txt",
-  length:
-    "https://raw.githubusercontent.com/WorldHealthOrganization/anthro/b776d8a12b1c97369c748b561159fd2ec4f4db58/data-raw/growthstandards/lenanthro.txt",
-  head: "https://raw.githubusercontent.com/WorldHealthOrganization/anthro/b776d8a12b1c97369c748b561159fd2ec4f4db58/data-raw/growthstandards/hcanthro.txt",
-} as const
-
 type AnthroRow = { sex: GrowthSex; age: number; loh: string; lms: GrowthLms }
 
 function anthroRows(text: string): AnthroRow[] {
@@ -253,9 +240,10 @@ function standard(rows: AnthroRow[], from = 0): GrowthStandard | undefined {
 }
 
 /**
- * Builds monthly standards from the text of WHO anthro tables, such as those
- * at `whoAnthroTables`. The length table splits into `length` (rows marked L)
- * and `height` (rows marked H, from 24 months).
+ * Builds monthly standards from tables you supply in the layout of WHO's anthro
+ * package: tab-separated sex (1 male, 2 female), age in days, l, m, s and, for
+ * length, loh. The length table splits into `length` (rows marked L) and
+ * `height` (rows marked H, from 24 months). No tables ship with this file.
  */
 export function growthStandardsFromAnthro(tables: {
   weight?: string
@@ -272,20 +260,6 @@ export function growthStandardsFromAnthro(tables: {
     ),
     head: tables.head ? standard(anthroRows(tables.head)) : undefined,
   }
-}
-
-/** Downloads WHO's anthro tables and builds monthly standards from them. */
-export async function loadWhoGrowthStandards(
-  init?: RequestInit
-): Promise<GrowthStandards> {
-  const entries = await Promise.all(
-    Object.entries(whoAnthroTables).map(async ([measure, url]) => {
-      const response = await fetch(url, init)
-      if (!response.ok) throw new Error(`${url}: ${response.status}`)
-      return [measure, await response.text()] as const
-    })
-  )
-  return growthStandardsFromAnthro(Object.fromEntries(entries))
 }
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 })

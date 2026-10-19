@@ -174,7 +174,7 @@
           "type": "registry:ui"
         }
       ],
-      "docs": "Growth chart docs: https://organui.com/docs/growth-chart. No growth data is included: you pass the reference tables. The WHO Child Growth Standards are © World Health Organization; WHO's anthro package distributes them under GPL-3 (https://www.gnu.org/licenses/gpl-3.0.html) and WHO requires permission for commercial use of its materials (https://www.who.int/about/policies/publishing/copyright). Check those terms before you load them."
+      "docs": "Growth chart docs: https://organui.com/docs/growth-chart. The item ships no growth data and no loader: you pass the reference tables. The docs say where to get them and under what terms. The WHO Child Growth Standards are © World Health Organization, distributed in WHO's anthro package under GPL-3 (https://www.gnu.org/licenses/gpl-3.0.html), and WHO requires permission for commercial use (https://www.who.int/about/policies/publishing/copyright)."
     },
     {
       "name": "medication-schedule",
