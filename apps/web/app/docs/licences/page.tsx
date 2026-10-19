@@ -67,6 +67,14 @@ export default async function Page() {
           if you do, credit the model elsewhere in your interface, as its
           licence requires. A model you serve yourself keeps the same licence.
         </p>
+        <p>
+          The thumbnails in the{" "}
+          <Link href="/organs" className="underline">
+            organs gallery
+          </Link>{" "}
+          are renderings of these models, so each is shared under its
+          model&apos;s licence, and its card shows the credit.
+        </p>
         <div
           tabIndex={0}
           role="region"

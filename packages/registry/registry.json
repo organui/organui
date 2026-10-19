@@ -267,7 +267,7 @@
       "title": "Adrenals",
       "description": "The adrenals from the OrganUI adrenals explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "endocrine"],
       "files": [
         {
           "path": "registry/base-nova/adrenals/adrenals.tsx",
@@ -282,7 +282,7 @@
       "title": "Appendix",
       "description": "The vermiform appendix with the cecum, terminal ileum, iliac vessels and the muscles behind it: 7 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/appendix/appendix.tsx",
@@ -297,7 +297,7 @@
       "title": "Bladder",
       "description": "The bladder from the OrganUI bladder explorer: 12 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "urinary"],
       "files": [
         {
           "path": "registry/base-nova/bladder/bladder.tsx",
@@ -312,7 +312,7 @@
       "title": "Brain",
       "description": "The brain from the OrganUI brain explorer: 19 selectable structures and 6 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "nervous"],
       "files": [
         {
           "path": "registry/base-nova/brain/brain.tsx",
@@ -327,7 +327,7 @@
       "title": "Breast",
       "description": "Both breasts from the HuBMAP Human Reference Atlas: 16 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "reproductive"],
       "files": [
         {
           "path": "registry/base-nova/breast/breast.tsx",
@@ -357,7 +357,7 @@
       "title": "Diaphragm",
       "description": "The diaphragm with the structures that pass through it and the organs above and below: 13 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "respiratory"],
       "files": [
         {
           "path": "registry/base-nova/diaphragm/diaphragm.tsx",
@@ -372,7 +372,7 @@
       "title": "Ear",
       "description": "The ear from the OrganUI ear explorer: 16 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "senses"],
       "files": [
         {
           "path": "registry/base-nova/ear/ear.tsx",
@@ -387,7 +387,7 @@
       "title": "Esophagus",
       "description": "The esophagus from the OrganUI esophagus explorer: 17 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/esophagus/esophagus.tsx",
@@ -402,7 +402,7 @@
       "title": "Eye",
       "description": "The eye from the OrganUI eye explorer: 21 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "senses"],
       "files": [
         {
           "path": "registry/base-nova/eye/eye.tsx",
@@ -417,7 +417,7 @@
       "title": "Gallbladder",
       "description": "The gallbladder from the OrganUI gallbladder explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/gallbladder/gallbladder.tsx",
@@ -432,7 +432,7 @@
       "title": "Hair",
       "description": "A hair follicle in a cut-away plug of scalp, from an original OrganUI schematic model: 14 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "integumentary"],
       "files": [
         {
           "path": "registry/base-nova/hair/hair.tsx",
@@ -447,7 +447,7 @@
       "title": "Heart",
       "description": "The heart from the OrganUI heart explorer: 11 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "cardiovascular"],
       "files": [
         {
           "path": "registry/base-nova/heart/heart.tsx",
@@ -462,7 +462,7 @@
       "title": "Intestines",
       "description": "The intestines from the OrganUI intestines explorer: 11 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/intestines/intestines.tsx",
@@ -477,7 +477,7 @@
       "title": "Joints",
       "description": "The joints and ligaments of the whole body, from Z-Anatomy: 197 selectable structures and 9 named views. Model licensed CC BY-SA 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "musculoskeletal"],
       "files": [
         {
           "path": "registry/base-nova/joints/joints.tsx",
@@ -492,7 +492,7 @@
       "title": "Kidneys",
       "description": "The kidneys from the OrganUI kidneys explorer: 6 selectable structures and 4 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "urinary"],
       "files": [
         {
           "path": "registry/base-nova/kidneys/kidneys.tsx",
@@ -507,7 +507,7 @@
       "title": "Larynx",
       "description": "The larynx from the OrganUI larynx explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "respiratory"],
       "files": [
         {
           "path": "registry/base-nova/larynx/larynx.tsx",
@@ -522,7 +522,7 @@
       "title": "Liver",
       "description": "The liver from the OrganUI liver explorer: 7 selectable structures and 5 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/liver/liver.tsx",
@@ -537,7 +537,7 @@
       "title": "Lungs",
       "description": "The lungs from the OrganUI lungs explorer: 20 selectable structures and 4 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "respiratory"],
       "files": [
         {
           "path": "registry/base-nova/lungs/lungs.tsx",
@@ -552,7 +552,7 @@
       "title": "Lymph node",
       "description": "The lymph node from the OrganUI lymph node explorer: 7 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "lymphatic"],
       "files": [
         {
           "path": "registry/base-nova/lymph/lymph.tsx",
@@ -567,7 +567,7 @@
       "title": "Muscles",
       "description": "The muscles from the OrganUI muscles explorer: 177 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "musculoskeletal"],
       "files": [
         {
           "path": "registry/base-nova/muscles/muscles.tsx",
@@ -582,7 +582,7 @@
       "title": "Nails",
       "description": "A fingertip halved through the nail, from an original OrganUI schematic model: 14 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "integumentary"],
       "files": [
         {
           "path": "registry/base-nova/nails/nails.tsx",
@@ -597,7 +597,7 @@
       "title": "Nerves",
       "description": "The peripheral nerves of the whole body, from the cranial nerves to the plexuses of the arms and legs: 41 selectable structures and 6 named views. Model licensed CC BY-SA 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "nervous"],
       "files": [
         {
           "path": "registry/base-nova/nerves/nerves.tsx",
@@ -612,7 +612,7 @@
       "title": "Nose",
       "description": "The nose from the OrganUI nose explorer: 22 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "respiratory"],
       "files": [
         {
           "path": "registry/base-nova/nose/nose.tsx",
@@ -627,7 +627,7 @@
       "title": "Pancreas",
       "description": "The pancreas from the OrganUI pancreas explorer: 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/pancreas/pancreas.tsx",
@@ -642,7 +642,7 @@
       "title": "Parathyroid",
       "description": "The four parathyroid glands on the back of the thyroid: 9 selectable structures and 5 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "endocrine"],
       "files": [
         {
           "path": "registry/base-nova/parathyroid/parathyroid.tsx",
@@ -657,7 +657,7 @@
       "title": "Pharynx",
       "description": "The pharynx from the OrganUI pharynx explorer: 20 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "respiratory"],
       "files": [
         {
           "path": "registry/base-nova/pharynx/pharynx.tsx",
@@ -672,7 +672,7 @@
       "title": "Pineal",
       "description": "The pineal gland and its neighbours deep in the brain: the epithalamus, thalami, midbrain tectum and deep veins. 15 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "endocrine"],
       "files": [
         {
           "path": "registry/base-nova/pineal/pineal.tsx",
@@ -687,7 +687,7 @@
       "title": "Pituitary",
       "description": "The pituitary gland in its setting: the hypothalamus above it, the optic chiasm, its portal blood supply, the cavernous sinus and the sphenoid bone. 19 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "endocrine"],
       "files": [
         {
           "path": "registry/base-nova/pituitary/pituitary.tsx",
@@ -702,7 +702,7 @@
       "title": "Prostate",
       "description": "The prostate from the OrganUI prostate explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "reproductive"],
       "files": [
         {
           "path": "registry/base-nova/prostate/prostate.tsx",
@@ -717,7 +717,7 @@
       "title": "Salivary glands",
       "description": "The major salivary glands, from Z-Anatomy: 15 selectable structures and 3 named views. Model licensed CC BY-SA 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/salivary-glands/salivary-glands.tsx",
@@ -732,7 +732,7 @@
       "title": "Skeleton",
       "description": "The skeleton from the OrganUI skeleton explorer: 242 selectable structures and 8 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "musculoskeletal"],
       "files": [
         {
           "path": "registry/base-nova/skeleton/skeleton.tsx",
@@ -747,7 +747,7 @@
       "title": "Skin",
       "description": "The skin from the OrganUI skin explorer: 13 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "integumentary"],
       "files": [
         {
           "path": "registry/base-nova/skin/skin.tsx",
@@ -762,7 +762,7 @@
       "title": "Spinal cord",
       "description": "The spinal cord from the OrganUI spinal cord explorer: 63 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "nervous"],
       "files": [
         {
           "path": "registry/base-nova/spinal-cord/spinal-cord.tsx",
@@ -777,7 +777,7 @@
       "title": "Spleen",
       "description": "The spleen from the OrganUI spleen explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "lymphatic"],
       "files": [
         {
           "path": "registry/base-nova/spleen/spleen.tsx",
@@ -792,7 +792,7 @@
       "title": "Stomach",
       "description": "The stomach from the OrganUI stomach explorer: 9 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/stomach/stomach.tsx",
@@ -807,7 +807,7 @@
       "title": "Teeth",
       "description": "The teeth from the OrganUI teeth explorer: 33 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/teeth/teeth.tsx",
@@ -822,7 +822,7 @@
       "title": "Thymus",
       "description": "The thymus from the OrganUI thymus explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "lymphatic"],
       "files": [
         {
           "path": "registry/base-nova/thymus/thymus.tsx",
@@ -837,7 +837,7 @@
       "title": "Thyroid",
       "description": "The thyroid from the OrganUI thyroid explorer: 18 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "endocrine"],
       "files": [
         {
           "path": "registry/base-nova/thyroid/thyroid.tsx",
@@ -852,7 +852,7 @@
       "title": "Tongue",
       "description": "The tongue from the OrganUI tongue explorer: 13 selectable structures and 3 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "digestive"],
       "files": [
         {
           "path": "registry/base-nova/tongue/tongue.tsx",
@@ -867,7 +867,7 @@
       "title": "Uterus",
       "description": "The uterus from the OrganUI uterus explorer: 27 selectable structures and 3 named views. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "reproductive"],
       "files": [
         {
           "path": "registry/base-nova/uterus/uterus.tsx",
@@ -882,7 +882,7 @@
       "title": "Vessels",
       "description": "The vessels from the OrganUI vessels explorer: 51 selectable structures and 6 named views. Model licensed CC BY-SA 2.1 JP.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "cardiovascular"],
       "files": [
         {
           "path": "registry/base-nova/vessels/vessels.tsx",
@@ -897,7 +897,7 @@
       "title": "Vestibular system",
       "description": "The inner ear's balance organs: the vestibule and three semicircular canals, with the cochlea and vestibular nerve. 6 selectable structures and 4 named views. Model licensed CC BY-SA 4.0.",
       "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["organ"],
+      "categories": ["organ", "senses"],
       "files": [
         {
           "path": "registry/base-nova/vestibular/vestibular.tsx",

@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { heartModel } from "@workspace/registry/heart"
+import { kidneysModel } from "@workspace/registry/kidneys"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
 
@@ -180,6 +181,16 @@ test("homepage explorer links support keyboard navigation without overflow", asy
 })
 
 // The scan of every preview is its own test, so neither needs a long timeout.
+// Items that depend on other OrganUI items are shown installing by name.
+function installCommand(item: {
+  name: string
+  registryDependencies?: string[]
+}) {
+  return item.registryDependencies?.some((name) => name.startsWith("@organui/"))
+    ? `bunx shadcn@4.22.1 add @organui/${item.name}`
+    : `bunx shadcn@4.22.1 add https://organui.com/r/${item.name}.json`
+}
+
 test("guides and the component index pass an accessibility scan without overflow", async ({
   page,
 }, info) => {
@@ -229,7 +240,8 @@ test("component index lists every component inside the docs layout", async ({
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
   )
-  for (const item of components) {
+  // Organs are listed on /organs; the index links there instead.
+  for (const item of components.filter((item) => !organs.includes(item))) {
     const title = item.title ?? item.name
     await expect(
       page
@@ -238,31 +250,24 @@ test("component index lists every component inside the docs layout", async ({
     ).toHaveAttribute("href", `/docs/components/${item.name}`)
     await expect(
       page.getByRole("region", { name: `Install ${title}`, exact: true })
-    ).toHaveText(
-      // Items that depend on other OrganUI items install through the namespace.
-      item.registryDependencies?.some((name) => name.startsWith("@organui/"))
-        ? `bunx shadcn@4.22.1 add @organui/${item.name}`
-        : `bunx shadcn@4.22.1 add https://organui.com/r/${item.name}.json`
-    )
+    ).toHaveText(installCommand(item))
     await expect(
       page
         .getByRole("group", { name: `${title} preview`, exact: true })
         .locator(":scope > *")
     ).toBeVisible()
   }
-  // Organs are their own section of the index, which the header links to.
   const organSection = page.getByRole("region", { name: "Organs", exact: true })
-  await expect(
-    organSection.getByRole("heading", { name: "Organs", level: 2 })
-  ).toHaveAttribute("id", "organs")
   for (const item of organs)
     await expect(
-      organSection.getByRole("heading", {
-        name: item.title ?? item.name,
-        level: 3,
-        exact: true,
-      })
-    ).toBeVisible()
+      organSection.getByRole("heading", { name: item.title ?? item.name })
+    ).toHaveCount(0)
+  await expect(
+    organSection.getByRole("link", {
+      name: `All ${organs.length} organs`,
+      exact: true,
+    })
+  ).toHaveAttribute("href", "/organs")
   const pages = await Promise.all(
     components.map(({ name }) => request.get(`/docs/components/${name}`))
   )
@@ -299,7 +304,7 @@ test("component index lists every component inside the docs layout", async ({
       name: `Browse all ${organs.length} organs`,
       exact: true,
     })
-  ).toHaveAttribute("href", "/docs/components#organs")
+  ).toHaveAttribute("href", "/organs")
   if (narrow) {
     // Tapping the current page still closes the menu.
     await docs.getByRole("link", { name: "Components", exact: true }).click()
@@ -359,10 +364,15 @@ test("the header links each section and searches the whole site", async ({
     "Blocks",
   ])
   await main.getByRole("link", { name: "Organs", exact: true }).click()
-  await expect(page).toHaveURL(/\/docs\/components#organs$/)
+  await expect(page).toHaveURL(/\/organs$/)
   await expect(
-    page.getByRole("main").getByRole("heading", { name: "Organs", level: 2 })
-  ).toBeInViewport()
+    page.getByRole("heading", { name: "Organs", level: 1 })
+  ).toBeVisible()
+  await expect(
+    page
+      .getByRole("navigation", { name: "Main" })
+      .getByRole("link", { name: "Organs", exact: true })
+  ).toHaveAttribute("aria-current", "page")
   await expect(
     page.getByRole("link", { name: "GitHub repository", exact: false })
   ).toHaveAttribute("href", "https://github.com/organui/organui")
@@ -405,6 +415,94 @@ test("the header links each section and searches the whole site", async ({
   const before = await dark()
   await page.getByRole("button", { name: "Toggle theme" }).click()
   await expect.poll(dark).toBe(!before)
+  expect(errors).toEqual([])
+})
+
+test("the organs gallery groups every organ by system and opens one scene at a time", async ({
+  page,
+  request,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  // Stand-ins for the commit-pinned models instead of the CDN.
+  for (const model of [heartModel, kidneysModel])
+    await page.route(model.src, (route) =>
+      route.fulfill({
+        body: Buffer.from(fixtureGlb(model.structures.map(({ id }) => id))),
+        contentType: "model/gltf-binary",
+      })
+    )
+  const organs = registrySchema
+    .parse(await (await request.get("/r/registry.json")).json())
+    .items.filter(({ categories }) => categories?.includes("organ"))
+  await page.goto("/organs")
+  await expect(
+    page.getByRole("heading", { name: "Organs", level: 1 })
+  ).toBeVisible()
+  // Nothing loads in 3D until asked.
+  await expect(page.locator("canvas")).toHaveCount(0)
+  const systems = page.getByRole("navigation", { name: "Body systems" })
+  const chips = await systems.getByRole("link").allTextContents()
+  expect(chips).toHaveLength(11)
+  let listed = 0
+  for (const title of chips) {
+    const section = page.getByRole("region", { name: title, exact: true })
+    for (const heading of await section
+      .getByRole("heading", { level: 3 })
+      .allTextContents()) {
+      const item = organs.find(
+        (organ) => (organ.title ?? organ.name) === heading
+      )
+      expect(item).toBeDefined()
+      listed++
+      await expect(
+        section
+          .getByRole("heading", { name: heading, level: 3, exact: true })
+          .getByRole("link")
+      ).toHaveAttribute("href", `/docs/components/${item!.name}`)
+      await expect(
+        section.getByRole("region", { name: `Install ${heading}`, exact: true })
+      ).toHaveText(installCommand(item!))
+      // Each card credits the model its thumbnail was rendered from.
+      await expect(
+        section
+          .getByRole("button", {
+            name: `Load the ${heading.toLowerCase()} in 3D`,
+          })
+          .locator("img")
+      ).toHaveAttribute("src", `/organs/${item!.name}.webp`)
+    }
+  }
+  expect(listed).toBe(organs.length)
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({ path: info.outputPath("organs.png"), fullPage: true })
+
+  await page.getByRole("button", { name: "Load the heart in 3D" }).click()
+  const heart = page.getByRole("group", {
+    name: "Heart 3D preview",
+    exact: true,
+  })
+  await expect(
+    heart.getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  await page.getByRole("button", { name: "Load the kidneys in 3D" }).click()
+  await expect(
+    page
+      .getByRole("group", { name: "Kidneys 3D preview", exact: true })
+      .getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  // The heart went back to its thumbnail, so one scene runs at a time.
+  await expect(heart).toHaveCount(0)
+  await expect(
+    page.getByRole("button", { name: "Load the heart in 3D" })
+  ).toBeVisible()
+  await expect(page.locator("canvas")).toHaveCount(1)
   expect(errors).toEqual([])
 })
 

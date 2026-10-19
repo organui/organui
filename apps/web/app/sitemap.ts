@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next"
-import { componentsIndex, guides, registryItems } from "@/lib/registry"
+import {
+  componentsIndex,
+  guides,
+  organsPage,
+  registryItems,
+} from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     ...guides.map((guide) => guide.href),
     componentsIndex.href,
+    organsPage.href,
     "/blocks",
     ...registryItems.map((item) => item.href),
   ].map((path) => ({

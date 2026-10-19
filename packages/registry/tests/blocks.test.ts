@@ -138,6 +138,31 @@ test("every component belongs to one docs group", () => {
   }
 })
 
+// The /organs gallery groups organs by body system (apps/web/lib/registry.ts),
+// so each organ needs exactly one and nothing else may have one.
+test("every organ belongs to one body system", () => {
+  const systems = [
+    "nervous",
+    "senses",
+    "endocrine",
+    "cardiovascular",
+    "lymphatic",
+    "respiratory",
+    "digestive",
+    "urinary",
+    "reproductive",
+    "musculoskeletal",
+    "integumentary",
+  ]
+  for (const item of registry.items) {
+    const categories: readonly string[] =
+      "categories" in item ? item.categories : []
+    expect(
+      categories.filter((category) => systems.includes(category))
+    ).toHaveLength(categories.includes("organ") ? 1 : 0)
+  }
+})
+
 // Registry dependencies such as tooltip install in the consumer's own style,
 // and Base UI's render prop does nothing on the Radix styles, so items that
 // use it say so after install. Organs and blocks inherit it from the viewer.

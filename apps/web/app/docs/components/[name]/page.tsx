@@ -65,6 +65,7 @@ export function ${component}Demo() {
         <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
           Components /{" "}
           {componentGroups.find(({ id }) => id === item.group)?.title}
+          {item.system && ` / ${item.system.title}`}
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">

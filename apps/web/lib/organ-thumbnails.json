@@ -1,0 +1,13 @@
+{
+  "heart": {
+    "file": "/organs/heart.webp",
+    "sha256": "966083b8e26c537d73f0ba2917f9c5a913ce37bf5fe37b3386332c68d670b24a",
+    "width": 640,
+    "height": 480,
+    "model": "https://cdn.jsdelivr.net/gh/organui/heart-3d@c72ce6654ff8e282942f97750d3104f55ef4fc3d/public/models/heart.glb",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+    "credit": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International",
+    "source": "https://github.com/organui/heart-3d/blob/c72ce6654ff8e282942f97750d3104f55ef4fc3d/public/models/ATTRIBUTION.md"
+  }
+}

@@ -6,6 +6,8 @@ import {
   componentGroups,
   componentsIndex,
   docsMetadata,
+  organs,
+  organsPage,
   registryItems,
 } from "@/lib/registry"
 
@@ -45,7 +47,7 @@ export default function Page() {
           </h2>
           <ul className="grid gap-4">
             {registryItems
-              .filter((item) => item.group === group.id)
+              .filter((item) => item.group === group.id && !item.organ)
               .map((item) => (
                 <li
                   key={item.name}
@@ -83,6 +85,22 @@ export default function Page() {
                   </a>
                 </li>
               ))}
+            {group.id === "organs" && (
+              <li className="flex min-w-0 flex-col gap-3 rounded-xl border p-5">
+                <h3 className="text-lg font-semibold">
+                  <Link
+                    href={organsPage.href}
+                    className="underline-offset-4 hover:underline"
+                  >
+                    All {organs.length} organs
+                  </Link>
+                </h3>
+                <p className="text-muted-foreground">
+                  Every organ built on the organ viewer, from the brain to the
+                  nails, grouped by body system in the organs gallery.
+                </p>
+              </li>
+            )}
           </ul>
         </section>
       ))}

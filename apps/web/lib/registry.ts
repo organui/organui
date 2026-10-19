@@ -30,6 +30,31 @@ export const componentGroups = [
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
 
+// The /organs gallery's sections, in order. Each organ carries exactly one
+// of these as a registry category (a registry test checks it).
+export const bodySystems = [
+  { id: "nervous", title: "Nervous" },
+  { id: "senses", title: "Special senses" },
+  { id: "endocrine", title: "Endocrine" },
+  { id: "cardiovascular", title: "Cardiovascular" },
+  { id: "lymphatic", title: "Lymphatic & immune" },
+  { id: "respiratory", title: "Respiratory" },
+  { id: "digestive", title: "Digestive" },
+  { id: "urinary", title: "Urinary" },
+  { id: "reproductive", title: "Reproductive" },
+  { id: "musculoskeletal", title: "Musculoskeletal" },
+  { id: "integumentary", title: "Integumentary" },
+] as const
+
+export type BodySystem = (typeof bodySystems)[number]
+
+function systemOf(categories: readonly string[]) {
+  if (!categories.includes("organ")) return undefined
+  const system = bodySystems.find(({ id }) => categories.includes(id))
+  if (!system) throw new Error(`No body system for ${categories.join(", ")}`)
+  return system
+}
+
 function groupOf(categories: readonly string[] = []) {
   const group = componentGroups.find((entry) =>
     entry.categories.some((category) => categories.includes(category))
@@ -50,6 +75,7 @@ export const registryItems = catalog.items
       name: item.name,
       group: groupOf(categories),
       organ: categories.includes("organ"),
+      system: systemOf(categories),
       // Items built on the organ viewer with a model: organs and the cell.
       model: categories.includes("organ") || categories.includes("cell"),
       title: item.title ?? item.name,
@@ -152,18 +178,23 @@ export const componentsIndex: NavLink & { description: string } = {
   description: "Every OrganUI component, grouped by category.",
 }
 
-export const organsHref = "/docs/components#organs"
+export const organsPage: NavLink & { description: string } = {
+  title: "Organs",
+  href: "/organs",
+  description:
+    "Every organ, grouped by body system, with a thumbnail and its install command.",
+}
 
 export const mainNav: NavLink[] = [
   { title: "Docs", href: "/docs" },
   { title: "Components", href: componentsIndex.href },
-  { title: "Organs", href: organsHref },
+  { title: organsPage.title, href: organsPage.href },
   { title: "Blocks", href: "/blocks" },
 ]
 
 // The sidebar lists the guides and every component except the organs, which
-// are one link to their section of the index; each organ page is still in
-// search and in the previous and next links.
+// are one link to the /organs gallery; each organ page is still in search and
+// in the previous and next links.
 export const docsNav: DocsNavSection[] = [
   { title: "Sections", items: [...guides, componentsIndex] },
   ...componentGroups.map(({ id, title }) => ({
@@ -173,7 +204,12 @@ export const docsNav: DocsNavSection[] = [
         .filter((item) => item.group === id && !item.organ)
         .map(({ title, href }) => ({ title, href })),
       ...(id === "organs"
-        ? [{ title: `Browse all ${organs.length} organs`, href: organsHref }]
+        ? [
+            {
+              title: `Browse all ${organs.length} organs`,
+              href: organsPage.href,
+            },
+          ]
         : []),
     ],
   })),
