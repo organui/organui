@@ -69,7 +69,7 @@ export function OrganPreview({
             height={thumbnail.height}
             alt=""
             unoptimized
-            sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw"
+            sizes="(min-width: 1280px) 22rem, (min-width: 640px) 45vw, 100vw"
             className="size-full object-contain transition-transform group-hover:scale-[1.03]"
           />
         )}

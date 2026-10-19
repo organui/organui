@@ -31,13 +31,21 @@ const nextConfig: NextConfig = {
   // install, so these stay. Each is listed by name because /docs/<slug> is
   // also where the guides live.
   async redirects() {
-    return catalog.items
-      .filter((item) => item.type !== "registry:block")
-      .map((item) => ({
-        source: `/docs/${item.name}`,
-        destination: `/docs/components/${item.name}`,
+    return [
+      ...catalog.items
+        .filter((item) => item.type !== "registry:block")
+        .map((item) => ({
+          source: `/docs/${item.name}`,
+          destination: `/docs/components/${item.name}`,
+          permanent: true,
+        })),
+      // The organs gallery's first address.
+      {
+        source: "/organs",
+        destination: "/docs/components/organs",
         permanent: true,
-      }))
+      },
+    ]
   },
 }
 

@@ -69,7 +69,7 @@ export default async function Page() {
         </p>
         <p>
           The thumbnails in the{" "}
-          <Link href="/organs" className="underline">
+          <Link href="/docs/components/organs" className="underline">
             organs gallery
           </Link>{" "}
           are renderings of these models, so each is shared under its

@@ -267,7 +267,7 @@ test("component index lists every component inside the docs layout", async ({
       name: `All ${organs.length} organs`,
       exact: true,
     })
-  ).toHaveAttribute("href", "/organs")
+  ).toHaveAttribute("href", "/docs/components/organs")
   const pages = await Promise.all(
     components.map(({ name }) => request.get(`/docs/components/${name}`))
   )
@@ -304,7 +304,7 @@ test("component index lists every component inside the docs layout", async ({
       name: `Browse all ${organs.length} organs`,
       exact: true,
     })
-  ).toHaveAttribute("href", "/organs")
+  ).toHaveAttribute("href", "/docs/components/organs")
   if (narrow) {
     // Tapping the current page still closes the menu.
     await docs.getByRole("link", { name: "Components", exact: true }).click()
@@ -341,6 +341,12 @@ test("old component addresses redirect permanently", async ({ request }) => {
       new URL(response.headers().location!, "http://localhost").pathname
     ).toBe(`/docs/components/${name}`)
   }
+  // The organs gallery's first address.
+  const organs = await request.get("/organs", { maxRedirects: 0 })
+  expect(organs.status()).toBe(308)
+  expect(new URL(organs.headers().location!, "http://localhost").pathname).toBe(
+    "/docs/components/organs"
+  )
 })
 
 test("the header links each section and searches the whole site", async ({
@@ -364,7 +370,7 @@ test("the header links each section and searches the whole site", async ({
     "Blocks",
   ])
   await main.getByRole("link", { name: "Organs", exact: true }).click()
-  await expect(page).toHaveURL(/\/organs$/)
+  await expect(page).toHaveURL(/\/docs\/components\/organs$/)
   await expect(
     page.getByRole("heading", { name: "Organs", level: 1 })
   ).toBeVisible()
@@ -374,6 +380,10 @@ test("the header links each section and searches the whole site", async ({
   await expect(
     main.getByRole("link", { name: "Organs", exact: true })
   ).toHaveAttribute("aria-current", "page")
+  // The gallery is under Components, but only its own section is current.
+  await expect(
+    main.getByRole("link", { name: "Components", exact: true })
+  ).not.toHaveAttribute("aria-current")
   if (narrow) await page.keyboard.press("Escape")
   await expect(
     page.getByRole("link", { name: "GitHub repository", exact: false })
@@ -437,9 +447,12 @@ test("the organs gallery groups every organ by system and opens one scene at a t
   const organs = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
     .items.filter(({ categories }) => categories?.includes("organ"))
-  await page.goto("/organs")
+  await page.goto("/docs/components/organs")
   await expect(
     page.getByRole("heading", { name: "Organs", level: 1 })
+  ).toBeVisible()
+  await expect(
+    page.getByText("Components / Organs", { exact: true })
   ).toBeVisible()
   // Nothing loads in 3D until asked.
   await expect(page.locator("canvas")).toHaveCount(0)

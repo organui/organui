@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import { DocsNav } from "@/components/docs-nav"
-import { isCurrentSection } from "@/components/main-nav"
+import { currentSection } from "@/components/main-nav"
 import type { DocsNavSection, NavLink } from "@/lib/registry"
 import { Button } from "@workspace/ui/components/button"
 import {
@@ -26,7 +26,7 @@ export function MobileNav({
   className?: string
 }) {
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
+  const current = currentSection(items, usePathname())
   const close = () => setOpen(false)
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -63,9 +63,7 @@ export function MobileNav({
               key={item.href}
               href={item.href}
               onClick={close}
-              aria-current={
-                isCurrentSection(item.href, pathname) ? "page" : undefined
-              }
+              aria-current={item.href === current ? "page" : undefined}
               className="rounded-md px-2 py-1.5 font-medium hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
             >
               {item.title}

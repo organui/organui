@@ -31,7 +31,7 @@ export const componentGroups = [
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
 
-// The /organs gallery's sections, in order. Each organ carries exactly one
+// The organs gallery's sections, in order. Each organ carries exactly one
 // of these as a registry category (a registry test checks it).
 export const bodySystems = systems
 
@@ -169,7 +169,7 @@ export const componentsIndex: NavLink & { description: string } = {
 
 export const organsPage: NavLink & { description: string } = {
   title: "Organs",
-  href: "/organs",
+  href: "/docs/components/organs",
   description:
     "Every organ, grouped by body system, with a thumbnail and its install command.",
 }
@@ -182,7 +182,7 @@ export const mainNav: NavLink[] = [
 ]
 
 // The sidebar lists the guides and every component except the organs, which
-// are one link to the /organs gallery; each organ page is still in search and
+// are one link to the organs gallery; each organ page is still in search and
 // in the previous and next links.
 export const docsNav: DocsNavSection[] = [
   { title: "Sections", items: [...guides, componentsIndex] },
@@ -205,10 +205,14 @@ export const docsNav: DocsNavSection[] = [
 ]
 
 // Reading order for the previous and next links.
+// The organs gallery comes before the organs, after the viewer and tree.
 const pageOrder: NavLink[] = [
   ...guides,
   componentsIndex,
-  ...registryItems.map(({ title, href }) => ({ title, href })),
+  ...registryItems.flatMap(({ title, href, name }) => [
+    ...(name === organs[0]?.name ? [organsPage] : []),
+    { title, href },
+  ]),
 ]
 
 export function neighbours(href: string) {

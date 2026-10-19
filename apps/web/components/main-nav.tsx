@@ -6,17 +6,13 @@ import type { NavLink } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
-// Docs covers the guides; Components covers the index and every component
-// page. Organs points into the index, so it is never the current page.
-export function isCurrentSection(href: string, pathname: string) {
-  if (href.includes("#")) return false
-  if (href === "/docs")
-    return (
-      pathname === "/docs" ||
-      (pathname.startsWith("/docs/") &&
-        !pathname.startsWith("/docs/components"))
-    )
-  return pathname === href || pathname.startsWith(`${href}/`)
+// The section a page belongs to: the item whose address is the longest
+// prefix of it, so the organs gallery is Organs rather than Components, and
+// Docs covers the guides.
+export function currentSection(items: NavLink[], pathname: string) {
+  return items
+    .filter(({ href }) => pathname === href || pathname.startsWith(`${href}/`))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href
 }
 
 export function MainNav({
@@ -26,11 +22,11 @@ export function MainNav({
   items: NavLink[]
   className?: string
 }) {
-  const pathname = usePathname()
+  const current = currentSection(items, usePathname())
   return (
     <nav aria-label="Main" className={cn("items-center", className)}>
       {items.map((item) => {
-        const active = isCurrentSection(item.href, pathname)
+        const active = item.href === current
         return (
           <Link
             key={item.href}
