@@ -9,11 +9,6 @@ on:
         description: Organs to render, comma-separated (default all)
         required: false
         default: ""
-  # TEMPORARY, removed before merge: renders the first set for the branch
-  # that adds the gallery, which can't be dispatched before it is on master.
-  push:
-    branches: [organs-gallery]
-    paths: [.github/workflows/thumbnails.yml]
 permissions:
   contents: write
   pull-requests: write
