@@ -14,3 +14,7 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # Types follow the oldest supported Node (engines), not the newest release.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
