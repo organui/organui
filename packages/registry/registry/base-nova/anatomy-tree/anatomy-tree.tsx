@@ -348,7 +348,9 @@ export function AnatomyTree({
                 else refs.current.delete(node.id)
               }}
               role="treeitem"
-              aria-label={node.label}
+              // Voice control users say what they see, so the name carries the
+              // row's visible text: the label, then its visibility state.
+              aria-label={`${node.label}, ${state.toLowerCase()}`}
               aria-level={level}
               aria-setsize={size}
               aria-posinset={position}
@@ -434,7 +436,7 @@ export function AnatomyTree({
                   />
                 )}
                 <span className="min-w-0">{node.label}</span>
-              </TreeButton>
+              </TreeButton>{" "}
               <Button
                 variant="outline"
                 size="xs"

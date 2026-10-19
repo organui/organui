@@ -363,14 +363,19 @@ function Strands({
           )}
         >
           {[pair.base, pair.partner].map((base, strand) => (
-            <span key={strand} className="flex items-center gap-0.5">
-              <span
-                aria-hidden="true"
-                className="size-1.5 rounded-full"
-                style={{ backgroundColor: nucleobaseColors[base] }}
-              />
-              {base}
-            </span>
+            // The space keeps the bases separate words in the visible label,
+            // so voice control matches them against the accessible name.
+            <React.Fragment key={strand}>
+              {strand > 0 && " "}
+              <span className="flex items-center gap-0.5">
+                <span
+                  aria-hidden="true"
+                  className="size-1.5 rounded-full"
+                  style={{ backgroundColor: nucleobaseColors[base] }}
+                />
+                {base}
+              </span>
+            </React.Fragment>
           ))}
         </button>
       ))}

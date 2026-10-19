@@ -9,12 +9,12 @@ test.beforeEach(async ({ page }) => {
 test("navigation, expansion and selection are separate from visibility", async ({
   page,
 }) => {
-  const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
+  const heart = page.getByRole("treeitem", { name: /^Heart, / })
   await page.getByRole("searchbox").focus()
   await page.keyboard.press("Tab")
   await expect(heart).toBeFocused()
   await page.keyboard.press("ArrowDown")
-  const left = page.getByRole("treeitem", { name: "Left heart", exact: true })
+  const left = page.getByRole("treeitem", { name: /^Left heart, / })
   await expect(left).toBeFocused()
   await expect(page.getByLabel("Selected", { exact: true })).toHaveText("none")
   await page.keyboard.press("Enter")
@@ -31,11 +31,11 @@ test("navigation, expansion and selection are separate from visibility", async (
   await page.keyboard.press("ArrowRight")
   await page.keyboard.press("ArrowRight")
   await expect(
-    page.getByRole("treeitem", { name: "Left atrium", exact: true })
+    page.getByRole("treeitem", { name: /^Left atrium, / })
   ).toBeFocused()
   await page.keyboard.press("End")
   await expect(
-    page.getByRole("treeitem", { name: "Right ventricle", exact: true })
+    page.getByRole("treeitem", { name: /^Right ventricle, / })
   ).toBeFocused()
   await page.keyboard.press("Home")
   await expect(heart).toBeFocused()
@@ -73,7 +73,7 @@ test("filtered ancestors affect all leaves and clearing restores collapse", asyn
   await page.getByRole("searchbox").fill("")
   await expect(page.getByRole("treeitem")).toHaveCount(5)
   await expect(
-    page.getByRole("treeitem", { name: "Left heart", exact: true })
+    page.getByRole("treeitem", { name: /^Left heart, / })
   ).toHaveAttribute("aria-expanded", "false")
 })
 
@@ -86,13 +86,11 @@ test("data replacement recovers focus and new leaves default visible", async ({
   await page
     .getByRole("button", { name: "Schedule replacement", exact: true })
     .click()
-  await page.getByRole("treeitem", { name: "Left atrium", exact: true }).focus()
+  await page.getByRole("treeitem", { name: /^Left atrium, / }).focus()
   await expect(page.getByRole("treeitem")).toHaveCount(2)
+  await expect(page.getByRole("treeitem", { name: /^Heart, / })).toBeFocused()
   await expect(
-    page.getByRole("treeitem", { name: "Heart", exact: true })
-  ).toBeFocused()
-  await expect(
-    page.getByRole("treeitem", { name: "New structure", exact: true })
+    page.getByRole("treeitem", { name: /^New structure, / })
   ).toHaveAttribute("aria-checked", "true")
   await page
     .getByRole("button", { name: "Visible: hide New structure", exact: true })
@@ -108,13 +106,13 @@ test("data replacement recovers focus and new leaves default visible", async ({
 test("updates after focus leaves to a non-focusable viewer keep focus there", async ({
   page,
 }) => {
-  const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
+  const heart = page.getByRole("treeitem", { name: /^Heart, / })
   await heart.focus()
   // A canvas viewer cannot take focus, so focus moves to the body.
   await page.getByRole("img", { name: "Viewer", exact: true }).click()
   await expect(page.getByLabel("Selected", { exact: true })).toHaveText("rv")
   await expect(
-    page.getByRole("treeitem", { name: "Right ventricle", exact: true })
+    page.getByRole("treeitem", { name: /^Right ventricle, / })
   ).toHaveAttribute("aria-selected", "true")
   await expect(heart).not.toBeFocused()
   expect(
@@ -147,14 +145,12 @@ test("Right does not move into a sibling when search excludes children", async (
   page,
 }) => {
   await page.getByRole("searchbox").fill("heart")
-  const left = page.getByRole("treeitem", { name: "Left heart", exact: true })
+  const left = page.getByRole("treeitem", { name: /^Left heart, / })
   await left.focus()
   await page.keyboard.press("ArrowRight")
   await expect(left).toBeFocused()
   await page.keyboard.press("ArrowLeft")
-  await expect(
-    page.getByRole("treeitem", { name: "Heart", exact: true })
-  ).toBeFocused()
+  await expect(page.getByRole("treeitem", { name: /^Heart, / })).toBeFocused()
 })
 
 test("empty updates restore search focus and arbitrary IDs retain visibility", async ({
@@ -163,9 +159,7 @@ test("empty updates restore search focus and arbitrary IDs retain visibility", a
   await page
     .getByRole("button", { name: "Schedule empty", exact: true })
     .click()
-  await page
-    .getByRole("treeitem", { name: "Right atrium", exact: true })
-    .focus()
+  await page.getByRole("treeitem", { name: /^Right atrium, / }).focus()
   await expect(page.getByRole("searchbox")).toBeFocused()
   await page.getByRole("button", { name: "Special IDs", exact: true }).click()
   await page
@@ -175,7 +169,7 @@ test("empty updates restore search focus and arbitrary IDs retain visibility", a
     '{"__proto__":false}'
   )
   await expect(
-    page.getByRole("treeitem", { name: "Special ID", exact: true })
+    page.getByRole("treeitem", { name: /^Special ID, / })
   ).toHaveAttribute("aria-checked", "false")
 })
 
@@ -207,14 +201,11 @@ test("a selection made outside the tree expands and reveals its row", async ({
     .click()
   await expect(page.getByRole("treeitem")).toHaveCount(1)
   await page.getByRole("img", { name: "Viewer", exact: true }).click()
-  const right = page.getByRole("treeitem", {
-    name: "Right ventricle",
-    exact: true,
-  })
+  const right = page.getByRole("treeitem", { name: /^Right ventricle, / })
   await expect(right).toHaveAttribute("aria-selected", "true")
   await expect(right).toBeInViewport()
   await expect(
-    page.getByRole("treeitem", { name: "Left heart", exact: true })
+    page.getByRole("treeitem", { name: /^Left heart, / })
   ).toHaveAttribute("aria-expanded", "true")
   // Collapsing again is respected until the selection changes.
   await page
@@ -227,7 +218,7 @@ test("groups that are not selectable expand instead, and colors show", async ({
   page,
 }) => {
   await page.getByRole("button", { name: "Grouped data", exact: true }).click()
-  const group = page.getByRole("treeitem", { name: "Chambers", exact: true })
+  const group = page.getByRole("treeitem", { name: /^Chambers, / })
   await expect(group).not.toHaveAttribute("aria-selected")
   await expect(group).toHaveAttribute("aria-expanded", "false")
   await group.focus()
@@ -237,10 +228,7 @@ test("groups that are not selectable expand instead, and colors show", async ({
   await expect(group).toHaveAttribute("aria-expanded", "false")
   await expect(page.getByLabel("Selected", { exact: true })).toHaveText("none")
   await page.keyboard.press("Enter")
-  const atrium = page.getByRole("treeitem", {
-    name: "Left atrium",
-    exact: true,
-  })
+  const atrium = page.getByRole("treeitem", { name: /^Left atrium, / })
   await expect(atrium.locator('span[aria-hidden="true"]').first()).toHaveCSS(
     "background-color",
     "rgb(183, 124, 118)"

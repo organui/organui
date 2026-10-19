@@ -18,7 +18,7 @@ test("documentation interaction, styling and registry serving", async ({
   await expect(
     page.getByRole("heading", { name: "Anatomy tree", exact: true })
   ).toBeVisible()
-  const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
+  const heart = page.getByRole("treeitem", { name: /^Heart, / })
   await expect(heart).toHaveCSS("display", "flex")
   await page.getByRole("searchbox").focus()
   await page.keyboard.press("Tab")
@@ -364,11 +364,11 @@ test("organ pages pair the viewer with the anatomy tree", async ({
     .getByRole("button", { name: "Left atrium", exact: true })
     .click()
   await expect(
-    tree.getByRole("treeitem", { name: "Left atrium", exact: true })
+    tree.getByRole("treeitem", { name: /^Left atrium, / })
   ).toHaveAttribute("aria-selected", "true")
   await viewer.click()
   await expect(
-    tree.getByRole("treeitem", { name: "Right atrium", exact: true })
+    tree.getByRole("treeitem", { name: /^Right atrium, / })
   ).toHaveAttribute("aria-selected", "true")
   await examples.getByRole("button", { name: "View Code", exact: true }).click()
   await expect(
@@ -690,7 +690,7 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
       // pressing Tab, otherwise a slower render legitimately skips the tree.
       await expect(page.getByRole("treeitem")).toHaveCount(7)
       await page.getByRole("searchbox").press("Tab")
-      const heart = page.getByRole("treeitem", { name: "Heart", exact: true })
+      const heart = page.getByRole("treeitem", { name: /^Heart, / })
       await expect(heart).toBeFocused()
       await heart.press("Enter")
       await expect(heart).toHaveAttribute("aria-selected", "true")
