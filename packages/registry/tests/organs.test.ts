@@ -12,16 +12,18 @@ const organItems = registry.items.filter(
   (item) => "categories" in item && item.categories?.includes("organ")
 )
 
-test("every organ file has exactly one registry item with the shared viewer", async () => {
+// Like shadcn's charts on `chart`, each organ ships only its own file and
+// depends on the shared viewer item.
+test("every organ file has exactly one registry item that depends on the viewer", async () => {
   const folders = await readdir(directory)
   expect(organItems).toHaveLength(42)
   for (const item of organItems) {
     expect(folders).toContain(item.name)
     expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
-      "registry/base-nova/organ-viewer/organ-viewer.tsx",
       `registry/base-nova/${item.name}/${item.name}.tsx`,
     ])
+    expect(item.registryDependencies).toEqual(["@organui/organ-viewer"])
   }
 })
 

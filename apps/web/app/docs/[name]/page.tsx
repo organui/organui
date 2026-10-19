@@ -10,7 +10,6 @@ import {
   docsMetadata,
   registryItems,
   registryNamespace,
-  shadcn,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -77,21 +76,9 @@ export function ${component}Demo() {
         <h2 id="installation" className="text-2xl font-semibold">
           Installation
         </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {item.install}
-        </pre>
         <p>
-          Or by name, with the OrganUI namespace in <code>components.json</code>
-          :{" "}
-          <code>
-            bunx {shadcn} add @organui/{name}
-          </code>
-          .
+          Organs depend on the shared organ viewer, which installs through the
+          OrganUI namespace. Add it to <code>components.json</code>:
         </p>
         <pre
           tabIndex={0}
@@ -101,11 +88,24 @@ export function ${component}Demo() {
         >
           {registryNamespace}
         </pre>
+        <p>Then run:</p>
+        <pre
+          tabIndex={0}
+          role="region"
+          aria-label="Installation command"
+          className={codeBlock}
+        >
+          {item.install}
+        </pre>
         <p className="text-sm text-muted-foreground">
-          This adds <code>organ-viewer.tsx</code> and <code>{name}.tsx</code> to
-          your components directory and installs three.js and the shadcn
-          components the viewer&apos;s controls use. Installing a second organ
-          reuses the same <code>organ-viewer.tsx</code>.
+          This adds <code>{name}.tsx</code> to your components directory. Its
+          dependency,{" "}
+          <Link href="/docs/organ-viewer" className="underline">
+            organ viewer
+          </Link>
+          , adds <code>organ-viewer.tsx</code>, three.js and the shadcn
+          components the viewer&apos;s controls use. Every organ shares that one{" "}
+          <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>
           View registry item JSON

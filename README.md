@@ -25,16 +25,18 @@ Or register the namespace once in `components.json`:
 
 and run `bunx shadcn@4.22.1 add @organui/anatomy-tree`. The repository is also
 a GitHub registry, so `bunx shadcn@4.22.1 add organui/organui/anatomy-tree`
-installs straight from source (append `#<commit>` to pin a version). See
+installs straight from source (append `#<commit>` to pin a version; items
+that depend on other OrganUI items still resolve those through the namespace). See
 [the anatomy tree documentation](https://organui.com/docs/anatomy-tree).
 
 ## Organs
 
 Every organ is a registry item named after it: `heart`, `brain`,
-`spinal-cord`, `nerves` and so on.
+`spinal-cord`, `nerves` and so on. Organs depend on `@organui/organ-viewer`,
+so register the namespace above first.
 
 ```bash
-bunx shadcn@4.22.1 add https://organui.com/r/heart.json
+bunx shadcn@4.22.1 add @organui/heart
 ```
 
 ```tsx
@@ -43,8 +45,9 @@ import { Heart } from "@/components/heart"
 ;<Heart className="h-[32rem]" />
 ```
 
-Each one installs the shared `organ-viewer.tsx` (three.js) plus the organ's
-structures, views and model credit. The GLB itself stays in the explorer
+Each organ item ships only its own file: the organ's structures, views and
+model credit. Like shadcn's charts on `chart`, it depends on `organ-viewer`,
+which installs `organ-viewer.tsx` (three.js) once and is shared by every organ. The GLB itself stays in the explorer
 repository under its own licence (CC BY-SA 2.1 JP, CC BY-SA 4.0, CC BY 4.0 or
 CC0, per organ) and loads from a commit-pinned jsDelivr URL; organs without an
 explorer repository, such as `nerves` and `parathyroid`, are built in this
@@ -99,8 +102,11 @@ Blocks are whole layouts built from those pieces, following shadcn's
 | `explorer-03` | One viewer switching between several organs                                  |
 
 ```bash
-bunx shadcn@4.22.1 add https://organui.com/r/explorer-01.json
+bunx shadcn@4.22.1 add @organui/explorer-01
 ```
+
+Blocks ship their own page and layout and install the OrganUI items they use,
+such as `organ-viewer`, `heart` and `anatomy-tree`, as dependencies.
 
 In Next.js this adds a page at `app/explorer/page.tsx`; other frameworks get
 the components only. Previews are at [organui.com/blocks](https://organui.com/blocks).

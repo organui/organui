@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { blockFiles } from "@/lib/blocks"
-import { codeBlock, docsMetadata, registryBlocks, shadcn } from "@/lib/registry"
+import { codeBlock, docsMetadata, registryBlocks } from "@/lib/registry"
 import { cn } from "@workspace/ui/lib/utils"
 
 export const metadata = docsMetadata(
@@ -36,13 +36,13 @@ export default async function Page() {
             swap the organ and change the layout.
           </p>
           <p className="text-sm text-muted-foreground">
-            Install by URL as shown, by name with the{" "}
+            Blocks install the OrganUI components they use as dependencies, so
+            add the{" "}
             <Link href="/docs" className="underline">
               OrganUI namespace
             </Link>{" "}
-            (<code>bunx {shadcn} add @organui/explorer-01</code>), or from
-            GitHub (<code>bunx {shadcn} add organui/organui/explorer-01</code>
-            ). Pages install in Next.js; other frameworks get the components.
+            to <code>components.json</code> first. Pages install in Next.js;
+            other frameworks get the components.
           </p>
         </header>
         {blocks.map((block) => (
@@ -97,28 +97,31 @@ export default async function Page() {
               <ul className="flex flex-col gap-2 text-sm">
                 {block.files.map((file) => (
                   <li key={file.path}>
-                    {file.item ? (
-                      <p>
-                        <code>{file.installed}</code>, from{" "}
-                        <Link href={`/docs/${file.item}`} className="underline">
-                          {file.item}
-                        </Link>
-                      </p>
-                    ) : (
-                      <details className="group">
-                        <summary className="cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-ring">
-                          <code>{file.installed}</code>
-                        </summary>
-                        <pre
-                          tabIndex={0}
-                          role="region"
-                          aria-label={`${file.installed} source`}
-                          className={cn(codeBlock, "mt-2 max-h-[32rem]")}
-                        >
-                          {block.sources.get(file.path)}
-                        </pre>
-                      </details>
-                    )}
+                    <details className="group">
+                      <summary className="cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-ring">
+                        <code>{file.installed}</code>
+                      </summary>
+                      <pre
+                        tabIndex={0}
+                        role="region"
+                        aria-label={`${file.installed} source`}
+                        className={cn(codeBlock, "mt-2 max-h-[32rem]")}
+                      >
+                        {block.sources.get(file.path)}
+                      </pre>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-medium">Uses</p>
+              <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                {block.uses.map((name) => (
+                  <li key={name}>
+                    <Link href={`/docs/${name}`} className="underline">
+                      {name}
+                    </Link>
                   </li>
                 ))}
               </ul>

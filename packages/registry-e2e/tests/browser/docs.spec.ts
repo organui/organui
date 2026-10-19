@@ -226,7 +226,10 @@ test("registry index lists every component inside the docs layout", async ({
     await expect(
       page.getByRole("region", { name: `Install ${title}`, exact: true })
     ).toHaveText(
-      `bunx shadcn@4.22.1 add https://organui.com/r/${item.name}.json`
+      // Items that depend on other OrganUI items install through the namespace.
+      item.registryDependencies?.some((name) => name.startsWith("@organui/"))
+        ? `bunx shadcn@4.22.1 add @organui/${item.name}`
+        : `bunx shadcn@4.22.1 add https://organui.com/r/${item.name}.json`
     )
     await expect(
       page
@@ -376,7 +379,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   ).toContainText("<Heart")
   await expect(
     page.getByRole("region", { name: "Installation command" })
-  ).toHaveText("bunx shadcn@4.22.1 add https://organui.com/r/heart.json")
+  ).toHaveText("bunx shadcn@4.22.1 add @organui/heart")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -398,9 +401,9 @@ test("organ pages pair the viewer with the anatomy tree", async ({
     await (await request.get("/r/heart.json")).json()
   )
   expect(item.files?.map((file) => file.path)).toEqual([
-    "registry/base-nova/organ-viewer/organ-viewer.tsx",
     "registry/base-nova/heart/heart.tsx",
   ])
+  expect(item.registryDependencies).toEqual(["@organui/organ-viewer"])
   expect(errors).toEqual([])
 })
 
@@ -452,9 +455,7 @@ test("blocks gallery previews and installs every block", async ({
     await expect(section).toHaveAttribute("id", block.name)
     await expect(
       section.getByRole("region", { name: `Install ${title}`, exact: true })
-    ).toHaveText(
-      `bunx shadcn@4.22.1 add https://organui.com/r/${block.name}.json`
-    )
+    ).toHaveText(`bunx shadcn@4.22.1 add @organui/${block.name}`)
     const preview = section.getByTitle(`${title} preview`)
     await preview.scrollIntoViewIfNeeded()
     await expect(
@@ -466,7 +467,18 @@ test("blocks gallery previews and installs every block", async ({
     const installedPage = item.files?.find(
       ({ type }) => type === "registry:page"
     )
-    // The gallery shows each block's own files and links the shared ones.
+    // The gallery shows each block's own files and links the items it uses.
+    for (const dependency of item.registryDependencies ?? [])
+      if (dependency.startsWith("@organui/"))
+        await expect(
+          section.getByRole("link", {
+            name: dependency.replace("@organui/", ""),
+            exact: true,
+          })
+        ).toHaveAttribute(
+          "href",
+          `/docs/${dependency.replace("@organui/", "")}`
+        )
     await section
       .getByText(installedPage?.target ?? "", { exact: true })
       .click()

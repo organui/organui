@@ -7,6 +7,7 @@ const blocks = registry.items.filter((item) => item.type === "registry:block")
 const components = registry.items.filter(
   (item) => item.type !== "registry:block"
 )
+const names = new Set(registry.items.map(({ name }) => name))
 
 // Where the CLI installs a file, as the import path other files use.
 function importPath(file: { path: string; type: string; target?: string }) {
@@ -16,61 +17,68 @@ function importPath(file: { path: string; type: string; target?: string }) {
     : `@/components/${name}`
 }
 
+// The item whose own file installs at an import path, such as organ-viewer for
+// @/components/organ-viewer.
+const owners = new Map(
+  components.flatMap((item) =>
+    item.files.map((file) => [importPath(file), item.name] as const)
+  )
+)
+
 test("there are blocks and their names do not clash with components", () => {
   expect(blocks.length).toBeGreaterThan(0)
-  const names = new Set(components.map(({ name }) => name))
-  for (const { name } of blocks) expect(names.has(name)).toBe(false)
+  const componentNames = new Set(components.map(({ name }) => name))
+  for (const { name } of blocks) expect(componentNames.has(name)).toBe(false)
 })
 
-for (const block of blocks) {
-  test(`${block.name} ships one page and every file it imports`, async () => {
-    const pages = block.files.filter((file) => file.type === "registry:page")
-    expect(pages).toHaveLength(1)
-    expect("target" in pages[0]! && pages[0].target).toMatch(
-      /^app\/[a-z-]+\/page\.tsx$/
-    )
-    const shipped = new Set(
-      block.files
-        .filter((file) => file.type !== "registry:page")
-        .map(importPath)
-    )
+// As in shadcn, an item ships only its own files and reaches every other item
+// through registryDependencies.
+test("no two items ship the same file", () => {
+  const paths = registry.items.flatMap(({ files }) =>
+    files.map(({ path }) => path)
+  )
+  expect(new Set(paths).size).toBe(paths.length)
+})
+
+for (const item of registry.items) {
+  test(`${item.name} ships its own files and lists everything it imports`, async () => {
+    const folder =
+      item.type === "registry:block"
+        ? `registry/base-nova/blocks/${item.name}/`
+        : `registry/base-nova/${item.name}/`
+    const shipped = new Set<string>()
+    for (const file of item.files) {
+      expect(file.path).toStartWith(folder)
+      if (file.type !== "registry:page") shipped.add(importPath(file))
+    }
     const used = new Set<string>()
-    for (const file of block.files) {
+    for (const file of item.files) {
       const source = await readFile(
         new URL(`../${file.path}`, import.meta.url),
         "utf8"
       )
       for (const [, path] of source.matchAll(/from "(@\/components\/[^"]+)"/g))
         used.add(path!)
-      // Organ files import the viewer beside them, and both install into the
-      // components folder. Other relative imports would break on install.
-      for (const [, name] of source.matchAll(/from "\.\/([^"]+)"/g)) {
-        expect(file.type).toBe("registry:component")
-        used.add(`@/components/${name}`)
-      }
-      expect(source).not.toMatch(/from "\.\.\//)
+      expect(source).not.toMatch(/from "\.\.?\//)
     }
+    const dependencies = item.registryDependencies ?? []
     for (const path of used) {
-      const shadcn = path.replace("@/components/ui/", "")
       if (shipped.has(path)) continue
+      const owner = owners.get(path)
+      if (owner) expect(dependencies).toContain(`@organui/${owner}`)
       // Anything else must be an official shadcn component the item lists.
-      expect(path).toStartWith("@/components/ui/")
-      expect(block.registryDependencies).toContain(shadcn)
+      else {
+        expect(path).toStartWith("@/components/ui/")
+        expect(dependencies).toContain(path.replace("@/components/ui/", ""))
+      }
     }
-    // Every shipped file is used, by the page or another shipped file.
-    for (const path of shipped) expect(used).toContain(path)
-  })
-
-  test(`${block.name} carries the dependencies of the items it reuses`, () => {
-    for (const file of block.files) {
-      const owner = components.find((item) =>
-        item.files.some(({ path }) => path === file.path)
+    for (const dependency of dependencies) {
+      if (!dependency.startsWith("@organui/")) continue
+      const name = dependency.replace("@organui/", "")
+      expect(names.has(name)).toBe(true)
+      expect(used).toContain(
+        [...owners].find(([, owner]) => owner === name)![0]
       )
-      if (!owner) continue
-      for (const dependency of owner.dependencies ?? [])
-        expect(block.dependencies).toContain(dependency)
-      for (const dependency of owner.registryDependencies ?? [])
-        expect(block.registryDependencies).toContain(dependency)
     }
   })
 }
@@ -85,3 +93,23 @@ test("every item links its documentation after install", () => {
     expect(item.docs).toStartWith(page)
   }
 })
+
+for (const block of blocks) {
+  test(`${block.name} installs one page and uses every file it ships`, async () => {
+    const pages = block.files.filter((file) => file.type === "registry:page")
+    expect(pages).toHaveLength(1)
+    expect("target" in pages[0]! && pages[0].target).toMatch(
+      /^app\/[a-z-]+\/page\.tsx$/
+    )
+    const sources = await Promise.all(
+      block.files.map((file) =>
+        readFile(new URL(`../${file.path}`, import.meta.url), "utf8")
+      )
+    )
+    for (const file of block.files)
+      if (file.type !== "registry:page")
+        expect(
+          sources.some((source) => source.includes(`"${importPath(file)}"`))
+        ).toBe(true)
+  })
+}

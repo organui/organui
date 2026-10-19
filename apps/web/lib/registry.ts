@@ -4,6 +4,14 @@ import { site } from "@/lib/site"
 
 export const shadcn = "shadcn@4.22.1"
 
+// Items that depend on other OrganUI items, such as an organ on the viewer,
+// resolve them through the @organui namespace, so they install by name.
+function install(item: { name: string; registryDependencies?: string[] }) {
+  return item.registryDependencies?.some((name) => name.startsWith("@organui/"))
+    ? `bunx ${shadcn} add @organui/${item.name}`
+    : `bunx ${shadcn} add ${site.url}/r/${item.name}.json`
+}
+
 // The registry catalog is the single source for what the docs list, so a new
 // item appears in the sidebar and the index once it has a page at its href.
 // Blocks are listed on /blocks instead.
@@ -16,7 +24,7 @@ export const registryItems = catalog.items
     description: item.description,
     href: `/docs/${item.name}`,
     json: `/r/${item.name}.json`,
-    install: `bunx ${shadcn} add ${site.url}/r/${item.name}.json`,
+    install: install(item),
   }))
 
 // Where the CLI writes each file, relative to a Next.js app with the default
@@ -29,14 +37,6 @@ function installedPath(file: { path: string; type: string; target?: string }) {
     : `components/${name}`
 }
 
-// Files a block shares with component items are documented on the first
-// item that ships them, such as organ-viewer.tsx on the organ viewer.
-const shared = new Map<string, string>()
-for (const item of catalog.items)
-  if (item.type !== "registry:block")
-    for (const { path } of item.files)
-      if (!shared.has(path)) shared.set(path, item.name)
-
 export const registryBlocks = catalog.items
   .filter((item) => item.type === "registry:block")
   .map((item) => ({
@@ -46,13 +46,16 @@ export const registryBlocks = catalog.items
     href: `/blocks#${item.name}`,
     view: `/view/${item.name}`,
     json: `/r/${item.name}.json`,
-    install: `bunx ${shadcn} add ${site.url}/r/${item.name}.json`,
+    install: install(item),
     files: item.files.map((file) => ({
       path: file.path,
       installed: installedPath(file),
-      // The registry item that documents a shared file, if any.
-      item: shared.get(file.path) ?? null,
     })),
+    // OrganUI items the block installs as dependencies, each documented on
+    // its own page.
+    uses: item.registryDependencies
+      .filter((name) => name.startsWith("@organui/"))
+      .map((name) => name.replace("@organui/", "")),
   }))
 
 export const registryNamespace = JSON.stringify(

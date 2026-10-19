@@ -42,6 +42,9 @@ export async function githubConsumer(directory: string, cli: string) {
     rsc: true,
     tsx: true,
     iconLibrary: "lucide",
+    // Organs reach the viewer through @organui/organ-viewer. shadcn does not
+    // pass a #ref on to dependencies, so it comes from the published site.
+    registries: { "@organui": "https://organui.com/r/{name}.json" },
     tailwind: {
       config: "",
       css: "src/globals.css",
@@ -111,8 +114,8 @@ export function Smoke() {
     ].map((name) => `organui/organui/${name}${ref ? `#${ref}` : ""}`),
     "--yes",
   ])
-  // These imports force the root registry include and the shared organ file
-  // to resolve through the CLI. Compile the actual installed sources.
+  // These imports force the root registry include and the organ's viewer
+  // dependency to resolve through the CLI. Compile the actual installed sources.
   for (const name of ["ui/anatomy-tree", "heart", "organ-viewer"])
     await readFile(resolve(directory, `src/components/${name}.tsx`), "utf8")
   for (const entry of await readdir(resolve(directory, "src"), {
