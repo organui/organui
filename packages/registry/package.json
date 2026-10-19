@@ -9,6 +9,8 @@
     "./ecg-trace": "./registry/base-nova/ecg-trace/ecg-trace.tsx",
     "./dermatome-map": "./registry/base-nova/dermatome-map/dermatome-map.tsx",
     "./medication-schedule": "./registry/base-nova/medication-schedule/medication-schedule.tsx",
+    "./image-viewer": "./registry/base-nova/image-viewer/image-viewer.tsx",
+    "./image-viewer/*": "./registry/base-nova/image-viewer/*.ts",
     "./lab-results": "./registry/base-nova/lab-results/lab-results.tsx",
     "./vital-signs": "./registry/base-nova/vital-signs/vital-signs.tsx",
     "./molecule-viewer": "./registry/base-nova/molecule-viewer/molecule-viewer.tsx",

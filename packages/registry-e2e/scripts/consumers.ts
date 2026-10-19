@@ -164,6 +164,19 @@ export default function BodyMapHarness(){
  const [submitted,setSubmitted]=useState("")
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed body map</h1><form onSubmit={(event)=>{event.preventDefault();setSubmitted(new FormData(event.currentTarget).getAll("regions").join(","))}}><BodyMap label="Where does it hurt?" value={value} onValueChange={setValue} name="regions"/><button type="submit">Submit</button></form><output aria-label="Value">{value.join(",")}</output><output aria-label="Submitted">{submitted}</output><button onClick={()=>setValue(["gone","neck"])}>Unknown ID</button></main>
 }`
+// The image harness shows the installed phantom and type-checks the DICOM reader.
+const imageHarness = `"use client"
+import { useState } from "react"
+import { ImageViewer, ctWindowPresets, type ImageWindow } from "@/components/ui/image-viewer"
+import { parseDicom } from "@/lib/dicom"
+import { createHeadPhantom } from "@/lib/head-phantom"
+const phantom = createHeadPhantom()
+export const readDicom: (buffer: ArrayBuffer) => { width: number } = parseDicom
+export default function ImageHarness(){
+ const [slice,setSlice]=useState(15)
+ const [window,setWindow]=useState<ImageWindow|null>(null)
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed image viewer</h1><ImageViewer {...phantom} label="Head phantom" presets={ctWindowPresets} slice={slice} onSliceChange={setSlice} onWindowChange={setWindow}/><output aria-label="Slice">{slice}</output><output aria-label="Window">{window?\`\${window.width}/\${window.center}\`:"default"}</output></main>
+}`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
@@ -292,6 +305,15 @@ try {
     await put(dir, "src/ecg-harness.tsx", source(ecgHarness))
     await put(dir, "src/body-map-harness.tsx", source(bodyMapHarness))
     await put(dir, "src/dermatome-harness.tsx", source(dermatomeHarness))
+    // Its lib files install by target, under src/lib whatever the aliases.
+    await put(
+      dir,
+      "src/image-harness.tsx",
+      source(imageHarness).replaceAll(
+        "@/lib/",
+        customAliases ? "~/lib/" : "@/lib/"
+      )
+    )
     await mkdir(resolve(dir, "public"), { recursive: true })
     await writeFile(
       resolve(dir, "public/heart.glb"),
@@ -347,6 +369,11 @@ try {
       )
       await put(
         dir,
+        "src/app/image/page.tsx",
+        'export {default} from "../../image-harness"'
+      )
+      await put(
+        dir,
         "src/app/layout.tsx",
         'import "../globals.css"; export const metadata = {title:"Anatomy tree consumer"}; export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}'
       )
@@ -360,7 +387,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(
@@ -496,6 +523,7 @@ try {
       "ecg-trace",
       "dermatome-map",
       "body-map",
+      "image-viewer",
     ])
       await run(
         [
@@ -551,6 +579,7 @@ try {
       "ecg-trace",
       "dermatome-map",
       "body-map",
+      "image-viewer",
     ]) {
       const installed = await readFile(
         resolve(dir, `${uiDir}/${name}.tsx`),
@@ -563,6 +592,13 @@ try {
       )
         throw new Error(`Invalid installed ${name} source`)
     }
+    for (const file of ["dicom.ts", "head-phantom.ts"])
+      if (
+        (await readFile(resolve(dir, "src/lib", file), "utf8")).includes(
+          "@workspace/"
+        )
+      )
+        throw new Error(`Invalid installed ${file}`)
     const vitals = await readFile(
       resolve(dir, `${uiDir}/vital-signs.tsx`),
       "utf8"

@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { heartModel } from "@workspace/registry/heart"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
+import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
 
 test("documentation interaction, styling and registry serving", async ({
   page,
@@ -779,4 +780,95 @@ test("component previews reveal copyable code without resetting the demo", async
     )
   ).toBe(true)
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+})
+
+test("image viewer docs scroll slices, window and read DICOM files", async ({
+  page,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text())
+  })
+  await page.goto("/docs/image-viewer")
+  const state = page.getByRole("status").filter({ hasText: "Slice" })
+  await expect(state).toHaveText("Slice 16 of 32 · Window 80 / level 40")
+  const stage = page.getByRole("region", { name: "Head phantom" })
+  await expect(
+    stage.getByRole("img", { name: "Head phantom, slice 16 of 32, Axial 16" })
+  ).toBeVisible()
+  await stage.focus()
+  await page.keyboard.press("ArrowDown")
+  await page.keyboard.press("End")
+  await expect(state).toContainText("Slice 32 of 32")
+  const slider = page.getByRole("slider", { name: "Slice" })
+  await slider.focus()
+  await page.keyboard.press("Home")
+  await expect(state).toContainText("Slice 1 of 32")
+  await page.getByRole("combobox", { name: "Window preset" }).click()
+  await page.getByRole("option", { name: "Bone" }).click()
+  await expect(state).toContainText("Window 1800 / level 400")
+  // Dragging right widens the window and down raises the level.
+  const box = (await stage.boundingBox())!
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(
+    box.x + box.width / 2 + 60,
+    box.y + box.height / 2 + 20,
+    {
+      steps: 4,
+    }
+  )
+  await page.mouse.up()
+  await expect(
+    page.getByRole("combobox", { name: "Window preset" })
+  ).toContainText("Custom")
+  const [width, level] = (await state.textContent())!
+    .match(/Window (\d+) \/ level (\d+)/)!
+    .slice(1)
+    .map(Number)
+  expect(width).toBeGreaterThan(1800)
+  expect(level).toBeGreaterThan(400)
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+
+  const files = [30, 10, 20].map((z) => ({
+    name: `slice-${z}.dcm`,
+    mimeType: "application/dicom",
+    buffer: Buffer.from(
+      dicomFile({
+        explicit: true,
+        pixels: new Int16Array(16 * 16).fill(1024 + z),
+        width: 16,
+        height: 16,
+        z,
+      })
+    ),
+  }))
+  await page.getByLabel("Open DICOM files").setInputFiles(files)
+  await expect(state).toHaveText("Slice 2 of 3 · Window 80 / level 40")
+  await expect(
+    page
+      .getByRole("region", { name: "3 DICOM files" })
+      .getByRole("img", { name: "3 DICOM files, slice 2 of 3, Head phantom" })
+  ).toBeVisible()
+  await page.getByLabel("Open DICOM files").setInputFiles({
+    name: "notes.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("not an image"),
+  })
+  // Next.js adds its own route announcer alert.
+  await expect(page.getByRole("alert").filter({ hasText: "DICOM" })).toHaveText(
+    "This is not a DICOM Part 10 file."
+  )
+  await page.screenshot({
+    path: info.outputPath("image-viewer.png"),
+    fullPage: true,
+  })
+  expect(errors).toEqual([])
 })

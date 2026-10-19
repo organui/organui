@@ -105,6 +105,23 @@ import { DermatomeMap } from "@/components/ui/dermatome-map"
 
 See [the dermatome map documentation](https://organui.com/docs/dermatome-map).
 
+## Medical image viewer
+
+`image-viewer` shows a stack of CT or MRI slices with a slice slider, window
+and level (drag or CT presets), zoom, pan and a pixel value readout, on a 2D
+canvas. It installs `lib/dicom.ts`, a reader for uncompressed single-frame
+grayscale DICOM files, and `lib/head-phantom.ts`, a generated head phantom in
+Hounsfield units for demos. Not a medical device.
+
+```tsx
+import { ImageViewer, ctWindowPresets } from "@/components/ui/image-viewer"
+import { createHeadPhantom } from "@/lib/head-phantom"
+
+;<ImageViewer {...createHeadPhantom()} presets={ctWindowPresets} />
+```
+
+See [the medical image viewer documentation](https://organui.com/docs/image-viewer).
+
 ## Blocks
 
 Blocks are whole layouts built from those pieces, following shadcn's

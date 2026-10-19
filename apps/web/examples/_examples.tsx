@@ -77,6 +77,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "image-viewer-demo": {
+    title: "Medical image viewer",
+    file: "image-viewer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./image-viewer-demo")
+      return <Example />
+    },
+  },
   "vital-signs-demo": {
     title: "Vital signs",
     file: "vital-signs-demo.tsx",

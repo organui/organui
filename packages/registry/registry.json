@@ -200,6 +200,43 @@
       "docs": "Dermatome map docs: https://organui.com/docs/dermatome-map. A simplified illustration that follows the ISNCSCI sensory levels and key sensory points; not a clinical tool."
     },
     {
+      "name": "image-viewer",
+      "type": "registry:ui",
+      "title": "Medical image viewer",
+      "description": "Scroll through CT or MRI slices with window and level, zoom and pan, and read DICOM files in the browser.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "progress",
+        "select",
+        "slider",
+        "toggle",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/image-viewer/image-viewer.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/base-nova/image-viewer/dicom.ts",
+          "type": "registry:ui",
+          "target": "lib/dicom.ts"
+        },
+        {
+          "path": "registry/base-nova/image-viewer/head-phantom.ts",
+          "type": "registry:ui",
+          "target": "lib/head-phantom.ts"
+        }
+      ],
+      "docs": "Medical image viewer docs: https://organui.com/docs/image-viewer. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing. The DICOM reader (lib/dicom.ts) handles uncompressed, single-frame grayscale files only; use a full DICOM toolkit for compressed, color or multi-frame images. Not a medical device."
+    },
+    {
       "name": "adrenals",
       "type": "registry:component",
       "title": "Adrenals",

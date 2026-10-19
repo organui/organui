@@ -25,7 +25,11 @@ const readExampleSource = cache(async (file: string) => {
       "@/components/organ-explorer"
     )
     .replace(
-      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map)/g,
+      /@workspace\/registry\/image-viewer\/(dicom|head-phantom)/g,
+      "@/lib/$1"
+    )
+    .replace(
+      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|image-viewer)/g,
       "@/components/ui/$1"
     )
     .replaceAll("@workspace/registry/", "@/components/")
