@@ -74,3 +74,14 @@ for (const block of blocks) {
     }
   })
 }
+
+// shadcn prints an item's docs after installing it.
+test("every item links its documentation after install", () => {
+  for (const item of registry.items) {
+    const page =
+      item.type === "registry:block"
+        ? `${item.title}: https://organui.com/blocks#${item.name}`
+        : `${item.title} docs: https://organui.com/docs/${item.name}`
+    expect(item.docs).toStartWith(page)
+  }
+})

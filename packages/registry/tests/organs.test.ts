@@ -75,6 +75,9 @@ for (const item of organItems) {
     expect(model.attribution.source).toStartWith("https://github.com/organui/")
     expect(model.attribution.licenseUrl).toStartWith("https://")
     expect(item.description).toContain(model.attribution.license)
+    // The CLI prints docs after install, so the licence reaches every user.
+    expect(item.docs).toContain(model.attribution.license)
+    expect(item.docs).toContain(model.attribution.licenseUrl)
     const nodes = organAnatomyNodes(model)
     expect(
       nodes.flatMap(({ children }) => children.map(({ id }) => id)).sort()

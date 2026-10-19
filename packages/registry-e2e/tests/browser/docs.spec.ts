@@ -178,12 +178,31 @@ test("homepage explorer links support keyboard navigation without overflow", asy
   expect(errors).toEqual([])
 })
 
+// The scan of every preview is its own test, so neither needs a long timeout.
+test("registry index passes an accessibility scan without overflow", async ({
+  page,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/docs")
+  await expect(
+    page.getByRole("heading", { name: "Components", level: 1 })
+  ).toBeVisible()
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({ path: info.outputPath("index.png"), fullPage: true })
+  expect(errors).toEqual([])
+})
+
 test("registry index lists every component inside the docs layout", async ({
   page,
   request,
-}, info) => {
-  // One check per catalog item plus an axe scan of every preview on the page.
-  test.setTimeout(60_000)
+}) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   const catalog = registrySchema.parse(
@@ -194,9 +213,10 @@ test("registry index lists every component inside the docs layout", async ({
     page.getByRole("heading", { name: "Components", level: 1 })
   ).toBeVisible()
   // Blocks are listed on /blocks.
-  for (const item of catalog.items.filter(
+  const components = catalog.items.filter(
     ({ type }) => type !== "registry:block"
-  )) {
+  )
+  for (const item of components) {
     const title = item.title ?? item.name
     await expect(
       page
@@ -213,16 +233,11 @@ test("registry index lists every component inside the docs layout", async ({
         .getByRole("group", { name: `${title} preview`, exact: true })
         .locator(":scope > *")
     ).toBeVisible()
-    expect((await request.get(`/docs/${item.name}`)).ok()).toBe(true)
   }
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth
-    )
-  ).toBe(true)
-  const axe = await new AxeBuilder({ page }).analyze()
-  expect(axe.violations).toEqual([])
-  await page.screenshot({ path: info.outputPath("index.png"), fullPage: true })
+  const pages = await Promise.all(
+    components.map(({ name }) => request.get(`/docs/${name}`))
+  )
+  expect(pages.map((response) => response.ok())).not.toContain(false)
 
   const docs = page.getByRole("navigation", { name: "Documentation" })
   const menu = page.getByRole("button", { name: "Menu", exact: true })

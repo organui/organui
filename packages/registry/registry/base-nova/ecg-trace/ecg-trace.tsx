@@ -203,7 +203,8 @@ export function ecgHeartRate(annotations: readonly EcgAnnotation[]) {
   return intervals.length ? Math.round(60 / median(intervals)) : null
 }
 
-// Grid lines as one path each: every 1 mm and every 5 mm.
+// Grid lines as one path each: every 1 mm and every 5 mm. ECG paper is red;
+// set --ecg-grid in your theme to change it without editing this file.
 function gridPath(width: number, height: number, step: number) {
   let d = ""
   for (let x = 0; x <= width + 1e-6; x += step) d += `M${x} 0V${height}`
@@ -404,13 +405,15 @@ export function EcgTrace({
         >
           <path
             d={gridPath(width, height, 1)}
-            className="stroke-red-500/15"
+            data-slot="ecg-trace-grid"
+            className="stroke-[color:var(--ecg-grid,var(--color-red-500))]/15"
             strokeWidth={0.5}
             vectorEffect="non-scaling-stroke"
           />
           <path
             d={gridPath(width, height, 5)}
-            className="stroke-red-500/35"
+            data-slot="ecg-trace-grid"
+            className="stroke-[color:var(--ecg-grid,var(--color-red-500))]/35"
             strokeWidth={1}
             vectorEffect="non-scaling-stroke"
           />

@@ -57,3 +57,24 @@ test("theme preserved, strips scroll inside the page, no errors", async ({
   expect(result.violations).toEqual([])
   expect(errors).toEqual([])
 })
+
+test("the grid is red ECG paper unless the theme sets --ecg-grid", async ({
+  page,
+}) => {
+  const grid = page.locator("[data-slot=ecg-trace-grid]").first()
+  // The stroke as oklab numbers; builds round the same colour differently.
+  const stroke = async () =>
+    (await grid.evaluate((element) => getComputedStyle(element).stroke))
+      .match(/-?[\d.]+/g)!
+      .map(Number)
+  const expectColor = (actual: number[], expected: number[]) =>
+    expected.forEach((value, index) =>
+      expect(actual[index]).toBeCloseTo(value, 2)
+    )
+  // Tailwind's red-500 at 15% opacity, emitted by the consumer's own build.
+  expectColor(await stroke(), [0.637, 0.214, 0.101, 0.15])
+  await page.evaluate(() =>
+    document.documentElement.style.setProperty("--ecg-grid", "rgb(0, 0, 255)")
+  )
+  expectColor(await stroke(), [0.452, -0.032, -0.312, 0.15])
+})

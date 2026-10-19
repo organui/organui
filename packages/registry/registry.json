@@ -19,7 +19,8 @@
           "path": "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "docs": "Anatomy tree docs: https://organui.com/docs/anatomy-tree"
     },
     {
       "name": "vital-signs",
@@ -33,7 +34,8 @@
           "path": "registry/base-nova/vital-signs/vital-signs.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "docs": "Vital signs docs: https://organui.com/docs/vital-signs"
     },
     {
       "name": "ecg-trace",
@@ -51,7 +53,8 @@
           "path": "registry/base-nova/ecg-trace/ecg-trace.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "docs": "ECG trace docs: https://organui.com/docs/ecg-trace"
     },
     {
       "name": "organ-viewer",
@@ -77,7 +80,8 @@
           "path": "registry/base-nova/organ-viewer/organ-viewer.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Organ viewer docs: https://organui.com/docs/organ-viewer"
     },
     {
       "name": "molecule-viewer",
@@ -98,7 +102,8 @@
           "path": "registry/base-nova/molecule-viewer/molecule-viewer.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Molecule viewer docs: https://organui.com/docs/molecule-viewer"
     },
     {
       "name": "dna-helix",
@@ -119,7 +124,8 @@
           "path": "registry/base-nova/dna-helix/dna-helix.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "DNA helix docs: https://organui.com/docs/dna-helix"
     },
     {
       "name": "lab-results",
@@ -133,7 +139,8 @@
           "path": "registry/base-nova/lab-results/lab-results.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Lab results table docs: https://organui.com/docs/lab-results"
     },
     {
       "name": "medication-schedule",
@@ -151,7 +158,8 @@
           "path": "registry/base-nova/medication-schedule/medication-schedule.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "docs": "Medication schedule docs: https://organui.com/docs/medication-schedule"
     },
     {
       "name": "adrenals",
@@ -182,7 +190,8 @@
           "path": "registry/base-nova/adrenals/adrenals.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Adrenals docs: https://organui.com/docs/adrenals. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "appendix",
@@ -213,7 +222,8 @@
           "path": "registry/base-nova/appendix/appendix.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Appendix docs: https://organui.com/docs/appendix. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "bladder",
@@ -244,7 +254,8 @@
           "path": "registry/base-nova/bladder/bladder.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Bladder docs: https://organui.com/docs/bladder. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "brain",
@@ -275,7 +286,8 @@
           "path": "registry/base-nova/brain/brain.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Brain docs: https://organui.com/docs/brain. The model is licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible."
     },
     {
       "name": "breast",
@@ -306,7 +318,8 @@
           "path": "registry/base-nova/breast/breast.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Breast docs: https://organui.com/docs/breast. The model is licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "diaphragm",
@@ -337,7 +350,8 @@
           "path": "registry/base-nova/diaphragm/diaphragm.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Diaphragm docs: https://organui.com/docs/diaphragm. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "ear",
@@ -368,7 +382,8 @@
           "path": "registry/base-nova/ear/ear.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Ear docs: https://organui.com/docs/ear. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "esophagus",
@@ -399,7 +414,8 @@
           "path": "registry/base-nova/esophagus/esophagus.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Esophagus docs: https://organui.com/docs/esophagus. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "eye",
@@ -430,7 +446,8 @@
           "path": "registry/base-nova/eye/eye.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Eye docs: https://organui.com/docs/eye. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "gallbladder",
@@ -461,7 +478,8 @@
           "path": "registry/base-nova/gallbladder/gallbladder.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Gallbladder docs: https://organui.com/docs/gallbladder. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "hair",
@@ -492,7 +510,8 @@
           "path": "registry/base-nova/hair/hair.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Hair docs: https://organui.com/docs/hair. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
     },
     {
       "name": "heart",
@@ -523,7 +542,8 @@
           "path": "registry/base-nova/heart/heart.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Heart docs: https://organui.com/docs/heart. The model is licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible."
     },
     {
       "name": "intestines",
@@ -554,7 +574,8 @@
           "path": "registry/base-nova/intestines/intestines.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Intestines docs: https://organui.com/docs/intestines. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "joints",
@@ -585,7 +606,8 @@
           "path": "registry/base-nova/joints/joints.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Joints docs: https://organui.com/docs/joints. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "kidneys",
@@ -616,7 +638,8 @@
           "path": "registry/base-nova/kidneys/kidneys.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Kidneys docs: https://organui.com/docs/kidneys. The model is licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible."
     },
     {
       "name": "larynx",
@@ -647,7 +670,8 @@
           "path": "registry/base-nova/larynx/larynx.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Larynx docs: https://organui.com/docs/larynx. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "liver",
@@ -678,7 +702,8 @@
           "path": "registry/base-nova/liver/liver.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Liver docs: https://organui.com/docs/liver. The model is licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible."
     },
     {
       "name": "lungs",
@@ -709,7 +734,8 @@
           "path": "registry/base-nova/lungs/lungs.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Lungs docs: https://organui.com/docs/lungs. The model is licensed CC BY-SA 2.1 JP (https://lifesciencedb.jp/bp3d/info/index.html#License); keep the viewer's credit visible."
     },
     {
       "name": "lymph",
@@ -740,7 +766,8 @@
           "path": "registry/base-nova/lymph/lymph.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Lymph node docs: https://organui.com/docs/lymph. The model is licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "muscles",
@@ -771,7 +798,8 @@
           "path": "registry/base-nova/muscles/muscles.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Muscles docs: https://organui.com/docs/muscles. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "nails",
@@ -802,7 +830,8 @@
           "path": "registry/base-nova/nails/nails.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Nails docs: https://organui.com/docs/nails. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
     },
     {
       "name": "nerves",
@@ -833,7 +862,8 @@
           "path": "registry/base-nova/nerves/nerves.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Nerves docs: https://organui.com/docs/nerves. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "nose",
@@ -864,7 +894,8 @@
           "path": "registry/base-nova/nose/nose.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Nose docs: https://organui.com/docs/nose. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "pancreas",
@@ -895,7 +926,8 @@
           "path": "registry/base-nova/pancreas/pancreas.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Pancreas docs: https://organui.com/docs/pancreas. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "parathyroid",
@@ -926,7 +958,8 @@
           "path": "registry/base-nova/parathyroid/parathyroid.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Parathyroid docs: https://organui.com/docs/parathyroid. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "pharynx",
@@ -957,7 +990,8 @@
           "path": "registry/base-nova/pharynx/pharynx.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Pharynx docs: https://organui.com/docs/pharynx. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "pineal",
@@ -988,7 +1022,8 @@
           "path": "registry/base-nova/pineal/pineal.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Pineal docs: https://organui.com/docs/pineal. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "pituitary",
@@ -1019,7 +1054,8 @@
           "path": "registry/base-nova/pituitary/pituitary.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Pituitary docs: https://organui.com/docs/pituitary. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "prostate",
@@ -1050,7 +1086,8 @@
           "path": "registry/base-nova/prostate/prostate.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Prostate docs: https://organui.com/docs/prostate. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "salivary-glands",
@@ -1081,7 +1118,8 @@
           "path": "registry/base-nova/salivary-glands/salivary-glands.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Salivary glands docs: https://organui.com/docs/salivary-glands. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "skeleton",
@@ -1112,7 +1150,8 @@
           "path": "registry/base-nova/skeleton/skeleton.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Skeleton docs: https://organui.com/docs/skeleton. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "skin",
@@ -1143,7 +1182,8 @@
           "path": "registry/base-nova/skin/skin.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Skin docs: https://organui.com/docs/skin. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
     },
     {
       "name": "spinal-cord",
@@ -1174,7 +1214,8 @@
           "path": "registry/base-nova/spinal-cord/spinal-cord.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Spinal cord docs: https://organui.com/docs/spinal-cord. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "spleen",
@@ -1205,7 +1246,8 @@
           "path": "registry/base-nova/spleen/spleen.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Spleen docs: https://organui.com/docs/spleen. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "stomach",
@@ -1236,7 +1278,8 @@
           "path": "registry/base-nova/stomach/stomach.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Stomach docs: https://organui.com/docs/stomach. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "teeth",
@@ -1267,7 +1310,8 @@
           "path": "registry/base-nova/teeth/teeth.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Teeth docs: https://organui.com/docs/teeth. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "thymus",
@@ -1298,7 +1342,8 @@
           "path": "registry/base-nova/thymus/thymus.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Thymus docs: https://organui.com/docs/thymus. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "thyroid",
@@ -1329,7 +1374,8 @@
           "path": "registry/base-nova/thyroid/thyroid.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Thyroid docs: https://organui.com/docs/thyroid. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "tongue",
@@ -1360,7 +1406,8 @@
           "path": "registry/base-nova/tongue/tongue.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Tongue docs: https://organui.com/docs/tongue. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "uterus",
@@ -1391,7 +1438,8 @@
           "path": "registry/base-nova/uterus/uterus.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Uterus docs: https://organui.com/docs/uterus. The model is licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "vessels",
@@ -1422,7 +1470,8 @@
           "path": "registry/base-nova/vessels/vessels.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Vessels docs: https://organui.com/docs/vessels. The model is licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible."
     },
     {
       "name": "vestibular",
@@ -1453,7 +1502,8 @@
           "path": "registry/base-nova/vestibular/vestibular.tsx",
           "type": "registry:component"
         }
-      ]
+      ],
+      "docs": "Vestibular system docs: https://organui.com/docs/vestibular. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
       "name": "explorer-01",
@@ -1502,7 +1552,8 @@
           "type": "registry:ui"
         }
       ],
-      "categories": ["explorer"]
+      "categories": ["explorer"],
+      "docs": "Explorer 01: https://organui.com/blocks#explorer-01. Keep the organ viewer's model credit visible."
     },
     {
       "name": "explorer-02",
@@ -1551,7 +1602,8 @@
           "type": "registry:ui"
         }
       ],
-      "categories": ["explorer"]
+      "categories": ["explorer"],
+      "docs": "Explorer 02: https://organui.com/blocks#explorer-02. Keep the organ viewer's model credit visible."
     },
     {
       "name": "explorer-03",
@@ -1603,7 +1655,8 @@
           "type": "registry:component"
         }
       ],
-      "categories": ["explorer"]
+      "categories": ["explorer"],
+      "docs": "Explorer 03: https://organui.com/blocks#explorer-03. Keep the organ viewer's model credit visible."
     }
   ]
 }

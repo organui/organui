@@ -139,6 +139,11 @@ export default function Page() {
           3 pixels per millimetre.
         </p>
         <p>
+          The grid is red, like printed ECG paper. To match your theme, set{" "}
+          <code>--ecg-grid</code> to any colour in your CSS; the small and large
+          boxes draw it at 15% and 35% opacity.
+        </p>
+        <p>
           Labels and the heart rate come from <code>detectEcgWaves</code>, a
           simple slope and amplitude heuristic tuned for clean sinus rhythms.
           For real recordings pass your own <code>annotations</code>, each a

@@ -77,6 +77,7 @@ and [DNA helix](https://organui.com/docs/dna-helix) documentation.
 `ecg-trace` draws a recorded trace or a live stream as a rhythm strip on
 standard ECG paper (25 mm/s, 10 mm/mV), with P, QRS and T labelled and a
 synthetic sinus rhythm for demos. It is SVG only and not for diagnostic use.
+The grid is red by default; set `--ecg-grid` in your CSS to change it.
 
 ```tsx
 import { EcgTrace, syntheticEcg } from "@/components/ui/ecg-trace"
