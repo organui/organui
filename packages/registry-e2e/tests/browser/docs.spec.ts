@@ -2,7 +2,6 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
-import bodySystems from "@workspace/registry/body-systems.json"
 import { heartModel } from "@workspace/registry/heart"
 import { kidneysModel } from "@workspace/registry/kidneys"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
@@ -446,6 +445,13 @@ test("the organs gallery groups every organ by system and opens one scene at a t
   await expect(page.locator("canvas")).toHaveCount(0)
   const systems = page.getByRole("navigation", { name: "Body systems" })
   const chips = await systems.getByRole("link").allTextContents()
+  // Node's ESM loader needs an import attribute for JSON, so read the file.
+  const bodySystems = JSON.parse(
+    await readFile(
+      new URL(import.meta.resolve("@workspace/registry/body-systems.json")),
+      "utf8"
+    )
+  ) as { id: string; title: string }[]
   expect(chips).toEqual(bodySystems.map(({ title }) => title))
   let listed = 0
   for (const title of chips) {
