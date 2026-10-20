@@ -8,7 +8,8 @@ updates:
       actions:
         patterns: ["*"]
   - package-ecosystem: bun
-    directory: /
+    # The model build scripts keep their own lockfiles outside the workspace.
+    directories: ["/", "/models", "/scripts/models"]
     schedule:
       interval: weekly
     groups:
