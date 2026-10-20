@@ -6,7 +6,7 @@ export function Example() {
     <div
       role="region"
       aria-label="Lab results example"
-      className="rounded-xl border p-4"
+      className="rounded-xl border p-5"
     >
       <LabResultsTable
         results={labResultsExampleData}

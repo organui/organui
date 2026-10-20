@@ -33,7 +33,12 @@ const nextConfig: NextConfig = {
       // other origins, so they need CORS.
       {
         source: "/models/:path*",
-        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          // Names carry no content hash, so browsers keep a model for an hour
+          // rather than revalidating megabytes of GLB on every view.
+          { key: "Cache-Control", value: "public, max-age=3600" },
+        ],
       },
     ]
   },

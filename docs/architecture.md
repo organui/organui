@@ -40,6 +40,8 @@ The tree uses a roving tab stop, explicit levels and sibling positions, separate
 
 The component intentionally targets small/medium in-memory datasets. It has no virtualization, lazy loading, multiselect, drag and drop, typeahead, or viewer. It uses recursive traversal; very deep or very large datasets need an adapted implementation.
 
+Registry items draw their few icons as inline SVG instead of importing an icon package. They install into projects whose shadcn `iconLibrary` may be lucide, tabler, hugeicons or another, and the shadcn rules say never to assume `lucide-react`. The site's own code uses lucide, as its `components.json` sets.
+
 ## Build and cache ownership
 
 `@workspace/registry#build` caches `dist/**`. `web#stage-registry` depends on that task and caches `public/r/**`. `web#build` depends on staging and dependency builds; `web#dev` stages before starting. Default Turbo inputs track package source and configuration; generated directories are ignored so output creation does not change input hashes. Dependency hashes propagate registry edits through staging to the website build. The website's own stylesheet (`apps/web/app/globals.css`) imports the shared theme and scans the registry source through its `node_modules` dependency link for demonstration styles; `packages/ui` does not reference sibling packages. Package-specific tasks live in each package's `turbo.json` (`extends: ["//"]`). `lint` and `typecheck` depend on a no-op `transit` task so they run in parallel while still invalidating when dependencies change.

@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { isProduction, site } from "@/lib/site"
 
@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     ],
   },
   robots: { index: isProduction, follow: isProduction },
+}
+
+// Matches --background in light and dark.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 }
 
 export default function RootLayout({
