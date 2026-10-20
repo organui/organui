@@ -17,7 +17,7 @@ export default function DocsLayout({
         <div className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto overscroll-contain py-8 md:block">
           <DocsNav sections={docsNav} />
         </div>
-        <main data-docs-content className="min-w-0 py-8 md:py-10">
+        <main id="main" data-docs-content className="min-w-0 py-8 md:py-10">
           {children}
         </main>
         {/* Pages with nothing to list, such as the organs gallery, mark

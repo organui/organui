@@ -16,10 +16,21 @@ const catalog = JSON.parse(
 
 // Workspace packages are transpiled automatically by Next.js 16.
 const nextConfig: NextConfig = {
-  // Organ models built in this repository load into installed viewers on
-  // other origins, so they need CORS.
+  poweredByHeader: false,
   async headers() {
     return [
+      // Vercel already sends Strict-Transport-Security. Blocks are framed
+      // only by /blocks, on this origin.
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
+      // Organ models built in this repository load into installed viewers on
+      // other origins, so they need CORS.
       {
         source: "/models/:path*",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],

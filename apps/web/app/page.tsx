@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { explorers, site } from "@/lib/site"
-import { buttonVariants } from "@workspace/ui/components/button"
-import { cn } from "@workspace/ui/lib/utils"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
 
 import { SiteHeader } from "@/components/site-header"
@@ -24,7 +22,10 @@ export default function Page() {
   return (
     <>
       <SiteHeader />
-      <main className="flex min-h-[calc(100svh-3.5rem)] items-center justify-center p-6">
+      <main
+        id="main"
+        className="flex min-h-[calc(100svh-3.5rem)] items-center justify-center p-6"
+      >
         <div className="flex max-w-md min-w-0 flex-col items-center gap-4 text-center text-sm leading-loose">
           <h1 className="flex items-center gap-4 text-4xl font-medium">
             <OrganUIMark />
@@ -55,22 +56,16 @@ export default function Page() {
             <a
               href="https://github.com/organui"
               aria-label="OrganUI on GitHub"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
-              )}
+              className="inline-flex size-11 items-center justify-center rounded-lg outline-none hover:text-muted-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-              <GitHubIcon />
+              <GitHubIcon className="size-[22px]" />
             </a>
             <a
               href="https://x.com/organui"
               aria-label="OrganUI on X"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
-              )}
+              className="inline-flex size-11 items-center justify-center rounded-lg outline-none hover:text-muted-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-              <XIcon />
+              <XIcon className="size-[22px]" />
             </a>
           </div>
         </div>

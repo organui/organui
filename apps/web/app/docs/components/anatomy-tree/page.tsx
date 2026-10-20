@@ -1,37 +1,17 @@
 import { ComponentPreview } from "@/components/component-preview"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import type { Metadata } from "next"
-import { codeBlock, shadcn } from "@/lib/registry"
+import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 const description =
   "An accessible anatomy tree component for selecting structures and controlling visibility in healthcare interfaces."
 
-export const metadata: Metadata = {
-  title: "Anatomy tree",
+export const metadata = docsMetadata(
+  "Anatomy tree",
   description,
-  alternates: { canonical: "/docs/components/anatomy-tree" },
-  openGraph: {
-    type: "website",
-    siteName: site.name,
-    title: "Anatomy tree — OrganUI",
-    description,
-    url: "/docs/components/anatomy-tree",
-    images: [
-      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@organui",
-    title: "Anatomy tree — OrganUI",
-    description,
-    images: [
-      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
-    ],
-  },
-}
+  "/docs/components/anatomy-tree"
+)
 const usage = `"use client"
 import { useState } from "react"
 import { AnatomyTree } from "@/components/ui/anatomy-tree"

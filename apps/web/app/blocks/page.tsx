@@ -20,7 +20,10 @@ export default async function Page() {
   return (
     <div className="min-h-svh">
       <SiteHeader />
-      <main className="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-10 sm:px-6">
+      <main
+        id="main"
+        className="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-10 sm:px-6"
+      >
         <header className="flex flex-col gap-4">
           <h1 className="text-4xl font-semibold tracking-tight">Blocks</h1>
           <p className="max-w-2xl text-lg text-muted-foreground">
