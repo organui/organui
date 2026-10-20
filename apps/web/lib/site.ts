@@ -3,7 +3,6 @@ export const site = {
   url: "https://organui.com",
   title: "OrganUI — The interfaces healthcare deserves.",
   description: "Interfaces for healthcare and life sciences.",
-  socialImage: "/opengraph-image",
   repo: "organui/organui",
   repository: "https://github.com/organui/organui",
 } as const

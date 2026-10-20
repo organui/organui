@@ -203,9 +203,6 @@ export function docsMetadata(
   description: string,
   path: string
 ): Metadata {
-  const images = [
-    { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
-  ]
   return {
     title,
     description,
@@ -216,14 +213,12 @@ export function docsMetadata(
       title: `${title} — OrganUI`,
       description,
       url: path,
-      images,
     },
     twitter: {
       card: "summary_large_image",
       site: "@organui",
       title: `${title} — OrganUI`,
       description,
-      images,
     },
   }
 }

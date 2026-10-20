@@ -30,9 +30,6 @@ export const metadata: Metadata = {
     site: "@organui",
     title: site.title,
     description: site.description,
-    images: [
-      { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
-    ],
   },
   robots: { index: isProduction, follow: isProduction },
 }
