@@ -182,25 +182,15 @@ export const mainNav: NavLink[] = [
 ]
 
 // The sidebar lists the guides and every component except the organs, which
-// are one link to the organs gallery; each organ page is still in search and
-// in the previous and next links.
+// the header's Organs link opens as a gallery; each organ page is still in
+// search and in the previous and next links.
 export const docsNav: DocsNavSection[] = [
   { title: "Sections", items: [...guides, componentsIndex] },
   ...componentGroups.map(({ id, title }) => ({
     title,
-    items: [
-      ...registryItems
-        .filter((item) => item.group === id && !item.organ)
-        .map(({ title, href }) => ({ title, href })),
-      ...(id === "organs"
-        ? [
-            {
-              title: `Browse all ${organs.length} organs`,
-              href: organsPage.href,
-            },
-          ]
-        : []),
-    ],
+    items: registryItems
+      .filter((item) => item.group === id && !item.organ)
+      .map(({ title, href }) => ({ title, href })),
   })),
 ]
 

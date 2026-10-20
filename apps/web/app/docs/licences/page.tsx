@@ -73,7 +73,7 @@ export default async function Page() {
             organs gallery
           </Link>{" "}
           are renderings of these models, so each is shared under its
-          model&apos;s licence, and its card shows the credit.
+          model&apos;s licence and credited in the table below.
         </p>
         <div
           tabIndex={0}

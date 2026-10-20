@@ -298,12 +298,8 @@ test("component index lists every component inside the docs layout", async ({
         `/docs/components/${item.name}`
       )
   }
-  await expect(
-    docs.getByRole("link", {
-      name: `Browse all ${organs.length} organs`,
-      exact: true,
-    })
-  ).toHaveAttribute("href", "/docs/components/organs")
+  // The header's Organs link opens the gallery, so the sidebar has none.
+  await expect(docs.getByRole("link", { name: /organs/i })).toHaveCount(0)
   if (narrow) {
     // Tapping the current page still closes the menu.
     await docs.getByRole("link", { name: "Components", exact: true }).click()
@@ -429,7 +425,7 @@ test("the header links each section and searches the whole site", async ({
   expect(errors).toEqual([])
 })
 
-test("the organs gallery groups every organ by system and credits each picture", async ({
+test("the organs gallery groups every organ by system as a picture and a link", async ({
   page,
   request,
 }, info) => {
@@ -465,26 +461,22 @@ test("the organs gallery groups every organ by system and credits each picture",
       categories?.includes(system.id)
     )) {
       const title = item.title ?? item.name
-      await expect(
-        section
-          .getByRole("heading", { name: title, level: 3, exact: true })
-          .getByRole("link")
-      ).toHaveAttribute("href", `/docs/components/${item.name}`)
-      await expect(
-        section.getByRole("region", { name: `Install ${title}`, exact: true })
-      ).toHaveText(installCommand(item))
-      await expect(
-        section.locator(`img[src="/organs/${item.name}.webp"]`)
-      ).toHaveCount(1)
+      const card = section.getByRole("link", { name: title, exact: true })
+      await expect(card).toHaveAttribute(
+        "href",
+        `/docs/components/${item.name}`
+      )
+      await expect(card.locator("img")).toHaveAttribute(
+        "src",
+        `/organs/${item.name}.webp`
+      )
     }
   }
-  // One card per organ, each crediting the model its picture shows.
-  await expect(main.getByRole("heading", { level: 3 })).toHaveCount(
-    organs.length
-  )
+  await expect(main.getByRole("listitem")).toHaveCount(organs.length)
+  // The pictures keep their models' licences, credited in Licences.
   await expect(
-    main.getByRole("link", { name: "Source", exact: true })
-  ).toHaveCount(organs.length)
+    main.getByRole("link", { name: "Licences", exact: true })
+  ).toHaveAttribute("href", "/docs/licences")
   // The gallery is pictures and links: nothing loads in 3D.
   await expect(page.locator("canvas")).toHaveCount(0)
   expect(
