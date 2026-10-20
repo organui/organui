@@ -179,17 +179,6 @@ test("homepage explorer links support keyboard navigation without overflow", asy
   expect(errors).toEqual([])
 })
 
-// The scan of every preview is its own test, so neither needs a long timeout.
-// Items that depend on other OrganUI items are shown installing by name.
-function installCommand(item: {
-  name: string
-  registryDependencies?: string[]
-}) {
-  return item.registryDependencies?.some((name) => name.startsWith("@organui/"))
-    ? `bunx shadcn@4.22.1 add @organui/${item.name}`
-    : `bunx shadcn@4.22.1 add https://organui.com/r/${item.name}.json`
-}
-
 test("guides and the component index pass an accessibility scan without overflow", async ({
   page,
 }, info) => {
@@ -239,34 +228,21 @@ test("component index lists every component inside the docs layout", async ({
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
   )
-  // Organs are listed on /organs; the index links there instead.
-  for (const item of components.filter((item) => !organs.includes(item))) {
-    const title = item.title ?? item.name
+  // An A–Z list of links, as on shadcn/ui; the organs share one gallery link.
+  const index = page.getByRole("main").getByRole("list").first()
+  for (const item of components.filter((item) => !organs.includes(item)))
     await expect(
-      page
-        .getByRole("heading", { name: title, level: 3, exact: true })
-        .getByRole("link")
+      index.getByRole("link", { name: item.title ?? item.name, exact: true })
     ).toHaveAttribute("href", `/docs/components/${item.name}`)
-    await expect(
-      page.getByRole("region", { name: `Install ${title}`, exact: true })
-    ).toHaveText(installCommand(item))
-    await expect(
-      page
-        .getByRole("group", { name: `${title} preview`, exact: true })
-        .locator(":scope > *")
-    ).toBeVisible()
-  }
-  const organSection = page.getByRole("region", { name: "Organs", exact: true })
   for (const item of organs)
     await expect(
-      organSection.getByRole("heading", { name: item.title ?? item.name })
+      index.getByRole("link", { name: item.title ?? item.name, exact: true })
     ).toHaveCount(0)
   await expect(
-    organSection.getByRole("link", {
-      name: `All ${organs.length} organs`,
-      exact: true,
-    })
+    index.getByRole("link", { name: "Organs", exact: true })
   ).toHaveAttribute("href", "/docs/components/organs")
+  const titles = await index.getByRole("link").allTextContents()
+  expect(titles).toEqual([...titles].sort((a, b) => a.localeCompare(b)))
   const pages = await Promise.all(
     components.map(({ name }) => request.get(`/docs/components/${name}`))
   )
@@ -810,18 +786,15 @@ test("lab results flag values in words and fit a phone", async ({
   await expect(row("Sodium").getByText("Range: 135–145 mmol/L")).toBeVisible({
     visible: narrow,
   })
-  for (const path of ["/docs/components/lab-results", "/docs/components"]) {
-    await page.goto(path)
-    expect(
-      await page.evaluate(() =>
-        [
-          document.documentElement,
-          ...document.querySelectorAll("[data-slot=lab-results] > *"),
-        ].every((element) => element.scrollWidth <= element.clientWidth)
-      )
-    ).toBe(true)
-  }
   await page.goto("/docs/components/lab-results")
+  expect(
+    await page.evaluate(() =>
+      [
+        document.documentElement,
+        ...document.querySelectorAll("[data-slot=lab-results] > *"),
+      ].every((element) => element.scrollWidth <= element.clientWidth)
+    )
+  ).toBe(true)
   const axe = await new AxeBuilder({ page }).analyze()
   expect(axe.violations).toEqual([])
   await page.screenshot({

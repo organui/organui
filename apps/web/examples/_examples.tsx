@@ -1,13 +1,10 @@
 import type { ReactNode } from "react"
 import { organExamples } from "./_organs"
 
-// Every documentation example by name. Plain data, so the server preview and
-// the client's load-on-request preview read the same definitions.
+// Every documentation example by name.
 export type ExampleDefinition = {
   title: string
   lazy?: boolean
-  /** The load-on-request button's text, for lazy examples that aren't 3D. */
-  loadLabel?: string
   file: string
   render: () => Promise<ReactNode>
 }
@@ -122,7 +119,6 @@ export const examples: Record<string, ExampleDefinition> = {
     // Generating the head phantom blocks the main thread for 70–170 ms on a
     // laptop, several times that on a phone, so index cards wait for a click.
     lazy: true,
-    loadLabel: "Load the medical image viewer",
     render: async () => {
       const { Example } = await import("./image-viewer-demo")
       return <Example />
