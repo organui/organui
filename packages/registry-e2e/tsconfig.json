@@ -124,9 +124,7 @@
       "@/components/vestibular": [
         "../registry/registry/base-nova/vestibular/vestibular.tsx"
       ],
-      "@/icons/icon-placeholder": [
-        "../ui/src/components/icon-placeholder.tsx"
-      ],
+      "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["../ui/src/components/*"],
       "@/components/*": ["../registry/registry/base-nova/organ-viewer/*"]
     }
