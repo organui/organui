@@ -6,7 +6,7 @@ import {
   type MoleculeResidue,
 } from "@workspace/registry/molecule-viewer"
 
-export function Example({ compact = false }: { compact?: boolean }) {
+export function Example() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [residue, setResidue] = useState<MoleculeResidue | null>(null)
   const viewer = (
@@ -23,10 +23,8 @@ export function Example({ compact = false }: { compact?: boolean }) {
         )
       }
       label="Interactive crambin structure"
-      className={compact ? "h-80" : undefined}
     />
   )
-  if (compact) return viewer
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_16rem]">
       {viewer}

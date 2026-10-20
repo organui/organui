@@ -15,6 +15,7 @@ import {
   PlusIcon,
   RotateCcwIcon,
   TriangleAlertIcon,
+  XIcon,
 } from "lucide-react"
 
 // Registry items draw icons through this placeholder, as shadcn's registry
@@ -38,6 +39,7 @@ const icons = {
   PlusIcon,
   RotateCcwIcon,
   TriangleAlertIcon,
+  XIcon,
 }
 
 export const iconLibraries = [

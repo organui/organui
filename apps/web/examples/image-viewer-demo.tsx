@@ -1,6 +1,8 @@
 "use client"
 import { useId, useState } from "react"
 import { Button } from "@workspace/ui/components/button"
+import { Field, FieldError, FieldLabel } from "@workspace/ui/components/field"
+import { Input } from "@workspace/ui/components/input"
 import {
   ImageViewer,
   ctWindowPresets,
@@ -84,22 +86,18 @@ export function Example() {
           </p>
         </div>
         <div className="flex flex-col items-start gap-2">
-          <label htmlFor={input} className="text-sm font-medium">
-            Open DICOM files
-          </label>
-          <input
-            id={input}
-            type="file"
-            multiple
-            accept=".dcm,application/dicom"
-            onChange={(event) => open(event.currentTarget.files)}
-            className="max-w-full text-sm file:mr-3 file:rounded-md file:border file:bg-background file:px-3 file:py-1.5 file:text-sm"
-          />
-          {error && (
-            <p role="alert" className="text-sm text-destructive">
-              {error}
-            </p>
-          )}
+          <Field data-invalid={error ? true : undefined}>
+            <FieldLabel htmlFor={input}>Open DICOM files</FieldLabel>
+            <Input
+              id={input}
+              type="file"
+              multiple
+              accept=".dcm,application/dicom"
+              aria-invalid={error ? true : undefined}
+              onChange={(event) => open(event.currentTarget.files)}
+            />
+            {error && <FieldError>{error}</FieldError>}
+          </Field>
           {series.name !== "Head phantom" && (
             <Button
               variant="link"

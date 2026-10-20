@@ -6,6 +6,7 @@ import { MobileNav } from "@/components/mobile-nav"
 import { ModeSwitcher } from "@/components/mode-switcher"
 import { docsNav, mainNav } from "@/lib/registry"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
+import { Separator } from "@workspace/ui/components/separator"
 
 // Shared by every page. Laid out after shadcn/ui's site header: navigation,
 // then search, the repository and the theme toggle.
@@ -24,14 +25,14 @@ export function SiteHeader() {
         <MainNav items={mainNav} className="hidden md:flex" />
         <div className="ml-auto flex items-center gap-1 sm:gap-2">
           <CommandMenu />
-          <div
-            aria-hidden="true"
-            className="hidden h-4 w-px bg-border sm:block"
+          <Separator
+            orientation="vertical"
+            className="hidden sm:block data-vertical:h-4 data-vertical:self-center"
           />
           <GitHubLink />
-          <div
-            aria-hidden="true"
-            className="hidden h-4 w-px bg-border sm:block"
+          <Separator
+            orientation="vertical"
+            className="hidden sm:block data-vertical:h-4 data-vertical:self-center"
           />
           <ModeSwitcher />
         </div>

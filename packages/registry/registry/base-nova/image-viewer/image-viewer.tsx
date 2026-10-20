@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -759,11 +760,13 @@ export function ImageViewer({
                     <SelectValue placeholder="Custom" />
                   </SelectTrigger>
                   <SelectContent>
-                    {presets.map(({ name }) => (
-                      <SelectItem key={name} value={name}>
-                        {name}
-                      </SelectItem>
-                    ))}
+                    <SelectGroup>
+                      {presets.map(({ name }) => (
+                        <SelectItem key={name} value={name}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
               )}

@@ -4,6 +4,7 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type BodyMapView = "front" | "back"
 export type BodyMapRegion = {
@@ -392,7 +393,15 @@ export function BodyMap({
                   onClick={() => toggle(region.id)}
                 >
                   {region.label}
-                  <span aria-hidden="true">×</span>
+                  <IconPlaceholder
+                    lucide="XIcon"
+                    tabler="IconX"
+                    hugeicons="Cancel01Icon"
+                    phosphor="XIcon"
+                    remixicon="RiCloseLine"
+                    aria-hidden="true"
+                    data-icon="inline-end"
+                  />
                 </Button>
               </li>
             ))}
