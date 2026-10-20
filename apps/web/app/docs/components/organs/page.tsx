@@ -46,7 +46,6 @@ export default function Page() {
                 width={640}
                 height={480}
                 alt=""
-                unoptimized
                 sizes="(min-width: 1280px) 14rem, (min-width: 1024px) 20vw, (min-width: 640px) 30vw, 50vw"
                 className="aspect-[4/3] w-full rounded-xl bg-muted/40 object-contain transition-transform group-hover:scale-[1.03]"
               />

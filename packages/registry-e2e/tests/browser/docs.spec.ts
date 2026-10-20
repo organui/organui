@@ -433,11 +433,17 @@ test("the organs gallery shows every organ as a picture and a link", async ({
       exact: true,
     })
     await expect(card).toHaveAttribute("href", `/docs/components/${item.name}`)
+    // Served through the image optimizer, sized for the grid column.
     await expect(card.locator("img")).toHaveAttribute(
       "src",
-      `/organs/${item.name}.webp`
+      new RegExp(`url=%2Forgans%2F${item.name}\\.webp`)
     )
   }
+  const first = main.getByRole("listitem").first().locator("img")
+  await first.scrollIntoViewIfNeeded()
+  await expect
+    .poll(() => first.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBeGreaterThan(0)
   // The pictures keep their models' licences, credited in Licences.
   await expect(
     main.getByRole("link", { name: "Licences", exact: true })
