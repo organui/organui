@@ -157,6 +157,8 @@ bun run dev
 
 Then open `http://localhost:3000/docs`. Run tasks from the root so
 Turborepo builds and stages the registry first; `next build` alone does not.
+No environment variables are needed; [.env.example](.env.example) lists
+the optional ones.
 
 `bun run lint`, `bun run typecheck`, `bun run test` and `bun run format:check`
 cover the quick checks. [docs/architecture.md](docs/architecture.md) describes
