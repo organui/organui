@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "consumers": "bun scripts/consumers.ts",
+    "lint": "eslint --max-warnings=0",
     "test:browser": "playwright test",
     "typecheck": "tsc --noEmit"
   },
@@ -12,8 +13,10 @@
     "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.64.1",
     "@types/bun": "1.4.3",
+    "@workspace/eslint-config": "workspace:*",
     "@workspace/registry": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "eslint": "^9.39.5",
     "shadcn": "4.22.1",
     "typescript": "^5.9.3",
     "web": "workspace:*"
