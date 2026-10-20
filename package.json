@@ -15,7 +15,6 @@
     "test:cache": "bun scripts/check-registry-cache.ts"
   },
   "devDependencies": {
-    "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",

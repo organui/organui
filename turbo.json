@@ -1,5 +1,5 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
   "tasks": {
     "build": {
@@ -15,9 +15,6 @@
     },
     "typecheck": {
       "dependsOn": ["transit"]
-    },
-    "format": {
-      "cache": false
     },
     "dev": {
       "cache": false,
