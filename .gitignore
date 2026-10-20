@@ -52,3 +52,7 @@ test-results/
 
 # model build cache
 .asset-cache
+
+# agent worktrees and local settings
+.claude/worktrees/
+.claude/settings.local.json
