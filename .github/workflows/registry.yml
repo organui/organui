@@ -17,6 +17,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # History for --affected, which compares a pull request with its base.
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
@@ -36,7 +39,9 @@ jobs:
           restore-keys: ${{ runner.os }}-turbo-${{ github.job }}-
       - run: bun install --frozen-lockfile
       - run: bun run format:check
-      - run: bunx turbo run lint typecheck test
+      # Pull requests check only the packages they change and their dependents;
+      # master checks everything.
+      - run: bunx turbo run lint typecheck test ${{ github.event_name == 'pull_request' && '--affected' || '' }}
   verify:
     name: Build, cache and installed consumers
     runs-on: ubuntu-latest
