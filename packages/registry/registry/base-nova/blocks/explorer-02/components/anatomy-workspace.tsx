@@ -25,7 +25,7 @@ import {
   organDefaultVisibility,
   type OrganModel,
 } from "@/components/organ-viewer"
-import { IconPlaceholder } from "@/registry/icon-placeholder"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 // Matches the lg breakpoint where the sidebar is shown.
 const WIDE = "(min-width: 64rem)"

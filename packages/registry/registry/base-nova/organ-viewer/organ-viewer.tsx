@@ -42,7 +42,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { IconPlaceholder } from "@/registry/icon-placeholder"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type OrganStructure = {
   /** Mesh name, or `userData.structureId`, of the structure in the GLB. */

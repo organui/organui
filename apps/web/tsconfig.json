@@ -144,7 +144,7 @@
       "@/components/vestibular": [
         "../../packages/registry/registry/base-nova/vestibular/vestibular.tsx"
       ],
-      "@/registry/icon-placeholder": [
+      "@/icons/icon-placeholder": [
         "../../packages/ui/src/components/icon-placeholder.tsx"
       ],
       "@/components/ui/*": ["../../packages/ui/src/components/*"],

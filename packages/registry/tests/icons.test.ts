@@ -30,7 +30,7 @@ for await (const file of new Glob("registry/**/*.tsx").scan(
     })
   if (source.includes("<IconPlaceholder"))
     expect(source).toContain(
-      'import { IconPlaceholder } from "@/registry/icon-placeholder"'
+      'import { IconPlaceholder } from "@/icons/icon-placeholder"'
     )
 }
 

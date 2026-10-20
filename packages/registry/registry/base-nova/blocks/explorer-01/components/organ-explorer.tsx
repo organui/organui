@@ -17,7 +17,7 @@ import {
   organDefaultVisibility,
   type OrganModel,
 } from "@/components/organ-viewer"
-import { IconPlaceholder } from "@/registry/icon-placeholder"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 // Matches the lg breakpoint where the panel fits beside the viewer.
 const WIDE = "(min-width: 64rem)"

@@ -83,7 +83,7 @@
         "./registry/base-nova/vestibular/vestibular.tsx"
       ],
       // Removed by shadcn add, which writes the project's own icons instead.
-      "@/registry/icon-placeholder": [
+      "@/icons/icon-placeholder": [
         "../ui/src/components/icon-placeholder.tsx"
       ],
       "@/components/ui/*": ["../ui/src/components/*"],
