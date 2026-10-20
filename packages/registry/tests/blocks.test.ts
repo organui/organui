@@ -139,9 +139,8 @@ test("every component belongs to one docs group", () => {
   }
 })
 
-// The /organs gallery groups organs by body system, in the order and with the
-// labels of body-systems.json, so each organ needs exactly one and nothing
-// else may have one.
+// Each organ carries one body system from body-systems.json, for grouping
+// organs (the site doesn't show them yet), and nothing else has one.
 test("every organ belongs to one body system", () => {
   const systems = bodySystems.map(({ id }) => id)
   for (const item of registry.items) {

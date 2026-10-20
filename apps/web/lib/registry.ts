@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import systems from "@workspace/registry/body-systems.json"
 import catalog from "@workspace/registry/registry.json"
 import { site } from "@/lib/site"
 
@@ -31,19 +30,6 @@ export const componentGroups = [
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
 
-// The organs gallery's sections, in order. Each organ carries exactly one
-// of these as a registry category (a registry test checks it).
-export const bodySystems = systems
-
-export type BodySystem = (typeof systems)[number]
-
-function systemOf(categories: readonly string[]) {
-  if (!categories.includes("organ")) return undefined
-  const system = bodySystems.find(({ id }) => categories.includes(id))
-  if (!system) throw new Error(`No body system for ${categories.join(", ")}`)
-  return system
-}
-
 function groupOf(categories: readonly string[] = []) {
   const group = componentGroups.find((entry) =>
     entry.categories.some((category) => categories.includes(category))
@@ -64,7 +50,6 @@ export const registryItems = catalog.items
       name: item.name,
       group: groupOf(categories),
       organ: categories.includes("organ"),
-      system: systemOf(categories),
       // Items built on the organ viewer with a model: organs and the cell.
       model: categories.includes("organ") || categories.includes("cell"),
       title: item.title ?? item.name,
@@ -170,8 +155,7 @@ export const componentsIndex: NavLink & { description: string } = {
 export const organsPage: NavLink & { description: string } = {
   title: "Organs",
   href: "/docs/components/organs",
-  description:
-    "Every organ, grouped by body system, with a thumbnail and its install command.",
+  description: "Every organ as a picture, linking to its page.",
 }
 
 export const mainNav: NavLink[] = [

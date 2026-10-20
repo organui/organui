@@ -425,7 +425,7 @@ test("the header links each section and searches the whole site", async ({
   expect(errors).toEqual([])
 })
 
-test("the organs gallery groups every organ by system as a picture and a link", async ({
+test("the organs gallery shows every organ as a picture and a link", async ({
   page,
   request,
 }, info) => {
@@ -434,13 +434,6 @@ test("the organs gallery groups every organ by system as a picture and a link", 
   const organs = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
     .items.filter(({ categories }) => categories?.includes("organ"))
-  // Node's ESM loader needs an import attribute for JSON, so read the file.
-  const bodySystems = JSON.parse(
-    await readFile(
-      new URL(import.meta.resolve("@workspace/registry/body-systems.json")),
-      "utf8"
-    )
-  ) as { id: string; title: string }[]
   await page.goto("/docs/components/organs")
   await expect(
     page.getByRole("heading", { name: "Organs", level: 1 })
@@ -449,30 +442,26 @@ test("the organs gallery groups every organ by system as a picture and a link", 
     page.getByText("Components / Organs", { exact: true })
   ).toBeVisible()
   const main = page.getByRole("main")
-  await expect(main.getByRole("heading", { level: 2 })).toHaveText(
-    bodySystems.map(({ title }) => title)
+  // One grid, A to Z, with no sections to list beside it.
+  await expect(main.getByRole("heading", { level: 2 })).toHaveCount(0)
+  await expect(
+    page.getByRole("navigation", { name: "On this page" })
+  ).toHaveCount(0)
+  const titles = organs.map(({ title, name }) => title ?? name)
+  await expect(main.getByRole("listitem")).toHaveText(
+    [...titles].sort((a, b) => a.localeCompare(b))
   )
-  for (const system of bodySystems) {
-    const section = main.getByRole("region", {
-      name: system.title,
+  for (const item of organs) {
+    const card = main.getByRole("link", {
+      name: item.title ?? item.name,
       exact: true,
     })
-    for (const item of organs.filter(({ categories }) =>
-      categories?.includes(system.id)
-    )) {
-      const title = item.title ?? item.name
-      const card = section.getByRole("link", { name: title, exact: true })
-      await expect(card).toHaveAttribute(
-        "href",
-        `/docs/components/${item.name}`
-      )
-      await expect(card.locator("img")).toHaveAttribute(
-        "src",
-        `/organs/${item.name}.webp`
-      )
-    }
+    await expect(card).toHaveAttribute("href", `/docs/components/${item.name}`)
+    await expect(card.locator("img")).toHaveAttribute(
+      "src",
+      `/organs/${item.name}.webp`
+    )
   }
-  await expect(main.getByRole("listitem")).toHaveCount(organs.length)
   // The pictures keep their models' licences, credited in Licences.
   await expect(
     main.getByRole("link", { name: "Licences", exact: true })

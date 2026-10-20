@@ -13,14 +13,16 @@ export default function DocsLayout({
   return (
     <div className="min-h-svh">
       <SiteHeader />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:grid md:grid-cols-[13rem_minmax(0,1fr)] md:gap-10 xl:grid-cols-[13rem_minmax(0,1fr)_12rem]">
+      <div className="group/docs mx-auto max-w-7xl px-4 sm:px-6 md:grid md:grid-cols-[13rem_minmax(0,1fr)] md:gap-10 xl:grid-cols-[13rem_minmax(0,1fr)_12rem] xl:has-data-docs-wide:grid-cols-[13rem_minmax(0,1fr)]">
         <div className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto overscroll-contain py-8 md:block">
           <DocsNav sections={docsNav} />
         </div>
         <main data-docs-content className="min-w-0 py-8 md:py-10">
           {children}
         </main>
-        <div className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto py-10 xl:block">
+        {/* Pages with nothing to list, such as the organs gallery, mark
+            themselves data-docs-wide and take this column's width. */}
+        <div className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto py-10 xl:block xl:group-has-data-docs-wide/docs:hidden">
           <DocsTableOfContents />
         </div>
       </div>

@@ -97,7 +97,7 @@ export default function Page() {
                 </h3>
                 <p className="text-muted-foreground">
                   Every organ built on the organ viewer, from the brain to the
-                  nails, grouped by body system in the organs gallery.
+                  nails, in the organs gallery.
                 </p>
               </li>
             )}
