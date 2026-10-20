@@ -21,6 +21,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { IconPlaceholder } from "@/registry/icon-placeholder"
 
 /**
  * One image of a stack. Pass raw values, such as Hounsfield units, as `data`
@@ -157,18 +158,6 @@ function formatValue(value: number) {
   return Math.abs(value) >= 10 || Number.isInteger(value)
     ? String(Math.round(value))
     : value.toFixed(2)
-}
-
-const iconProps = {
-  width: 16,
-  height: 16,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 2,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  "aria-hidden": true,
 }
 
 function ToolbarButton({
@@ -671,10 +660,14 @@ export function ImageViewer({
         {message ? (
           <div className="absolute inset-0 flex items-center justify-center p-6">
             <Alert className="max-w-sm">
-              <svg {...iconProps}>
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 8v4M12 16h.01" />
-              </svg>
+              <IconPlaceholder
+                lucide="CircleAlertIcon"
+                tabler="IconExclamationCircle"
+                hugeicons="AlertCircleIcon"
+                phosphor="WarningCircleIcon"
+                remixicon="RiErrorWarningLine"
+                aria-hidden="true"
+              />
               <AlertTitle>{message.title}</AlertTitle>
               <AlertDescription>
                 <p>{message.text}</p>
@@ -779,35 +772,58 @@ export function ImageViewer({
                 pressed={tool === "window"}
                 onPressedChange={() => setTool("window")}
               >
-                <svg {...iconProps}>
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" />
-                </svg>
+                <IconPlaceholder
+                  lucide="ContrastIcon"
+                  tabler="IconContrast"
+                  hugeicons="ContrastIcon"
+                  phosphor="CircleHalfIcon"
+                  remixicon="RiContrastLine"
+                  aria-hidden="true"
+                />
               </ToolToggle>
               <ToolToggle
                 label="Pan tool"
                 pressed={tool === "pan"}
                 onPressedChange={() => setTool("pan")}
               >
-                <svg {...iconProps}>
-                  <path d="M12 2v20M2 12h20M12 2l-3 3M12 2l3 3M12 22l-3-3M12 22l3-3M2 12l3-3M2 12l3 3M22 12l-3-3M22 12l-3 3" />
-                </svg>
+                <IconPlaceholder
+                  lucide="MoveIcon"
+                  tabler="IconArrowsMove"
+                  hugeicons="ArrowAllDirectionIcon"
+                  phosphor="ArrowsOutCardinalIcon"
+                  remixicon="RiDragMove2Line"
+                  aria-hidden="true"
+                />
               </ToolToggle>
               <ToolbarButton label="Zoom in" onClick={() => zoomAt(1.25)}>
-                <svg {...iconProps}>
-                  <path d="M5 12h14M12 5v14" />
-                </svg>
+                <IconPlaceholder
+                  lucide="PlusIcon"
+                  tabler="IconPlus"
+                  hugeicons="Add01Icon"
+                  phosphor="PlusIcon"
+                  remixicon="RiAddLine"
+                  aria-hidden="true"
+                />
               </ToolbarButton>
               <ToolbarButton label="Zoom out" onClick={() => zoomAt(0.8)}>
-                <svg {...iconProps}>
-                  <path d="M5 12h14" />
-                </svg>
+                <IconPlaceholder
+                  lucide="MinusIcon"
+                  tabler="IconMinus"
+                  hugeicons="MinusSignIcon"
+                  phosphor="MinusIcon"
+                  remixicon="RiSubtractLine"
+                  aria-hidden="true"
+                />
               </ToolbarButton>
               <ToolbarButton label="Reset view" onClick={reset}>
-                <svg {...iconProps}>
-                  <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
-                  <path d="M3 3v5h5" />
-                </svg>
+                <IconPlaceholder
+                  lucide="RotateCcwIcon"
+                  tabler="IconRotate"
+                  hugeicons="RotateLeft01Icon"
+                  phosphor="ArrowCounterClockwiseIcon"
+                  remixicon="RiResetLeftLine"
+                  aria-hidden="true"
+                />
               </ToolbarButton>
             </div>
           </TooltipProvider>

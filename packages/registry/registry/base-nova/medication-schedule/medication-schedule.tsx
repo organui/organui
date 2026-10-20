@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
+import { IconPlaceholder } from "@/registry/icon-placeholder"
 
 export type Medication = {
   id: string
@@ -226,22 +227,6 @@ function hours(value: number) {
   return `${value} ${value === 1 ? "hour" : "hours"}`
 }
 
-function Chevron({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d={direction === "left" ? "M10 3 5 8l5 5" : "m6 3 5 5-5 5"} />
-    </svg>
-  )
-}
-
 export function MedicationSchedule({
   medications,
   interactions = [],
@@ -297,7 +282,14 @@ export function MedicationSchedule({
               aria-label="Previous day"
               onClick={() => onDateChange(addDays(date, -1))}
             >
-              <Chevron direction="left" />
+              <IconPlaceholder
+                lucide="ChevronLeftIcon"
+                tabler="IconChevronLeft"
+                hugeicons="ArrowLeft01Icon"
+                phosphor="CaretLeftIcon"
+                remixicon="RiArrowLeftSLine"
+                aria-hidden="true"
+              />
             </Button>
             <Button
               variant="outline"
@@ -305,7 +297,14 @@ export function MedicationSchedule({
               aria-label="Next day"
               onClick={() => onDateChange(addDays(date, 1))}
             >
-              <Chevron direction="right" />
+              <IconPlaceholder
+                lucide="ChevronRightIcon"
+                tabler="IconChevronRight"
+                hugeicons="ArrowRight01Icon"
+                phosphor="CaretRightIcon"
+                remixicon="RiArrowRightSLine"
+                aria-hidden="true"
+              />
             </Button>
           </CardAction>
         )}

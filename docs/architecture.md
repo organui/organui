@@ -40,7 +40,7 @@ The tree uses a roving tab stop, explicit levels and sibling positions, separate
 
 The component intentionally targets small/medium in-memory datasets. It has no virtualization, lazy loading, multiselect, drag and drop, typeahead, or viewer. It uses recursive traversal; very deep or very large datasets need an adapted implementation.
 
-Registry items draw their few icons as inline SVG instead of importing an icon package. They install into projects whose shadcn `iconLibrary` may be lucide, tabler, hugeicons or another, and the shadcn rules say never to assume `lucide-react`. The site's own code uses lucide, as its `components.json` sets.
+Registry items draw icons with `<IconPlaceholder lucide="…" tabler="…" hugeicons="…" phosphor="…" remixicon="…" />`, as shadcn's own registry does. `shadcn add` replaces each one with the named icon from the installing project's `iconLibrary` and removes the placeholder import, so items depend on no particular icon package. In this repository `@/registry/icon-placeholder` resolves to `packages/ui/src/components/icon-placeholder.tsx`, which renders lucide like the site. `tests/icons.test.ts` checks every name against all five libraries.
 
 ## Build and cache ownership
 

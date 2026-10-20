@@ -84,7 +84,7 @@ test("flags render as text with an icon, and a lab flag overrides", () => {
   )
   expect(html).toContain("<caption")
   expect(html).toMatch(
-    /data-flag="high"[^>]*><svg aria-hidden="true"[\s\S]*?<\/svg>High<\/span>/
+    /data-flag="high"[^>]*><svg[^>]*aria-hidden="true"[\s\S]*?<\/svg>High<\/span>/
   )
   expect(html).toContain(">Critical high</span>")
   expect(html).toContain(">Abnormal</span>")

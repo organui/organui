@@ -16,11 +16,9 @@ test("installed vital signs flag readings in text, not colour alone", async ({
   await expect(card("spo2")).toContainText("No reading")
   await expect(card("temperature")).toContainText("38.6°CHigh")
   await expect(panel.getByText("Example readings")).toBeVisible()
-  // Each status has its own icon beside the text.
-  await expect(card("heartRate").locator("svg path")).toHaveAttribute(
-    "d",
-    "m5 12 7-7 7 7M12 19V5"
-  )
+  // Each status has its own icon beside the text, from the consumer's icon
+  // library: shadcn add replaced the item's IconPlaceholder with lucide's.
+  await expect(card("heartRate").locator("svg")).toHaveClass(/lucide-arrow-up/)
   const custom = page.getByRole("region", { name: "Fahrenheit", exact: true })
   await expect(custom.locator("[data-vital]")).toHaveCount(3)
   await expect(custom.locator('[data-vital="temperature"]')).toContainText(

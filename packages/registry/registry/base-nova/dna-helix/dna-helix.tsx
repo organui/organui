@@ -35,6 +35,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { IconPlaceholder } from "@/registry/icon-placeholder"
 
 export type Nucleobase = "A" | "C" | "G" | "T"
 
@@ -242,18 +243,6 @@ function buildHelix(pairs: BasePair[]) {
 type Engine = DnaHelixHandle & {
   paint: (selected: number) => void
   spin: (on: boolean) => void
-}
-
-const iconProps = {
-  width: 16,
-  height: 16,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 2,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  "aria-hidden": true,
 }
 
 function ToolbarButton({
@@ -709,10 +698,14 @@ export function DnaHelix({
         {message && (
           <div className="absolute inset-0 flex items-center justify-center p-6">
             <Alert className="max-w-sm">
-              <svg {...iconProps}>
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 8v4M12 16h.01" />
-              </svg>
+              <IconPlaceholder
+                lucide="CircleAlertIcon"
+                tabler="IconExclamationCircle"
+                hugeicons="AlertCircleIcon"
+                phosphor="WarningCircleIcon"
+                remixicon="RiErrorWarningLine"
+                aria-hidden="true"
+              />
               <AlertTitle>{message.title}</AlertTitle>
               <AlertDescription>
                 <p>{message.text}</p>
@@ -743,31 +736,55 @@ export function DnaHelix({
                   onClick={() => setPaused(!paused)}
                 >
                   {paused ? (
-                    <svg {...iconProps}>
-                      <path d="M7 4v16l13-8z" />
-                    </svg>
+                    <IconPlaceholder
+                      lucide="PlayIcon"
+                      tabler="IconPlayerPlay"
+                      hugeicons="PlayIcon"
+                      phosphor="PlayIcon"
+                      remixicon="RiPlayLine"
+                      aria-hidden="true"
+                    />
                   ) : (
-                    <svg {...iconProps}>
-                      <path d="M8 5v14M16 5v14" />
-                    </svg>
+                    <IconPlaceholder
+                      lucide="PauseIcon"
+                      tabler="IconPlayerPause"
+                      hugeicons="PauseIcon"
+                      phosphor="PauseIcon"
+                      remixicon="RiPauseLine"
+                      aria-hidden="true"
+                    />
                   )}
                 </ToolbarButton>
               )}
               <ToolbarButton label="Zoom in" onClick={() => engine.zoom(0.85)}>
-                <svg {...iconProps}>
-                  <path d="M5 12h14M12 5v14" />
-                </svg>
+                <IconPlaceholder
+                  lucide="PlusIcon"
+                  tabler="IconPlus"
+                  hugeicons="Add01Icon"
+                  phosphor="PlusIcon"
+                  remixicon="RiAddLine"
+                  aria-hidden="true"
+                />
               </ToolbarButton>
               <ToolbarButton label="Zoom out" onClick={() => engine.zoom(1.18)}>
-                <svg {...iconProps}>
-                  <path d="M5 12h14" />
-                </svg>
+                <IconPlaceholder
+                  lucide="MinusIcon"
+                  tabler="IconMinus"
+                  hugeicons="MinusSignIcon"
+                  phosphor="MinusIcon"
+                  remixicon="RiSubtractLine"
+                  aria-hidden="true"
+                />
               </ToolbarButton>
               <ToolbarButton label="Reset view" onClick={() => engine.reset()}>
-                <svg {...iconProps}>
-                  <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
-                  <path d="M3 3v5h5" />
-                </svg>
+                <IconPlaceholder
+                  lucide="RotateCcwIcon"
+                  tabler="IconRotate"
+                  hugeicons="RotateLeft01Icon"
+                  phosphor="ArrowCounterClockwiseIcon"
+                  remixicon="RiResetLeftLine"
+                  aria-hidden="true"
+                />
               </ToolbarButton>
             </div>
           </TooltipProvider>

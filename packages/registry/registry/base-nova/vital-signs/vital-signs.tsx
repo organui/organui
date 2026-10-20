@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { IconPlaceholder } from "@/registry/icon-placeholder"
 
 /** Inclusive bounds of the normal range. */
 export type VitalRange = { low: number; high: number }
@@ -200,8 +201,8 @@ export function assessVital(
   }
 }
 
-// Inline icons keep the item free of an icon library. Each status has its own
-// shape, so it reads without colour as well as with the text beside it.
+// Each status has its own shape, so it reads without colour as well as with
+// the text beside it.
 function StatusIcon({
   status,
   className,
@@ -209,26 +210,56 @@ function StatusIcon({
   status: VitalStatus
   className?: string
 }) {
-  const paths = {
-    normal: <path d="M20 6 9 17l-5-5" />,
-    high: <path d="m5 12 7-7 7 7M12 19V5" />,
-    low: <path d="M12 5v14m7-7-7 7-7-7" />,
-    missing: <path d="M5 12h14" />,
+  switch (status) {
+    case "normal":
+      return (
+        <IconPlaceholder
+          lucide="CheckIcon"
+          tabler="IconCheck"
+          hugeicons="Tick02Icon"
+          phosphor="CheckIcon"
+          remixicon="RiCheckLine"
+          aria-hidden="true"
+          className={cn("size-3.5 shrink-0", className)}
+        />
+      )
+    case "high":
+      return (
+        <IconPlaceholder
+          lucide="ArrowUpIcon"
+          tabler="IconArrowUp"
+          hugeicons="ArrowUpIcon"
+          phosphor="ArrowUpIcon"
+          remixicon="RiArrowUpLine"
+          aria-hidden="true"
+          className={cn("size-3.5 shrink-0", className)}
+        />
+      )
+    case "low":
+      return (
+        <IconPlaceholder
+          lucide="ArrowDownIcon"
+          tabler="IconArrowDown"
+          hugeicons="ArrowDownIcon"
+          phosphor="ArrowDownIcon"
+          remixicon="RiArrowDownLine"
+          aria-hidden="true"
+          className={cn("size-3.5 shrink-0", className)}
+        />
+      )
+    case "missing":
+      return (
+        <IconPlaceholder
+          lucide="MinusIcon"
+          tabler="IconMinus"
+          hugeicons="MinusSignIcon"
+          phosphor="MinusIcon"
+          remixicon="RiSubtractLine"
+          aria-hidden="true"
+          className={cn("size-3.5 shrink-0", className)}
+        />
+      )
   }
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={cn("size-3.5 shrink-0", className)}
-    >
-      {paths[status]}
-    </svg>
-  )
 }
 
 export function VitalSigns({

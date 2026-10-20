@@ -29,6 +29,8 @@ rather than running them locally.
 Registry components follow the [shadcn/ui](https://ui.shadcn.com) conventions:
 semantic tokens rather than raw colors, `flex` with `gap-*` for spacing, and
 existing components (`Empty`, `Alert`, `Table` and so on) before custom markup.
+Icons in registry items use `IconPlaceholder` with a name for each icon
+library, so `shadcn add` can write the installing project's own icons.
 
 Keep pull requests focused on one change and write the title as an imperative
 sentence, for example "Add a growth chart component".

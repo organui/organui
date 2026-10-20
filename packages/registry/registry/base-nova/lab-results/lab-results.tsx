@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { IconPlaceholder } from "@/registry/icon-placeholder"
 
 export type LabFlag =
   | "critical-low"
@@ -159,49 +160,68 @@ export function describeTrend(
 }
 
 function FlagIcon({ flag }: { flag: LabFlag }) {
-  const common = {
-    "aria-hidden": true,
-    viewBox: "0 0 16 16",
-    className: "size-4 shrink-0",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.75,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  }
   switch (flag) {
     case "high":
       return (
-        <svg {...common}>
-          <path d="M8 13V3M4 7l4-4 4 4" />
-        </svg>
+        <IconPlaceholder
+          lucide="ArrowUpIcon"
+          tabler="IconArrowUp"
+          hugeicons="ArrowUpIcon"
+          phosphor="ArrowUpIcon"
+          remixicon="RiArrowUpLine"
+          aria-hidden="true"
+          className="size-4 shrink-0"
+        />
       )
     case "low":
       return (
-        <svg {...common}>
-          <path d="M8 3v10M4 9l4 4 4-4" />
-        </svg>
+        <IconPlaceholder
+          lucide="ArrowDownIcon"
+          tabler="IconArrowDown"
+          hugeicons="ArrowDownIcon"
+          phosphor="ArrowDownIcon"
+          remixicon="RiArrowDownLine"
+          aria-hidden="true"
+          className="size-4 shrink-0"
+        />
       )
     case "critical-high":
     case "critical-low":
     case "abnormal":
       return (
-        <svg {...common}>
-          <path d="M8 1.75 15 14H1z" />
-          <path d="M8 6v3.5M8 11.75v.01" />
-        </svg>
+        <IconPlaceholder
+          lucide="TriangleAlertIcon"
+          tabler="IconAlertTriangle"
+          hugeicons="Alert02Icon"
+          phosphor="WarningIcon"
+          remixicon="RiErrorWarningLine"
+          aria-hidden="true"
+          className="size-4 shrink-0"
+        />
       )
     case "normal":
       return (
-        <svg {...common}>
-          <path d="m3 8.5 3 3 7-7" />
-        </svg>
+        <IconPlaceholder
+          lucide="CheckIcon"
+          tabler="IconCheck"
+          hugeicons="Tick02Icon"
+          phosphor="CheckIcon"
+          remixicon="RiCheckLine"
+          aria-hidden="true"
+          className="size-4 shrink-0"
+        />
       )
     default:
       return (
-        <svg {...common}>
-          <path d="M4 8h8" />
-        </svg>
+        <IconPlaceholder
+          lucide="MinusIcon"
+          tabler="IconMinus"
+          hugeicons="MinusSignIcon"
+          phosphor="MinusIcon"
+          remixicon="RiSubtractLine"
+          aria-hidden="true"
+          className="size-4 shrink-0"
+        />
       )
   }
 }

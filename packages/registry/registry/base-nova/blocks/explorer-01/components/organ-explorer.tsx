@@ -17,6 +17,7 @@ import {
   organDefaultVisibility,
   type OrganModel,
 } from "@/components/organ-viewer"
+import { IconPlaceholder } from "@/registry/icon-placeholder"
 
 // Matches the lg breakpoint where the panel fits beside the viewer.
 const WIDE = "(min-width: 64rem)"
@@ -107,21 +108,15 @@ export function OrganExplorer({
             aria-controls={open && wide ? panel : undefined}
             className="shrink-0"
           >
-            <svg
-              width={16}
-              height={16}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <IconPlaceholder
+              lucide="PanelRightIcon"
+              tabler="IconLayoutSidebarRight"
+              hugeicons="SidebarRightIcon"
+              phosphor="SidebarSimpleIcon"
+              remixicon="RiLayoutRightLine"
               aria-hidden="true"
               data-icon="inline-start"
-            >
-              <rect width="18" height="18" x="3" y="3" rx="2" />
-              <path d="M15 3v18" />
-            </svg>
+            />
             Anatomy
           </Toggle>
         </div>
