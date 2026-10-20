@@ -1,6 +1,14 @@
 import Link from "next/link"
 import { DocsPager } from "@/components/docs-pager"
 import { codeBlock, docsMetadata } from "@/lib/registry"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@workspace/ui/components/table"
 
 export const metadata = docsMetadata(
   "Theming",
@@ -54,35 +62,30 @@ export default function Page() {
           tokens, the CSS variables <code>shadcn init</code> writes to your
           stylesheet. Change a token and every component follows it.
         </p>
-        <div
+        <Table
           tabIndex={0}
-          role="region"
           aria-label="Tokens and their use"
-          className="overflow-x-auto rounded-lg border focus-visible:outline-2 focus-visible:outline-ring"
+          className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
         >
-          <table className="w-full text-left text-sm">
-            <thead className="bg-muted/50">
-              <tr>
-                <th scope="col" className="px-3 py-2 font-medium">
-                  Tokens
-                </th>
-                <th scope="col" className="px-3 py-2 font-medium">
-                  Used for
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {tokens.map(([names, use]) => (
-                <tr key={names} className="border-t align-top">
-                  <th scope="row" className="px-3 py-2 font-normal">
-                    <code>{names}</code>
-                  </th>
-                  <td className="px-3 py-2 text-muted-foreground">{use}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Tokens</TableHead>
+              <TableHead>Used for</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {tokens.map(([names, use]) => (
+              <TableRow key={names}>
+                <TableCell>
+                  <code>{names}</code>
+                </TableCell>
+                <TableCell className="whitespace-normal text-muted-foreground">
+                  {use}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
         <pre
           tabIndex={0}
           role="region"

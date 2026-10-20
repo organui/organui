@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
+import { SearchIcon } from "lucide-react"
 import { Button } from "@workspace/ui/components/button"
 import { Kbd, KbdGroup } from "@workspace/ui/components/kbd"
 
@@ -51,20 +52,9 @@ export function CommandMenu() {
         onPointerEnter={loadSearchDialog}
         onFocus={loadSearchDialog}
         aria-keyshortcuts="Meta+K Control+K /"
-        className="h-9 w-9 justify-start gap-2 bg-muted/50 px-0 font-normal text-muted-foreground sm:w-48 sm:px-3 lg:w-60 dark:bg-muted/30"
+        className="size-9 justify-start gap-2 bg-muted/50 px-0 font-normal text-muted-foreground sm:w-48 sm:px-3 lg:w-60"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          aria-hidden="true"
-          className="mx-auto size-4 sm:mx-0"
-        >
-          <circle cx="11" cy="11" r="7" />
-          <path d="m20 20-3.5-3.5" />
-        </svg>
+        <SearchIcon data-icon="inline-start" className="mx-auto sm:mx-0" />
         <span className="sr-only sm:not-sr-only">Search…</span>
         <KbdGroup className="ml-auto hidden sm:inline-flex">
           <Kbd>⌘</Kbd>

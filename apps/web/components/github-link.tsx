@@ -10,7 +10,7 @@ export function GitHubLink() {
       href={site.repository}
       className={cn(buttonVariants({ variant: "ghost" }), "h-9 px-2")}
     >
-      <GitHubIcon className="size-4" />
+      <GitHubIcon data-icon="inline-start" />
       <span className="sr-only">GitHub repository</span>
       <Suspense>
         <StarsCount />

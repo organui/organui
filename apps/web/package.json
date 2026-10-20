@@ -8,7 +8,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --max-warnings=0",
-    "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "stage-registry": "bun scripts/stage-registry.ts",
     "thumbnails": "bun scripts/organ-thumbnails.ts",

@@ -3,6 +3,8 @@
 import * as React from "react"
 import { cn } from "cn"
 
+import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
+
 export type GrowthMeasure = "weight" | "length" | "head"
 export type GrowthSex = "female" | "male"
 /** LMS parameters: Box-Cox power, median and coefficient of variation. */
@@ -404,9 +406,13 @@ export function GrowthChart({
     return (
       <figure className={cn("flex flex-col gap-3", className)}>
         <figcaption className="text-sm font-medium">{title}</figcaption>
-        <p className="rounded-lg border border-dashed p-6 text-center text-sm text-muted-foreground">
-          No growth standard covers this measure and age range.
-        </p>
+        <Empty className="border">
+          <EmptyHeader>
+            <EmptyDescription>
+              No growth standard covers this measure and age range.
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       </figure>
     )
 

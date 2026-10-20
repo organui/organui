@@ -3,6 +3,14 @@ import { DocsPager } from "@/components/docs-pager"
 import { organModels } from "@/lib/organ-models"
 import { docsMetadata, registryItems } from "@/lib/registry"
 import { site } from "@/lib/site"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@workspace/ui/components/table"
 
 export const metadata = docsMetadata(
   "Licences",
@@ -75,53 +83,41 @@ export default async function Page() {
           are renderings of these models, so each is shared under its
           model&apos;s licence and credited in the table below.
         </p>
-        <div
+        <Table
           tabIndex={0}
-          role="region"
           aria-label="Model licences"
-          className="overflow-x-auto rounded-lg border focus-visible:outline-2 focus-visible:outline-ring"
+          className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
         >
-          <table className="w-full min-w-xl text-left text-sm">
-            <thead className="bg-muted/50">
-              <tr>
-                <th scope="col" className="px-3 py-2 font-medium">
-                  Item
-                </th>
-                <th scope="col" className="px-3 py-2 font-medium">
-                  Licence
-                </th>
-                <th scope="col" className="px-3 py-2 font-medium">
-                  Credit
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {models.map(({ item, model }) => (
-                <tr key={item.name} className="border-t align-top">
-                  <th scope="row" className="px-3 py-2 font-normal">
-                    <Link href={item.href} className="underline">
-                      {item.title}
-                    </Link>
-                  </th>
-                  <td className="px-3 py-2 whitespace-nowrap">
-                    <a
-                      className="underline"
-                      href={model.attribution.licenseUrl}
-                    >
-                      {model.attribution.license}
-                    </a>
-                  </td>
-                  <td className="px-3 py-2 text-muted-foreground">
-                    {model.attribution.credit}{" "}
-                    <a className="underline" href={model.attribution.source}>
-                      Source
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Item</TableHead>
+              <TableHead>Licence</TableHead>
+              <TableHead>Credit</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {models.map(({ item, model }) => (
+              <TableRow key={item.name}>
+                <TableCell>
+                  <Link href={item.href} className="underline">
+                    {item.title}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <a className="underline" href={model.attribution.licenseUrl}>
+                    {model.attribution.license}
+                  </a>
+                </TableCell>
+                <TableCell className="min-w-64 whitespace-normal text-muted-foreground">
+                  {model.attribution.credit}{" "}
+                  <a className="underline" href={model.attribution.source}>
+                    Source
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
         <p className="text-sm text-muted-foreground">
           Models from the organ explorer repositories load from commit-pinned
           copies there; the rest are built in the OrganUI repository and served
