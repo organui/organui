@@ -15,7 +15,7 @@
     "@workspace/registry": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "shadcn": "4.22.1",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "web": "workspace:*"
   },
   "license": "MIT"
