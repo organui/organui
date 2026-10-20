@@ -1,7 +1,7 @@
+import Image from "next/image"
 import Link from "next/link"
-import { OrganGallery, OrganPreview } from "@/components/organ-gallery"
 import { DocsPager } from "@/components/docs-pager"
-import thumbnails from "@/lib/organ-thumbnails.json"
+import { organModels } from "@/lib/organ-models"
 import {
   bodySystems,
   codeBlock,
@@ -16,12 +16,16 @@ export const metadata = docsMetadata(
   organsPage.href
 )
 
-type Thumbnail = (typeof thumbnails)[keyof typeof thumbnails]
-
-const thumbnailOf = (name: string) =>
-  (thumbnails as Record<string, Thumbnail | undefined>)[name]
-
-export default function Page() {
+export default async function Page() {
+  // The credit each thumbnail needs, read from the model it shows.
+  const credits = new Map(
+    await Promise.all(
+      organs.map(
+        async ({ name }) =>
+          [name, (await organModels[name]!()).attribution] as const
+      )
+    )
+  )
   return (
     <div className="flex flex-col gap-10">
       <header className="flex flex-col gap-4">
@@ -30,14 +34,14 @@ export default function Page() {
         </p>
         <h1 className="text-4xl font-semibold tracking-tight">Organs</h1>
         <p className="max-w-2xl text-lg text-muted-foreground">
-          {organs.length} organs, each a component on the shared{" "}
+          {organs.length} organs by body system, each a component on the shared{" "}
           <Link href="/docs/components/organ-viewer" className="underline">
             organ viewer
           </Link>
-          . Pictures are still renderings; open one to load it in 3D.
+          . Open one to explore it in 3D.
         </p>
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Each thumbnail is a rendering of its organ&apos;s model and is shared
+          Each picture is a rendering of its organ&apos;s model and is shared
           under that model&apos;s licence, credited on its card. See{" "}
           <Link href="/docs/licences" className="underline">
             Licences
@@ -45,92 +49,78 @@ export default function Page() {
           for every model.
         </p>
       </header>
-      <nav
-        aria-label="Body systems"
-        className="sticky top-14 z-10 overflow-x-auto border-b bg-background/95 py-2 backdrop-blur"
-      >
-        <ul className="flex w-max gap-2 text-sm">
-          {bodySystems.map((system) => (
-            <li key={system.id}>
-              <a
-                href={`#${system.id}`}
-                className="block rounded-full border px-3 py-1 whitespace-nowrap hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
-              >
-                {system.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <OrganGallery>
-        {bodySystems.map((system) => (
-          <section
-            key={system.id}
-            aria-labelledby={system.id}
-            className="flex flex-col gap-4"
-          >
-            <h2 id={system.id} className="scroll-mt-28 text-2xl font-semibold">
-              {system.title}
-            </h2>
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {organs
-                .filter((item) => item.system?.id === system.id)
-                .map((item) => {
-                  const thumbnail = thumbnailOf(item.name)
-                  return (
-                    <li
-                      key={item.name}
-                      className="flex min-w-0 flex-col gap-3 rounded-xl border p-4"
+      {bodySystems.map((system) => (
+        <section
+          key={system.id}
+          aria-labelledby={system.id}
+          className="flex flex-col gap-4"
+        >
+          <h2 id={system.id} className="scroll-mt-20 text-2xl font-semibold">
+            {system.title}
+          </h2>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {organs
+              .filter((item) => item.system?.id === system.id)
+              .map((item) => {
+                const credit = credits.get(item.name)!
+                return (
+                  <li
+                    key={item.name}
+                    className="flex min-w-0 flex-col gap-3 rounded-xl border p-4"
+                  >
+                    {/* The heading's link names the page; this one repeats
+                        it for pointers only. */}
+                    <Link
+                      href={item.href}
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      className="group overflow-hidden rounded-xl border bg-muted/40"
                     >
-                      <OrganPreview
-                        name={item.name}
-                        title={item.title}
-                        thumbnail={
-                          thumbnail && {
-                            src: thumbnail.file,
-                            width: thumbnail.width,
-                            height: thumbnail.height,
-                          }
-                        }
+                      <Image
+                        src={`/organs/${item.name}.webp`}
+                        width={640}
+                        height={480}
+                        alt=""
+                        unoptimized
+                        sizes="(min-width: 1280px) 22rem, (min-width: 640px) 45vw, 100vw"
+                        className="aspect-[4/3] w-full object-contain transition-transform group-hover:scale-[1.03]"
                       />
-                      <h3 className="text-lg font-semibold">
-                        <Link
-                          href={item.href}
-                          className="underline-offset-4 hover:underline"
-                        >
-                          {item.title}
-                        </Link>
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {item.description}
-                      </p>
-                      <pre
-                        tabIndex={0}
-                        role="region"
-                        aria-label={`Install ${item.title}`}
-                        className={codeBlock}
+                    </Link>
+                    <h3 className="text-lg font-semibold">
+                      <Link
+                        href={item.href}
+                        className="underline-offset-4 hover:underline"
                       >
-                        {item.install}
-                      </pre>
-                      {thumbnail && (
-                        <p className="text-xs text-muted-foreground">
-                          {thumbnail.credit}{" "}
-                          <a className="underline" href={thumbnail.licenseUrl}>
-                            {thumbnail.license}
-                          </a>
-                          {" · "}
-                          <a className="underline" href={thumbnail.source}>
-                            Source
-                          </a>
-                        </p>
-                      )}
-                    </li>
-                  )
-                })}
-            </ul>
-          </section>
-        ))}
-      </OrganGallery>
+                        {item.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                    <pre
+                      tabIndex={0}
+                      role="region"
+                      aria-label={`Install ${item.title}`}
+                      className={codeBlock}
+                    >
+                      {item.install}
+                    </pre>
+                    <p className="text-xs text-muted-foreground">
+                      {credit.credit}{" "}
+                      <a className="underline" href={credit.licenseUrl}>
+                        {credit.license}
+                      </a>
+                      {" · "}
+                      <a className="underline" href={credit.source}>
+                        Source
+                      </a>
+                    </p>
+                  </li>
+                )
+              })}
+          </ul>
+        </section>
+      ))}
       <DocsPager href={organsPage.href} />
     </div>
   )

@@ -1,16 +1,16 @@
-// Renders each organ at its default view and writes public/organs/<name>.webp
-// plus lib/organ-thumbnails.json, which records the model each thumbnail was
-// made from and its licence. A thumbnail is a rendering of its model, so it
-// keeps that model's licence, and the gallery shows its credit.
+// Renders each organ at its default view to public/organs/<name>.webp for the
+// organs gallery, as shadcn/ui's scripts/capture-registry.mts captures block
+// screenshots. lib/organ-thumbnails.json records the model each image was
+// rendered from, so a test fails when a model changes and its image doesn't.
 //
-//   bun run thumbnails                 all organs (CI: .github/workflows/thumbnails.yml)
-//   bun run thumbnails --only heart    one or more, comma-separated
+//   bun run thumbnails                 organs without an image
+//   bun run thumbnails --only heart    these organs, comma-separated
+//   bun run thumbnails --force         every organ
 //
 // It runs `next dev` with ORGANUI_THUMBNAILS=1, the only way the uncredited
-// /thumbnail pages exist, and one browser renders one organ at a time in
-// software WebGL. Locally, prefer --only: all of them is slow on a laptop.
+// /thumbnail pages exist, and one browser renders one organ at a time.
 import { spawn } from "node:child_process"
-import { createHash } from "node:crypto"
+import { existsSync } from "node:fs"
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { parseArgs } from "node:util"
 import { chromium } from "@playwright/test"
@@ -18,20 +18,12 @@ import sharp from "sharp"
 import catalog from "@workspace/registry/registry.json"
 import { loadOrganModel } from "../lib/organ-source"
 
-export type ThumbnailEntry = {
-  file: string
-  sha256: string
-  width: number
-  height: number
-  model: string
-  license: string
-  licenseUrl: string
-  credit: string
-  source: string
-}
-
 const { values } = parseArgs({
-  options: { only: { type: "string" }, port: { type: "string" } },
+  options: {
+    only: { type: "string" },
+    force: { type: "boolean" },
+    port: { type: "string" },
+  },
 })
 const port = Number(values.port ?? 3210)
 const origin = `http://localhost:${port}`
@@ -45,7 +37,19 @@ const organs = catalog.items
 const only = values.only?.split(",").map((name) => name.trim())
 const unknown = only?.filter((name) => !organs.includes(name)) ?? []
 if (unknown.length) throw new Error(`Not an organ: ${unknown.join(", ")}`)
-const targets = only ?? organs
+const targets =
+  only ??
+  organs.filter(
+    (name) => values.force || !existsSync(new URL(`${name}.webp`, outputDir))
+  )
+if (targets.length === 0) {
+  console.log("Every organ has a thumbnail; use --only or --force to redo one.")
+  process.exit(0)
+}
+
+const manifest = JSON.parse(
+  await readFile(manifestUrl, "utf8").catch(() => "{}")
+) as Record<string, string>
 
 const server = spawn("bunx", ["next", "dev", "--port", String(port)], {
   cwd: root,
@@ -56,15 +60,6 @@ const server = spawn("bunx", ["next", "dev", "--port", String(port)], {
 })
 let failedToStart: Error | undefined
 server.on("error", (error) => (failedToStart = error))
-
-// Saved after every organ, so a failure partway leaves each written image
-// matching its manifest entry.
-async function saveManifest(manifest: Record<string, ThumbnailEntry>) {
-  const sorted = Object.fromEntries(
-    Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b))
-  )
-  await writeFile(manifestUrl, `${JSON.stringify(sorted, null, 2)}\n`)
-}
 
 try {
   // The first request compiles the route.
@@ -80,9 +75,6 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 1000))
   }
 
-  const manifest = JSON.parse(
-    await readFile(manifestUrl, "utf8").catch(() => "{}")
-  ) as Record<string, ThumbnailEntry>
   await mkdir(outputDir, { recursive: true })
   const browser = await chromium.launch({
     args: ["--enable-unsafe-swiftshader"],
@@ -115,20 +107,14 @@ try {
       const webp = await sharp(png)
         .webp({ quality: 75, alphaQuality: 90, effort: 6 })
         .toBuffer()
-      const file = `${name}.webp`
-      await writeFile(new URL(file, outputDir), webp)
-      manifest[name] = {
-        file: `/organs/${file}`,
-        sha256: createHash("sha256").update(webp).digest("hex"),
-        width: 640,
-        height: 480,
-        model: model.src,
-        license: model.attribution.license,
-        licenseUrl: model.attribution.licenseUrl,
-        credit: model.attribution.credit,
-        source: model.attribution.source,
-      }
-      await saveManifest(manifest)
+      await writeFile(new URL(`${name}.webp`, outputDir), webp)
+      // Saved after every organ, so a failure partway keeps the record
+      // true for each image already written.
+      manifest[name] = model.src
+      const sorted = Object.fromEntries(
+        Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b))
+      )
+      await writeFile(manifestUrl, `${JSON.stringify(sorted, null, 2)}\n`)
       console.log(`${name}: ${(webp.byteLength / 1024).toFixed(1)} KB`)
     }
   } finally {

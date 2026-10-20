@@ -3,7 +3,6 @@ import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { heartModel } from "@workspace/registry/heart"
-import { kidneysModel } from "@workspace/registry/kidneys"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
 
@@ -430,34 +429,15 @@ test("the header links each section and searches the whole site", async ({
   expect(errors).toEqual([])
 })
 
-test("the organs gallery groups every organ by system and opens one scene at a time", async ({
+test("the organs gallery groups every organ by system and credits each picture", async ({
   page,
   request,
 }, info) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  // Stand-ins for the commit-pinned models instead of the CDN.
-  for (const model of [heartModel, kidneysModel])
-    await page.route(model.src, (route) =>
-      route.fulfill({
-        body: Buffer.from(fixtureGlb(model.structures.map(({ id }) => id))),
-        contentType: "model/gltf-binary",
-      })
-    )
   const organs = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
     .items.filter(({ categories }) => categories?.includes("organ"))
-  await page.goto("/docs/components/organs")
-  await expect(
-    page.getByRole("heading", { name: "Organs", level: 1 })
-  ).toBeVisible()
-  await expect(
-    page.getByText("Components / Organs", { exact: true })
-  ).toBeVisible()
-  // Nothing loads in 3D until asked.
-  await expect(page.locator("canvas")).toHaveCount(0)
-  const systems = page.getByRole("navigation", { name: "Body systems" })
-  const chips = await systems.getByRole("link").allTextContents()
   // Node's ESM loader needs an import attribute for JSON, so read the file.
   const bodySystems = JSON.parse(
     await readFile(
@@ -465,37 +445,48 @@ test("the organs gallery groups every organ by system and opens one scene at a t
       "utf8"
     )
   ) as { id: string; title: string }[]
-  expect(chips).toEqual(bodySystems.map(({ title }) => title))
-  let listed = 0
-  for (const title of chips) {
-    const section = page.getByRole("region", { name: title, exact: true })
-    for (const heading of await section
-      .getByRole("heading", { level: 3 })
-      .allTextContents()) {
-      const item = organs.find(
-        (organ) => (organ.title ?? organ.name) === heading
-      )
-      expect(item).toBeDefined()
-      listed++
+  await page.goto("/docs/components/organs")
+  await expect(
+    page.getByRole("heading", { name: "Organs", level: 1 })
+  ).toBeVisible()
+  await expect(
+    page.getByText("Components / Organs", { exact: true })
+  ).toBeVisible()
+  const main = page.getByRole("main")
+  await expect(main.getByRole("heading", { level: 2 })).toHaveText(
+    bodySystems.map(({ title }) => title)
+  )
+  for (const system of bodySystems) {
+    const section = main.getByRole("region", {
+      name: system.title,
+      exact: true,
+    })
+    for (const item of organs.filter(({ categories }) =>
+      categories?.includes(system.id)
+    )) {
+      const title = item.title ?? item.name
       await expect(
         section
-          .getByRole("heading", { name: heading, level: 3, exact: true })
+          .getByRole("heading", { name: title, level: 3, exact: true })
           .getByRole("link")
-      ).toHaveAttribute("href", `/docs/components/${item!.name}`)
+      ).toHaveAttribute("href", `/docs/components/${item.name}`)
       await expect(
-        section.getByRole("region", { name: `Install ${heading}`, exact: true })
-      ).toHaveText(installCommand(item!))
-      // Each card credits the model its thumbnail was rendered from.
+        section.getByRole("region", { name: `Install ${title}`, exact: true })
+      ).toHaveText(installCommand(item))
       await expect(
-        section
-          .getByRole("button", {
-            name: `Load the ${heading.toLowerCase()} in 3D`,
-          })
-          .locator("img")
-      ).toHaveAttribute("src", `/organs/${item!.name}.webp`)
+        section.locator(`img[src="/organs/${item.name}.webp"]`)
+      ).toHaveCount(1)
     }
   }
-  expect(listed).toBe(organs.length)
+  // One card per organ, each crediting the model its picture shows.
+  await expect(main.getByRole("heading", { level: 3 })).toHaveCount(
+    organs.length
+  )
+  await expect(
+    main.getByRole("link", { name: "Source", exact: true })
+  ).toHaveCount(organs.length)
+  // The gallery is pictures and links: nothing loads in 3D.
+  await expect(page.locator("canvas")).toHaveCount(0)
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -504,27 +495,6 @@ test("the organs gallery groups every organ by system and opens one scene at a t
   const axe = await new AxeBuilder({ page }).analyze()
   expect(axe.violations).toEqual([])
   await page.screenshot({ path: info.outputPath("organs.png"), fullPage: true })
-
-  await page.getByRole("button", { name: "Load the heart in 3D" }).click()
-  const heart = page.getByRole("group", {
-    name: "Heart 3D preview",
-    exact: true,
-  })
-  await expect(
-    heart.getByRole("toolbar", { name: "View controls" })
-  ).toBeVisible()
-  await page.getByRole("button", { name: "Load the kidneys in 3D" }).click()
-  await expect(
-    page
-      .getByRole("group", { name: "Kidneys 3D preview", exact: true })
-      .getByRole("toolbar", { name: "View controls" })
-  ).toBeVisible()
-  // The heart went back to its thumbnail, so one scene runs at a time.
-  await expect(heart).toHaveCount(0)
-  await expect(
-    page.getByRole("button", { name: "Load the heart in 3D" })
-  ).toBeVisible()
-  await expect(page.locator("canvas")).toHaveCount(1)
   expect(errors).toEqual([])
 })
 
