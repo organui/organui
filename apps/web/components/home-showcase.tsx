@@ -12,6 +12,13 @@ import { Example as LabResults } from "@/examples/lab-results-demo"
 import { Example as VitalSigns } from "@/examples/vital-signs-demo"
 import { organs, organsPage } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card"
 import { cn } from "@workspace/ui/lib/utils"
 
 const organPicks = [
@@ -29,9 +36,11 @@ export function HomeShowcase() {
   return (
     <section
       aria-label="Components"
-      className="relative overflow-hidden border-y bg-muted/40 dark:bg-muted/20"
+      className="relative overflow-hidden bg-muted dark:bg-background"
     >
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:max-h-[64rem] lg:py-10">
+      {/* Light mode eases from the page into the grey; dark mode has no grey. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-48 bg-linear-to-b from-background via-muted to-transparent dark:hidden" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:max-h-[64rem] lg:py-10">
         {/* Three columns on wide screens, two then one below. */}
         <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
           <div className="flex flex-col gap-4">
@@ -66,8 +75,8 @@ export function HomeShowcase() {
           </div>
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-64 bg-linear-to-t from-background via-background/80 to-transparent lg:block" />
-      <div className="flex justify-center pb-8 lg:absolute lg:inset-x-0 lg:bottom-10 lg:pb-0">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 hidden h-64 bg-linear-to-t from-background via-muted/80 to-transparent lg:block dark:via-background/80" />
+      <div className="relative z-30 flex justify-center pb-8 lg:absolute lg:inset-x-0 lg:bottom-10 lg:pb-0">
         <Link
           href="/docs/components"
           className={cn(buttonVariants({ variant: "outline" }), "shadow-sm")}
@@ -90,20 +99,22 @@ function Tile({
   children: ReactNode
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-4 rounded-xl bg-background p-4 shadow-xs ring-1 ring-foreground/5 sm:p-5">
-      <div className="flex items-center justify-between gap-4">
-        <h3 className="text-sm font-semibold">{title}</h3>
-        <Link
-          href={href}
-          className="inline-flex items-center gap-1 rounded-sm text-xs font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          Docs
-          <ArrowRightIcon aria-hidden="true" className="size-3" />
-          <span className="sr-only">: {title}</span>
-        </Link>
-      </div>
-      {children}
-    </div>
+    <Card className="min-w-0">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardAction>
+          <Link
+            href={href}
+            className="inline-flex items-center gap-1 rounded-sm text-xs font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            Docs
+            <ArrowRightIcon aria-hidden="true" className="size-3" />
+            <span className="sr-only">: {title}</span>
+          </Link>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">{children}</CardContent>
+    </Card>
   )
 }
 
