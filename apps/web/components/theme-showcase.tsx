@@ -1,7 +1,6 @@
 import type { ReactNode } from "react"
 import { AiDisclaimer } from "@workspace/registry/ai-disclaimer"
 import { DifferentialList } from "@workspace/registry/differential-list"
-import { LabResultsTable } from "@workspace/registry/lab-results"
 import { VitalSigns } from "@workspace/registry/vital-signs"
 import {
   Card,
@@ -16,7 +15,6 @@ import {
   HomeMedicationSchedule,
 } from "@/components/home-demos"
 import { aiCaseDifferential } from "@/lib/ai-case"
-import { labResultsExampleData } from "@/lib/examples"
 
 function Tile({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -67,12 +65,6 @@ export function ThemeShowcase() {
           <DifferentialList items={aiCaseDifferential} />
         </Tile>
         <ClinicianReview />
-        <Tile title="Lab results">
-          <LabResultsTable
-            results={labResultsExampleData.slice(0, 4)}
-            caption="Illustrative values, not patient data"
-          />
-        </Tile>
       </div>
     </div>
   )

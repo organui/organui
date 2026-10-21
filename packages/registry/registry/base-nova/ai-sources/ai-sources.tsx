@@ -91,13 +91,13 @@ export function AiSources({
 }) {
   if (sources.length === 0) return null
   return (
-    // Named by its title, without an id, so a page's table of contents
-    // leaves it out.
+    // Named by its title rather than a heading, so it fits under any
+    // heading level and stays out of a page's table of contents.
     <section
       aria-label={title}
       className={cn("flex flex-col gap-2 text-sm", className)}
     >
-      <h3 className="font-medium">{title}</h3>
+      <p className="font-medium">{title}</p>
       <ol className="flex flex-col gap-2">
         {sources.map((source, index) => (
           <li key={source.id} className="flex gap-2">

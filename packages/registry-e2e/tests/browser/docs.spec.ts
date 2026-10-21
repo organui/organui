@@ -1376,7 +1376,7 @@ test("the colours page lists every organ's structure colours to copy", async ({
   ).toBeVisible()
   const heart = page.getByRole("region", { name: "Heart" })
   await expect(
-    heart.getByRole("button", { name: "Copy #a96d70, Right atrium" })
+    heart.getByRole("button", { name: "Copy Right atrium #a96d70" })
   ).toBeVisible()
   await expect(
     page.getByRole("region", { name: "Dermatome regions" }).getByRole("button")
@@ -1392,7 +1392,7 @@ test("the charts page shows each chart with its code", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Charts", level: 1 })
   ).toBeVisible()
-  const ecg = page.getByRole("region", { name: "ECG" })
+  const ecg = page.getByRole("region", { name: "ECG charts" })
   await expect(
     ecg.getByRole("img", { name: /Sinus bradycardia, 46 bpm/ })
   ).toBeVisible()

@@ -100,14 +100,11 @@ export default function Page() {
             <section
               key={group.id}
               id={group.id}
-              aria-labelledby={`${group.id}-title`}
+              aria-label={`${group.title} charts`}
               className="flex scroll-mt-24 flex-col gap-4"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2
-                  id={`${group.id}-title`}
-                  className="text-lg font-semibold tracking-tight"
-                >
+                <h2 className="text-lg font-semibold tracking-tight">
                   {group.title}
                 </h2>
                 <Link

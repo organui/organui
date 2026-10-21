@@ -18,8 +18,7 @@ export function ColorSwatch({
   return (
     <button
       type="button"
-      aria-label={`Copy ${value}, ${name}`}
-      title={value}
+      title={`Copy ${value}`}
       onClick={() =>
         navigator.clipboard
           .writeText(value)
@@ -42,7 +41,10 @@ export function ColorSwatch({
           <CheckIcon className="size-4 text-white mix-blend-difference" />
         )}
       </span>
-      <span className="truncate font-medium">{name}</span>
+      <span className="truncate font-medium">
+        <span className="sr-only">Copy </span>
+        {name}
+      </span>
       <span className="truncate font-mono text-muted-foreground">
         {copied ? "Copied" : value}
       </span>

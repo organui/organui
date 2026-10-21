@@ -59,8 +59,14 @@ export function AiNote({
       className={cn("flex flex-col gap-4 text-sm", className)}
     >
       {sections.map((section) => (
-        <section key={section.id} className="flex flex-col gap-1">
-          <h3 className="font-medium">{section.title}</h3>
+        // Named sections rather than headings, so the note fits under any
+        // heading level on the page that shows it.
+        <section
+          key={section.id}
+          aria-label={section.title}
+          className="flex flex-col gap-1"
+        >
+          <p className="font-medium">{section.title}</p>
           <p className="leading-relaxed">
             {section.content.map((segment, index) => {
               if (typeof segment === "string")
