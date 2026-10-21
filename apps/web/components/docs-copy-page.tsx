@@ -18,6 +18,8 @@ import {
 } from "@workspace/ui/components/dropdown-menu"
 import { pageMarkdown } from "@/lib/page-markdown"
 import { site } from "@/lib/site"
+import { copyText } from "@workspace/ui/lib/copy-text"
+import { trackEvent } from "@/lib/events"
 
 function currentMarkdown() {
   const content = document.querySelector("[data-docs-content]")
@@ -47,10 +49,10 @@ export function DocsCopyPage({ href }: { href: string }) {
         size="sm"
         className="h-8 shadow-none md:h-7 md:text-[0.8rem]"
         onClick={() =>
-          navigator.clipboard
-            .writeText(currentMarkdown())
-            .then(() => setCopied(true))
-            .catch(() => {})
+          copyText(currentMarkdown()).then((ok) => {
+            setCopied(ok)
+            if (ok) trackEvent("copy_page", { page: location.pathname })
+          })
         }
       >
         {copied ? (

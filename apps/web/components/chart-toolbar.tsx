@@ -23,6 +23,8 @@ import {
 } from "@workspace/ui/components/dialog"
 import { Separator } from "@workspace/ui/components/separator"
 import type { ChartType } from "@/lib/registry"
+import { copyText } from "@workspace/ui/lib/copy-text"
+import { trackEvent } from "@/lib/events"
 
 const kinds: Record<ChartType, { icon: LucideIcon; label: string }> = {
   area: { icon: AreaChartIcon, label: "Area Chart" },
@@ -62,13 +64,12 @@ export function ChartToolbar({
           size="icon-xs"
           aria-label={`Copy code: ${title}`}
           onClick={() =>
-            navigator.clipboard
-              .writeText(code)
-              .then(() => {
-                setCopied(true)
-                setTimeout(() => setCopied(false), 2000)
-              })
-              .catch(() => {})
+            copyText(code).then((ok) => {
+              if (!ok) return
+              setCopied(true)
+              setTimeout(() => setCopied(false), 2000)
+              trackEvent("copy_chart_code", { chart: title })
+            })
           }
         >
           {copied ? <CheckIcon /> : <CopyIcon />}

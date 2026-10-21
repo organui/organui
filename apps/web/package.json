@@ -15,6 +15,7 @@
     "test": "bun test tests"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@workspace/registry": "workspace:*",
     "@workspace/ui": "workspace:*",
     "linkedom": "0.18.12",

@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { CheckIcon } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
+import { copyText } from "@workspace/ui/lib/copy-text"
+import { trackEvent } from "@/lib/events"
 
 // A colour that copies its value on click, as on shadcn/ui's colors page.
 export function ColorSwatch({
@@ -20,13 +22,12 @@ export function ColorSwatch({
       type="button"
       title={`Copy ${value}`}
       onClick={() =>
-        navigator.clipboard
-          .writeText(value)
-          .then(() => {
-            setCopied(true)
-            setTimeout(() => setCopied(false), 1500)
-          })
-          .catch(() => {})
+        copyText(value).then((ok) => {
+          if (!ok) return
+          setCopied(true)
+          setTimeout(() => setCopied(false), 1500)
+          trackEvent("copy_color", { name, value })
+        })
       }
       className={cn(
         "group flex min-w-0 flex-col gap-1.5 rounded-md text-left text-xs outline-none focus-visible:ring-3 focus-visible:ring-ring/50",

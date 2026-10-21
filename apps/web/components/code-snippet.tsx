@@ -3,11 +3,11 @@ import {
   CodeBlock,
   CodeBlockActions,
   CodeBlockContent,
-  CodeBlockCopyButton,
   CodeBlockHeader,
   CodeBlockLine,
   CodeBlockTitle,
 } from "@workspace/ui/components/code-block"
+import { CopyButton } from "@/components/copy-button"
 
 // A highlighted, copyable code example, with an optional file name above it.
 // The code is a scrollable region named by its label, so keyboard users can
@@ -34,12 +34,12 @@ export async function CodeSnippet({
         <CodeBlockHeader>
           <CodeBlockTitle>{title}</CodeBlockTitle>
           <CodeBlockActions>
-            <CodeBlockCopyButton value={code} />
+            <CopyButton event="copy_code" value={code} />
           </CodeBlockActions>
         </CodeBlockHeader>
       ) : (
         <CodeBlockActions>
-          <CodeBlockCopyButton value={code} />
+          <CopyButton event="copy_code" value={code} />
         </CodeBlockActions>
       )}
       <CodeBlockContent

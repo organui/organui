@@ -15,6 +15,8 @@ import {
 } from "@workspace/ui/components/command"
 import { Kbd } from "@workspace/ui/components/kbd"
 import { Separator } from "@workspace/ui/components/separator"
+import { copyText } from "@workspace/ui/lib/copy-text"
+import { trackEvent } from "@/lib/events"
 
 // Lowercase, as cmdk reports it; the href keeps values unique.
 function itemValue(group: SearchGroup, entry: SearchEntry) {
@@ -94,10 +96,11 @@ export default function SearchDialog({
             !window.getSelection()?.toString()
           ) {
             event.preventDefault()
-            navigator.clipboard
-              .writeText(highlighted.install)
-              .then(() => setCopied(true))
-              .catch(() => {})
+            const command = highlighted.install
+            copyText(command).then((ok) => {
+              setCopied(ok)
+              if (ok) trackEvent("copy_install_command", { command })
+            })
           }
         }}
       >

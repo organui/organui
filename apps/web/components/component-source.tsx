@@ -9,11 +9,11 @@ import {
   CodeBlock,
   CodeBlockActions,
   CodeBlockContent,
-  CodeBlockCopyButton,
   CodeBlockHeader,
   CodeBlockLine,
   CodeBlockTitle,
 } from "@workspace/ui/components/code-block"
+import { CopyButton } from "@/components/copy-button"
 
 const readExampleSource = cache(async (file: string) => {
   const source = await readFile(join(process.cwd(), "examples", file), "utf8")
@@ -60,7 +60,11 @@ export async function ComponentSource({
         <CodeBlockHeader>
           <CodeBlockTitle>{name}.tsx</CodeBlockTitle>
           <CodeBlockActions>
-            <CodeBlockCopyButton value={fullCode} />
+            <CopyButton
+              event="copy_code"
+              properties={{ name }}
+              value={fullCode}
+            />
           </CodeBlockActions>
         </CodeBlockHeader>
       )}

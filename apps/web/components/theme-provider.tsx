@@ -16,6 +16,7 @@ function ThemeProvider({
       {...props}
     >
       <ThemeHotkey />
+      <ThemeColor />
       {children}
     </NextThemesProvider>
   )
@@ -64,6 +65,25 @@ function ThemeHotkey() {
       window.removeEventListener("keydown", onKeyDown)
     }
   }, [resolvedTheme, setTheme])
+
+  return null
+}
+
+// Keeps the phone browser bar on the chosen theme rather than the system
+// one. Matches --background, as the viewport's themeColor does.
+function ThemeColor() {
+  const { resolvedTheme } = useTheme()
+
+  React.useEffect(() => {
+    if (!resolvedTheme) {
+      return
+    }
+
+    const color = resolvedTheme === "dark" ? "#0a0a0a" : "#ffffff"
+    document
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((meta) => meta.setAttribute("content", color))
+  }, [resolvedTheme])
 
   return null
 }

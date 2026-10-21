@@ -7,7 +7,6 @@ import { packageManagers, type PackageManager } from "@/lib/package-commands"
 import {
   CodeBlock,
   CodeBlockContent,
-  CodeBlockCopyButton,
   CodeBlockHeader,
   CodeBlockLine,
 } from "@workspace/ui/components/code-block"
@@ -17,6 +16,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@workspace/ui/components/tabs"
+import { CopyButton } from "@/components/copy-button"
 
 export function CodeBlockCommandTabs({
   label,
@@ -51,7 +51,12 @@ export function CodeBlockCommandTabs({
               </TabsTrigger>
             ))}
           </TabsList>
-          <CodeBlockCopyButton value={commands[manager]} className="ms-auto" />
+          <CopyButton
+            event="copy_install_command"
+            properties={{ command: commands[manager] }}
+            value={commands[manager]}
+            className="ms-auto"
+          />
         </CodeBlockHeader>
         {packageManagers.map((name) => (
           <TabsContent key={name} value={name}>

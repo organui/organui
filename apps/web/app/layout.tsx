@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { isProduction, site } from "@/lib/site"
 
 import "./globals.css"
+import { Analytics } from "@/components/analytics"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@workspace/ui/lib/utils"
 
@@ -72,6 +73,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider>{children}</ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )

@@ -26,6 +26,8 @@ import {
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
 import { cn } from "@workspace/ui/lib/utils"
+import { copyText } from "@workspace/ui/lib/copy-text"
+import { trackEvent } from "@/lib/events"
 
 export type BlockViewerFile = { target: string; source: React.ReactNode }
 
@@ -293,10 +295,10 @@ function InstallButton({ command }: { command: string }) {
       className="max-w-full min-w-0 gap-1.5 font-mono text-xs shadow-none"
       title="Copy the install command"
       onClick={() =>
-        navigator.clipboard
-          .writeText(command)
-          .then(() => setCopied(true))
-          .catch(() => {})
+        copyText(command).then((ok) => {
+          setCopied(ok)
+          if (ok) trackEvent("copy_block_command", { command })
+        })
       }
     >
       {copied ? <CheckIcon /> : <TerminalIcon />}

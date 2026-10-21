@@ -8,7 +8,6 @@ import {
   CodeBlock,
   CodeBlockActions,
   CodeBlockContent,
-  CodeBlockCopyButton,
   CodeBlockHeader,
   CodeBlockTitle,
 } from "@workspace/ui/components/code-block"
@@ -42,6 +41,7 @@ import {
   radii,
   type ThemeChoice,
 } from "@/lib/themes"
+import { CopyButton } from "@/components/copy-button"
 
 const templates = [
   { value: "next", label: "Next.js" },
@@ -121,7 +121,7 @@ function Command({ title, code }: { title: string; code: string }) {
       <CodeBlockHeader>
         <CodeBlockTitle>{title}</CodeBlockTitle>
         <CodeBlockActions>
-          <CodeBlockCopyButton value={code} />
+          <CopyButton event="copy_create_command" value={code} />
         </CodeBlockActions>
       </CodeBlockHeader>
       <CodeBlockContent role="region" aria-label={title}>
