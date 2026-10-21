@@ -25,9 +25,21 @@ const origin = `http://localhost:${port}`
 const root = new URL("../", import.meta.url)
 const publicDir = new URL("public/", root)
 
-const blocks = catalog.items
-  .filter((item) => item.type === "registry:block")
-  .map(({ name }) => name)
+// Charts are blocks too, but /charts shows them live.
+const blockItems = catalog.items.filter(
+  (item) =>
+    item.type === "registry:block" && !item.categories?.includes("charts")
+)
+const blocks = blockItems.map(({ name }) => name)
+// The height /blocks frames each block at, so the picture matches.
+const heights = new Map(
+  blockItems.map((item) => [
+    item.name,
+    Number.parseInt(
+      ("meta" in item ? item.meta?.iframeHeight : undefined) ?? "900"
+    ),
+  ])
+)
 const only = values.only?.split(",").map((name) => name.trim())
 const unknown =
   only?.filter((name) => name !== "home" && !blocks.includes(name)) ?? []
@@ -94,19 +106,23 @@ async function settle(page: Page) {
 
 async function captureBlock(browser: Browser, name: string, theme: Theme) {
   const page = await browser.newPage({
-    viewport: { width: 1440, height: 900 },
+    viewport: { width: 1440, height: heights.get(name) ?? 900 },
     colorScheme: theme,
   })
   try {
     await page.goto(`${origin}/view/${name}`)
-    await page.locator("canvas").first().waitFor({ state: "attached" })
+    await page.locator("main").first().waitFor()
+    await page.waitForLoadState("networkidle")
     // Loading shows a status; a failed load shows an alert instead.
     await page
       .getByRole("status")
       .filter({ hasText: /loading/i })
       .waitFor({ state: "detached", timeout: 120_000 })
-    // Next.js adds its own, empty route announcer alert.
-    const failed = page.getByRole("alert").filter({ hasText: /\S/ })
+    // A viewer that failed to load shows an alert. Other alerts, such as a
+    // medicine interaction, are part of the page.
+    const failed = page
+      .getByRole("region", { name: /^Interactive .* model$/ })
+      .getByRole("alert")
     if (await failed.count())
       throw new Error(`${name}: ${await failed.first().innerText()}`)
     await settle(page)

@@ -25,6 +25,18 @@
         "./registry/base-nova/clinician-review/clinician-review.tsx"
       ],
       "@/components/ui/ai-note": ["./registry/base-nova/ai-note/ai-note.tsx"],
+      "@/components/ui/ecg-trace": [
+        "./registry/base-nova/ecg-trace/ecg-trace.tsx"
+      ],
+      "@/components/ui/lab-results": [
+        "./registry/base-nova/lab-results/lab-results.tsx"
+      ],
+      "@/components/ui/medication-schedule": [
+        "./registry/base-nova/medication-schedule/medication-schedule.tsx"
+      ],
+      "@/components/ui/vital-signs": [
+        "./registry/base-nova/vital-signs/vital-signs.tsx"
+      ],
       "@/lib/age": ["./registry/base-nova/age/age.ts"],
       "@/lib/z-scores": ["./registry/base-nova/z-scores/z-scores.ts"],
       "@/lib/reference-ranges": [
@@ -47,6 +59,9 @@
       ],
       "@/components/organ-switcher": [
         "./registry/base-nova/blocks/explorer-03/components/organ-switcher.tsx"
+      ],
+      "@/components/patient-dashboard": [
+        "./registry/base-nova/blocks/dashboard-01/components/patient-dashboard.tsx"
       ],
       "@/components/adrenals": ["./registry/base-nova/adrenals/adrenals.tsx"],
       "@/components/appendix": ["./registry/base-nova/appendix/appendix.tsx"],

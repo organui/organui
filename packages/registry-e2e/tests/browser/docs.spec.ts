@@ -734,9 +734,7 @@ test("blocks gallery previews and installs every block", async ({
     if ((page.viewportSize()?.width ?? 0) >= 1024) {
       const preview = section.getByTitle(`${title} preview`)
       await preview.scrollIntoViewIfNeeded()
-      await expect(
-        preview.contentFrame().getByRole("toolbar", { name: "View controls" })
-      ).toBeVisible()
+      await expect(preview.contentFrame().getByRole("main")).toBeVisible()
     } else
       await expect(
         section.getByRole("img", { name: `${title} preview`, exact: true })

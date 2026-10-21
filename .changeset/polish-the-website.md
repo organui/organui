@@ -18,6 +18,9 @@ New items:
 - Utilities: one item adds the heartbeat, ECG grid and severity classes to
   the CSS file, as shadcn's utilities come together.
 
+Blocks: Dashboard 01, one patient at a glance with vital signs, a live ECG,
+lab results and the day's medicines.
+
 Charts: 21 charts of health data (area, bar, line, pie, radar and radial)
 built on shadcn's chart and card, each installable like shadcn's charts.
 

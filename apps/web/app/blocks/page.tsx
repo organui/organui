@@ -11,7 +11,7 @@ import { cn } from "@workspace/ui/lib/utils"
 
 export const metadata = docsMetadata(
   "Blocks",
-  "Ready-made anatomy layouts that compose the organ viewer and anatomy tree, installed as source with the shadcn CLI.",
+  "Ready-made layouts, from organ explorers to a patient dashboard, installed as source with the shadcn CLI.",
   "/blocks"
 )
 
@@ -28,7 +28,7 @@ export default async function Page() {
       <main id="main" className="flex flex-1 flex-col">
         <PageHeader
           title="Blocks"
-          description="Ready-made anatomy layouts built from the organ viewer and the anatomy tree. Each installs its page and components as source, so you can swap the organ and change the layout."
+          description="Ready-made layouts: organ explorers built on the viewer and anatomy tree, and a patient dashboard of vitals, ECG, labs and medicines. Each installs its page and components as source, yours to change."
         >
           <a
             href="#blocks"

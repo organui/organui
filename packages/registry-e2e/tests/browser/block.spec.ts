@@ -111,3 +111,21 @@ test("explorer-03 switches organs and resets the selection", async ({
   )
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })
+
+test("dashboard-01 shows one patient and records doses", async ({ page }) => {
+  await page.goto("/dashboard")
+  await expect(page.getByRole("heading", { name: "Sam Okafor" })).toBeVisible()
+  await expect(page.getByRole("region", { name: "Vital signs" })).toBeVisible()
+  await expect(page.getByRole("table")).toContainText("Creatinine")
+  await expect(page.getByRole("alert")).toContainText(
+    "Enoxaparin and Ibuprofen"
+  )
+  const dose = page.getByRole("button", {
+    name: "Lisinopril at 08:00: To take",
+  })
+  await dose.click()
+  await expect(
+    page.getByRole("button", { name: "Lisinopril at 08:00: Taken" })
+  ).toBeVisible()
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+})

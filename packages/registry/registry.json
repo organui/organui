@@ -181,7 +181,7 @@
           "type": "registry:ui"
         }
       ],
-      "docs": "Growth chart docs: https://organui.com/docs/components/growth-chart. The item ships no growth data and no loader: you pass the reference tables. The docs say where to get them and under what terms. The WHO Child Growth Standards are © World Health Organization, distributed in WHO's anthro package under GPL-3 (https://www.gnu.org/licenses/gpl-3.0.html), and WHO requires permission for commercial use (https://www.who.int/about/policies/publishing/copyright)."
+      "docs": "Growth chart docs: https://organui.com/docs/components/growth-chart. The item ships no growth data and no loader: you pass the reference tables. The docs say where to get them and under what terms. The WHO Child Growth Standards are \u00a9 World Health Organization, distributed in WHO's anthro package under GPL-3 (https://www.gnu.org/licenses/gpl-3.0.html), and WHO requires permission for commercial use (https://www.who.int/about/policies/publishing/copyright)."
     },
     {
       "name": "medication-schedule",
@@ -1153,7 +1153,9 @@
       "type": "registry:block",
       "title": "Explorer 01",
       "description": "An organ viewer with an anatomy panel that docks beside it on wide screens and opens as a sheet on phones. Heart model licensed CC BY 4.0.",
-      "meta": { "iframeHeight": "700px" },
+      "meta": {
+        "iframeHeight": "700px"
+      },
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
@@ -1185,7 +1187,9 @@
       "type": "registry:block",
       "title": "Explorer 02",
       "description": "A full-height anatomy workspace with the tree in a sidebar and a details card to hide or isolate the selected structure. Heart model licensed CC BY 4.0.",
-      "meta": { "iframeHeight": "800px" },
+      "meta": {
+        "iframeHeight": "800px"
+      },
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
@@ -1218,7 +1222,9 @@
       "type": "registry:block",
       "title": "Explorer 03",
       "description": "One viewer that switches between several organs from a menu, here the heart, kidneys, stomach and pancreas. Models licensed CC BY 4.0 and CC BY-SA 2.1 JP.",
-      "meta": { "iframeHeight": "760px" },
+      "meta": {
+        "iframeHeight": "760px"
+      },
       "dependencies": [
         "@base-ui/react@^1.8.0",
         "class-variance-authority@^0.7.1",
@@ -1245,6 +1251,36 @@
       ],
       "categories": ["explorer"],
       "docs": "Explorer 03: https://organui.com/blocks#explorer-03. Keep the organ viewer's model credit visible."
+    },
+    {
+      "name": "dashboard-01",
+      "type": "registry:block",
+      "title": "Dashboard 01",
+      "description": "One patient at a glance: vital signs, a live ECG, lab results with trends and the day's medicines, with fictional data to replace with your records.",
+      "meta": {
+        "iframeHeight": "1120px"
+      },
+      "registryDependencies": [
+        "badge",
+        "card",
+        "@organui/ecg-trace",
+        "@organui/lab-results",
+        "@organui/medication-schedule",
+        "@organui/vital-signs"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/dashboard-01/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/dashboard-01/components/patient-dashboard.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": ["dashboard"],
+      "docs": "Dashboard 01: https://organui.com/blocks#dashboard-01. The patient and readings are fictional; connect your own records before clinical use."
     },
     {
       "name": "chart-area-admissions",
