@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -47,10 +47,9 @@ export default function Page() {
     <div className="flex flex-col gap-10">
       <DocsHeader
         href="/docs/components/medication-schedule"
-        eyebrow="Components / Clinical"
         title="Medication schedule"
       >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           A day of doses on a 24-hour timeline, with a checklist to mark each
           one taken or skipped and warnings for interactions you supply.
         </p>
@@ -65,8 +64,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="medication-schedule"
           command={`bunx ${shadcn} add ${site.url}/r/medication-schedule.json`}
         />
         <p>

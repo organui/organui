@@ -46,12 +46,8 @@ structures: [
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/theming"
-        eyebrow="Getting started"
-        title="Theming"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/theming" title="Theming">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Components use your shadcn theme. They install no global styles of
           their own.
         </p>

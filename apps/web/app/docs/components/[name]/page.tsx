@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -10,7 +10,7 @@ import { notFound } from "next/navigation"
 import { OrganApi } from "@/components/organ-api"
 import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
-import { componentGroups, docsMetadata, registryItems } from "@/lib/registry"
+import { docsMetadata, registryItems } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 type Props = { params: Promise<{ name: string }> }
@@ -60,17 +60,8 @@ export function ${component}Demo() {
 }`
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href={item.href}
-        eyebrow={
-          <>
-            Components /{" "}
-            {componentGroups.find(({ id }) => id === item.group)?.title}
-          </>
-        }
-        title={<>{item.title}</>}
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href={item.href} title={<>{item.title}</>}>
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           An interactive 3D {model.name.toLowerCase()} with{" "}
           {model.structures.length} selectable structures and{" "}
           {model.views.length} named views.
@@ -79,8 +70,7 @@ export function ${component}Demo() {
       <ComponentPreview key={name} name={`${name}-demo`} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="installation">Installation</DocsHeading>
-        <p>Run:</p>
-        <CodeBlockCommand label="Installation command" command={item.install} />
+        <ComponentInstallation name={name} command={item.install} />
         <p className="text-sm text-muted-foreground">
           This adds <code>{name}.tsx</code> to your components directory. Its
           dependency,{" "}

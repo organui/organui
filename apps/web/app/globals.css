@@ -31,7 +31,21 @@
     @apply rounded-md bg-muted px-[0.3em] py-[0.15em] font-mono text-[0.85em] break-words text-foreground;
   }
 
-  [data-docs-content] :where(p, li, td) > a {
+  [data-docs-content] :where(p, td) > a {
     @apply font-medium underline decoration-current/30 underline-offset-4 transition-colors hover:decoration-current;
+  }
+}
+
+/* Numbered steps, such as a component's manual installation. */
+@utility steps {
+  @apply flex flex-col gap-6 [counter-reset:step] md:ms-4 md:border-s md:ps-8;
+
+  & > li {
+    @apply relative flex min-w-0 flex-col gap-3 [counter-increment:step];
+  }
+
+  & > li::before {
+    @apply inline-flex size-7 items-center justify-center rounded-full bg-muted font-mono text-sm font-medium md:absolute md:-ms-[3.15rem] md:size-9 md:border-4 md:border-background;
+    content: counter(step);
   }
 }

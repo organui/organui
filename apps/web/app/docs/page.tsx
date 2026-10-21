@@ -20,8 +20,8 @@ export const metadata = docsMetadata(
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader href="/docs" eyebrow="Getting started" title="Introduction">
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs" title="Introduction">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           OrganUI is a set of interface components for healthcare and life
           sciences: 3D anatomy, clinical charts, molecules and medical images.
         </p>

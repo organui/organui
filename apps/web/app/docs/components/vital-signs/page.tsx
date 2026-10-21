@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -40,12 +40,8 @@ const ranges = `// Merged over adultVitalRanges, one vital at a time.
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/vital-signs"
-        eyebrow="Components / Clinical"
-        title="Vital signs"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/vital-signs" title="Vital signs">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Heart rate, blood pressure, SpO₂ and temperature at a glance, each
           checked against a normal range you can configure. Every status is
           written out with its own icon, so it never depends on colour.
@@ -61,8 +57,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="vital-signs"
           command={`bunx ${shadcn} add ${site.url}/r/vital-signs.json`}
         />
         <p>

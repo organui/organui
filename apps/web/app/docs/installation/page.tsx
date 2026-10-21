@@ -18,12 +18,8 @@ const init = `bunx ${shadcn} init --preset base-nova`
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/installation"
-        eyebrow="Getting started"
-        title="Installation"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/installation" title="Installation">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Configure a project once, then add components by name.
         </p>
       </DocsHeader>

@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -32,12 +32,8 @@ export function GenePanel() {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/dna-helix"
-        eyebrow={<>Components / Molecular &amp; cellular</>}
-        title="DNA helix"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/dna-helix" title="DNA helix">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Type a sequence and get its double helix, with every base paired to
           its complement. Built procedurally, so there is no model to download.
         </p>
@@ -45,8 +41,8 @@ export default function Page() {
       <ComponentPreview name="dna-helix-demo" />
       <section className="flex flex-col gap-4">
         <DocsHeading id="installation">Installation</DocsHeading>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="dna-helix"
           command={`bunx ${shadcn} add ${site.url}/r/dna-helix.json`}
         />
         <p>

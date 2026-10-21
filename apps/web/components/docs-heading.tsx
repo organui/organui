@@ -11,7 +11,7 @@ export function DocsHeading({
   return (
     <h2
       id={id}
-      className="group/heading scroll-m-20 text-2xl font-semibold tracking-tight"
+      className="group/heading scroll-m-20 text-xl font-semibold tracking-tight"
     >
       <a
         href={`#${id}`}

@@ -24,8 +24,15 @@ export default function DocsLayout({
             className="w-px shrink-0 bg-linear-to-b from-transparent via-border to-transparent"
           />
         </div>
-        <main id="main" data-docs-content className="min-w-0 py-8 md:py-10">
-          {children}
+        {/* A reading column; wide pages such as the organs gallery fill. */}
+        <main
+          id="main"
+          data-docs-content
+          className="min-w-0 py-8 text-[1.05rem] sm:text-[15px] md:py-10"
+        >
+          <div className="mx-auto w-full max-w-3xl group-has-data-docs-wide/docs:max-w-none">
+            {children}
+          </div>
         </main>
         {/* Pages with nothing to list, such as the organs gallery, mark
             themselves data-docs-wide and take this column's width. */}

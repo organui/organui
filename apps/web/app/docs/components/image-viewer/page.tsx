@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -48,10 +48,9 @@ export default function Page() {
     <div className="flex flex-col gap-10">
       <DocsHeader
         href="/docs/components/image-viewer"
-        eyebrow="Components / Imaging"
         title="Medical image viewer"
       >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Scroll through a stack of CT or MRI slices, adjust window and level,
           zoom and pan, and read uncompressed DICOM files in the browser.
         </p>
@@ -66,8 +65,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="image-viewer"
           command={`bunx ${shadcn} add ${site.url}/r/image-viewer.json`}
         />
         <p>

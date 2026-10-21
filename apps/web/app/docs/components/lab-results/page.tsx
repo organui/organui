@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -46,12 +46,8 @@ export function Results() {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/lab-results"
-        eyebrow="Components / Clinical"
-        title="Lab results table"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/lab-results" title="Lab results table">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Lab values flagged against the reference ranges you pass, with a
           sparkline of earlier results. Flags read as text and an icon, so they
           never depend on color alone.
@@ -67,8 +63,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="lab-results"
           command={`bunx ${shadcn} add ${site.url}/r/lab-results.json`}
         />
         <p>

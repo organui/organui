@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -36,12 +36,8 @@ const colors = { C6: "var(--destructive)", C7: "oklch(0.8 0.12 85)" }
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/dermatome-map"
-        eyebrow="Components / Clinical"
-        title="Dermatome map"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/dermatome-map" title="Dermatome map">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           The skin each spinal nerve supplies, front and back. Pick a level from
           the list or a region on the body to see its area and the key point
           where it is tested.
@@ -57,8 +53,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="dermatome-map"
           command={`bunx ${shadcn} add ${site.url}/r/dermatome-map.json`}
         />
         <p>

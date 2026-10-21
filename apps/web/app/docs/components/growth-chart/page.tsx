@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -61,12 +61,8 @@ const standards: GrowthStandards = {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/growth-chart"
-        eyebrow="Components / Clinical"
-        title="Growth chart"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/growth-chart" title="Growth chart">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Percentile curves for a child&apos;s weight, length/height and head
           circumference, with measurements plotted on top. Hover over or tab to
           a point for its percentile and z-score.
@@ -82,8 +78,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="growth-chart"
           command={`bunx ${shadcn} add ${site.url}/r/growth-chart.json`}
         />
         <p>

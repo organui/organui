@@ -41,12 +41,8 @@ export default async function Page() {
   const direct = (await itemsUsingRender()).filter(({ model }) => !model)
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/base-ui"
-        eyebrow="Getting started"
-        title="Base UI"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/base-ui" title="Base UI">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Items with controls need one of shadcn&apos;s Base UI styles, such as{" "}
           <code>base-nova</code>.
         </p>

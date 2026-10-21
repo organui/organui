@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -43,12 +43,8 @@ const synthetic = `import {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/ecg-trace"
-        eyebrow="Components / Clinical"
-        title="ECG trace"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/ecg-trace" title="ECG trace">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           A rhythm strip for a recorded trace or a live stream, drawn on
           standard ECG paper with its P, QRS and T waves labelled. Not for
           diagnostic use.
@@ -57,8 +53,8 @@ export default function Page() {
       <ComponentPreview name="ecg-trace-demo" />
       <section className="flex flex-col gap-4">
         <DocsHeading id="installation">Installation</DocsHeading>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="ecg-trace"
           command={`bunx ${shadcn} add ${site.url}/r/ecg-trace.json`}
         />
         <p>

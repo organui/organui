@@ -74,7 +74,11 @@ export const organs = registryItems.filter(({ organ }) => organ)
 
 // Where the CLI writes each file, relative to a Next.js app with the default
 // aliases. Pages only install in frameworks with file routing.
-function installedPath(file: { path: string; type: string; target?: string }) {
+export function installedPath(file: {
+  path: string
+  type: string
+  target?: string
+}) {
   if (file.target) return file.target
   const name = file.path.split("/").at(-1)
   return file.type === "registry:ui"

@@ -9,15 +9,28 @@ const runners: Record<PackageManager, string> = {
   yarn: "yarn dlx",
 }
 
-// Commands are written once with bunx and shown for each package manager.
+const installers: Record<PackageManager, string> = {
+  bun: "bun add",
+  pnpm: "pnpm add",
+  npm: "npm install",
+  yarn: "yarn add",
+}
+
+// Commands are written once for bun, as `bunx …` or `bun add …`, and shown
+// for each package manager.
 export function packageCommands(command: string) {
-  if (!command.startsWith("bunx "))
-    throw new Error(`Expected a bunx command: ${command}`)
-  const rest = command.slice("bunx ".length)
+  const [prefix, commands] = command.startsWith("bunx ")
+    ? ["bunx ", runners]
+    : command.startsWith("bun add ")
+      ? ["bun add ", installers]
+      : []
+  if (!prefix || !commands)
+    throw new Error(`Expected a bunx or bun add command: ${command}`)
+  const rest = command.slice(prefix.length)
   return Object.fromEntries(
-    Object.entries(runners).map(([manager, runner]) => [
+    Object.entries(commands).map(([manager, start]) => [
       manager,
-      `${runner} ${rest}`,
+      `${start} ${rest}`,
     ])
   ) as Record<PackageManager, string>
 }

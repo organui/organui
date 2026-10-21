@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -46,12 +46,8 @@ const regions = bodyMapRegions
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/body-map"
-        eyebrow="Components / Clinical"
-        title="Body map"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/body-map" title="Body map">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           A front and back outline of the body for recording where pain or
           symptoms are. Each region is a checkbox, so it works with a mouse, a
           touch screen, a keyboard and a screen reader.
@@ -67,8 +63,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="body-map"
           command={`bunx ${shadcn} add ${site.url}/r/body-map.json`}
         />
         <p>

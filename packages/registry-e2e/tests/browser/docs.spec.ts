@@ -412,9 +412,6 @@ test("the organs gallery shows every organ as a picture and a link", async ({
   await expect(
     page.getByRole("heading", { name: "Organs", level: 1 })
   ).toBeVisible()
-  await expect(
-    page.getByText("Components / Organs", { exact: true })
-  ).toBeVisible()
   const main = page.getByRole("main")
   // One grid, A to Z, with no sections to list beside it.
   await expect(main.getByRole("heading", { level: 2 })).toHaveCount(0)

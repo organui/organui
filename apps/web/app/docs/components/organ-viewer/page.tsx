@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -48,12 +48,8 @@ export default async function Page() {
   const organs = registryItems.filter(({ organ }) => organ)
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/organ-viewer"
-        eyebrow="Components / Organs"
-        title="Organ viewer"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/organ-viewer" title="Organ viewer">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           The 3D stage every OrganUI explorer shares. Give it a GLB and a
           description of its structures; it handles loading, framing, picking
           and emphasis.
@@ -74,8 +70,8 @@ export default async function Page() {
           ))}
           . To bring your own model, install the viewer alone.
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="organ-viewer"
           command={`bunx ${shadcn} add ${site.url}/r/organ-viewer.json`}
         />
         <p className="text-sm text-muted-foreground">

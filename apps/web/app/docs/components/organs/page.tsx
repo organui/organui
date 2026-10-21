@@ -13,12 +13,8 @@ export const metadata = docsMetadata(
 export default function Page() {
   return (
     <div data-docs-wide className="flex flex-col gap-10">
-      <DocsHeader
-        href={organsPage.href}
-        eyebrow="Components / Organs"
-        title="Organs"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href={organsPage.href} title="Organs">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           {organs.length} organs, each a component on the shared{" "}
           <Link href="/docs/components/organ-viewer" className="underline">
             organ viewer

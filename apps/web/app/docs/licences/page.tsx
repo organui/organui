@@ -32,12 +32,8 @@ export default async function Page() {
   )
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/licences"
-        eyebrow="Getting started"
-        title="Licences"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/licences" title="Licences">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           The code is MIT. The models and data it shows keep their own licences.
         </p>
       </DocsHeader>

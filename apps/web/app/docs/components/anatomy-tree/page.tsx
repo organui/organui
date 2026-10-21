@@ -1,5 +1,5 @@
 import { ComponentPreview } from "@/components/component-preview"
-import { CodeBlockCommand } from "@/components/code-block-command"
+import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
@@ -35,12 +35,8 @@ export function Panel() {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/anatomy-tree"
-        eyebrow="Components / Organs"
-        title="Anatomy tree"
-      >
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <DocsHeader href="/docs/components/anatomy-tree" title="Anatomy tree">
+        <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           A searchable hierarchy for selecting structures and controlling what
           your viewer shows. Bring your own data and rendering engine.
         </p>
@@ -55,8 +51,8 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <CodeBlockCommand
-          label="Installation command"
+        <ComponentInstallation
+          name="anatomy-tree"
           command={`bunx ${shadcn} add ${site.url}/r/anatomy-tree.json`}
         />
         <p>
