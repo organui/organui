@@ -1,8 +1,11 @@
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { access, readdir, readFile, rm, writeFile } from "node:fs/promises"
+import packageJson from "../package.json"
 const output = new URL("../dist/", import.meta.url)
 // shadcn build does not clear its output, so removed items would linger.
 await rm(output, { recursive: true, force: true })
+// The range of radix-ui the Radix build installs, as the Radix consumer tests.
+const radixUi = `radix-ui@^${packageJson.devDependencies["radix-ui"]}`
 // Items that use Base UI's API say so in their docs; the Radix copies don't.
 const baseOnly =
   " Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
@@ -39,9 +42,10 @@ const radixSource = {
   items: await Promise.all(
     source.items.map(async (item) => ({
       ...item,
-      // Radix projects get their primitives from shadcn's radix-ui package.
-      dependencies: item.dependencies?.filter(
-        (dependency) => !dependency.startsWith("@base-ui/react")
+      // shadcn's components don't list their primitives, so items do: the
+      // Radix build swaps Base UI for the radix-ui package.
+      dependencies: item.dependencies?.map((dependency) =>
+        dependency.startsWith("@base-ui/react@") ? radixUi : dependency
       ),
       docs: item.docs?.replace(baseOnly, ""),
       files: await Promise.all(
