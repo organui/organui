@@ -12,9 +12,13 @@
     "test:consumers": "turbo run consumers",
     "test:browser": "turbo run test:browser",
     "format:check": "prettier --check .",
-    "test:cache": "bun scripts/check-registry-cache.ts"
+    "test:cache": "bun scripts/check-registry-cache.ts",
+    "changeset": "changeset",
+    "version-packages": "changeset version && bun scripts/sync-version.ts && prettier --write packages/registry/CHANGELOG.md package.json packages/registry/package.json",
+    "release": "bun scripts/release.ts"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",

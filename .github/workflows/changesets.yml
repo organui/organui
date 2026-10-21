@@ -1,0 +1,37 @@
+name: Changesets
+# On master: while changesets are waiting, keep a "Release the next version"
+# pull request that bumps the version and writes the changelog; once it
+# merges, publish the GitHub release. Nothing goes to npm.
+on:
+  push:
+    branches: [master]
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: changesets
+  cancel-in-progress: false
+jobs:
+  version:
+    name: Version pull request or release
+    # Forks don't release.
+    if: github.repository == 'organui/organui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.2"
+      - run: bun install --frozen-lockfile
+      - uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        with:
+          version: bun run version-packages
+          publish: bun run release
+          title: Release the next version
+          commit: Release the next version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -41,6 +41,10 @@ jobs:
           restore-keys: ${{ runner.os }}-turbo-${{ github.job }}-
       - run: bun install --frozen-lockfile
       - run: bun run format:check
+      # A pull request that changes what the registry installs carries a
+      # changeset, which becomes its line in the release notes.
+      - if: github.event_name == 'pull_request'
+        run: bunx changeset status --since=origin/${{ github.base_ref }}
       # Pull requests check only the packages they change and their dependents;
       # master checks everything.
       - run: bunx turbo run lint typecheck test ${{ github.event_name == 'pull_request' && '--affected' || '' }}
