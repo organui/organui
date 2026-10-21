@@ -65,7 +65,7 @@ export function CommandMenu() {
         onPointerEnter={loadSearchDialog}
         onFocus={loadSearchDialog}
         aria-keyshortcuts="Meta+K Control+K /"
-        className="size-8 justify-start gap-2 rounded-lg border-none bg-muted px-0 font-normal text-muted-foreground shadow-none hover:bg-muted/60 sm:w-48 sm:px-3 lg:w-56 xl:w-72 dark:bg-card dark:hover:bg-card/60"
+        className="size-8 justify-start gap-2 rounded-lg border-none bg-muted px-0 font-normal text-foreground shadow-none hover:bg-muted/60 sm:w-48 sm:px-3 lg:w-56 xl:w-72 dark:bg-card dark:hover:bg-card/60"
       >
         <SearchIcon data-icon="inline-start" className="mx-auto sm:mx-0" />
         <span className="sr-only sm:not-sr-only sm:truncate">

@@ -28,7 +28,7 @@
   /* Text in docs pages: inline code and links. Code blocks, buttons and
      components style themselves. */
   [data-docs-content] :where(p, li, td, figcaption, summary) > code {
-    @apply rounded-md bg-muted px-[0.3em] py-[0.15em] font-mono text-[0.85em] break-words;
+    @apply rounded-md bg-muted px-[0.3em] py-[0.15em] font-mono text-[0.85em] break-words text-foreground;
   }
 
   [data-docs-content] :where(p, li, td) > a {
