@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import {
   CheckIcon,
@@ -170,7 +171,26 @@ export function BlockViewer({
           <InstallButton command={install} />
         </div>
       </div>
-      <div className="group-data-[view=code]/block:hidden">
+      {/* Phones get a picture of the page; wide screens get the page. */}
+      <div className="overflow-hidden rounded-xl border group-data-[view=code]/block:hidden lg:hidden">
+        <Image
+          src={`/blocks/${name}-light.webp`}
+          alt={`${title} preview`}
+          width={1440}
+          height={900}
+          sizes="100vw"
+          className="w-full dark:hidden"
+        />
+        <Image
+          src={`/blocks/${name}-dark.webp`}
+          alt={`${title} preview`}
+          width={1440}
+          height={900}
+          sizes="100vw"
+          className="hidden w-full dark:block"
+        />
+      </div>
+      <div className="hidden lg:group-data-[view=preview]/block:block">
         <div className="relative">
           {/* A dotted backdrop that shows when the preview is narrowed. */}
           <div

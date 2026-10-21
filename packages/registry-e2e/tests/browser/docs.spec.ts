@@ -643,11 +643,17 @@ test("blocks gallery previews and installs every block", async ({
         exact: true,
       })
     ).toBeVisible()
-    const preview = section.getByTitle(`${title} preview`)
-    await preview.scrollIntoViewIfNeeded()
-    await expect(
-      preview.contentFrame().getByRole("toolbar", { name: "View controls" })
-    ).toBeVisible()
+    // Wide screens frame the page; phones show a picture of it.
+    if ((page.viewportSize()?.width ?? 0) >= 1024) {
+      const preview = section.getByTitle(`${title} preview`)
+      await preview.scrollIntoViewIfNeeded()
+      await expect(
+        preview.contentFrame().getByRole("toolbar", { name: "View controls" })
+      ).toBeVisible()
+    } else
+      await expect(
+        section.getByRole("img", { name: `${title} preview`, exact: true })
+      ).toBeVisible()
     const item = registryItemSchema.parse(
       await (await request.get(`/r/${block.name}.json`)).json()
     )
