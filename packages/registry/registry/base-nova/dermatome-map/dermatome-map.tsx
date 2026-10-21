@@ -197,7 +197,9 @@ export type DermatomeId = (typeof dermatomes)[number]["id"]
 export type Dermatome = (typeof dermatomes)[number]
 
 export type DermatomeMapProps = {
+  /** The selected dermatome, such as L4, or null. */
   selectedId: DermatomeId | null
+  /** Called with the dermatome a reader selects, or null. */
   onSelectionChange: (id: DermatomeId | null) => void
   /** Defaults to both views, front first. */
   views?: readonly DermatomeView[]
@@ -205,7 +207,9 @@ export type DermatomeMapProps = {
   colors?: Partial<Record<DermatomeId, string>>
   /** Defaults to true. Labels show once a figure is at least 16rem wide. */
   showLabels?: boolean
+  /** The accessible name of the map. */
   label?: string
+  /** Classes for the root element. */
   className?: string
 }
 

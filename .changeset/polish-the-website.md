@@ -21,4 +21,7 @@ New items:
 Charts: 21 charts of health data (area, bar, line, pie, radar and radial)
 built on shadcn's chart and card, each installable like shadcn's charts.
 
+Every component documents each prop with a doc comment, which the docs
+show as its API Reference.
+
 Blocks carry the height /blocks frames them at, in `meta.iframeHeight`.

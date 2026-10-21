@@ -32,6 +32,7 @@
     "./body-measurements": "./registry/base-nova/body-measurements/body-measurements.ts",
     "./utilities-css": "./scripts/utilities-css.ts",
     "./utilities.css": "./utilities.css",
+    "./component-api.json": "./component-api.json",
     "./body-systems.json": "./body-systems.json",
     "./dist/*": "./dist/*",
     "./organ-viewer": "./registry/base-nova/organ-viewer/organ-viewer.tsx",
@@ -83,6 +84,7 @@
     "build": "bun scripts/build.ts",
     "lint": "eslint registry --max-warnings=0",
     "utilities-css": "bun scripts/write-utilities-css.ts",
+    "component-api": "bun scripts/write-component-api.ts",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.radix.json",
     "test": "bun test tests"
   },

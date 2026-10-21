@@ -48,14 +48,21 @@ export type AnatomyNode = {
   selectable?: boolean
 }
 export type AnatomyTreeProps = {
+  /** The tree: structures with ids, labels and children. */
   data: readonly AnatomyNode[]
+  /** The selected structure id, or null. */
   selectedId: string | null
+  /** Called with the id a reader selects. */
   onSelectionChange: (id: string) => void
   /** Missing IDs are visible. Branches summarize their leaf descendants. */
   visibility: Readonly<Record<string, boolean>>
+  /** Called with the new visibility after a show or hide. */
   onVisibilityChange: (visibility: Record<string, boolean>) => void
+  /** Branches open on first render. */
   defaultExpandedIds?: readonly string[]
+  /** The accessible name of the tree. */
   label?: string
+  /** Classes for the root element. */
   className?: string
 }
 export type AnatomyIndex = {

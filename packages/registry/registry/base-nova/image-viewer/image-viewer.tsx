@@ -60,14 +60,19 @@ export type ImageViewerHandle = {
 export type ImageViewerTool = "window" | "pan"
 
 export type ImageViewerProps = {
+  /** The image slices, each with its width, height and pixel values. */
   slices: readonly ImageSlice[]
   /** Zero-based index of the shown slice, when controlled. */
   slice?: number
+  /** The slice shown first, when uncontrolled. */
   defaultSlice?: number
+  /** Called with the new slice index. */
   onSliceChange?: (index: number) => void
+  /** The window centre and width, when controlled. */
   window?: ImageWindow
   /** Defaults to the first preset, or else the first slice's value range. */
   defaultWindow?: ImageWindow
+  /** Called with the new window after a drag or preset. */
   onWindowChange?: (window: ImageWindow) => void
   /** Named windows offered in the toolbar, such as `ctWindowPresets`. */
   presets?: readonly WindowPreset[]
@@ -77,8 +82,11 @@ export type ImageViewerProps = {
   unit?: string
   /** Shows the toolbar and slice slider. Defaults to true. */
   controls?: boolean
+  /** The accessible name of the image. */
   label?: string
+  /** Classes for the root element. */
   className?: string
+  /** Moves through slices, zooms and resets the view from your own controls. */
   ref?: React.Ref<ImageViewerHandle>
 }
 

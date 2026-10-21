@@ -39,6 +39,7 @@ export type VitalSign =
 export type VitalStatus = "low" | "normal" | "high" | "missing"
 export type TemperatureUnit = "celsius" | "fahrenheit"
 export type VitalSignsProps = {
+  /** The latest value of each vital; null when not measured. */
   readings: VitalReadings
   /** Merged over `adultVitalRanges`, one vital at a time. */
   ranges?: Partial<VitalRanges>
@@ -48,9 +49,11 @@ export type VitalSignsProps = {
   temperatureUnit?: TemperatureUnit
   /** Used to format numbers. */
   locale?: string
+  /** The heading above the readings. */
   title?: string
   /** Shown under the title, such as when the readings were taken. */
   description?: React.ReactNode
+  /** Classes for the root element. */
   className?: string
 }
 

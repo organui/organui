@@ -4,6 +4,9 @@ import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
+import { PropsTable } from "@/components/props-table"
+import { ComponentExamples } from "@/components/component-examples"
+import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
@@ -134,6 +137,8 @@ export default function Page() {
           to the chains you need first.
         </p>
       </section>
+      <ComponentExamples examples={componentExamples["molecule-viewer"]!} />
+      <PropsTable item="molecule-viewer" />
       <DocsPager href="/docs/components/molecule-viewer" />
     </div>
   )

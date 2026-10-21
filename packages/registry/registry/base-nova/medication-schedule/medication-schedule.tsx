@@ -59,6 +59,7 @@ export type DoseConflict = {
   doses: readonly [ScheduledDose, ScheduledDose]
 }
 export type MedicationScheduleProps = {
+  /** The medications, each with its dose times and days. */
   medications: readonly Medication[]
   /** Interactions come from your own data source; none are bundled. */
   interactions?: readonly MedicationInteraction[]
@@ -74,9 +75,11 @@ export type MedicationScheduleProps = {
   now?: string
   /** Used to format the date heading. Defaults to "en-US". */
   locale?: string
+  /** The accessible name of the schedule. */
   label?: string
   /** Shown under the schedule. Pass null to hide it. */
   disclaimer?: React.ReactNode
+  /** Classes for the root element. */
   className?: string
 }
 

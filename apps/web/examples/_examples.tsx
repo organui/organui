@@ -302,4 +302,184 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "anatomy-tree-groups": {
+    title: "Groups and Colours",
+    file: "anatomy-tree-groups.tsx",
+    render: async () => {
+      const { Example } = await import("./anatomy-tree-groups")
+      return <Example />
+    },
+  },
+  "anatomy-tree-hidden": {
+    title: "Hidden Structures",
+    file: "anatomy-tree-hidden.tsx",
+    render: async () => {
+      const { Example } = await import("./anatomy-tree-hidden")
+      return <Example />
+    },
+  },
+  "body-map-front": {
+    title: "One View",
+    file: "body-map-front.tsx",
+    render: async () => {
+      const { Example } = await import("./body-map-front")
+      return <Example />
+    },
+  },
+  "body-map-form": {
+    title: "In a Form",
+    file: "body-map-form.tsx",
+    render: async () => {
+      const { Example } = await import("./body-map-form")
+      return <Example />
+    },
+  },
+  "dermatome-map-results": {
+    title: "Examination Results",
+    file: "dermatome-map-results.tsx",
+    render: async () => {
+      const { Example } = await import("./dermatome-map-results")
+      return <Example />
+    },
+  },
+  "dermatome-map-back": {
+    title: "Back Only",
+    file: "dermatome-map-back.tsx",
+    render: async () => {
+      const { Example } = await import("./dermatome-map-back")
+      return <Example />
+    },
+  },
+  "dna-helix-still": {
+    title: "Still",
+    file: "dna-helix-still.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./dna-helix-still")
+      return <Example />
+    },
+  },
+  "dna-helix-controlled": {
+    title: "Controlled Selection",
+    file: "dna-helix-controlled.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./dna-helix-controlled")
+      return <Example />
+    },
+  },
+  "ecg-trace-live": {
+    title: "Live Stream",
+    file: "ecg-trace-live.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-trace-live")
+      return <Example />
+    },
+  },
+  "ecg-trace-paper": {
+    title: "Paper Speed and Gain",
+    file: "ecg-trace-paper.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-trace-paper")
+      return <Example />
+    },
+  },
+  "growth-chart-length": {
+    title: "Length and Height",
+    file: "growth-chart-length.tsx",
+    render: async () => {
+      const { Example } = await import("./growth-chart-length")
+      return <Example />
+    },
+  },
+  "growth-chart-head": {
+    title: "Chosen Percentiles",
+    file: "growth-chart-head.tsx",
+    render: async () => {
+      const { Example } = await import("./growth-chart-head")
+      return <Example />
+    },
+  },
+  "image-viewer-controlled": {
+    title: "Controlled Slice and Window",
+    file: "image-viewer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./image-viewer-controlled")
+      return <Example />
+    },
+  },
+  "image-viewer-no-controls": {
+    title: "Without Controls",
+    file: "image-viewer-no-controls.tsx",
+    render: async () => {
+      const { Example } = await import("./image-viewer-no-controls")
+      return <Example />
+    },
+  },
+  "lab-results-flags": {
+    title: "Text Results and Lab Flags",
+    file: "lab-results-flags.tsx",
+    render: async () => {
+      const { Example } = await import("./lab-results-flags")
+      return <Example />
+    },
+  },
+  "lab-results-no-trend": {
+    title: "Without Trends",
+    file: "lab-results-no-trend.tsx",
+    render: async () => {
+      const { Example } = await import("./lab-results-no-trend")
+      return <Example />
+    },
+  },
+  "medication-schedule-simple": {
+    title: "One Medication",
+    file: "medication-schedule-simple.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-simple")
+      return <Example />
+    },
+  },
+  "medication-schedule-read-only": {
+    title: "Read-only",
+    file: "medication-schedule-read-only.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-read-only")
+      return <Example />
+    },
+  },
+  "molecule-viewer-spacefill": {
+    title: "Spacefill",
+    file: "molecule-viewer-spacefill.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./molecule-viewer-spacefill")
+      return <Example />
+    },
+  },
+  "molecule-viewer-no-controls": {
+    title: "Without Controls",
+    file: "molecule-viewer-no-controls.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./molecule-viewer-no-controls")
+      return <Example />
+    },
+  },
+  "vital-signs-fahrenheit": {
+    title: "Fahrenheit and Chosen Vitals",
+    file: "vital-signs-fahrenheit.tsx",
+    render: async () => {
+      const { Example } = await import("./vital-signs-fahrenheit")
+      return <Example />
+    },
+  },
+  "vital-signs-targets": {
+    title: "Target Ranges",
+    file: "vital-signs-targets.tsx",
+    render: async () => {
+      const { Example } = await import("./vital-signs-targets")
+      return <Example />
+    },
+  },
 }

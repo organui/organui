@@ -92,13 +92,17 @@ export type OrganViewerHandle = {
 }
 
 export type OrganViewerProps = {
+  /** The model: its GLB, structures, named views and credit. */
   model: OrganModel
   /** Overrides `model.src`, for example to serve the GLB yourself. */
   src?: string
+  /** The selected structure id, or null. */
   selectedId?: string | null
+  /** Called with the structure a reader selects. */
   onSelectionChange?: (id: string) => void
   /** Missing IDs are visible, matching the anatomy tree's contract. */
   visibility?: Readonly<Record<string, boolean>>
+  /** The named view shown first. */
   defaultView?: string
   /** Called with the view name, or null once the camera is rotated freely. */
   onViewChange?: (view: string | null) => void
@@ -106,8 +110,11 @@ export type OrganViewerProps = {
   controls?: boolean
   /** Shows the model credit and licence link. Keep it unless you credit the model elsewhere. */
   attribution?: boolean
+  /** The accessible name of the viewer. */
   label?: string
+  /** Classes for the root element. */
   className?: string
+  /** Sets views, zooms, rotates and resets from your own controls. */
   ref?: React.Ref<OrganViewerHandle>
 }
 

@@ -17,14 +17,19 @@ export type BodyMapRegion = {
   mirrored?: boolean
 }
 export type BodyMapProps = {
+  /** The selected region ids. */
   value: readonly string[]
+  /** Called with the new selection. */
   onValueChange: (value: string[]) => void
   /** Defaults to bodyMapRegions. Replace labels or shapes to customize. */
   regions?: readonly BodyMapRegion[]
+  /** Which figures to show, front and back by default. */
   views?: readonly BodyMapView[]
   /** Submits one hidden input per selected region inside a form. */
   name?: string
+  /** The accessible name of the map, and its legend. */
   label?: string
+  /** Classes for the root element. */
   className?: string
 }
 

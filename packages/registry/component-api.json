@@ -1,0 +1,902 @@
+{
+  "anatomy-tree": {
+    "component": "AnatomyTree",
+    "props": [
+      {
+        "name": "data",
+        "type": "readonly AnatomyNode[]",
+        "required": true,
+        "default": null,
+        "description": "The tree: structures with ids, labels and children."
+      },
+      {
+        "name": "selectedId",
+        "type": "string | null",
+        "required": true,
+        "default": null,
+        "description": "The selected structure id, or null."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(id: string) => void",
+        "required": true,
+        "default": null,
+        "description": "Called with the id a reader selects."
+      },
+      {
+        "name": "visibility",
+        "type": "Readonly<Record<string, boolean>>",
+        "required": true,
+        "default": null,
+        "description": "Missing IDs are visible. Branches summarize their leaf descendants."
+      },
+      {
+        "name": "onVisibilityChange",
+        "type": "(visibility: Record<string, boolean>) => void",
+        "required": true,
+        "default": null,
+        "description": "Called with the new visibility after a show or hide."
+      },
+      {
+        "name": "defaultExpandedIds",
+        "type": "readonly string[]",
+        "required": false,
+        "default": "[]",
+        "description": "Branches open on first render."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Anatomy\"",
+        "description": "The accessible name of the tree."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "body-map": {
+    "component": "BodyMap",
+    "props": [
+      {
+        "name": "value",
+        "type": "readonly string[]",
+        "required": true,
+        "default": null,
+        "description": "The selected region ids."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string[]) => void",
+        "required": true,
+        "default": null,
+        "description": "Called with the new selection."
+      },
+      {
+        "name": "regions",
+        "type": "readonly BodyMapRegion[]",
+        "required": false,
+        "default": "bodyMapRegions",
+        "description": "Defaults to bodyMapRegions. Replace labels or shapes to customize."
+      },
+      {
+        "name": "views",
+        "type": "readonly BodyMapView[]",
+        "required": false,
+        "default": "[\"front\", \"back\"]",
+        "description": "Which figures to show, front and back by default."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Submits one hidden input per selected region inside a form."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Body map\"",
+        "description": "The accessible name of the map, and its legend."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "dermatome-map": {
+    "component": "DermatomeMap",
+    "props": [
+      {
+        "name": "selectedId",
+        "type": "DermatomeId | null",
+        "required": true,
+        "default": null,
+        "description": "The selected dermatome, such as L4, or null."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(id: DermatomeId | null) => void",
+        "required": true,
+        "default": null,
+        "description": "Called with the dermatome a reader selects, or null."
+      },
+      {
+        "name": "views",
+        "type": "readonly DermatomeView[]",
+        "required": false,
+        "default": "[\"front\", \"back\"]",
+        "description": "Defaults to both views, front first."
+      },
+      {
+        "name": "colors",
+        "type": "Partial<Record<DermatomeId, string>>",
+        "required": false,
+        "default": null,
+        "description": "CSS colors by level, for example to show sensory test results."
+      },
+      {
+        "name": "showLabels",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Defaults to true. Labels show once a figure is at least 16rem wide."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Dermatome map\"",
+        "description": "The accessible name of the map."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "dna-helix": {
+    "component": "DnaHelix",
+    "props": [
+      {
+        "name": "sequence",
+        "type": "string",
+        "required": false,
+        "default": "\"ATGCGTACCTGAGCTTAACGGATC\"",
+        "description": "One strand, read 5′ to 3′. Whitespace is ignored; only A, C, G and T are allowed."
+      },
+      {
+        "name": "selectedIndex",
+        "type": "number | null",
+        "required": false,
+        "default": "null",
+        "description": "Base pair index, from 0 at the 5′ end."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(index: number, pair: BasePair) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the selected pair's index and its bases."
+      },
+      {
+        "name": "autoRotate",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Spins the helix slowly about its axis until the user pauses it or moves the camera. Off when the user prefers reduced motion. Defaults to true."
+      },
+      {
+        "name": "strands",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the selectable sequence of both strands below the stage. Defaults to true."
+      },
+      {
+        "name": "controls",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the rotation, zoom and reset buttons. Defaults to true."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Interactive DNA double helix\"",
+        "description": "The accessible name of the viewer."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      },
+      {
+        "name": "ref",
+        "type": "React.Ref<DnaHelixHandle>",
+        "required": false,
+        "default": null,
+        "description": "Rotates, zooms and resets the camera from your own controls."
+      }
+    ]
+  },
+  "ecg-trace": {
+    "component": "EcgTrace",
+    "props": [
+      {
+        "name": "samples",
+        "type": "readonly number[]",
+        "required": false,
+        "default": null,
+        "description": "A recorded trace in millivolts. Ignored when `stream` is set."
+      },
+      {
+        "name": "stream",
+        "type": "EcgStream",
+        "required": false,
+        "default": null,
+        "description": "A live source, drawn as a monitor sweep."
+      },
+      {
+        "name": "sampleRate",
+        "type": "number",
+        "required": false,
+        "default": "250",
+        "description": "Samples per second. Defaults to 250."
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": "Seconds shown across the strip. Defaults to the whole recording, or 6 seconds for a stream."
+      },
+      {
+        "name": "speed",
+        "type": "number",
+        "required": false,
+        "default": "25",
+        "description": "Paper speed in mm/s. Defaults to the standard 25."
+      },
+      {
+        "name": "gain",
+        "type": "number",
+        "required": false,
+        "default": "10",
+        "description": "Gain in mm/mV. Defaults to the standard 10."
+      },
+      {
+        "name": "range",
+        "type": "readonly [number, number]",
+        "required": false,
+        "default": "[-1.5, 2]",
+        "description": "Lowest and highest millivolts shown. Defaults to -1.5 to 2."
+      },
+      {
+        "name": "lead",
+        "type": "string",
+        "required": false,
+        "default": "\"II\"",
+        "description": "The lead name shown in the caption. Defaults to II."
+      },
+      {
+        "name": "annotations",
+        "type": "readonly EcgAnnotation[] | false",
+        "required": false,
+        "default": null,
+        "description": "Wave labels. Detected from the signal unless given; pass false to hide them. Streams are always detected."
+      },
+      {
+        "name": "calibration",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Draws the 1 mV calibration pulse before the trace. Defaults to true."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"ECG\"",
+        "description": "The accessible name of the strip. Defaults to \"ECG\"."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "growth-chart": {
+    "component": "GrowthChart",
+    "props": [
+      {
+        "name": "standards",
+        "type": "GrowthStandards",
+        "required": true,
+        "default": null,
+        "description": "The LMS reference tables you supply, such as WHO's."
+      },
+      {
+        "name": "measure",
+        "type": "GrowthMeasure",
+        "required": true,
+        "default": null,
+        "description": "weight, length (length or height) or head circumference."
+      },
+      {
+        "name": "sex",
+        "type": "GrowthSex",
+        "required": true,
+        "default": null,
+        "description": "female or male; the standards differ by sex."
+      },
+      {
+        "name": "measurements",
+        "type": "readonly GrowthMeasurement[]",
+        "required": false,
+        "default": "[]",
+        "description": "The child's measurements, by age in months."
+      },
+      {
+        "name": "percentiles",
+        "type": "readonly number[]",
+        "required": false,
+        "default": "defaultPercentiles",
+        "description": "Percentile curves to draw, between 0 and 100. Defaults to WHO's set."
+      },
+      {
+        "name": "ageRange",
+        "type": "readonly [number, number]",
+        "required": false,
+        "default": "[0, 24]",
+        "description": "Age range shown, in months. Defaults to 0 to 24."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The accessible name of the chart."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "image-viewer": {
+    "component": "ImageViewer",
+    "props": [
+      {
+        "name": "slices",
+        "type": "readonly ImageSlice[]",
+        "required": true,
+        "default": null,
+        "description": "The image slices, each with its width, height and pixel values."
+      },
+      {
+        "name": "slice",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": "Zero-based index of the shown slice, when controlled."
+      },
+      {
+        "name": "defaultSlice",
+        "type": "number",
+        "required": false,
+        "default": "0",
+        "description": "The slice shown first, when uncontrolled."
+      },
+      {
+        "name": "onSliceChange",
+        "type": "(index: number) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the new slice index."
+      },
+      {
+        "name": "window",
+        "type": "ImageWindow",
+        "required": false,
+        "default": null,
+        "description": "The window centre and width, when controlled."
+      },
+      {
+        "name": "defaultWindow",
+        "type": "ImageWindow",
+        "required": false,
+        "default": null,
+        "description": "Defaults to the first preset, or else the first slice's value range."
+      },
+      {
+        "name": "onWindowChange",
+        "type": "(window: ImageWindow) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the new window after a drag or preset."
+      },
+      {
+        "name": "presets",
+        "type": "readonly WindowPreset[]",
+        "required": false,
+        "default": "[]",
+        "description": "Named windows offered in the toolbar, such as `ctWindowPresets`."
+      },
+      {
+        "name": "pixelSpacing",
+        "type": "readonly [number, number]",
+        "required": false,
+        "default": null,
+        "description": "Physical [row, column] spacing, as in DICOM Pixel Spacing, so pixels keep their true aspect."
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Unit shown after pixel values, such as \"HU\"."
+      },
+      {
+        "name": "controls",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the toolbar and slice slider. Defaults to true."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Medical image\"",
+        "description": "The accessible name of the image."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      },
+      {
+        "name": "ref",
+        "type": "React.Ref<ImageViewerHandle>",
+        "required": false,
+        "default": null,
+        "description": "Moves through slices, zooms and resets the view from your own controls."
+      }
+    ]
+  },
+  "lab-results": {
+    "component": "LabResultsTable",
+    "props": [
+      {
+        "name": "results",
+        "type": "readonly LabResult[]",
+        "required": true,
+        "default": null,
+        "description": "The results, each with its value, unit, range and history."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Defaults to a UTC date such as \"Oct 1, 2026\"."
+      },
+      {
+        "name": "showTrend",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the trend column. Defaults to true."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "medication-schedule": {
+    "component": "MedicationSchedule",
+    "props": [
+      {
+        "name": "medications",
+        "type": "readonly Medication[]",
+        "required": true,
+        "default": null,
+        "description": "The medications, each with its dose times and days."
+      },
+      {
+        "name": "interactions",
+        "type": "readonly MedicationInteraction[]",
+        "required": false,
+        "default": "[]",
+        "description": "Interactions come from your own data source; none are bundled."
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "required": true,
+        "default": null,
+        "description": "The day shown, \"YYYY-MM-DD\"."
+      },
+      {
+        "name": "onDateChange",
+        "type": "(date: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Shows previous and next day buttons when set."
+      },
+      {
+        "name": "doseStatus",
+        "type": "Readonly<Record<string, DoseStatus>>",
+        "required": false,
+        "default": "{}",
+        "description": "Missing doses are still to take."
+      },
+      {
+        "name": "onDoseStatusChange",
+        "type": "(doseStatus: Record<string, DoseStatus>) => void",
+        "required": false,
+        "default": null,
+        "description": "Makes each dose's status a button that cycles to take, taken, skipped."
+      },
+      {
+        "name": "now",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The current local time, \"HH:MM\", drawn as a marker on the timeline."
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false,
+        "default": "\"en-US\"",
+        "description": "Used to format the date heading. Defaults to \"en-US\"."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Medication schedule\"",
+        "description": "The accessible name of the schedule."
+      },
+      {
+        "name": "disclaimer",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": "\"Interaction warnings come only from the data this schedule is given. This is not medical advice.\"",
+        "description": "Shown under the schedule. Pass null to hide it."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  },
+  "molecule-viewer": {
+    "component": "MoleculeViewer",
+    "props": [
+      {
+        "name": "src",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "URL of a PDB or mmCIF file. Ignored when `data` is given."
+      },
+      {
+        "name": "data",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "PDB or mmCIF text."
+      },
+      {
+        "name": "format",
+        "type": "\"pdb\" | \"mmcif\"",
+        "required": false,
+        "default": null,
+        "description": "Detected from the text when omitted."
+      },
+      {
+        "name": "representation",
+        "type": "MoleculeRepresentation",
+        "required": false,
+        "default": null,
+        "description": "Cartoon, sticks, spheres and so on, when controlled."
+      },
+      {
+        "name": "defaultRepresentation",
+        "type": "MoleculeRepresentation",
+        "required": false,
+        "default": "\"cartoon\"",
+        "description": "The representation shown first, when uncontrolled."
+      },
+      {
+        "name": "onRepresentationChange",
+        "type": "(representation: MoleculeRepresentation) => void",
+        "required": false,
+        "default": null,
+        "description": "Called when a reader picks another representation."
+      },
+      {
+        "name": "colorScheme",
+        "type": "MoleculeColorScheme",
+        "required": false,
+        "default": null,
+        "description": "How atoms and residues are coloured, when controlled."
+      },
+      {
+        "name": "defaultColorScheme",
+        "type": "MoleculeColorScheme",
+        "required": false,
+        "default": "\"secondary\"",
+        "description": "The colour scheme shown first, when uncontrolled."
+      },
+      {
+        "name": "onColorSchemeChange",
+        "type": "(scheme: MoleculeColorScheme) => void",
+        "required": false,
+        "default": null,
+        "description": "Called when a reader picks another colour scheme."
+      },
+      {
+        "name": "selectedId",
+        "type": "string | null",
+        "required": false,
+        "default": "null",
+        "description": "Residue ID, such as `A:16`."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "( id: string | null, residue: MoleculeResidue | null ) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the selected residue's id and details, or null."
+      },
+      {
+        "name": "onLoad",
+        "type": "(structure: MolecularStructure) => void",
+        "required": false,
+        "default": null,
+        "description": "Called once a structure is parsed."
+      },
+      {
+        "name": "water",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": "Shows water molecules. Defaults to false."
+      },
+      {
+        "name": "sequence",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the selectable sequence below the stage. Defaults to true."
+      },
+      {
+        "name": "controls",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the style and colour menus, zoom and reset buttons. Defaults to true."
+      },
+      {
+        "name": "attribution",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Links the entry on RCSB PDB when the file names its ID. Defaults to true."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Interactive molecular structure\"",
+        "description": "The accessible name of the viewer."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      },
+      {
+        "name": "ref",
+        "type": "React.Ref<MoleculeViewerHandle>",
+        "required": false,
+        "default": null,
+        "description": "Zooms, rotates and resets the camera from your own controls."
+      }
+    ]
+  },
+  "organ-viewer": {
+    "component": "OrganViewer",
+    "props": [
+      {
+        "name": "model",
+        "type": "OrganModel",
+        "required": true,
+        "default": null,
+        "description": "The model: its GLB, structures, named views and credit."
+      },
+      {
+        "name": "src",
+        "type": "string",
+        "required": false,
+        "default": "model.src",
+        "description": "Overrides `model.src`, for example to serve the GLB yourself."
+      },
+      {
+        "name": "selectedId",
+        "type": "string | null",
+        "required": false,
+        "default": "null",
+        "description": "The selected structure id, or null."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(id: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the structure a reader selects."
+      },
+      {
+        "name": "visibility",
+        "type": "Readonly<Record<string, boolean>>",
+        "required": false,
+        "default": null,
+        "description": "Missing IDs are visible, matching the anatomy tree's contract."
+      },
+      {
+        "name": "defaultView",
+        "type": "string",
+        "required": false,
+        "default": "model.defaultView",
+        "description": "The named view shown first."
+      },
+      {
+        "name": "onViewChange",
+        "type": "(view: string | null) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the view name, or null once the camera is rotated freely."
+      },
+      {
+        "name": "controls",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the view menu, zoom and reset buttons. Defaults to true."
+      },
+      {
+        "name": "attribution",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the model credit and licence link. Keep it unless you credit the model elsewhere."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "`Interactive ${model.name.toLowerCase()} model`",
+        "description": "The accessible name of the viewer."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      },
+      {
+        "name": "ref",
+        "type": "React.Ref<OrganViewerHandle>",
+        "required": false,
+        "default": null,
+        "description": "Sets views, zooms, rotates and resets from your own controls."
+      }
+    ]
+  },
+  "vital-signs": {
+    "component": "VitalSigns",
+    "props": [
+      {
+        "name": "readings",
+        "type": "VitalReadings",
+        "required": true,
+        "default": null,
+        "description": "The latest value of each vital; null when not measured."
+      },
+      {
+        "name": "ranges",
+        "type": "Partial<VitalRanges>",
+        "required": false,
+        "default": null,
+        "description": "Merged over `adultVitalRanges`, one vital at a time."
+      },
+      {
+        "name": "vitals",
+        "type": "readonly VitalSign[]",
+        "required": false,
+        "default": "defaultVitals",
+        "description": "Which vitals to show, in order."
+      },
+      {
+        "name": "temperatureUnit",
+        "type": "TemperatureUnit",
+        "required": false,
+        "default": "\"celsius\"",
+        "description": "The unit of `readings.temperature` and `ranges.temperature`."
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "required": false,
+        "default": "\"en-US\"",
+        "description": "Used to format numbers."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "\"Vital signs\"",
+        "description": "The heading above the readings."
+      },
+      {
+        "name": "description",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Shown under the title, such as when the readings were taken."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the root element."
+      }
+    ]
+  }
+}

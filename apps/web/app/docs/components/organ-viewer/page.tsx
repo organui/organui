@@ -4,6 +4,7 @@ import { CodeSnippet } from "@/components/code-snippet"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
+import { PropsTable } from "@/components/props-table"
 import Link from "next/link"
 import { OrganExamples } from "@/components/organ-examples"
 import { docsMetadata, registryItems, shadcn } from "@/lib/registry"
@@ -140,6 +141,7 @@ export default async function Page() {
           such as the anatomy tree alongside it.
         </p>
       </section>
+      <PropsTable item="organ-viewer" />
       <DocsPager href="/docs/components/organ-viewer" />
     </div>
   )

@@ -41,6 +41,7 @@ export type EcgTraceProps = {
   calibration?: boolean
   /** The accessible name of the strip. Defaults to "ECG". */
   label?: string
+  /** Classes for the root element. */
   className?: string
 }
 

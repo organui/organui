@@ -59,6 +59,7 @@ export type DnaHelixProps = {
   sequence?: string
   /** Base pair index, from 0 at the 5′ end. */
   selectedIndex?: number | null
+  /** Called with the selected pair's index and its bases. */
   onSelectionChange?: (index: number, pair: BasePair) => void
   /** Spins the helix slowly about its axis until the user pauses it or moves the camera. Off when the user prefers reduced motion. Defaults to true. */
   autoRotate?: boolean
@@ -66,8 +67,11 @@ export type DnaHelixProps = {
   strands?: boolean
   /** Shows the rotation, zoom and reset buttons. Defaults to true. */
   controls?: boolean
+  /** The accessible name of the viewer. */
   label?: string
+  /** Classes for the root element. */
   className?: string
+  /** Rotates, zooms and resets the camera from your own controls. */
   ref?: React.Ref<DnaHelixHandle>
 }
 

@@ -1450,3 +1450,34 @@ test("charts show health data on shadcn's chart, with their code", async ({
   ).toBeVisible()
   expect(errors).toEqual([])
 })
+
+test("component pages end with examples and an API reference", async ({
+  page,
+}) => {
+  test.setTimeout(120_000)
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  for (const [name, component] of [
+    ["anatomy-tree", "AnatomyTree"],
+    ["body-map", "BodyMap"],
+    ["dermatome-map", "DermatomeMap"],
+    ["ecg-trace", "EcgTrace"],
+    ["growth-chart", "GrowthChart"],
+    ["lab-results", "LabResultsTable"],
+    ["medication-schedule", "MedicationSchedule"],
+    ["vital-signs", "VitalSigns"],
+  ] as const) {
+    await page.goto(`/docs/components/${name}`)
+    await expect(
+      page.getByRole("heading", { name: "Examples", level: 2 })
+    ).toBeVisible()
+    // Each example has a linkable heading and a live preview.
+    expect(
+      await page.getByRole("heading", { level: 3 }).count()
+    ).toBeGreaterThanOrEqual(2)
+    const props = page.getByRole("table", { name: `${component} props` })
+    await expect(props).toBeVisible()
+    expect(await props.getByRole("row").count()).toBeGreaterThan(2)
+  }
+  expect(errors).toEqual([])
+})

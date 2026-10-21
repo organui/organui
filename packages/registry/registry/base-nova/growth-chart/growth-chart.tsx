@@ -47,15 +47,21 @@ export type GrowthMeasurement = {
   value: number
 }
 export type GrowthChartProps = {
+  /** The LMS reference tables you supply, such as WHO's. */
   standards: GrowthStandards
+  /** weight, length (length or height) or head circumference. */
   measure: GrowthMeasure
+  /** female or male; the standards differ by sex. */
   sex: GrowthSex
+  /** The child's measurements, by age in months. */
   measurements?: readonly GrowthMeasurement[]
   /** Percentile curves to draw, between 0 and 100. Defaults to WHO's set. */
   percentiles?: readonly number[]
   /** Age range shown, in months. Defaults to 0 to 24. */
   ageRange?: readonly [number, number]
+  /** The accessible name of the chart. */
   label?: string
+  /** Classes for the root element. */
   className?: string
 }
 

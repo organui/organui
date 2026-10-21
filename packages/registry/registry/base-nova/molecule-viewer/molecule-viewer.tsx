@@ -106,14 +106,21 @@ export type MoleculeViewerProps = {
   data?: string
   /** Detected from the text when omitted. */
   format?: "pdb" | "mmcif"
+  /** Cartoon, sticks, spheres and so on, when controlled. */
   representation?: MoleculeRepresentation
+  /** The representation shown first, when uncontrolled. */
   defaultRepresentation?: MoleculeRepresentation
+  /** Called when a reader picks another representation. */
   onRepresentationChange?: (representation: MoleculeRepresentation) => void
+  /** How atoms and residues are coloured, when controlled. */
   colorScheme?: MoleculeColorScheme
+  /** The colour scheme shown first, when uncontrolled. */
   defaultColorScheme?: MoleculeColorScheme
+  /** Called when a reader picks another colour scheme. */
   onColorSchemeChange?: (scheme: MoleculeColorScheme) => void
   /** Residue ID, such as `A:16`. */
   selectedId?: string | null
+  /** Called with the selected residue's id and details, or null. */
   onSelectionChange?: (
     id: string | null,
     residue: MoleculeResidue | null
@@ -128,8 +135,11 @@ export type MoleculeViewerProps = {
   controls?: boolean
   /** Links the entry on RCSB PDB when the file names its ID. Defaults to true. */
   attribution?: boolean
+  /** The accessible name of the viewer. */
   label?: string
+  /** Classes for the root element. */
   className?: string
+  /** Zooms, rotates and resets the camera from your own controls. */
   ref?: React.Ref<MoleculeViewerHandle>
 }
 

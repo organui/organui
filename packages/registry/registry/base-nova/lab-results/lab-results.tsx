@@ -50,6 +50,7 @@ export type LabResult = {
 }
 
 export type LabResultsTableProps = {
+  /** The results, each with its value, unit, range and history. */
   results: readonly LabResult[]
   /** Names the table for assistive technology and shows below it. */
   caption?: React.ReactNode
@@ -57,6 +58,7 @@ export type LabResultsTableProps = {
   formatDate?: (date: string) => string
   /** Shows the trend column. Defaults to true. */
   showTrend?: boolean
+  /** Classes for the root element. */
   className?: string
 }
 
