@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://organui.com/docs
+    about: Installation, theming and every component's API.
+  - name: Report a vulnerability
+    url: https://github.com/organui/organui/security/advisories/new
+    about: Report security problems privately, not as an issue.

@@ -1,0 +1,48 @@
+name: Bug report
+description: Something in a component, block or the docs doesn't work.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please search open and closed issues first. For a security problem, follow [SECURITY.md](https://github.com/organui/organui/blob/master/SECURITY.md) instead.
+  - type: input
+    id: item
+    attributes:
+      label: Affected items
+      description: Registry names, such as heart, organ-viewer or explorer-01, or the docs page.
+      placeholder: organ-viewer
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened
+      description: What you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce
+      description: Steps, or a link to a repository or sandbox that shows it.
+      placeholder: |
+        1. bunx shadcn@latest add @organui/heart
+        2. Render <Heart /> in a Next.js page
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Framework and version, shadcn style (from components.json), browser and OS.
+      placeholder: Next.js 16.4, base-nova, Chrome 154 on macOS
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Browser console or CLI output, as text.
+      render: shell

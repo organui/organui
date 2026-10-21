@@ -1,0 +1,25 @@
+name: Component request
+description: Propose a new component, block or change to an existing one.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        As CONTRIBUTING.md asks, agree on the API here before starting a large change.
+  - type: textarea
+    id: need
+    attributes:
+      label: What it's for
+      description: The interface you're building and what's missing for it.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: Props, behaviour and how it composes with existing items.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Data and models
+      description: Any model, dataset or standard it would use, and its licence.

@@ -1,0 +1,43 @@
+name: Registry monitor
+# Checks that organui.com keeps serving what installs depend on: the
+# catalog, items, a model with CORS, and the docs for assistants. A failed
+# run notifies through GitHub's usual workflow emails.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: registry-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    name: Check organui.com
+    # Forks don't monitor production.
+    if: github.repository == 'organui/organui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SITE: https://organui.com
+    steps:
+      - name: Catalog
+        run: |
+          curl -fsS --retry 3 "$SITE/r/registry.json" -o registry.json
+          jq -e '.items | length > 0' registry.json
+      - name: Items install with their files
+        run: |
+          for name in heart organ-viewer ecg-trace explorer-01; do
+            curl -fsS --retry 3 "$SITE/r/$name.json" \
+              | jq -e --arg name "$name" '.name == $name and (.files | all(.content | length > 0))'
+          done
+      - name: Models load cross-origin
+        run: |
+          model=$(curl -fsS --retry 3 "$SITE/r/appendix.json" | jq -r '.files[0].content' | grep -o "$SITE/models/[a-z-]*\.glb" | head -1)
+          test -n "$model"
+          curl -fsSI --retry 3 -H "Origin: https://example.com" "$model" \
+            | grep -i '^access-control-allow-origin: \*'
+      - name: Docs and llms.txt
+        run: |
+          curl -fsS --retry 3 "$SITE/docs" -o /dev/null
+          curl -fsS --retry 3 "$SITE/llms.txt" | grep -q "/docs/components/heart.md"

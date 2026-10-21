@@ -18,8 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # History for --affected, which compares a pull request with its base.
+        # Neither job pushes, so the token isn't kept in the checkout.
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
@@ -48,6 +50,8 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
@@ -68,6 +72,12 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun scripts/vercel-build.ts
       - run: bun run test:cache
+      # The browser download, keyed on the lockfile that pins Playwright.
+      # System packages still install each run.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('bun.lock') }}
       - run: bunx playwright install --with-deps chromium
         working-directory: packages/registry-e2e
       # Turbo generates the consumers and reuses the cached website build.
