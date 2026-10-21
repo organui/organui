@@ -16,12 +16,14 @@ test("documentation interaction, styling and registry serving", async ({
     if (message.type() === "error") errors.push(message.text())
   })
   await page.goto("/docs/components/anatomy-tree")
+  // The main demo; the examples below it have their own.
+  const demo = page.locator('[data-example="anatomy-tree-demo"]')
   await expect(
     page.getByRole("heading", { name: "Anatomy tree", exact: true })
   ).toBeVisible()
-  const heart = page.getByRole("treeitem", { name: /^Heart, / })
+  const heart = demo.getByRole("treeitem", { name: /^Heart, / })
   await expect(heart).toHaveCSS("display", "flex")
-  await page.getByRole("searchbox").focus()
+  await demo.getByRole("searchbox").focus()
   await page.keyboard.press("Tab")
   await expect(heart).toBeFocused()
   expect(
@@ -31,11 +33,11 @@ test("documentation interaction, styling and registry serving", async ({
   ).toBeGreaterThan(0)
   await page.keyboard.press("Space")
   await expect(heart).toHaveAttribute("aria-checked", "false")
-  await page.getByRole("searchbox").fill("ventricle")
-  await page
+  await demo.getByRole("searchbox").fill("ventricle")
+  await demo
     .getByRole("button", { name: "Left ventricle", exact: true })
     .click()
-  await expect(page.getByRole("status")).toHaveText("Selected: lv")
+  await expect(demo.getByRole("status")).toHaveText("Selected: lv")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -93,13 +95,15 @@ test("accessibility scan covers expanded, mixed and filtered states", async ({
   page,
 }, info) => {
   await page.goto("/docs/components/anatomy-tree")
+  // The main demo; the examples below it have their own.
+  const demo = page.locator('[data-example="anatomy-tree-demo"]')
   for (const state of ["expanded", "mixed", "filtered"]) {
     if (state === "mixed")
-      await page
+      await demo
         .getByRole("button", { name: "Visible: hide Left atrium", exact: true })
         .click()
     if (state === "filtered")
-      await page.getByRole("searchbox").fill("ventricle")
+      await demo.getByRole("searchbox").fill("ventricle")
     const result = await new AxeBuilder({ page }).analyze()
     await info.attach(`axe-${state}`, {
       body: JSON.stringify(result, null, 2),
@@ -1014,16 +1018,17 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
     await page.goto(`/docs/components/${name}`)
     await expect(page.locator("html")).toHaveClass(/dark/)
     if (name === "anatomy-tree") {
-      await page.getByRole("searchbox").fill("no such structure")
-      await expect(page.getByRole("status").first()).toContainText(
+      const demo = page.locator('[data-example="anatomy-tree-demo"]')
+      await demo.getByRole("searchbox").fill("no such structure")
+      await expect(demo.getByRole("status").first()).toContainText(
         "No matching anatomy."
       )
-      await page.getByRole("searchbox").fill("")
+      await demo.getByRole("searchbox").fill("")
       // Filtering is deferred. Wait for the tree's tab stop to return before
       // pressing Tab, otherwise a slower render legitimately skips the tree.
-      await expect(page.getByRole("treeitem")).toHaveCount(7)
-      await page.getByRole("searchbox").press("Tab")
-      const heart = page.getByRole("treeitem", { name: /^Heart, / })
+      await expect(demo.getByRole("treeitem")).toHaveCount(7)
+      await demo.getByRole("searchbox").press("Tab")
+      const heart = demo.getByRole("treeitem", { name: /^Heart, / })
       await expect(heart).toBeFocused()
       await heart.press("Enter")
       await expect(heart).toHaveAttribute("aria-selected", "true")
@@ -1111,6 +1116,8 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
     if (message.type() === "error") errors.push(message.text())
   })
   await page.goto("/docs/components/image-viewer")
+  // The main demo; the examples below it have their own.
+  const demo = page.locator('[data-example="image-viewer-demo"]')
   const state = page.getByRole("status").filter({ hasText: "Slice" })
   await expect(state).toHaveText("Slice 16 of 32 · Window 80 / level 40")
   const stage = page.getByRole("region", { name: "Head phantom" })
@@ -1121,11 +1128,11 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
   await page.keyboard.press("ArrowDown")
   await page.keyboard.press("End")
   await expect(state).toContainText("Slice 32 of 32")
-  const slider = page.getByRole("slider", { name: "Slice" })
+  const slider = demo.getByRole("slider", { name: "Slice" })
   await slider.focus()
   await page.keyboard.press("Home")
   await expect(state).toContainText("Slice 1 of 32")
-  await page.getByRole("combobox", { name: "Window preset" }).click()
+  await demo.getByRole("combobox", { name: "Window preset" }).click()
   await page.getByRole("option", { name: "Bone" }).click()
   await expect(state).toContainText("Window 1800 / level 400")
   // Dragging right widens the window and down raises the level.
@@ -1141,7 +1148,7 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
   )
   await page.mouse.up()
   await expect(
-    page.getByRole("combobox", { name: "Window preset" })
+    demo.getByRole("combobox", { name: "Window preset" })
   ).toContainText("Custom")
   const [width, level] = (await state.textContent())!
     .match(/Window (\d+) \/ level (\d+)/)!
