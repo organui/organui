@@ -246,4 +246,60 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "ai-elements-demo": {
+    title: "Review an AI-drafted note",
+    file: "ai-elements-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-elements-demo")
+      return <Example />
+    },
+  },
+  "ai-disclaimer-demo": {
+    title: "AI disclaimer",
+    file: "ai-disclaimer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-disclaimer-demo")
+      return <Example />
+    },
+  },
+  "ai-note-demo": {
+    title: "AI note",
+    file: "ai-note-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-note-demo")
+      return <Example />
+    },
+  },
+  "ai-sources-demo": {
+    title: "AI sources",
+    file: "ai-sources-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-sources-demo")
+      return <Example />
+    },
+  },
+  "ai-reasoning-demo": {
+    title: "AI reasoning",
+    file: "ai-reasoning-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-reasoning-demo")
+      return <Example />
+    },
+  },
+  "differential-list-demo": {
+    title: "Differential list",
+    file: "differential-list-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./differential-list-demo")
+      return <Example />
+    },
+  },
+  "clinician-review-demo": {
+    title: "Clinician review",
+    file: "clinician-review-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./clinician-review-demo")
+      return <Example />
+    },
+  },
 }

@@ -8,6 +8,8 @@ import {
   registryItems,
   utilitiesIndex,
   utilityItems,
+  aiIndex,
+  aiItems,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -38,6 +40,11 @@ export function GET() {
         .filter((item) => item.group === id)
         .map((item) => entry(item.title, item.href, item.description)),
     ]),
+    [
+      `## ${aiIndex.title}`,
+      entry(aiIndex.title, aiIndex.href, aiIndex.description),
+      ...aiItems.map((item) => entry(item.title, item.href, item.description)),
+    ],
     [
       `## ${utilitiesIndex.title}`,
       entry(

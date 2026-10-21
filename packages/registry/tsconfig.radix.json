@@ -1,10 +1,26 @@
 {
-  // The Radix copies of the items that differ by library, checked against
-  // shadcn's radix-nova components (vendor/radix-nova). Everything else
-  // they import is the shared base-nova source.
+  // Every item as a Radix project installs it, checked against shadcn's
+  // radix-nova components (vendor/radix-nova): the shared base-nova files,
+  // and the Radix copies in place of the Base UI files that have one.
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "paths": {
+      "@/components/ui/ai-disclaimer": [
+        "./registry/base-nova/ai-disclaimer/ai-disclaimer.tsx"
+      ],
+      "@/components/ui/ai-sources": [
+        "./registry/base-nova/ai-sources/ai-sources.tsx"
+      ],
+      "@/components/ui/ai-reasoning": [
+        "./registry/base-nova/ai-reasoning/ai-reasoning.tsx"
+      ],
+      "@/components/ui/differential-list": [
+        "./registry/base-nova/differential-list/differential-list.tsx"
+      ],
+      "@/components/ui/clinician-review": [
+        "./registry/base-nova/clinician-review/clinician-review.tsx"
+      ],
+      "@/components/ui/ai-note": ["./registry/base-nova/ai-note/ai-note.tsx"],
       "@/lib/age": ["./registry/base-nova/age/age.ts"],
       "@/lib/z-scores": ["./registry/base-nova/z-scores/z-scores.ts"],
       "@/lib/reference-ranges": [
@@ -97,6 +113,14 @@
       "@/components/*": ["./registry/base-nova/organ-viewer/*"]
     }
   },
-  "include": ["registry/radix-nova", "vendor/radix-nova"],
-  "exclude": []
+  "include": ["registry", "vendor/radix-nova"],
+  "exclude": [
+    // The Base UI files that have a Radix copy in registry/radix-nova.
+    "registry/base-nova/anatomy-tree/anatomy-tree.tsx",
+    "registry/base-nova/organ-viewer/organ-viewer.tsx",
+    "registry/base-nova/molecule-viewer/molecule-viewer.tsx",
+    "registry/base-nova/dna-helix/dna-helix.tsx",
+    "registry/base-nova/image-viewer/image-viewer.tsx",
+    "registry/base-nova/blocks/*/components"
+  ]
 }

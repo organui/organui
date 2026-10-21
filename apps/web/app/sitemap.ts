@@ -7,6 +7,8 @@ import {
   registryItems,
   utilitiesIndex,
   utilityItems,
+  aiIndex,
+  aiItems,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -21,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     organsPage.href,
     "/blocks",
     ...registryItems.map((item) => item.href),
+    aiIndex.href,
+    ...aiItems.map((item) => item.href),
     utilitiesIndex.href,
     ...utilityItems.map((item) => item.href),
   ].map((path) => ({

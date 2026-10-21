@@ -16,7 +16,9 @@ import {
   PlayIcon,
   PlusIcon,
   RotateCcwIcon,
+  SparklesIcon,
   TriangleAlertIcon,
+  Undo2Icon,
   XIcon,
 } from "lucide-react"
 
@@ -42,7 +44,9 @@ const icons = {
   PlayIcon,
   PlusIcon,
   RotateCcwIcon,
+  SparklesIcon,
   TriangleAlertIcon,
+  Undo2Icon,
   XIcon,
 }
 

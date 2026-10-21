@@ -44,7 +44,9 @@ function groupOf(categories: readonly string[] = []) {
 export const registryItems = catalog.items
   .filter(
     (item) =>
-      item.type !== "registry:block" && !item.categories?.includes("utility")
+      item.type !== "registry:block" &&
+      !item.categories?.includes("utility") &&
+      !item.categories?.includes("ai")
   )
   .map((item) => {
     const categories: readonly string[] =
@@ -95,6 +97,29 @@ export const utilityItems = catalog.items
   )
 
 export type UtilityItem = (typeof utilityItems)[number]
+
+// Patterns for AI in clinical interfaces, under /docs/ai-elements, in the
+// order a reviewer meets them.
+const aiOrder = [
+  "ai-disclaimer",
+  "ai-note",
+  "ai-sources",
+  "ai-reasoning",
+  "differential-list",
+  "clinician-review",
+]
+
+export const aiItems = catalog.items
+  .filter((item) => item.categories?.includes("ai"))
+  .map((item) => ({
+    name: item.name,
+    title: item.title ?? item.name,
+    description: item.description,
+    href: `/docs/ai-elements/${item.name}`,
+    json: `/r/${item.name}.json`,
+    install: install(item),
+  }))
+  .sort((a, b) => aiOrder.indexOf(a.name) - aiOrder.indexOf(b.name))
 
 // Where the CLI writes each file, relative to a Next.js app with the default
 // aliases. Pages only install in frameworks with file routing.
@@ -209,6 +234,13 @@ export const componentsIndex: NavLink & { description: string } = {
   description: "Every OrganUI component, grouped by category.",
 }
 
+export const aiIndex: NavLink & { description: string } = {
+  title: "AI Elements",
+  href: "/docs/ai-elements",
+  description:
+    "Patterns for AI in clinical interfaces: disclosure, sources, reasoning and sign-off.",
+}
+
 export const utilitiesIndex: NavLink & { description: string } = {
   title: "Utilities",
   href: "/docs/utilities",
@@ -231,12 +263,19 @@ export const mainNav: NavLink[] = [
 // The sidebar lists the guides and every component, the organs after the
 // viewer and the tree they're built on.
 export const docsNav: DocsNavSection[] = [
-  { title: "Sections", items: [...guides, componentsIndex, utilitiesIndex] },
+  {
+    title: "Sections",
+    items: [...guides, componentsIndex, aiIndex, utilitiesIndex],
+  },
   { title: "Installation", items: installationGuides },
   ...componentGroups.flatMap(({ id, title }) => [
-    // Utilities come before the long list of organs.
+    // AI Elements and utilities come before the long list of organs.
     ...(id === "organs"
       ? [
+          {
+            title: aiIndex.title,
+            items: aiItems.map(({ title, href }) => ({ title, href })),
+          },
           {
             title: utilitiesIndex.title,
             items: utilityItems.map(({ title, href }) => ({ title, href })),
@@ -266,6 +305,8 @@ export const pageOrder: NavLink[] = [
     ...(name === organs[0]?.name ? [organsPage] : []),
     { title, href },
   ]),
+  aiIndex,
+  ...aiItems.map(({ title, href }) => ({ title, href })),
   utilitiesIndex,
   ...utilityItems.map(({ title, href }) => ({ title, href })),
 ]

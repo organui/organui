@@ -221,6 +221,16 @@ const helpers = [
   "body-measurements",
 ]
 const utilities = [...helpers, "heartbeat", "ecg-grid", "severity-colors"]
+// Built from shadcn components only, so one copy serves Base UI and Radix;
+// the Radix consumer's build checks that.
+const aiElements = [
+  "ai-disclaimer",
+  "ai-sources",
+  "ai-reasoning",
+  "differential-list",
+  "clinician-review",
+  "ai-note",
+]
 const blocks = ["explorer-01", "explorer-02", "explorer-03"]
 const pages = ["explorer", "workspace", "organs"]
 // Deliberately use distinct theme values to detect accidental theme overwrites.
@@ -702,6 +712,32 @@ try {
       if (!styles.includes(rule)) throw new Error(`Missing ${rule} in CSS`)
     if (!styles.includes("--background:#f4f7fb"))
       throw new Error("Consumer theme modified by a utility")
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        ...aiElements.map((name) =>
+          byName
+            ? `@organui/${name}`
+            : `http://127.0.0.1:${server.port}/${name}.json`
+        ),
+        ...(framework === "vite" ? ["--overwrite"] : []),
+        "--yes",
+      ],
+      dir
+    )
+    for (const name of aiElements) {
+      const installed = await readFile(
+        resolve(dir, `${uiDir}/${name}.tsx`),
+        "utf8"
+      )
+      if (
+        installed.includes("@workspace/") ||
+        (customAliases && installed.includes('from "@/'))
+      )
+        throw new Error(`Invalid installed ${name}`)
+    }
     // Helpers install in the lib alias, ~/support in the Vite consumer.
     await put(
       dir,

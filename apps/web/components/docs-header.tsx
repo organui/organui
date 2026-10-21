@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 import { DocsCopyPage } from "@/components/docs-copy-page"
 import { DocsPagerIcons } from "@/components/docs-pager"
 import { LibrarySwitcher } from "@/components/library-switcher"
-import { registryItems } from "@/lib/registry"
+import { aiItems, registryItems } from "@/lib/registry"
 
 // The top of every docs page: its title and a summary, with Copy Page and
 // the previous and next pages beside the title. A component's page also
@@ -28,7 +28,9 @@ export function DocsHeader({
         </div>
       </div>
       {children}
-      {registryItems.some((item) => item.href === href) && <LibrarySwitcher />}
+      {[...registryItems, ...aiItems].some((item) => item.href === href) && (
+        <LibrarySwitcher />
+      )}
     </header>
   )
 }

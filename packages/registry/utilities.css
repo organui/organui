@@ -46,10 +46,10 @@
 
 /* Severity colours */
 :root {
-  --severity-normal: oklch(0.527 0.154 150.069);
-  --severity-info: oklch(0.546 0.245 262.881);
-  --severity-warning: oklch(0.555 0.163 48.998);
-  --severity-critical: oklch(0.577 0.245 27.325);
+  --severity-normal: oklch(0.448 0.119 151.328);
+  --severity-info: oklch(0.488 0.243 264.376);
+  --severity-warning: oklch(0.473 0.137 46.201);
+  --severity-critical: oklch(0.505 0.213 27.518);
 }
 
 .dark {

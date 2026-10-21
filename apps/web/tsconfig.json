@@ -3,6 +3,24 @@
   "compilerOptions": {
     // Registry blocks import the files they ship where the CLI installs them.
     "paths": {
+      "@/components/ui/ai-disclaimer": [
+        "../../packages/registry/registry/base-nova/ai-disclaimer/ai-disclaimer.tsx"
+      ],
+      "@/components/ui/ai-sources": [
+        "../../packages/registry/registry/base-nova/ai-sources/ai-sources.tsx"
+      ],
+      "@/components/ui/ai-reasoning": [
+        "../../packages/registry/registry/base-nova/ai-reasoning/ai-reasoning.tsx"
+      ],
+      "@/components/ui/differential-list": [
+        "../../packages/registry/registry/base-nova/differential-list/differential-list.tsx"
+      ],
+      "@/components/ui/clinician-review": [
+        "../../packages/registry/registry/base-nova/clinician-review/clinician-review.tsx"
+      ],
+      "@/components/ui/ai-note": [
+        "../../packages/registry/registry/base-nova/ai-note/ai-note.tsx"
+      ],
       "@/lib/age": ["../../packages/registry/registry/base-nova/age/age.ts"],
       "@/lib/z-scores": [
         "../../packages/registry/registry/base-nova/z-scores/z-scores.ts"

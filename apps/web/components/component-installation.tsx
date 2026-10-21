@@ -15,12 +15,19 @@ export async function ComponentInstallation({
   name,
   command,
   css,
+  oneLibrary = false,
 }: {
   name: string
   command: string
   // CSS the item adds to the project's CSS file, for a manual install.
   css?: string
+  // Items with no shadcn or OrganUI dependencies install the same in both.
+  oneLibrary?: boolean
 }) {
+  if (oneLibrary)
+    return (
+      <Installation name={name} command={command} css={css} library="base" />
+    )
   return (
     <LibraryView
       base={

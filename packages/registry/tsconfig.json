@@ -9,6 +9,22 @@
     // alias points at the base-nova copies the docs site installs. Blocks
     // import the other files they ship where the CLI installs them.
     "paths": {
+      "@/components/ui/ai-disclaimer": [
+        "./registry/base-nova/ai-disclaimer/ai-disclaimer.tsx"
+      ],
+      "@/components/ui/ai-sources": [
+        "./registry/base-nova/ai-sources/ai-sources.tsx"
+      ],
+      "@/components/ui/ai-reasoning": [
+        "./registry/base-nova/ai-reasoning/ai-reasoning.tsx"
+      ],
+      "@/components/ui/differential-list": [
+        "./registry/base-nova/differential-list/differential-list.tsx"
+      ],
+      "@/components/ui/clinician-review": [
+        "./registry/base-nova/clinician-review/clinician-review.tsx"
+      ],
+      "@/components/ui/ai-note": ["./registry/base-nova/ai-note/ai-note.tsx"],
       "@/lib/age": ["./registry/base-nova/age/age.ts"],
       "@/lib/z-scores": ["./registry/base-nova/z-scores/z-scores.ts"],
       "@/lib/reference-ranges": [

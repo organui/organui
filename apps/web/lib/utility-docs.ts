@@ -1,14 +1,8 @@
+import type { ItemDoc } from "@/components/item-docs"
+
 // The content of each utility's page: how to use it, what it exports or the
 // classes it adds, and what to know before relying on it.
-export type UtilityDoc = {
-  usage: string
-  usageLang: "tsx" | "css"
-  // Functions for a helper, classes for CSS.
-  reference: { name: string; description: string }[]
-  notes: string[]
-}
-
-export const utilityDocs: Record<string, UtilityDoc> = {
+export const utilityDocs: Record<string, ItemDoc> = {
   age: {
     usageLang: "tsx",
     usage: `import { ageInMonths, correctedAgeInMonths, formatAge } from "@/lib/age"
@@ -278,7 +272,7 @@ bodySurfaceArea(20, 110, "haycock") // 0.78 m²`,
       },
     ],
     notes: [
-      "Each colour reaches 4.5:1 against the default light and dark backgrounds for text. Change the variables in :root and .dark to match your theme.",
+      "Each colour reaches 4.5:1 as text on the default light and dark backgrounds, and on its own 10% tint. Change the variables in :root and .dark to match your theme.",
       "Colour alone doesn't carry meaning for everyone: pair it with text or an icon, as the lab results table does.",
     ],
   },

@@ -125,7 +125,9 @@ test("every item links its documentation after install", () => {
         ? `${item.title}: https://organui.com/blocks#${item.name}`
         : item.categories?.includes("utility")
           ? `${item.title} docs: https://organui.com/docs/utilities/${item.name}`
-          : `${item.title} docs: https://organui.com/docs/components/${item.name}`
+          : item.categories?.includes("ai")
+            ? `${item.title} docs: https://organui.com/docs/ai-elements/${item.name}`
+            : `${item.title} docs: https://organui.com/docs/components/${item.name}`
     expect(item.docs).toStartWith(page)
   }
 })
@@ -141,6 +143,7 @@ test("every component belongs to one docs group", () => {
     "anatomy",
     "organ",
     "utility",
+    "ai",
   ]
   for (const item of registry.items) {
     if (item.type === "registry:block") continue

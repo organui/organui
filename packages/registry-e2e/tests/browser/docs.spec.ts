@@ -221,6 +221,7 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs/installation/vite", "Vite"],
     ["/docs/components", "Components"],
     ["/docs/utilities", "Utilities"],
+    ["/docs/ai-elements", "AI Elements"],
   ] as const) {
     await page.goto(path)
     await expect(
@@ -251,9 +252,13 @@ test("component index lists every component inside the docs layout", async ({
   await expect(
     page.getByRole("heading", { name: "Components", level: 1 })
   ).toBeVisible()
-  // Blocks are listed on /blocks.
+  // Blocks are listed on /blocks, AI Elements and utilities on their own
+  // pages.
   const components = catalog.items.filter(
-    ({ type }) => type !== "registry:block"
+    ({ type, categories }) =>
+      type !== "registry:block" &&
+      !categories?.includes("utility") &&
+      !categories?.includes("ai")
   )
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
@@ -845,7 +850,10 @@ test("lab results flag values in words and fit a phone", async ({
   const item = registryItemSchema.parse(
     await (await request.get("/r/lab-results.json")).json()
   )
-  expect(item.registryDependencies).toEqual(["table"])
+  expect(item.registryDependencies).toEqual([
+    "table",
+    "@organui/reference-ranges",
+  ])
   expect(item.files?.[0]?.content).toBe(
     await readFile(
       new URL(import.meta.resolve("@workspace/registry/lab-results")),
@@ -1250,5 +1258,59 @@ test("utility pages show a working example and pass an accessibility scan", asyn
   await units.getByLabel(/^Value/).fill("18")
   // 18 mg/dL of glucose is 1 mmol/L.
   await expect(units.locator("p[aria-live]")).toHaveText(/^1\s+mmol\/L$/)
+  expect(errors).toEqual([])
+})
+
+test("AI Elements cite sources, mark unsupported claims and record review", async ({
+  page,
+  request,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  const elements = registrySchema
+    .parse(await (await request.get("/r/registry.json")).json())
+    .items.filter(({ categories }) => categories?.includes("ai"))
+  expect(elements.length).toBeGreaterThan(0)
+  for (const item of elements) {
+    await page.goto(`/docs/ai-elements/${item.name}`)
+    await expect(
+      page.getByRole("heading", { name: item.title, level: 1 })
+    ).toBeVisible()
+    await expect(
+      page.getByRole("group", { name: `${item.title} example` })
+    ).toBeVisible()
+    const axe = await new AxeBuilder({ page }).analyze()
+    expect(axe.violations).toEqual([])
+  }
+
+  await page.goto("/docs/ai-elements")
+  const example = page.getByRole("group", {
+    name: "Review an AI-drafted note example",
+  })
+  const note = example.getByRole("article", { name: "AI-drafted note" })
+  // A claim without a source says so to screen readers.
+  await expect(note.getByText("(no source)").first()).toBeAttached()
+  await note.getByRole("button", { name: /^Source 3:/ }).click()
+  await expect(page.getByRole("dialog")).toContainText(
+    "99th percentile 26 ng/L"
+  )
+  await page.keyboard.press("Escape")
+
+  await expect(example.getByRole("note")).toContainText("AI-generated draft")
+  // Rejecting needs a reason; approving records the reviewer.
+  await example.getByRole("button", { name: "Reject" }).click()
+  const reason = example.getByRole("textbox", { name: "Reason for rejecting" })
+  await expect(reason).toBeFocused()
+  await expect(
+    example.getByRole("button", { name: "Reject", exact: true })
+  ).toBeDisabled()
+  await example.getByRole("button", { name: "Cancel" }).click()
+  await example.getByRole("button", { name: "Approve" }).click()
+  await expect(example).toContainText("Approved by Dr A. Rivera")
+  await expect(example.getByRole("note")).toContainText(
+    "AI-generated, reviewed"
+  )
+  await example.getByRole("button", { name: "Undo" }).click()
+  await expect(example).toContainText("Awaiting review")
   expect(errors).toEqual([])
 })

@@ -907,6 +907,102 @@
       "docs": "Vestibular system docs: https://organui.com/docs/components/vestibular. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
+      "name": "ai-disclaimer",
+      "type": "registry:ui",
+      "title": "AI disclaimer",
+      "description": "Marks content as AI-generated: the model, when it ran, and whether a clinician has reviewed it.",
+      "categories": ["ai"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["alert"],
+      "files": [
+        {
+          "path": "registry/base-nova/ai-disclaimer/ai-disclaimer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "AI disclaimer docs: https://organui.com/docs/ai-elements/ai-disclaimer"
+    },
+    {
+      "name": "ai-sources",
+      "type": "registry:ui",
+      "title": "AI sources",
+      "description": "Numbered citations that open the source a claim relies on, and the list of sources they number.",
+      "categories": ["ai"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["popover"],
+      "files": [
+        {
+          "path": "registry/base-nova/ai-sources/ai-sources.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "AI sources docs: https://organui.com/docs/ai-elements/ai-sources"
+    },
+    {
+      "name": "ai-reasoning",
+      "type": "registry:ui",
+      "title": "AI reasoning",
+      "description": "The steps a model reports it took, in a disclosure a reviewer opens beside the suggestion.",
+      "categories": ["ai"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["collapsible"],
+      "files": [
+        {
+          "path": "registry/base-nova/ai-reasoning/ai-reasoning.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "AI reasoning docs: https://organui.com/docs/ai-elements/ai-reasoning"
+    },
+    {
+      "name": "differential-list",
+      "type": "registry:ui",
+      "title": "Differential list",
+      "description": "Suggested diagnoses ranked by model confidence, each with the findings for and against it.",
+      "categories": ["ai"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["collapsible", "progress"],
+      "files": [
+        {
+          "path": "registry/base-nova/differential-list/differential-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Differential list docs: https://organui.com/docs/ai-elements/differential-list"
+    },
+    {
+      "name": "clinician-review",
+      "type": "registry:ui",
+      "title": "Clinician review",
+      "description": "A clinician's sign-off on AI-generated content: approve, or request changes or reject with a reason, recording who and when.",
+      "categories": ["ai"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["badge", "button", "card", "field", "textarea"],
+      "files": [
+        {
+          "path": "registry/base-nova/clinician-review/clinician-review.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Clinician review docs: https://organui.com/docs/ai-elements/clinician-review"
+    },
+    {
+      "name": "ai-note",
+      "type": "registry:ui",
+      "title": "AI note",
+      "description": "An AI-drafted clinical note whose claims cite their sources, with unsupported claims marked for review.",
+      "categories": ["ai"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["@organui/ai-sources"],
+      "files": [
+        {
+          "path": "registry/base-nova/ai-note/ai-note.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "AI note docs: https://organui.com/docs/ai-elements/ai-note"
+    },
+    {
       "name": "age",
       "type": "registry:lib",
       "title": "Age",
@@ -1057,10 +1153,10 @@
           "color-severity-critical": "var(--severity-critical)"
         },
         "light": {
-          "severity-normal": "oklch(0.527 0.154 150.069)",
-          "severity-info": "oklch(0.546 0.245 262.881)",
-          "severity-warning": "oklch(0.555 0.163 48.998)",
-          "severity-critical": "oklch(0.577 0.245 27.325)"
+          "severity-normal": "oklch(0.448 0.119 151.328)",
+          "severity-info": "oklch(0.488 0.243 264.376)",
+          "severity-warning": "oklch(0.473 0.137 46.201)",
+          "severity-critical": "oklch(0.505 0.213 27.518)"
         },
         "dark": {
           "severity-normal": "oklch(0.792 0.209 151.711)",
