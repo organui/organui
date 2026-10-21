@@ -29,8 +29,8 @@
 <p align="center">
   <a href="https://organui.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/home/showcase-dark.webp" />
-      <img src="apps/web/public/home/showcase-light.webp" alt="OrganUI components: organs, vital signs, body map, ECG trace, medication schedule, growth chart and lab results" width="860" />
+      <source media="(prefers-color-scheme: dark)" srcset=".github/readme-banner-dark.png" />
+      <img src=".github/readme-banner-light.png" alt="OrganUI: the interfaces healthcare deserves. Open-source components for healthcare and life sciences, installed as source with the shadcn CLI." width="860" />
     </picture>
   </a>
 </p>
