@@ -644,7 +644,7 @@ test("blocks gallery previews and installs every block", async ({
     await expect(section).toHaveAttribute("id", block.name)
     await expect(
       section.getByRole("button", {
-        name: `Copy install command: bunx shadcn@4.22.1 add @organui/${block.name}`,
+        name: `bunx shadcn@4.22.1 add @organui/${block.name}`,
         exact: true,
       })
     ).toBeVisible()

@@ -105,7 +105,7 @@ export function BlockViewer({
             </p>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex max-w-full min-w-0 items-center gap-2">
           <div className="hidden h-8 items-center gap-1 rounded-lg border p-[3px] lg:flex">
             <ToggleGroup
               aria-label="Preview width"
@@ -167,7 +167,7 @@ export function BlockViewer({
             orientation="vertical"
             className="mx-1 hidden lg:block data-vertical:h-4 data-vertical:self-center"
           />
-          <InstallButton command={install} name={name} />
+          <InstallButton command={install} />
         </div>
       </div>
       <div className="group-data-[view=code]/block:hidden">
@@ -256,7 +256,7 @@ export function BlockViewer({
   )
 }
 
-function InstallButton({ command, name }: { command: string; name: string }) {
+function InstallButton({ command }: { command: string }) {
   const [copied, setCopied] = React.useState(false)
   React.useEffect(() => {
     if (!copied) return
@@ -267,8 +267,8 @@ function InstallButton({ command, name }: { command: string; name: string }) {
     <Button
       variant="outline"
       size="sm"
-      className="gap-1.5 font-mono text-xs shadow-none"
-      aria-label={`Copy install command: ${command}`}
+      className="max-w-full min-w-0 gap-1.5 font-mono text-xs shadow-none"
+      title="Copy the install command"
       onClick={() =>
         navigator.clipboard
           .writeText(command)
@@ -277,8 +277,7 @@ function InstallButton({ command, name }: { command: string; name: string }) {
       }
     >
       {copied ? <CheckIcon /> : <TerminalIcon />}
-      <span className="hidden sm:inline">bunx shadcn add @organui/{name}</span>
-      <span className="sm:hidden">Install</span>
+      <span className="truncate">{command}</span>
       <span aria-live="polite" className="sr-only">
         {copied ? "Copied" : ""}
       </span>
