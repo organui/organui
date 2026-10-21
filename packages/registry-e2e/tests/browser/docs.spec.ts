@@ -261,7 +261,7 @@ test("component index lists every component inside the docs layout", async ({
   await expect(
     docs.getByRole("link", { name: "Components", exact: true })
   ).toHaveAttribute("aria-current", "page")
-  // The sidebar lists every component except the organs, which are one link.
+  // The sidebar lists every component; the organs sit in a closed group.
   for (const item of components) {
     const link = docs.getByRole("link", {
       name: item.title ?? item.name,
@@ -274,8 +274,14 @@ test("component index lists every component inside the docs layout", async ({
         `/docs/components/${item.name}`
       )
   }
-  // The header's Organs link opens the gallery, so the sidebar has none.
-  await expect(docs.getByRole("link", { name: /organs/i })).toHaveCount(0)
+  await expect(
+    docs.getByRole("link", { name: "All organs", exact: true })
+  ).toHaveAttribute("href", "/docs/components/organs")
+  const organList = docs.getByRole("button", {
+    name: "All organs list",
+    exact: true,
+  })
+  await expect(organList).toHaveAttribute("aria-expanded", "false")
   if (narrow) {
     // Tapping the current page still closes the menu.
     await docs.getByRole("link", { name: "Components", exact: true }).click()
@@ -295,6 +301,29 @@ test("component index lists every component inside the docs layout", async ({
   }
   await expect(
     docs.getByRole("link", { name: "Anatomy tree" })
+  ).toHaveAttribute("aria-current", "page")
+
+  // Opening the group lists every organ, A to Z.
+  await organList.click()
+  await expect(organList).toHaveAttribute("aria-expanded", "true")
+  const organTitles = organs.map(({ title, name }) => title ?? name)
+  for (const item of organs)
+    await expect(
+      docs.getByRole("link", { name: item.title ?? item.name, exact: true })
+    ).toHaveAttribute("href", `/docs/components/${item.name}`)
+  expect([...organTitles].sort((a, b) => a.localeCompare(b))).toEqual(
+    await docs
+      .getByRole("link")
+      .filter({ hasText: new RegExp(`^(${organTitles.join("|")})$`) })
+      .allTextContents()
+  )
+  // An organ's own page opens the group with the organ current.
+  const [organ] = organs
+  await page.goto(`/docs/components/${organ!.name}`)
+  if (narrow) await menu.click()
+  await expect(organList).toHaveAttribute("aria-expanded", "true")
+  await expect(
+    docs.getByRole("link", { name: organ!.title ?? organ!.name, exact: true })
   ).toHaveAttribute("aria-current", "page")
   expect(errors).toEqual([])
 })
