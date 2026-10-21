@@ -8,7 +8,7 @@ await rm(output, { recursive: true, force: true })
 const radixUi = `radix-ui@^${packageJson.devDependencies["radix-ui"]}`
 // Items that use Base UI's API say so in their docs; the Radix copies don't.
 const baseOnly =
-  " Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
+  " Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/base-ui#radix)."
 async function shadcn(args: string[], cwd: URL) {
   const command = Bun.spawn(["shadcn", ...args], {
     cwd: cwd.pathname,

@@ -11,28 +11,20 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
+import {
+  flagValue,
+  formatReferenceRange,
+  rangeFlagLabels,
+  type RangeFlag,
+  type ReferenceRange,
+} from "@/lib/reference-ranges"
 
-export type LabFlag =
-  | "critical-low"
-  | "low"
-  | "normal"
-  | "high"
-  | "critical-high"
-  | "abnormal"
-  | "unflagged"
-
-export type LabReferenceRange = {
-  /** Lowest normal value, inclusive. */
-  low?: number
-  /** Highest normal value, inclusive. */
-  high?: number
-  /** Values below this are flagged critical low. */
-  criticalLow?: number
-  /** Values above this are flagged critical high. */
-  criticalHigh?: number
-  /** Shown instead of the generated range, such as "Negative". */
-  text?: string
-}
+export { formatReferenceRange }
+export type LabFlag = RangeFlag
+export type LabReferenceRange = ReferenceRange
+/** Flags a numeric value against its reference range. */
+export const labFlag = flagValue
+export const labFlagLabels = rangeFlagLabels
 
 export type LabMeasurement = {
   value: number
@@ -68,33 +60,8 @@ export type LabResultsTableProps = {
   className?: string
 }
 
-/** Flags a numeric value against its reference range. */
-export function labFlag(
-  value: number | string,
-  range: LabReferenceRange = {}
-): LabFlag {
-  if (typeof value !== "number" || Number.isNaN(value)) return "unflagged"
-  const { low, high, criticalLow, criticalHigh } = range
-  if (criticalLow !== undefined && value < criticalLow) return "critical-low"
-  if (criticalHigh !== undefined && value > criticalHigh) return "critical-high"
-  if (low !== undefined && value < low) return "low"
-  if (high !== undefined && value > high) return "high"
-  if (low === undefined && high === undefined) return "unflagged"
-  return "normal"
-}
-
 export function resultFlag(result: LabResult): LabFlag {
   return result.flag ?? labFlag(result.value, result.referenceRange)
-}
-
-export const labFlagLabels: Record<LabFlag, string> = {
-  "critical-low": "Critical low",
-  low: "Low",
-  normal: "Normal",
-  high: "High",
-  "critical-high": "Critical high",
-  abnormal: "Abnormal",
-  unflagged: "Not flagged",
 }
 
 function formatNumber(value: number, decimals?: number) {
@@ -103,21 +70,6 @@ function formatNumber(value: number, decimals?: number) {
 
 function formatValue(value: number | string, decimals?: number) {
   return typeof value === "number" ? formatNumber(value, decimals) : value
-}
-
-/** The range as printed on a report, such as "70–99" or "≤ 200". */
-export function formatReferenceRange(
-  range: LabReferenceRange | undefined,
-  decimals?: number
-): string | null {
-  if (!range) return null
-  if (range.text) return range.text
-  const { low, high } = range
-  if (low !== undefined && high !== undefined)
-    return `${formatNumber(low, decimals)}–${formatNumber(high, decimals)}`
-  if (high !== undefined) return `≤ ${formatNumber(high, decimals)}`
-  if (low !== undefined) return `≥ ${formatNumber(low, decimals)}`
-  return null
 }
 
 const dateFormat = new Intl.DateTimeFormat("en-US", {

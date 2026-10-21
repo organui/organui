@@ -6,6 +6,8 @@ import {
   organsPage,
   registryBlocks,
   registryItems,
+  utilitiesIndex,
+  utilityItems,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -36,6 +38,17 @@ export function GET() {
         .filter((item) => item.group === id)
         .map((item) => entry(item.title, item.href, item.description)),
     ]),
+    [
+      `## ${utilitiesIndex.title}`,
+      entry(
+        utilitiesIndex.title,
+        utilitiesIndex.href,
+        utilitiesIndex.description
+      ),
+      ...utilityItems.map((item) =>
+        entry(item.title, item.href, item.description)
+      ),
+    ],
     [
       "## Blocks",
       ...registryBlocks.map(

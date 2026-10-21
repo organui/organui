@@ -202,6 +202,25 @@ export default function BlockHarness({path}:{path:string}){
  if(path==="/workspace")return <AnatomyWorkspace model={heartModel}/>
  return <main style={{padding:24}}><h1>{path==="/organs"?"Organs":"Heart"}</h1>{path==="/organs"?<OrganSwitcher models={[heartModel,kidneysModel,stomachModel,pancreasModel]}/>:<OrganExplorer model={heartModel}/>}</main>
 }`
+// Uses each helper and CSS utility, so the build type-checks the helpers
+// and compiles the classes.
+const utilitiesHarness = `import { formatAge, ageInMonths } from "@/lib/age"
+import { bodyMassIndex } from "@/lib/body-measurements"
+import { convertAnalyte } from "@/lib/clinical-units"
+import { flagValue } from "@/lib/reference-ranges"
+import { lmsZScore } from "@/lib/z-scores"
+export default function UtilitiesHarness(){
+ const z=lmsZScore(10,[0.2,9.4,0.11])
+ return <main className="bg-ecg-grid ecg-grid-color-sky-500"><p className="animate-heartbeat heartbeat-rate-72 text-severity-critical">{formatAge(ageInMonths(new Date("2025-01-01"),new Date("2026-01-01")))} {bodyMassIndex(70,175).toFixed(1)} {convertAnalyte("glucose",100,"conventional","si").toFixed(1)} {flagValue(6.4,{high:5.1})} {z?.toFixed(2)}</p></main>
+}`
+const helpers = [
+  "age",
+  "z-scores",
+  "reference-ranges",
+  "clinical-units",
+  "body-measurements",
+]
+const utilities = [...helpers, "heartbeat", "ecg-grid", "severity-colors"]
 const blocks = ["explorer-01", "explorer-02", "explorer-03"]
 const pages = ["explorer", "workspace", "organs"]
 // Deliberately use distinct theme values to detect accidental theme overwrites.
@@ -644,6 +663,54 @@ try {
       throw new Error("Invalid installed vital signs")
     if ((await readFile(resolve(dir, "src/globals.css"), "utf8")) !== css)
       throw new Error("Consumer theme modified")
+    // Utilities: helpers install in lib; CSS utilities add to the CSS file
+    // and keep the consumer's theme. The growth chart and lab results
+    // installed the helpers they use above.
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        ...utilities.map((name) =>
+          byName
+            ? `@organui/${name}`
+            : `http://127.0.0.1:${server.port}/${name}.json`
+        ),
+        "--yes",
+      ],
+      dir
+    )
+    const libDir = customAliases ? "src/support" : "src/lib"
+    for (const name of helpers)
+      if (!(await Bun.file(resolve(dir, libDir, `${name}.ts`)).exists()))
+        throw new Error(`The ${name} helper was not installed`)
+    const growth = await readFile(
+      resolve(dir, `${uiDir}/growth-chart.tsx`),
+      "utf8"
+    )
+    if (
+      !growth.includes(customAliases ? "~/support/z-scores" : "@/lib/z-scores")
+    )
+      throw new Error("The growth chart doesn't import the z-scores helper")
+    const styles = await readFile(resolve(dir, "src/globals.css"), "utf8")
+    for (const rule of [
+      "@utility animate-heartbeat",
+      "@utility bg-ecg-grid",
+      "--severity-critical",
+      "--color-severity-critical",
+    ])
+      if (!styles.includes(rule)) throw new Error(`Missing ${rule} in CSS`)
+    if (!styles.includes("--background:#f4f7fb"))
+      throw new Error("Consumer theme modified by a utility")
+    // Helpers install in the lib alias, ~/support in the Vite consumer.
+    await put(
+      dir,
+      "src/utilities-harness.tsx",
+      utilitiesHarness.replaceAll(
+        "@/lib/",
+        customAliases ? "~/support/" : "@/lib/"
+      )
+    )
     await run(["bun", "run", "build"], dir)
   }
   await githubConsumer(resolve(out, "github"), shadcn)

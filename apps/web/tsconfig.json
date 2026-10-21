@@ -3,6 +3,19 @@
   "compilerOptions": {
     // Registry blocks import the files they ship where the CLI installs them.
     "paths": {
+      "@/lib/age": ["../../packages/registry/registry/base-nova/age/age.ts"],
+      "@/lib/z-scores": [
+        "../../packages/registry/registry/base-nova/z-scores/z-scores.ts"
+      ],
+      "@/lib/reference-ranges": [
+        "../../packages/registry/registry/base-nova/reference-ranges/reference-ranges.ts"
+      ],
+      "@/lib/clinical-units": [
+        "../../packages/registry/registry/base-nova/clinical-units/clinical-units.ts"
+      ],
+      "@/lib/body-measurements": [
+        "../../packages/registry/registry/base-nova/body-measurements/body-measurements.ts"
+      ],
       "@/components/ui/anatomy-tree": [
         "../../packages/registry/registry/base-nova/anatomy-tree/anatomy-tree.tsx"
       ],

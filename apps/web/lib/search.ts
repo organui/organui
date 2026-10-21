@@ -6,6 +6,8 @@ import {
   mainNav,
   registryBlocks,
   registryItems,
+  utilitiesIndex,
+  utilityItems,
 } from "@/lib/registry"
 
 export type SearchEntry = {
@@ -27,7 +29,12 @@ export const searchIndex: SearchGroup[] = [
   },
   {
     heading: "Docs",
-    entries: [...guides, ...installationGuides, componentsIndex],
+    entries: [
+      ...guides,
+      ...installationGuides,
+      componentsIndex,
+      utilitiesIndex,
+    ],
   },
   ...componentGroups.map(({ id, title }) => ({
     heading: title,
@@ -40,6 +47,15 @@ export const searchIndex: SearchGroup[] = [
         install,
       })),
   })),
+  {
+    heading: "Utilities",
+    entries: utilityItems.map(({ title, href, description, install }) => ({
+      title,
+      href,
+      description,
+      install,
+    })),
+  },
   {
     heading: "Blocks",
     entries: registryBlocks.map(({ title, href, description, install }) => ({

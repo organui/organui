@@ -18,6 +18,13 @@
     "./dna-helix": "./registry/base-nova/dna-helix/dna-helix.tsx",
     "./blocks/*": "./registry/base-nova/blocks/*.tsx",
     "./registry.json": "./registry.json",
+    "./age": "./registry/base-nova/age/age.ts",
+    "./z-scores": "./registry/base-nova/z-scores/z-scores.ts",
+    "./reference-ranges": "./registry/base-nova/reference-ranges/reference-ranges.ts",
+    "./clinical-units": "./registry/base-nova/clinical-units/clinical-units.ts",
+    "./body-measurements": "./registry/base-nova/body-measurements/body-measurements.ts",
+    "./utilities-css": "./scripts/utilities-css.ts",
+    "./utilities.css": "./utilities.css",
     "./body-systems.json": "./body-systems.json",
     "./dist/*": "./dist/*",
     "./organ-viewer": "./registry/base-nova/organ-viewer/organ-viewer.tsx",
@@ -68,6 +75,7 @@
   "scripts": {
     "build": "bun scripts/build.ts",
     "lint": "eslint registry --max-warnings=0",
+    "utilities-css": "bun scripts/write-utilities-css.ts",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.radix.json",
     "test": "bun test tests"
   },

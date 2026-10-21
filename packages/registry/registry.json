@@ -105,7 +105,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Organ viewer docs: https://organui.com/docs/components/organ-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
+      "docs": "Organ viewer docs: https://organui.com/docs/components/organ-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/base-ui#radix)."
     },
     {
       "name": "molecule-viewer",
@@ -127,7 +127,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Molecule viewer docs: https://organui.com/docs/components/molecule-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
+      "docs": "Molecule viewer docs: https://organui.com/docs/components/molecule-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/base-ui#radix)."
     },
     {
       "name": "dna-helix",
@@ -149,7 +149,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "DNA helix docs: https://organui.com/docs/components/dna-helix. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
+      "docs": "DNA helix docs: https://organui.com/docs/components/dna-helix. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/base-ui#radix)."
     },
     {
       "name": "lab-results",
@@ -158,7 +158,7 @@
       "description": "Lab values flagged against the reference ranges you pass, with text and icon flags and a trend sparkline.",
       "categories": ["clinical"],
       "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["table"],
+      "registryDependencies": ["table", "@organui/reference-ranges"],
       "files": [
         {
           "path": "registry/base-nova/lab-results/lab-results.tsx",
@@ -173,7 +173,7 @@
       "title": "Growth chart",
       "description": "Child growth percentile curves for weight, length/height and head circumference from reference tables you supply, with plotted measurements, percentiles and z-scores.",
       "categories": ["clinical"],
-      "registryDependencies": ["empty"],
+      "registryDependencies": ["empty", "@organui/age", "@organui/z-scores"],
       "dependencies": ["cn@^0.5.0"],
       "files": [
         {
@@ -259,7 +259,7 @@
           "target": "lib/head-phantom.ts"
         }
       ],
-      "docs": "Medical image viewer docs: https://organui.com/docs/components/image-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix). The DICOM reader (lib/dicom.ts) handles uncompressed, single-frame grayscale files only; use a full DICOM toolkit for compressed, color or multi-frame images. Not a medical device."
+      "docs": "Medical image viewer docs: https://organui.com/docs/components/image-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/base-ui#radix). The DICOM reader (lib/dicom.ts) handles uncompressed, single-frame grayscale files only; use a full DICOM toolkit for compressed, color or multi-frame images. Not a medical device."
     },
     {
       "name": "adrenals",
@@ -905,6 +905,171 @@
         }
       ],
       "docs": "Vestibular system docs: https://organui.com/docs/components/vestibular. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
+    },
+    {
+      "name": "age",
+      "type": "registry:lib",
+      "title": "Age",
+      "description": "Age in months and years, age corrected for prematurity, and age formatted for charts.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/age/age.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "docs": "Age docs: https://organui.com/docs/utilities/age"
+    },
+    {
+      "name": "z-scores",
+      "type": "registry:lib",
+      "title": "Z-scores",
+      "description": "Z-scores and percentiles from LMS reference parameters, with WHO's restricted extrapolation.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/z-scores/z-scores.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "docs": "Z-scores docs: https://organui.com/docs/utilities/z-scores"
+    },
+    {
+      "name": "reference-ranges",
+      "type": "registry:lib",
+      "title": "Reference ranges",
+      "description": "Flags a value low, high or critical against its reference range, and prints the range as a report does.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/reference-ranges/reference-ranges.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "docs": "Reference ranges docs: https://organui.com/docs/utilities/reference-ranges"
+    },
+    {
+      "name": "clinical-units",
+      "type": "registry:lib",
+      "title": "Clinical units",
+      "description": "Converts laboratory values between conventional and SI units, and temperature, weight and length between systems.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/clinical-units/clinical-units.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "docs": "Clinical units docs: https://organui.com/docs/utilities/clinical-units. Check each factor against your laboratory's units before clinical use."
+    },
+    {
+      "name": "body-measurements",
+      "type": "registry:lib",
+      "title": "Body measurements",
+      "description": "Body mass index with its WHO category, and body surface area by the Mosteller, Du Bois or Haycock formula.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/body-measurements/body-measurements.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "docs": "Body measurements docs: https://organui.com/docs/utilities/body-measurements"
+    },
+    {
+      "name": "heartbeat",
+      "type": "registry:item",
+      "title": "Heartbeat",
+      "description": "An animate-heartbeat utility that pulses an element like a heartbeat, at a rate you set in beats per minute.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [],
+      "css": {
+        "@keyframes heartbeat": {
+          "0%, 40%, 100%": {
+            "transform": "scale(1)"
+          },
+          "10%": {
+            "transform": "scale(1.12)"
+          },
+          "20%": {
+            "transform": "scale(1.02)"
+          },
+          "30%": {
+            "transform": "scale(1.08)"
+          }
+        },
+        "@utility animate-heartbeat": {
+          "animation": "heartbeat var(--heartbeat-duration, 1s) ease-in-out infinite",
+          "@media (prefers-reduced-motion: reduce)": {
+            "animation": "none"
+          }
+        },
+        "@utility heartbeat-rate-*": {
+          "--heartbeat-duration": "calc(60s / --value(integer))"
+        }
+      },
+      "docs": "Heartbeat docs: https://organui.com/docs/utilities/heartbeat"
+    },
+    {
+      "name": "ecg-grid",
+      "type": "registry:item",
+      "title": "ECG grid",
+      "description": "A bg-ecg-grid utility that draws ECG paper: fine squares with a bolder line every fifth, in a colour and size you set.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [],
+      "css": {
+        "@utility bg-ecg-grid": {
+          "--ecg-grid-minor": "color-mix(in oklch, var(--ecg-grid-color, var(--color-red-500)) 18%, transparent)",
+          "--ecg-grid-major": "color-mix(in oklch, var(--ecg-grid-color, var(--color-red-500)) 45%, transparent)",
+          "--ecg-grid-step": "var(--ecg-grid-size, 4px)",
+          "background-image": "linear-gradient(to right, var(--ecg-grid-major) 1px, transparent 1px), linear-gradient(to bottom, var(--ecg-grid-major) 1px, transparent 1px), linear-gradient(to right, var(--ecg-grid-minor) 1px, transparent 1px), linear-gradient(to bottom, var(--ecg-grid-minor) 1px, transparent 1px)",
+          "background-size": "calc(var(--ecg-grid-step) * 5) calc(var(--ecg-grid-step) * 5), calc(var(--ecg-grid-step) * 5) calc(var(--ecg-grid-step) * 5), var(--ecg-grid-step) var(--ecg-grid-step), var(--ecg-grid-step) var(--ecg-grid-step)"
+        },
+        "@utility ecg-grid-size-*": {
+          "--ecg-grid-size": "calc(var(--spacing) * --value(number))"
+        },
+        "@utility ecg-grid-color-*": {
+          "--ecg-grid-color": "--value(--color-*, [color])"
+        }
+      },
+      "docs": "ECG grid docs: https://organui.com/docs/utilities/ecg-grid"
+    },
+    {
+      "name": "severity-colors",
+      "type": "registry:item",
+      "title": "Severity colours",
+      "description": "Theme colours for clinical severity, normal, info, warning and critical, in light and dark, as text-, bg- and border- utilities.",
+      "categories": ["utility"],
+      "registryDependencies": [],
+      "files": [],
+      "cssVars": {
+        "theme": {
+          "color-severity-normal": "var(--severity-normal)",
+          "color-severity-info": "var(--severity-info)",
+          "color-severity-warning": "var(--severity-warning)",
+          "color-severity-critical": "var(--severity-critical)"
+        },
+        "light": {
+          "severity-normal": "oklch(0.527 0.154 150.069)",
+          "severity-info": "oklch(0.546 0.245 262.881)",
+          "severity-warning": "oklch(0.555 0.163 48.998)",
+          "severity-critical": "oklch(0.577 0.245 27.325)"
+        },
+        "dark": {
+          "severity-normal": "oklch(0.792 0.209 151.711)",
+          "severity-info": "oklch(0.707 0.165 254.624)",
+          "severity-warning": "oklch(0.828 0.189 84.429)",
+          "severity-critical": "oklch(0.704 0.191 22.216)"
+        }
+      },
+      "docs": "Severity colours docs: https://organui.com/docs/utilities/severity-colors"
     },
     {
       "name": "explorer-01",

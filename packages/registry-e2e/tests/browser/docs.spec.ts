@@ -220,6 +220,7 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs/installation/next", "Next.js"],
     ["/docs/installation/vite", "Vite"],
     ["/docs/components", "Components"],
+    ["/docs/utilities", "Utilities"],
   ] as const) {
     await page.goto(path)
     await expect(
@@ -1209,5 +1210,45 @@ test("component pages switch library, and each library gets its own build", asyn
       .getByRole("group", { name: "Primitive library" })
       .getByRole("button", { name: "Radix UI" })
   ).toHaveAttribute("aria-pressed", "true")
+  expect(errors).toEqual([])
+})
+
+test("utility pages show a working example and pass an accessibility scan", async ({
+  page,
+  request,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  const utilities = registrySchema
+    .parse(await (await request.get("/r/registry.json")).json())
+    .items.filter(({ categories }) => categories?.includes("utility"))
+  expect(utilities.length).toBeGreaterThan(0)
+  for (const item of utilities) {
+    await page.goto(`/docs/utilities/${item.name}`)
+    await expect(
+      page.getByRole("heading", { name: item.title, level: 1 })
+    ).toBeVisible()
+    await expect(
+      page.getByRole("group", { name: `${item.title} example` })
+    ).toBeVisible()
+    await expect(
+      page.getByRole("region", { name: "Installation command" })
+    ).toContainText(`${item.name}`)
+    const axe = await new AxeBuilder({ page }).analyze()
+    expect(axe.violations).toEqual([])
+  }
+  // The CSS utilities are compiled into the site, as they are for a project.
+  await page.goto("/docs/utilities/heartbeat")
+  expect(
+    await page
+      .locator(".animate-heartbeat")
+      .first()
+      .evaluate((element) => getComputedStyle(element).animationName)
+  ).toBe("heartbeat")
+  await page.goto("/docs/utilities/clinical-units")
+  const units = page.getByRole("group", { name: "Clinical units example" })
+  await units.getByLabel(/^Value/).fill("18")
+  // 18 mg/dL of glucose is 1 mmol/L.
+  await expect(units.locator("p[aria-live]")).toHaveText(/^1\s+mmol\/L$/)
   expect(errors).toEqual([])
 })

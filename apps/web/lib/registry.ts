@@ -42,7 +42,10 @@ function groupOf(categories: readonly string[] = []) {
 // item appears in the sidebar and the index once it has a page at its href.
 // Blocks are listed on /blocks instead.
 export const registryItems = catalog.items
-  .filter((item) => item.type !== "registry:block")
+  .filter(
+    (item) =>
+      item.type !== "registry:block" && !item.categories?.includes("utility")
+  )
   .map((item) => {
     const categories: readonly string[] =
       "categories" in item ? item.categories : []
@@ -72,6 +75,27 @@ export type RegistryItem = (typeof registryItems)[number]
 
 export const organs = registryItems.filter(({ organ }) => organ)
 
+// Helpers and CSS that components can share, under /docs/utilities.
+export const utilityItems = catalog.items
+  .filter((item) => item.categories?.includes("utility"))
+  .map((item) => ({
+    name: item.name,
+    title: item.title ?? item.name,
+    description: item.description,
+    // TypeScript helpers install in lib; CSS utilities add to the CSS file.
+    kind: item.type === "registry:lib" ? ("helper" as const) : ("css" as const),
+    href: `/docs/utilities/${item.name}`,
+    json: `/r/${item.name}.json`,
+    install: install(item),
+  }))
+  .sort(
+    (a, b) =>
+      Number(a.kind === "css") - Number(b.kind === "css") ||
+      a.title.localeCompare(b.title)
+  )
+
+export type UtilityItem = (typeof utilityItems)[number]
+
 // Where the CLI writes each file, relative to a Next.js app with the default
 // aliases. Pages only install in frameworks with file routing.
 export function installedPath(file: {
@@ -81,6 +105,7 @@ export function installedPath(file: {
 }) {
   if (file.target) return file.target
   const name = file.path.split("/").at(-1)
+  if (file.type === "registry:lib") return `lib/${name}`
   return file.type === "registry:ui"
     ? `components/ui/${name}`
     : `components/${name}`
@@ -184,6 +209,12 @@ export const componentsIndex: NavLink & { description: string } = {
   description: "Every OrganUI component, grouped by category.",
 }
 
+export const utilitiesIndex: NavLink & { description: string } = {
+  title: "Utilities",
+  href: "/docs/utilities",
+  description: "Clinical helpers and CSS utilities that install on their own.",
+}
+
 export const organsPage: NavLink & { description: string } = {
   title: "Organs",
   href: "/docs/components/organs",
@@ -200,14 +231,25 @@ export const mainNav: NavLink[] = [
 // The sidebar lists the guides and every component, the organs after the
 // viewer and the tree they're built on.
 export const docsNav: DocsNavSection[] = [
-  { title: "Sections", items: [...guides, componentsIndex] },
+  { title: "Sections", items: [...guides, componentsIndex, utilitiesIndex] },
   { title: "Installation", items: installationGuides },
-  ...componentGroups.map(({ id, title }) => ({
-    title,
-    items: registryItems
-      .filter((item) => item.group === id)
-      .map(({ title, href }) => ({ title, href })),
-  })),
+  ...componentGroups.flatMap(({ id, title }) => [
+    // Utilities come before the long list of organs.
+    ...(id === "organs"
+      ? [
+          {
+            title: utilitiesIndex.title,
+            items: utilityItems.map(({ title, href }) => ({ title, href })),
+          },
+        ]
+      : []),
+    {
+      title,
+      items: registryItems
+        .filter((item) => item.group === id)
+        .map(({ title, href }) => ({ title, href })),
+    },
+  ]),
 ]
 
 // Reading order for the previous and next links.
@@ -224,6 +266,8 @@ export const pageOrder: NavLink[] = [
     ...(name === organs[0]?.name ? [organsPage] : []),
     { title, href },
   ]),
+  utilitiesIndex,
+  ...utilityItems.map(({ title, href }) => ({ title, href })),
 ]
 
 export function neighbours(href: string) {

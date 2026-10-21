@@ -29,8 +29,12 @@ const readExampleSource = cache(async (file: string) => {
       "@/lib/$1"
     )
     .replace(
-      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|image-viewer|growth-chart)/g,
+      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|image-viewer|growth-chart|lab-results)/g,
       "@/components/ui/$1"
+    )
+    .replace(
+      /@workspace\/registry\/(age|z-scores|reference-ranges|clinical-units|body-measurements)/g,
+      "@/lib/$1"
     )
     .replaceAll("@workspace/registry/", "@/components/")
     .trimEnd()

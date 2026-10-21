@@ -14,17 +14,23 @@ import { readRegistryItem } from "@/lib/registry-item"
 export async function ComponentInstallation({
   name,
   command,
+  css,
 }: {
   name: string
   command: string
+  // CSS the item adds to the project's CSS file, for a manual install.
+  css?: string
 }) {
   return (
     <LibraryView
-      base={<Installation name={name} command={command} library="base" />}
+      base={
+        <Installation name={name} command={command} css={css} library="base" />
+      }
       radix={
         <Installation
           name={name}
           command={`bunx ${shadcn} add @organui/${name}`}
+          css={css}
           library="radix"
         />
       }
@@ -35,10 +41,12 @@ export async function ComponentInstallation({
 async function Installation({
   name,
   command,
+  css,
   library,
 }: {
   name: string
   command: string
+  css?: string
   library: Library
 }) {
   const item = await readRegistryItem(name, library)
@@ -104,21 +112,36 @@ async function Installation({
               />
             </li>
           )}
-          <li>
-            <p>Copy and paste the following code into your project.</p>
-            {item.files.map((file) => (
+          {css && (
+            <li>
+              <p>Add the following to your global CSS file.</p>
               <CodeSnippet
-                key={file.installed}
-                title={file.installed}
-                label={`${file.installed} source`}
-                code={file.content}
+                label="CSS to add"
+                code={css}
+                lang="css"
                 contentClassName="max-h-96"
               />
-            ))}
-          </li>
-          <li>
-            <p>Update the import paths to match your project setup.</p>
-          </li>
+            </li>
+          )}
+          {item.files.length > 0 && (
+            <>
+              <li>
+                <p>Copy and paste the following code into your project.</p>
+                {item.files.map((file) => (
+                  <CodeSnippet
+                    key={file.installed}
+                    title={file.installed}
+                    label={`${file.installed} source`}
+                    code={file.content}
+                    contentClassName="max-h-96"
+                  />
+                ))}
+              </li>
+              <li>
+                <p>Update the import paths to match your project setup.</p>
+              </li>
+            </>
+          )}
         </ol>
       }
     />

@@ -1,4 +1,6 @@
 @import "@workspace/ui/globals.css";
+/* The CSS the utility items install, for their previews. */
+@import "@workspace/registry/utilities.css";
 
 /* The docs render the registry component from its workspace dependency. */
 @source "../node_modules/@workspace/registry/registry";

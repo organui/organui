@@ -9,6 +9,17 @@
     // alias points at the base-nova copies the docs site installs. Blocks
     // import the other files they ship where the CLI installs them.
     "paths": {
+      "@/lib/age": ["./registry/base-nova/age/age.ts"],
+      "@/lib/z-scores": ["./registry/base-nova/z-scores/z-scores.ts"],
+      "@/lib/reference-ranges": [
+        "./registry/base-nova/reference-ranges/reference-ranges.ts"
+      ],
+      "@/lib/clinical-units": [
+        "./registry/base-nova/clinical-units/clinical-units.ts"
+      ],
+      "@/lib/body-measurements": [
+        "./registry/base-nova/body-measurements/body-measurements.ts"
+      ],
       "@/components/ui/anatomy-tree": [
         "./registry/base-nova/anatomy-tree/anatomy-tree.tsx"
       ],

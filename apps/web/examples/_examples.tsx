@@ -182,4 +182,68 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "age-demo": {
+    title: "Age",
+    file: "age-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./age-demo")
+      return <Example />
+    },
+  },
+  "z-scores-demo": {
+    title: "Z-scores",
+    file: "z-scores-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./z-scores-demo")
+      return <Example />
+    },
+  },
+  "reference-ranges-demo": {
+    title: "Reference ranges",
+    file: "reference-ranges-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./reference-ranges-demo")
+      return <Example />
+    },
+  },
+  "clinical-units-demo": {
+    title: "Clinical units",
+    file: "clinical-units-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./clinical-units-demo")
+      return <Example />
+    },
+  },
+  "body-measurements-demo": {
+    title: "Body measurements",
+    file: "body-measurements-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./body-measurements-demo")
+      return <Example />
+    },
+  },
+  "heartbeat-demo": {
+    title: "Heartbeat",
+    file: "heartbeat-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./heartbeat-demo")
+      return <Example />
+    },
+  },
+  "ecg-grid-demo": {
+    title: "ECG grid",
+    file: "ecg-grid-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-grid-demo")
+      return <Example />
+    },
+  },
+  "severity-colors-demo": {
+    title: "Severity colours",
+    file: "severity-colors-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./severity-colors-demo")
+      return <Example />
+    },
+  },
 }

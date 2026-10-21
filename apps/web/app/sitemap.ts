@@ -5,6 +5,8 @@ import {
   installationGuides,
   organsPage,
   registryItems,
+  utilitiesIndex,
+  utilityItems,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -19,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     organsPage.href,
     "/blocks",
     ...registryItems.map((item) => item.href),
+    utilitiesIndex.href,
+    ...utilityItems.map((item) => item.href),
   ].map((path) => ({
     url: new URL(path, site.url).href,
     lastModified,
