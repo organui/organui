@@ -31,7 +31,8 @@ const organPicks = [
 ].flatMap((name) => organs.filter((organ) => organ.name === name))
 
 // Live components in columns, cut off at a fixed height on wide screens
-// with a fade into the button that leads to the rest.
+// with a fade into the button that leads to the rest. The columns are
+// balanced so every card's top shows above the fade.
 export function HomeShowcase() {
   return (
     <section
@@ -40,9 +41,9 @@ export function HomeShowcase() {
     >
       {/* Light mode eases from the page into the grey; dark mode has no grey. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-48 bg-linear-to-b from-background via-muted to-transparent dark:hidden" />
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:max-h-[64rem] lg:py-10">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:max-h-[88rem] lg:py-10">
         {/* Three columns on wide screens, two then one below. */}
-        <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 *:min-w-0 md:grid-cols-2 xl:grid-cols-3">
           <div className="flex flex-col gap-4">
             <Tile title="Organs" href={organsPage.href}>
               <OrganPicks />
@@ -50,22 +51,22 @@ export function HomeShowcase() {
             <Tile title="Vital signs" href="/docs/components/vital-signs">
               <VitalSigns />
             </Tile>
+            <Tile title="Body map" href="/docs/components/body-map">
+              <HomeBodyMap />
+            </Tile>
           </div>
           <div className="flex flex-col gap-4">
             <Tile title="ECG trace" href="/docs/components/ecg-trace">
               <HomeEcg />
             </Tile>
-            <Tile title="Body map" href="/docs/components/body-map">
-              <HomeBodyMap />
-            </Tile>
-          </div>
-          <div className="flex flex-col gap-4 md:col-span-2 md:grid md:grid-cols-2 xl:col-span-1 xl:flex">
             <Tile
               title="Medication schedule"
               href="/docs/components/medication-schedule"
             >
               <HomeMedicationSchedule />
             </Tile>
+          </div>
+          <div className="flex flex-col gap-4 md:col-span-2 md:grid md:grid-cols-2 xl:col-span-1 xl:flex">
             <Tile title="Growth chart" href="/docs/components/growth-chart">
               <GrowthChart />
             </Tile>
