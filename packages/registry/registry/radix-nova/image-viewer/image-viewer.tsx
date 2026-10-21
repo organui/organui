@@ -234,6 +234,13 @@ export function ImageViewer({
   const canvas = React.useRef<HTMLCanvasElement>(null)
   const instructions = React.useId()
   const sliceLabel = React.useId()
+  const slider = React.useRef<HTMLSpanElement>(null)
+  // Radix's slider names its root, not the thumb people focus; name the thumb.
+  React.useEffect(() => {
+    slider.current
+      ?.querySelector('[role="slider"]')
+      ?.setAttribute("aria-labelledby", sliceLabel)
+  })
   const count = slices.length
 
   const [ownSlice, setOwnSlice] = React.useState(defaultSlice)
@@ -834,6 +841,7 @@ export function ImageViewer({
             Slice
           </span>
           <Slider
+            ref={slider}
             aria-labelledby={sliceLabel}
             min={1}
             max={count}

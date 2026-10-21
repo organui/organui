@@ -1187,7 +1187,8 @@ test("component pages switch library, and each library gets its own build", asyn
   await expect(
     library.getByRole("button", { name: "Base UI" })
   ).toHaveAttribute("aria-pressed", "true")
-  await expect(command).toContainText("@organui/organ-viewer")
+  // The viewer depends on no OrganUI item, so it installs by address.
+  await expect(command).toContainText("/r/organ-viewer.json")
   await expect(
     page.getByRole("region", { name: "Registry namespace configuration" })
   ).toHaveCount(0)
