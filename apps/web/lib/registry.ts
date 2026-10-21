@@ -258,6 +258,9 @@ export const mainNav: NavLink[] = [
   { title: "Components", href: componentsIndex.href },
   { title: organsPage.title, href: organsPage.href },
   { title: "Blocks", href: "/blocks" },
+  { title: "Charts", href: "/charts" },
+  { title: "Themes", href: "/themes" },
+  { title: "Create", href: "/create" },
 ]
 
 // The sidebar lists the guides and every component, the organs after the

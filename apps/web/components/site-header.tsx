@@ -14,7 +14,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
       <div className="flex h-(--header-height) w-full items-center gap-2 px-4 sm:px-6">
-        <MobileNav items={mainNav} sections={docsNav} className="md:hidden" />
+        <MobileNav items={mainNav} sections={docsNav} className="lg:hidden" />
         <Link
           href="/"
           className="mr-2 flex items-center gap-2 rounded-md font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-ring"
@@ -22,7 +22,7 @@ export function SiteHeader() {
           <OrganUIMark className="size-6" />
           organui
         </Link>
-        <MainNav items={mainNav} className="hidden md:flex" />
+        <MainNav items={mainNav} className="hidden lg:flex" />
         <div className="ml-auto flex items-center gap-1 sm:gap-2">
           <CommandMenu />
           <Separator

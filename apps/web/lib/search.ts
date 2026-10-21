@@ -27,7 +27,10 @@ export type SearchGroup = { heading: string; entries: SearchEntry[] }
 export const searchIndex: SearchGroup[] = [
   {
     heading: "Pages",
-    entries: mainNav.map(({ title, href }) => ({ title, href })),
+    entries: [
+      ...mainNav.map(({ title, href }) => ({ title, href })),
+      { title: "Colours", href: "/colors" },
+    ],
   },
   {
     heading: "Docs",

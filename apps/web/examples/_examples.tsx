@@ -302,4 +302,100 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "chart-growth-weight": {
+    title: "chart-growth-weight",
+    file: "chart-growth-weight.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-growth-weight")
+      return <Example />
+    },
+  },
+  "chart-growth-length": {
+    title: "chart-growth-length",
+    file: "chart-growth-length.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-growth-length")
+      return <Example />
+    },
+  },
+  "chart-growth-head": {
+    title: "chart-growth-head",
+    file: "chart-growth-head.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-growth-head")
+      return <Example />
+    },
+  },
+  "chart-ecg-sinus": {
+    title: "chart-ecg-sinus",
+    file: "chart-ecg-sinus.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-ecg-sinus")
+      return <Example />
+    },
+  },
+  "chart-ecg-live": {
+    title: "chart-ecg-live",
+    file: "chart-ecg-live.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-ecg-live")
+      return <Example />
+    },
+  },
+  "chart-ecg-bradycardia": {
+    title: "chart-ecg-bradycardia",
+    file: "chart-ecg-bradycardia.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-ecg-bradycardia")
+      return <Example />
+    },
+  },
+  "chart-ecg-tachycardia": {
+    title: "chart-ecg-tachycardia",
+    file: "chart-ecg-tachycardia.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-ecg-tachycardia")
+      return <Example />
+    },
+  },
+  "chart-ecg-paper": {
+    title: "chart-ecg-paper",
+    file: "chart-ecg-paper.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-ecg-paper")
+      return <Example />
+    },
+  },
+  "chart-lab-trends": {
+    title: "chart-lab-trends",
+    file: "chart-lab-trends.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-lab-trends")
+      return <Example />
+    },
+  },
+  "chart-lab-sparkline": {
+    title: "chart-lab-sparkline",
+    file: "chart-lab-sparkline.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-lab-sparkline")
+      return <Example />
+    },
+  },
+  "chart-vitals-adult": {
+    title: "chart-vitals-adult",
+    file: "chart-vitals-adult.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-vitals-adult")
+      return <Example />
+    },
+  },
+  "chart-vitals-custom": {
+    title: "chart-vitals-custom",
+    file: "chart-vitals-custom.tsx",
+    render: async () => {
+      const { Example } = await import("./chart-vitals-custom")
+      return <Example />
+    },
+  },
 }

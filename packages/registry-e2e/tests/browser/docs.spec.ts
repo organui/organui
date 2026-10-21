@@ -372,6 +372,9 @@ test("the header links each section and searches the whole site", async ({
     "Components",
     "Organs",
     "Blocks",
+    "Charts",
+    "Themes",
+    "Create",
   ])
   await main.getByRole("link", { name: "Organs", exact: true }).click()
   await expect(page).toHaveURL(/\/docs\/components\/organs$/)
@@ -1378,6 +1381,24 @@ test("the colours page lists every organ's structure colours to copy", async ({
   await expect(
     page.getByRole("region", { name: "Dermatome regions" }).getByRole("button")
   ).toHaveCount(4)
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+  expect(errors).toEqual([])
+})
+
+test("the charts page shows each chart with its code", async ({ page }) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/charts")
+  await expect(
+    page.getByRole("heading", { name: "Charts", level: 1 })
+  ).toBeVisible()
+  const ecg = page.getByRole("region", { name: "ECG" })
+  await expect(
+    ecg.getByRole("img", { name: /Sinus bradycardia, 46 bpm/ })
+  ).toBeVisible()
+  await ecg.getByRole("button", { name: "View code: Bradycardia" }).click()
+  await expect(page.getByRole("dialog")).toContainText("heartRate: 46")
+  await page.keyboard.press("Escape")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
 })
