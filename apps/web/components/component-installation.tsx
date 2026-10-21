@@ -1,6 +1,7 @@
 import { Fragment } from "react"
 import Link from "next/link"
 import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeCollapsible } from "@/components/code-collapsible"
 import { CodeSnippet } from "@/components/code-snippet"
 import { InstallationTabs } from "@/components/installation-tabs"
 import { LibraryView } from "@/components/library-switcher"
@@ -134,15 +135,26 @@ async function Installation({
             <>
               <li>
                 <p>Copy and paste the following code into your project.</p>
-                {item.files.map((file) => (
-                  <CodeSnippet
-                    key={file.installed}
-                    title={file.installed}
-                    label={`${file.installed} source`}
-                    code={file.content}
-                    contentClassName="max-h-96"
-                  />
-                ))}
+                {item.files.map((file) => {
+                  const snippet = (
+                    <CodeSnippet
+                      key={file.installed}
+                      title={file.installed}
+                      label={`${file.installed} source`}
+                      code={file.content}
+                    />
+                  )
+                  return file.content.split("\n").length > 16 ? (
+                    <CodeCollapsible
+                      key={file.installed}
+                      label={file.installed}
+                    >
+                      {snippet}
+                    </CodeCollapsible>
+                  ) : (
+                    snippet
+                  )
+                })}
               </li>
               <li>
                 <p>Update the import paths to match your project setup.</p>

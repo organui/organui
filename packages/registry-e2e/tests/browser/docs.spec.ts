@@ -1237,6 +1237,15 @@ test("component pages switch library, and each library gets its own build", asyn
   await expect(
     page.getByRole("region", { name: "components/organ-viewer.tsx source" })
   ).toContainText("asChild")
+  // Long files start folded.
+  const expand = page.getByRole("button", {
+    name: "Expand components/organ-viewer.tsx",
+  })
+  await expect(expand).toHaveAttribute("aria-expanded", "false")
+  await expand.click()
+  await expect(
+    page.getByRole("button", { name: "Collapse components/organ-viewer.tsx" })
+  ).toHaveAttribute("aria-expanded", "true")
 
   // The choice holds on the next component page.
   await page.goto("/docs/components/heart")

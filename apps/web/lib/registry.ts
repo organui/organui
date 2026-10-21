@@ -317,6 +317,14 @@ export const mainNav: NavLink[] = [
   { title: "Create", href: "/create" },
 ]
 
+// Pages added in the latest release, marked with a dot in the sidebar.
+export const pagesNew: string[] = [
+  "/docs/base-ui",
+  aiIndex.href,
+  helpersIndex.href,
+  utilitiesIndex.href,
+]
+
 // The sidebar lists the guides and every component, the organs after the
 // viewer and the tree they're built on.
 export const docsNav: DocsNavSection[] = [
