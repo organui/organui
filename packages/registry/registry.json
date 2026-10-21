@@ -105,7 +105,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Organ viewer docs: https://organui.com/docs/components/organ-viewer. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing."
+      "docs": "Organ viewer docs: https://organui.com/docs/components/organ-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
     },
     {
       "name": "molecule-viewer",
@@ -127,7 +127,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Molecule viewer docs: https://organui.com/docs/components/molecule-viewer. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing."
+      "docs": "Molecule viewer docs: https://organui.com/docs/components/molecule-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
     },
     {
       "name": "dna-helix",
@@ -149,7 +149,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "DNA helix docs: https://organui.com/docs/components/dna-helix. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing."
+      "docs": "DNA helix docs: https://organui.com/docs/components/dna-helix. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix)."
     },
     {
       "name": "lab-results",
@@ -259,7 +259,7 @@
           "target": "lib/head-phantom.ts"
         }
       ],
-      "docs": "Medical image viewer docs: https://organui.com/docs/components/image-viewer. Needs one of shadcn's Base UI styles, such as base-nova: its controls use Base UI's render prop, so on a Radix style its buttons do nothing. The DICOM reader (lib/dicom.ts) handles uncompressed, single-frame grayscale files only; use a full DICOM toolkit for compressed, color or multi-frame images. Not a medical device."
+      "docs": "Medical image viewer docs: https://organui.com/docs/components/image-viewer. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/installation#radix). The DICOM reader (lib/dicom.ts) handles uncompressed, single-frame grayscale files only; use a full DICOM toolkit for compressed, color or multi-frame images. Not a medical device."
     },
     {
       "name": "adrenals",

@@ -28,12 +28,13 @@ export default function Page() {
         <ul className="flex list-disc flex-col gap-2 pl-5">
           <li>React 19 and Tailwind CSS 4.</li>
           <li>
-            A project initialised with shadcn, using one of its{" "}
-            <Link href="/docs/base-ui" className="underline">
-              Base UI styles
+            A project initialised with shadcn, in any of its styles: Base UI,
+            such as <code>base-nova</code>, or Radix, which needs the namespace
+            below (see{" "}
+            <Link href="/docs/base-ui#radix" className="underline">
+              Base UI and Radix
             </Link>
-            , such as <code>base-nova</code>. Items with controls compose
-            shadcn&apos;s components through Base UI.
+            ).
           </li>
           <li>
             Any framework shadcn supports. Next.js and Vite are tested on every
@@ -83,13 +84,12 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="namespace">
-          Register the namespace (optional)
-        </DocsHeading>
+        <DocsHeading id="namespace">Register the namespace</DocsHeading>
         <p>
-          To pin the registry address, point it at a copy you host, or use a
-          shadcn CLI older than the directory, add the namespace to{" "}
-          <code>components.json</code> yourself:
+          Radix projects add the namespace to <code>components.json</code>, so
+          the CLI fetches the Radix build of each item. Base UI projects can
+          skip it, or add it to pin the address, point it at a copy you host, or
+          use a shadcn CLI older than the directory:
         </p>
         <CodeSnippet
           label="Registry namespace configuration"

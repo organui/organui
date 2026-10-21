@@ -145,9 +145,12 @@ export default function Page() {
         <p className="text-sm text-muted-foreground">
           Designed for small to medium in-memory trees. No virtualization, lazy
           loading, drag and drop, multiselection, or viewer implementation.
-          Built on shadcn&apos;s Base UI components; compatibility with
-          Radix-based presets is not claimed. Keyboard/browser checks do not
-          replace a screen-reader usability audit.
+          Built on shadcn&apos;s components, with a copy for{" "}
+          <Link href="/docs/base-ui" className="underline">
+            Radix projects
+          </Link>
+          . Keyboard/browser checks do not replace a screen-reader usability
+          audit.
         </p>
       </section>
       <DocsPager href="/docs/components/anatomy-tree" />

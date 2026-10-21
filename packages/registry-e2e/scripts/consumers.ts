@@ -16,9 +16,14 @@ const registry = dirname(
 const server = Bun.serve({
   port: 0,
   hostname: "127.0.0.1",
+  // /styles/radix-*/ serves the Radix build, as the docs site does.
   fetch(request) {
-    const name = new URL(request.url).pathname.split("/").at(-1) ?? ""
-    const file = Bun.file(resolve(registry, name))
+    const path = new URL(request.url).pathname
+    const name = path.split("/").at(-1) ?? ""
+    const directory = path.startsWith("/styles/radix-")
+      ? resolve(registry, "radix")
+      : registry
+    const file = Bun.file(resolve(directory, name))
     if (!/^[a-z0-9-]+\.json$/.test(name))
       return new Response(null, { status: 404 })
     return file
@@ -204,8 +209,13 @@ const css = `@import "tailwindcss";
 @theme inline { --color-background:var(--background);--color-foreground:var(--foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-border:var(--border);--color-ring:var(--ring); }
 :root{--background:#f4f7fb;--foreground:#142d45;--muted:#e5edf4;--muted-foreground:#48627a;--accent:#d7e8f5;--border:#94a9ba;--ring:#225d9b;}body{background:var(--background);color:var(--foreground);font-family:system-ui;}button{cursor:pointer;}`
 try {
-  for (const framework of ["next", "vite"]) {
+  // Radix is a Next.js app on a Radix style, installing every item by name
+  // through a {style} registry URL.
+  for (const framework of ["next", "vite", "radix"]) {
     const dir = resolve(out, framework)
+    const nextjs = framework !== "vite"
+    const byName = framework !== "next"
+    const radix = framework === "radix"
     // Exercise both a different prefix and independent component/UI folders.
     const customAliases = framework === "vite"
     const componentDir = customAliases ? "src/widgets" : "src/components"
@@ -226,17 +236,17 @@ try {
       "react-dom": "19.2.4",
       tailwindcss: "4.2.2",
       "@tailwindcss/postcss": "4.2.2",
-      ...(framework === "next" ? { next: "16.3.3" } : { vite: "7.3.1" }),
+      ...(nextjs ? { next: "16.3.3" } : { vite: "7.3.1" }),
     }
     await put(dir, "package.json", {
       name: `anatomy-consumer-${framework}`,
       private: true,
       type: "module",
       scripts: {
-        build:
-          framework === "next" ? "next build" : "tsc --noEmit && vite build",
-        start:
-          framework === "next"
+        build: nextjs ? "next build" : "tsc --noEmit && vite build",
+        start: radix
+          ? "next start --port 4320"
+          : nextjs
             ? "next start --port 4318"
             : "vite preview --host 127.0.0.1 --port 4319 --strictPort",
       },
@@ -262,14 +272,14 @@ try {
         allowJs: true,
         resolveJsonModule: true,
         paths: { [customAliases ? "~/*" : "@/*"]: ["./src/*"] },
-        ...(framework === "next" ? { plugins: [{ name: "next" }] } : {}),
+        ...(nextjs ? { plugins: [{ name: "next" }] } : {}),
       },
       include: ["src", "next-env.d.ts", ".next/types/**/*.ts"],
     })
     await put(dir, "components.json", {
       $schema: "https://ui.shadcn.com/schema.json",
-      style: "base-nova",
-      rsc: framework === "next",
+      style: radix ? "radix-nova" : "base-nova",
+      rsc: nextjs,
       tsx: true,
       tailwind: {
         config: "",
@@ -279,7 +289,9 @@ try {
       },
       iconLibrary: "lucide",
       registries: {
-        "@organui": `http://127.0.0.1:${server.port}/{name}.json`,
+        "@organui": radix
+          ? `http://127.0.0.1:${server.port}/styles/{style}/{name}.json`
+          : `http://127.0.0.1:${server.port}/{name}.json`,
       },
       aliases: customAliases
         ? {
@@ -333,7 +345,7 @@ try {
         fileURLToPath(import.meta.resolve("web/public/models/crambin.pdb"))
       )
     )
-    if (framework === "next") {
+    if (nextjs) {
       await put(dir, "src/app/page.tsx", 'export {default} from "../harness"')
       await put(
         dir,
@@ -416,7 +428,7 @@ try {
         shadcn,
         "add",
         // Vite exercises the documented namespace; Next installs by URL.
-        framework === "vite"
+        byName
           ? "@organui/anatomy-tree"
           : `http://127.0.0.1:${server.port}/anatomy-tree.json`,
         "--yes",
@@ -428,7 +440,7 @@ try {
         "node",
         shadcn,
         "add",
-        framework === "vite"
+        byName
           ? "@organui/heart"
           : `http://127.0.0.1:${server.port}/heart.json`,
         "--yes",
@@ -447,7 +459,7 @@ try {
         "node",
         shadcn,
         "add",
-        framework === "vite"
+        byName
           ? "@organui/brain"
           : `http://127.0.0.1:${server.port}/brain.json`,
         "--yes",
@@ -481,7 +493,7 @@ try {
         shadcn,
         "add",
         ...organs.map(({ name }) =>
-          framework === "vite"
+          byName
             ? `@organui/${name}`
             : `http://127.0.0.1:${server.port}/${name}.json`
         ),
@@ -511,7 +523,7 @@ try {
         "node",
         shadcn,
         "add",
-        framework === "vite"
+        byName
           ? "@organui/lab-results"
           : `http://127.0.0.1:${server.port}/lab-results.json`,
         "--yes",
@@ -523,7 +535,7 @@ try {
         "node",
         shadcn,
         "add",
-        framework === "vite"
+        byName
           ? "@organui/medication-schedule"
           : `http://127.0.0.1:${server.port}/medication-schedule.json`,
         "--yes",
@@ -547,8 +559,8 @@ try {
           "node",
           shadcn,
           "add",
-          ...(framework === "vite"
-            ? [`@organui/${item}`, "--overwrite"]
+          ...(byName
+            ? [`@organui/${item}`, ...(radix ? [] : ["--overwrite"])]
             : [`http://127.0.0.1:${server.port}/${item}.json`]),
           "--yes",
         ],
@@ -563,8 +575,8 @@ try {
           "node",
           shadcn,
           "add",
-          ...(framework === "vite"
-            ? [`@organui/${block}`, "--overwrite"]
+          ...(byName
+            ? [`@organui/${block}`, ...(radix ? [] : ["--overwrite"])]
             : [`http://127.0.0.1:${server.port}/${block}.json`]),
           "--yes",
         ],
@@ -575,7 +587,7 @@ try {
       const installed = await Bun.file(
         resolve(dir, `src/app/${page}/page.tsx`)
       ).exists()
-      if (installed !== (framework === "next"))
+      if (installed !== nextjs)
         throw new Error(`Unexpected ${page} page in ${framework}`)
     }
     for (const name of ["organ-viewer", "molecule-viewer", "dna-helix"]) {
@@ -586,7 +598,8 @@ try {
       if (
         viewer.includes("@workspace/") ||
         (customAliases && viewer.includes('from "@/')) ||
-        (framework === "next" && !viewer.includes('"use client"'))
+        (nextjs && !viewer.includes('"use client"')) ||
+        (radix && viewer.includes("render={"))
       )
         throw new Error(`Invalid installed ${name}`)
     }
@@ -606,7 +619,8 @@ try {
       if (
         installed.includes("@workspace/") ||
         (customAliases && installed.includes('from "@/')) ||
-        (framework === "next" && !installed.includes('"use client"'))
+        (nextjs && !installed.includes('"use client"')) ||
+        (radix && installed.includes("@base-ui/react"))
       )
         throw new Error(`Invalid installed ${name} source`)
     }

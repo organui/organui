@@ -49,6 +49,15 @@ export default defineConfig({
         viewport: { width: 390, height: 844 },
       },
     },
+    // The items with a Radix copy, installed on a Radix style.
+    {
+      name: "radix-desktop",
+      testMatch: "**/{anatomy,organ,block,image,molecule}.spec.ts",
+      use: {
+        baseURL: "http://127.0.0.1:4320",
+        viewport: { width: 1280, height: 900 },
+      },
+    },
   ],
   webServer: [
     {
@@ -67,6 +76,12 @@ export default defineConfig({
       command: "bun run start",
       cwd: ".consumers/vite",
       url: "http://127.0.0.1:4319",
+      reuseExistingServer: false,
+    },
+    {
+      command: "bun run start",
+      cwd: ".consumers/radix",
+      url: "http://127.0.0.1:4320",
       reuseExistingServer: false,
     },
   ],

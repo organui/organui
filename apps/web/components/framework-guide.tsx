@@ -36,8 +36,9 @@ export function FrameworkGuide({
           <DocsHeading id="create-project">Create the project</DocsHeading>
           <p>
             This creates a {name} app with Tailwind CSS and shadcn&apos;s{" "}
-            <code>base-nova</code> style, one of the{" "}
-            <Link href="/docs/base-ui">Base UI styles</Link> OrganUI needs.
+            <code>base-nova</code> style, built on Base UI. For Radix, use{" "}
+            <code>radix-nova</code> and add the namespace in{" "}
+            <Link href="/docs/base-ui#radix">Radix projects</Link>.
           </p>
           <CodeBlockCommand
             label={`Create a ${name} project`}

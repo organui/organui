@@ -62,13 +62,12 @@ export default function Page() {
           The source installs into your components directory and adds three.js,
           plus shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
           <code>select</code> and <code>tooltip</code> for its controls. Its
-          toolbar composes them with Base UI&apos;s <code>render</code> prop, so
-          it needs{" "}
+          toolbar composes them with Base UI&apos;s <code>render</code> prop;{" "}
           <Link href="/docs/base-ui" className="underline">
-            one of shadcn&apos;s Base UI styles
-          </Link>
-          , such as <code>base-nova</code>; on a Radix style its buttons do
-          nothing. It uses your theme tokens and installs no global styles.
+            Radix projects
+          </Link>{" "}
+          get a copy built on <code>asChild</code>. It uses your theme tokens
+          and installs no global styles.
         </p>
         <a className="underline" href="/r/molecule-viewer.json">
           View registry item JSON

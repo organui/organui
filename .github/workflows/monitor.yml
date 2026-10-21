@@ -31,6 +31,12 @@ jobs:
             curl -fsS --retry 3 "$SITE/r/$name.json" \
               | jq -e --arg name "$name" '.name == $name and (.files | all(.content | length > 0))'
           done
+      - name: Each library gets its own build
+        run: |
+          curl -fsS --retry 3 "$SITE/r/styles/base-nova/organ-viewer.json" \
+            | jq -e '.files[0].content | contains("render={")'
+          curl -fsS --retry 3 "$SITE/r/styles/radix-nova/organ-viewer.json" \
+            | jq -e '.files[0].content | contains("asChild")'
       - name: Models load cross-origin
         run: |
           model=$(curl -fsS --retry 3 "$SITE/r/appendix.json" | jq -r '.files[0].content' | grep -o "$SITE/models/[a-z-]*\.glb" | head -1)

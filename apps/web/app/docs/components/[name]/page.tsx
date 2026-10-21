@@ -78,11 +78,11 @@ export function ${component}Demo() {
             organ viewer
           </Link>
           , adds <code>organ-viewer.tsx</code>, three.js and the shadcn
-          components the viewer&apos;s controls use, which need{" "}
+          components the viewer&apos;s controls use, in your project&apos;s{" "}
           <Link href="/docs/base-ui" className="underline">
-            one of shadcn&apos;s Base UI styles
-          </Link>
-          . Every organ and the cell share that one{" "}
+            Base UI or Radix
+          </Link>{" "}
+          style. Every organ and the cell share that one{" "}
           <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>

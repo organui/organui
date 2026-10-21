@@ -42,11 +42,21 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  // Every docs page is also served as Markdown at its address plus .md.
   async rewrites() {
     return [
+      // Every docs page is also served as Markdown at its address plus .md.
       { source: "/docs.md", destination: "/llm" },
       { source: "/docs/:path*.md", destination: "/llm/:path*" },
+      // A registry URL with {style} in it gets the build for the project's
+      // library: base-nova, base-vega and so on share one, radix-* the other.
+      {
+        source: "/r/styles/:style(base-[a-z0-9-]+)/:name",
+        destination: "/r/:name",
+      },
+      {
+        source: "/r/styles/:style(radix-[a-z0-9-]+)/:name",
+        destination: "/r/radix/:name",
+      },
     ]
   },
   // Component pages moved from /docs/<name> to /docs/components/<name>.

@@ -213,7 +213,7 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs", "Introduction"],
     ["/docs/installation", "Installation"],
     ["/docs/theming", "Theming"],
-    ["/docs/base-ui", "Base UI"],
+    ["/docs/base-ui", "Base UI and Radix"],
     ["/docs/licences", "Licences"],
     ["/docs/mcp", "MCP"],
     ["/docs/changelog", "Changelog"],
@@ -1161,5 +1161,52 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
     path: info.outputPath("image-viewer.png"),
     fullPage: true,
   })
+  expect(errors).toEqual([])
+})
+
+test("component pages switch library, and each library gets its own build", async ({
+  page,
+  request,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  // A {style} registry URL picks the build for the project's library.
+  const base = await (
+    await request.get("/r/styles/base-nova/organ-viewer.json")
+  ).json()
+  const radix = await (
+    await request.get("/r/styles/radix-nova/organ-viewer.json")
+  ).json()
+  expect(base.files[0].content).toContain("render={")
+  expect(radix.files[0].content).toContain("asChild")
+  expect(radix.files[0].content).not.toContain("render={")
+
+  await page.goto("/docs/components/organ-viewer")
+  const library = page.getByRole("group", { name: "Primitive library" })
+  const command = page.getByRole("region", { name: "Installation command" })
+  await expect(
+    library.getByRole("button", { name: "Base UI" })
+  ).toHaveAttribute("aria-pressed", "true")
+  await expect(command).toContainText("@organui/organ-viewer")
+  await expect(
+    page.getByRole("region", { name: "Registry namespace configuration" })
+  ).toHaveCount(0)
+
+  await library.getByRole("button", { name: "Radix UI" }).click()
+  await expect(
+    page.getByRole("region", { name: "Registry namespace configuration" })
+  ).toContainText("/r/styles/{style}/{name}.json")
+  await page.getByRole("tab", { name: "Manual" }).click()
+  await expect(
+    page.getByRole("region", { name: "components/organ-viewer.tsx source" })
+  ).toContainText("asChild")
+
+  // The choice holds on the next component page.
+  await page.goto("/docs/components/heart")
+  await expect(
+    page
+      .getByRole("group", { name: "Primitive library" })
+      .getByRole("button", { name: "Radix UI" })
+  ).toHaveAttribute("aria-pressed", "true")
   expect(errors).toEqual([])
 })

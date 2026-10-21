@@ -3,11 +3,14 @@ import Link from "next/link"
 import { CodeBlockCommand } from "@/components/code-block-command"
 import { CodeSnippet } from "@/components/code-snippet"
 import { InstallationTabs } from "@/components/installation-tabs"
-import { shadcn } from "@/lib/registry"
+import { LibraryView } from "@/components/library-switcher"
+import type { Library } from "@/lib/libraries"
+import { registryNamespace, shadcn } from "@/lib/registry"
 import { readRegistryItem } from "@/lib/registry-item"
 
 // A component's Installation section: the CLI command, or the steps to do
-// by hand with the same files the CLI would write.
+// by hand with the same files the CLI would write. Each library gets its
+// own, as the registry serves it.
 export async function ComponentInstallation({
   name,
   command,
@@ -15,14 +18,53 @@ export async function ComponentInstallation({
   name: string
   command: string
 }) {
-  const item = await readRegistryItem(name)
+  return (
+    <LibraryView
+      base={<Installation name={name} command={command} library="base" />}
+      radix={
+        <Installation
+          name={name}
+          command={`bunx ${shadcn} add @organui/${name}`}
+          library="radix"
+        />
+      }
+    />
+  )
+}
+
+async function Installation({
+  name,
+  command,
+  library,
+}: {
+  name: string
+  command: string
+  library: Library
+}) {
+  const item = await readRegistryItem(name, library)
   const organui = item.registryDependencies
     .filter((dependency) => dependency.startsWith("@organui/"))
     .map((dependency) => dependency.replace("@organui/", ""))
   return (
     <InstallationTabs
       command={
-        <CodeBlockCommand label="Installation command" command={command} />
+        library === "radix" ? (
+          <div className="flex flex-col gap-4">
+            <p>
+              Radix projects add OrganUI to <code>components.json</code> once,
+              so the CLI fetches the Radix build of each item:
+            </p>
+            <CodeSnippet
+              label="Registry namespace configuration"
+              code={registryNamespace}
+              lang="json"
+            />
+            <p>Then install it by name:</p>
+            <CodeBlockCommand label="Installation command" command={command} />
+          </div>
+        ) : (
+          <CodeBlockCommand label="Installation command" command={command} />
+        )
       }
       manual={
         <ol className="steps">

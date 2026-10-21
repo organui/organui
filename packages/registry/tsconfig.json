@@ -88,5 +88,6 @@
       "@/components/*": ["./registry/base-nova/organ-viewer/*"]
     }
   },
-  "include": ["registry", "scripts", "tests"]
+  "include": ["registry", "scripts", "tests"],
+  "exclude": ["registry/radix-nova"]
 }

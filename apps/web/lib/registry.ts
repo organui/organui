@@ -110,8 +110,11 @@ export const registryBlocks = catalog.items
       .map((name) => name.replace("@organui/", "")),
   }))
 
+// The CLI fills {style} from components.json, so each project gets the
+// build for its library: Radix styles need this, Base UI styles work with or
+// without it.
 export const registryNamespace = JSON.stringify(
-  { registries: { "@organui": `${site.url}/r/{name}.json` } },
+  { registries: { "@organui": `${site.url}/r/styles/{style}/{name}.json` } },
   null,
   2
 )
@@ -138,9 +141,10 @@ export const guides: (NavLink & { description: string })[] = [
     description: "The design tokens components read, and dark mode.",
   },
   {
-    title: "Base UI",
+    title: "Base UI and Radix",
     href: "/docs/base-ui",
-    description: "Why items with controls need one of shadcn's Base UI styles.",
+    description:
+      "Install on either library, and the items that ship a copy for each.",
   },
   {
     title: "Licences",

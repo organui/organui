@@ -74,12 +74,12 @@ export default async function Page() {
             ))}
           </nav>
           <p className="text-sm text-muted-foreground">
-            Pages install in Next.js. Blocks need{" "}
+            Pages install in Next.js. Blocks work in{" "}
             <Link
               href="/docs/base-ui"
               className="font-medium text-foreground underline underline-offset-4"
             >
-              a Base UI style
+              Base UI and Radix styles
             </Link>
             .
           </p>

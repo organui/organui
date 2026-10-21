@@ -153,9 +153,7 @@ export default function Page() {
         </p>
         <p className="text-sm text-muted-foreground">
           A display component, not a medical device. No reminders,
-          notifications, as-needed dosing, titration or dose calculations. Built
-          on shadcn&apos;s Base UI components; compatibility with Radix-based
-          presets is not claimed.
+          notifications, as-needed dosing, titration or dose calculations.
         </p>
       </section>
       <DocsPager href="/docs/components/medication-schedule" />
