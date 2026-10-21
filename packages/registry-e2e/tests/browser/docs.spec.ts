@@ -1314,3 +1314,50 @@ test("AI Elements cite sources, mark unsupported claims and record review", asyn
   await expect(example).toContainText("Awaiting review")
   expect(errors).toEqual([])
 })
+
+test("themes preview the components and give their CSS; create gives the commands", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/themes")
+  await expect(
+    page.getByRole("heading", { name: "Themes", level: 1 })
+  ).toBeVisible()
+  await page
+    .getByRole("group", { name: "Accent" })
+    .getByRole("button", { name: "Blue" })
+    .click()
+  await page
+    .getByRole("group", { name: "Radius" })
+    .getByRole("button", { name: "Large" })
+    .click()
+  await page.getByRole("button", { name: "Copy code" }).click()
+  const css = page.getByRole("region", { name: "Theme CSS" })
+  // Blue's primary, over the neutral base, with the large radius.
+  await expect(css).toContainText("--primary: oklch(0.488 0.243 264.376)")
+  await expect(css).toContainText("--radius: 0.875rem")
+  await page.keyboard.press("Escape")
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+
+  await page.goto("/create")
+  const init = page.getByRole("region", { name: "Create the project" })
+  await expect(init).toContainText("init -t next -b base -p ")
+  await expect(
+    page.getByRole("region", { name: "Registry namespace" })
+  ).toHaveCount(0)
+  await page
+    .getByRole("group", { name: "Library" })
+    .getByRole("button", { name: "Radix UI" })
+    .click()
+  await expect(init).toContainText("-b radix")
+  await expect(
+    page.getByRole("region", { name: "Registry namespace" })
+  ).toContainText("/r/styles/{style}/{name}.json")
+  await page.getByRole("checkbox", { name: "Lab results table" }).click()
+  await expect(
+    page.getByRole("region", { name: "Add OrganUI items" })
+  ).toContainText("@organui/vital-signs @organui/lab-results")
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+  expect(errors).toEqual([])
+})
