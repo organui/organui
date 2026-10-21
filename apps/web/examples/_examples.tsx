@@ -326,6 +326,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "form-rhf-demo": {
+    title: "Pain assessment form",
+    file: "form-rhf-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./form-rhf-demo")
+      return <Example />
+    },
+  },
   "body-map-form": {
     title: "In a Form",
     file: "body-map-form.tsx",

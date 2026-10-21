@@ -220,6 +220,7 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs/installation", "Installation"],
     ["/docs/theming", "Theming"],
     ["/docs/base-ui", "Base UI and Radix"],
+    ["/docs/forms", "Forms"],
     ["/docs/licences", "Licences"],
     ["/docs/mcp", "MCP"],
     ["/docs/changelog", "Changelog"],
@@ -243,6 +244,33 @@ test("guides and the component index pass an accessibility scan without overflow
     expect(axe.violations).toEqual([])
   }
   await page.screenshot({ path: info.outputPath("index.png"), fullPage: true })
+  expect(errors).toEqual([])
+})
+
+test("the forms guide validates the body map with React Hook Form", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/docs/forms")
+  const form = page.locator('[data-example="form-rhf-demo"]')
+  await form.getByRole("button", { name: "Submit" }).click()
+  await expect(form.getByText("Select at least one region.")).toBeVisible()
+  await expect(form.getByLabel("Main complaint")).toHaveAttribute(
+    "aria-invalid",
+    "true"
+  )
+
+  await form.getByLabel("Main complaint").fill("Knee pain")
+  await form
+    .getByRole("group", { name: "Front of body" })
+    .getByRole("checkbox", { name: "Right knee" })
+    .click()
+  await expect(form.getByText("Select at least one region.")).toHaveCount(0)
+  await form.getByRole("button", { name: "Submit" }).click()
+  await expect(
+    form.getByRole("status", { name: "Submitted values" })
+  ).toContainText('"right-knee"')
   expect(errors).toEqual([])
 })
 

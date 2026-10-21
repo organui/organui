@@ -245,6 +245,12 @@ export const guides: (NavLink & { description: string })[] = [
       "Install on either library, and the items that ship a copy for each.",
   },
   {
+    title: "Forms",
+    href: "/docs/forms",
+    description:
+      "Use the clinical inputs in forms with React Hook Form, Zod and shadcn's Field.",
+  },
+  {
     title: "Licences",
     href: "/docs/licences",
     description: "MIT code, and the licence each model and dataset keeps.",
@@ -320,6 +326,7 @@ export const mainNav: NavLink[] = [
 // Pages added in the latest release, marked with a dot in the sidebar.
 export const pagesNew: string[] = [
   "/docs/base-ui",
+  "/docs/forms",
   aiIndex.href,
   helpersIndex.href,
   utilitiesIndex.href,
