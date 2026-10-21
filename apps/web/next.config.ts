@@ -42,6 +42,13 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  // Every docs page is also served as Markdown at its address plus .md.
+  async rewrites() {
+    return [
+      { source: "/docs.md", destination: "/llm" },
+      { source: "/docs/:path*.md", destination: "/llm/:path*" },
+    ]
+  },
   // Component pages moved from /docs/<name> to /docs/components/<name>.
   // Items installed from v0.3.0 and earlier print the old address after
   // install, so these stay. Each is listed by name because /docs/<slug> is

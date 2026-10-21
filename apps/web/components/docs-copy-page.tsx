@@ -6,6 +6,7 @@ import {
   ChevronDownIcon,
   CopyIcon,
   ExternalLinkIcon,
+  FileTextIcon,
 } from "lucide-react"
 import { Button } from "@workspace/ui/components/button"
 import { ButtonGroup } from "@workspace/ui/components/button-group"
@@ -15,82 +16,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@workspace/ui/components/dropdown-menu"
+import { pageMarkdown } from "@/lib/page-markdown"
 
-// Docs pages are components rather than Markdown files, so the Markdown is
-// read from the rendered page: headings, text, lists, tables and code.
-// Previews, navigation and controls are left out.
-const skipped =
-  "nav, button, iframe, canvas, svg, [aria-hidden=true], [role=tablist], [data-slot=component-preview], [data-copy-skip]"
-
-function inline(node: Node): string {
-  if (node.nodeType === Node.TEXT_NODE) return node.textContent ?? ""
-  if (!(node instanceof HTMLElement) || node.matches(skipped)) return ""
-  const text = [...node.childNodes].map(inline).join("")
-  switch (node.tagName) {
-    case "CODE":
-      return `\`${node.textContent}\``
-    case "A": {
-      const href = node.getAttribute("href")
-      return href && !href.startsWith("#")
-        ? `[${text.trim()}](${new URL(href, location.href).href})`
-        : text
-    }
-    case "STRONG":
-    case "B":
-      return `**${text}**`
-    default:
-      return text
-  }
-}
-
-function line(node: Element) {
-  return inline(node).replace(/\s+/g, " ").trim()
-}
-
-function blocks(node: Element): string[] {
-  if (!(node instanceof HTMLElement) || node.matches(skipped)) return []
-  if (node.hidden) return []
-  const heading = /^H([1-6])$/.exec(node.tagName)
-  if (heading) return [`${"#".repeat(Number(heading[1]))} ${line(node)}`]
-  switch (node.tagName) {
-    case "P":
-      return line(node) ? [line(node)] : []
-    case "PRE":
-      return [`\`\`\`\n${node.textContent?.trimEnd()}\n\`\`\``]
-    case "UL":
-    case "OL":
-      return [
-        [...node.children]
-          .map((item, index) =>
-            node.tagName === "OL"
-              ? `${index + 1}. ${line(item)}`
-              : `- ${line(item)}`
-          )
-          .join("\n"),
-      ]
-    case "TABLE": {
-      const rows = [...node.querySelectorAll("tr")].map(
-        (row) => `| ${[...row.children].map(line).join(" | ")} |`
-      )
-      const columns = node.querySelector("tr")?.children.length ?? 0
-      return rows.length
-        ? [
-            [rows[0], `|${" --- |".repeat(columns)}`, ...rows.slice(1)].join(
-              "\n"
-            ),
-          ]
-        : []
-    }
-    default:
-      return [...node.children].flatMap(blocks)
-  }
-}
-
-function pageMarkdown() {
+function currentMarkdown() {
   const content = document.querySelector("[data-docs-content]")
-  return content
-    ? `${blocks(content).join("\n\n")}\n\nSource: ${location.href.split("#")[0]}\n`
-    : ""
+  return content ? pageMarkdown(content, location.href) : ""
 }
 
 function promptUrl(base: string) {
@@ -117,7 +47,7 @@ export function DocsCopyPage() {
         className="shadow-none"
         onClick={() =>
           navigator.clipboard
-            .writeText(pageMarkdown())
+            .writeText(currentMarkdown())
             .then(() => setCopied(true))
             .catch(() => {})
         }
@@ -146,6 +76,18 @@ export function DocsCopyPage() {
           <ChevronDownIcon />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuItem
+            onClick={() =>
+              window.open(
+                `${location.pathname.replace(/\/$/, "")}.md`,
+                "_blank",
+                "noopener"
+              )
+            }
+          >
+            <FileTextIcon />
+            View as Markdown
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
               window.open(
