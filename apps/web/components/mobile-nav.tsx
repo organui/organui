@@ -32,7 +32,13 @@ export function MobileNav({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         render={
-          <Button variant="ghost" className={cn("h-9 gap-2 px-2", className)} />
+          <Button
+            variant="ghost"
+            className={cn(
+              "extend-touch-target h-9 touch-manipulation gap-2 px-2 hover:bg-transparent dark:hover:bg-transparent",
+              className
+            )}
+          />
         }
       >
         <span aria-hidden="true" className="relative size-4">

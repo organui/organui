@@ -49,6 +49,7 @@ export function BlockViewer({
   title,
   description,
   view: src,
+  frameHeight,
   install,
   files,
   uses,
@@ -57,6 +58,7 @@ export function BlockViewer({
   title: string
   description?: string
   view: string
+  frameHeight: string
   install: string
   files: BlockViewerFile[]
   uses: string[]
@@ -213,7 +215,8 @@ export function BlockViewer({
                 src={src}
                 title={`${title} preview`}
                 loading="lazy"
-                className="h-[36rem] w-full bg-background lg:h-[44rem]"
+                style={{ height: frameHeight }}
+                className="w-full bg-background"
               />
             </ResizablePanel>
             <ResizableHandle className="relative hidden w-4 bg-transparent after:absolute after:top-1/2 after:right-0 after:left-auto after:h-8 after:w-1.5 after:translate-x-0 after:-translate-y-1/2 after:rounded-full after:bg-border after:transition-all hover:after:h-10 lg:flex" />

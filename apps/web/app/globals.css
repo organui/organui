@@ -9,6 +9,12 @@
   --selection-foreground: oklch(1 0 0);
 }
 
+@media (width >= 64rem) {
+  :root {
+    --header-height: calc(var(--spacing) * 16);
+  }
+}
+
 .dark {
   --selection: oklch(0.922 0 0);
   --selection-foreground: oklch(0.205 0 0);
@@ -18,6 +24,25 @@
   html {
     /* Anchors land below the sticky header. */
     scroll-padding-top: calc(var(--header-height) + 1rem);
+    @apply overscroll-y-none;
+  }
+
+  body {
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Taps show on touch screens, which have no hover. */
+  a:active,
+  button:active {
+    @apply opacity-60 md:opacity-100;
+  }
+
+  /* Code reads character by character, so "=>" stays two characters. */
+  code,
+  pre,
+  kbd {
+    font-variant-ligatures: none;
   }
 
   ::selection {
@@ -33,6 +58,13 @@
 
   [data-docs-content] :where(p, td) > a {
     @apply font-medium underline decoration-current/30 underline-offset-4 transition-colors hover:decoration-current;
+  }
+}
+
+/* A tap area at least 2rem larger than the control on touch screens. */
+@utility extend-touch-target {
+  @media (pointer: coarse) {
+    @apply relative touch-manipulation after:absolute after:-inset-2;
   }
 }
 

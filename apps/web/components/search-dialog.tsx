@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { CornerDownLeftIcon } from "lucide-react"
 import type { SearchEntry, SearchGroup } from "@/lib/search"
 import {
   Command,
@@ -13,6 +14,7 @@ import {
   CommandList,
 } from "@workspace/ui/components/command"
 import { Kbd } from "@workspace/ui/components/kbd"
+import { Separator } from "@workspace/ui/components/separator"
 
 // Lowercase, as cmdk reports it; the href keeps values unique.
 function itemValue(group: SearchGroup, entry: SearchEntry) {
@@ -75,9 +77,10 @@ export default function SearchDialog({
       onOpenChange={onOpenChange}
       title="Search"
       description="Search components, docs and blocks"
-      className="sm:max-w-lg"
+      className="rounded-xl! border-none bg-clip-padding p-2 pb-11 shadow-2xl ring-4 ring-neutral-200/80 sm:max-w-lg dark:bg-neutral-900 dark:ring-neutral-800"
     >
       <Command
+        className="rounded-none bg-transparent **:data-[slot=command-input-wrapper]:p-0 **:data-[slot=input-group]:h-9! **:data-[slot=input-group]:rounded-md! **:data-[slot=input-group]:border-input **:data-[slot=input-group]:bg-input/50"
         value={value}
         onValueChange={(next) => {
           setValue(next)
@@ -99,7 +102,7 @@ export default function SearchDialog({
         }}
       >
         <CommandInput placeholder="Search components, docs and blocks…" />
-        <CommandList className="max-h-[min(24rem,60svh)]">
+        <CommandList className="no-scrollbar max-h-[min(24rem,60svh)] min-h-[min(20rem,50svh)] scroll-pt-2 scroll-pb-1.5">
           {groups ? (
             <CommandEmpty>No results found.</CommandEmpty>
           ) : (
@@ -110,17 +113,22 @@ export default function SearchDialog({
             </div>
           )}
           {groups?.map((group) => (
-            <CommandGroup key={group.heading} heading={group.heading}>
+            <CommandGroup
+              key={group.heading}
+              heading={group.heading}
+              className="p-0! **:[[cmdk-group-heading]]:p-3! **:[[cmdk-group-heading]]:pb-1!"
+            >
               {group.entries.map((entry) => (
                 <CommandItem
                   key={entry.href}
                   value={itemValue(group, entry)}
                   keywords={entry.description ? [entry.description] : undefined}
                   onSelect={() => go(entry)}
+                  className="h-9 rounded-md border border-transparent px-3! font-medium data-selected:border-input data-selected:bg-input/50 [&>svg:last-child]:hidden"
                 >
                   {entry.title}
                   {entry.install && (
-                    <span className="ml-auto text-xs text-muted-foreground">
+                    <span className="ml-auto text-xs font-normal text-muted-foreground">
                       {group.heading === "Blocks" ? "Block" : "Component"}
                     </span>
                   )}
@@ -129,15 +137,30 @@ export default function SearchDialog({
             </CommandGroup>
           ))}
         </CommandList>
-        <div className="flex h-10 items-center gap-4 border-t px-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1.5">
-            <Kbd>↵</Kbd> Go to page
+        <div className="absolute inset-x-0 bottom-0 z-20 flex h-10 items-center gap-2 rounded-b-xl border-t border-t-neutral-100 bg-neutral-50 px-4 text-xs font-medium text-muted-foreground dark:border-t-neutral-700 dark:bg-neutral-800">
+          <span className="flex shrink-0 items-center gap-2">
+            <Kbd className="border bg-background">
+              <CornerDownLeftIcon />
+            </Kbd>
+            Go to Page
           </span>
           {highlighted?.install && (
-            <span className="flex items-center gap-1.5" aria-live="polite">
-              <Kbd>⌘</Kbd>
-              <Kbd>C</Kbd> {copied ? "Copied" : "Copy install command"}
-            </span>
+            <>
+              <Separator
+                orientation="vertical"
+                className="data-vertical:h-4 data-vertical:self-center"
+              />
+              <span
+                className="flex min-w-0 items-center gap-1"
+                aria-live="polite"
+              >
+                <Kbd className="border bg-background">⌘</Kbd>
+                <Kbd className="border bg-background">C</Kbd>
+                <span className="truncate font-mono">
+                  {copied ? "Copied" : highlighted.install}
+                </span>
+              </span>
+            </>
           )}
         </div>
       </Command>

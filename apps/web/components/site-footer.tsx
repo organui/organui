@@ -5,7 +5,7 @@ import { site } from "@/lib/site"
 // Pages outside the docs end with the credits and the project's links.
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/60">
+    <footer>
       <div className="flex w-full flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:px-6 sm:text-sm">
         <p className="text-center text-balance sm:text-start">
           MIT code; each model keeps its own licence, listed in{" "}

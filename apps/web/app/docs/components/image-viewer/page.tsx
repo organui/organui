@@ -130,9 +130,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="keyboard-and-pointer">
-          Keyboard and pointer
-        </DocsHeading>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           Tab focuses the image. Up and Down move one slice, Page Up and Page
           Down move ten, and Home and End jump to the first and last. Plus and

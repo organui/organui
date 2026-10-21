@@ -93,6 +93,7 @@ export default async function Page() {
                 title={block.title}
                 description={block.description}
                 view={block.view}
+                frameHeight={block.frameHeight}
                 install={block.install}
                 uses={block.uses}
                 files={block.files.map((file) => ({
@@ -100,9 +101,10 @@ export default async function Page() {
                   source: (
                     <CodeSnippet
                       label={`${file.installed} source`}
+                      title={file.installed}
                       code={block.sources.get(file.path) ?? ""}
                       className="h-full rounded-none border-0 dark:bg-transparent"
-                      contentClassName="h-full"
+                      contentClassName="min-h-0 flex-1"
                     />
                   ),
                 }))}

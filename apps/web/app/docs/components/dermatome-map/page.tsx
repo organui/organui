@@ -95,9 +95,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="keyboard-and-accessibility">
-          Keyboard and accessibility
-        </DocsHeading>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           The level list is one tab stop. Arrow keys move between levels, Home
           and End jump to C2 and S4-5, Enter or Space selects, and Escape clears

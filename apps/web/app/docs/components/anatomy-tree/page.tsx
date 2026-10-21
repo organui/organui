@@ -101,9 +101,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="keyboard-and-data-updates">
-          Keyboard and data updates
-        </DocsHeading>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           Tab enters the search field, then the tree as one tab stop. Up/Down
           move between visible rows; Home/End move to the first/last row. Right
@@ -112,6 +110,9 @@ export default function Page() {
           Selection and checked visibility are exposed separately to assistive
           technology.
         </p>
+      </section>
+      <section className="flex flex-col gap-4">
+        <DocsHeading id="data-updates">Data updates</DocsHeading>
         <p>
           Data updates retain state by ID. If the focused row disappears, focus
           returns to a visible ancestor or the first row; an empty result

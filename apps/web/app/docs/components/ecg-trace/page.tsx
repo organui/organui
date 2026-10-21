@@ -130,9 +130,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="accessibility-and-limits">
-          Accessibility and limits
-        </DocsHeading>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           The strip is an image whose name gives the lead, duration, paper
           settings and heart rate. Wave labels are hidden from assistive

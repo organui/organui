@@ -42,8 +42,33 @@ export function HomeShowcase() {
       {/* Light mode eases from the page into the grey; dark mode has no grey. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-48 bg-linear-to-b from-background via-muted to-transparent dark:hidden" />
       <div className="relative z-10 mx-auto max-w-[1400px] px-4 py-8 lg:max-h-[88rem] lg:px-8 lg:py-10">
-        {/* Three columns on wide screens, two then one below. */}
-        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 *:min-w-0 md:grid-cols-2 xl:grid-cols-3">
+        {/* Phones show a picture of the cards as a wide screen lays them out
+            (bun run screenshots), wider than the screen and cut at its edge. */}
+        <div className="-mx-4 -mt-8 overflow-hidden md:hidden">
+          <Image
+            src="/home/showcase-light.webp"
+            width={2432}
+            height={2800}
+            alt="Components for vital signs, anatomy, ECG, medication, growth and lab results"
+            sizes="140vw"
+            priority
+            className="h-auto w-[140vw] max-w-none dark:hidden"
+          />
+          <Image
+            src="/home/showcase-dark.webp"
+            width={2432}
+            height={2800}
+            alt="Components for vital signs, anatomy, ECG, medication, growth and lab results"
+            sizes="140vw"
+            priority
+            className="hidden h-auto w-[140vw] max-w-none dark:block"
+          />
+        </div>
+        {/* Three columns on wide screens, two below. */}
+        <div
+          data-showcase-cards
+          className="hidden grid-cols-2 items-start gap-4 *:min-w-0 md:grid xl:grid-cols-3"
+        >
           <div className="flex flex-col gap-4">
             <Tile title="Organs" href={organsPage.href}>
               <OrganPicks />

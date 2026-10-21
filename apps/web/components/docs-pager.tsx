@@ -50,10 +50,10 @@ export function DocsPagerIcons({ href }: { href: string }) {
   const { previous, next } = neighbours(href)
   const button = cn(
     buttonVariants({ variant: "secondary", size: "icon-sm" }),
-    "shadow-none"
+    "extend-touch-target size-8 shadow-none md:size-7"
   )
   return (
-    <div className="hidden shrink-0 items-center gap-2 sm:flex">
+    <div className="ms-auto flex shrink-0 items-center gap-2">
       {previous && (
         <Link
           href={previous.href}

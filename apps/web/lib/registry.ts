@@ -94,6 +94,9 @@ export const registryBlocks = catalog.items
     description: item.description,
     href: `/blocks#${item.name}`,
     view: `/view/${item.name}`,
+    // The height /blocks frames the block's page at on wide screens.
+    frameHeight:
+      ("meta" in item ? item.meta?.iframeHeight : undefined) ?? "44rem",
     json: `/r/${item.name}.json`,
     install: install(item),
     files: item.files.map((file) => ({

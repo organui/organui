@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "stage-registry": "bun scripts/stage-registry.ts",
     "thumbnails": "bun scripts/organ-thumbnails.ts",
-    "block-screenshots": "bun scripts/block-screenshots.ts",
+    "screenshots": "bun scripts/screenshots.ts",
     "test": "bun test tests"
   },
   "dependencies": {

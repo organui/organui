@@ -100,9 +100,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="keyboard-and-screen-readers">
-          Keyboard and screen readers
-        </DocsHeading>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           Each view is one tab stop. Arrow keys move to the nearest region in
           that direction, Home and End jump to the first and last region, and

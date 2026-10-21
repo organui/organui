@@ -15,12 +15,12 @@ export function DocsHeader({
 }) {
   return (
     <header className="flex flex-col gap-2">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 md:items-start">
         <h1 className="scroll-m-24 text-3xl font-semibold tracking-tight text-balance">
           {title}
         </h1>
         <div className="flex shrink-0 items-center gap-2">
-          <DocsCopyPage />
+          <DocsCopyPage href={href} />
           <DocsPagerIcons href={href} />
         </div>
       </div>

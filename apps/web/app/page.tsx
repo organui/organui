@@ -40,7 +40,7 @@ export default function Page() {
           <h1 className="max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-balance text-primary lg:leading-[1.1] xl:text-5xl xl:tracking-tighter">
             The interfaces healthcare deserves
           </h1>
-          <p className="max-w-2xl text-base text-balance text-muted-foreground sm:text-lg">
+          <p className="max-w-2xl text-base text-balance text-foreground sm:text-lg">
             {registryItems.length} open-source components for healthcare and
             life sciences: 3D anatomy, clinical charts, molecules and medical
             images. Install them as source with the shadcn CLI.
@@ -55,8 +55,8 @@ export default function Page() {
             <Link
               href="/docs/components"
               className={cn(
-                buttonVariants({ size: "sm", variant: "ghost" }),
-                "h-[35px] px-4"
+                buttonVariants({ size: "sm", variant: "secondary" }),
+                "h-[35px] px-4 shadow-none"
               )}
             >
               Browse Components
