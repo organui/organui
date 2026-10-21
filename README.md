@@ -1,32 +1,44 @@
-# OrganUI
+<p align="center">
+  <a href="https://organui.com">
+    <img src="apps/web/app/icon.svg" alt="OrganUI" width="72" height="74" />
+  </a>
+</p>
 
-Interfaces for healthcare and life sciences, distributed as editable source
-through a [shadcn](https://ui.shadcn.com)-compatible registry at
-[organui.com](https://organui.com).
+<h1 align="center">OrganUI</h1>
 
-## Install a component
+<p align="center">
+  The interfaces healthcare deserves.<br />
+  Open-source components for healthcare and life sciences, installed as source with the shadcn CLI.
+</p>
 
-In a React 19 project configured with shadcn, Tailwind CSS 4 and one of
-shadcn's Base UI styles:
+<p align="center">
+  <a href="https://organui.com/docs">Docs</a> ·
+  <a href="https://organui.com/docs/components">Components</a> ·
+  <a href="https://organui.com/blocks">Blocks</a> ·
+  <a href="https://organui.com/charts/area">Charts</a> ·
+  <a href="https://organui.com/create">Create</a> ·
+  <a href="https://organui.com/docs/changelog">Changelog</a>
+</p>
 
-```bash
-bunx shadcn@4.22.1 add @organui/anatomy-tree
-```
+<p align="center">
+  <a href="https://github.com/organui/organui/actions/workflows/registry.yml"><img src="https://github.com/organui/organui/actions/workflows/registry.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/organui/organui/releases"><img src="https://img.shields.io/github/v/release/organui/organui?label=release" alt="Latest release" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT licence" /></a>
+</p>
 
-`@organui` is in shadcn's registry directory, so this needs no
-`components.json` entry; `bunx shadcn@4.22.1 add https://organui.com/r/anatomy-tree.json`
-works the same. The repository is also a GitHub registry
-(`bunx shadcn@4.22.1 add organui/organui/anatomy-tree`). The
-[installation guide](https://organui.com/docs/installation) covers each, the
-optional manual namespace entry, [theming](https://organui.com/docs/theming)
-and the [Base UI requirement](https://organui.com/docs/base-ui).
+<p align="center">
+  <a href="https://organui.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/home/showcase-dark.webp" />
+      <img src="apps/web/public/home/showcase-light.webp" alt="OrganUI components: organs, vital signs, body map, ECG trace, medication schedule, growth chart and lab results" width="860" />
+    </picture>
+  </a>
+</p>
 
-## Organs
+## Quick start
 
-Every organ is a registry item named after it: `heart`, `brain`,
-`spinal-cord`, `nerves` and so on. The same viewer shows an animal cell's
-organelles as `cell`. Organs and the cell depend on `@organui/organ-viewer`,
-which the CLI installs with them.
+In a React 19 project set up with shadcn and Tailwind CSS 4, add any item by
+name:
 
 ```bash
 bunx shadcn@4.22.1 add @organui/heart
@@ -35,116 +47,65 @@ bunx shadcn@4.22.1 add @organui/heart
 ```tsx
 import { Heart } from "@/components/heart"
 
-;<Heart className="h-[32rem]" />
+export default function Page() {
+  return <Heart className="h-[32rem]" />
+}
 ```
 
-Each organ item ships only its own file: the organ's structures, views and
-model credit. Like shadcn's charts on `chart`, it depends on `organ-viewer`,
-which installs `organ-viewer.tsx` (three.js) once and is shared by every organ.
-The GLB loads at runtime and keeps its own licence (CC BY, CC BY-SA or CC0, per
-model); the viewer shows its credit. See
-[licences](https://organui.com/docs/licences) for every model and
-[the organ viewer documentation](https://organui.com/docs/components/organ-viewer).
+`@organui` is listed in shadcn's registry directory, so no setup is needed.
+The commands pin the shadcn version the registry is tested with.
+The code lands in your project, yours to change. `npx`, `pnpm dlx` and
+`yarn dlx` work the same way. New project? [Create](https://organui.com/create)
+picks the library, theme and items, and gives you the commands.
 
-## Molecules
+### Base UI and Radix
 
-`molecule-viewer` opens a PDB or mmCIF structure (by URL or text) as a cartoon,
-ball and stick or spacefill model, with residue selection and a sequence
-strip; it parses the file itself and needs only three.js. `dna-helix` draws a
-B-DNA double helix from a sequence, with selectable base pairs.
+Every item installs on shadcn's Base UI and Radix styles. Radix projects add
+OrganUI to `components.json` once, so the CLI fetches the Radix build:
 
-```bash
-bunx shadcn@4.22.1 add https://organui.com/r/molecule-viewer.json
+```json
+{
+  "registries": {
+    "@organui": "https://organui.com/r/styles/{style}/{name}.json"
+  }
+}
 ```
 
-```tsx
-import { MoleculeViewer } from "@/components/molecule-viewer"
+See [Base UI and Radix](https://organui.com/docs/base-ui) for which items ship
+a copy for each library.
 
-;<MoleculeViewer src="https://files.rcsb.org/download/1CRN.cif" />
-```
+## What's inside
 
-The docs site serves a small sample, crambin (PDB 1CRN, CC0), at
-`organui.com/models/crambin.pdb`. See [the molecule viewer](https://organui.com/docs/components/molecule-viewer)
-and [DNA helix](https://organui.com/docs/components/dna-helix) documentation.
+|                                                                                                         |                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Organs](https://organui.com/docs/components/organs)**                                                | 42 interactive 3D organs, from the heart and brain to the spinal cord and skin, on one shared [organ viewer](https://organui.com/docs/components/organ-viewer), with an [anatomy tree](https://organui.com/docs/components/anatomy-tree) to select and hide structures. |
+| **[Clinical](https://organui.com/docs/components)**                                                     | Vital signs, lab results with trends, an ECG trace, a growth chart, a medication schedule with interaction warnings, a body map and a dermatome map.                                                                                                                    |
+| **[Imaging and molecules](https://organui.com/docs/components)**                                        | A CT and MRI slice viewer with a DICOM reader, a PDB and mmCIF molecule viewer, a DNA helix and an animal cell.                                                                                                                                                         |
+| **[AI Elements](https://organui.com/docs/ai-elements)**                                                 | The clinical side of an AI interface, on shadcn's components: AI disclaimers, record citations and sources, a differential list, clinician sign-off and AI-drafted notes.                                                                                               |
+| **[Blocks](https://organui.com/blocks)**                                                                | Whole layouts, such as an organ explorer with its anatomy panel, that install a page and its components.                                                                                                                                                                |
+| **[Charts](https://organui.com/charts/area)**                                                           | 21 charts of health data on shadcn's chart component: vitals, labs, beds, adherence and outcomes.                                                                                                                                                                       |
+| **[Helpers](https://organui.com/docs/helpers)** and **[utilities](https://organui.com/docs/utilities)** | Ages, z-scores, reference ranges, unit conversion and body measurements in TypeScript; heartbeat, ECG grid and severity colour classes in CSS.                                                                                                                          |
 
-## ECG trace
+Components read your shadcn theme tokens and follow its dark mode. They are
+keyboard and screen reader accessible, checked with axe in every pull request.
 
-`ecg-trace` draws a recorded trace or a live stream as a rhythm strip on
-standard ECG paper (25 mm/s, 10 mm/mV), with P, QRS and T labelled and a
-synthetic sinus rhythm for demos. It is SVG only and not for diagnostic use.
-The grid is red by default; set `--ecg-grid` in your CSS to change it.
+> [!IMPORTANT]
+> OrganUI is for building interfaces. It is not a medical device: nothing in
+> it diagnoses, alarms or replaces clinical judgement, and its example data is
+> fictional.
 
-```tsx
-import { EcgTrace, syntheticEcg } from "@/components/ui/ecg-trace"
+### 3D models
 
-;<EcgTrace samples={syntheticEcg({ heartRate: 72 })} sampleRate={250} />
-```
+Organ models load at runtime and keep their own licences (CC BY, CC BY-SA or
+CC0); the viewer shows each model's credit. [Licences](https://organui.com/docs/licences)
+lists every model and dataset.
 
-See [the ECG trace documentation](https://organui.com/docs/components/ecg-trace).
+### For AI assistants
 
-## Dermatome map
-
-`dermatome-map` draws the front and back of the body split into the 28 ISNCSCI
-sensory levels (C2 to S4-5). A level is chosen from the body or a keyboard list,
-and shows its area and key sensory point. It is SVG only, a simplified
-illustration, and not a clinical tool.
-
-```tsx
-import { DermatomeMap } from "@/components/ui/dermatome-map"
-
-;<DermatomeMap selectedId={level} onSelectionChange={setLevel} />
-```
-
-See [the dermatome map documentation](https://organui.com/docs/components/dermatome-map).
-
-## Medical image viewer
-
-`image-viewer` shows a stack of CT or MRI slices with a slice slider, window
-and level (drag or CT presets), zoom, pan and a pixel value readout, on a 2D
-canvas. It installs `lib/dicom.ts`, a reader for uncompressed single-frame
-grayscale DICOM files, and `lib/head-phantom.ts`, a generated head phantom in
-Hounsfield units for demos. Not a medical device.
-
-```tsx
-import { ImageViewer, ctWindowPresets } from "@/components/ui/image-viewer"
-import { createHeadPhantom } from "@/lib/head-phantom"
-
-;<ImageViewer {...createHeadPhantom()} presets={ctWindowPresets} />
-```
-
-See [the medical image viewer documentation](https://organui.com/docs/components/image-viewer).
-
-## Blocks
-
-Blocks are whole layouts built from those pieces, following shadcn's
-`registry:block` convention: a page plus the components it needs.
-
-| Block         | Layout                                                                       |
-| ------------- | ---------------------------------------------------------------------------- |
-| `explorer-01` | Viewer with an anatomy panel that docks beside it, or opens as a sheet       |
-| `explorer-02` | Full-height workspace: tree sidebar and a card to hide or isolate structures |
-| `explorer-03` | One viewer switching between several organs                                  |
-
-```bash
-bunx shadcn@4.22.1 add @organui/explorer-01
-```
-
-Blocks ship their own page and layout and install the OrganUI items they use,
-such as `organ-viewer`, `heart` and `anatomy-tree`, as dependencies.
-
-In Next.js this adds a page at `app/explorer/page.tsx`; other frameworks get
-the components only. Previews are at [organui.com/blocks](https://organui.com/blocks).
-
-## Repository
-
-| Path                    | Contents                                                          |
-| ----------------------- | ----------------------------------------------------------------- |
-| `apps/web`              | Website, component documentation and the staged registry (`/r`)   |
-| `packages/registry`     | `registry.json`, item source under `registry/` and `shadcn build` |
-| `packages/registry-e2e` | Generated Next.js/Vite consumers and Playwright browser tests     |
-| `packages/ui`           | Private website foundation (theme, internal components)           |
-| `packages/*-config`     | Shared ESLint and TypeScript configuration                        |
-| `models`                | Build scripts and attribution for organ models kept in this repo  |
+The docs are available as Markdown (add `.md` to any docs address) and indexed
+at [organui.com/llms.txt](https://organui.com/llms.txt). With the
+[shadcn MCP server](https://organui.com/docs/mcp), assistants can browse and
+install OrganUI items.
 
 ## Develop
 
@@ -155,17 +116,32 @@ bun install --frozen-lockfile
 bun run dev
 ```
 
-Then open `http://localhost:3000/docs`. Run tasks from the root so
-Turborepo builds and stages the registry first; `next build` alone does not.
-No environment variables are needed; [.env.example](.env.example) lists
-the optional ones.
+Then open `http://localhost:3000`. Run tasks from the root, so Turborepo
+builds and stages the registry first.
 
-`bun run lint`, `bun run typecheck`, `bun run test` and `bun run format:check`
-cover the quick checks. [docs/architecture.md](docs/architecture.md) describes
-the registry boundaries and the consumer, browser and cache suites.
+| Path                    | Contents                                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- |
+| `apps/web`              | The website and documentation, which serves the registry at `/r`                                     |
+| `packages/registry`     | `registry.json` and every item's source, for Base UI (`base-nova`) and Radix (`radix-nova`)          |
+| `packages/registry-e2e` | Generated Next.js, Vite and Radix projects that install every item, and the Playwright browser tests |
+| `packages/ui`           | The website's own components and theme                                                               |
+| `models`                | Build scripts and attribution for organ models kept here                                             |
+
+`bun run format:check`, `bun run lint`, `bun run typecheck` and `bun run test`
+are the quick checks. CI also builds the registry, installs every item into the
+generated projects and runs the browser tests.
+[docs/architecture.md](docs/architecture.md) describes how the pieces fit.
+
+## Contributing
+
+Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+first; changes to what the registry installs come with a
+[changeset](.changeset/README.md), which becomes their line in the release
+notes. Report security issues as described in [SECURITY.md](SECURITY.md).
 
 ## License
 
-OrganUI code is licensed under [MIT](LICENSE). Third-party dependencies, fonts,
-and other upstream material retain their own licenses; see
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+OrganUI's code is [MIT](LICENSE). Models, datasets and other third-party
+material keep their own licences; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and
+[Licences](https://organui.com/docs/licences).
