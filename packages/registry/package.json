@@ -17,6 +17,7 @@
     "./molecule-viewer": "./registry/base-nova/molecule-viewer/molecule-viewer.tsx",
     "./dna-helix": "./registry/base-nova/dna-helix/dna-helix.tsx",
     "./blocks/*": "./registry/base-nova/blocks/*.tsx",
+    "./charts/*": "./registry/base-nova/charts/*.tsx",
     "./registry.json": "./registry.json",
     "./ai-disclaimer": "./registry/base-nova/ai-disclaimer/ai-disclaimer.tsx",
     "./clinical-citation": "./registry/base-nova/clinical-citation/clinical-citation.tsx",
@@ -89,6 +90,7 @@
     "@base-ui/react": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.0",
+    "recharts": "3.10.1",
     "three": "^0.186.1"
   },
   "peerDependencies": {

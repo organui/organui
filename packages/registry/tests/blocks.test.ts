@@ -5,7 +5,14 @@ import packageJson from "../package.json"
 import bodySystems from "../body-systems.json"
 import registry from "../registry.json"
 
-const blocks = registry.items.filter((item) => item.type === "registry:block")
+// Charts are blocks too, as in shadcn's registry, documented on /charts.
+const charts = registry.items.filter((item) =>
+  item.categories?.includes("charts")
+)
+const blocks = registry.items.filter(
+  (item) =>
+    item.type === "registry:block" && !item.categories?.includes("charts")
+)
 // Helpers (/docs/helpers) and CSS utilities (/docs/utilities).
 const utilities = registry.items.filter(
   (item) =>
@@ -77,8 +84,9 @@ test("no two items ship the same file", () => {
 
 for (const item of registry.items) {
   test(`${item.name} ships its own files and lists everything it imports`, async () => {
-    const folder =
-      item.type === "registry:block"
+    const folder = item.categories?.includes("charts")
+      ? "registry/base-nova/charts/"
+      : item.type === "registry:block"
         ? `registry/base-nova/blocks/${item.name}/`
         : `registry/base-nova/${item.name}/`
     const shipped = new Set<string>()
@@ -123,8 +131,12 @@ for (const item of registry.items) {
 // shadcn prints an item's docs after installing it.
 test("every item links its documentation after install", () => {
   for (const item of registry.items) {
-    const page =
-      item.type === "registry:block"
+    const kind = item.categories
+      ?.find((category) => category.startsWith("charts-"))
+      ?.replace("charts-", "")
+    const page = kind
+      ? `${item.title}: https://organui.com/charts/${kind}#${item.name}`
+      : item.type === "registry:block"
         ? `${item.title}: https://organui.com/blocks#${item.name}`
         : item.categories?.includes("utility")
           ? `${item.title} docs: https://organui.com/docs/utilities`
@@ -233,3 +245,14 @@ for (const block of blocks) {
         ).toBe(true)
   })
 }
+
+test("each chart has one chart type and installs one file", () => {
+  expect(charts.length).toBeGreaterThan(0)
+  for (const chart of charts) {
+    expect(
+      chart.categories?.filter((category) => category.startsWith("charts-"))
+    ).toHaveLength(1)
+    expect(chart.files).toHaveLength(1)
+    expect(chart.registryDependencies).toEqual(["card", "chart"])
+  }
+})

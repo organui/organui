@@ -1393,20 +1393,37 @@ test("the colours page lists every organ's structure colours to copy", async ({
   expect(errors).toEqual([])
 })
 
-test("the charts page shows each chart with its code", async ({ page }) => {
+test("charts show health data on shadcn's chart, with their code", async ({
+  page,
+}) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/charts")
+  await expect(page).toHaveURL(/\/charts\/area$/)
   await expect(
-    page.getByRole("heading", { name: "Charts", level: 1 })
+    page.getByRole("heading", { name: "Charts for Health Data", level: 1 })
   ).toBeVisible()
-  const ecg = page.getByRole("region", { name: "ECG charts" })
-  await expect(
-    ecg.getByRole("img", { name: /Sinus bradycardia, 46 bpm/ })
-  ).toBeVisible()
-  await ecg.getByRole("button", { name: "View code: Bradycardia" }).click()
-  await expect(page.getByRole("dialog")).toContainText("heartRate: 46")
+  const types = page.getByRole("navigation", { name: "Chart types" })
+  await expect(types.getByRole("link")).toHaveText([
+    "Area Charts",
+    "Bar Charts",
+    "Line Charts",
+    "Pie Charts",
+    "Radar Charts",
+    "Radial Charts",
+  ])
+  await page
+    .getByRole("button", { name: "View code: Admissions area chart" })
+    .click()
+  await expect(page.getByRole("dialog")).toContainText(
+    "export function ChartAreaAdmissions"
+  )
   await page.keyboard.press("Escape")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+  await types.getByRole("link", { name: "Radial Charts" }).click()
+  await expect(page).toHaveURL(/\/charts\/radial/)
+  await expect(
+    page.getByRole("button", { name: "View code: Steps radial chart" })
+  ).toBeVisible()
   expect(errors).toEqual([])
 })

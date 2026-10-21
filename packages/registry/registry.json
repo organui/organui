@@ -1245,6 +1245,342 @@
       ],
       "categories": ["explorer"],
       "docs": "Explorer 03: https://organui.com/blocks#explorer-03. Keep the organ viewer's model credit visible."
+    },
+    {
+      "name": "chart-area-admissions",
+      "type": "registry:block",
+      "title": "Admissions area chart",
+      "description": "Hospital admissions by month, as an area chart.",
+      "categories": ["charts", "charts-area"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-area-admissions.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Admissions area chart: https://organui.com/charts/area#chart-area-admissions"
+    },
+    {
+      "name": "chart-area-census",
+      "type": "registry:block",
+      "title": "Census area chart",
+      "description": "Daily census by status, as a stacked area chart.",
+      "categories": ["charts", "charts-area"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-area-census.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Census area chart: https://organui.com/charts/area#chart-area-census"
+    },
+    {
+      "name": "chart-area-heart-rate",
+      "type": "registry:block",
+      "title": "Heart rate area chart",
+      "description": "Heart rate across a shift, as a gradient area chart.",
+      "categories": ["charts", "charts-area"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-area-heart-rate.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Heart rate area chart: https://organui.com/charts/area#chart-area-heart-rate"
+    },
+    {
+      "name": "chart-area-oxygen",
+      "type": "registry:block",
+      "title": "Oxygen weaning area chart",
+      "description": "Oxygen flow rate over time, as a step area chart.",
+      "categories": ["charts", "charts-area"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-area-oxygen.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Oxygen weaning area chart: https://organui.com/charts/area#chart-area-oxygen"
+    },
+    {
+      "name": "chart-bar-appointments",
+      "type": "registry:block",
+      "title": "Appointments bar chart",
+      "description": "Clinic appointments attended and missed, as a stacked bar chart.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-appointments.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Appointments bar chart: https://organui.com/charts/bar#chart-bar-appointments"
+    },
+    {
+      "name": "chart-bar-diagnoses",
+      "type": "registry:block",
+      "title": "Top diagnoses bar chart",
+      "description": "Most common discharge diagnoses, as a horizontal bar chart.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-diagnoses.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Top diagnoses bar chart: https://organui.com/charts/bar#chart-bar-diagnoses"
+    },
+    {
+      "name": "chart-bar-ed-visits",
+      "type": "registry:block",
+      "title": "ED visits bar chart",
+      "description": "Emergency department visits by weekday, as a bar chart.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-ed-visits.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "ED visits bar chart: https://organui.com/charts/bar#chart-bar-ed-visits"
+    },
+    {
+      "name": "chart-bar-vaccinations",
+      "type": "registry:block",
+      "title": "Vaccinations bar chart",
+      "description": "Vaccine doses by age group, as a multiple bar chart.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-vaccinations.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Vaccinations bar chart: https://organui.com/charts/bar#chart-bar-vaccinations"
+    },
+    {
+      "name": "chart-line-blood-pressure",
+      "type": "registry:block",
+      "title": "Blood pressure line chart",
+      "description": "Home blood pressure readings, as a multiple line chart.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-blood-pressure.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Blood pressure line chart: https://organui.com/charts/line#chart-line-blood-pressure"
+    },
+    {
+      "name": "chart-line-glucose",
+      "type": "registry:block",
+      "title": "Fasting glucose line chart",
+      "description": "Fasting glucose readings, as a line chart with dots.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-glucose.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Fasting glucose line chart: https://organui.com/charts/line#chart-line-glucose"
+    },
+    {
+      "name": "chart-line-hba1c",
+      "type": "registry:block",
+      "title": "HbA1c line chart",
+      "description": "HbA1c by quarter, as a line chart with labels.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-hba1c.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "HbA1c line chart: https://organui.com/charts/line#chart-line-hba1c"
+    },
+    {
+      "name": "chart-line-insulin",
+      "type": "registry:block",
+      "title": "Insulin titration line chart",
+      "description": "Basal insulin dose titration, as a step line chart.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-insulin.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin titration line chart: https://organui.com/charts/line#chart-line-insulin"
+    },
+    {
+      "name": "chart-pie-adherence",
+      "type": "registry:block",
+      "title": "Adherence pie chart",
+      "description": "Medication adherence, as a pie chart with a legend.",
+      "categories": ["charts", "charts-pie"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-pie-adherence.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Adherence pie chart: https://organui.com/charts/pie#chart-pie-adherence"
+    },
+    {
+      "name": "chart-pie-blood-types",
+      "type": "registry:block",
+      "title": "Blood donations pie chart",
+      "description": "Blood donations by type, as a pie chart.",
+      "categories": ["charts", "charts-pie"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-pie-blood-types.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Blood donations pie chart: https://organui.com/charts/pie#chart-pie-blood-types"
+    },
+    {
+      "name": "chart-pie-occupancy",
+      "type": "registry:block",
+      "title": "Bed occupancy pie chart",
+      "description": "Bed occupancy, as a donut chart with the total.",
+      "categories": ["charts", "charts-pie"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-pie-occupancy.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Bed occupancy pie chart: https://organui.com/charts/pie#chart-pie-occupancy"
+    },
+    {
+      "name": "chart-radar-outcomes",
+      "type": "registry:block",
+      "title": "Outcomes radar chart",
+      "description": "Patient-reported outcomes before and after, as a radar chart.",
+      "categories": ["charts", "charts-radar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-radar-outcomes.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Outcomes radar chart: https://organui.com/charts/radar#chart-radar-outcomes"
+    },
+    {
+      "name": "chart-radar-sleep",
+      "type": "registry:block",
+      "title": "Sleep radar chart",
+      "description": "Sleep quality by domain, as a radar chart with a circular grid.",
+      "categories": ["charts", "charts-radar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-radar-sleep.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Sleep radar chart: https://organui.com/charts/radar#chart-radar-sleep"
+    },
+    {
+      "name": "chart-radar-symptoms",
+      "type": "registry:block",
+      "title": "Symptoms radar chart",
+      "description": "A symptom profile, as a radar chart.",
+      "categories": ["charts", "charts-radar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-radar-symptoms.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Symptoms radar chart: https://organui.com/charts/radar#chart-radar-symptoms"
+    },
+    {
+      "name": "chart-radial-coverage",
+      "type": "registry:block",
+      "title": "Vaccine coverage radial chart",
+      "description": "Vaccination coverage by vaccine, as a radial chart.",
+      "categories": ["charts", "charts-radial"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-radial-coverage.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Vaccine coverage radial chart: https://organui.com/charts/radial#chart-radial-coverage"
+    },
+    {
+      "name": "chart-radial-fluids",
+      "type": "registry:block",
+      "title": "Fluid balance radial chart",
+      "description": "Fluid intake and output, as a stacked radial chart.",
+      "categories": ["charts", "charts-radial"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-radial-fluids.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Fluid balance radial chart: https://organui.com/charts/radial#chart-radial-fluids"
+    },
+    {
+      "name": "chart-radial-steps",
+      "type": "registry:block",
+      "title": "Steps radial chart",
+      "description": "Daily steps toward a goal, as a radial chart with text.",
+      "categories": ["charts", "charts-radial"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-radial-steps.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Steps radial chart: https://organui.com/charts/radial#chart-radial-steps"
     }
   ]
 }

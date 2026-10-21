@@ -79,6 +79,8 @@ const nextConfig: NextConfig = {
           destination: `/docs/components/${item.name}`,
           permanent: true,
         })),
+      // Charts open on their first type, as on shadcn/ui.
+      { source: "/charts", destination: "/charts/area", permanent: false },
       // Themes live in Create, as on shadcn/ui.
       { source: "/themes", destination: "/create", permanent: true },
       // The organs gallery's first address.

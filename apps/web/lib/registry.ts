@@ -158,7 +158,10 @@ export function installedPath(file: {
 }
 
 export const registryBlocks = catalog.items
-  .filter((item) => item.type === "registry:block")
+  .filter(
+    (item) =>
+      item.type === "registry:block" && !item.categories?.includes("charts")
+  )
   .map((item) => ({
     name: item.name,
     title: item.title ?? item.name,
@@ -184,6 +187,30 @@ export const registryBlocks = catalog.items
 // The CLI fills {style} from components.json, so each project gets the
 // build for its library: Radix styles need this, Base UI styles work with or
 // without it.
+// The chart types /charts shows, each a page of charts, as on shadcn/ui.
+export const chartTypes = [
+  { type: "area", title: "Area Charts" },
+  { type: "bar", title: "Bar Charts" },
+  { type: "line", title: "Line Charts" },
+  { type: "pie", title: "Pie Charts" },
+  { type: "radar", title: "Radar Charts" },
+  { type: "radial", title: "Radial Charts" },
+] as const
+
+export type ChartType = (typeof chartTypes)[number]["type"]
+
+export const chartItems = catalog.items
+  .filter((item) => item.categories?.includes("charts"))
+  .map((item) => ({
+    name: item.name,
+    title: item.title ?? item.name,
+    description: item.description,
+    type: (item.categories ?? [])
+      .find((category) => category.startsWith("charts-"))!
+      .replace("charts-", "") as ChartType,
+    install: install(item),
+  }))
+
 export const registryNamespace = JSON.stringify(
   { registries: { "@organui": `${site.url}/r/styles/{style}/{name}.json` } },
   null,
@@ -286,7 +313,7 @@ export const mainNav: NavLink[] = [
   { title: "Components", href: componentsIndex.href },
   { title: organsPage.title, href: organsPage.href },
   { title: "Blocks", href: "/blocks" },
-  { title: "Charts", href: "/charts" },
+  { title: "Charts", href: "/charts/area" },
   { title: "Create", href: "/create" },
 ]
 

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 import {
+  chartTypes,
   componentsIndex,
   guides,
   installationGuides,
@@ -24,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     componentsIndex.href,
     organsPage.href,
     "/blocks",
-    "/charts",
+    ...chartTypes.map(({ type }) => `/charts/${type}`),
     "/colors",
     "/create",
     ...registryItems.map((item) => item.href),

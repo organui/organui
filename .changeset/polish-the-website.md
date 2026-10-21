@@ -18,4 +18,7 @@ New items:
 - Utilities: one item adds the heartbeat, ECG grid and severity classes to
   the CSS file, as shadcn's utilities come together.
 
+Charts: 21 charts of health data (area, bar, line, pie, radar and radial)
+built on shadcn's chart and card, each installable like shadcn's charts.
+
 Blocks carry the height /blocks frames them at, in `meta.iframeHeight`.

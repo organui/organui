@@ -7,6 +7,12 @@
 
 :root {
   --header-height: calc(var(--spacing) * 14);
+  /* Blue charts, as on shadcn/ui's site. */
+  --chart-1: var(--color-blue-300);
+  --chart-2: var(--color-blue-500);
+  --chart-3: var(--color-blue-600);
+  --chart-4: var(--color-blue-700);
+  --chart-5: var(--color-blue-800);
   --selection: oklch(0.145 0 0);
   --selection-foreground: oklch(1 0 0);
 }
@@ -18,6 +24,11 @@
 }
 
 .dark {
+  --chart-1: var(--color-blue-300);
+  --chart-2: var(--color-blue-500);
+  --chart-3: var(--color-blue-600);
+  --chart-4: var(--color-blue-700);
+  --chart-5: var(--color-blue-800);
   --selection: oklch(0.922 0 0);
   --selection-foreground: oklch(0.205 0 0);
 }

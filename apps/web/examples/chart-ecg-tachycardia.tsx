@@ -1,9 +1,0 @@
-"use client"
-import { EcgTrace, syntheticEcg } from "@workspace/registry/ecg-trace"
-
-// A synthetic rhythm at 128 bpm, above 100.
-const samples = syntheticEcg({ heartRate: 128, duration: 6 })
-
-export function Example() {
-  return <EcgTrace samples={samples} label="Sinus tachycardia, 128 bpm" />
-}

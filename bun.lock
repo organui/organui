@@ -63,11 +63,12 @@
     },
     "packages/registry": {
       "name": "@workspace/registry",
-      "version": "0.0.0",
+      "version": "0.4.0",
       "dependencies": {
         "@base-ui/react": "^1.9.0",
         "class-variance-authority": "^0.7.1",
         "cn": "^0.5.0",
+        "recharts": "3.10.1",
         "three": "^0.186.1",
       },
       "devDependencies": {

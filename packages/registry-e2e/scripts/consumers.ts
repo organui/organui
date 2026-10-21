@@ -727,6 +727,32 @@ try {
       ],
       dir
     )
+    // Charts install as blocks, with shadcn's chart and card.
+    const charts = catalog.items
+      .filter(
+        (item) => "categories" in item && item.categories?.includes("charts")
+      )
+      .map(({ name }) => name)
+    await run(
+      [
+        "node",
+        shadcn,
+        "add",
+        ...charts.map((name) =>
+          byName
+            ? `@organui/${name}`
+            : `http://127.0.0.1:${server.port}/${name}.json`
+        ),
+        ...(framework === "vite" ? ["--overwrite"] : []),
+        "--yes",
+      ],
+      dir
+    )
+    for (const name of charts)
+      if (
+        !(await Bun.file(resolve(dir, `${componentDir}/${name}.tsx`)).exists())
+      )
+        throw new Error(`The ${name} chart was not installed`)
     for (const name of aiElements) {
       const installed = await readFile(
         resolve(dir, `${uiDir}/${name}.tsx`),
