@@ -74,7 +74,7 @@ export default function RootLayout({
         </a>
         <ThemeProvider>{children}</ThemeProvider>
         {/* The script is served only on Vercel deployments. */}
-        {process.env.VERCEL && <Analytics />}
+        {process.env.VERCEL_ENV && <Analytics />}
       </body>
     </html>
   )
