@@ -207,6 +207,8 @@ test("homepage explorer links support keyboard navigation without overflow", asy
 test("guides and the component index pass an accessibility scan without overflow", async ({
   page,
 }, info) => {
+  // A scan per guide, a dozen of them.
+  test.setTimeout(90_000)
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   for (const [path, title] of [
