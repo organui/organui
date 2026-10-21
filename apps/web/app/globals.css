@@ -7,6 +7,9 @@
 
 :root {
   --header-height: calc(var(--spacing) * 14);
+  /* Code sits on its own surface, as on shadcn/ui's site. */
+  --code: oklch(0.98 0 0);
+  --code-foreground: var(--foreground);
   /* Blue charts, as on shadcn/ui's site. */
   --chart-1: var(--color-blue-300);
   --chart-2: var(--color-blue-500);
@@ -24,6 +27,8 @@
 }
 
 .dark {
+  --code: oklch(0.2 0 0);
+  --code-foreground: oklch(0.708 0 0);
   --chart-1: var(--color-blue-300);
   --chart-2: var(--color-blue-500);
   --chart-3: var(--color-blue-600);
@@ -31,6 +36,18 @@
   --chart-5: var(--color-blue-800);
   --selection: oklch(0.922 0 0);
   --selection-foreground: oklch(0.205 0 0);
+}
+
+@theme inline {
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+}
+
+/* The site's code blocks fill the code surface instead of drawing a border,
+   as shadcn/ui's do. Unlayered, so it wins over the block's own classes. */
+[data-slot="code-block"][data-variant="default"] {
+  border-color: transparent;
+  background-color: var(--color-code);
 }
 
 @layer base {

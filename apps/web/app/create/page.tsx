@@ -1,15 +1,13 @@
 import { CreateStudio, type CreateGroup } from "@/components/create-studio"
-import { PageHeader } from "@/components/page-header"
-import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeShowcase } from "@/components/theme-showcase"
 import {
   aiItems,
   componentGroups,
   docsMetadata,
+  helperItems,
   registryItems,
   shadcn,
-  helperItems,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -32,22 +30,17 @@ const groups: CreateGroup[] = [
   { title: "Utilities", items: [{ name: "utilities", title: "Utilities" }] },
 ]
 
+// A workspace rather than a page, as on shadcn/ui: no footer.
 export default function Page() {
   return (
     <div className="flex min-h-svh flex-col">
       <SiteHeader />
       <main id="main" className="flex flex-1 flex-col">
-        <PageHeader
-          title="Create"
-          description="Pick a library, framework, theme and icons, choose the OrganUI items you need, and copy two commands to set up the project."
-        />
-        <div className="mx-auto w-full max-w-[1400px] px-4 pb-16 lg:px-8">
-          <CreateStudio shadcn={shadcn} site={site.url} groups={groups}>
-            <ThemeShowcase />
-          </CreateStudio>
-        </div>
+        <h1 className="sr-only">Create a project</h1>
+        <CreateStudio shadcn={shadcn} site={site.url} groups={groups}>
+          <ThemeShowcase />
+        </CreateStudio>
       </main>
-      <SiteFooter />
     </div>
   )
 }

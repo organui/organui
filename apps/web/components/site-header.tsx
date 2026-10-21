@@ -40,15 +40,16 @@ export function SiteHeader() {
             className="data-vertical:h-4 data-vertical:self-center"
           />
           <ModeSwitcher />
+          {/* Phones have no room for it beside the menu and logo. */}
           <Separator
             orientation="vertical"
-            className="data-vertical:h-4 data-vertical:self-center"
+            className="hidden sm:block data-vertical:h-4 data-vertical:self-center"
           />
           <Link
             href="/create"
             className={cn(
               buttonVariants({ size: "sm" }),
-              "h-[31px] rounded-lg"
+              "hidden h-[31px] rounded-lg sm:inline-flex"
             )}
           >
             <PlusIcon data-icon="inline-start" />

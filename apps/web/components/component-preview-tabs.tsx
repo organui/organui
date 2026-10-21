@@ -47,7 +47,7 @@ export function ComponentPreviewTabs({
         <div
           data-align={align}
           className={cn(
-            "preview relative flex h-72 w-full justify-center p-4 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start sm:p-6",
+            "preview relative flex h-72 w-full justify-center p-4 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start sm:p-10",
             previewClassName
           )}
         >
@@ -59,12 +59,12 @@ export function ComponentPreviewTabs({
           ref={codeRef}
           data-slot="code"
           data-mobile-code-visible={isMobileCodeVisible}
-          className="relative min-w-0 overflow-hidden [&_pre]:max-h-72"
+          className="relative min-w-0 overflow-hidden border-t [&_pre]:max-h-72"
         >
           {isMobileCodeVisible ? (
             <>
               {source}
-              <div className="flex justify-center border-t p-2">
+              <div className="flex justify-center border-t bg-code p-2">
                 <Button
                   type="button"
                   size="sm"
@@ -83,11 +83,12 @@ export function ComponentPreviewTabs({
               <div aria-hidden="true" className="pointer-events-none">
                 {sourcePreview}
               </div>
-              <div className="absolute inset-0 flex items-center justify-center bg-linear-to-t from-background via-background/70 to-transparent">
+              <div className="absolute inset-0 flex items-center justify-center bg-linear-to-t from-code via-code/60 to-transparent pb-4">
                 <Button
                   type="button"
                   size="sm"
                   variant="outline"
+                  className="rounded-lg bg-background text-foreground shadow-none hover:bg-muted dark:bg-background dark:text-foreground dark:hover:bg-muted"
                   onClick={() => {
                     toggled.current = true
                     setIsMobileCodeVisible(true)

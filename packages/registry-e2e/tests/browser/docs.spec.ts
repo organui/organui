@@ -669,7 +669,11 @@ test("blocks gallery previews and installs every block", async ({
   )
   const blocks = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
-    .items.filter(({ type }) => type === "registry:block")
+    // Charts are blocks too, shown on /charts.
+    .items.filter(
+      ({ type, categories }) =>
+        type === "registry:block" && !categories?.includes("charts")
+    )
   expect(blocks.length).toBeGreaterThan(0)
   await page.goto("/docs")
   if ((page.viewportSize()?.width ?? 0) < 768)
@@ -1352,22 +1356,37 @@ test("themes redirect to create, which gives the commands", async ({
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/themes")
   await expect(page).toHaveURL(/\/create$/)
-  const init = page.getByRole("region", { name: "Create the project" })
-  await expect(init).toContainText("init -t next -b base -p ")
+  const settings = page.getByRole("complementary", { name: "Project settings" })
+  await expect(settings).toContainText("--preset b0")
+  // Get Code shows the commands for the settings.
+  const getCode = page.getByRole("button", { name: "Get Code" })
+  await getCode.click()
+  const dialog = page.getByRole("dialog", { name: "Create the project" })
   await expect(
-    page.getByRole("region", { name: "Registry namespace" })
+    dialog.getByRole("region", { name: "Create the project" })
+  ).toContainText("init -t next -b base -p b0")
+  await expect(
+    dialog.getByRole("region", { name: "Registry namespace" })
   ).toHaveCount(0)
-  await page
-    .getByRole("group", { name: "Library" })
-    .getByRole("button", { name: "Radix UI" })
-    .click()
-  await expect(init).toContainText("-b radix")
-  await expect(
-    page.getByRole("region", { name: "Registry namespace" })
-  ).toContainText("/r/styles/{style}/{name}.json")
+  await page.keyboard.press("Escape")
+
+  await settings.getByRole("combobox", { name: "Library" }).click()
+  await page.getByRole("option", { name: "Radix UI" }).click()
+  await settings.getByRole("combobox", { name: "Theme" }).click()
+  await page.getByRole("option", { name: "Blue" }).click()
+  await settings.getByRole("button", { name: /OrganUI items/ }).click()
   await page.getByRole("checkbox", { name: "Lab results table" }).click()
+  await page.keyboard.press("Escape")
+  await expect(settings).not.toContainText("--preset b0")
+  await getCode.click()
   await expect(
-    page.getByRole("region", { name: "Add OrganUI items" })
+    dialog.getByRole("region", { name: "Create the project" })
+  ).toContainText("-b radix")
+  await expect(
+    dialog.getByRole("region", { name: "Registry namespace" })
+  ).toContainText("/r/styles/{style}/{name}.json")
+  await expect(
+    dialog.getByRole("region", { name: "Add OrganUI items" })
   ).toContainText("@organui/vital-signs @organui/lab-results")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
