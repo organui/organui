@@ -659,7 +659,8 @@ test("blocks gallery previews and installs every block", async ({
     const installedPage = item.files?.find(
       ({ type }) => type === "registry:page"
     )
-    // The gallery shows each block's own files and links the items it uses.
+    // The code view lists the block's own files and links the items it uses.
+    await section.getByRole("tab", { name: "Code", exact: true }).click()
     for (const dependency of item.registryDependencies ?? [])
       if (dependency.startsWith("@organui/"))
         await expect(
@@ -671,8 +672,6 @@ test("blocks gallery previews and installs every block", async ({
           "href",
           `/docs/components/${dependency.replace("@organui/", "")}`
         )
-    // The code view lists the files; the page's source opens first.
-    await section.getByRole("tab", { name: "Code", exact: true }).click()
     await section
       .getByRole("button", { name: installedPage?.target ?? "", exact: true })
       .click()
