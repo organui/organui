@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     organsPage.href,
     "/blocks",
     "/charts",
-    "/themes",
     "/colors",
     "/create",
     ...registryItems.map((item) => item.href),

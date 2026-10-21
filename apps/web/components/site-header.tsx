@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { PlusIcon } from "lucide-react"
 import { CommandMenu } from "@/components/command-menu"
 import { GitHubLink } from "@/components/github-link"
 import { MainNav } from "@/components/main-nav"
@@ -6,10 +7,12 @@ import { MobileNav } from "@/components/mobile-nav"
 import { ModeSwitcher } from "@/components/mode-switcher"
 import { docsNav, mainNav } from "@/lib/registry"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
+import { buttonVariants } from "@workspace/ui/components/button"
 import { Separator } from "@workspace/ui/components/separator"
+import { cn } from "@workspace/ui/lib/utils"
 
 // Shared by every page. Laid out after shadcn/ui's site header: navigation,
-// then search, the repository and the theme toggle.
+// then search, the repository, the theme toggle and a link to start a project.
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
@@ -23,18 +26,34 @@ export function SiteHeader() {
           organui
         </Link>
         <MainNav items={mainNav} className="hidden lg:flex" />
-        <div className="ml-auto flex items-center gap-1 sm:gap-2">
-          <CommandMenu />
+        <div className="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+          <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+            <CommandMenu />
+          </div>
           <Separator
             orientation="vertical"
-            className="hidden sm:block data-vertical:h-4 data-vertical:self-center"
+            className="ml-2 hidden lg:block data-vertical:h-4 data-vertical:self-center"
           />
           <GitHubLink />
           <Separator
             orientation="vertical"
-            className="hidden sm:block data-vertical:h-4 data-vertical:self-center"
+            className="data-vertical:h-4 data-vertical:self-center"
           />
           <ModeSwitcher />
+          <Separator
+            orientation="vertical"
+            className="data-vertical:h-4 data-vertical:self-center"
+          />
+          <Link
+            href="/create"
+            className={cn(
+              buttonVariants({ size: "sm" }),
+              "h-[31px] rounded-lg"
+            )}
+          >
+            <PlusIcon data-icon="inline-start" />
+            New
+          </Link>
         </div>
       </div>
     </header>

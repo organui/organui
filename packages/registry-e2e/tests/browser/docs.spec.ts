@@ -373,7 +373,6 @@ test("the header links each section and searches the whole site", async ({
     "Organs",
     "Blocks",
     "Charts",
-    "Themes",
     "Create",
   ])
   await main.getByRole("link", { name: "Organs", exact: true }).click()
@@ -422,9 +421,12 @@ test("the header links each section and searches the whole site", async ({
     page.getByRole("heading", { name: "Vital signs", level: 1 })
   ).toBeVisible()
 
-  await page.getByRole("button", { name: /^Search/ }).click()
-  await expect(dialog).toBeVisible()
-  await page.keyboard.press("Escape")
+  // As on shadcn/ui, phones search from the keyboard shortcut only.
+  if (!narrow) {
+    await page.getByRole("button", { name: /^Search/ }).click()
+    await expect(dialog).toBeVisible()
+    await page.keyboard.press("Escape")
+  }
   await expect(dialog).toBeHidden()
   expect(indexRequests).toBe(1)
 
@@ -1322,32 +1324,13 @@ test("AI Elements cite sources, mark unsupported claims and record review", asyn
   expect(errors).toEqual([])
 })
 
-test("themes preview the components and give their CSS; create gives the commands", async ({
+test("themes redirect to create, which gives the commands", async ({
   page,
 }) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/themes")
-  await expect(
-    page.getByRole("heading", { name: "Themes", level: 1 })
-  ).toBeVisible()
-  await page
-    .getByRole("group", { name: "Accent" })
-    .getByRole("button", { name: "Blue" })
-    .click()
-  await page
-    .getByRole("group", { name: "Radius" })
-    .getByRole("button", { name: "Large" })
-    .click()
-  await page.getByRole("button", { name: "Copy code" }).click()
-  const css = page.getByRole("region", { name: "Theme CSS" })
-  // Blue's primary, over the neutral base, with the large radius.
-  await expect(css).toContainText("--primary: oklch(0.488 0.243 264.376)")
-  await expect(css).toContainText("--radius: 0.875rem")
-  await page.keyboard.press("Escape")
-  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
-
-  await page.goto("/create")
+  await expect(page).toHaveURL(/\/create$/)
   const init = page.getByRole("region", { name: "Create the project" })
   await expect(init).toContainText("init -t next -b base -p ")
   await expect(

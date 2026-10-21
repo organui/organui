@@ -259,7 +259,6 @@ export const mainNav: NavLink[] = [
   { title: organsPage.title, href: organsPage.href },
   { title: "Blocks", href: "/blocks" },
   { title: "Charts", href: "/charts" },
-  { title: "Themes", href: "/themes" },
   { title: "Create", href: "/create" },
 ]
 

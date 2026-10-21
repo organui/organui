@@ -72,6 +72,8 @@ const nextConfig: NextConfig = {
           destination: `/docs/components/${item.name}`,
           permanent: true,
         })),
+      // Themes live in Create, as on shadcn/ui.
+      { source: "/themes", destination: "/create", permanent: true },
       // The organs gallery's first address.
       {
         source: "/organs",

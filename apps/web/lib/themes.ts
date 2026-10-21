@@ -1144,12 +1144,3 @@ export function themeVars(choice: ThemeChoice, mode: "light" | "dark") {
     ...(mode === "light" && radius ? { radius: radius.value } : {}),
   } as ThemeVars
 }
-
-// The CSS a project pastes over its own :root and .dark.
-export function themeCss(choice: ThemeChoice) {
-  const block = (selector: string, vars: ThemeVars) =>
-    `${selector} {\n${Object.entries(vars)
-      .map(([name, value]) => `  --${name}: ${value};`)
-      .join("\n")}\n}`
-  return `${block(":root", themeVars(choice, "light"))}\n\n${block(".dark", themeVars(choice, "dark"))}\n`
-}

@@ -69,10 +69,10 @@ export default async function Page() {
           description="The colours OrganUI components draw with: severity, dermatome regions and every organ's structures. Click one to copy it."
         >
           <Link
-            href="/themes"
+            href="/create"
             className={cn(buttonVariants({ size: "sm" }), "h-[35px] px-4")}
           >
-            Themes
+            Create
           </Link>
           <Link
             href="/docs/utilities/severity-colors"

@@ -1,10 +1,8 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { useEffect, useState, useSyncExternalStore } from "react"
-import { SearchIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 import { Button } from "@workspace/ui/components/button"
-import { Kbd, KbdGroup } from "@workspace/ui/components/kbd"
 
 // The dialog, cmdk and the index load on first use, so the header costs
 // pages one button.
@@ -21,20 +19,7 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
-// Apple keyboards say ⌘; others say Ctrl. The server can't tell, so it
-// renders ⌘ and the browser corrects it after hydration.
-const subscribeNothing = () => () => {}
-
-function useIsApple() {
-  return useSyncExternalStore(
-    subscribeNothing,
-    () => /Mac|iPhone|iPad/.test(navigator.userAgent),
-    () => true
-  )
-}
-
 export function CommandMenu() {
-  const apple = useIsApple()
   const [open, setOpen] = useState(false)
   const [used, setUsed] = useState(false)
 
@@ -65,16 +50,10 @@ export function CommandMenu() {
         onPointerEnter={loadSearchDialog}
         onFocus={loadSearchDialog}
         aria-keyshortcuts="Meta+K Control+K /"
-        className="size-8 justify-start gap-2 rounded-lg border-none bg-muted px-0 font-normal text-foreground shadow-none hover:bg-muted/60 sm:w-48 sm:px-3 lg:w-56 xl:w-72 dark:bg-card dark:hover:bg-card/60"
+        className="relative h-8 w-full justify-start rounded-lg border-none bg-muted pl-3 font-normal text-foreground shadow-none transition-colors hover:bg-muted/50 md:w-48 lg:w-40 xl:w-64 dark:bg-card"
       >
-        <SearchIcon data-icon="inline-start" className="mx-auto sm:mx-0" />
-        <span className="sr-only sm:not-sr-only sm:truncate">
-          Search<span className="hidden xl:inline"> documentation</span>…
-        </span>
-        <KbdGroup className="ml-auto hidden sm:inline-flex">
-          <Kbd className="border bg-background">{apple ? "⌘" : "Ctrl"}</Kbd>
-          <Kbd className="border bg-background">K</Kbd>
-        </KbdGroup>
+        <span className="hidden xl:inline-flex">Search documentation...</span>
+        <span className="inline-flex xl:hidden">Search...</span>
       </Button>
       {used && <SearchDialog open={open} onOpenChange={setOpen} />}
     </>

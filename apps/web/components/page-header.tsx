@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 
 // The centred title, summary and actions at the top of a page outside the
-// docs, such as /blocks or /themes.
+// docs, such as /blocks or /create.
 export function PageHeader({
   title,
   description,
