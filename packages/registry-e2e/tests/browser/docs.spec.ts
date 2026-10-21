@@ -1361,3 +1361,23 @@ test("themes preview the components and give their CSS; create gives the command
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
 })
+
+test("the colours page lists every organ's structure colours to copy", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/colors")
+  await expect(
+    page.getByRole("heading", { name: "Colours", level: 1 })
+  ).toBeVisible()
+  const heart = page.getByRole("region", { name: "Heart" })
+  await expect(
+    heart.getByRole("button", { name: "Copy #a96d70, Right atrium" })
+  ).toBeVisible()
+  await expect(
+    page.getByRole("region", { name: "Dermatome regions" }).getByRole("button")
+  ).toHaveCount(4)
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+  expect(errors).toEqual([])
+})
