@@ -2,6 +2,7 @@ import {
   componentGroups,
   componentsIndex,
   guides,
+  installationGuides,
   mainNav,
   registryBlocks,
   registryItems,
@@ -24,7 +25,10 @@ export const searchIndex: SearchGroup[] = [
     heading: "Pages",
     entries: mainNav.map(({ title, href }) => ({ title, href })),
   },
-  { heading: "Docs", entries: [...guides, componentsIndex] },
+  {
+    heading: "Docs",
+    entries: [...guides, ...installationGuides, componentsIndex],
+  },
   ...componentGroups.map(({ id, title }) => ({
     heading: title,
     entries: registryItems

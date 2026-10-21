@@ -109,6 +109,31 @@ test("accessibility scan covers expanded, mixed and filtered states", async ({
   }
 })
 
+test("docs are served as Markdown and listed in llms.txt and RSS", async ({
+  request,
+}) => {
+  const index = await request.get("/llms.txt")
+  expect(index.ok()).toBe(true)
+  expect(await index.text()).toContain(
+    "(https://organui.com/docs/components/ecg-trace.md)"
+  )
+  const page = await request.get("/docs/components/ecg-trace.md")
+  expect(page.headers()["content-type"]).toContain("text/markdown")
+  const markdown = await page.text()
+  expect(markdown.startsWith("# ECG trace\n")).toBe(true)
+  expect(markdown).toContain("## Installation")
+  expect(markdown).toContain(
+    "bunx shadcn@4.22.1 add https://organui.com/r/ecg-trace.json"
+  )
+  // Previews and controls stay out.
+  expect(markdown).not.toContain("View Code")
+  expect((await request.get("/docs.md")).ok()).toBe(true)
+  expect((await request.get("/docs/not-a-page.md")).status()).toBe(404)
+  const feed = await request.get("/rss.xml")
+  expect(feed.headers()["content-type"]).toContain("application/rss+xml")
+  expect(await feed.text()).toContain("<title>OrganUI changelog</title>")
+})
+
 test("homepage explorer links support keyboard navigation without overflow", async ({
   page,
 }, info) => {
@@ -190,6 +215,10 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs/theming", "Theming"],
     ["/docs/base-ui", "Base UI"],
     ["/docs/licences", "Licences"],
+    ["/docs/mcp", "MCP"],
+    ["/docs/changelog", "Changelog"],
+    ["/docs/installation/next", "Next.js"],
+    ["/docs/installation/vite", "Vite"],
     ["/docs/components", "Components"],
   ] as const) {
     await page.goto(path)

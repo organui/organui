@@ -40,7 +40,12 @@ export default function Page() {
             change; blocks add a page only in frameworks with file routing.
           </li>
         </ul>
-        <p>For a new project, run:</p>
+        <p>
+          For a step-by-step setup, follow the{" "}
+          <Link href="/docs/installation/next">Next.js</Link> or{" "}
+          <Link href="/docs/installation/vite">Vite</Link> guide. Otherwise, for
+          a new project, run:
+        </p>
         <CodeBlockCommand label="Initialise shadcn" command={init} />
         <p className="text-sm text-muted-foreground">
           The commands use Bun and pin the shadcn version the registry is tested

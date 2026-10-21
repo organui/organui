@@ -144,6 +144,31 @@ export const guides: (NavLink & { description: string })[] = [
     href: "/docs/licences",
     description: "MIT code, and the licence each model and dataset keeps.",
   },
+  {
+    title: "MCP",
+    href: "/docs/mcp",
+    description:
+      "Browse and install components from an AI assistant, and read the docs as Markdown.",
+  },
+  {
+    title: "Changelog",
+    href: "/docs/changelog",
+    description: "What each release added and changed.",
+  },
+]
+
+// Setting up a new project in each framework the registry is tested with.
+export const installationGuides: (NavLink & { description: string })[] = [
+  {
+    title: "Next.js",
+    href: "/docs/installation/next",
+    description: "Create a Next.js app with shadcn and add OrganUI components.",
+  },
+  {
+    title: "Vite",
+    href: "/docs/installation/vite",
+    description: "Create a Vite app with shadcn and add OrganUI components.",
+  },
 ]
 
 export const componentsIndex: NavLink & { description: string } = {
@@ -169,6 +194,7 @@ export const mainNav: NavLink[] = [
 // viewer and the tree they're built on.
 export const docsNav: DocsNavSection[] = [
   { title: "Sections", items: [...guides, componentsIndex] },
+  { title: "Installation", items: installationGuides },
   ...componentGroups.map(({ id, title }) => ({
     title,
     items: registryItems
@@ -179,8 +205,13 @@ export const docsNav: DocsNavSection[] = [
 
 // Reading order for the previous and next links.
 // The organs gallery comes before the organs, after the viewer and tree.
-const pageOrder: NavLink[] = [
-  ...guides,
+// The framework guides follow Installation. Every docs page is here once.
+export const pageOrder: NavLink[] = [
+  ...guides.flatMap((guide) =>
+    guide.href === "/docs/installation"
+      ? [guide, ...installationGuides]
+      : [guide]
+  ),
   componentsIndex,
   ...registryItems.flatMap(({ title, href, name }) => [
     ...(name === organs[0]?.name ? [organsPage] : []),
