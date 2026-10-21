@@ -64,7 +64,7 @@ export function ComponentPreviewTabs({
           {isMobileCodeVisible ? (
             <>
               {source}
-              <div className="flex justify-center border-t bg-code p-2">
+              <div className="bg-code flex justify-center border-t p-2">
                 <Button
                   type="button"
                   size="sm"
@@ -83,7 +83,7 @@ export function ComponentPreviewTabs({
               <div aria-hidden="true" className="pointer-events-none">
                 {sourcePreview}
               </div>
-              <div className="absolute inset-0 flex items-center justify-center bg-linear-to-t from-code via-code/60 to-transparent pb-4">
+              <div className="from-code via-code/60 absolute inset-0 flex items-center justify-center bg-linear-to-t to-transparent pb-4">
                 <Button
                   type="button"
                   size="sm"
