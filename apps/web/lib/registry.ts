@@ -203,6 +203,8 @@ export function docsMetadata(
   description: string,
   path: string
 ): Metadata {
+  // Listed by hand on purpose: a page's own openGraph replaces the root
+  // opengraph-image, so without this docs pages share no image (see #90).
   const images = [
     { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
   ]
