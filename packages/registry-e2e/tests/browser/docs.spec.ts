@@ -1293,7 +1293,11 @@ test("AI Elements cite sources, mark unsupported claims and record review", asyn
   const note = example.getByRole("article", { name: "AI-drafted note" })
   // A claim without a source says so to screen readers.
   await expect(note.getByText("(no source)").first()).toBeAttached()
-  await note.getByRole("button", { name: /^Source 3:/ }).click()
+  // The note cites the troponin result twice; open the first citation.
+  await note
+    .getByRole("button", { name: /^Source 3:/ })
+    .first()
+    .click()
   await expect(page.getByRole("dialog")).toContainText(
     "99th percentile 26 ng/L"
   )
