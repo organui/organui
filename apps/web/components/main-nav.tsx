@@ -34,7 +34,7 @@ export function MainNav({
             aria-current={active ? "page" : undefined}
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
-              "text-muted-foreground aria-[current=page]:text-foreground"
+              "px-2.5"
             )}
           >
             {item.title}

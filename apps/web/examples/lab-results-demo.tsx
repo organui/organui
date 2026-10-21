@@ -3,11 +3,7 @@ import { labResultsExampleData } from "@/lib/examples"
 
 export function Example() {
   return (
-    <div
-      role="region"
-      aria-label="Lab results example"
-      className="rounded-xl border p-5"
-    >
+    <div role="region" aria-label="Lab results example">
       <LabResultsTable
         results={labResultsExampleData}
         caption="Illustrative values, not patient data"

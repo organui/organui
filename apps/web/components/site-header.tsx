@@ -12,7 +12,7 @@ import { Separator } from "@workspace/ui/components/separator"
 // then search, the repository and the theme toggle.
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
+    <header className="sticky top-0 z-40 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
       <div className="flex h-(--header-height) w-full items-center gap-2 px-4 sm:px-6">
         <MobileNav items={mainNav} sections={docsNav} className="md:hidden" />
         <Link

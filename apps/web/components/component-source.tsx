@@ -61,6 +61,7 @@ export async function ComponentSource({
         </CodeBlockHeader>
       )}
       <CodeBlockContent
+        lineNumbers
         aria-label={maxLines ? undefined : `${item.title} code`}
         tabIndex={maxLines ? -1 : 0}
       >

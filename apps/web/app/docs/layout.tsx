@@ -32,7 +32,7 @@ export default function DocsLayout({
           data-docs-content
           className="min-w-0 py-8 text-[1.05rem] sm:text-[15px] md:py-10"
         >
-          <div className="mx-auto w-full max-w-3xl group-has-data-docs-wide/docs:max-w-none">
+          <div className="mx-auto w-full max-w-160 group-has-data-docs-wide/docs:max-w-none">
             {children}
           </div>
         </main>

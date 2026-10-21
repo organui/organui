@@ -56,7 +56,7 @@ export function DocsTableOfContents({ className }: { className?: string }) {
       aria-label="On this page"
       className={cn("flex flex-col gap-2 text-[0.8rem]", className)}
     >
-      <p className="text-xs font-medium text-muted-foreground">On this page</p>
+      <p className="text-xs font-medium text-muted-foreground">On This Page</p>
       <ul className="flex flex-col gap-2">
         {headings.map(({ id, title, depth }) => (
           <li key={id} className={cn(depth === 3 && "ps-4")}>

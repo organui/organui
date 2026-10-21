@@ -21,7 +21,7 @@ export function Example() {
   const [heartRate, setHeartRate] = useState(72)
   const stream = useMemo(() => syntheticEcgStream({ heartRate }), [heartRate])
   return (
-    <div className="flex flex-col gap-6 rounded-xl border p-5">
+    <div className="flex w-full flex-col gap-6">
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="font-medium">Live monitor</h2>

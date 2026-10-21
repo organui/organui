@@ -12,7 +12,6 @@ export function Example() {
         value={value}
         onValueChange={setValue}
         label="Where does it hurt?"
-        className="rounded-xl border p-5"
       />
       <aside className="rounded-xl border bg-muted/30 p-5">
         <h2 className="mb-3 font-medium">Your form state</h2>

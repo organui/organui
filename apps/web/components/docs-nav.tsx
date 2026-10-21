@@ -8,7 +8,7 @@ import type { DocsNavSection } from "@/lib/registry"
 import { cn } from "@workspace/ui/lib/utils"
 
 const link =
-  "flex h-[30px] items-center rounded-md border border-transparent px-2.5 text-[0.8rem] font-medium text-foreground/80 transition-colors hover:bg-accent/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:border-accent aria-[current=page]:bg-accent aria-[current=page]:text-foreground"
+  "flex h-[30px] w-fit max-w-full items-center rounded-md border border-transparent px-2.5 text-[0.8rem] font-medium text-foreground/80 transition-colors hover:bg-accent/60 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:border-accent aria-[current=page]:bg-accent aria-[current=page]:text-foreground"
 
 // Sections come from the server so the catalog stays out of the client bundle.
 export function DocsNav({

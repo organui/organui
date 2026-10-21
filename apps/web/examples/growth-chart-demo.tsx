@@ -57,7 +57,7 @@ export function Example() {
     loadWhoGrowthStandards().then(setStandards, () => setFailed(true))
   }, [])
   return (
-    <div className="flex flex-col gap-5 rounded-xl border p-5">
+    <div className="flex w-full flex-col gap-5">
       <div className="flex flex-wrap gap-3">
         <Choice
           label="Measure"
