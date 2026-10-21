@@ -38,5 +38,4 @@ sentence, for example "Add a growth chart component".
 If your change alters what the registry installs, add a changeset with
 `bunx changeset`: pick `@workspace/registry`, the bump, and a line for the
 release notes. CI asks for one when registry files change. See
-[.changeset/README.md](.changeset/README.md) for how releases are made from
-them.
+[RELEASING.md](RELEASING.md) for how releases are made from them.
