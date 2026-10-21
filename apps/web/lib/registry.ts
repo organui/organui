@@ -111,10 +111,7 @@ export const registryNamespace = JSON.stringify(
 
 export type NavLink = { title: string; href: string }
 
-// An item with items of its own is a collapsible group in the sidebar.
-export type DocsNavItem = NavLink & { items?: NavLink[] }
-
-export type DocsNavSection = { title: string; items: DocsNavItem[] }
+export type DocsNavSection = { title: string; items: NavLink[] }
 
 // The guides under /docs, in reading order.
 export const guides: (NavLink & { description: string })[] = [
@@ -164,27 +161,15 @@ export const mainNav: NavLink[] = [
   { title: "Blocks", href: "/blocks" },
 ]
 
-// The sidebar lists the guides and every component. The organs follow the
-// viewer and the tree as one collapsible group headed by their gallery, so
-// they don't crowd out the other components.
+// The sidebar lists the guides and every component, the organs after the
+// viewer and the tree they're built on.
 export const docsNav: DocsNavSection[] = [
   { title: "Sections", items: [...guides, componentsIndex] },
   ...componentGroups.map(({ id, title }) => ({
     title,
-    items: [
-      ...registryItems
-        .filter((item) => item.group === id && !item.organ)
-        .map(({ title, href }) => ({ title, href })),
-      ...(id === "organs"
-        ? [
-            {
-              title: "All organs",
-              href: organsPage.href,
-              items: organs.map(({ title, href }) => ({ title, href })),
-            },
-          ]
-        : []),
-    ],
+    items: registryItems
+      .filter((item) => item.group === id)
+      .map(({ title, href }) => ({ title, href })),
   })),
 ]
 
