@@ -1438,6 +1438,8 @@ test("charts show health data on shadcn's chart, with their code", async ({
     "export function ChartAreaAdmissions"
   )
   await page.keyboard.press("Escape")
+  // Scan once the dialog has faded out.
+  await expect(page.getByRole("dialog")).toHaveCount(0)
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   await types.getByRole("link", { name: "Radial Charts" }).click()
   await expect(page).toHaveURL(/\/charts\/radial/)
