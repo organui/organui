@@ -1,13 +1,13 @@
 import type { AiNoteSection } from "@workspace/registry/ai-note"
-import type { AiReasoningStep } from "@workspace/registry/ai-reasoning"
-import type { AiSource } from "@workspace/registry/ai-sources"
+import type { ClinicalSource } from "@workspace/registry/clinical-citation"
 import type { Differential } from "@workspace/registry/differential-list"
 
 // A fictional emergency department case for the AI Elements examples. Not
 // patient data, and not clinical guidance.
-export const aiCaseSources: AiSource[] = [
+export const aiCaseSources: ClinicalSource[] = [
   {
     id: "triage",
+    label: "Triage",
     title: "Triage note",
     kind: "Nursing note",
     date: "Oct 21, 2026",
@@ -15,6 +15,7 @@ export const aiCaseSources: AiSource[] = [
   },
   {
     id: "ecg",
+    label: "ECG",
     title: "12-lead ECG",
     kind: "ECG",
     date: "Oct 21, 2026",
@@ -22,6 +23,7 @@ export const aiCaseSources: AiSource[] = [
   },
   {
     id: "troponin",
+    label: "Troponin",
     title: "Troponin I, high-sensitivity",
     kind: "Lab result",
     date: "Oct 21, 2026",
@@ -29,6 +31,7 @@ export const aiCaseSources: AiSource[] = [
   },
   {
     id: "pathway",
+    label: "Pathway",
     title: "Chest pain pathway",
     kind: "Local guideline",
     detail:
@@ -86,7 +89,9 @@ export const aiCaseNote: AiNoteSection[] = [
   },
 ]
 
-export const aiCaseReasoning: AiReasoningStep[] = [
+// What the model reports it did, shown with shadcn's Trace, as its
+// Reasoning and Chain of Thought do.
+export const aiCaseReasoning: { title: string; detail: string }[] = [
   {
     title: "Read the triage note",
     detail: "Central chest tightness for two hours, worse on exertion.",

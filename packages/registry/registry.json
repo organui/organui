@@ -923,45 +923,45 @@
       "docs": "AI disclaimer docs: https://organui.com/docs/ai-elements/ai-disclaimer"
     },
     {
-      "name": "ai-sources",
+      "name": "clinical-citation",
       "type": "registry:ui",
-      "title": "AI sources",
-      "description": "Numbered citations that open the source a claim relies on, and the list of sources they number.",
+      "title": "Clinical citation",
+      "description": "A record cited in the sentence that relies on it: a lab result, note, image or guideline, opening on hover or focus like shadcn's Inline Citation.",
       "categories": ["ai"],
-      "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["popover"],
+      "dependencies": [],
+      "registryDependencies": ["button", "hover-card"],
       "files": [
         {
-          "path": "registry/base-nova/ai-sources/ai-sources.tsx",
+          "path": "registry/base-nova/clinical-citation/clinical-citation.tsx",
           "type": "registry:ui"
         }
       ],
-      "docs": "AI sources docs: https://organui.com/docs/ai-elements/ai-sources"
+      "docs": "Clinical citation docs: https://organui.com/docs/ai-elements/clinical-citation. Built for shadcn's Base UI styles; Radix projects get the Radix version through a {style} registry URL (https://organui.com/docs/base-ui#radix)."
     },
     {
-      "name": "ai-reasoning",
+      "name": "clinical-sources",
       "type": "registry:ui",
-      "title": "AI reasoning",
-      "description": "The steps a model reports it took, in a disclosure a reviewer opens beside the suggestion.",
+      "title": "Clinical sources",
+      "description": "The records an AI answer used, under one line that opens into the list, built on shadcn's Trace like its Sources.",
       "categories": ["ai"],
-      "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["collapsible"],
+      "dependencies": [],
+      "registryDependencies": ["trace", "@organui/clinical-citation"],
       "files": [
         {
-          "path": "registry/base-nova/ai-reasoning/ai-reasoning.tsx",
+          "path": "registry/base-nova/clinical-sources/clinical-sources.tsx",
           "type": "registry:ui"
         }
       ],
-      "docs": "AI reasoning docs: https://organui.com/docs/ai-elements/ai-reasoning"
+      "docs": "Clinical sources docs: https://organui.com/docs/ai-elements/clinical-sources"
     },
     {
       "name": "differential-list",
       "type": "registry:ui",
       "title": "Differential list",
-      "description": "Suggested diagnoses ranked by model confidence, each with the findings for and against it.",
+      "description": "Suggested diagnoses ranked by model confidence, as shadcn Items, each with the findings for and against it.",
       "categories": ["ai"],
       "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["collapsible", "progress"],
+      "registryDependencies": ["collapsible", "item", "progress"],
       "files": [
         {
           "path": "registry/base-nova/differential-list/differential-list.tsx",
@@ -974,10 +974,10 @@
       "name": "clinician-review",
       "type": "registry:ui",
       "title": "Clinician review",
-      "description": "A clinician's sign-off on AI-generated content: approve, or request changes or reject with a reason, recording who and when.",
+      "description": "A clinician's sign-off on AI-generated content, built like shadcn's Confirmation: approve, or request changes or reject with a reason, recording who and when.",
       "categories": ["ai"],
       "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["badge", "button", "card", "field", "textarea"],
+      "registryDependencies": ["button", "field", "item", "textarea"],
       "files": [
         {
           "path": "registry/base-nova/clinician-review/clinician-review.tsx",
@@ -990,10 +990,13 @@
       "name": "ai-note",
       "type": "registry:ui",
       "title": "AI note",
-      "description": "An AI-drafted clinical note whose claims cite their sources, with unsupported claims marked for review.",
+      "description": "An AI-drafted clinical note whose claims cite the records they rely on, with unsupported claims marked for review.",
       "categories": ["ai"],
       "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["@organui/ai-sources"],
+      "registryDependencies": [
+        "@organui/clinical-citation",
+        "@organui/clinical-sources"
+      ],
       "files": [
         {
           "path": "registry/base-nova/ai-note/ai-note.tsx",

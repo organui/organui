@@ -225,8 +225,8 @@ const utilities = [...helpers, "heartbeat", "ecg-grid", "severity-colors"]
 // the Radix consumer's build checks that.
 const aiElements = [
   "ai-disclaimer",
-  "ai-sources",
-  "ai-reasoning",
+  "clinical-citation",
+  "clinical-sources",
   "differential-list",
   "clinician-review",
   "ai-note",

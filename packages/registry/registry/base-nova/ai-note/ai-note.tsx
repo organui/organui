@@ -4,10 +4,10 @@ import * as React from "react"
 import { cn } from "cn"
 
 import {
-  AiCitation,
-  AiSources,
-  type AiSource,
-} from "@/components/ui/ai-sources"
+  ClinicalCitation,
+  type ClinicalSource,
+} from "@/components/ui/clinical-citation"
+import { ClinicalSources } from "@/components/ui/clinical-sources"
 
 /**
  * Text joining claims, or a claim with the ids of the sources it relies on.
@@ -24,8 +24,8 @@ export type AiNoteSection = {
 
 export type AiNoteProps = {
   sections: readonly AiNoteSection[]
-  /** Every source the note cites, numbered in this order. */
-  sources?: readonly AiSource[]
+  /** Every record the note cites. */
+  sources?: readonly ClinicalSource[]
   /** Marks claims without a source. Defaults to true. */
   markUnsupported?: boolean
   /** Names the note for assistive technology. */
@@ -34,8 +34,8 @@ export type AiNoteProps = {
 }
 
 /**
- * An AI-drafted clinical note: each claim carries numbered citations to its
- * sources, and claims without one are marked, so a reviewer can see what to
+ * An AI-drafted clinical note: each claim cites the records it relies on,
+ * and claims without one are marked, so a reviewer can see what to
  * check. Pair it with AiDisclaimer and ClinicianReview.
  */
 export function AiNote({
@@ -45,9 +45,6 @@ export function AiNote({
   label = "AI-drafted note",
   className,
 }: AiNoteProps) {
-  const numbers = new Map(
-    sources.map((source, index) => [source.id, index + 1])
-  )
   const unsupported = sections.some((section) =>
     section.content.some(
       (segment) => typeof segment !== "string" && !segment.sources?.length
@@ -89,11 +86,7 @@ export function AiNote({
                 <React.Fragment key={index}>
                   {segment.text}
                   {cited.map((source) => (
-                    <AiCitation
-                      key={source.id}
-                      source={source}
-                      number={numbers.get(source.id)!}
-                    />
+                    <ClinicalCitation key={source.id} source={source} />
                   ))}
                 </React.Fragment>
               )
@@ -109,7 +102,7 @@ export function AiNote({
           has no source. Check it against the record.
         </p>
       )}
-      <AiSources sources={sources} />
+      <ClinicalSources sources={sources} />
     </article>
   )
 }

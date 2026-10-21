@@ -12,11 +12,11 @@
       "@/components/ui/ai-disclaimer": [
         "./registry/base-nova/ai-disclaimer/ai-disclaimer.tsx"
       ],
-      "@/components/ui/ai-sources": [
-        "./registry/base-nova/ai-sources/ai-sources.tsx"
+      "@/components/ui/clinical-citation": [
+        "./registry/base-nova/clinical-citation/clinical-citation.tsx"
       ],
-      "@/components/ui/ai-reasoning": [
-        "./registry/base-nova/ai-reasoning/ai-reasoning.tsx"
+      "@/components/ui/clinical-sources": [
+        "./registry/base-nova/clinical-sources/clinical-sources.tsx"
       ],
       "@/components/ui/differential-list": [
         "./registry/base-nova/differential-list/differential-list.tsx"

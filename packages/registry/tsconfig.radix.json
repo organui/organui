@@ -8,11 +8,11 @@
       "@/components/ui/ai-disclaimer": [
         "./registry/base-nova/ai-disclaimer/ai-disclaimer.tsx"
       ],
-      "@/components/ui/ai-sources": [
-        "./registry/base-nova/ai-sources/ai-sources.tsx"
+      "@/components/ui/clinical-citation": [
+        "./registry/radix-nova/clinical-citation/clinical-citation.tsx"
       ],
-      "@/components/ui/ai-reasoning": [
-        "./registry/base-nova/ai-reasoning/ai-reasoning.tsx"
+      "@/components/ui/clinical-sources": [
+        "./registry/base-nova/clinical-sources/clinical-sources.tsx"
       ],
       "@/components/ui/differential-list": [
         "./registry/base-nova/differential-list/differential-list.tsx"
@@ -121,6 +121,7 @@
     "registry/base-nova/molecule-viewer/molecule-viewer.tsx",
     "registry/base-nova/dna-helix/dna-helix.tsx",
     "registry/base-nova/image-viewer/image-viewer.tsx",
+    "registry/base-nova/clinical-citation/clinical-citation.tsx",
     "registry/base-nova/blocks/*/components"
   ]
 }

@@ -247,7 +247,7 @@ export const examples: Record<string, ExampleDefinition> = {
     },
   },
   "ai-elements-demo": {
-    title: "Review an AI-drafted note",
+    title: "A clinical assistant",
     file: "ai-elements-demo.tsx",
     render: async () => {
       const { Example } = await import("./ai-elements-demo")
@@ -270,19 +270,19 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "ai-sources-demo": {
-    title: "AI sources",
-    file: "ai-sources-demo.tsx",
+  "clinical-citation-demo": {
+    title: "Clinical citation",
+    file: "clinical-citation-demo.tsx",
     render: async () => {
-      const { Example } = await import("./ai-sources-demo")
+      const { Example } = await import("./clinical-citation-demo")
       return <Example />
     },
   },
-  "ai-reasoning-demo": {
-    title: "AI reasoning",
-    file: "ai-reasoning-demo.tsx",
+  "clinical-sources-demo": {
+    title: "Clinical sources",
+    file: "clinical-sources-demo.tsx",
     render: async () => {
-      const { Example } = await import("./ai-reasoning-demo")
+      const { Example } = await import("./clinical-sources-demo")
       return <Example />
     },
   },

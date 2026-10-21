@@ -103,8 +103,8 @@ export type UtilityItem = (typeof utilityItems)[number]
 const aiOrder = [
   "ai-disclaimer",
   "ai-note",
-  "ai-sources",
-  "ai-reasoning",
+  "clinical-citation",
+  "clinical-sources",
   "differential-list",
   "clinician-review",
 ]

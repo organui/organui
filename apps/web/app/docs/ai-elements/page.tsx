@@ -39,9 +39,16 @@ export default function Page() {
     <div className="flex flex-col gap-10">
       <DocsHeader href={aiIndex.href} title={aiIndex.title}>
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
-          Patterns for showing AI output in clinical interfaces, built from
-          shadcn&apos;s components in your project&apos;s Base UI or Radix
-          style. There is no package to install. The code is yours.
+          The healthcare and life science parts of an AI interface, built on
+          shadcn&apos;s components and its{" "}
+          <a
+            href="https://ui.shadcn.com/docs/ai-elements"
+            className="underline"
+          >
+            AI Elements
+          </a>
+          . Use shadcn&apos;s for the chat, reasoning and tool calls, and these
+          for the clinical record around them.
         </p>
       </DocsHeader>
       <ComponentPreview name="ai-elements-demo" />

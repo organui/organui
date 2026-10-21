@@ -3,18 +3,17 @@
 import * as React from "react"
 import { cn } from "cn"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
 import { Textarea } from "@/components/ui/textarea"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
 
@@ -66,10 +65,11 @@ function defaultFormatDate(date: string) {
 type Pending = "changes-requested" | "rejected"
 
 /**
- * A clinician's sign-off on AI-generated content: approve it, or request
- * changes or reject it with a reason. Each decision records who and when,
- * and can be undone. You store the decision; the component holds no state
- * beyond the reason being typed.
+ * A clinician's sign-off on AI-generated content, built like shadcn's
+ * Confirmation from an Item and Buttons: approve it, or request changes or
+ * reject it with a reason. Each decision records who and when, and can be
+ * undone. You store the decision; the component holds no state beyond the
+ * reason being typed.
  */
 export function ClinicianReview({
   value,
@@ -97,46 +97,31 @@ export function ClinicianReview({
 
   const decided = value.status !== "pending"
   return (
-    <Card className={cn("gap-4", className)}>
-      <CardHeader>
-        <CardTitle>Clinician review</CardTitle>
-        <CardDescription>{subject}</CardDescription>
-        <CardAction>
-          <Badge variant={value.status === "approved" ? "default" : "outline"}>
-            {reviewStatusLabels[value.status]}
-          </Badge>
-        </CardAction>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-3 text-sm">
-        <p aria-live="polite">
+    <Item variant="outline" className={cn(className)}>
+      <ItemMedia variant="icon">
+        <IconPlaceholder
+          lucide="ShieldCheckIcon"
+          tabler="IconShieldCheck"
+          hugeicons="SecurityCheckIcon"
+          phosphor="ShieldCheckIcon"
+          remixicon="RiShieldCheckLine"
+          aria-hidden="true"
+        />
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>{subject}</ItemTitle>
+        <ItemDescription aria-live="polite">
           {decided
             ? `${reviewStatusLabels[value.status]} by ${value.reviewer ?? "unknown"}${value.at ? `, ${formatDate(value.at)}` : ""}.`
-            : `Review as ${reviewer} before this is used.`}
-        </p>
+            : `${reviewStatusLabels.pending}. Review as ${reviewer} before this is used.`}
+        </ItemDescription>
         {decided && value.comment && (
-          <blockquote className="border-l-2 pl-3 text-muted-foreground">
+          <blockquote className="mt-1 border-l-2 pl-3 text-sm text-muted-foreground">
             {value.comment}
           </blockquote>
         )}
-        {asking && (
-          <Field>
-            <FieldLabel htmlFor={reasonId}>
-              {asking === "rejected"
-                ? "Reason for rejecting"
-                : "Changes needed"}
-            </FieldLabel>
-            <Textarea
-              ref={reason}
-              id={reasonId}
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-              required
-            />
-            <FieldDescription>Recorded with your decision.</FieldDescription>
-          </Field>
-        )}
-      </CardContent>
-      <CardFooter className="flex flex-wrap gap-2">
+      </ItemContent>
+      <ItemActions className="flex-wrap">
         {decided ? (
           <Button
             variant="outline"
@@ -154,16 +139,48 @@ export function ClinicianReview({
             />
             Undo
           </Button>
-        ) : asking ? (
-          <>
-            <Button
-              size="sm"
-              variant={asking === "rejected" ? "destructive" : "default"}
-              disabled={!comment.trim()}
-              onClick={() => decide(asking, comment.trim())}
-            >
-              {asking === "rejected" ? "Reject" : "Request changes"}
-            </Button>
+        ) : (
+          !asking && (
+            <>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setAsking("rejected")}
+              >
+                Reject
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setAsking("changes-requested")}
+              >
+                Request changes
+              </Button>
+              <Button size="sm" onClick={() => decide("approved")}>
+                Approve
+              </Button>
+            </>
+          )
+        )}
+      </ItemActions>
+      {asking && (
+        <ItemFooter className="flex-col items-stretch gap-3">
+          <Field>
+            <FieldLabel htmlFor={reasonId}>
+              {asking === "rejected"
+                ? "Reason for rejecting"
+                : "Changes needed"}
+            </FieldLabel>
+            <Textarea
+              ref={reason}
+              id={reasonId}
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+              required
+            />
+            <FieldDescription>Recorded with your decision.</FieldDescription>
+          </Field>
+          <div className="flex justify-end gap-2">
             <Button
               size="sm"
               variant="ghost"
@@ -174,38 +191,17 @@ export function ClinicianReview({
             >
               Cancel
             </Button>
-          </>
-        ) : (
-          <>
-            <Button size="sm" onClick={() => decide("approved")}>
-              <IconPlaceholder
-                lucide="CheckIcon"
-                tabler="IconCheck"
-                hugeicons="Tick02Icon"
-                phosphor="CheckIcon"
-                remixicon="RiCheckLine"
-                aria-hidden="true"
-                data-icon="inline-start"
-              />
-              Approve
-            </Button>
             <Button
               size="sm"
-              variant="outline"
-              onClick={() => setAsking("changes-requested")}
+              variant={asking === "rejected" ? "destructive" : "default"}
+              disabled={!comment.trim()}
+              onClick={() => decide(asking, comment.trim())}
             >
-              Request changes
+              {asking === "rejected" ? "Reject" : "Request changes"}
             </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setAsking("rejected")}
-            >
-              Reject
-            </Button>
-          </>
-        )}
-      </CardFooter>
-    </Card>
+          </div>
+        </ItemFooter>
+      )}
+    </Item>
   )
 }

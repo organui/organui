@@ -8,6 +8,15 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemFooter,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
 import { Progress } from "@/components/ui/progress"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
 
@@ -36,8 +45,8 @@ function percent(confidence: number) {
 }
 
 /**
- * Suggested diagnoses, most confident first, each with the findings for and
- * against it. The confidence is the model's, shown as a bar and a number.
+ * Suggested diagnoses as shadcn Items, most confident first, each with the
+ * findings for and against it. The confidence is the model's.
  */
 export function DifferentialList({
   items,
@@ -47,14 +56,11 @@ export function DifferentialList({
   const ranked = [...items].sort((a, b) => b.confidence - a.confidence)
   return (
     <div className={cn("flex flex-col gap-3", className)}>
-      <ol
-        aria-label={label}
-        className="flex flex-col divide-y rounded-lg border"
-      >
+      <ItemGroup aria-label={label} className="gap-2">
         {ranked.map((item, index) => (
           <DifferentialItem key={item.id} item={item} rank={index + 1} />
         ))}
-      </ol>
+      </ItemGroup>
       <p className="text-xs text-muted-foreground">
         Model confidence, not a probability of disease. A clinician decides the
         diagnosis.
@@ -73,50 +79,50 @@ function DifferentialItem({
   const value = percent(item.confidence)
   const evidence = Boolean(item.supporting?.length || item.against?.length)
   return (
-    <li className="flex flex-col gap-2 p-3 text-sm">
-      <div className="flex items-baseline gap-2">
-        <span className="w-4 shrink-0 text-right font-mono text-xs text-muted-foreground tabular-nums">
-          {rank}
-        </span>
-        <span className="min-w-0 flex-1 font-medium">{item.name}</span>
-        {item.code && (
-          <span className="font-mono text-xs text-muted-foreground">
-            {item.code}
-          </span>
-        )}
-        <span className="w-10 text-right font-medium tabular-nums">
-          {value}%
-        </span>
-      </div>
-      <Progress
-        value={value}
-        aria-label={`${item.name}: model confidence`}
-        className="ml-6"
-      />
+    <Item role="listitem" variant="outline" size="sm">
+      <ItemMedia className="w-4 justify-end font-mono text-xs text-muted-foreground tabular-nums">
+        {rank}
+      </ItemMedia>
+      <ItemContent className="gap-2">
+        <ItemTitle>
+          {item.name}
+          {item.code && (
+            <span className="font-mono text-xs font-normal text-muted-foreground">
+              {item.code}
+            </span>
+          )}
+        </ItemTitle>
+        <Progress value={value} aria-label={`${item.name}: model confidence`} />
+      </ItemContent>
+      <ItemActions className="w-10 justify-end font-medium tabular-nums">
+        {value}%
+      </ItemActions>
       {evidence && (
-        <Collapsible className="ml-6">
-          <CollapsibleTrigger className="group/evidence inline-flex items-center gap-1 rounded-sm text-xs font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50">
-            Evidence
-            <span className="sr-only"> for {item.name}</span>
-            <IconPlaceholder
-              lucide="ChevronDownIcon"
-              tabler="IconChevronDown"
-              hugeicons="ArrowDown01Icon"
-              phosphor="CaretDownIcon"
-              remixicon="RiArrowDownSLine"
-              aria-hidden="true"
-              className="size-3.5 transition-transform group-aria-expanded/evidence:rotate-180"
-            />
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <div className="grid gap-3 pt-2 sm:grid-cols-2">
-              <Findings title="Supports" findings={item.supporting} />
-              <Findings title="Against" findings={item.against} />
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
+        <ItemFooter className="pl-6.5">
+          <Collapsible className="w-full">
+            <CollapsibleTrigger className="group/evidence inline-flex items-center gap-1 rounded-sm text-xs font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50">
+              Evidence
+              <span className="sr-only"> for {item.name}</span>
+              <IconPlaceholder
+                lucide="ChevronDownIcon"
+                tabler="IconChevronDown"
+                hugeicons="ArrowDown01Icon"
+                phosphor="CaretDownIcon"
+                remixicon="RiArrowDownSLine"
+                aria-hidden="true"
+                className="size-3.5 transition-transform group-aria-expanded/evidence:rotate-180"
+              />
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="grid gap-3 pt-2 sm:grid-cols-2">
+                <Findings title="Supports" findings={item.supporting} />
+                <Findings title="Against" findings={item.against} />
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </ItemFooter>
       )}
-    </li>
+    </Item>
   )
 }
 

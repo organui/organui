@@ -64,8 +64,7 @@ export const aiDocs: Record<string, ItemDoc> = {
       },
       {
         name: "sources",
-        description:
-          "Every source the note cites, numbered in this order. See AI sources.",
+        description: "Every record the note cites. See Clinical citation.",
       },
       {
         name: "markUnsupported",
@@ -79,67 +78,58 @@ export const aiDocs: Record<string, ItemDoc> = {
     ],
     notes: [
       "Make every factual statement a claim, with its sources, so the ones the model couldn't support stand out.",
-      "Installing it also installs AI sources, which draws the citations and the list.",
+      "Installing it also installs Clinical citation and Clinical sources, which draw the citations and the list.",
     ],
   },
-  "ai-sources": {
+  "clinical-citation": {
     usageLang: "tsx",
-    usage: `import { AiCitation, AiSources } from "@/components/ui/ai-sources"
+    usage: `import { ClinicalCitation } from "@/components/ui/clinical-citation"
 
 <p>
   Troponin below the 99th percentile
-  <AiCitation source={troponin} number={1} />.
-</p>
-<AiSources sources={[troponin]} />`,
+  <ClinicalCitation
+    source={{
+      id: "troponin",
+      label: "Troponin",
+      title: "Troponin I, high-sensitivity",
+      kind: "Lab result",
+      date: "Oct 21, 2026",
+      detail: "18 ng/L at 0 hours, 21 ng/L at 3 hours.",
+      href: "/patients/42/labs/troponin",
+    }}
+  />
+  .
+</p>`,
     reference: [
       {
-        name: "AiSource",
+        name: "source",
         description:
-          "{ id, title, kind?, date?, detail?, href? }. detail quotes the part relied on; href opens it in your record.",
-      },
-      {
-        name: "AiCitation",
-        description:
-          "source and number. A button that opens the source in a popover, named for screen readers.",
-      },
-      {
-        name: "AiSources",
-        description:
-          'sources and title, which defaults to "Sources". A numbered list.',
+          "{ id, title, label?, kind?, date?, detail?, href? }. label is the chip's text; detail quotes the part relied on; href opens it in your record.",
       },
     ],
     notes: [
-      "Number sources in the order the content first cites them, and keep the numbers the same in the list.",
-      "Link to the source in your record, not a copy, so a reviewer sees it as it is now.",
+      "Built like shadcn's Inline Citation, from its Hover Card and Button: it opens on hover or keyboard focus.",
+      "Link to the record itself, not a copy, so the reviewer sees it as it is now.",
     ],
   },
-  "ai-reasoning": {
+  "clinical-sources": {
     usageLang: "tsx",
-    usage: `import { AiReasoning } from "@/components/ui/ai-reasoning"
+    usage: `import { ClinicalSources } from "@/components/ui/clinical-sources"
 
-<AiReasoning
-  steps={[
-    { title: "Compared serial troponin", detail: "18 and 21 ng/L." },
-    { title: "Applied the 0/3-hour pathway" },
-  ]}
-/>`,
+<ClinicalSources sources={records} />`,
     reference: [
-      { name: "steps", description: "{ title, detail? }, in the order taken." },
       {
-        name: "label",
-        description: `The trigger's text. Defaults to "How this was reached".`,
+        name: "sources",
+        description: "The records the answer used, as for Clinical citation.",
       },
       {
         name: "defaultOpen",
-        description: "Opens it on first render. Defaults to false.",
-      },
-      {
-        name: "open, onOpenChange",
-        description: "Controls it from your state.",
+        description: "Opens the list on first render. Defaults to false.",
       },
     ],
     notes: [
-      "Steps are what the model reports, not a proof. Show them so a reviewer can check them against the record.",
+      'Built like shadcn\'s Sources, on its Trace: one line, "Used 4 records", that opens into the list.',
+      "For the model's reasoning, use shadcn's Reasoning or Chain of Thought, also built on Trace; the example on the AI Elements page shows one beside these.",
     ],
   },
   "differential-list": {

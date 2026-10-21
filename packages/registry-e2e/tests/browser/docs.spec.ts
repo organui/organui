@@ -1290,20 +1290,19 @@ test("AI Elements cite sources, mark unsupported claims and record review", asyn
 
   await page.goto("/docs/ai-elements")
   const example = page.getByRole("group", {
-    name: "Review an AI-drafted note example",
+    name: "A clinical assistant example",
   })
   const note = example.getByRole("article", { name: "AI-drafted note" })
   // A claim without a source says so to screen readers.
   await expect(note.getByText("(no source)").first()).toBeAttached()
-  // The note cites the troponin result twice; open the first citation.
-  await note
-    .getByRole("button", { name: /^Source 3:/ })
-    .first()
-    .click()
-  await expect(page.getByRole("dialog")).toContainText(
-    "99th percentile 26 ng/L"
-  )
+  // A citation opens on focus, as shadcn's Inline Citation does. The note
+  // cites the troponin result twice.
+  await note.getByRole("button", { name: "Troponin" }).first().focus()
+  await expect(page.getByText("99th percentile 26 ng/L")).toBeVisible()
   await page.keyboard.press("Escape")
+  // The records it used open from one line, as shadcn's Sources do.
+  await note.getByRole("button", { name: /Used 4 records/ }).click()
+  await expect(note.getByText(/Chest pain pathway/)).toBeVisible()
 
   await expect(example.getByRole("note")).toContainText("AI-generated draft")
   // Rejecting needs a reason; approving records the reviewer.
