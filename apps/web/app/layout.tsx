@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   applicationName: site.name,
   title: { default: site.title, template: "%s — OrganUI" },
   description: site.description,
+  alternates: {
+    types: { "application/rss+xml": [{ url: "/rss.xml", title: "Changelog" }] },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
