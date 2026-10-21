@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 import { organs, organsPage, registryItems } from "@/lib/registry"
@@ -8,6 +7,7 @@ import { Badge } from "@workspace/ui/components/badge"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
+import { HomeShowcase } from "@/components/home-showcase"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
@@ -22,18 +22,6 @@ export const metadata: Metadata = {
     url: "/",
   },
 }
-
-// A row of organs to show what the components look like.
-const showcase = [
-  "heart",
-  "brain",
-  "lungs",
-  "kidneys",
-  "liver",
-  "stomach",
-  "eye",
-  "skeleton",
-].flatMap((name) => organs.filter((organ) => organ.name === name))
 
 export default function Page() {
   return (
@@ -75,33 +63,7 @@ export default function Page() {
             </Link>
           </div>
         </section>
-        <section
-          aria-label="Organs"
-          className="mx-auto w-full max-w-6xl px-4 sm:px-6"
-        >
-          <ul className="grid grid-cols-2 gap-3 rounded-2xl border bg-muted/30 p-3 sm:grid-cols-4 sm:gap-4 sm:p-4">
-            {showcase.map((organ) => (
-              <li key={organ.name}>
-                <Link
-                  href={organ.href}
-                  className="group flex flex-col gap-2 rounded-xl bg-background p-2 ring-1 ring-foreground/5 transition-shadow outline-none hover:shadow-sm focus-visible:ring-3 focus-visible:ring-ring/50"
-                >
-                  <Image
-                    src={`/organs/${organ.name}.webp`}
-                    width={640}
-                    height={480}
-                    alt=""
-                    sizes="(min-width: 1152px) 17rem, (min-width: 640px) 25vw, 50vw"
-                    className="aspect-[4/3] w-full rounded-lg object-contain transition-transform duration-300 group-hover:scale-[1.04]"
-                  />
-                  <span className="px-1 pb-1 text-sm font-medium">
-                    {organ.title}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <HomeShowcase />
         <section className="mx-auto flex max-w-3xl flex-col items-center gap-3 px-6 py-16 text-center text-sm md:py-20">
           <h2 className="text-base font-semibold tracking-tight">
             3D anatomy explorers
