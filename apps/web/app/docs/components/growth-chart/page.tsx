@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -57,22 +61,20 @@ const standards: GrowthStandards = {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Clinical
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Growth chart</h1>
+      <DocsHeader
+        href="/docs/components/growth-chart"
+        eyebrow="Components / Clinical"
+        title="Growth chart"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Percentile curves for a child&apos;s weight, length/height and head
           circumference, with measurements plotted on top. Hover over or tab to
           a point for its percentile and z-score.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="growth-chart-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
+        <DocsHeading id="installation">Installation</DocsHeading>
         <p>
           In a project set up as in{" "}
           <Link href="/docs/installation" className="underline">
@@ -80,14 +82,10 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/growth-chart.json`}
-        </pre>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/growth-chart.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/growth-chart</code>.
         </p>
@@ -101,17 +99,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Usage example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Usage example" code={usage} />
         <p>
           Set <code>measure</code> to <code>weight</code> (kilograms),{" "}
           <code>length</code> (centimetres) or <code>head</code> (head
@@ -126,9 +115,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="standards" className="text-2xl font-semibold">
+        <DocsHeading id="standards">
           Growth standards and their licence
-        </h2>
+        </DocsHeading>
         <p>
           The component ships no reference data, because the tables are not
           OrganUI&apos;s to license. You pass <code>standards</code>: LMS
@@ -192,27 +181,13 @@ export default function Page() {
           at runtime, with a loader that lives on this site only. The installed
           component contains no data and makes no network requests.
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Own standards example"
-          className={codeBlock}
-        >
-          {own}
-        </pre>
+        <CodeSnippet label="Own standards example" code={own} />
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="percentiles-and-z-scores" className="text-2xl font-semibold">
+        <DocsHeading id="percentiles-and-z-scores">
           Percentiles and z-scores
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Helper example"
-          className={codeBlock}
-        >
-          {helpers}
-        </pre>
+        </DocsHeading>
+        <CodeSnippet label="Helper example" code={helpers} />
         <p>
           The file also exports the calculations the chart uses:{" "}
           <code>growthLms</code>, <code>growthZScore</code>,{" "}
@@ -224,9 +199,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="accessibility" className="text-2xl font-semibold">
-          Accessibility
-        </h2>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           Each measurement is a focusable point whose name gives its age, value
           and percentile, and a visually hidden table after the chart lists

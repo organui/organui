@@ -1,6 +1,9 @@
 import Link from "next/link"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
-import { codeBlock, docsMetadata } from "@/lib/registry"
+import { docsMetadata } from "@/lib/registry"
 import {
   Table,
   TableBody,
@@ -43,20 +46,18 @@ structures: [
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Getting started
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Theming</h1>
+      <DocsHeader
+        href="/docs/theming"
+        eyebrow="Getting started"
+        title="Theming"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Components use your shadcn theme. They install no global styles of
           their own.
         </p>
-      </header>
+      </DocsHeader>
       <section className="flex flex-col gap-4">
-        <h2 id="tokens" className="text-2xl font-semibold">
-          Theme tokens
-        </h2>
+        <DocsHeading id="tokens">Theme tokens</DocsHeading>
         <p>
           Every item is styled with Tailwind utilities on shadcn&apos;s semantic
           tokens, the CSS variables <code>shadcn init</code> writes to your
@@ -86,19 +87,10 @@ export default function Page() {
             ))}
           </TableBody>
         </Table>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Theme overrides"
-          className={codeBlock}
-        >
-          {css}
-        </pre>
+        <CodeSnippet label="Theme overrides" code={css} lang="css" />
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="dark-mode" className="text-2xl font-semibold">
-          Dark mode
-        </h2>
+        <DocsHeading id="dark-mode">Dark mode</DocsHeading>
         <p>
           Components have no dark mode of their own: they follow the{" "}
           <code>.dark</code> values of your tokens, however you toggle them, for
@@ -107,9 +99,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="anatomy-colours" className="text-2xl font-semibold">
-          Anatomy colours
-        </h2>
+        <DocsHeading id="anatomy-colours">Anatomy colours</DocsHeading>
         <p>
           Structure colours are data, not theme: each organ lists its structures
           with a <code>color</code>, which the viewer, the{" "}
@@ -118,19 +108,10 @@ export default function Page() {
           </Link>{" "}
           swatches and the blocks share. Edit them in the installed file.
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Structure colour"
-          className={codeBlock}
-        >
-          {structure}
-        </pre>
+        <CodeSnippet label="Structure colour" code={structure} />
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="per-component" className="text-2xl font-semibold">
-          Per component
-        </h2>
+        <DocsHeading id="per-component">Per component</DocsHeading>
         <p>
           Every component takes <code>className</code> for its root, merged with{" "}
           <code>cn</code>, so sizing and spacing stay at the call site. For

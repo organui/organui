@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -34,32 +38,24 @@ structure.bonds       // atom index pairs inferred from covalent radii`
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Molecular &amp; cellular
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">
-          Molecule viewer
-        </h1>
+      <DocsHeader
+        href="/docs/components/molecule-viewer"
+        eyebrow={<>Components / Molecular &amp; cellular</>}
+        title="Molecule viewer"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Open a protein or nucleic acid structure from the Protein Data Bank
           and explore it residue by residue. The viewer parses PDB and mmCIF
           text itself, so it needs nothing beyond three.js.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="molecule-viewer-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/molecule-viewer.json`}
-        </pre>
+        <DocsHeading id="installation">Installation</DocsHeading>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/molecule-viewer.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/molecule-viewer</code>.
         </p>
@@ -80,17 +76,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Usage example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Usage example" code={usage} />
         <p>
           Pass a URL as <code>src</code>, or the file&apos;s text as{" "}
           <code>data</code>. RCSB serves every entry with CORS, as{" "}
@@ -109,9 +96,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="behaviour" className="text-2xl font-semibold">
-          Behaviour
-        </h2>
+        <DocsHeading id="behaviour">Behaviour</DocsHeading>
         <p>
           Selection is controlled and works on residues: pass{" "}
           <code>selectedId</code>, such as <code>A:16</code> (chain, author
@@ -140,17 +125,10 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="use-the-parser-on-its-own" className="text-2xl font-semibold">
+        <DocsHeading id="use-the-parser-on-its-own">
           Use the parser on its own
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Parser example"
-          className={codeBlock}
-        >
-          {parse}
-        </pre>
+        </DocsHeading>
+        <CodeSnippet label="Parser example" code={parse} />
         <p className="text-sm text-muted-foreground">
           WebGL is required. When it cannot start, or the file cannot be read,
           the viewer shows a message with a retry button. Very large assemblies

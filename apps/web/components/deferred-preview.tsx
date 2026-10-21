@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, type ReactNode } from "react"
+import { Skeleton } from "@workspace/ui/components/skeleton"
 
 // Heavy demos join the shared preview without loading their scene offscreen.
 export function DeferredPreview({ children }: { children: ReactNode }) {
@@ -22,7 +23,11 @@ export function DeferredPreview({ children }: { children: ReactNode }) {
   }, [])
   return (
     <div ref={viewport} className="w-full min-w-0">
-      {visible ? children : <div aria-hidden="true" className="h-[28rem]" />}
+      {visible ? (
+        children
+      ) : (
+        <Skeleton aria-hidden="true" className="h-[28rem] w-full rounded-xl" />
+      )}
     </div>
   )
 }

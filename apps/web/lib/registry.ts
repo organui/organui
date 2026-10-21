@@ -109,10 +109,6 @@ export const registryNamespace = JSON.stringify(
   2
 )
 
-// Shared style for the scrollable, focusable code regions on docs pages.
-export const codeBlock =
-  "overflow-auto rounded-lg border bg-muted/30 p-4 text-sm focus-visible:outline-2 focus-visible:outline-ring"
-
 export type NavLink = { title: string; href: string }
 
 export type DocsNavSection = { title: string; items: NavLink[] }
@@ -205,8 +201,15 @@ export function docsMetadata(
 ): Metadata {
   // Listed by hand on purpose: a page's own openGraph replaces the root
   // opengraph-image, so without this docs pages share no image (see #90).
+  // Each page gets a card with its own title and summary.
+  const query = new URLSearchParams({ title, description })
   const images = [
-    { url: site.socialImage, alt: site.title, width: 1200, height: 630 },
+    {
+      url: `/og?${query}`,
+      alt: `${title} — OrganUI`,
+      width: 1200,
+      height: 630,
+    },
   ]
   return {
     title,

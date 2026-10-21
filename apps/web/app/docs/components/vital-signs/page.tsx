@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -36,22 +40,20 @@ const ranges = `// Merged over adultVitalRanges, one vital at a time.
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Clinical
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Vital signs</h1>
+      <DocsHeader
+        href="/docs/components/vital-signs"
+        eyebrow="Components / Clinical"
+        title="Vital signs"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Heart rate, blood pressure, SpO₂ and temperature at a glance, each
           checked against a normal range you can configure. Every status is
           written out with its own icon, so it never depends on colour.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="vital-signs-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
+        <DocsHeading id="installation">Installation</DocsHeading>
         <p>
           In a project set up as in{" "}
           <Link href="/docs/installation" className="underline">
@@ -59,14 +61,10 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/vital-signs.json`}
-        </pre>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/vital-signs.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/vital-signs</code>.
         </p>
@@ -81,17 +79,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Usage example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Usage example" code={usage} />
         <p>
           Pass the latest readings as numbers. A missing, <code>null</code> or
           non-finite value shows a dash and the status <em>No reading</em>.
@@ -100,17 +89,8 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="ranges-and-status" className="text-2xl font-semibold">
-          Ranges and status
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Range configuration example"
-          className={codeBlock}
-        >
-          {ranges}
-        </pre>
+        <DocsHeading id="ranges-and-status">Ranges and status</DocsHeading>
+        <CodeSnippet label="Range configuration example" code={ranges} />
         <p>
           Defaults are common resting adult ranges, exported as{" "}
           <code>adultVitalRanges</code>: heart rate 60–100 bpm, blood pressure
@@ -136,9 +116,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="customize" className="text-2xl font-semibold">
-          Customize
-        </h2>
+        <DocsHeading id="customize">Customize</DocsHeading>
         <p>
           Set <code>title</code> for the heading and the region&apos;s
           accessible name, <code>description</code> for a line under it,{" "}

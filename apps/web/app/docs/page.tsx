@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import {
   componentGroups,
@@ -18,20 +20,14 @@ export const metadata = docsMetadata(
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Getting started
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Introduction</h1>
+      <DocsHeader href="/docs" eyebrow="Getting started" title="Introduction">
         <p className="max-w-2xl text-lg text-muted-foreground">
           OrganUI is a set of interface components for healthcare and life
           sciences: 3D anatomy, clinical charts, molecules and medical images.
         </p>
-      </header>
+      </DocsHeader>
       <section className="flex flex-col gap-4">
-        <h2 id="source-you-own" className="text-2xl font-semibold">
-          Source you own
-        </h2>
+        <DocsHeading id="source-you-own">Source you own</DocsHeading>
         <p>
           OrganUI is not a package you import. Like shadcn/ui, each component is
           distributed as source through a shadcn-compatible registry: the shadcn
@@ -51,9 +47,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="where-to-start" className="text-2xl font-semibold">
-          Where to start
-        </h2>
+        <DocsHeading id="where-to-start">Where to start</DocsHeading>
         <ul className="flex flex-col gap-3">
           {guides.slice(1).map((guide) => (
             <li key={guide.href}>
@@ -87,9 +81,9 @@ export default function Page() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="not-a-medical-device" className="text-2xl font-semibold">
+        <DocsHeading id="not-a-medical-device">
           Not a medical device
-        </h2>
+        </DocsHeading>
         <p>
           The components, models and sample data are for education, prototyping
           and interfaces around clinical software. None of them is a medical

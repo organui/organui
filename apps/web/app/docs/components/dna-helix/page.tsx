@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -28,29 +32,23 @@ export function GenePanel() {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Molecular &amp; cellular
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">DNA helix</h1>
+      <DocsHeader
+        href="/docs/components/dna-helix"
+        eyebrow={<>Components / Molecular &amp; cellular</>}
+        title="DNA helix"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Type a sequence and get its double helix, with every base paired to
           its complement. Built procedurally, so there is no model to download.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="dna-helix-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/dna-helix.json`}
-        </pre>
+        <DocsHeading id="installation">Installation</DocsHeading>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/dna-helix.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/dna-helix</code>.
         </p>
@@ -70,17 +68,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Usage example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Usage example" code={usage} />
         <p>
           <code>sequence</code> is one strand read 5′ to 3′; whitespace and case
           are ignored, and any letter other than A, C, G or T shows a message
@@ -93,9 +82,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="geometry-and-behaviour" className="text-2xl font-semibold">
+        <DocsHeading id="geometry-and-behaviour">
           Geometry and behaviour
-        </h2>
+        </DocsHeading>
         <p>
           The helix is right-handed B-DNA: 3.38 Å rise and 34.3° twist per pair,
           about 10.5 pairs a turn, with phosphates 9 Å from the axis and the

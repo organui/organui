@@ -1,11 +1,10 @@
 import Link from "next/link"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
-import {
-  codeBlock,
-  docsMetadata,
-  registryNamespace,
-  shadcn,
-} from "@/lib/registry"
+import { docsMetadata, registryNamespace, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -19,19 +18,17 @@ const init = `bunx ${shadcn} init --preset base-nova`
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Getting started
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Installation</h1>
+      <DocsHeader
+        href="/docs/installation"
+        eyebrow="Getting started"
+        title="Installation"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Configure a project once, then add components by name.
         </p>
-      </header>
+      </DocsHeader>
       <section className="flex flex-col gap-4">
-        <h2 id="requirements" className="text-2xl font-semibold">
-          Requirements
-        </h2>
+        <DocsHeading id="requirements">Requirements</DocsHeading>
         <ul className="flex list-disc flex-col gap-2 pl-5">
           <li>React 19 and Tailwind CSS 4.</li>
           <li>
@@ -48,14 +45,7 @@ export default function Page() {
           </li>
         </ul>
         <p>For a new project, run:</p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Initialise shadcn"
-          className={codeBlock}
-        >
-          {init}
-        </pre>
+        <CodeBlockCommand label="Initialise shadcn" command={init} />
         <p className="text-sm text-muted-foreground">
           The commands use Bun and pin the shadcn version the registry is tested
           with. <code>npx</code>, <code>pnpm dlx</code> and{" "}
@@ -63,33 +53,23 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="add-components" className="text-2xl font-semibold">
-          Add components
-        </h2>
+        <DocsHeading id="add-components">Add components</DocsHeading>
         <p>
           <code>@organui</code> is listed in shadcn&apos;s registry directory,
           so the CLI knows it without any setup. Install any item by name:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Install by name"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add @organui/heart`}
-        </pre>
+        <CodeBlockCommand
+          label="Install by name"
+          command={`bunx ${shadcn} add @organui/heart`}
+        />
         <p>
           Or by its address, which works the same, including for items that
           depend on other OrganUI items:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Install by URL"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/heart.json`}
-        </pre>
+        <CodeBlockCommand
+          label="Install by URL"
+          command={`bunx ${shadcn} add ${site.url}/r/heart.json`}
+        />
         <p>
           The CLI installs each item&apos;s dependencies in the same run: other
           OrganUI items, such as the shared organ viewer behind every organ, and
@@ -102,45 +82,34 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="namespace" className="text-2xl font-semibold">
+        <DocsHeading id="namespace">
           Register the namespace (optional)
-        </h2>
+        </DocsHeading>
         <p>
           To pin the registry address, point it at a copy you host, or use a
           shadcn CLI older than the directory, add the namespace to{" "}
           <code>components.json</code> yourself:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Registry namespace configuration"
-          className={codeBlock}
-        >
-          {registryNamespace}
-        </pre>
+        <CodeSnippet
+          label="Registry namespace configuration"
+          code={registryNamespace}
+          lang="json"
+        />
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="from-github" className="text-2xl font-semibold">
-          Install from GitHub
-        </h2>
+        <DocsHeading id="from-github">Install from GitHub</DocsHeading>
         <p>
           The repository is also a GitHub registry, so items install straight
           from source. Append <code>#&lt;commit&gt;</code> to pin a version;
           OrganUI dependencies still resolve through <code>@organui</code>.
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Install from GitHub"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add organui/organui/anatomy-tree`}
-        </pre>
+        <CodeBlockCommand
+          label="Install from GitHub"
+          command={`bunx ${shadcn} add organui/organui/anatomy-tree`}
+        />
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="after-install" className="text-2xl font-semibold">
-          After install
-        </h2>
+        <DocsHeading id="after-install">After install</DocsHeading>
         <p>
           The files land in your components directory, or in your UI directory
           for <code>registry:ui</code> items, and the CLI prints a link to the

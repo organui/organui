@@ -1,4 +1,8 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import type { Metadata } from "next"
 import Link from "next/link"
@@ -6,12 +10,7 @@ import { notFound } from "next/navigation"
 import { OrganApi } from "@/components/organ-api"
 import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
-import {
-  codeBlock,
-  componentGroups,
-  docsMetadata,
-  registryItems,
-} from "@/lib/registry"
+import { componentGroups, docsMetadata, registryItems } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 type Props = { params: Promise<{ name: string }> }
@@ -61,32 +60,27 @@ export function ${component}Demo() {
 }`
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components /{" "}
-          {componentGroups.find(({ id }) => id === item.group)?.title}
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">{item.title}</h1>
+      <DocsHeader
+        href={item.href}
+        eyebrow={
+          <>
+            Components /{" "}
+            {componentGroups.find(({ id }) => id === item.group)?.title}
+          </>
+        }
+        title={<>{item.title}</>}
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           An interactive 3D {model.name.toLowerCase()} with{" "}
           {model.structures.length} selectable structures and{" "}
           {model.views.length} named views.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview key={name} name={`${name}-demo`} />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
+        <DocsHeading id="installation">Installation</DocsHeading>
         <p>Run:</p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {item.install}
-        </pre>
+        <CodeBlockCommand label="Installation command" command={item.install} />
         <p className="text-sm text-muted-foreground">
           This adds <code>{name}.tsx</code> to your components directory. Its
           dependency,{" "}
@@ -106,17 +100,8 @@ export function ${component}Demo() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Usage example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Usage example" code={usage} />
         <p>
           Pair it with the{" "}
           <Link href="/docs/components/anatomy-tree" className="underline">
@@ -134,18 +119,14 @@ export function ${component}Demo() {
       <OrganExamples key={`${name}-examples`} name={name} />
       <OrganApi component={component} />
       <section className="flex flex-col gap-4">
-        <h2 id="views" className="text-2xl font-semibold">
-          Views
-        </h2>
+        <DocsHeading id="views">Views</DocsHeading>
         <p>
           {model.views.map(({ name }) => name).join(", ")}. The viewer opens on{" "}
           {model.defaultView}; call <code>setView</code> on its ref to switch.
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="model-and-licence" className="text-2xl font-semibold">
-          Model and licence
-        </h2>
+        <DocsHeading id="model-and-licence">Model and licence</DocsHeading>
         <p>
           {model.attribution.credit} The component code is MIT, but the model
           keeps its own licence,{" "}

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { DocsHeader } from "@/components/docs-header"
 import { DocsPager } from "@/components/docs-pager"
 import {
   componentsIndex,
@@ -25,8 +26,7 @@ const links = [
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <h1 className="text-4xl font-semibold tracking-tight">Components</h1>
+      <DocsHeader href={componentsIndex.href} title="Components">
         <p className="max-w-2xl text-lg text-muted-foreground">
           Each component installs as source with the shadcn CLI. Set up a
           project first in{" "}
@@ -39,7 +39,7 @@ export default function Page() {
           </Link>
           .
         </p>
-      </header>
+      </DocsHeader>
       <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-x-8 lg:gap-x-16 lg:gap-y-6">
         {links.map(({ title, href }) => (
           <li key={href}>

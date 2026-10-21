@@ -386,7 +386,7 @@ test("the header links each section and searches the whole site", async ({
     page.getByRole("heading", { name: "Vital signs", level: 1 })
   ).toBeVisible()
 
-  await page.getByRole("button", { name: /^Search…/ }).click()
+  await page.getByRole("button", { name: /^Search/ }).click()
   await expect(dialog).toBeVisible()
   await page.keyboard.press("Escape")
   await expect(dialog).toBeHidden()

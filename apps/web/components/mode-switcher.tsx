@@ -11,7 +11,7 @@ export function ModeSwitcher() {
     <Button
       variant="ghost"
       size="icon"
-      className="size-9"
+      className="size-8"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
       <svg

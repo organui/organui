@@ -1,4 +1,5 @@
 import type { OrganViewerProps } from "@workspace/registry/organ-viewer"
+import { DocsHeading } from "@/components/docs-heading"
 import {
   Table,
   TableBody,
@@ -74,9 +75,7 @@ const props = {
 export function OrganApi({ component }: { component: string }) {
   return (
     <section className="flex min-w-0 flex-col gap-4">
-      <h2 id="api-reference" className="text-2xl font-semibold">
-        API Reference
-      </h2>
+      <DocsHeading id="api-reference">API Reference</DocsHeading>
       <p>
         Import <code>{component}Props</code> from the same file as{" "}
         <code>{component}</code>. The organ model is already configured.

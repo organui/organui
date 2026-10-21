@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { organModels } from "@/lib/organ-models"
 import { docsMetadata, registryItems } from "@/lib/registry"
@@ -30,19 +32,17 @@ export default async function Page() {
   )
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Getting started
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Licences</h1>
+      <DocsHeader
+        href="/docs/licences"
+        eyebrow="Getting started"
+        title="Licences"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           The code is MIT. The models and data it shows keep their own licences.
         </p>
-      </header>
+      </DocsHeader>
       <section className="flex flex-col gap-4">
-        <h2 id="code" className="text-2xl font-semibold">
-          Code
-        </h2>
+        <DocsHeading id="code">Code</DocsHeading>
         <p>
           Every registry item, and this website, is{" "}
           <a
@@ -60,9 +60,7 @@ export default async function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="models" className="text-2xl font-semibold">
-          3D models
-        </h2>
+        <DocsHeading id="models">3D models</DocsHeading>
         <p>
           Organs and the cell load a GLB model at runtime; the component file
           holds only its structures, views and credit. The models are under CC
@@ -126,9 +124,7 @@ export default async function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="data" className="text-2xl font-semibold">
-          Sample data
-        </h2>
+        <DocsHeading id="data">Sample data</DocsHeading>
         <ul className="flex list-disc flex-col gap-3 pl-5">
           <li>
             <Link href="/docs/components/molecule-viewer" className="underline">
@@ -179,9 +175,7 @@ export default async function Page() {
         </ul>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="site" className="text-2xl font-semibold">
-          This website
-        </h2>
+        <DocsHeading id="site">This website</DocsHeading>
         <p>
           The docs adapt parts of shadcn/ui&apos;s site, whose MIT notice is
           kept beside them in the repository, and use the Geist fonts under the

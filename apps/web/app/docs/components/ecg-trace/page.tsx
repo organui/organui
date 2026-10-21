@@ -1,6 +1,10 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -39,30 +43,24 @@ const synthetic = `import {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Clinical
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">ECG trace</h1>
+      <DocsHeader
+        href="/docs/components/ecg-trace"
+        eyebrow="Components / Clinical"
+        title="ECG trace"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           A rhythm strip for a recorded trace or a live stream, drawn on
           standard ECG paper with its P, QRS and T waves labelled. Not for
           diagnostic use.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="ecg-trace-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/ecg-trace.json`}
-        </pre>
+        <DocsHeading id="installation">Installation</DocsHeading>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/ecg-trace.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/ecg-trace</code>.
         </p>
@@ -76,17 +74,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Recorded trace example"
-          className={codeBlock}
-        >
-          {recorded}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Recorded trace example" code={recorded} />
         <p>
           Pass <code>samples</code> in millivolts and their{" "}
           <code>sampleRate</code> in hertz (250 by default). The strip shows the
@@ -95,17 +84,8 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="live-streams" className="text-2xl font-semibold">
-          Live streams
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Live stream example"
-          className={codeBlock}
-        >
-          {live}
-        </pre>
+        <DocsHeading id="live-streams">Live streams</DocsHeading>
+        <CodeSnippet label="Live stream example" code={live} />
         <p>
           A <code>stream</code> is any object whose <code>subscribe</code> takes
           a listener for chunks of samples and returns an unsubscribe function.
@@ -117,9 +97,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="paper-labels-and-rate" className="text-2xl font-semibold">
+        <DocsHeading id="paper-labels-and-rate">
           Paper, labels and rate
-        </h2>
+        </DocsHeading>
         <p>
           The grid follows standard ECG paper: 1 mm small boxes and 5 mm large
           boxes, at 25 mm/s and 10 mm/mV by default. Change <code>speed</code>{" "}
@@ -144,17 +124,8 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="synthetic-rhythm" className="text-2xl font-semibold">
-          Synthetic rhythm
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Synthetic rhythm example"
-          className={codeBlock}
-        >
-          {synthetic}
-        </pre>
+        <DocsHeading id="synthetic-rhythm">Synthetic rhythm</DocsHeading>
+        <CodeSnippet label="Synthetic rhythm example" code={synthetic} />
         <p>
           <code>syntheticEcg</code> and <code>syntheticEcgStream</code> generate
           an original, regular sinus rhythm from Gaussian P, Q, R, S and T
@@ -163,9 +134,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="accessibility-and-limits" className="text-2xl font-semibold">
+        <DocsHeading id="accessibility-and-limits">
           Accessibility and limits
-        </h2>
+        </DocsHeading>
         <p>
           The strip is an image whose name gives the lead, duration, paper
           settings and heart rate. Wave labels are hidden from assistive

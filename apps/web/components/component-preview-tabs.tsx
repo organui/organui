@@ -25,8 +25,12 @@ export function ComponentPreviewTabs({
 }) {
   const [isMobileCodeVisible, setIsMobileCodeVisible] = React.useState(false)
   const codeRef = React.useRef<HTMLDivElement>(null)
+  const toggled = React.useRef(false)
+  // After either button, focus what replaced it: the code, or View Code.
   React.useEffect(() => {
+    if (!toggled.current) return
     if (isMobileCodeVisible) codeRef.current?.querySelector("pre")?.focus()
+    else codeRef.current?.querySelector("button")?.focus()
   }, [isMobileCodeVisible])
 
   return (
@@ -58,7 +62,22 @@ export function ComponentPreviewTabs({
           className="relative min-w-0 overflow-hidden [&_pre]:max-h-72"
         >
           {isMobileCodeVisible ? (
-            source
+            <>
+              {source}
+              <div className="flex justify-center border-t p-2">
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    toggled.current = true
+                    setIsMobileCodeVisible(false)
+                  }}
+                >
+                  Hide Code
+                </Button>
+              </div>
+            </>
           ) : (
             <div className="relative">
               <div aria-hidden="true" className="pointer-events-none">
@@ -69,7 +88,10 @@ export function ComponentPreviewTabs({
                   type="button"
                   size="sm"
                   variant="outline"
-                  onClick={() => setIsMobileCodeVisible(true)}
+                  onClick={() => {
+                    toggled.current = true
+                    setIsMobileCodeVisible(true)
+                  }}
                 >
                   View Code
                 </Button>

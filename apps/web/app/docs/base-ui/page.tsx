@@ -1,8 +1,11 @@
 import { readFile } from "node:fs/promises"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { join } from "node:path"
 import Link from "next/link"
 import { DocsPager } from "@/components/docs-pager"
-import { codeBlock, docsMetadata, registryItems } from "@/lib/registry"
+import { docsMetadata, registryItems } from "@/lib/registry"
 
 export const metadata = docsMetadata(
   "Base UI",
@@ -38,20 +41,18 @@ export default async function Page() {
   const direct = (await itemsUsingRender()).filter(({ model }) => !model)
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Getting started
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Base UI</h1>
+      <DocsHeader
+        href="/docs/base-ui"
+        eyebrow="Getting started"
+        title="Base UI"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Items with controls need one of shadcn&apos;s Base UI styles, such as{" "}
           <code>base-nova</code>.
         </p>
-      </header>
+      </DocsHeader>
       <section className="flex flex-col gap-4">
-        <h2 id="why" className="text-2xl font-semibold">
-          Why
-        </h2>
+        <DocsHeading id="why">Why</DocsHeading>
         <p>
           OrganUI items don&apos;t ship their own buttons, selects or tooltips.
           They list shadcn&apos;s as registry dependencies, and the CLI installs
@@ -67,9 +68,7 @@ export default async function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="which-items" className="text-2xl font-semibold">
-          Which items
-        </h2>
+        <DocsHeading id="which-items">Which items</DocsHeading>
         <ul className="flex list-disc flex-col gap-1 pl-5">
           {direct.map((item) => (
             <li key={item.name}>
@@ -92,22 +91,17 @@ export default async function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="check-your-style" className="text-2xl font-semibold">
-          Check your style
-        </h2>
+        <DocsHeading id="check-your-style">Check your style</DocsHeading>
         <p>
           The style is the <code>style</code> field of{" "}
           <code>components.json</code>. Base UI styles start with{" "}
           <code>base-</code>:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Base UI style in components.json"
-          className={codeBlock}
-        >
-          {components}
-        </pre>
+        <CodeSnippet
+          label="Base UI style in components.json"
+          code={components}
+          lang="json"
+        />
         <p>
           On a Radix style, either use a Base UI style for the project, as in{" "}
           <Link href="/docs/installation#requirements" className="underline">

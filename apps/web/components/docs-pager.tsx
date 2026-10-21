@@ -1,5 +1,8 @@
 import Link from "next/link"
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import { neighbours } from "@/lib/registry"
+import { buttonVariants } from "@workspace/ui/components/button"
+import { cn } from "@workspace/ui/lib/utils"
 
 // Previous and next pages in sidebar order, organs included.
 export function DocsPager({ href }: { href: string }) {
@@ -8,15 +11,19 @@ export function DocsPager({ href }: { href: string }) {
   return (
     <nav
       aria-label="Previous and next pages"
-      className="flex flex-wrap justify-between gap-4 border-t pt-6 text-sm"
+      className="flex items-center justify-between gap-4 border-t pt-6"
     >
       {previous ? (
         <Link
           href={previous.href}
-          className="flex flex-col gap-1 rounded-md hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring"
+          className={cn(
+            buttonVariants({ variant: "secondary", size: "sm" }),
+            "min-w-0 shadow-none"
+          )}
         >
-          <span className="text-muted-foreground">Previous</span>
-          <span className="font-medium">← {previous.title}</span>
+          <ArrowLeftIcon data-icon="inline-start" />
+          <span className="sr-only">Previous: </span>
+          <span className="truncate">{previous.title}</span>
         </Link>
       ) : (
         <span />
@@ -24,12 +31,49 @@ export function DocsPager({ href }: { href: string }) {
       {next && (
         <Link
           href={next.href}
-          className="ml-auto flex flex-col items-end gap-1 rounded-md text-right hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring"
+          className={cn(
+            buttonVariants({ variant: "secondary", size: "sm" }),
+            "ms-auto min-w-0 shadow-none"
+          )}
         >
-          <span className="text-muted-foreground">Next</span>
-          <span className="font-medium">{next.title} →</span>
+          <span className="sr-only">Next: </span>
+          <span className="truncate">{next.title}</span>
+          <ArrowRightIcon data-icon="inline-end" />
         </Link>
       )}
     </nav>
+  )
+}
+
+// The same neighbours as small icon buttons beside a page's title.
+export function DocsPagerIcons({ href }: { href: string }) {
+  const { previous, next } = neighbours(href)
+  const button = cn(
+    buttonVariants({ variant: "secondary", size: "icon-sm" }),
+    "shadow-none"
+  )
+  return (
+    <div className="hidden shrink-0 items-center gap-2 sm:flex">
+      {previous && (
+        <Link
+          href={previous.href}
+          aria-label={`Previous: ${previous.title}`}
+          title={previous.title}
+          className={button}
+        >
+          <ArrowLeftIcon />
+        </Link>
+      )}
+      {next && (
+        <Link
+          href={next.href}
+          aria-label={`Next: ${next.title}`}
+          title={next.title}
+          className={button}
+        >
+          <ArrowRightIcon />
+        </Link>
+      )}
+    </div>
   )
 }

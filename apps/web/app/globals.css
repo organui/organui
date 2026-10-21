@@ -2,3 +2,36 @@
 
 /* The docs render the registry component from its workspace dependency. */
 @source "../node_modules/@workspace/registry/registry";
+
+:root {
+  --header-height: calc(var(--spacing) * 14);
+  --selection: oklch(0.145 0 0);
+  --selection-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --selection: oklch(0.922 0 0);
+  --selection-foreground: oklch(0.205 0 0);
+}
+
+@layer base {
+  html {
+    /* Anchors land below the sticky header. */
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  ::selection {
+    background-color: var(--selection);
+    color: var(--selection-foreground);
+  }
+
+  /* Text in docs pages: inline code and links. Code blocks, buttons and
+     components style themselves. */
+  [data-docs-content] :where(p, li, td, figcaption, summary) > code {
+    @apply rounded-md bg-muted px-[0.3em] py-[0.15em] font-mono text-[0.85em] break-words;
+  }
+
+  [data-docs-content] :where(p, li, td) > a {
+    @apply font-medium underline decoration-current/30 underline-offset-4 transition-colors hover:decoration-current;
+  }
+}

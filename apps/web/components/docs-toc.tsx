@@ -4,18 +4,21 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { cn } from "@workspace/ui/lib/utils"
 
-type Heading = { id: string; title: string }
+type Heading = { id: string; title: string; depth: 2 | 3 }
 
 // Read from the rendered page rather than declared per page: every section
-// heading has an id, or sits in a section that has one.
+// heading has an id, or sits in a section that has one. Subheadings are
+// listed when they have their own id.
 function readHeadings(): Heading[] {
-  return [...document.querySelectorAll("[data-docs-content] h2")].flatMap(
-    (heading) => {
-      const id = heading.id || heading.closest("section")?.id
-      const title = heading.textContent?.trim()
-      return id && title ? [{ id, title }] : []
-    }
-  )
+  return [
+    ...document.querySelectorAll("[data-docs-content] :is(h2, h3)"),
+  ].flatMap((heading) => {
+    const depth = heading.tagName === "H3" ? 3 : 2
+    const id =
+      heading.id || (depth === 2 ? heading.closest("section")?.id : undefined)
+    const title = heading.textContent?.trim()
+    return id && title ? [{ id, title, depth }] : []
+  })
 }
 
 export function DocsTableOfContents({ className }: { className?: string }) {
@@ -49,15 +52,18 @@ export function DocsTableOfContents({ className }: { className?: string }) {
 
   if (headings.length < 2) return null
   return (
-    <nav aria-label="On this page" className={cn("text-sm", className)}>
-      <p className="mb-2 font-medium">On this page</p>
+    <nav
+      aria-label="On this page"
+      className={cn("flex flex-col gap-2 text-[0.8rem]", className)}
+    >
+      <p className="text-xs font-medium text-muted-foreground">On this page</p>
       <ul className="flex flex-col gap-2">
-        {headings.map(({ id, title }) => (
-          <li key={id}>
+        {headings.map(({ id, title, depth }) => (
+          <li key={id} className={cn(depth === 3 && "ps-4")}>
             <a
               href={`#${id}`}
               aria-current={active === id ? "location" : undefined}
-              className="text-muted-foreground hover:text-foreground aria-[current=location]:text-foreground"
+              className="rounded-sm text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=location]:font-medium aria-[current=location]:text-foreground"
             >
               {title}
             </a>

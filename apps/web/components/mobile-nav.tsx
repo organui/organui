@@ -35,36 +35,37 @@ export function MobileNav({
           <Button variant="ghost" className={cn("h-9 gap-2 px-2", className)} />
         }
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          aria-hidden="true"
-          className="size-5"
-        >
-          {open ? (
-            <path d="M6 18 18 6M6 6l12 12" />
-          ) : (
-            <path d="M4 9h16M4 15h16" />
-          )}
-        </svg>
+        <span aria-hidden="true" className="relative size-4">
+          <span
+            className={cn(
+              "absolute left-0 h-0.5 w-4 rounded-full bg-foreground transition-all duration-100",
+              open ? "top-[0.4375rem] -rotate-45" : "top-1"
+            )}
+          />
+          <span
+            className={cn(
+              "absolute left-0 h-0.5 w-4 rounded-full bg-foreground transition-all duration-100",
+              open ? "top-[0.4375rem] rotate-45" : "top-2.5"
+            )}
+          />
+        </span>
         Menu
       </PopoverTrigger>
+      {/* Fills the screen below the header. */}
       <PopoverContent
         align="start"
-        sideOffset={10}
-        className="max-h-[calc(100svh-5rem)] w-[calc(100vw-2rem)] gap-6 overflow-y-auto p-4"
+        alignOffset={-16}
+        sideOffset={11}
+        className="h-[calc(100svh-var(--header-height)-1px)] w-screen gap-8 overflow-y-auto overscroll-contain rounded-none bg-background/95 p-6 shadow-none ring-0 backdrop-blur data-open:zoom-in-100 data-closed:zoom-out-100"
       >
-        <nav aria-label="Main" className="flex flex-col gap-1 text-base">
+        <nav aria-label="Main" className="flex flex-col gap-1 text-lg">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={close}
               aria-current={item.href === current ? "page" : undefined}
-              className="rounded-md px-2 py-1.5 font-medium hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
+              className="rounded-md px-2 py-1.5 font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:text-foreground"
             >
               {item.title}
             </Link>

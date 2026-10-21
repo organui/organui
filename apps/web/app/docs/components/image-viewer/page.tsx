@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -42,23 +46,19 @@ const images = `<ImageViewer slices={[
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Imaging
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">
-          Medical image viewer
-        </h1>
+      <DocsHeader
+        href="/docs/components/image-viewer"
+        eyebrow="Components / Imaging"
+        title="Medical image viewer"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           Scroll through a stack of CT or MRI slices, adjust window and level,
           zoom and pan, and read uncompressed DICOM files in the browser.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="image-viewer-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
+        <DocsHeading id="installation">Installation</DocsHeading>
         <p>
           In a project set up as in{" "}
           <Link href="/docs/installation" className="underline">
@@ -66,14 +66,10 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/image-viewer.json`}
-        </pre>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/image-viewer.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/image-viewer</code>.
         </p>
@@ -90,17 +86,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Usage example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="Usage example" code={usage} />
         <p>
           Each slice is either raw values with their size, such as Hounsfield
           units in an <code>Int16Array</code> or <code>Float32Array</code> in
@@ -110,19 +97,10 @@ export default function Page() {
           to keep non-square pixels in proportion, and <code>unit</code> to
           label values under the pointer.
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Image URL example"
-          className={codeBlock}
-        >
-          {images}
-        </pre>
+        <CodeSnippet label="Image URL example" code={images} />
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="window-and-level" className="text-2xl font-semibold">
-          Window and level
-        </h2>
+        <DocsHeading id="window-and-level">Window and level</DocsHeading>
         <p>
           The window maps values from <code>center - width / 2</code> to{" "}
           <code>center + width / 2</code> onto black through white, using the
@@ -141,17 +119,8 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="dicom-files" className="text-2xl font-semibold">
-          DICOM files
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="DICOM example"
-          className={codeBlock}
-        >
-          {dicom}
-        </pre>
+        <DocsHeading id="dicom-files">DICOM files</DocsHeading>
+        <CodeSnippet label="DICOM example" code={dicom} />
         <p>
           <code>parseDicom</code> reads single-frame grayscale Part 10 files in
           implicit or explicit little endian, applies rescale slope and
@@ -162,9 +131,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="keyboard-and-pointer" className="text-2xl font-semibold">
+        <DocsHeading id="keyboard-and-pointer">
           Keyboard and pointer
-        </h2>
+        </DocsHeading>
         <p>
           Tab focuses the image. Up and Down move one slice, Page Up and Page
           Down move ten, and Home and End jump to the first and last. Plus and

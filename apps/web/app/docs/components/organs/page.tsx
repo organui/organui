@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { DocsHeader } from "@/components/docs-header"
 import Link from "next/link"
 import { DocsPager } from "@/components/docs-pager"
 import { docsMetadata, organs, organsPage } from "@/lib/registry"
@@ -12,11 +13,11 @@ export const metadata = docsMetadata(
 export default function Page() {
   return (
     <div data-docs-wide className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Organs
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Organs</h1>
+      <DocsHeader
+        href={organsPage.href}
+        eyebrow="Components / Organs"
+        title="Organs"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           {organs.length} organs, each a component on the shared{" "}
           <Link href="/docs/components/organ-viewer" className="underline">
@@ -33,7 +34,7 @@ export default function Page() {
           </Link>
           .
         </p>
-      </header>
+      </DocsHeader>
       <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
         {organs.map((item) => (
           <li key={item.name}>

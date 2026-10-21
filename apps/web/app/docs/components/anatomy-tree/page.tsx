@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 const description =
@@ -31,21 +35,19 @@ export function Panel() {
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Organs
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Anatomy tree</h1>
+      <DocsHeader
+        href="/docs/components/anatomy-tree"
+        eyebrow="Components / Organs"
+        title="Anatomy tree"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           A searchable hierarchy for selecting structures and controlling what
           your viewer shows. Bring your own data and rendering engine.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="anatomy-tree-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
+        <DocsHeading id="installation">Installation</DocsHeading>
         <p>
           In a project set up as in{" "}
           <Link href="/docs/installation" className="underline">
@@ -53,14 +55,10 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/anatomy-tree.json`}
-        </pre>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/anatomy-tree.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/anatomy-tree</code>.
         </p>
@@ -76,17 +74,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="State wiring example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="State wiring example" code={usage} />
         <p>
           Use globally unique, nonempty IDs that remain stable between renders.
           Duplicate IDs throw an error. Labels may repeat. Selection is
@@ -96,9 +85,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="visibility-and-search" className="text-2xl font-semibold">
+        <DocsHeading id="visibility-and-search">
           Visibility and search
-        </h2>
+        </DocsHeading>
         <p>
           Visibility is controlled by a map of leaf IDs to booleans. Missing
           leaves are visible. Branches summarize their leaves as visible,
@@ -116,9 +105,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="keyboard-and-data-updates" className="text-2xl font-semibold">
+        <DocsHeading id="keyboard-and-data-updates">
           Keyboard and data updates
-        </h2>
+        </DocsHeading>
         <p>
           Tab enters the search field, then the tree as one tab stop. Up/Down
           move between visible rows; Home/End move to the first/last row. Right
@@ -147,9 +136,7 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="customize" className="text-2xl font-semibold">
-          Customize
-        </h2>
+        <DocsHeading id="customize">Customize</DocsHeading>
         <p>
           Set <code>label</code> for the accessible tree name and search label,{" "}
           <code>className</code> for the outer container, and{" "}

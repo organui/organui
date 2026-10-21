@@ -12,12 +12,12 @@ import { Separator } from "@workspace/ui/components/separator"
 // then search, the repository and the theme toggle.
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:px-6">
+    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
+      <div className="mx-auto flex h-(--header-height) max-w-7xl items-center gap-2 px-4 sm:px-6">
         <MobileNav items={mainNav} sections={docsNav} className="md:hidden" />
         <Link
           href="/"
-          className="mr-2 flex items-center gap-2 rounded-md font-medium focus-visible:outline-2 focus-visible:outline-ring"
+          className="mr-2 flex items-center gap-2 rounded-md font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-ring"
         >
           <OrganUIMark className="size-6" />
           organui

@@ -1,8 +1,10 @@
 import Link from "next/link"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { blockFiles } from "@/lib/blocks"
-import { codeBlock, docsMetadata, registryBlocks } from "@/lib/registry"
-import { cn } from "@workspace/ui/lib/utils"
+import { docsMetadata, registryBlocks } from "@/lib/registry"
 
 export const metadata = docsMetadata(
   "Blocks",
@@ -87,14 +89,10 @@ export default async function Page() {
               loading="lazy"
               className="h-[44rem] w-full rounded-xl border bg-background"
             />
-            <pre
-              tabIndex={0}
-              role="region"
-              aria-label={`Install ${block.title}`}
-              className={codeBlock}
-            >
-              {block.install}
-            </pre>
+            <CodeBlockCommand
+              label={`Install ${block.title}`}
+              command={block.install}
+            />
             <div className="flex flex-col gap-2">
               <p className="font-medium">Files</p>
               <ul className="flex flex-col gap-2 text-sm">
@@ -104,14 +102,13 @@ export default async function Page() {
                       <summary className="cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-ring">
                         <code>{file.installed}</code>
                       </summary>
-                      <pre
-                        tabIndex={0}
-                        role="region"
-                        aria-label={`${file.installed} source`}
-                        className={cn(codeBlock, "mt-2 max-h-[32rem]")}
-                      >
-                        {block.sources.get(file.path)}
-                      </pre>
+                      <div className="mt-2">
+                        <CodeSnippet
+                          label={`${file.installed} source`}
+                          code={block.sources.get(file.path) ?? ""}
+                          className="max-h-[32rem]"
+                        />
+                      </div>
                     </details>
                   </li>
                 ))}
@@ -135,6 +132,7 @@ export default async function Page() {
           </section>
         ))}
       </main>
+      <SiteFooter />
     </div>
   )
 }

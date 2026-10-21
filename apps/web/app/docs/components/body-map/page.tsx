@@ -1,7 +1,11 @@
 import { ComponentPreview } from "@/components/component-preview"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
+import { DocsHeader } from "@/components/docs-header"
+import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import Link from "next/link"
-import { codeBlock, docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -42,22 +46,20 @@ const regions = bodyMapRegions
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          Components / Clinical
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight">Body map</h1>
+      <DocsHeader
+        href="/docs/components/body-map"
+        eyebrow="Components / Clinical"
+        title="Body map"
+      >
         <p className="max-w-2xl text-lg text-muted-foreground">
           A front and back outline of the body for recording where pain or
           symptoms are. Each region is a checkbox, so it works with a mouse, a
           touch screen, a keyboard and a screen reader.
         </p>
-      </header>
+      </DocsHeader>
       <ComponentPreview name="body-map-demo" />
       <section className="flex flex-col gap-4">
-        <h2 id="installation" className="text-2xl font-semibold">
-          Installation
-        </h2>
+        <DocsHeading id="installation">Installation</DocsHeading>
         <p>
           In a project set up as in{" "}
           <Link href="/docs/installation" className="underline">
@@ -65,14 +67,10 @@ export default function Page() {
           </Link>
           , run:
         </p>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Installation command"
-          className={codeBlock}
-        >
-          {`bunx ${shadcn} add ${site.url}/r/body-map.json`}
-        </pre>
+        <CodeBlockCommand
+          label="Installation command"
+          command={`bunx ${shadcn} add ${site.url}/r/body-map.json`}
+        />
         <p>
           Or by name: <code>bunx {shadcn} add @organui/body-map</code>.
         </p>
@@ -87,17 +85,8 @@ export default function Page() {
         </a>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="usage" className="text-2xl font-semibold">
-          Usage
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="State wiring example"
-          className={codeBlock}
-        >
-          {usage}
-        </pre>
+        <DocsHeading id="usage">Usage</DocsHeading>
+        <CodeSnippet label="State wiring example" code={usage} />
         <p>
           Selection is controlled. <code>value</code> is the list of selected
           region IDs in the order they were picked, and{" "}
@@ -115,9 +104,9 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="keyboard-and-screen-readers" className="text-2xl font-semibold">
+        <DocsHeading id="keyboard-and-screen-readers">
           Keyboard and screen readers
-        </h2>
+        </DocsHeading>
         <p>
           Each view is one tab stop. Arrow keys move to the nearest region in
           that direction, Home and End jump to the first and last region, and
@@ -128,17 +117,8 @@ export default function Page() {
         </p>
       </section>
       <section className="flex flex-col gap-4">
-        <h2 id="customize" className="text-2xl font-semibold">
-          Customize
-        </h2>
-        <pre
-          tabIndex={0}
-          role="region"
-          aria-label="Custom regions example"
-          className={codeBlock}
-        >
-          {custom}
-        </pre>
+        <DocsHeading id="customize">Customize</DocsHeading>
+        <CodeSnippet label="Custom regions example" code={custom} />
         <p>
           <code>bodyMapRegions</code> exports the default regions. Pass your own
           list to <code>regions</code> to rename, remove or redraw them; paths
