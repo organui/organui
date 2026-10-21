@@ -17,7 +17,7 @@ export const metadata = docsMetadata(
   "/colors"
 )
 
-const severity = registry.items.find(({ name }) => name === "severity-colors")
+const severity = registry.items.find(({ name }) => name === "utilities")
 const levels = ["normal", "info", "warning", "critical"] as const
 
 function Palette({
@@ -75,7 +75,7 @@ export default async function Page() {
             Create
           </Link>
           <Link
-            href="/docs/utilities/severity-colors"
+            href="/docs/utilities/severity"
             className={cn(
               buttonVariants({ size: "sm", variant: "secondary" }),
               "h-[35px] px-4"

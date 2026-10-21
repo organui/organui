@@ -221,6 +221,7 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs/installation/vite", "Vite"],
     ["/docs/components", "Components"],
     ["/docs/utilities", "Utilities"],
+    ["/docs/helpers", "Helpers"],
     ["/docs/ai-elements", "AI Elements"],
   ] as const) {
     await page.goto(path)
@@ -258,6 +259,7 @@ test("component index lists every component inside the docs layout", async ({
     ({ type, categories }) =>
       type !== "registry:block" &&
       !categories?.includes("utility") &&
+      !categories?.includes("helper") &&
       !categories?.includes("ai")
   )
   const organs = components.filter(({ categories }) =>
@@ -337,8 +339,15 @@ test("old component addresses redirect permanently", async ({ request }) => {
   const catalog = registrySchema.parse(
     await (await request.get("/r/registry.json")).json()
   )
-  for (const { name, type } of catalog.items) {
-    if (type === "registry:block") continue
+  for (const { name, type, categories } of catalog.items) {
+    // Only components had those addresses.
+    if (
+      type === "registry:block" ||
+      ["ai", "helper", "utility"].some((category) =>
+        categories?.includes(category)
+      )
+    )
+      continue
     const response = await request.get(`/docs/${name}`, { maxRedirects: 0 })
     expect(response.status()).toBe(308)
     expect(
@@ -1226,27 +1235,40 @@ test("component pages switch library, and each library gets its own build", asyn
   expect(errors).toEqual([])
 })
 
-test("utility pages show a working example and pass an accessibility scan", async ({
+test("helper and utility pages show a working example and pass an accessibility scan", async ({
   page,
   request,
 }) => {
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
-  const utilities = registrySchema
+  const helpers = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
-    .items.filter(({ categories }) => categories?.includes("utility"))
-  expect(utilities.length).toBeGreaterThan(0)
-  for (const item of utilities) {
-    await page.goto(`/docs/utilities/${item.name}`)
+    .items.filter(({ categories }) => categories?.includes("helper"))
+  expect(helpers.length).toBeGreaterThan(0)
+  const pages = [
+    ...helpers.map((item) => ({
+      path: `/docs/helpers/${item.name}`,
+      title: item.title ?? item.name,
+      command: item.name,
+    })),
+    // The CSS utilities install together, so every page gives one command.
+    ...["heartbeat", "ecg-grid", "severity"].map((name) => ({
+      path: `/docs/utilities/${name}`,
+      title: name,
+      command: "utilities",
+    })),
+  ]
+  for (const { path, title, command } of pages) {
+    await page.goto(path)
     await expect(
-      page.getByRole("heading", { name: item.title, level: 1 })
+      page.getByRole("heading", { name: title, level: 1 })
     ).toBeVisible()
     await expect(
-      page.getByRole("group", { name: `${item.title} example` })
+      page.getByRole("group", { name: `${title} example` })
     ).toBeVisible()
     await expect(
       page.getByRole("region", { name: "Installation command" })
-    ).toContainText(`${item.name}`)
+    ).toContainText(command)
     const axe = await new AxeBuilder({ page }).analyze()
     expect(axe.violations).toEqual([])
   }
@@ -1258,7 +1280,7 @@ test("utility pages show a working example and pass an accessibility scan", asyn
       .first()
       .evaluate((element) => getComputedStyle(element).animationName)
   ).toBe("heartbeat")
-  await page.goto("/docs/utilities/clinical-units")
+  await page.goto("/docs/helpers/clinical-units")
   const units = page.getByRole("group", { name: "Clinical units example" })
   await units.getByLabel(/^Value/).fill("18")
   // 18 mg/dL of glucose is 1 mmol/L.

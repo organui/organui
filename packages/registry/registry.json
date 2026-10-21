@@ -1010,7 +1010,7 @@
       "type": "registry:lib",
       "title": "Age",
       "description": "Age in months and years, age corrected for prematurity, and age formatted for charts.",
-      "categories": ["utility"],
+      "categories": ["helper"],
       "registryDependencies": [],
       "files": [
         {
@@ -1018,14 +1018,14 @@
           "type": "registry:lib"
         }
       ],
-      "docs": "Age docs: https://organui.com/docs/utilities/age"
+      "docs": "Age docs: https://organui.com/docs/helpers/age"
     },
     {
       "name": "z-scores",
       "type": "registry:lib",
       "title": "Z-scores",
       "description": "Z-scores and percentiles from LMS reference parameters, with WHO's restricted extrapolation.",
-      "categories": ["utility"],
+      "categories": ["helper"],
       "registryDependencies": [],
       "files": [
         {
@@ -1033,14 +1033,14 @@
           "type": "registry:lib"
         }
       ],
-      "docs": "Z-scores docs: https://organui.com/docs/utilities/z-scores"
+      "docs": "Z-scores docs: https://organui.com/docs/helpers/z-scores"
     },
     {
       "name": "reference-ranges",
       "type": "registry:lib",
       "title": "Reference ranges",
       "description": "Flags a value low, high or critical against its reference range, and prints the range as a report does.",
-      "categories": ["utility"],
+      "categories": ["helper"],
       "registryDependencies": [],
       "files": [
         {
@@ -1048,14 +1048,14 @@
           "type": "registry:lib"
         }
       ],
-      "docs": "Reference ranges docs: https://organui.com/docs/utilities/reference-ranges"
+      "docs": "Reference ranges docs: https://organui.com/docs/helpers/reference-ranges"
     },
     {
       "name": "clinical-units",
       "type": "registry:lib",
       "title": "Clinical units",
       "description": "Converts laboratory values between conventional and SI units, and temperature, weight and length between systems.",
-      "categories": ["utility"],
+      "categories": ["helper"],
       "registryDependencies": [],
       "files": [
         {
@@ -1063,14 +1063,14 @@
           "type": "registry:lib"
         }
       ],
-      "docs": "Clinical units docs: https://organui.com/docs/utilities/clinical-units. Check each factor against your laboratory's units before clinical use."
+      "docs": "Clinical units docs: https://organui.com/docs/helpers/clinical-units. Check each factor against your laboratory's units before clinical use."
     },
     {
       "name": "body-measurements",
       "type": "registry:lib",
       "title": "Body measurements",
       "description": "Body mass index with its WHO category, and body surface area by the Mosteller, Du Bois or Haycock formula.",
-      "categories": ["utility"],
+      "categories": ["helper"],
       "registryDependencies": [],
       "files": [
         {
@@ -1078,73 +1078,13 @@
           "type": "registry:lib"
         }
       ],
-      "docs": "Body measurements docs: https://organui.com/docs/utilities/body-measurements"
+      "docs": "Body measurements docs: https://organui.com/docs/helpers/body-measurements"
     },
     {
-      "name": "heartbeat",
+      "name": "utilities",
       "type": "registry:item",
-      "title": "Heartbeat",
-      "description": "An animate-heartbeat utility that pulses an element like a heartbeat, at a rate you set in beats per minute.",
-      "categories": ["utility"],
-      "registryDependencies": [],
-      "files": [],
-      "css": {
-        "@keyframes heartbeat": {
-          "0%, 40%, 100%": {
-            "transform": "scale(1)"
-          },
-          "10%": {
-            "transform": "scale(1.12)"
-          },
-          "20%": {
-            "transform": "scale(1.02)"
-          },
-          "30%": {
-            "transform": "scale(1.08)"
-          }
-        },
-        "@utility animate-heartbeat": {
-          "animation": "heartbeat var(--heartbeat-duration, 1s) ease-in-out infinite",
-          "@media (prefers-reduced-motion: reduce)": {
-            "animation": "none"
-          }
-        },
-        "@utility heartbeat-rate-*": {
-          "--heartbeat-duration": "calc(60s / --value(integer))"
-        }
-      },
-      "docs": "Heartbeat docs: https://organui.com/docs/utilities/heartbeat"
-    },
-    {
-      "name": "ecg-grid",
-      "type": "registry:item",
-      "title": "ECG grid",
-      "description": "A bg-ecg-grid utility that draws ECG paper: fine squares with a bolder line every fifth, in a colour and size you set.",
-      "categories": ["utility"],
-      "registryDependencies": [],
-      "files": [],
-      "css": {
-        "@utility bg-ecg-grid": {
-          "--ecg-grid-minor": "color-mix(in oklch, var(--ecg-grid-color, var(--color-red-500)) 18%, transparent)",
-          "--ecg-grid-major": "color-mix(in oklch, var(--ecg-grid-color, var(--color-red-500)) 45%, transparent)",
-          "--ecg-grid-step": "var(--ecg-grid-size, 4px)",
-          "background-image": "linear-gradient(to right, var(--ecg-grid-major) 1px, transparent 1px), linear-gradient(to bottom, var(--ecg-grid-major) 1px, transparent 1px), linear-gradient(to right, var(--ecg-grid-minor) 1px, transparent 1px), linear-gradient(to bottom, var(--ecg-grid-minor) 1px, transparent 1px)",
-          "background-size": "calc(var(--ecg-grid-step) * 5) calc(var(--ecg-grid-step) * 5), calc(var(--ecg-grid-step) * 5) calc(var(--ecg-grid-step) * 5), var(--ecg-grid-step) var(--ecg-grid-step), var(--ecg-grid-step) var(--ecg-grid-step)"
-        },
-        "@utility ecg-grid-size-*": {
-          "--ecg-grid-size": "calc(var(--spacing) * --value(number))"
-        },
-        "@utility ecg-grid-color-*": {
-          "--ecg-grid-color": "--value(--color-*, [color])"
-        }
-      },
-      "docs": "ECG grid docs: https://organui.com/docs/utilities/ecg-grid"
-    },
-    {
-      "name": "severity-colors",
-      "type": "registry:item",
-      "title": "Severity colours",
-      "description": "Theme colours for clinical severity, normal, info, warning and critical, in light and dark, as text-, bg- and border- utilities.",
+      "title": "Utilities",
+      "description": "Tailwind utilities for clinical interfaces: a heartbeat animation, ECG paper and severity colours. One install adds them all to your CSS file.",
       "categories": ["utility"],
       "registryDependencies": [],
       "files": [],
@@ -1168,7 +1108,45 @@
           "severity-critical": "oklch(0.704 0.191 22.216)"
         }
       },
-      "docs": "Severity colours docs: https://organui.com/docs/utilities/severity-colors"
+      "css": {
+        "@keyframes heartbeat": {
+          "0%, 40%, 100%": {
+            "transform": "scale(1)"
+          },
+          "10%": {
+            "transform": "scale(1.12)"
+          },
+          "20%": {
+            "transform": "scale(1.02)"
+          },
+          "30%": {
+            "transform": "scale(1.08)"
+          }
+        },
+        "@utility animate-heartbeat": {
+          "animation": "heartbeat var(--heartbeat-duration, 1s) ease-in-out infinite",
+          "@media (prefers-reduced-motion: reduce)": {
+            "animation": "none"
+          }
+        },
+        "@utility heartbeat-rate-*": {
+          "--heartbeat-duration": "calc(60s / --value(integer))"
+        },
+        "@utility bg-ecg-grid": {
+          "--ecg-grid-minor": "color-mix(in oklch, var(--ecg-grid-color, var(--color-red-500)) 18%, transparent)",
+          "--ecg-grid-major": "color-mix(in oklch, var(--ecg-grid-color, var(--color-red-500)) 45%, transparent)",
+          "--ecg-grid-step": "var(--ecg-grid-size, 4px)",
+          "background-image": "linear-gradient(to right, var(--ecg-grid-major) 1px, transparent 1px), linear-gradient(to bottom, var(--ecg-grid-major) 1px, transparent 1px), linear-gradient(to right, var(--ecg-grid-minor) 1px, transparent 1px), linear-gradient(to bottom, var(--ecg-grid-minor) 1px, transparent 1px)",
+          "background-size": "calc(var(--ecg-grid-step) * 5) calc(var(--ecg-grid-step) * 5), calc(var(--ecg-grid-step) * 5) calc(var(--ecg-grid-step) * 5), var(--ecg-grid-step) var(--ecg-grid-step), var(--ecg-grid-step) var(--ecg-grid-step)"
+        },
+        "@utility ecg-grid-size-*": {
+          "--ecg-grid-size": "calc(var(--spacing) * --value(number))"
+        },
+        "@utility ecg-grid-color-*": {
+          "--ecg-grid-color": "--value(--color-*, [color])"
+        }
+      },
+      "docs": "Utilities docs: https://organui.com/docs/utilities"
     },
     {
       "name": "explorer-01",

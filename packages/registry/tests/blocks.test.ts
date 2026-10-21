@@ -6,13 +6,16 @@ import bodySystems from "../body-systems.json"
 import registry from "../registry.json"
 
 const blocks = registry.items.filter((item) => item.type === "registry:block")
-// Utilities are helpers and CSS, documented under /docs/utilities.
-const utilities = registry.items.filter((item) =>
-  item.categories?.includes("utility")
+// Helpers (/docs/helpers) and CSS utilities (/docs/utilities).
+const utilities = registry.items.filter(
+  (item) =>
+    item.categories?.includes("utility") || item.categories?.includes("helper")
 )
 const components = registry.items.filter(
   (item) =>
-    item.type !== "registry:block" && !item.categories?.includes("utility")
+    item.type !== "registry:block" &&
+    !item.categories?.includes("utility") &&
+    !item.categories?.includes("helper")
 )
 const filesOf = (item: (typeof registry.items)[number]) =>
   "files" in item ? item.files : []
@@ -124,10 +127,12 @@ test("every item links its documentation after install", () => {
       item.type === "registry:block"
         ? `${item.title}: https://organui.com/blocks#${item.name}`
         : item.categories?.includes("utility")
-          ? `${item.title} docs: https://organui.com/docs/utilities/${item.name}`
-          : item.categories?.includes("ai")
-            ? `${item.title} docs: https://organui.com/docs/ai-elements/${item.name}`
-            : `${item.title} docs: https://organui.com/docs/components/${item.name}`
+          ? `${item.title} docs: https://organui.com/docs/utilities`
+          : item.categories?.includes("helper")
+            ? `${item.title} docs: https://organui.com/docs/helpers/${item.name}`
+            : item.categories?.includes("ai")
+              ? `${item.title} docs: https://organui.com/docs/ai-elements/${item.name}`
+              : `${item.title} docs: https://organui.com/docs/components/${item.name}`
     expect(item.docs).toStartWith(page)
   }
 })
@@ -143,6 +148,7 @@ test("every component belongs to one docs group", () => {
     "anatomy",
     "organ",
     "utility",
+    "helper",
     "ai",
   ]
   for (const item of registry.items) {

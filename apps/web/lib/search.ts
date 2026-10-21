@@ -8,6 +8,8 @@ import {
   registryItems,
   utilitiesIndex,
   utilityItems,
+  helpersIndex,
+  helperItems,
   aiIndex,
   aiItems,
 } from "@/lib/registry"
@@ -39,6 +41,7 @@ export const searchIndex: SearchGroup[] = [
       ...installationGuides,
       componentsIndex,
       aiIndex,
+      helpersIndex,
       utilitiesIndex,
     ],
   },
@@ -56,6 +59,15 @@ export const searchIndex: SearchGroup[] = [
   {
     heading: "AI Elements",
     entries: aiItems.map(({ title, href, description, install }) => ({
+      title,
+      href,
+      description,
+      install,
+    })),
+  },
+  {
+    heading: "Helpers",
+    entries: helperItems.map(({ title, href, description, install }) => ({
       title,
       href,
       description,

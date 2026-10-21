@@ -12,7 +12,7 @@ const catalog = JSON.parse(
     ),
     "utf8"
   )
-) as { items: { name: string; type: string }[] }
+) as { items: { name: string; type: string; categories?: string[] }[] }
 
 // Workspace packages are transpiled automatically by Next.js 16.
 const nextConfig: NextConfig = {
@@ -65,8 +65,15 @@ const nextConfig: NextConfig = {
   // also where the guides live.
   async redirects() {
     return [
+      // Only components: AI Elements, helpers and utilities were never there.
       ...catalog.items
-        .filter((item) => item.type !== "registry:block")
+        .filter(
+          (item) =>
+            item.type !== "registry:block" &&
+            !["ai", "helper", "utility"].some((category) =>
+              item.categories?.includes(category)
+            )
+        )
         .map((item) => ({
           source: `/docs/${item.name}`,
           destination: `/docs/components/${item.name}`,

@@ -7,6 +7,8 @@ import {
   registryItems,
   utilitiesIndex,
   utilityItems,
+  helpersIndex,
+  helperItems,
   aiIndex,
   aiItems,
 } from "@/lib/registry"
@@ -28,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...registryItems.map((item) => item.href),
     aiIndex.href,
     ...aiItems.map((item) => item.href),
+    helpersIndex.href,
+    ...helperItems.map((item) => item.href),
     utilitiesIndex.href,
     ...utilityItems.map((item) => item.href),
   ].map((path) => ({

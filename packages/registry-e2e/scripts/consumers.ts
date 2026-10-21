@@ -220,7 +220,7 @@ const helpers = [
   "clinical-units",
   "body-measurements",
 ]
-const utilities = [...helpers, "heartbeat", "ecg-grid", "severity-colors"]
+const utilities = [...helpers, "utilities"]
 // Built from shadcn components only, so one copy serves Base UI and Radix;
 // the Radix consumer's build checks that.
 const aiElements = [

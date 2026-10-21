@@ -8,6 +8,8 @@ import {
   registryItems,
   utilitiesIndex,
   utilityItems,
+  helpersIndex,
+  helperItems,
   aiIndex,
   aiItems,
 } from "@/lib/registry"
@@ -44,6 +46,13 @@ export function GET() {
       `## ${aiIndex.title}`,
       entry(aiIndex.title, aiIndex.href, aiIndex.description),
       ...aiItems.map((item) => entry(item.title, item.href, item.description)),
+    ],
+    [
+      `## ${helpersIndex.title}`,
+      entry(helpersIndex.title, helpersIndex.href, helpersIndex.description),
+      ...helperItems.map((item) =>
+        entry(item.title, item.href, item.description)
+      ),
     ],
     [
       `## ${utilitiesIndex.title}`,

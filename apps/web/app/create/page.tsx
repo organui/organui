@@ -9,7 +9,7 @@ import {
   docsMetadata,
   registryItems,
   shadcn,
-  utilityItems,
+  helperItems,
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
@@ -28,7 +28,8 @@ const groups: CreateGroup[] = [
     items: pick(registryItems.filter((item) => item.group === id)),
   })),
   { title: "AI Elements", items: pick(aiItems) },
-  { title: "Utilities", items: pick(utilityItems) },
+  { title: "Helpers", items: pick(helperItems) },
+  { title: "Utilities", items: [{ name: "utilities", title: "Utilities" }] },
 ]
 
 export default function Page() {

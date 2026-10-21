@@ -46,6 +46,7 @@ export const registryItems = catalog.items
     (item) =>
       item.type !== "registry:block" &&
       !item.categories?.includes("utility") &&
+      !item.categories?.includes("helper") &&
       !item.categories?.includes("ai")
   )
   .map((item) => {
@@ -77,26 +78,46 @@ export type RegistryItem = (typeof registryItems)[number]
 
 export const organs = registryItems.filter(({ organ }) => organ)
 
-// Helpers and CSS that components can share, under /docs/utilities.
-export const utilityItems = catalog.items
-  .filter((item) => item.categories?.includes("utility"))
+// TypeScript helpers that install in lib, under /docs/helpers.
+export const helperItems = catalog.items
+  .filter((item) => item.categories?.includes("helper"))
   .map((item) => ({
     name: item.name,
     title: item.title ?? item.name,
     description: item.description,
-    // TypeScript helpers install in lib; CSS utilities add to the CSS file.
-    kind: item.type === "registry:lib" ? ("helper" as const) : ("css" as const),
-    href: `/docs/utilities/${item.name}`,
+    href: `/docs/helpers/${item.name}`,
     json: `/r/${item.name}.json`,
     install: install(item),
   }))
-  .sort(
-    (a, b) =>
-      Number(a.kind === "css") - Number(b.kind === "css") ||
-      a.title.localeCompare(b.title)
-  )
+  .sort((a, b) => a.title.localeCompare(b.title))
 
-export type UtilityItem = (typeof utilityItems)[number]
+const utilitiesItem = catalog.items.find(({ name }) => name === "utilities")
+if (!utilitiesItem) throw new Error("No utilities item in the registry")
+
+// The CSS utilities install together, as shadcn's come in one stylesheet;
+// each family of classes has its own page under /docs/utilities.
+export const utilityItems = [
+  {
+    name: "ecg-grid",
+    title: "ecg-grid",
+    description: "Utilities for drawing ECG paper behind a trace.",
+  },
+  {
+    name: "heartbeat",
+    title: "heartbeat",
+    description: "Utilities for pulsing an element like a heartbeat.",
+  },
+  {
+    name: "severity",
+    title: "severity",
+    description:
+      "Theme colours for clinical severity: normal, info, warning and critical.",
+  },
+].map((page) => ({
+  ...page,
+  href: `/docs/utilities/${page.name}`,
+  install: install(utilitiesItem),
+}))
 
 // Patterns for AI in clinical interfaces, under /docs/ai-elements, in the
 // order a reviewer meets them.
@@ -244,7 +265,14 @@ export const aiIndex: NavLink & { description: string } = {
 export const utilitiesIndex: NavLink & { description: string } = {
   title: "Utilities",
   href: "/docs/utilities",
-  description: "Clinical helpers and CSS utilities that install on their own.",
+  description: "Tailwind utilities for clinical interfaces, in one install.",
+}
+
+export const helpersIndex: NavLink & { description: string } = {
+  title: "Helpers",
+  href: "/docs/helpers",
+  description:
+    "Clinical calculations in TypeScript: ages, z-scores, reference ranges, units and body measurements.",
 }
 
 export const organsPage: NavLink & { description: string } = {
@@ -267,7 +295,7 @@ export const mainNav: NavLink[] = [
 export const docsNav: DocsNavSection[] = [
   {
     title: "Sections",
-    items: [...guides, componentsIndex, aiIndex, utilitiesIndex],
+    items: [...guides, componentsIndex, aiIndex, helpersIndex, utilitiesIndex],
   },
   { title: "Installation", items: installationGuides },
   ...componentGroups.flatMap(({ id, title }) => [
@@ -277,6 +305,10 @@ export const docsNav: DocsNavSection[] = [
           {
             title: aiIndex.title,
             items: aiItems.map(({ title, href }) => ({ title, href })),
+          },
+          {
+            title: helpersIndex.title,
+            items: helperItems.map(({ title, href }) => ({ title, href })),
           },
           {
             title: utilitiesIndex.title,
@@ -309,6 +341,8 @@ export const pageOrder: NavLink[] = [
   ]),
   aiIndex,
   ...aiItems.map(({ title, href }) => ({ title, href })),
+  helpersIndex,
+  ...helperItems.map(({ title, href }) => ({ title, href })),
   utilitiesIndex,
   ...utilityItems.map(({ title, href }) => ({ title, href })),
 ]

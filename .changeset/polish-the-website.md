@@ -15,6 +15,7 @@ New items:
 - Helpers: age, z-scores, reference ranges, clinical units and body
   measurements. The growth chart and lab results table now install the
   ones they use.
-- CSS utilities: heartbeat, ECG grid and severity colours.
+- Utilities: one item adds the heartbeat, ECG grid and severity classes to
+  the CSS file, as shadcn's utilities come together.
 
 Blocks carry the height /blocks frames them at, in `meta.iframeHeight`.

@@ -223,7 +223,7 @@ export const examples: Record<string, ExampleDefinition> = {
     },
   },
   "heartbeat-demo": {
-    title: "Heartbeat",
+    title: "heartbeat",
     file: "heartbeat-demo.tsx",
     render: async () => {
       const { Example } = await import("./heartbeat-demo")
@@ -231,18 +231,18 @@ export const examples: Record<string, ExampleDefinition> = {
     },
   },
   "ecg-grid-demo": {
-    title: "ECG grid",
+    title: "ecg-grid",
     file: "ecg-grid-demo.tsx",
     render: async () => {
       const { Example } = await import("./ecg-grid-demo")
       return <Example />
     },
   },
-  "severity-colors-demo": {
-    title: "Severity colours",
-    file: "severity-colors-demo.tsx",
+  "severity-demo": {
+    title: "severity",
+    file: "severity-demo.tsx",
     render: async () => {
-      const { Example } = await import("./severity-colors-demo")
+      const { Example } = await import("./severity-demo")
       return <Example />
     },
   },
