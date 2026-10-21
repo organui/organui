@@ -1,8 +1,8 @@
-// Draws the README's banner, light and dark, to .github/: a 1280×640 card
-// with the mark, name and tagline beside four organ renders. The light PNG
-// doubles as the repository's social preview (Settings → Social preview).
+// Draws the repository's social preview to .github/social-preview.png: a
+// 1280×640 card with the mark, name and tagline beside four organ renders.
+// Upload it in Settings → Social preview.
 //
-//   bun scripts/readme-banner.ts
+//   bun scripts/social-preview.ts
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { chromium } from "@playwright/test"
 import sharp from "sharp"
@@ -73,29 +73,15 @@ p { font-size: 26px; line-height: 1.4; color: ${theme.muted}; max-width: 560px; 
 await mkdir(out, { recursive: true })
 const browser = await chromium.launch()
 try {
-  for (const [name, theme] of Object.entries(themes)) {
-    const tab = await browser.newPage({
-      viewport: { width: 1280, height: 640 },
-      deviceScaleFactor: 2,
-    })
-    await tab.setContent(page(theme))
-    await tab.evaluate(() => document.fonts.ready)
-    const shot = await tab.screenshot()
-    // Twice the pixels for the README; 1280×640 for the social preview.
-    await writeFile(
-      new URL(`readme-banner-${name}.png`, out),
-      await sharp(shot).png({ compressionLevel: 9, palette: true }).toBuffer()
-    )
-    if (name === "light")
-      await writeFile(
-        new URL("social-preview.png", out),
-        await sharp(shot)
-          .resize(1280, 640)
-          .png({ compressionLevel: 9 })
-          .toBuffer()
-      )
-    await tab.close()
-  }
+  const tab = await browser.newPage({ viewport: { width: 1280, height: 640 } })
+  await tab.setContent(page(themes.light))
+  await tab.evaluate(() => document.fonts.ready)
+  await writeFile(
+    new URL("social-preview.png", out),
+    await sharp(await tab.screenshot())
+      .png({ compressionLevel: 9 })
+      .toBuffer()
+  )
 } finally {
   await browser.close()
 }

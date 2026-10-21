@@ -26,15 +26,6 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT licence" /></a>
 </p>
 
-<p align="center">
-  <a href="https://organui.com">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset=".github/readme-banner-dark.png" />
-      <img src=".github/readme-banner-light.png" alt="OrganUI: the interfaces healthcare deserves. Open-source components for healthcare and life sciences, installed as source with the shadcn CLI." width="860" />
-    </picture>
-  </a>
-</p>
-
 ## Quick start
 
 In a React 19 project set up with shadcn and Tailwind CSS 4, add any item by
