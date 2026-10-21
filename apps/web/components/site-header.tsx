@@ -13,7 +13,7 @@ import { Separator } from "@workspace/ui/components/separator"
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
-      <div className="mx-auto flex h-(--header-height) max-w-7xl items-center gap-2 px-4 sm:px-6">
+      <div className="flex h-(--header-height) w-full items-center gap-2 px-4 sm:px-6">
         <MobileNav items={mainNav} sections={docsNav} className="md:hidden" />
         <Link
           href="/"

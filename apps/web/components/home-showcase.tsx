@@ -41,7 +41,7 @@ export function HomeShowcase() {
     >
       {/* Light mode eases from the page into the grey; dark mode has no grey. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-48 bg-linear-to-b from-background via-muted to-transparent dark:hidden" />
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:max-h-[88rem] lg:py-10">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 py-8 lg:max-h-[88rem] lg:px-8 lg:py-10">
         {/* Three columns on wide screens, two then one below. */}
         <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 *:min-w-0 md:grid-cols-2 xl:grid-cols-3">
           <div className="flex flex-col gap-4">

@@ -54,7 +54,7 @@ export default async function Page() {
         </header>
         <div
           id="blocks"
-          className="mx-auto flex w-full max-w-7xl scroll-mt-24 flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6"
+          className="mx-auto flex w-full max-w-[1400px] scroll-mt-24 flex-wrap items-center justify-between gap-4 px-4 py-4 lg:px-8"
         >
           <nav
             aria-label="Blocks"
@@ -85,7 +85,7 @@ export default async function Page() {
           </p>
         </div>
         <div className="flex-1 border-t bg-muted/30 py-8 md:py-12">
-          <div className="mx-auto flex max-w-7xl flex-col gap-12 px-4 sm:px-6 md:gap-24">
+          <div className="mx-auto flex max-w-[1400px] flex-col gap-12 px-4 md:gap-24 lg:px-8">
             {blocks.map((block) => (
               <BlockViewer
                 key={block.name}
