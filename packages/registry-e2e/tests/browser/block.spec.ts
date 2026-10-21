@@ -117,9 +117,9 @@ test("dashboard-01 shows one patient and records doses", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Sam Okafor" })).toBeVisible()
   await expect(page.getByRole("region", { name: "Vital signs" })).toBeVisible()
   await expect(page.getByRole("table")).toContainText("Creatinine")
-  await expect(page.getByRole("alert")).toContainText(
-    "Enoxaparin and Ibuprofen"
-  )
+  await expect(
+    page.getByRole("alert").filter({ hasText: "Major interaction" })
+  ).toContainText("Enoxaparin and Ibuprofen")
   const dose = page.getByRole("button", {
     name: "Lisinopril at 08:00: To take",
   })

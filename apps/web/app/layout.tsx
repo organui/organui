@@ -73,7 +73,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider>{children}</ThemeProvider>
-        <Analytics />
+        {/* The script is served only on Vercel deployments. */}
+        {process.env.VERCEL && <Analytics />}
       </body>
     </html>
   )
