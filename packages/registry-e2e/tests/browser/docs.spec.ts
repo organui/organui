@@ -643,8 +643,11 @@ test("blocks gallery previews and installs every block", async ({
     const section = page.getByRole("region", { name: title, exact: true })
     await expect(section).toHaveAttribute("id", block.name)
     await expect(
-      section.getByRole("region", { name: `Install ${title}`, exact: true })
-    ).toHaveText(`bunx shadcn@4.22.1 add @organui/${block.name}`)
+      section.getByRole("button", {
+        name: `Copy install command: bunx shadcn@4.22.1 add @organui/${block.name}`,
+        exact: true,
+      })
+    ).toBeVisible()
     const preview = section.getByTitle(`${title} preview`)
     await preview.scrollIntoViewIfNeeded()
     await expect(
@@ -668,8 +671,10 @@ test("blocks gallery previews and installs every block", async ({
           "href",
           `/docs/components/${dependency.replace("@organui/", "")}`
         )
+    // The code view lists the files; the page's source opens first.
+    await section.getByRole("tab", { name: "Code", exact: true }).click()
     await section
-      .getByText(installedPage?.target ?? "", { exact: true })
+      .getByRole("button", { name: installedPage?.target ?? "", exact: true })
       .click()
     await expect(
       section.getByRole("region", { name: `${installedPage?.target} source` })

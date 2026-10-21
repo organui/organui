@@ -14,19 +14,25 @@ export async function CodeSnippet({
   label,
   lang = "tsx",
   className,
+  contentClassName,
 }: {
   code: string
   label: string
   lang?: CodeLanguage
   className?: string
+  contentClassName?: string
 }) {
   const lines = await highlightCode(code, lang)
   return (
-    <CodeBlock>
+    <CodeBlock className={className}>
       <CodeBlockActions>
         <CodeBlockCopyButton value={code} />
       </CodeBlockActions>
-      <CodeBlockContent role="region" aria-label={label} className={className}>
+      <CodeBlockContent
+        role="region"
+        aria-label={label}
+        className={contentClassName}
+      >
         {lines.map((line, index) => (
           <CodeBlockLine key={index}>
             {line}
