@@ -1,8 +1,16 @@
 name: Registry foundation
 on:
+  # Prose that no build, test or page reads. Changesets aren't listed: the
+  # checks job verifies them.
   pull_request:
+    paths-ignore: &prose
+      - "*.md"
+      - "docs/**"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/pull_request_template.md"
   push:
     branches: [master]
+    paths-ignore: *prose
   # Run any branch without opening a PR: gh workflow run registry.yml --ref <branch>
   workflow_dispatch:
 permissions:

@@ -23,7 +23,7 @@ bun run test
 ```
 
 CI runs the build, the installed-consumer checks and the browser tests on
-every pull request. They start several Chromium instances, so leave them to CI
+every pull request that changes more than prose, such as this file. They start several Chromium instances, so leave them to CI
 rather than running them locally.
 
 Registry components follow the [shadcn/ui](https://ui.shadcn.com) conventions:
