@@ -668,7 +668,12 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   const api = page.getByRole("table", { name: "Heart props" })
   await api.focus()
   await expect(api).toBeFocused()
-  if ((page.viewportSize()?.width ?? 0) < 768) {
+  if (
+    await api.evaluate(
+      (table) =>
+        table.parentElement!.scrollWidth > table.parentElement!.clientWidth
+    )
+  ) {
     await api.press("ArrowRight")
     await expect
       .poll(() => api.evaluate((table) => table.parentElement!.scrollLeft))

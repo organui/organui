@@ -118,6 +118,17 @@ export default async function Page() {
           on a ghost prefer the solid structure behind it.
         </p>
         <p>
+          Omit <code>selectedId</code> to manage selection inside the viewer, or
+          keep it present for controlled selection; <code>null</code> and{" "}
+          <code>undefined</code> both clear a controlled selection. Keep that
+          mode for the lifetime of the viewer. Uncontrolled selection resets to{" "}
+          <code>defaultSelectedId</code> when the model or source changes. The
+          viewer announces uncontrolled selections after loading. Set{" "}
+          <code>announceSelection</code> to opt controlled selections into these
+          announcements, or disable it when your surrounding UI already
+          announces selections.
+        </p>
+        <p>
           Each named view fits the model to 80% of the stage from its direction.
           Rotating leaves the named view, and <code>onViewChange</code> reports{" "}
           <code>null</code>; zooming does not. Drag or the arrow keys rotate;

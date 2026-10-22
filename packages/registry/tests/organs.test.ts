@@ -132,6 +132,7 @@ test("all organ public components preserve their model and consumer props", asyn
       src: "/custom.glb",
       selectedId: "example",
       defaultSelectedId: "initial",
+      announceSelection: false,
       visibility: { example: false },
       onSelectionChange: () => {},
       ref: { current: null },
@@ -144,7 +145,7 @@ test("all organ public components preserve their model and consumer props", asyn
   }
 })
 
-test("every organ supports initial selection, controlled null and hidden selection", async () => {
+test("every organ announces only loading before its model is ready", async () => {
   for (const item of organItems) {
     const name = item.name
       .split("-")
@@ -166,14 +167,18 @@ test("every organ supports initial selection, controlled null and hidden selecti
           ...props,
         })
       )
-    expect(render({})).toContain(`Selected: ${structure.label}`)
-    expect(render({ selectedId: null })).toContain("No structure selected.")
-    expect(render({ selectedId: "unknown" })).toContain(
-      "No structure selected."
-    )
-    expect(render({ visibility: { [structure.id]: false } })).toContain(
-      "No structure selected."
-    )
+    for (const props of [
+      {},
+      { selectedId: undefined },
+      { selectedId: structure.id, announceSelection: true },
+      { visibility: { [structure.id]: false } },
+    ]) {
+      const markup = render(props)
+      expect(markup.match(/role="status"/g)).toHaveLength(1)
+      expect(markup).toContain("Loading anatomy")
+      expect(markup).not.toContain("Selected:")
+      expect(markup).not.toContain("No structure selected.")
+    }
   }
 })
 

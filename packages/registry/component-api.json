@@ -771,14 +771,14 @@
         "type": "string | null",
         "required": false,
         "default": null,
-        "description": "Controls the selected structure ID. Omit to let the viewer manage selection."
+        "description": "Controls selection when supplied on mount; null or undefined means no selection. Omit to let the viewer manage selection."
       },
       {
         "name": "defaultSelectedId",
         "type": "string | null",
         "required": false,
         "default": "null",
-        "description": "The initially selected structure ID when selection is uncontrolled."
+        "description": "Initial uncontrolled selection, reapplied when the model or source changes."
       },
       {
         "name": "onSelectionChange",
@@ -786,6 +786,13 @@
         "required": false,
         "default": null,
         "description": "Called with the structure a reader selects."
+      },
+      {
+        "name": "announceSelection",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Announces selection after loading. Defaults to true for uncontrolled selection and false for controlled selection."
       },
       {
         "name": "visibility",
