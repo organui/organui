@@ -5,6 +5,7 @@ import { GitHubLink } from "@/components/github-link"
 import { MainNav } from "@/components/main-nav"
 import { MobileNav } from "@/components/mobile-nav"
 import { ModeSwitcher } from "@/components/mode-switcher"
+import { XLink } from "@/components/x-link"
 import { docsNav, mainNav } from "@/lib/registry"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
 import { buttonVariants } from "@workspace/ui/components/button"
@@ -12,7 +13,7 @@ import { Separator } from "@workspace/ui/components/separator"
 import { cn } from "@workspace/ui/lib/utils"
 
 // Shared by every page. Laid out after shadcn/ui's site header: navigation,
-// then search, the repository, the theme toggle and a link to start a project.
+// then search, the repository, X, the theme toggle and a link to start a project.
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
@@ -35,6 +36,7 @@ export function SiteHeader() {
             className="ml-2 hidden lg:block data-vertical:h-4 data-vertical:self-center"
           />
           <GitHubLink />
+          <XLink />
           <Separator
             orientation="vertical"
             className="data-vertical:h-4 data-vertical:self-center"
