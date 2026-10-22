@@ -121,3 +121,9 @@
     content: counter(step);
   }
 }
+
+/* The chart code sheet dims the page as shadcn/ui's does, without nova's
+   blur: blurring a page of charts makes the slide stutter. */
+[data-slot="sheet-overlay"]:has(~ [data-chart-code]) {
+  @apply bg-black/50 backdrop-blur-none duration-500 data-ending-style:duration-300;
+}

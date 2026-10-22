@@ -52,19 +52,18 @@ const kinds: Record<ChartType, { icon: LucideIcon; label: string }> = {
 }
 
 // Above each chart, as on shadcn/ui: its kind, then copy and view its code.
-// The code opens beside the page in a sheet, or from the bottom on phones,
-// under a preview of the chart.
+// The code opens beside the page in a sheet, or from the bottom on phones.
+// It holds only the code, as shadcn/ui's does, so it opens without drawing
+// the chart a second time.
 export function ChartToolbar({
   title,
   type,
   code,
-  preview,
   children,
 }: {
   title: string
   type: ChartType
   code: string
-  preview: ReactNode
   // The highlighted code.
   children: ReactNode
 }) {
@@ -80,13 +79,8 @@ export function ChartToolbar({
     description: "The chart's code, as the CLI installs it.",
   }
   const content = (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <div className="hidden border-b *:data-[slot=card]:rounded-none *:data-[slot=card]:ring-0 **:data-[slot=chart]:mx-auto **:data-[slot=chart]:max-h-[35vh] sm:block">
-        {preview}
-      </div>
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col p-4 *:min-h-0 *:flex-1">
-        {children}
-      </div>
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col p-4 *:min-h-0 *:flex-1">
+      {children}
     </div>
   )
 
@@ -139,9 +133,12 @@ export function ChartToolbar({
         ) : (
           <Sheet>
             <SheetTrigger render={button}>View Code</SheetTrigger>
+            {/* Slides in from off screen like shadcn/ui's Radix sheet, slower
+                to open than to close, rather than nova's short fade. */}
             <SheetContent
               side="right"
-              className="gap-0 p-0 data-[side=right]:w-full data-[side=right]:sm:max-w-[700px]"
+              data-chart-code=""
+              className="gap-0 bg-background p-0 duration-500 data-ending-style:opacity-100 data-ending-style:duration-300 data-starting-style:opacity-100 data-[side=right]:w-full data-[side=right]:data-ending-style:translate-x-full data-[side=right]:data-starting-style:translate-x-full data-[side=right]:sm:max-w-[700px]"
             >
               <SheetHeader className="sr-only">
                 <SheetTitle>{header.title}</SheetTitle>

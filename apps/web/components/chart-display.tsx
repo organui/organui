@@ -30,12 +30,7 @@ export async function ChartDisplay({
         className
       )}
     >
-      <ChartToolbar
-        title={chart.title}
-        type={chart.type}
-        code={code}
-        preview={Chart && <Chart />}
-      >
+      <ChartToolbar title={chart.title} type={chart.type} code={code}>
         <CodeSnippet
           label={`${chart.title} code`}
           title={files[0]?.installed}
