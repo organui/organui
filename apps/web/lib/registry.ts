@@ -254,6 +254,12 @@ export const guides: (NavLink & { description: string })[] = [
       "Use the clinical inputs in forms with React Hook Form, Zod and shadcn's Field.",
   },
   {
+    title: "Clinical charts",
+    href: "/docs/clinical-charts",
+    description:
+      "The conventions the charts follow, so health data reads the way clinicians expect.",
+  },
+  {
     title: "Licences",
     href: "/docs/licences",
     description: "MIT code, and the licence each model and dataset keeps.",
@@ -330,6 +336,7 @@ export const mainNav: NavLink[] = [
 export const pagesNew: string[] = [
   "/docs/base-ui",
   "/docs/forms",
+  "/docs/clinical-charts",
   aiIndex.href,
   helpersIndex.href,
   utilitiesIndex.href,

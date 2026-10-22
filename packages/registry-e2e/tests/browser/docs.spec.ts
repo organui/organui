@@ -221,6 +221,7 @@ test("guides and the component index pass an accessibility scan without overflow
     ["/docs/theming", "Theming"],
     ["/docs/base-ui", "Base UI and Radix"],
     ["/docs/forms", "Forms"],
+    ["/docs/clinical-charts", "Clinical charts"],
     ["/docs/licences", "Licences"],
     ["/docs/mcp", "MCP"],
     ["/docs/changelog", "Changelog"],
