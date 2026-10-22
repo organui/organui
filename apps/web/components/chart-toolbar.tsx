@@ -134,11 +134,12 @@ export function ChartToolbar({
           <Sheet>
             <SheetTrigger render={button}>View Code</SheetTrigger>
             {/* Slides in from off screen like shadcn/ui's Radix sheet, slower
-                to open than to close, rather than nova's short fade. */}
+                to open than to close, rather than nova's short fade. Its
+                close button sits at the end of the code's header bar. */}
             <SheetContent
               side="right"
               data-chart-code=""
-              className="gap-0 bg-background p-0 duration-500 data-ending-style:opacity-100 data-ending-style:duration-300 data-starting-style:opacity-100 data-[side=right]:w-full data-[side=right]:data-ending-style:translate-x-full data-[side=right]:data-starting-style:translate-x-full data-[side=right]:sm:max-w-[700px]"
+              className="gap-0 bg-background p-0 duration-500 data-ending-style:opacity-100 data-ending-style:duration-300 data-starting-style:opacity-100 data-[side=right]:w-full data-[side=right]:data-ending-style:translate-x-full data-[side=right]:data-starting-style:translate-x-full **:data-[slot=sheet-close]:top-6 **:data-[slot=sheet-close]:right-6 data-[side=right]:sm:max-w-[700px]"
             >
               <SheetHeader className="sr-only">
                 <SheetTitle>{header.title}</SheetTitle>
