@@ -34,12 +34,13 @@ export async function ChartDisplay({
         title={chart.title}
         type={chart.type}
         code={code}
-        install={chart.install}
+        preview={Chart && <Chart />}
       >
         <CodeSnippet
           label={`${chart.title} code`}
           title={files[0]?.installed}
           code={code}
+          contentClassName="min-h-0 flex-1 overflow-auto"
         />
       </ChartToolbar>
       {/* Cards in a row share its height, their footers at the bottom. */}
