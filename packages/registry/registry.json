@@ -1367,6 +1367,22 @@
       "docs": "Oxygen weaning area chart: https://organui.com/charts/area#chart-area-oxygen"
     },
     {
+      "name": "chart-area-glucose-profile",
+      "type": "registry:block",
+      "title": "Glucose profile area chart",
+      "description": "An ambulatory glucose profile: the median and percentile bands over a day.",
+      "categories": ["charts", "charts-area"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-area-glucose-profile.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Glucose profile area chart: https://organui.com/charts/area#chart-area-glucose-profile"
+    },
+    {
       "name": "chart-bar-tests",
       "type": "registry:block",
       "title": "Tests ordered bar chart",
@@ -1450,6 +1466,54 @@
       "docs": "Vaccinations bar chart: https://organui.com/charts/bar#chart-bar-vaccinations"
     },
     {
+      "name": "chart-bar-blood-pressure",
+      "type": "registry:block",
+      "title": "Ambulatory blood pressure bar chart",
+      "description": "24-hour blood pressure as range bars from diastolic to systolic, with the overnight dip.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "badge", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-blood-pressure.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Ambulatory blood pressure bar chart: https://organui.com/charts/bar#chart-bar-blood-pressure"
+    },
+    {
+      "name": "chart-bar-time-in-range",
+      "type": "registry:block",
+      "title": "Time in range bar chart",
+      "description": "Continuous glucose monitor time in range by week, as a stacked bar chart.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "badge", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-time-in-range.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Time in range bar chart: https://organui.com/charts/bar#chart-bar-time-in-range"
+    },
+    {
+      "name": "chart-bar-lab-panel",
+      "type": "registry:block",
+      "title": "Lab panel bar chart",
+      "description": "A lab panel, each result placed on its own reference range with high and low flags.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "badge", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-lab-panel.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Lab panel bar chart: https://organui.com/charts/bar#chart-bar-lab-panel"
+    },
+    {
       "name": "chart-line-rehab",
       "type": "registry:block",
       "title": "Cardiac rehab line chart",
@@ -1531,6 +1595,38 @@
         }
       ],
       "docs": "Insulin titration line chart: https://organui.com/charts/line#chart-line-insulin"
+    },
+    {
+      "name": "chart-line-survival",
+      "type": "registry:block",
+      "title": "Survival line chart",
+      "description": "Kaplan–Meier survival curves for two trial arms, with censoring and numbers at risk.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-survival.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Survival line chart: https://organui.com/charts/line#chart-line-survival"
+    },
+    {
+      "name": "chart-line-forest-plot",
+      "type": "registry:block",
+      "title": "Forest plot line chart",
+      "description": "A forest plot of hazard ratios with 95% confidence intervals by subgroup.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-forest-plot.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Forest plot line chart: https://organui.com/charts/line#chart-line-forest-plot"
     },
     {
       "name": "chart-pie-adherence",
