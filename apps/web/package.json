@@ -19,7 +19,7 @@
     "@vercel/analytics": "^2.0.1",
     "@workspace/registry": "workspace:*",
     "@workspace/ui": "workspace:*",
-    "linkedom": "0.18.12",
+    "linkedom": "0.18.13",
     "lucide-react": "^1.59.0",
     "next": "16.4.2",
     "next-themes": "^0.4.6",
