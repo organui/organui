@@ -984,7 +984,7 @@ export function OrganViewer({
                       key={structure.id}
                       value={structure.id}
                       disabled={shown[structure.id] === false}
-                      className="[&>span]:whitespace-normal"
+                      className="[&>div]:whitespace-normal"
                     >
                       {structure.label}
                     </SelectItem>
