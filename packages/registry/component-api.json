@@ -813,7 +813,7 @@
         "type": "boolean",
         "required": false,
         "default": "true",
-        "description": "Shows the model credit and licence link. Keep it unless you credit the model elsewhere."
+        "description": "Shows a button that opens the model credit and licence link. Keep it unless you credit the model elsewhere."
       },
       {
         "name": "label",

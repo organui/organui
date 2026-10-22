@@ -57,7 +57,8 @@ test("hidden structures cannot be picked and the credit links its licence", asyn
   await page.getByRole("button", { name: "Hide right atrium" }).click()
   await viewer.click()
   await expect(page.getByLabel("Selected", { exact: true })).toHaveText("none")
-  await expect(viewer.getByRole("link", { name: "CC BY 4.0" })).toHaveAttribute(
+  await viewer.getByRole("button", { name: "Model credit" }).click()
+  await expect(page.getByRole("link", { name: "CC BY 4.0" })).toHaveAttribute(
     "href",
     "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
   )

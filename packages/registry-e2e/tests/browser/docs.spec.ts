@@ -809,8 +809,9 @@ test("a public organ component loads its attributed hosted model", async ({
   const viewer = page.getByRole("region", { name: "Breast default example" })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
+  await viewer.getByRole("button", { name: "Model credit" }).click()
   await expect(
-    viewer.getByRole("link", { name: "CC BY 4.0", exact: true })
+    page.getByRole("link", { name: "CC BY 4.0", exact: true })
   ).toBeVisible()
   await page.screenshot({ path: info.outputPath("breast.png"), fullPage: true })
   expect(errors).toEqual([])

@@ -95,6 +95,7 @@
       "registryDependencies": [
         "alert",
         "button",
+        "popover",
         "progress",
         "select",
         "tooltip"

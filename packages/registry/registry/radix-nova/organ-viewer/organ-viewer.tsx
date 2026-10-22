@@ -27,6 +27,11 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { Progress } from "@/components/ui/progress"
 import {
   Select,
@@ -108,7 +113,7 @@ export type OrganViewerProps = {
   onViewChange?: (view: string | null) => void
   /** Shows the view menu, zoom and reset buttons. Defaults to true. */
   controls?: boolean
-  /** Shows the model credit and licence link. Keep it unless you credit the model elsewhere. */
+  /** Shows a button that opens the model credit and licence link. Keep it unless you credit the model elsewhere. */
   attribution?: boolean
   /** The accessible name of the viewer. */
   label?: string
@@ -846,27 +851,45 @@ export function OrganViewer({
       {engine && !interacted && (
         <p
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-8 text-center text-xs text-muted-foreground"
+          className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs text-muted-foreground"
         >
           Drag to rotate · Scroll or pinch to zoom
         </p>
       )}
       {attribution && (
-        <p className="absolute right-2 bottom-1.5 left-2 flex justify-end gap-1 text-[11px] text-muted-foreground">
-          <a
-            href={model.attribution.source}
-            className="min-w-0 truncate underline-offset-2 hover:underline"
-          >
-            {model.attribution.credit}
-          </a>
-          <span aria-hidden="true">·</span>
-          <a
-            href={model.attribution.licenseUrl}
-            className="shrink-0 underline-offset-2 hover:underline"
-          >
-            {model.attribution.license}
-          </a>
-        </p>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              aria-label="Model credit"
+              className="absolute right-2 bottom-2 text-muted-foreground"
+            >
+              <IconPlaceholder
+                lucide="InfoIcon"
+                tabler="IconInfoCircle"
+                hugeicons="InformationCircleIcon"
+                phosphor="InfoIcon"
+                remixicon="RiInformationLine"
+                aria-hidden="true"
+              />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent side="top" align="end" className="w-64 text-xs">
+            <a
+              href={model.attribution.source}
+              className="underline-offset-2 hover:underline"
+            >
+              {model.attribution.credit}
+            </a>
+            <a
+              href={model.attribution.licenseUrl}
+              className="text-muted-foreground underline-offset-2 hover:underline"
+            >
+              {model.attribution.license}
+            </a>
+          </PopoverContent>
+        </Popover>
       )}
     </div>
   )
