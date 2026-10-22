@@ -875,7 +875,12 @@ export function OrganViewer({
               />
             </Button>
           </PopoverTrigger>
-          <PopoverContent side="top" align="end" className="w-64 text-xs">
+          <PopoverContent
+            side="top"
+            align="end"
+            aria-label="Model credit"
+            className="w-64 text-xs"
+          >
             <a
               href={model.attribution.source}
               className="underline-offset-2 hover:underline"
