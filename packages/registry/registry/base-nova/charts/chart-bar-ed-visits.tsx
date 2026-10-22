@@ -1,6 +1,13 @@
 "use client"
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Label,
+  ReferenceLine,
+  XAxis,
+} from "recharts"
 
 import {
   Card,
@@ -38,6 +45,10 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const average = Math.round(
+  chartData.reduce((sum, { visits }) => sum + visits, 0) / chartData.length
+)
+
 export function ChartBarEdVisits() {
   return (
     <Card>
@@ -47,7 +58,7 @@ export function ChartBarEdVisits() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart accessibilityLayer data={chartData} margin={{ right: 52 }}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="day"
@@ -61,6 +72,18 @@ export function ChartBarEdVisits() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Bar dataKey="visits" fill="var(--color-visits)" radius={8} />
+            <ReferenceLine
+              y={average}
+              stroke="var(--muted-foreground)"
+              strokeDasharray="4 4"
+            >
+              <Label
+                value={`Avg ${average}`}
+                position="right"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceLine>
           </BarChart>
         </ChartContainer>
       </CardContent>

@@ -4,6 +4,7 @@ import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -38,12 +39,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const latest = chartData.at(-1)!
+
 export function ChartLineInsulin() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Insulin titration</CardTitle>
         <CardDescription>Basal dose, adjusted every three days</CardDescription>
+        <CardAction className="flex flex-col items-end gap-1.5">
+          <div className="text-2xl leading-none font-semibold">
+            {latest.dose}{" "}
+            <span className="text-sm font-normal text-muted-foreground">
+              units
+            </span>
+          </div>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

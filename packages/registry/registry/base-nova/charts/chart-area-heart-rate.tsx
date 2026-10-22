@@ -1,21 +1,32 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  Label,
+  ReferenceArea,
+  XAxis,
+  YAxis,
+} from "recharts"
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description = "Heart rate across a shift, as a gradient area chart"
 
@@ -42,12 +53,33 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const latest = chartData.at(-1)!
+
 export function ChartAreaHeartRate() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Heart rate</CardTitle>
         <CardDescription>Hourly, across a day shift</CardDescription>
+        <CardAction className="flex flex-col items-end gap-1.5">
+          <div className="text-2xl leading-none font-semibold">
+            {latest.heartRate}{" "}
+            <span className="text-sm font-normal text-muted-foreground">
+              bpm
+            </span>
+          </div>
+          <Badge variant="outline">
+            <IconPlaceholder
+              lucide="CheckIcon"
+              tabler="IconCheck"
+              hugeicons="Tick02Icon"
+              phosphor="CheckIcon"
+              remixicon="RiCheckLine"
+              data-icon="inline-start"
+            />
+            In range
+          </Badge>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -70,6 +102,20 @@ export function ChartAreaHeartRate() {
               tickMargin={8}
               domain={[50, 110]}
             />
+            {/* The usual adult resting range, behind the readings. */}
+            <ReferenceArea
+              y1={60}
+              y2={100}
+              fill="var(--muted-foreground)"
+              fillOpacity={0.08}
+            >
+              <Label
+                value="Normal 60–100"
+                position="insideTopLeft"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceArea>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <defs>
               <linearGradient id="fillHeartRate" x1="0" y1="0" x2="0" y2="1">

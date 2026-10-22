@@ -4,12 +4,14 @@ import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   ChartContainer,
   ChartTooltip,
@@ -40,12 +42,33 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const latest = chartData.at(-1)!
+
 export function ChartAreaOxygen() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Oxygen weaning</CardTitle>
         <CardDescription>Nasal cannula flow, litres per minute</CardDescription>
+        <CardAction className="flex flex-col items-end gap-1.5">
+          <div className="text-2xl leading-none font-semibold">
+            {latest.flow}{" "}
+            <span className="text-sm font-normal text-muted-foreground">
+              L/min
+            </span>
+          </div>
+          <Badge variant="outline">
+            <IconPlaceholder
+              lucide="CheckIcon"
+              tabler="IconCheck"
+              hugeicons="Tick02Icon"
+              phosphor="CheckIcon"
+              remixicon="RiCheckLine"
+              data-icon="inline-start"
+            />
+            Room air
+          </Badge>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>

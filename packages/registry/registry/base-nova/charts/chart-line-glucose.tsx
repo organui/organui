@@ -1,15 +1,25 @@
 "use client"
 
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import {
+  CartesianGrid,
+  Label,
+  Line,
+  LineChart,
+  ReferenceArea,
+  XAxis,
+  YAxis,
+} from "recharts"
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   ChartContainer,
   ChartTooltip,
@@ -38,12 +48,33 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const latest = chartData.at(-1)!
+
 export function ChartLineGlucose() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Fasting glucose</CardTitle>
         <CardDescription>Fingerstick readings, one week</CardDescription>
+        <CardAction className="flex flex-col items-end gap-1.5">
+          <div className="text-2xl leading-none font-semibold">
+            {latest.glucose}{" "}
+            <span className="text-sm font-normal text-muted-foreground">
+              mg/dL
+            </span>
+          </div>
+          <Badge variant="outline">
+            <IconPlaceholder
+              lucide="CheckIcon"
+              tabler="IconCheck"
+              hugeicons="Tick02Icon"
+              phosphor="CheckIcon"
+              remixicon="RiCheckLine"
+              data-icon="inline-start"
+            />
+            In target
+          </Badge>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -58,7 +89,23 @@ export function ChartLineGlucose() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
+              interval={0}
             />
+            <YAxis hide domain={[60, 160]} />
+            {/* A common fasting target; set your own patient's range. */}
+            <ReferenceArea
+              y1={80}
+              y2={130}
+              fill="var(--muted-foreground)"
+              fillOpacity={0.08}
+            >
+              <Label
+                value="Target 80–130"
+                position="insideBottomRight"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceArea>
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}

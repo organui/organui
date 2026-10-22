@@ -1341,7 +1341,7 @@
       "description": "Heart rate across a shift, as a gradient area chart.",
       "categories": ["charts", "charts-area"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-area-heart-rate.tsx",
@@ -1357,7 +1357,7 @@
       "description": "Oxygen flow rate over time, as a step area chart.",
       "categories": ["charts", "charts-area"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-area-oxygen.tsx",
@@ -1475,7 +1475,7 @@
       "description": "Home blood pressure readings, as a multiple line chart.",
       "categories": ["charts", "charts-line"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-line-blood-pressure.tsx",
@@ -1491,7 +1491,7 @@
       "description": "Fasting glucose readings, as a line chart with dots.",
       "categories": ["charts", "charts-line"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-line-glucose.tsx",
@@ -1507,7 +1507,7 @@
       "description": "HbA1c by quarter, as a line chart with labels.",
       "categories": ["charts", "charts-line"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-line-hba1c.tsx",

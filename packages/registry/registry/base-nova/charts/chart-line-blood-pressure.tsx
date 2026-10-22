@@ -1,15 +1,25 @@
 "use client"
 
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
+import {
+  CartesianGrid,
+  Label,
+  Line,
+  LineChart,
+  ReferenceLine,
+  XAxis,
+  YAxis,
+} from "recharts"
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   ChartContainer,
   ChartTooltip,
@@ -43,12 +53,33 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const latest = chartData.at(-1)!
+
 export function ChartLineBloodPressure() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Blood pressure</CardTitle>
         <CardDescription>Morning home readings, first week</CardDescription>
+        <CardAction className="flex flex-col items-end gap-1.5">
+          <div className="text-2xl leading-none font-semibold">
+            {latest.systolic}/{latest.diastolic}{" "}
+            <span className="text-sm font-normal text-muted-foreground">
+              mmHg
+            </span>
+          </div>
+          <Badge variant="outline">
+            <IconPlaceholder
+              lucide="TriangleAlertIcon"
+              tabler="IconAlertTriangle"
+              hugeicons="Alert02Icon"
+              phosphor="WarningIcon"
+              remixicon="RiAlertLine"
+              data-icon="inline-start"
+            />
+            Above target
+          </Badge>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -70,6 +101,31 @@ export function ChartLineBloodPressure() {
               tickMargin={8}
               domain={[60, 160]}
             />
+            {/* A common home target of 130/80; set your own patient's. */}
+            <ReferenceLine
+              y={130}
+              stroke="var(--muted-foreground)"
+              strokeDasharray="4 4"
+            >
+              <Label
+                value="130"
+                position="insideBottomLeft"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceLine>
+            <ReferenceLine
+              y={80}
+              stroke="var(--muted-foreground)"
+              strokeDasharray="4 4"
+            >
+              <Label
+                value="80"
+                position="insideBottomLeft"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceLine>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
               dataKey="systolic"

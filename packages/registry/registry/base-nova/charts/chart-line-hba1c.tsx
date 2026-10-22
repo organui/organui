@@ -1,15 +1,26 @@
 "use client"
 
-import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts"
+import {
+  CartesianGrid,
+  Label,
+  LabelList,
+  Line,
+  LineChart,
+  ReferenceLine,
+  XAxis,
+  YAxis,
+} from "recharts"
 
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   ChartContainer,
   ChartTooltip,
@@ -37,12 +48,31 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const latest = chartData.at(-1)!
+
 export function ChartLineHba1c() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>HbA1c</CardTitle>
         <CardDescription>Quarterly, over 18 months</CardDescription>
+        <CardAction className="flex flex-col items-end gap-1.5">
+          <div className="text-2xl leading-none font-semibold">
+            {latest.hba1c}{" "}
+            <span className="text-sm font-normal text-muted-foreground">%</span>
+          </div>
+          <Badge variant="outline">
+            <IconPlaceholder
+              lucide="CheckIcon"
+              tabler="IconCheck"
+              hugeicons="Tick02Icon"
+              phosphor="CheckIcon"
+              remixicon="RiCheckLine"
+              data-icon="inline-start"
+            />
+            At target
+          </Badge>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -59,6 +89,20 @@ export function ChartLineHba1c() {
               tickMargin={8}
               tickFormatter={(value) => value.slice(0, 2)}
             />
+            <YAxis hide domain={[6, 9]} />
+            {/* A common target for adults; set your own patient's. */}
+            <ReferenceLine
+              y={7}
+              stroke="var(--muted-foreground)"
+              strokeDasharray="4 4"
+            >
+              <Label
+                value="Target 7%"
+                position="insideBottomLeft"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceLine>
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}

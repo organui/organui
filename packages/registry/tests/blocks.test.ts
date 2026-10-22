@@ -253,13 +253,15 @@ test("each chart has one chart type and installs one file", async () => {
       chart.categories?.filter((category) => category.startsWith("charts-"))
     ).toHaveLength(1)
     expect(chart.files).toHaveLength(1)
-    // Card and chart, plus any control an interactive chart uses.
+    // Card and chart, plus any control or badge the chart uses.
     const source = await readFile(
       new URL(`../${chart.files[0]!.path}`, import.meta.url),
       "utf8"
     )
     const used = [...source.matchAll(/from "@\/components\/ui\/([\w-]+)"/g)]
     expect(chart.registryDependencies).toEqual(used.map(([, name]) => name!))
-    expect(chart.registryDependencies.slice(0, 2)).toEqual(["card", "chart"])
+    expect(chart.registryDependencies).toEqual(
+      expect.arrayContaining(["card", "chart"])
+    )
   }
 })

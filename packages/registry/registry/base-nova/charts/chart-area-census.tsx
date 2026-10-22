@@ -1,6 +1,14 @@
 "use client"
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  Label,
+  ReferenceLine,
+  XAxis,
+  YAxis,
+} from "recharts"
 
 import {
   Card,
@@ -42,6 +50,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+// Beds the hospital can staff, the ceiling the census works against.
+const staffedBeds = 260
+
 export function ChartAreaCensus() {
   return (
     <Card>
@@ -64,6 +75,7 @@ export function ChartAreaCensus() {
               tickMargin={8}
               tickFormatter={(value) => value.slice(0, 3)}
             />
+            <YAxis hide domain={[0, staffedBeds + 20]} />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
@@ -85,6 +97,18 @@ export function ChartAreaCensus() {
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />
+            <ReferenceLine
+              y={staffedBeds}
+              stroke="var(--muted-foreground)"
+              strokeDasharray="4 4"
+            >
+              <Label
+                value={`Staffed beds ${staffedBeds}`}
+                position="insideTopRight"
+                className="fill-muted-foreground"
+                fontSize={11}
+              />
+            </ReferenceLine>
           </AreaChart>
         </ChartContainer>
       </CardContent>
