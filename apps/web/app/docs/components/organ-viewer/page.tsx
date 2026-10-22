@@ -78,9 +78,9 @@ export default async function Page() {
         <p className="text-sm text-muted-foreground">
           The source installs into your components directory and adds three.js,
           plus shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
-          <code>progress</code>, <code>select</code> and <code>tooltip</code>{" "}
-          for its controls. Its toolbar composes them with Base UI&apos;s{" "}
-          <code>render</code> prop;{" "}
+          <code>popover</code>, <code>progress</code>, <code>select</code> and{" "}
+          <code>tooltip</code> for its controls. Its toolbar composes them with
+          Base UI&apos;s <code>render</code> prop;{" "}
           <Link href="/docs/base-ui" className="underline">
             Radix projects
           </Link>{" "}
@@ -107,13 +107,15 @@ export default async function Page() {
       <section className="flex flex-col gap-4">
         <DocsHeading id="behaviour">Behaviour</DocsHeading>
         <p>
-          Selection and visibility are controlled, with the same contract as the
-          anatomy tree: pass <code>selectedId</code> and a visibility map where
-          missing IDs are visible, and update them from{" "}
-          <code>onSelectionChange</code>. A selected structure glows in its own
-          colour while everything else is ghosted, so it stays visible even
-          inside other anatomy. Clicks on a ghost prefer the solid structure
-          behind it.
+          Click a structure or choose it from the keyboard-accessible Structure
+          menu to select it. Selection works out of the box; use{" "}
+          <code>defaultSelectedId</code> for an initial selection, or control it
+          with <code>selectedId</code> and <code>onSelectionChange</code> to
+          share state with the anatomy tree. The optional{" "}
+          <code>visibility</code> map controls visibility, with missing IDs
+          visible. A selected structure glows in its own colour while everything
+          else is ghosted, so it stays visible even inside other anatomy. Clicks
+          on a ghost prefer the solid structure behind it.
         </p>
         <p>
           Each named view fits the model to 80% of the stage from its direction.
@@ -130,8 +132,9 @@ export default async function Page() {
         <CodeSnippet label="Imperative handle example" code={handle} />
         <p>
           Pass <code>controls=&#123;false&#125;</code> to hide the built-in view
-          menu, zoom and reset buttons. <code>organAnatomyNodes(model)</code>{" "}
-          builds anatomy tree data from the model&apos;s groups, and{" "}
+          and structure menus, zoom and reset buttons.{" "}
+          <code>organAnatomyNodes(model)</code> builds anatomy tree data from
+          the model&apos;s groups, and{" "}
           <code>organDefaultVisibility(model)</code> returns its initial
           visibility.
         </p>

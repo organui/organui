@@ -44,7 +44,7 @@ export default function Page() {
                 height={480}
                 alt=""
                 sizes="(min-width: 1280px) 14rem, (min-width: 1024px) 20vw, (min-width: 640px) 30vw, 50vw"
-                className="aspect-[4/3] w-full rounded-xl bg-muted/40 object-contain transition-transform group-hover:scale-[1.03]"
+                className="aspect-[4/3] w-full rounded-xl bg-muted/40 object-contain motion-safe:transition-transform motion-safe:group-hover:scale-[1.03]"
               />
               <span className="text-sm font-medium">{item.title}</span>
             </Link>

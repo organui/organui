@@ -770,8 +770,15 @@
         "name": "selectedId",
         "type": "string | null",
         "required": false,
+        "default": null,
+        "description": "Controls the selected structure ID. Omit to let the viewer manage selection."
+      },
+      {
+        "name": "defaultSelectedId",
+        "type": "string | null",
+        "required": false,
         "default": "null",
-        "description": "The selected structure id, or null."
+        "description": "The initially selected structure ID when selection is uncontrolled."
       },
       {
         "name": "onSelectionChange",
@@ -806,7 +813,7 @@
         "type": "boolean",
         "required": false,
         "default": "true",
-        "description": "Shows the view menu, zoom and reset buttons. Defaults to true."
+        "description": "Shows structure selection, the view menu, zoom and reset buttons. Defaults to true."
       },
       {
         "name": "attribution",

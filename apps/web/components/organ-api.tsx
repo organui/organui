@@ -1,4 +1,4 @@
-import type { OrganViewerProps } from "@workspace/registry/organ-viewer"
+import api from "@workspace/registry/component-api.json"
 import { DocsHeading } from "@/components/docs-heading"
 import {
   Table,
@@ -10,67 +10,14 @@ import {
   TableRow,
 } from "@workspace/ui/components/table"
 
-const props = {
-  src: {
-    type: "string",
-    default: "Organ model URL",
-    description: "Override the model URL to host the GLB yourself.",
-  },
-  selectedId: {
-    type: "string | null",
-    default: "null",
-    description: "Control the selected structure ID.",
-  },
-  onSelectionChange: {
-    type: "(id: string) => void",
-    default: "—",
-    description: "Receive selection changes from the model.",
-  },
-  visibility: {
-    type: "Readonly<Record<string, boolean>>",
-    default: "Model defaults",
-    description: "Set structure visibility by ID; missing IDs are visible.",
-  },
-  defaultView: {
-    type: "string",
-    default: "Organ default view",
-    description: "Choose the initial named view.",
-  },
-  onViewChange: {
-    type: "(view: string | null) => void",
-    default: "—",
-    description: "Receive the view name, or null after free rotation.",
-  },
-  controls: {
-    type: "boolean",
-    default: "true",
-    description: "Show view, zoom and reset controls.",
-  },
-  attribution: {
-    type: "boolean",
-    default: "true",
-    description:
-      "Show model credit and licence. Credit it elsewhere if hidden.",
-  },
-  label: {
-    type: "string",
-    default: "Interactive [organ] model",
-    description: "Accessible name for the viewer region.",
-  },
-  className: {
-    type: "string",
-    default: "—",
-    description: "Set the component's layout and dimensions.",
-  },
-  ref: {
-    type: "React.Ref<OrganViewerHandle>",
-    default: "—",
-    description: "Access setView, zoom, rotate and reset methods.",
-  },
-} satisfies Record<
-  keyof Omit<OrganViewerProps, "model">,
-  { type: string; default: string; description: string }
->
+// Read shared props from the generated API so every organ stays in sync.
+const props = api["organ-viewer"].props.filter(({ name }) => name !== "model")
+const defaults: Record<string, string> = {
+  src: "Organ model URL",
+  defaultView: "Organ default view",
+  visibility: "Model defaults",
+  label: "Interactive [organ] model",
+}
 
 export function OrganApi({ component }: { component: string }) {
   return (
@@ -94,15 +41,17 @@ export function OrganApi({ component }: { component: string }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {Object.entries(props).map(([name, prop]) => (
-            <TableRow key={name}>
+          {props.map((prop) => (
+            <TableRow key={prop.name}>
               <TableCell>
-                <code>{name}</code>
+                <code>{prop.name}</code>
               </TableCell>
               <TableCell>
                 <code>{prop.type}</code>
               </TableCell>
-              <TableCell>{prop.default}</TableCell>
+              <TableCell>
+                {defaults[prop.name] ?? prop.default ?? "—"}
+              </TableCell>
               <TableCell className="whitespace-normal">
                 {prop.description}
               </TableCell>

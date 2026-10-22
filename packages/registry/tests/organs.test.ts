@@ -1,5 +1,7 @@
 import { expect, test } from "bun:test"
 import { readFile, readdir } from "node:fs/promises"
+import { createElement } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
 import registry from "../registry.json"
 import {
   organAnatomyNodes,
@@ -61,13 +63,20 @@ for (const item of organItems) {
       (value) => typeof value === "object"
     ) as OrganModel
     const ids = model.structures.map(({ id }) => id)
+    expect(ids.length).toBeGreaterThan(0)
     expect(new Set(ids).size).toBe(ids.length)
-    for (const { color, label, group } of model.structures) {
+    for (const { id, color, label, group } of model.structures) {
+      expect(id.trim()).not.toBe("")
       expect(color).toMatch(/^#[0-9a-f]{6}$/i)
       expect(label.length && group.length).toBeGreaterThan(0)
     }
     expect(model.views.map(({ name }) => name)).toContain(model.defaultView)
+    expect(new Set(model.views.map(({ name }) => name)).size).toBe(
+      model.views.length
+    )
     for (const view of model.views) {
+      expect(view.name.trim()).not.toBe("")
+      expect(view.direction.every(Number.isFinite)).toBe(true)
       expect(Math.hypot(...view.direction)).toBeGreaterThan(0)
       for (const id of view.structureIds ?? []) expect(ids).toContain(id)
     }
@@ -89,6 +98,8 @@ for (const item of organItems) {
     expect(item.docs).toContain(model.attribution.license)
     expect(item.docs).toContain(model.attribution.licenseUrl)
     const nodes = organAnatomyNodes(model)
+    const treeIds = [...ids, ...nodes.map(({ id }) => id)]
+    expect(new Set(treeIds).size).toBe(treeIds.length)
     expect(
       nodes.flatMap(({ children }) => children.map(({ id }) => id)).sort()
     ).toEqual([...ids].sort())
@@ -120,6 +131,7 @@ test("all organ public components preserve their model and consumer props", asyn
       controls: false,
       src: "/custom.glb",
       selectedId: "example",
+      defaultSelectedId: "initial",
       visibility: { example: false },
       onSelectionChange: () => {},
       ref: { current: null },
@@ -129,6 +141,39 @@ test("all organ public components preserve their model and consumer props", asyn
     expect(element.type).toBe(OrganViewer)
     expect(element.props).toEqual({ model, ...props })
     expect(Component({}).props.controls).toBeUndefined()
+  }
+})
+
+test("every organ supports initial selection, controlled null and hidden selection", async () => {
+  for (const item of organItems) {
+    const name = item.name
+      .split("-")
+      .map((word) => word[0]!.toUpperCase() + word.slice(1))
+      .join("")
+    const module = await import(
+      new URL(`${item.name}/${item.name}.tsx`, directory).href
+    )
+    const model = Object.values(module).find(
+      (value) => typeof value === "object"
+    ) as OrganModel
+    const structure = model.structures.find(
+      ({ id }) => !model.hiddenIds?.includes(id)
+    )!
+    const render = (props: object) =>
+      renderToStaticMarkup(
+        createElement(module[name], {
+          defaultSelectedId: structure.id,
+          ...props,
+        })
+      )
+    expect(render({})).toContain(`Selected: ${structure.label}`)
+    expect(render({ selectedId: null })).toContain("No structure selected.")
+    expect(render({ selectedId: "unknown" })).toContain(
+      "No structure selected."
+    )
+    expect(render({ visibility: { [structure.id]: false } })).toContain(
+      "No structure selected."
+    )
   }
 })
 
