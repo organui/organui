@@ -47,7 +47,8 @@ Each component documents its props with doc comments. `bun run component-api` (`
 - `/create` builds a project setup: library, preset, theme and items, ending in the `shadcn init` and `add` commands. `/colors` lists the severity, dermatome and organ structure colours.
 - `/docs/forms` shows the clinical inputs in a React Hook Form and Zod form with shadcn's Field.
 - Every docs page is also served as Markdown at its address plus `.md` (`app/llm`), and `/llms.txt` indexes them.
-- Vercel Analytics loads only on Vercel deployments (`VERCEL_ENV`), so local and CI builds make no requests. `apps/web/lib/events.ts` names the copy events it counts.
+- Vercel Analytics loads only on Vercel deployments (`VERCEL_ENV`), so local and CI builds make no requests. `apps/web/lib/events.ts` names the copy events it counts. Web Analytics is enabled on the `organui` Vercel project; its script returns 404 on any deployment made before that setting is on.
+- `organui.com` is the site's address, as in the canonical URLs, sitemap and registry URLs. `www.organui.com` redirects to it with a 308, set in the Vercel project's domains.
 - Copy buttons use `copyText` (`packages/ui/src/lib/copy-text.ts`), which falls back to `execCommand` when the Clipboard API is blocked.
 - `apps/web/scripts/social-preview.ts` renders `.github/social-preview.png`.
 
@@ -102,7 +103,7 @@ Verified configuration: React/React DOM 19.2.4, TypeScript 5.9.3, Tailwind 4.2.2
 
 The browser matrix uses ports 4318 to 4321 and refuses to reuse another service. It covers desktop/mobile website documentation plus desktop Next.js, mobile Vite and desktop Radix consumers: navigation, independent selection, mixed visibility, filtered/collapsed descendants, no results, data replacement/focus recovery, no focus stealing after focus leaves for a non-focusable viewer, default visibility, custom theme preservation, runtime errors and overflow. The documentation checks also verify compiled styles, visible keyboard focus and served item/catalog JSON against the registry source. The website should also be visually inspected at desktop/mobile sizes when changing styling. Vite may warn that Base UI's `use client` directives are ignored, as expected for a client-only bundle.
 
-`.github/workflows/registry.yml` runs these checks for pull requests and master pushes with read-only GitHub permissions, in two parallel jobs: quick checks (format, then one `turbo run lint typecheck test`) and the build, cache, consumer and browser suites. Superseded pull request runs are cancelled. Actions are pinned to commit SHAs, and Dependabot proposes weekly GitHub Actions and Bun updates. It does not publish packages or deploy production. Normal Vercel PR previews remain controlled by the existing integration.
+`.github/workflows/registry.yml` runs these checks for pull requests and master pushes with read-only GitHub permissions, except changes that touch only prose (root Markdown files, `docs/` and the issue and pull request templates), in two parallel jobs: quick checks (format, then one `turbo run lint typecheck test`) and the build, cache, consumer and browser suites. Superseded pull request runs are cancelled. Actions are pinned to commit SHAs, and Dependabot proposes weekly GitHub Actions and Bun updates. It does not publish packages or deploy production. Vercel builds previews and production through its Git integration, and skips a build when `turbo query affected` finds `web` and its dependencies unchanged since the last deployment (`ignoreCommand` in `apps/web/vercel.json`).
 
 ## References
 

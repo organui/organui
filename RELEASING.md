@@ -4,6 +4,13 @@ Releases are made from changesets, and published as GitHub releases. Nothing
 goes to npm: the registry is served from organui.com, which deploys from
 `master`.
 
+The workflow opens its pull request with the repository's `GITHUB_TOKEN`, so
+GitHub Actions must be allowed to create pull requests: tick **Allow GitHub
+Actions to create and approve pull requests** under Settings → Actions →
+General → Workflow permissions, in the organui organization first and then in
+the repository. Without it the workflow fails with "GitHub Actions is not
+permitted to create or approve pull requests".
+
 ## While you work
 
 A pull request that changes what the registry installs adds a changeset:
