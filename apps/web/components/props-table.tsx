@@ -13,14 +13,26 @@ import { DocsHeading } from "@/components/docs-heading"
 // A component's API Reference, as shadcn/ui ends its component pages with:
 // every prop, read from the component's own types, doc comments and
 // defaults (packages/registry/component-api.json).
-export function PropsTable({ item }: { item: keyof typeof api }) {
-  const { component, props } = api[item]
+export function PropsTable({
+  item,
+  component = api[item].component,
+  description,
+  exclude = [],
+  defaults = {},
+}: {
+  item: keyof typeof api
+  component?: string
+  description?: string
+  exclude?: readonly string[]
+  defaults?: Readonly<Record<string, string>>
+}) {
+  const props = api[item].props.filter(({ name }) => !exclude.includes(name))
   return (
     <section className="flex min-w-0 flex-col gap-4">
       <DocsHeading id="api-reference">API Reference</DocsHeading>
       <p>
         Import <code>{component}Props</code> from the same file as{" "}
-        <code>{component}</code>.
+        <code>{component}</code>.{description ? ` ${description}` : null}
       </p>
       <Table
         tabIndex={0}
@@ -35,26 +47,31 @@ export function PropsTable({ item }: { item: keyof typeof api }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {props.map((prop) => (
-            <TableRow key={prop.name}>
-              <TableCell className="align-top">
-                <code>{prop.name}</code>
-              </TableCell>
-              <TableCell className="whitespace-normal">
-                <code className="break-words">{prop.type}</code>
-                <p className="mt-1 text-muted-foreground">{prop.description}</p>
-              </TableCell>
-              <TableCell className="align-top">
-                {prop.required ? (
-                  "Required"
-                ) : prop.default ? (
-                  <code>{prop.default}</code>
-                ) : (
-                  "—"
-                )}
-              </TableCell>
-            </TableRow>
-          ))}
+          {props.map((prop) => {
+            const defaultValue = defaults[prop.name] ?? prop.default
+            return (
+              <TableRow key={prop.name}>
+                <TableCell className="align-top">
+                  <code>{prop.name}</code>
+                </TableCell>
+                <TableCell className="whitespace-normal">
+                  <code className="break-words">{prop.type}</code>
+                  <p className="mt-1 text-muted-foreground">
+                    {prop.description}
+                  </p>
+                </TableCell>
+                <TableCell className="align-top">
+                  {prop.required ? (
+                    "Required"
+                  ) : defaultValue ? (
+                    <code>{defaultValue}</code>
+                  ) : (
+                    "—"
+                  )}
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </section>

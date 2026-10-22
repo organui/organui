@@ -38,6 +38,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -101,17 +102,21 @@ export type OrganViewerProps = {
   model: OrganModel
   /** Overrides `model.src`, for example to serve the GLB yourself. */
   src?: string
-  /** The selected structure id, or null. */
+  /** Controls selection when supplied on mount; null or undefined means no selection. Omit to let the viewer manage selection. */
   selectedId?: string | null
+  /** Initial uncontrolled selection, reapplied when the model or source changes. */
+  defaultSelectedId?: string | null
   /** Called with the structure a reader selects. */
   onSelectionChange?: (id: string) => void
+  /** Announces selection after loading. Defaults to true for uncontrolled selection and false for controlled selection. */
+  announceSelection?: boolean
   /** Missing IDs are visible, matching the anatomy tree's contract. */
   visibility?: Readonly<Record<string, boolean>>
   /** The named view shown first. */
   defaultView?: string
   /** Called with the view name, or null once the camera is rotated freely. */
   onViewChange?: (view: string | null) => void
-  /** Shows the view menu, zoom and reset buttons. Defaults to true. */
+  /** Shows structure selection, the view menu, zoom and reset buttons. Defaults to true. */
   controls?: boolean
   /** Shows a button that opens the model credit and licence link. Keep it unless you credit the model elsewhere. */
   attribution?: boolean
@@ -291,6 +296,7 @@ function ToolbarButton({
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
+          type="button"
           variant="ghost"
           size="icon"
           aria-label={label}
@@ -307,8 +313,9 @@ function ToolbarButton({
 export function OrganViewer({
   model,
   src = model.src,
-  selectedId = null,
+  defaultSelectedId = null,
   onSelectionChange,
+  announceSelection,
   visibility,
   defaultView = model.defaultView,
   onViewChange,
@@ -317,7 +324,19 @@ export function OrganViewer({
   label = `Interactive ${model.name.toLowerCase()} model`,
   className,
   ref,
+  ...selectionProps
 }: OrganViewerProps) {
+  const { selectedId } = selectionProps
+  const hasSelectedId = Object.hasOwn(selectionProps, "selectedId")
+  const [isControlled] = React.useState(hasSelectedId)
+  React.useEffect(() => {
+    // No NODE_ENV guard: registry source must type-check without Node types.
+    if (hasSelectedId !== isControlled) {
+      console.warn(
+        "OrganViewer cannot switch between controlled and uncontrolled selection. Keep selectedId present or omitted for the lifetime of the viewer, or remount it to change modes."
+      )
+    }
+  }, [hasSelectedId, isControlled])
   const host = React.useRef<HTMLDivElement>(null)
   const [attempt, setAttempt] = React.useState(0)
   // Load results are keyed by request so a new src or retry starts clean
@@ -336,20 +355,63 @@ export function OrganViewer({
   const [engine, setEngine] = React.useState<Engine | null>(null)
   const [view, setView] = React.useState<string | null>(defaultView)
   const [interacted, setInteracted] = React.useState(false)
+  // Keyed by model name rather than identity, so a model object rebuilt on
+  // each render keeps the reader's selection.
+  const [selection, setSelection] = React.useState({
+    name: model.name,
+    src,
+    id: defaultSelectedId,
+  })
+  if (selection.name !== model.name || selection.src !== src) {
+    setSelection({ name: model.name, src, id: defaultSelectedId })
+  }
+  const selectStructure = React.useCallback(
+    (id: string) => {
+      if (!isControlled) setSelection({ name: model.name, src, id })
+      setInteracted(true)
+      onSelectionChange?.(id)
+    },
+    [isControlled, model.name, src, onSelectionChange]
+  )
+  // Only uncontrolled selection can be cleared here; controlled viewers clear
+  // by passing null.
+  const clearSelection = React.useCallback(() => {
+    if (!isControlled) setSelection({ name: model.name, src, id: null })
+  }, [isControlled, model.name, src])
   const latest = React.useRef({
     model,
     defaultView,
-    onSelectionChange,
+    selectStructure,
+    clearSelection,
     onViewChange,
   })
   React.useLayoutEffect(() => {
-    latest.current = { model, defaultView, onSelectionChange, onViewChange }
+    latest.current = {
+      model,
+      defaultView,
+      selectStructure,
+      clearSelection,
+      onViewChange,
+    }
   })
   const instructions = React.useId()
 
   const shown = React.useMemo(
     () => visibility ?? organDefaultVisibility(model),
     [visibility, model]
+  )
+  const selected = isControlled ? (selectedId ?? null) : selection.id
+  // Hidden or stale selections must not ghost every visible structure.
+  const activeStructure = model.structures.find(
+    ({ id }) => id === selected && shown[id] !== false
+  )
+  const activeId = activeStructure?.id ?? null
+  const anatomy = React.useMemo(
+    () =>
+      organAnatomyNodes(model).filter(({ children }) =>
+        children.some(({ id }) => shown[id] !== false)
+      ),
+    [model, shown]
   )
   const viewRef = React.useRef(view)
   const changeView = React.useCallback((next: string | null) => {
@@ -581,10 +643,30 @@ export function OrganViewer({
 
     const raycaster = new Raycaster()
     const down = new Vector2()
-    const onPointerDown = (event: PointerEvent) =>
+    let pointer: number | null = null
+    const onPointerDown = (event: PointerEvent) => {
+      if (!event.isPrimary || event.button !== 0) {
+        pointer = null
+        return
+      }
+      pointer = event.pointerId
       down.set(event.clientX, event.clientY)
+    }
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerId !== pointer) return
+      const dx = event.clientX - down.x
+      const dy = event.clientY - down.y
+      if (dx * dx + dy * dy > 16) pointer = null
+    }
+    const onPointerCancel = (event: PointerEvent) => {
+      if (event.pointerId === pointer) pointer = null
+    }
     const onPointerUp = (event: PointerEvent) => {
-      if (down.distanceTo(new Vector2(event.clientX, event.clientY)) > 4) return
+      if (pointer !== event.pointerId) return
+      pointer = null
+      const dx = event.clientX - down.x
+      const dy = event.clientY - down.y
+      if (dx * dx + dy * dy > 16) return
       const bounds = canvas.getBoundingClientRect()
       raycaster.setFromCamera(
         new Vector2(
@@ -595,9 +677,12 @@ export function OrganViewer({
       )
       const mesh = pickVisibleMesh(raycaster.intersectObjects(allMeshes, false))
       const id = mesh && structureId(mesh, known)
-      if (id) latest.current.onSelectionChange?.(id)
+      if (id) latest.current.selectStructure(id)
+      else latest.current.clearSelection()
     }
     canvas.addEventListener("pointerdown", onPointerDown)
+    canvas.addEventListener("pointermove", onPointerMove)
+    canvas.addEventListener("pointercancel", onPointerCancel)
     canvas.addEventListener("pointerup", onPointerUp)
     const onContextLost = (event: Event) => {
       event.preventDefault()
@@ -678,6 +763,8 @@ export function OrganViewer({
       observer.disconnect()
       motion.removeEventListener("change", applyMotion)
       canvas.removeEventListener("pointerdown", onPointerDown)
+      canvas.removeEventListener("pointermove", onPointerMove)
+      canvas.removeEventListener("pointercancel", onPointerCancel)
       canvas.removeEventListener("pointerup", onPointerUp)
       canvas.removeEventListener("webglcontextlost", onContextLost)
       orbit.dispose()
@@ -688,8 +775,8 @@ export function OrganViewer({
   }, [scene, graphicsFailed, changeView])
 
   React.useEffect(() => {
-    engine?.paint(selectedId, shown)
-  }, [engine, selectedId, shown])
+    engine?.paint(activeId, shown)
+  }, [engine, activeId, shown])
 
   React.useImperativeHandle(
     ref,
@@ -720,6 +807,7 @@ export function OrganViewer({
 
   return (
     <div
+      data-slot="organ-viewer"
       ref={host}
       role="region"
       aria-label={label}
@@ -730,7 +818,19 @@ export function OrganViewer({
         className
       )}
       onKeyDown={(event) => {
-        if (event.target !== event.currentTarget || !engine) return
+        if (
+          event.target !== event.currentTarget ||
+          !engine ||
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey
+        )
+          return
+        // Escape clears without preventDefault so surrounding dialogs still close.
+        if (event.key === "Escape") {
+          clearSelection()
+          return
+        }
         const actions: Record<string, () => void> = {
           ArrowLeft: () => engine.rotate(-0.2),
           ArrowRight: () => engine.rotate(0.2),
@@ -748,8 +848,15 @@ export function OrganViewer({
     >
       <p id={instructions} className="sr-only">
         Drag or use the arrow keys to rotate, and scroll, pinch or press plus
-        and minus to zoom. Click a structure to select it.
+        and minus to zoom. Click a structure to select it, and click empty space
+        or press Escape to clear it.
+        {controls && " Use the Structure menu to select with the keyboard."}
       </p>
+      {engine && scene && !message && (announceSelection ?? !isControlled) && (
+        <p role="status" className="sr-only">
+          {activeStructure ? `Selected: ${activeStructure.label}` : ""}
+        </p>
+      )}
       {message ? (
         <div className="absolute inset-0 flex items-center justify-center p-6">
           <Alert className="max-w-sm">
@@ -765,10 +872,11 @@ export function OrganViewer({
             <AlertDescription>
               <p>{message.text}</p>
               <Button
+                type="button"
                 variant="outline"
                 size="sm"
                 onClick={retry}
-                className="mt-3 text-foreground"
+                className="text-foreground"
               >
                 Try again
               </Button>
@@ -791,18 +899,20 @@ export function OrganViewer({
       {engine && controls && (
         <TooltipProvider>
           <div
-            role="toolbar"
+            role="group"
             aria-label="View controls"
-            className="absolute top-2 right-2 flex items-center gap-0.5 rounded-lg border bg-background/90 p-1 shadow-sm backdrop-blur"
+            className="absolute top-2 right-2 flex max-w-[calc(100%-1rem)] items-center gap-0.5 rounded-lg border bg-background/90 p-1 shadow-sm backdrop-blur"
           >
-            {/* An empty value shows the placeholder: a view set by dragging. */}
             <Select
               value={view ?? ""}
               onValueChange={(next) => {
                 if (next) engine.setView(next)
               }}
             >
-              <SelectTrigger aria-label="View" className="border-transparent">
+              <SelectTrigger
+                aria-label="View"
+                className="min-w-0 flex-1 border-transparent [&_[data-slot=select-value]]:block [&_[data-slot=select-value]]:truncate"
+              >
                 <SelectValue placeholder="Custom view" />
               </SelectTrigger>
               <SelectContent>
@@ -848,10 +958,53 @@ export function OrganViewer({
           </div>
         </TooltipProvider>
       )}
+      {engine && controls && (
+        <div className="absolute bottom-2 left-2 max-w-[calc(100%-4rem)] rounded-lg border bg-background/90 shadow-sm backdrop-blur">
+          <Select
+            value={activeId ?? ""}
+            onValueChange={(id) => {
+              if (id) selectStructure(id)
+            }}
+          >
+            <SelectTrigger
+              aria-label="Structure"
+              disabled={anatomy.length === 0}
+              className="w-52 max-w-full border-transparent [&_[data-slot=select-value]]:block [&_[data-slot=select-value]]:truncate"
+            >
+              <SelectValue placeholder="Select structure" />
+            </SelectTrigger>
+            <SelectContent
+              side="top"
+              align="start"
+              position="popper"
+              className="max-h-[min(20rem,var(--radix-select-content-available-height))] max-w-[calc(100vw-2rem)]"
+            >
+              {anatomy.map(({ id, label, children }) => (
+                <SelectGroup key={id}>
+                  <SelectLabel>{label}</SelectLabel>
+                  {children.map((structure) => (
+                    <SelectItem
+                      key={structure.id}
+                      value={structure.id}
+                      disabled={shown[structure.id] === false}
+                      className="[&>span]:whitespace-normal"
+                    >
+                      {structure.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
       {engine && !interacted && (
         <p
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs text-muted-foreground"
+          className={cn(
+            "pointer-events-none absolute inset-x-10 text-center text-xs text-muted-foreground",
+            controls ? "bottom-14" : "bottom-3"
+          )}
         >
           Drag to rotate · Scroll or pinch to zoom
         </p>
@@ -860,6 +1013,7 @@ export function OrganViewer({
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              type="button"
               variant="ghost"
               size="icon-xs"
               aria-label="Model credit"

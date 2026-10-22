@@ -770,8 +770,15 @@
         "name": "selectedId",
         "type": "string | null",
         "required": false,
+        "default": null,
+        "description": "Controls selection when supplied on mount; null or undefined means no selection. Omit to let the viewer manage selection."
+      },
+      {
+        "name": "defaultSelectedId",
+        "type": "string | null",
+        "required": false,
         "default": "null",
-        "description": "The selected structure id, or null."
+        "description": "Initial uncontrolled selection, reapplied when the model or source changes."
       },
       {
         "name": "onSelectionChange",
@@ -779,6 +786,13 @@
         "required": false,
         "default": null,
         "description": "Called with the structure a reader selects."
+      },
+      {
+        "name": "announceSelection",
+        "type": "boolean",
+        "required": false,
+        "default": null,
+        "description": "Announces selection after loading. Defaults to true for uncontrolled selection and false for controlled selection."
       },
       {
         "name": "visibility",
@@ -806,7 +820,7 @@
         "type": "boolean",
         "required": false,
         "default": "true",
-        "description": "Shows the view menu, zoom and reset buttons. Defaults to true."
+        "description": "Shows structure selection, the view menu, zoom and reset buttons. Defaults to true."
       },
       {
         "name": "attribution",

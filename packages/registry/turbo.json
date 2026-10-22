@@ -5,6 +5,9 @@
     "build": {
       "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/registry.json"],
       "outputs": ["dist/**"]
+    },
+    "test": {
+      "env": ["NODE_ENV"]
     }
   }
 }

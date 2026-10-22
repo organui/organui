@@ -6,7 +6,7 @@ export const organExampleVariants = [
     suffix: "without-controls",
     title: "Without Controls",
     description:
-      "Hide the built-in view, zoom, and reset controls while keeping camera interaction and attribution.",
+      "Hide the built-in structure, view, zoom, and reset controls while keeping camera interaction and attribution.",
   },
   {
     suffix: "controlled",

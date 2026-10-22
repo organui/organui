@@ -561,9 +561,21 @@ test("organ pages pair the viewer with the anatomy tree", async ({
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
   const demo = page.getByRole("group", { name: "Heart example", exact: true })
-  await expect(
-    demo.getByRole("toolbar", { name: "View controls" })
-  ).toBeVisible()
+  await expect(demo.getByRole("group", { name: "View controls" })).toBeVisible()
+  const defaultViewer = demo.getByRole("region", {
+    name: "Heart default example",
+  })
+  await defaultViewer.click()
+  const structure = defaultViewer.getByRole("combobox", { name: "Structure" })
+  await expect(structure).toContainText("Right atrium")
+  await structure.focus()
+  await page.keyboard.press("Enter")
+  await page
+    .getByRole("option", { name: "Left atrium", exact: true })
+    .press("Enter")
+  await expect(defaultViewer.getByRole("status")).toHaveText(
+    "Selected: Left atrium"
+  )
   await demo.getByRole("button", { name: "View Code", exact: true }).click()
   await expect(demo.getByLabel("Heart code")).toContainText(
     'from "@/components/heart"'
@@ -574,6 +586,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   )
   // Revealing code preserves the live default demo and its context.
   await expect(demo.locator("canvas")).toHaveCount(1)
+  await expect(structure).toContainText("Left atrium")
   const headings = await page
     .getByRole("heading", { level: 2 })
     .allTextContents()
@@ -593,7 +606,9 @@ test("organ pages pair the viewer with the anatomy tree", async ({
       name: "Heart without controls example",
     })
   ).toBeVisible()
-  await expect(withoutControls.getByRole("toolbar")).toHaveCount(0)
+  await expect(
+    withoutControls.getByRole("group", { name: "View controls" })
+  ).toHaveCount(0)
   await withoutControls
     .getByRole("button", { name: "View Code", exact: true })
     .click()
@@ -606,7 +621,7 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   })
   await controlled.scrollIntoViewIfNeeded()
   await expect(
-    controlled.getByRole("toolbar", { name: "View controls" })
+    controlled.getByRole("group", { name: "View controls" })
   ).toBeVisible()
   await controlled
     .getByRole("button", { name: "View Code", exact: true })
@@ -622,7 +637,9 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   const viewer = examples.getByRole("region", {
     name: "Heart with anatomy example",
   })
-  await expect(viewer.getByRole("toolbar")).toBeVisible()
+  await expect(
+    viewer.getByRole("group", { name: "View controls" })
+  ).toBeVisible()
   await expect(examples.locator("canvas")).toHaveCount(1)
   const tree = examples.getByRole("tree", { name: "Heart anatomy" })
   await expect(tree).toBeVisible()
@@ -651,7 +668,12 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   const api = page.getByRole("table", { name: "Heart props" })
   await api.focus()
   await expect(api).toBeFocused()
-  if ((page.viewportSize()?.width ?? 0) < 768) {
+  if (
+    await api.evaluate(
+      (table) =>
+        table.parentElement!.scrollWidth > table.parentElement!.clientWidth
+    )
+  ) {
     await api.press("ArrowRight")
     await expect
       .poll(() => api.evaluate((table) => table.parentElement!.scrollLeft))
@@ -808,7 +830,9 @@ test("a public organ component loads its attributed hosted model", async ({
   await page.goto("/docs/components/breast")
   await loaded
   const viewer = page.getByRole("region", { name: "Breast default example" })
-  await expect(viewer.getByRole("toolbar")).toBeVisible()
+  await expect(
+    viewer.getByRole("group", { name: "View controls" })
+  ).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
   await viewer.getByRole("button", { name: "Model credit" }).click()
   await expect(

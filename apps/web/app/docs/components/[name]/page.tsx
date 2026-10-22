@@ -98,7 +98,7 @@ export function ${component}Demo() {
             anatomy tree
           </Link>{" "}
           as shown below. For a complete explorer with a mobile sheet, install
-          as the{" "}
+          the{" "}
           <Link href="/blocks#explorer-01" className="underline">
             Explorer 01 block
           </Link>

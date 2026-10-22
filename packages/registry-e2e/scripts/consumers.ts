@@ -105,14 +105,23 @@ export default function Harness(){
 // The organ harness loads a local stand-in GLB instead of the real model.
 const organHarness = `"use client"
 import { useRef, useState } from "react"
-import { Heart } from "@/components/heart"
-import type { OrganViewerHandle } from "@/components/organ-viewer"
+import { Heart, heartModel } from "@/components/heart"
+import { OrganViewer, type OrganViewerHandle } from "@/components/organ-viewer"
+const labeledHeart={...heartModel,structures:heartModel.structures.map(structure=>structure.id==="left-atrium"?{...structure,label:"Left atrium receiving oxygen-rich blood from the pulmonary veins"}:structure)}
+type Mode="controlled"|"uncontrolled"|"undefined"|"custom-model"
 export default function OrganHarness(){
  const viewer=useRef<OrganViewerHandle>(null)
- const [selectedId,select]=useState<string|null>(null)
+ const [selectedId,select]=useState<string|null|undefined>(null)
  const [view,setView]=useState<string|null>("Anterior")
  const [visibility,show]=useState<Record<string,boolean>>({})
- return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1><Heart ref={viewer} src="/heart.glb" selectedId={selectedId} onSelectionChange={select} onViewChange={setView} visibility={visibility}/><output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button></main>
+ const [mode,setMode]=useState<Mode>("controlled")
+ const [hasSelectionProp,setHasSelectionProp]=useState(true)
+ const [src,setSrc]=useState("/heart.glb")
+ const [model,setModel]=useState(labeledHeart)
+ const [announceSelection,setAnnounceSelection]=useState<boolean|undefined>(undefined)
+ const changeMode=(next:Mode)=>{setMode(next);setHasSelectionProp(next==="controlled"||next==="undefined");select(next==="undefined"?undefined:null)}
+ const props={ref:viewer,src,...(hasSelectionProp?{selectedId}:{}),defaultSelectedId:"left-atrium",onSelectionChange:select,onViewChange:setView,visibility,announceSelection}
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed heart</h1>{mode==="custom-model"?<OrganViewer {...props} model={model}/>:<Heart key={mode} {...props}/>}<output aria-label="Selected">{selectedId??"none"}</output><output aria-label="View">{view??"custom"}</output><button onClick={()=>select("left-atrium")}>Select left atrium</button><button onClick={()=>select(undefined)}>Clear controlled selection</button><button onClick={()=>show({"right-atrium":false})}>Hide right atrium</button><button onClick={()=>show(Object.fromEntries(heartModel.structures.filter(({group})=>group==="Ventricular cavities").map(({id})=>[id,false])))}>Hide ventricular cavities</button><button onClick={()=>viewer.current?.setView("Left lateral")}>Left lateral</button><button onClick={()=>changeMode("uncontrolled")}>Use uncontrolled selection</button><button onClick={()=>changeMode("undefined")}>Use undefined controlled selection</button><button onClick={()=>changeMode("custom-model")}>Use custom model</button><button onClick={()=>setHasSelectionProp(!hasSelectionProp)}>Toggle selectedId prop</button><button onClick={()=>setSrc(src==="/heart.glb"?"/heart.glb?source=b":"/heart.glb")}>Toggle source</button><button onClick={()=>setModel({...model})}>Replace model metadata</button><button onClick={()=>setAnnounceSelection(true)}>Announce selection</button></main>
 }`
 // No client directive: the panel has no state, so Next.js renders it on the server.
 const vitalsHarness = `import { VitalSigns } from "@/components/ui/vital-signs"
