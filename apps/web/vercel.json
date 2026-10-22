@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "npx --yes turbo@2 query affected --base=$VERCEL_GIT_PREVIOUS_SHA --packages web --exit-code",
+  "ignoreCommand": "[ -n \"$VERCEL_GIT_PREVIOUS_SHA\" ] && npx --yes turbo@2 query affected --base=$VERCEL_GIT_PREVIOUS_SHA --packages web --exit-code || exit 1",
   "installCommand": "npx --yes bun@1.4.2 install --frozen-lockfile",
   "buildCommand": "npx --yes bun@1.4.2 run ../../scripts/vercel-build.ts"
 }
