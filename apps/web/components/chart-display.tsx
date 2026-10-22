@@ -31,12 +31,7 @@ export async function ChartDisplay({
         className
       )}
     >
-      <ChartToolbar
-        title={chart.title}
-        type={chart.type}
-        code={code}
-        deprecated={chart.deprecated}
-      >
+      <ChartToolbar title={chart.title} type={chart.type} code={code}>
         {/* Laid out as shadcn/ui's chart code: a bar with the file's name,
             then numbered lines that scroll without a scrollbar. The install
             command follows, so the sheet says how to add the chart. */}

@@ -27,7 +27,7 @@
       "name": "vital-signs",
       "type": "registry:ui",
       "title": "Vital signs",
-      "description": "Heart rate, blood pressure, SpO\u2082 and temperature, each flagged against a configurable normal range.",
+      "description": "Heart rate, blood pressure, SpO₂ and temperature, each flagged against a configurable normal range.",
       "categories": ["clinical"],
       "dependencies": ["cn@^0.5.0"],
       "registryDependencies": ["card"],
@@ -182,7 +182,7 @@
           "type": "registry:ui"
         }
       ],
-      "docs": "Growth chart docs: https://organui.com/docs/components/growth-chart. The item ships no growth data and no loader: you pass the reference tables. The docs say where to get them and under what terms. The WHO Child Growth Standards are \u00a9 World Health Organization, distributed in WHO's anthro package under GPL-3 (https://www.gnu.org/licenses/gpl-3.0.html), and WHO requires permission for commercial use (https://www.who.int/about/policies/publishing/copyright)."
+      "docs": "Growth chart docs: https://organui.com/docs/components/growth-chart. The item ships no growth data and no loader: you pass the reference tables. The docs say where to get them and under what terms. The WHO Child Growth Standards are © World Health Organization, distributed in WHO's anthro package under GPL-3 (https://www.gnu.org/licenses/gpl-3.0.html), and WHO requires permission for commercial use (https://www.who.int/about/policies/publishing/copyright)."
     },
     {
       "name": "medication-schedule",
@@ -1287,10 +1287,10 @@
       "name": "chart-area-ed-arrivals",
       "type": "registry:block",
       "title": "ED arrivals area chart",
-      "description": "Emergency department arrivals by day, as an interactive area chart with a time range.",
+      "description": "Daily emergency department arrivals with a 7-day average, a surge threshold and events.",
       "categories": ["charts", "charts-area"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart", "select"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-area-ed-arrivals.tsx",
@@ -1306,20 +1306,17 @@
       "name": "chart-area-admissions",
       "type": "registry:block",
       "title": "Admissions area chart",
-      "description": "Hospital admissions by month, as an area chart.",
+      "description": "Monthly admissions against the range of the past three years, as surveillance reports draw them.",
       "categories": ["charts", "charts-area"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-area-admissions.tsx",
           "type": "registry:block"
         }
       ],
-      "meta": {
-        "deprecated": true
-      },
-      "docs": "Admissions area chart: https://organui.com/charts/area#chart-area-admissions. Deprecated: removed in the next major release; chart-area-ed-arrivals shows daily arrivals."
+      "docs": "Admissions area chart: https://organui.com/charts/area#chart-area-admissions"
     },
     {
       "name": "chart-area-census",
@@ -1386,42 +1383,39 @@
       "docs": "Glucose profile area chart: https://organui.com/charts/area#chart-area-glucose-profile"
     },
     {
-      "name": "chart-bar-tests",
+      "name": "chart-bar-turnaround",
       "type": "registry:block",
-      "title": "Tests ordered bar chart",
-      "description": "Blood tests and imaging ordered by day, as an interactive bar chart.",
+      "title": "Lab turnaround bar chart",
+      "description": "Daily laboratory turnaround for urgent bloods, against a target.",
       "categories": ["charts", "charts-bar"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
-          "path": "registry/base-nova/charts/chart-bar-tests.tsx",
+          "path": "registry/base-nova/charts/chart-bar-turnaround.tsx",
           "type": "registry:block"
         }
       ],
       "meta": {
         "fullWidth": true
       },
-      "docs": "Tests ordered bar chart: https://organui.com/charts/bar#chart-bar-tests"
+      "docs": "Lab turnaround bar chart: https://organui.com/charts/bar#chart-bar-turnaround"
     },
     {
       "name": "chart-bar-appointments",
       "type": "registry:block",
-      "title": "Appointments bar chart",
-      "description": "Clinic appointments attended and missed, as a stacked bar chart.",
+      "title": "Missed appointments bar chart",
+      "description": "Outpatient did-not-attend rate by month, against a target.",
       "categories": ["charts", "charts-bar"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-bar-appointments.tsx",
           "type": "registry:block"
         }
       ],
-      "meta": {
-        "deprecated": true
-      },
-      "docs": "Appointments bar chart: https://organui.com/charts/bar#chart-bar-appointments. Deprecated: removed in the next major release."
+      "docs": "Missed appointments bar chart: https://organui.com/charts/bar#chart-bar-appointments"
     },
     {
       "name": "chart-bar-diagnoses",
@@ -1442,21 +1436,18 @@
     {
       "name": "chart-bar-ed-visits",
       "type": "registry:block",
-      "title": "ED visits bar chart",
-      "description": "Emergency department visits by weekday, as a bar chart.",
+      "title": "ED four-hour bar chart",
+      "description": "Emergency department visits seen within four hours, by weekday, against a target.",
       "categories": ["charts", "charts-bar"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-bar-ed-visits.tsx",
           "type": "registry:block"
         }
       ],
-      "meta": {
-        "deprecated": true
-      },
-      "docs": "ED visits bar chart: https://organui.com/charts/bar#chart-bar-ed-visits. Deprecated: removed in the next major release; chart-area-ed-arrivals shows daily arrivals."
+      "docs": "ED four-hour bar chart: https://organui.com/charts/bar#chart-bar-ed-visits"
     },
     {
       "name": "chart-bar-vaccinations",
@@ -1526,10 +1517,10 @@
       "name": "chart-line-rehab",
       "type": "registry:block",
       "title": "Cardiac rehab line chart",
-      "description": "Resting heart rate and daily steps during cardiac rehab, as an interactive line chart.",
+      "description": "Resting heart rate through cardiac rehab: daily readings, a 7-day average and milestones.",
       "categories": ["charts", "charts-line"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-line-rehab.tsx",
@@ -1638,6 +1629,38 @@
       "docs": "Forest plot line chart: https://organui.com/charts/line#chart-line-forest-plot"
     },
     {
+      "name": "chart-pie-pdc",
+      "type": "registry:block",
+      "title": "Medication adherence pie chart",
+      "description": "Proportion of days covered by a medication over a year, with the 80% adherence threshold.",
+      "categories": ["charts", "charts-pie"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "badge", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-pie-pdc.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Medication adherence pie chart: https://organui.com/charts/pie#chart-pie-pdc"
+    },
+    {
+      "name": "chart-pie-blood-types",
+      "type": "registry:block",
+      "title": "Blood donations pie chart",
+      "description": "Blood donations by ABO group against the population, as two rings.",
+      "categories": ["charts", "charts-pie"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "badge", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-pie-blood-types.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Blood donations pie chart: https://organui.com/charts/pie#chart-pie-blood-types"
+    },
+    {
       "name": "chart-pie-adherence",
       "type": "registry:block",
       "title": "Adherence pie chart",
@@ -1652,25 +1675,6 @@
         }
       ],
       "docs": "Adherence pie chart: https://organui.com/charts/pie#chart-pie-adherence"
-    },
-    {
-      "name": "chart-pie-blood-types",
-      "type": "registry:block",
-      "title": "Blood donations pie chart",
-      "description": "Blood donations by type, as a pie chart.",
-      "categories": ["charts", "charts-pie"],
-      "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
-      "files": [
-        {
-          "path": "registry/base-nova/charts/chart-pie-blood-types.tsx",
-          "type": "registry:block"
-        }
-      ],
-      "meta": {
-        "deprecated": true
-      },
-      "docs": "Blood donations pie chart: https://organui.com/charts/pie#chart-pie-blood-types. Deprecated: removed in the next major release."
     },
     {
       "name": "chart-pie-occupancy",
@@ -1689,20 +1693,20 @@
       "docs": "Bed occupancy pie chart: https://organui.com/charts/pie#chart-pie-occupancy"
     },
     {
-      "name": "chart-pie-pdc",
+      "name": "chart-radar-news2",
       "type": "registry:block",
-      "title": "Medication adherence pie chart",
-      "description": "Proportion of days covered by a medication over a year, with the 80% adherence threshold.",
-      "categories": ["charts", "charts-pie"],
+      "title": "NEWS2 radar chart",
+      "description": "A NEWS2 early warning score, scored from raw observations, as a radar of each parameter's points.",
+      "categories": ["charts", "charts-radar"],
       "dependencies": ["recharts@^3.8.0"],
       "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
-          "path": "registry/base-nova/charts/chart-pie-pdc.tsx",
+          "path": "registry/base-nova/charts/chart-radar-news2.tsx",
           "type": "registry:block"
         }
       ],
-      "docs": "Medication adherence pie chart: https://organui.com/charts/pie#chart-pie-pdc"
+      "docs": "NEWS2 radar chart: https://organui.com/charts/radar#chart-radar-news2"
     },
     {
       "name": "chart-radar-outcomes",
@@ -1751,22 +1755,6 @@
         }
       ],
       "docs": "Symptoms radar chart: https://organui.com/charts/radar#chart-radar-symptoms"
-    },
-    {
-      "name": "chart-radar-news2",
-      "type": "registry:block",
-      "title": "NEWS2 radar chart",
-      "description": "A NEWS2 early warning score, scored from raw observations, as a radar of each parameter's points.",
-      "categories": ["charts", "charts-radar"],
-      "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "badge", "chart"],
-      "files": [
-        {
-          "path": "registry/base-nova/charts/chart-radar-news2.tsx",
-          "type": "registry:block"
-        }
-      ],
-      "docs": "NEWS2 radar chart: https://organui.com/charts/radar#chart-radar-news2"
     },
     {
       "name": "chart-radial-coverage",

@@ -49,9 +49,9 @@ export function ChartRadarSleep() {
       <CardContent className="pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[250px] [&_.recharts-surface]:overflow-visible"
         >
-          <RadarChart data={chartData}>
+          <RadarChart data={chartData} outerRadius="66%">
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}

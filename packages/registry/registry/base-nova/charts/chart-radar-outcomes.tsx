@@ -62,7 +62,7 @@ export function ChartRadarOutcomes() {
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
         >
-          <RadarChart data={chartData}>
+          <RadarChart data={chartData} outerRadius="66%">
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}
