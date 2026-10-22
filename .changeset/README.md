@@ -16,3 +16,7 @@ On master, a pull request named "Release the next version" collects the
 notes into `packages/registry/CHANGELOG.md` and bumps the version. Merging
 it publishes the GitHub release, which the changelog page and RSS feed
 read.
+
+A change to `packages/registry` that installs nothing new, such as a script or
+a test, still needs one for the check to pass: run `bunx changeset --empty`
+and commit the empty file. It adds no line to the release notes.

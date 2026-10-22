@@ -1,0 +1,2 @@
+# For scripts/dermatome-map.py. 2.2.0 regenerates the committed map unchanged.
+shapely==2.2.0
