@@ -49,6 +49,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const units = chartData.reduce((sum, { units }) => sum + units, 0)
+const top = chartData.reduce((a, b) => (b.units > a.units ? b : a))
+
 export function ChartPieBloodTypes() {
   return (
     <Card className="flex flex-col">
@@ -72,7 +75,8 @@ export function ChartPieBloodTypes() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Type O makes up 46% of units
+          Type {chartConfig[top.type as keyof typeof chartConfig].label} makes
+          up {Math.round((top.units / units) * 100)}% of units
         </div>
         <div className="leading-none text-muted-foreground">
           This month; illustrative data

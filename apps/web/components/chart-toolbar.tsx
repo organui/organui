@@ -103,7 +103,10 @@ export function ChartToolbar({
                     if (!ok) return
                     setCopied(true)
                     setTimeout(() => setCopied(false), 2000)
-                    trackEvent("copy_chart_code", { chart: title })
+                    trackEvent("copy_chart_code", {
+                      chart: title,
+                      from: "toolbar",
+                    })
                   })
                 }
               />

@@ -43,6 +43,10 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const latest = chartData.at(-1)!
+const onRoomAir = latest.flow === 0
+
+const first = chartData[0]!
+const offAt = chartData.find(({ flow }) => flow === 0)?.time
 
 export function ChartAreaOxygen() {
   return (
@@ -58,15 +62,26 @@ export function ChartAreaOxygen() {
             </span>
           </div>
           <Badge variant="outline">
-            <IconPlaceholder
-              lucide="CheckIcon"
-              tabler="IconCheck"
-              hugeicons="Tick02Icon"
-              phosphor="CheckIcon"
-              remixicon="RiCheckLine"
-              data-icon="inline-start"
-            />
-            Room air
+            {onRoomAir ? (
+              <IconPlaceholder
+                lucide="CheckIcon"
+                tabler="IconCheck"
+                hugeicons="Tick02Icon"
+                phosphor="CheckIcon"
+                remixicon="RiCheckLine"
+                data-icon="inline-start"
+              />
+            ) : (
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiAlertLine"
+                data-icon="inline-start"
+              />
+            )}
+            {onRoomAir ? "Room air" : "On oxygen"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -100,18 +115,29 @@ export function ChartAreaOxygen() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Off oxygen by 16:00{" "}
-          <IconPlaceholder
-            lucide="TrendingDownIcon"
-            tabler="IconTrendingDown"
-            hugeicons="ChartDownIcon"
-            phosphor="TrendDownIcon"
-            remixicon="RiArrowDownLine"
-            className="size-4"
-          />
+          {offAt ? `Off oxygen by ${offAt}` : `On ${latest.flow} L/min`}{" "}
+          {latest.flow < first.flow ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          Weaned from 4 L/min; a fictional patient
+          Started at {first.flow} L/min; a fictional patient
         </div>
       </CardFooter>
     </Card>

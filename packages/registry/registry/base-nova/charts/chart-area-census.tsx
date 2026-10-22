@@ -53,6 +53,10 @@ const chartConfig = {
 // Beds the hospital can staff, the ceiling the census works against.
 const staffedBeds = 260
 
+const busiest = chartData.reduce((a, b) =>
+  b.inpatient + b.observation > a.inpatient + a.observation ? b : a
+)
+
 export function ChartAreaCensus() {
   return (
     <Card>
@@ -114,7 +118,8 @@ export function ChartAreaCensus() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Busiest in February, at 256 beds
+          Busiest in {busiest.month}, at{" "}
+          {busiest.inpatient + busiest.observation} beds
         </div>
         <div className="leading-none text-muted-foreground">
           Illustrative data for one hospital

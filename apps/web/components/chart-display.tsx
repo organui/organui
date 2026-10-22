@@ -1,16 +1,8 @@
 import type { ComponentProps, ComponentType } from "react"
-import {
-  CodeBlock,
-  CodeBlockActions,
-  CodeBlockContent,
-  CodeBlockHeader,
-  CodeBlockLine,
-  CodeBlockTitle,
-} from "@workspace/ui/components/code-block"
 import { cn } from "@workspace/ui/lib/utils"
 import { ChartToolbar } from "@/components/chart-toolbar"
-import { CopyButton } from "@/components/copy-button"
-import { highlightCode } from "@/lib/highlight-code"
+import { CodeBlockCommand } from "@/components/code-block-command"
+import { CodeSnippet } from "@/components/code-snippet"
 import { readRegistryItem } from "@/lib/registry-item"
 import type { chartItems } from "@/lib/registry"
 
@@ -31,7 +23,6 @@ export async function ChartDisplay({
   )?.[1] as ComponentType | undefined
   const { files } = await readRegistryItem(chart.name)
   const code = files[0]?.content ?? ""
-  const lines = await highlightCode(code, "tsx")
   return (
     <div
       id={chart.name}
@@ -42,34 +33,26 @@ export async function ChartDisplay({
     >
       <ChartToolbar title={chart.title} type={chart.type} code={code}>
         {/* Laid out as shadcn/ui's chart code: a bar with the file's name,
-            then numbered lines that scroll without a scrollbar. */}
-        <CodeBlock className="h-full rounded-xl">
-          <CodeBlockHeader className="h-12 border-b pe-12 pt-0">
-            <CodeBlockTitle>
-              <TypeScriptIcon className="fill-foreground" />
-              {chart.name}
-            </CodeBlockTitle>
-            <CodeBlockActions>
-              <CopyButton
-                event="copy_chart_code"
-                properties={{ chart: chart.title }}
-                value={code}
-              />
-            </CodeBlockActions>
-          </CodeBlockHeader>
-          <CodeBlockContent
+            then numbered lines that scroll without a scrollbar. The install
+            command follows, so the sheet says how to add the chart. */}
+        <div className="flex min-h-0 flex-1 flex-col gap-4">
+          <CodeSnippet
+            label={`${chart.title} code`}
+            title={files[0]?.installed}
+            icon={<TypeScriptIcon className="fill-foreground" />}
             lineNumbers
-            aria-label={`${chart.title} code`}
-            className="no-scrollbar! min-h-0 flex-1"
-          >
-            {lines.map((line, index) => (
-              <CodeBlockLine key={index}>
-                {line}
-                {index < lines.length - 1 ? "\n" : null}
-              </CodeBlockLine>
-            ))}
-          </CodeBlockContent>
-        </CodeBlock>
+            event="copy_chart_code"
+            properties={{ chart: chart.title, from: "sheet" }}
+            code={code}
+            className="min-h-0 flex-1 rounded-xl"
+            headerClassName="h-12 border-b pt-0 pe-12"
+            contentClassName="min-h-0 flex-1 no-scrollbar!"
+          />
+          <CodeBlockCommand
+            label={`${chart.title} install command`}
+            command={chart.install}
+          />
+        </div>
       </ChartToolbar>
       {/* Cards in a row share its height, their footers at the bottom. */}
       <div className="relative flex flex-1 flex-col overflow-hidden rounded-xl bg-background *:data-[slot=card]:flex-1 **:data-[slot=card-content]:flex-1">

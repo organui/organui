@@ -44,6 +44,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const doses = chartData.reduce((sum, { doses }) => sum + doses, 0)
+const onTime = chartData.find(({ status }) => status === "onTime")!.doses
+
 export function ChartPieAdherence() {
   return (
     <Card className="flex flex-col">
@@ -71,7 +74,7 @@ export function ChartPieAdherence() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          87% of doses on time
+          {Math.round((onTime / doses) * 100)}% of doses on time
         </div>
         <div className="leading-none text-muted-foreground">
           Last 30 days; a fictional patient

@@ -49,6 +49,15 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const latest = chartData.at(-1)!
+// A common target for adults, in percent; set your own patient's.
+const target = 7
+const atTarget = latest.hba1c < target
+
+const first = chartData[0]!
+// The first quarter from which every reading stays below target.
+const belowFrom = chartData.find((_, index) =>
+  chartData.slice(index).every(({ hba1c }) => hba1c < target)
+)
 
 export function ChartLineHba1c() {
   return (
@@ -62,15 +71,26 @@ export function ChartLineHba1c() {
             <span className="text-sm font-normal text-muted-foreground">%</span>
           </div>
           <Badge variant="outline">
-            <IconPlaceholder
-              lucide="CheckIcon"
-              tabler="IconCheck"
-              hugeicons="Tick02Icon"
-              phosphor="CheckIcon"
-              remixicon="RiCheckLine"
-              data-icon="inline-start"
-            />
-            At target
+            {atTarget ? (
+              <IconPlaceholder
+                lucide="CheckIcon"
+                tabler="IconCheck"
+                hugeicons="Tick02Icon"
+                phosphor="CheckIcon"
+                remixicon="RiCheckLine"
+                data-icon="inline-start"
+              />
+            ) : (
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiAlertLine"
+                data-icon="inline-start"
+              />
+            )}
+            {atTarget ? "At target" : "Above target"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -90,14 +110,13 @@ export function ChartLineHba1c() {
               tickFormatter={(value) => value.slice(0, 2)}
             />
             <YAxis hide domain={[6, 9]} />
-            {/* A common target for adults; set your own patient's. */}
             <ReferenceLine
-              y={7}
+              y={target}
               stroke="var(--muted-foreground)"
               strokeDasharray="4 4"
             >
               <Label
-                value="Target 7%"
+                value={`Target ${target}%`}
                 position="insideBottomLeft"
                 className="fill-muted-foreground"
                 fontSize={11}
@@ -127,18 +146,34 @@ export function ChartLineHba1c() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Down 1.6 points since Q1 2025{" "}
-          <IconPlaceholder
-            lucide="TrendingDownIcon"
-            tabler="IconTrendingDown"
-            hugeicons="ChartDownIcon"
-            phosphor="TrendDownIcon"
-            remixicon="RiArrowDownLine"
-            className="size-4"
-          />
+          {latest.hba1c <= first.hba1c ? "Down" : "Up"}{" "}
+          {Math.abs(first.hba1c - latest.hba1c).toFixed(1)} points since{" "}
+          {first.quarter}{" "}
+          {latest.hba1c <= first.hba1c ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          Below 7% since Q1 2026; a fictional patient
+          {belowFrom
+            ? `Below ${target}% since ${belowFrom.quarter}`
+            : `Not yet below ${target}%`}
+          ; a fictional patient
         </div>
       </CardFooter>
     </Card>

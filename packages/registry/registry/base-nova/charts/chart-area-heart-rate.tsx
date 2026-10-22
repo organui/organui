@@ -54,6 +54,12 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const latest = chartData.at(-1)!
+// The usual adult resting range, drawn behind the readings.
+const normal = { low: 60, high: 100 }
+const inRange =
+  latest.heartRate >= normal.low && latest.heartRate <= normal.high
+
+const peak = chartData.reduce((a, b) => (b.heartRate > a.heartRate ? b : a))
 
 export function ChartAreaHeartRate() {
   return (
@@ -69,15 +75,26 @@ export function ChartAreaHeartRate() {
             </span>
           </div>
           <Badge variant="outline">
-            <IconPlaceholder
-              lucide="CheckIcon"
-              tabler="IconCheck"
-              hugeicons="Tick02Icon"
-              phosphor="CheckIcon"
-              remixicon="RiCheckLine"
-              data-icon="inline-start"
-            />
-            In range
+            {inRange ? (
+              <IconPlaceholder
+                lucide="CheckIcon"
+                tabler="IconCheck"
+                hugeicons="Tick02Icon"
+                phosphor="CheckIcon"
+                remixicon="RiCheckLine"
+                data-icon="inline-start"
+              />
+            ) : (
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiAlertLine"
+                data-icon="inline-start"
+              />
+            )}
+            {inRange ? "In range" : "Out of range"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -102,15 +119,14 @@ export function ChartAreaHeartRate() {
               tickMargin={8}
               domain={[50, 110]}
             />
-            {/* The usual adult resting range, behind the readings. */}
             <ReferenceArea
-              y1={60}
-              y2={100}
+              y1={normal.low}
+              y2={normal.high}
               fill="var(--muted-foreground)"
               fillOpacity={0.08}
             >
               <Label
-                value="Normal 60–100"
+                value={`Normal ${normal.low}–${normal.high}`}
                 position="insideTopLeft"
                 className="fill-muted-foreground"
                 fontSize={11}
@@ -142,10 +158,10 @@ export function ChartAreaHeartRate() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Peaks at 91 bpm at 10:00
+          Peaks at {peak.heartRate} bpm at {peak.time}
         </div>
         <div className="leading-none text-muted-foreground">
-          07:00 to 18:00; a fictional patient
+          {chartData[0]!.time} to {latest.time}; a fictional patient
         </div>
       </CardFooter>
     </Card>

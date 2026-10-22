@@ -49,6 +49,8 @@ const average = Math.round(
   chartData.reduce((sum, { visits }) => sum + visits, 0) / chartData.length
 )
 
+const busiest = chartData.reduce((a, b) => (b.visits > a.visits ? b : a))
+
 export function ChartBarEdVisits() {
   return (
     <Card>
@@ -89,7 +91,7 @@ export function ChartBarEdVisits() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Mondays are busiest, at 214 visits
+          {busiest.day}s are busiest, at {busiest.visits} visits
         </div>
         <div className="leading-none text-muted-foreground">
           Average per weekday; illustrative data

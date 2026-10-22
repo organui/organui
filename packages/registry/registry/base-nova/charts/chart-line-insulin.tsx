@@ -41,6 +41,8 @@ const chartConfig = {
 
 const latest = chartData.at(-1)!
 
+const first = chartData[0]!
+
 export function ChartLineInsulin() {
   return (
     <Card>
@@ -87,18 +89,30 @@ export function ChartLineInsulin() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Up from 10 to 18 units{" "}
-          <IconPlaceholder
-            lucide="TrendingUpIcon"
-            tabler="IconTrendingUp"
-            hugeicons="ChartUpIcon"
-            phosphor="TrendUpIcon"
-            remixicon="RiArrowUpLine"
-            className="size-4"
-          />
+          {latest.dose >= first.dose ? "Up" : "Down"} from {first.dose} to{" "}
+          {latest.dose} units{" "}
+          {latest.dose < first.dose ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          Over 19 days; illustrative, not a protocol
+          {first.day} to {latest.day}; illustrative, not a protocol
         </div>
       </CardFooter>
     </Card>

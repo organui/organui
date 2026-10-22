@@ -12,7 +12,7 @@ export function ChartsNav() {
   const pathname = usePathname()
   return (
     <div className="relative overflow-hidden">
-      <ScrollArea className="max-w-[600px] lg:max-w-none">
+      <ScrollArea>
         <nav aria-label="Chart types" className="flex items-center">
           {chartTypes.map(({ type, title }) => {
             const href = `/charts/${type}`

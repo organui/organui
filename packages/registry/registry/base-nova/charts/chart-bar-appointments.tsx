@@ -44,6 +44,15 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const first = chartData[0]!
+const last = chartData.at(-1)!
+const change = Math.round(((last.missed - first.missed) / first.missed) * 100)
+const missed = chartData.reduce((sum, { missed }) => sum + missed, 0)
+const booked = chartData.reduce(
+  (sum, { attended, missed }) => sum + attended + missed,
+  0
+)
+
 export function ChartBarAppointments() {
   return (
     <Card>
@@ -81,18 +90,31 @@ export function ChartBarAppointments() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Missed down 27% since January{" "}
-          <IconPlaceholder
-            lucide="TrendingDownIcon"
-            tabler="IconTrendingDown"
-            hugeicons="ChartDownIcon"
-            phosphor="TrendDownIcon"
-            remixicon="RiArrowDownLine"
-            className="size-4"
-          />
+          Missed {change < 0 ? "down" : "up"} {Math.abs(change)}% since{" "}
+          {first.month}{" "}
+          {change < 0 ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          About one in ten missed; illustrative data
+          {Math.round((missed / booked) * 100)}% missed overall; illustrative
+          data
         </div>
       </CardFooter>
     </Card>

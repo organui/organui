@@ -43,6 +43,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+const improved = chartData.every(({ before, after }) => after > before)
+const most = chartData.reduce((a, b) =>
+  b.after - b.before > a.after - a.before ? b : a
+)
+
 export function ChartRadarOutcomes() {
   return (
     <Card>
@@ -80,18 +85,29 @@ export function ChartRadarOutcomes() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Better in every domain{" "}
-          <IconPlaceholder
-            lucide="TrendingUpIcon"
-            tabler="IconTrendingUp"
-            hugeicons="ChartUpIcon"
-            phosphor="TrendUpIcon"
-            remixicon="RiArrowUpLine"
-            className="size-4"
-          />
+          {improved ? "Better in every domain" : "Better in some domains"}{" "}
+          {!improved ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          Pain improved most; a fictional patient
+          {most.domain} improved most; a fictional patient
         </div>
       </CardFooter>
     </Card>

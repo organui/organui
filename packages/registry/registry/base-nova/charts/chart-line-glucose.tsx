@@ -49,6 +49,15 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const latest = chartData.at(-1)!
+// A common fasting target; set your own patient's range.
+const targetRange = { low: 80, high: 130 }
+const inTarget =
+  latest.glucose >= targetRange.low && latest.glucose <= targetRange.high
+
+const first = chartData[0]!
+const change = Math.round(
+  ((latest.glucose - first.glucose) / first.glucose) * 100
+)
 
 export function ChartLineGlucose() {
   return (
@@ -64,15 +73,26 @@ export function ChartLineGlucose() {
             </span>
           </div>
           <Badge variant="outline">
-            <IconPlaceholder
-              lucide="CheckIcon"
-              tabler="IconCheck"
-              hugeicons="Tick02Icon"
-              phosphor="CheckIcon"
-              remixicon="RiCheckLine"
-              data-icon="inline-start"
-            />
-            In target
+            {inTarget ? (
+              <IconPlaceholder
+                lucide="CheckIcon"
+                tabler="IconCheck"
+                hugeicons="Tick02Icon"
+                phosphor="CheckIcon"
+                remixicon="RiCheckLine"
+                data-icon="inline-start"
+              />
+            ) : (
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiAlertLine"
+                data-icon="inline-start"
+              />
+            )}
+            {inTarget ? "In target" : "Out of target"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -92,15 +112,14 @@ export function ChartLineGlucose() {
               interval={0}
             />
             <YAxis hide domain={[60, 160]} />
-            {/* A common fasting target; set your own patient's range. */}
             <ReferenceArea
-              y1={80}
-              y2={130}
+              y1={targetRange.low}
+              y2={targetRange.high}
               fill="var(--muted-foreground)"
               fillOpacity={0.08}
             >
               <Label
-                value="Target 80–130"
+                value={`Target ${targetRange.low}–${targetRange.high}`}
                 position="insideBottomRight"
                 className="fill-muted-foreground"
                 fontSize={11}
@@ -123,18 +142,29 @@ export function ChartLineGlucose() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Down 18% this week{" "}
-          <IconPlaceholder
-            lucide="TrendingDownIcon"
-            tabler="IconTrendingDown"
-            hugeicons="ChartDownIcon"
-            phosphor="TrendDownIcon"
-            remixicon="RiArrowDownLine"
-            className="size-4"
-          />
+          {change < 0 ? "Down" : "Up"} {Math.abs(change)}% this week{" "}
+          {change < 0 ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          Trending toward target; a fictional patient
+          {first.day} to {latest.day}; a fictional patient
         </div>
       </CardFooter>
     </Card>

@@ -54,6 +54,12 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const latest = chartData.at(-1)!
+// A common home target, in mmHg; set your own patient's.
+const target = { systolic: 130, diastolic: 80 }
+const atTarget =
+  latest.systolic < target.systolic && latest.diastolic < target.diastolic
+
+const first = chartData[0]!
 
 export function ChartLineBloodPressure() {
   return (
@@ -69,15 +75,26 @@ export function ChartLineBloodPressure() {
             </span>
           </div>
           <Badge variant="outline">
-            <IconPlaceholder
-              lucide="TriangleAlertIcon"
-              tabler="IconAlertTriangle"
-              hugeicons="Alert02Icon"
-              phosphor="WarningIcon"
-              remixicon="RiAlertLine"
-              data-icon="inline-start"
-            />
-            Above target
+            {atTarget ? (
+              <IconPlaceholder
+                lucide="CheckIcon"
+                tabler="IconCheck"
+                hugeicons="Tick02Icon"
+                phosphor="CheckIcon"
+                remixicon="RiCheckLine"
+                data-icon="inline-start"
+              />
+            ) : (
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiAlertLine"
+                data-icon="inline-start"
+              />
+            )}
+            {atTarget ? "At target" : "Above target"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -101,26 +118,25 @@ export function ChartLineBloodPressure() {
               tickMargin={8}
               domain={[60, 160]}
             />
-            {/* A common home target of 130/80; set your own patient's. */}
             <ReferenceLine
-              y={130}
+              y={target.systolic}
               stroke="var(--muted-foreground)"
               strokeDasharray="4 4"
             >
               <Label
-                value="130"
+                value={target.systolic}
                 position="insideBottomLeft"
                 className="fill-muted-foreground"
                 fontSize={11}
               />
             </ReferenceLine>
             <ReferenceLine
-              y={80}
+              y={target.diastolic}
               stroke="var(--muted-foreground)"
               strokeDasharray="4 4"
             >
               <Label
-                value="80"
+                value={target.diastolic}
                 position="insideBottomLeft"
                 className="fill-muted-foreground"
                 fontSize={11}
@@ -146,15 +162,28 @@ export function ChartLineBloodPressure() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Down 21/12 mmHg this week{" "}
-          <IconPlaceholder
-            lucide="TrendingDownIcon"
-            tabler="IconTrendingDown"
-            hugeicons="ChartDownIcon"
-            phosphor="TrendDownIcon"
-            remixicon="RiArrowDownLine"
-            className="size-4"
-          />
+          {latest.systolic <= first.systolic ? "Down" : "Up"}{" "}
+          {Math.abs(first.systolic - latest.systolic)}/
+          {Math.abs(first.diastolic - latest.diastolic)} mmHg this week{" "}
+          {latest.systolic <= first.systolic ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
           Morning home readings; a fictional patient

@@ -39,6 +39,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+// The group whose second doses come closest to its first.
+const closest = chartData.reduce((a, b) =>
+  b.second / b.first > a.second / a.first ? b : a
+)
+
 export function ChartBarVaccinations() {
   return (
     <Card>
@@ -67,10 +72,12 @@ export function ChartBarVaccinations() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Second doses trail in every group
+          Second doses reach{" "}
+          {Math.round((closest.second / closest.first) * 100)}% of first in{" "}
+          {closest.age}
         </div>
         <div className="leading-none text-muted-foreground">
-          Closest in 65+, at 93%; illustrative data
+          The closest group; illustrative data
         </div>
       </CardFooter>
     </Card>

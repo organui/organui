@@ -99,8 +99,10 @@ export function ChartRadialSteps() {
           {Math.round((steps / goal) * 100)}% of the daily goal
         </div>
         <div className="leading-none text-muted-foreground">
-          {(goal - steps).toLocaleString("en-US")} steps to go; a fictional
-          patient
+          {steps < goal
+            ? `${(goal - steps).toLocaleString("en-US")} steps to go`
+            : "Goal reached"}
+          ; a fictional patient
         </div>
       </CardFooter>
     </Card>
