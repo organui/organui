@@ -7,7 +7,7 @@
 <h1 align="center">OrganUI</h1>
 
 <p align="center">
-  The interfaces healthcare deserves.<br />
+  Healthcare &amp; life science UI for humans and agents.<br />
   Open-source components for healthcare and life sciences, installed as source with the shadcn CLI.
 </p>
 

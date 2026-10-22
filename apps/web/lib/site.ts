@@ -1,8 +1,9 @@
 export const site = {
   name: "OrganUI",
   url: "https://organui.com",
-  title: "OrganUI — The interfaces healthcare deserves.",
-  description: "Interfaces for healthcare and life sciences.",
+  title: "OrganUI · Healthcare & life science UI for humans and agents",
+  description:
+    "Open-source components for healthcare and life sciences, installed as source with the shadcn CLI.",
   socialImage: "/opengraph-image",
   repo: "organui/organui",
   repository: "https://github.com/organui/organui",

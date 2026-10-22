@@ -62,8 +62,7 @@ p { font-size: 26px; line-height: 1.4; color: ${theme.muted}; max-width: 560px; 
 </style></head><body>
 <div class="text">
   <div class="brand"><svg width="40" height="42" viewBox="0 0 100 104"><path fill="${theme.foreground}" fill-rule="evenodd" d="${mark}"/></svg>OrganUI</div>
-  <h1>The interfaces healthcare deserves.</h1>
-  <p>Open-source components for healthcare and life sciences, installed as source with the shadcn CLI.</p>
+  <h1>Healthcare &amp; life science UI for humans and agents</h1>
   <div class="url">organui.com</div>
 </div>
 <div class="grid">${organs.map((name) => `<div class="organ"><img src="data:image/webp;base64,${images[name]}" alt=""/></div>`).join("")}</div>
