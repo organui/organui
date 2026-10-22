@@ -6,6 +6,7 @@ import {
   CartesianGrid,
   Label,
   ReferenceArea,
+  ReferenceLine,
   XAxis,
   YAxis,
 } from "recharts"
@@ -52,6 +53,13 @@ const chartConfig = {
     color: "var(--chart-3)",
   },
 } satisfies ChartConfig
+
+// What happened during the shift, marked on the timeline so a change in the
+// readings can be read against its cause.
+const events = [
+  { time: "08:00", label: "Fever" },
+  { time: "11:00", label: "Paracetamol" },
+]
 
 const latest = chartData.at(-1)!
 // The usual adult resting range, drawn behind the readings.
@@ -127,11 +135,25 @@ export function ChartAreaHeartRate() {
             >
               <Label
                 value={`Normal ${normal.low}–${normal.high}`}
-                position="insideTopLeft"
+                position="insideBottomLeft"
                 className="fill-muted-foreground"
                 fontSize={11}
               />
             </ReferenceArea>
+            {events.map((event) => (
+              <ReferenceLine
+                key={event.time}
+                x={event.time}
+                stroke="var(--muted-foreground)"
+              >
+                <Label
+                  value={event.label}
+                  position="insideTopLeft"
+                  className="fill-foreground"
+                  fontSize={11}
+                />
+              </ReferenceLine>
+            ))}
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <defs>
               <linearGradient id="fillHeartRate" x1="0" y1="0" x2="0" y2="1">
