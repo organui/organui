@@ -17,7 +17,7 @@ export default function GlobalError({ retry }: { retry: () => void }) {
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        <title>Something went wrong — OrganUI</title>
+        <title>Something went wrong · OrganUI</title>
         <main className="flex min-h-svh items-center justify-center p-6">
           <Empty>
             <EmptyHeader>
