@@ -165,7 +165,7 @@ test("another pointer's movement does not cancel a primary tap", async ({
   )
 })
 
-test("uncontrolled selection resets when returning to a source or replacing its model", async ({
+test("uncontrolled selection resets with its source and survives a recreated model object", async ({
   page,
 }) => {
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
@@ -185,8 +185,9 @@ test("uncontrolled selection resets when returning to a source or replacing its 
   await menu.click()
   await page.getByRole("option", { name: "Right atrium", exact: true }).click()
   await expect(menu).toContainText("Right atrium")
+  // A copied model object with the same name keeps the reader's selection.
   await page.getByRole("button", { name: "Replace model metadata" }).click()
-  await expect(menu).toContainText("Left atrium receiving")
+  await expect(menu).toContainText("Right atrium")
 })
 
 test("selection mode stays fixed and explicit undefined remains controlled", async ({
