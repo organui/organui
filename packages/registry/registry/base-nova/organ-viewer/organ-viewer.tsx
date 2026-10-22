@@ -332,10 +332,8 @@ export function OrganViewer({
   const hasSelectedId = Object.hasOwn(selectionProps, "selectedId")
   const [isControlled] = React.useState(hasSelectedId)
   React.useEffect(() => {
-    if (
-      process.env.NODE_ENV !== "production" &&
-      hasSelectedId !== isControlled
-    ) {
+    // No NODE_ENV guard: registry source must type-check without Node types.
+    if (hasSelectedId !== isControlled) {
       console.warn(
         "OrganViewer cannot switch between controlled and uncontrolled selection. Keep selectedId present or omitted for the lifetime of the viewer, or remount it to change modes."
       )
@@ -359,30 +357,44 @@ export function OrganViewer({
   const [engine, setEngine] = React.useState<Engine | null>(null)
   const [view, setView] = React.useState<string | null>(defaultView)
   const [interacted, setInteracted] = React.useState(false)
+  // Keyed by model name rather than identity, so a model object rebuilt on
+  // each render keeps the reader's selection.
   const [selection, setSelection] = React.useState({
-    model,
+    name: model.name,
     src,
     id: defaultSelectedId,
   })
-  if (selection.model !== model || selection.src !== src) {
-    setSelection({ model, src, id: defaultSelectedId })
+  if (selection.name !== model.name || selection.src !== src) {
+    setSelection({ name: model.name, src, id: defaultSelectedId })
   }
   const selectStructure = React.useCallback(
     (id: string) => {
-      if (!isControlled) setSelection({ model, src, id })
+      if (!isControlled) setSelection({ name: model.name, src, id })
       setInteracted(true)
       onSelectionChange?.(id)
     },
-    [isControlled, model, src, onSelectionChange]
+    [isControlled, model.name, src, onSelectionChange]
   )
+  // Only uncontrolled selection can be cleared here; controlled viewers clear
+  // by passing null.
+  const clearSelection = React.useCallback(() => {
+    if (!isControlled) setSelection({ name: model.name, src, id: null })
+  }, [isControlled, model.name, src])
   const latest = React.useRef({
     model,
     defaultView,
     selectStructure,
+    clearSelection,
     onViewChange,
   })
   React.useLayoutEffect(() => {
-    latest.current = { model, defaultView, selectStructure, onViewChange }
+    latest.current = {
+      model,
+      defaultView,
+      selectStructure,
+      clearSelection,
+      onViewChange,
+    }
   })
   const instructions = React.useId()
 
@@ -668,6 +680,7 @@ export function OrganViewer({
       const mesh = pickVisibleMesh(raycaster.intersectObjects(allMeshes, false))
       const id = mesh && structureId(mesh, known)
       if (id) latest.current.selectStructure(id)
+      else latest.current.clearSelection()
     }
     canvas.addEventListener("pointerdown", onPointerDown)
     canvas.addEventListener("pointermove", onPointerMove)
@@ -815,6 +828,11 @@ export function OrganViewer({
           event.metaKey
         )
           return
+        // Escape clears without preventDefault so surrounding dialogs still close.
+        if (event.key === "Escape") {
+          clearSelection()
+          return
+        }
         const actions: Record<string, () => void> = {
           ArrowLeft: () => engine.rotate(-0.2),
           ArrowRight: () => engine.rotate(0.2),
@@ -832,7 +850,8 @@ export function OrganViewer({
     >
       <p id={instructions} className="sr-only">
         Drag or use the arrow keys to rotate, and scroll, pinch or press plus
-        and minus to zoom. Click a structure to select it.
+        and minus to zoom. Click a structure to select it, and click empty space
+        or press Escape to clear it.
         {controls && " Use the Structure menu to select with the keyboard."}
       </p>
       {engine && scene && !message && (announceSelection ?? !isControlled) && (
