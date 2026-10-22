@@ -195,6 +195,7 @@ export const chartTypes = [
   { type: "pie", title: "Pie Charts" },
   { type: "radar", title: "Radar Charts" },
   { type: "radial", title: "Radial Charts" },
+  { type: "tooltip", title: "Tooltips" },
 ] as const
 
 export type ChartType = (typeof chartTypes)[number]["type"]

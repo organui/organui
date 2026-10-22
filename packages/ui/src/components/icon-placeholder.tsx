@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
   ChevronUpIcon,
   CircleAlertIcon,
+  ClockIcon,
   ContrastIcon,
   FileTextIcon,
   InfoIcon,
@@ -24,6 +25,7 @@ import {
   TrendingUpIcon,
   TriangleAlertIcon,
   Undo2Icon,
+  UtensilsIcon,
   XIcon,
 } from "lucide-react"
 
@@ -40,6 +42,7 @@ const icons = {
   ChevronRightIcon,
   ChevronUpIcon,
   CircleAlertIcon,
+  ClockIcon,
   ContrastIcon,
   FileTextIcon,
   InfoIcon,
@@ -57,6 +60,7 @@ const icons = {
   TrendingUpIcon,
   TriangleAlertIcon,
   Undo2Icon,
+  UtensilsIcon,
   XIcon,
 }
 

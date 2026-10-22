@@ -8,6 +8,7 @@ import {
   CopyIcon,
   HexagonIcon,
   LineChartIcon,
+  MousePointer2Icon,
   PieChartIcon,
   RadarIcon,
   type LucideIcon,
@@ -47,6 +48,7 @@ const kinds: Record<ChartType, { icon: LucideIcon; label: string }> = {
   pie: { icon: PieChartIcon, label: "Pie Chart" },
   radar: { icon: HexagonIcon, label: "Radar Chart" },
   radial: { icon: RadarIcon, label: "Radial Chart" },
+  tooltip: { icon: MousePointer2Icon, label: "Tooltip" },
 }
 
 // Above each chart, as on shadcn/ui: its kind, then copy and view its code.

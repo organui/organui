@@ -1477,6 +1477,7 @@ test("charts show health data on shadcn's chart, with their code", async ({
     "Pie Charts",
     "Radar Charts",
     "Radial Charts",
+    "Tooltips",
   ])
   await page
     .getByRole("button", { name: "View code: Admissions area chart" })

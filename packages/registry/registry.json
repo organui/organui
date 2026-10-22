@@ -1675,6 +1675,150 @@
         }
       ],
       "docs": "Steps radial chart: https://organui.com/charts/radial#chart-radial-steps"
+    },
+    {
+      "name": "chart-tooltip-insulin",
+      "type": "registry:block",
+      "title": "Insulin tooltip",
+      "description": "Insulin doses by day, as a stacked bar chart. Default tooltip with ChartTooltipContent.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: https://organui.com/charts/tooltip#chart-tooltip-insulin"
+    },
+    {
+      "name": "chart-tooltip-insulin-line",
+      "type": "registry:block",
+      "title": "Insulin tooltip: line indicator",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip with a line indicator.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-line.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: line indicator: https://organui.com/charts/tooltip#chart-tooltip-insulin-line"
+    },
+    {
+      "name": "chart-tooltip-insulin-no-indicator",
+      "type": "registry:block",
+      "title": "Insulin tooltip: no indicator",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip without an indicator.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-no-indicator.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: no indicator: https://organui.com/charts/tooltip#chart-tooltip-insulin-no-indicator"
+    },
+    {
+      "name": "chart-tooltip-insulin-custom-label",
+      "type": "registry:block",
+      "title": "Insulin tooltip: custom label",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip labelled from chartConfig.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-custom-label.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: custom label: https://organui.com/charts/tooltip#chart-tooltip-insulin-custom-label"
+    },
+    {
+      "name": "chart-tooltip-insulin-label-formatter",
+      "type": "registry:block",
+      "title": "Insulin tooltip: label formatter",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip with a formatted date label.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-label-formatter.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: label formatter: https://organui.com/charts/tooltip#chart-tooltip-insulin-label-formatter"
+    },
+    {
+      "name": "chart-tooltip-insulin-no-label",
+      "type": "registry:block",
+      "title": "Insulin tooltip: no label",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip without a label or indicator.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-no-label.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: no label: https://organui.com/charts/tooltip#chart-tooltip-insulin-no-label"
+    },
+    {
+      "name": "chart-tooltip-insulin-formatter",
+      "type": "registry:block",
+      "title": "Insulin tooltip: formatter",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip with a custom formatter.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-formatter.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: formatter: https://organui.com/charts/tooltip#chart-tooltip-insulin-formatter"
+    },
+    {
+      "name": "chart-tooltip-insulin-icons",
+      "type": "registry:block",
+      "title": "Insulin tooltip: icons",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip with icons from chartConfig.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-icons.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: icons: https://organui.com/charts/tooltip#chart-tooltip-insulin-icons"
+    },
+    {
+      "name": "chart-tooltip-insulin-advanced",
+      "type": "registry:block",
+      "title": "Insulin tooltip: advanced",
+      "description": "Insulin doses by day, as a stacked bar chart. Tooltip with a custom formatter and a total.",
+      "categories": ["charts", "charts-tooltip"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-tooltip-insulin-advanced.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "docs": "Insulin tooltip: advanced: https://organui.com/charts/tooltip#chart-tooltip-insulin-advanced"
     }
   ]
 }
