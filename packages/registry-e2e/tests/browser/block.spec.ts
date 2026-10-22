@@ -28,7 +28,9 @@ const phone = (width = 0) => width < 1024
 test("explorer-01 pairs the viewer with a panel or sheet", async ({ page }) => {
   await page.goto("/explorer")
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
-  await expect(viewer.getByRole("toolbar")).toBeVisible()
+  await expect(
+    viewer.getByRole("group", { name: "View controls" })
+  ).toBeVisible()
   const anatomy = page.getByRole("button", { name: "Anatomy", exact: true })
   await anatomy.click()
   if (phone(page.viewportSize()?.width))
@@ -47,7 +49,9 @@ test("explorer-01 pairs the viewer with a panel or sheet", async ({ page }) => {
 test("explorer-02 hides, isolates and shows structures", async ({ page }) => {
   await page.goto("/workspace")
   const viewer = page.getByRole("region", { name: "Interactive heart model" })
-  await expect(viewer.getByRole("toolbar")).toBeVisible()
+  await expect(
+    viewer.getByRole("group", { name: "View controls" })
+  ).toBeVisible()
   if (phone(page.viewportSize()?.width)) {
     await expect(page.getByRole("complementary")).toHaveCount(0)
     await page.getByRole("button", { name: "Open anatomy" }).click()
@@ -91,7 +95,7 @@ test("explorer-03 switches organs and resets the selection", async ({
   await expect(
     page
       .getByRole("region", { name: "Interactive heart model" })
-      .getByRole("toolbar")
+      .getByRole("group", { name: "View controls" })
   ).toBeVisible()
   await page.getByRole("region", { name: "Interactive heart model" }).click()
   await expect(page.getByRole("status").last()).toContainText("Right atrium:")
@@ -101,7 +105,9 @@ test("explorer-03 switches organs and resets the selection", async ({
   const kidneys = page.getByRole("region", {
     name: "Interactive kidneys model",
   })
-  await expect(kidneys.getByRole("toolbar")).toBeVisible()
+  await expect(
+    kidneys.getByRole("group", { name: "View controls" })
+  ).toBeVisible()
   await expect(page.getByRole("status").last()).toHaveText(
     "Select a structure of the kidneys to learn about it."
   )
