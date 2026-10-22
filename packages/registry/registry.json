@@ -1316,7 +1316,10 @@
           "type": "registry:block"
         }
       ],
-      "docs": "Admissions area chart: https://organui.com/charts/area#chart-area-admissions"
+      "meta": {
+        "deprecated": true
+      },
+      "docs": "Admissions area chart: https://organui.com/charts/area#chart-area-admissions. Deprecated: removed in the next major release; chart-area-ed-arrivals shows daily arrivals."
     },
     {
       "name": "chart-area-census",
@@ -1415,7 +1418,10 @@
           "type": "registry:block"
         }
       ],
-      "docs": "Appointments bar chart: https://organui.com/charts/bar#chart-bar-appointments"
+      "meta": {
+        "deprecated": true
+      },
+      "docs": "Appointments bar chart: https://organui.com/charts/bar#chart-bar-appointments. Deprecated: removed in the next major release."
     },
     {
       "name": "chart-bar-diagnoses",
@@ -1447,7 +1453,10 @@
           "type": "registry:block"
         }
       ],
-      "docs": "ED visits bar chart: https://organui.com/charts/bar#chart-bar-ed-visits"
+      "meta": {
+        "deprecated": true
+      },
+      "docs": "ED visits bar chart: https://organui.com/charts/bar#chart-bar-ed-visits. Deprecated: removed in the next major release; chart-area-ed-arrivals shows daily arrivals."
     },
     {
       "name": "chart-bar-vaccinations",
@@ -1658,7 +1667,10 @@
           "type": "registry:block"
         }
       ],
-      "docs": "Blood donations pie chart: https://organui.com/charts/pie#chart-pie-blood-types"
+      "meta": {
+        "deprecated": true
+      },
+      "docs": "Blood donations pie chart: https://organui.com/charts/pie#chart-pie-blood-types. Deprecated: removed in the next major release."
     },
     {
       "name": "chart-pie-occupancy",

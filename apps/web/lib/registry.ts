@@ -211,6 +211,9 @@ export const chartItems = catalog.items
       .replace("charts-", "") as ChartType,
     // Interactive charts span the grid, as on shadcn/ui.
     fullWidth: Boolean("meta" in item && item.meta?.fullWidth),
+    // Kept for projects that installed it, and removed in the next major
+    // release.
+    deprecated: Boolean("meta" in item && item.meta?.deprecated),
     install: install(item),
   }))
 

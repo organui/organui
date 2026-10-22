@@ -59,11 +59,14 @@ export function ChartToolbar({
   title,
   type,
   code,
+  deprecated = false,
   children,
 }: {
   title: string
   type: ChartType
   code: string
+  // Shown so readers pick a current chart instead.
+  deprecated?: boolean
   // The highlighted code.
   children: ReactNode
 }) {
@@ -89,6 +92,11 @@ export function ChartToolbar({
       <div className="flex items-center gap-1.5 pl-1 text-[13px] text-muted-foreground">
         <Icon aria-hidden="true" className="size-3.5" />
         {label}
+        {deprecated && (
+          <span className="rounded-sm border px-1.5 text-xs leading-5">
+            Deprecated
+          </span>
+        )}
       </div>
       <div className="ml-auto flex items-center gap-2">
         <Tooltip>
