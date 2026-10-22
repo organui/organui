@@ -8,8 +8,7 @@
 
 <p align="center">
   Healthcare &amp; life science UI for humans and agents.<br />
-  Open-source components for the clinic and the lab, designed for people and ready for agents.<br />
-  Installed as source with the shadcn CLI.
+  Open-source components for healthcare and life sciences, installed as source with the shadcn CLI.
 </p>
 
 <p align="center">
