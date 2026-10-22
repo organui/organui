@@ -35,8 +35,11 @@ export function SiteHeader() {
             orientation="vertical"
             className="ml-2 hidden lg:block data-vertical:h-4 data-vertical:self-center"
           />
-          <GitHubLink />
-          <XLink />
+          {/* The social links sit together as one group, without the gap. */}
+          <div className="flex items-center">
+            <GitHubLink />
+            <XLink />
+          </div>
           <Separator
             orientation="vertical"
             className="data-vertical:h-4 data-vertical:self-center"
