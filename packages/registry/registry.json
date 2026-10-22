@@ -1420,18 +1420,18 @@
     {
       "name": "chart-bar-diagnoses",
       "type": "registry:block",
-      "title": "Top diagnoses bar chart",
-      "description": "Most common discharge diagnoses, as a horizontal bar chart.",
+      "title": "Length of stay bar chart",
+      "description": "Length of stay for the top diagnoses against a benchmark, as a dumbbell chart.",
       "categories": ["charts", "charts-bar"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-bar-diagnoses.tsx",
           "type": "registry:block"
         }
       ],
-      "docs": "Top diagnoses bar chart: https://organui.com/charts/bar#chart-bar-diagnoses"
+      "docs": "Length of stay bar chart: https://organui.com/charts/bar#chart-bar-diagnoses"
     },
     {
       "name": "chart-bar-ed-visits",
@@ -1663,18 +1663,18 @@
     {
       "name": "chart-pie-adherence",
       "type": "registry:block",
-      "title": "Adherence pie chart",
-      "description": "Medication adherence, as a pie chart with a legend.",
+      "title": "Doses pie chart",
+      "description": "A month of twice-daily doses as a ring, each dose on time, late or missed.",
       "categories": ["charts", "charts-pie"],
       "dependencies": ["recharts@^3.8.0"],
-      "registryDependencies": ["card", "chart"],
+      "registryDependencies": ["card", "badge", "chart"],
       "files": [
         {
           "path": "registry/base-nova/charts/chart-pie-adherence.tsx",
           "type": "registry:block"
         }
       ],
-      "docs": "Adherence pie chart: https://organui.com/charts/pie#chart-pie-adherence"
+      "docs": "Doses pie chart: https://organui.com/charts/pie#chart-pie-adherence"
     },
     {
       "name": "chart-pie-occupancy",
