@@ -27,7 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blocks",
     ...chartTypes.map(({ type }) => `/charts/${type}`),
     "/colors",
-    "/create",
     ...registryItems.map((item) => item.href),
     aiIndex.href,
     ...aiItems.map((item) => item.href),

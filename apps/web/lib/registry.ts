@@ -323,13 +323,13 @@ export const organsPage: NavLink & { description: string } = {
   description: "Every organ as a picture, linking to its page.",
 }
 
+// Create (/create) is left out while it is in progress; see docs/architecture.md.
 export const mainNav: NavLink[] = [
   { title: "Docs", href: "/docs" },
   { title: "Components", href: componentsIndex.href },
   { title: organsPage.title, href: organsPage.href },
   { title: "Blocks", href: "/blocks" },
   { title: "Charts", href: "/charts/area" },
-  { title: "Create", href: "/create" },
 ]
 
 // Pages added in the latest release, marked with a dot in the sidebar.

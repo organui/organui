@@ -11,11 +11,16 @@ import {
 } from "@/lib/registry"
 import { site } from "@/lib/site"
 
-export const metadata = docsMetadata(
-  "Create",
-  "Pick a library, framework, theme and icons, choose OrganUI items, and copy the commands that set up the project.",
-  "/create"
-)
+// Unlisted while in progress: no links, search entry or sitemap entry, and
+// not indexed. Reachable by URL only (see docs/architecture.md).
+export const metadata = {
+  ...docsMetadata(
+    "Create",
+    "Pick a library, framework, theme and icons, choose OrganUI items, and copy the commands that set up the project.",
+    "/create"
+  ),
+  robots: { index: false, follow: false },
+}
 
 const pick = (items: { name: string; title: string }[]) =>
   items.map(({ name, title }) => ({ name, title }))
