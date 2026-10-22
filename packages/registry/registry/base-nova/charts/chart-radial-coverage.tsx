@@ -75,8 +75,13 @@ export function ChartRadialCoverage() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        HPV lags the others; illustrative data.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          HPV lags, at 71%
+        </div>
+        <div className="leading-none text-muted-foreground">
+          The others reach 89% or more; illustrative data
+        </div>
       </CardFooter>
     </Card>
   )

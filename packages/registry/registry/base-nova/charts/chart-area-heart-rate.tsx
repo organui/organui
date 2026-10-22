@@ -94,8 +94,13 @@ export function ChartAreaHeartRate() {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Peaks at 91 bpm at 10:00; a fictional patient.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Peaks at 91 bpm at 10:00
+        </div>
+        <div className="leading-none text-muted-foreground">
+          07:00 to 18:00; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

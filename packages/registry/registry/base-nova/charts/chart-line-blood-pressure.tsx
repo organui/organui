@@ -16,6 +16,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description =
   "Home blood pressure readings, as a multiple line chart"
@@ -87,8 +88,21 @@ export function ChartLineBloodPressure() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Down 21/12 mmHg over the week; a fictional patient.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Down 21/12 mmHg this week{" "}
+          <IconPlaceholder
+            lucide="TrendingDownIcon"
+            tabler="IconTrendingDown"
+            hugeicons="ChartDownIcon"
+            phosphor="TrendDownIcon"
+            remixicon="RiArrowDownLine"
+            className="size-4"
+          />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Morning home readings; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

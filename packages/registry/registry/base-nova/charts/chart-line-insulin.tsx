@@ -16,6 +16,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description = "Basal insulin dose titration, as a step line chart"
 
@@ -73,8 +74,21 @@ export function ChartLineInsulin() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        From 10 to 18 units over 19 days; illustrative, not a protocol.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Up from 10 to 18 units{" "}
+          <IconPlaceholder
+            lucide="TrendingUpIcon"
+            tabler="IconTrendingUp"
+            hugeicons="ChartUpIcon"
+            phosphor="TrendUpIcon"
+            remixicon="RiArrowUpLine"
+            className="size-4"
+          />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Over 19 days; illustrative, not a protocol
+        </div>
       </CardFooter>
     </Card>
   )

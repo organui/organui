@@ -65,8 +65,13 @@ export function ChartBarVaccinations() {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Second doses trail first doses in every group; illustrative data.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Second doses trail in every group
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Closest in 65+, at 93%; illustrative data
+        </div>
       </CardFooter>
     </Card>
   )

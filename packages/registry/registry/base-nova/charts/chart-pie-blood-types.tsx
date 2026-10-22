@@ -70,8 +70,13 @@ export function ChartPieBloodTypes() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Illustrative data.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Type O makes up 46% of units
+        </div>
+        <div className="leading-none text-muted-foreground">
+          This month; illustrative data
+        </div>
       </CardFooter>
     </Card>
   )

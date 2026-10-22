@@ -16,6 +16,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description = "HbA1c by quarter, as a line chart with labels"
 
@@ -80,8 +81,21 @@ export function ChartLineHba1c() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Below 7% since Q1 2026; a fictional patient.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Down 1.6 points since Q1 2025{" "}
+          <IconPlaceholder
+            lucide="TrendingDownIcon"
+            tabler="IconTrendingDown"
+            hugeicons="ChartDownIcon"
+            phosphor="TrendDownIcon"
+            remixicon="RiArrowDownLine"
+            className="size-4"
+          />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Below 7% since Q1 2026; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

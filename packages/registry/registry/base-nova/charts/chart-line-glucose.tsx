@@ -16,6 +16,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description = "Fasting glucose readings, as a line chart with dots"
 
@@ -73,8 +74,21 @@ export function ChartLineGlucose() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Trending down toward target; a fictional patient.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Down 18% this week{" "}
+          <IconPlaceholder
+            lucide="TrendingDownIcon"
+            tabler="IconTrendingDown"
+            hugeicons="ChartDownIcon"
+            phosphor="TrendDownIcon"
+            remixicon="RiArrowDownLine"
+            className="size-4"
+          />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Trending toward target; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

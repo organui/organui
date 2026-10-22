@@ -64,8 +64,13 @@ export function ChartBarEdVisits() {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Mondays are busiest; illustrative data.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Mondays are busiest, at 214 visits
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Average per weekday; illustrative data
+        </div>
       </CardFooter>
     </Card>
   )

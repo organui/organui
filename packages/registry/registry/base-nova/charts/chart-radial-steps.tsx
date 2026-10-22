@@ -94,8 +94,14 @@ export function ChartRadialSteps() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        {Math.round((steps / goal) * 100)}% of the goal; a fictional patient.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          {Math.round((steps / goal) * 100)}% of the daily goal
+        </div>
+        <div className="leading-none text-muted-foreground">
+          {(goal - steps).toLocaleString("en-US")} steps to go; a fictional
+          patient
+        </div>
       </CardFooter>
     </Card>
   )

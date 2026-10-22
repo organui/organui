@@ -10,6 +10,7 @@ import {
   HexagonIcon,
   LineChartIcon,
   PieChartIcon,
+  RadarIcon,
   type LucideIcon,
 } from "lucide-react"
 import { Button } from "@workspace/ui/components/button"
@@ -32,7 +33,7 @@ const kinds: Record<ChartType, { icon: LucideIcon; label: string }> = {
   line: { icon: LineChartIcon, label: "Line Chart" },
   pie: { icon: PieChartIcon, label: "Pie Chart" },
   radar: { icon: HexagonIcon, label: "Radar Chart" },
-  radial: { icon: PieChartIcon, label: "Radial Chart" },
+  radial: { icon: RadarIcon, label: "Radial Chart" },
 }
 
 // Above each chart, as on shadcn/ui: its kind, then copy and view its code.

@@ -16,6 +16,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description = "Oxygen flow rate over time, as a step area chart"
 
@@ -74,8 +75,21 @@ export function ChartAreaOxygen() {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Off oxygen by 16:00; a fictional patient.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Off oxygen by 16:00{" "}
+          <IconPlaceholder
+            lucide="TrendingDownIcon"
+            tabler="IconTrendingDown"
+            hugeicons="ChartDownIcon"
+            phosphor="TrendDownIcon"
+            remixicon="RiArrowDownLine"
+            className="size-4"
+          />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Weaned from 4 L/min; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

@@ -107,8 +107,14 @@ export function ChartPieOccupancy() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        {total} beds; illustrative data.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          {chartData.find(({ status }) => status === "available")!.beds} beds
+          available now
+        </div>
+        <div className="leading-none text-muted-foreground">
+          {total} beds across all wards; illustrative data
+        </div>
       </CardFooter>
     </Card>
   )

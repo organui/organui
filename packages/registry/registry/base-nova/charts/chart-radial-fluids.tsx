@@ -67,7 +67,8 @@ export function ChartRadialFluids() {
                           y={(viewBox.cy || 0) - 16}
                           className="fill-foreground text-2xl font-bold"
                         >
-                          +{(intake - output).toLocaleString("en-US")} mL
+                          {intake >= output ? "+" : "−"}
+                          {Math.abs(intake - output).toLocaleString("en-US")} mL
                         </tspan>
                         <tspan
                           x={viewBox.cx}
@@ -99,8 +100,14 @@ export function ChartRadialFluids() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Illustrative; check your own unit&apos;s charting rules.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Net {intake >= output ? "positive" : "negative"} by{" "}
+          {Math.abs(intake - output).toLocaleString("en-US")} mL
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Illustrative; check your own unit&apos;s charting rules
+        </div>
       </CardFooter>
     </Card>
   )

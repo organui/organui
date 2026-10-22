@@ -42,7 +42,8 @@ export async function ChartDisplay({
           code={code}
         />
       </ChartToolbar>
-      <div className="relative overflow-hidden rounded-xl bg-background *:data-[slot=card]:h-full">
+      {/* Cards in a row share its height, their footers at the bottom. */}
+      <div className="relative flex flex-1 flex-col overflow-hidden rounded-xl bg-background *:data-[slot=card]:flex-1 **:data-[slot=card-content]:flex-1">
         {Chart && <Chart />}
       </div>
     </div>

@@ -69,8 +69,13 @@ export function ChartPieAdherence() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        87% on time; a fictional patient.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          87% of doses on time
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Last 30 days; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

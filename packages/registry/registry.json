@@ -1284,6 +1284,25 @@
       "docs": "Dashboard 01: https://organui.com/blocks#dashboard-01. The patient and readings are fictional; connect your own records before clinical use."
     },
     {
+      "name": "chart-area-ed-arrivals",
+      "type": "registry:block",
+      "title": "ED arrivals area chart",
+      "description": "Emergency department arrivals by day, as an interactive area chart with a time range.",
+      "categories": ["charts", "charts-area"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart", "select"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-area-ed-arrivals.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "fullWidth": true
+      },
+      "docs": "ED arrivals area chart: https://organui.com/charts/area#chart-area-ed-arrivals"
+    },
+    {
       "name": "chart-area-admissions",
       "type": "registry:block",
       "title": "Admissions area chart",
@@ -1348,6 +1367,25 @@
       "docs": "Oxygen weaning area chart: https://organui.com/charts/area#chart-area-oxygen"
     },
     {
+      "name": "chart-bar-tests",
+      "type": "registry:block",
+      "title": "Tests ordered bar chart",
+      "description": "Blood tests and imaging ordered by day, as an interactive bar chart.",
+      "categories": ["charts", "charts-bar"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-bar-tests.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "fullWidth": true
+      },
+      "docs": "Tests ordered bar chart: https://organui.com/charts/bar#chart-bar-tests"
+    },
+    {
       "name": "chart-bar-appointments",
       "type": "registry:block",
       "title": "Appointments bar chart",
@@ -1410,6 +1448,25 @@
         }
       ],
       "docs": "Vaccinations bar chart: https://organui.com/charts/bar#chart-bar-vaccinations"
+    },
+    {
+      "name": "chart-line-rehab",
+      "type": "registry:block",
+      "title": "Cardiac rehab line chart",
+      "description": "Resting heart rate and daily steps during cardiac rehab, as an interactive line chart.",
+      "categories": ["charts", "charts-line"],
+      "dependencies": ["recharts@^3.8.0"],
+      "registryDependencies": ["card", "chart"],
+      "files": [
+        {
+          "path": "registry/base-nova/charts/chart-line-rehab.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "fullWidth": true
+      },
+      "docs": "Cardiac rehab line chart: https://organui.com/charts/line#chart-line-rehab"
     },
     {
       "name": "chart-line-blood-pressure",

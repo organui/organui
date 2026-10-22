@@ -18,6 +18,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description =
   "Patient-reported outcomes before and after, as a radar chart"
@@ -77,8 +78,21 @@ export function ChartRadarOutcomes() {
           </RadarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Better in every domain; a fictional patient.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Better in every domain{" "}
+          <IconPlaceholder
+            lucide="TrendingUpIcon"
+            tabler="IconTrendingUp"
+            hugeicons="ChartUpIcon"
+            phosphor="TrendUpIcon"
+            remixicon="RiArrowUpLine"
+            className="size-4"
+          />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Pain improved most; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

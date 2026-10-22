@@ -65,8 +65,13 @@ export function ChartRadarSleep() {
           </RadarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Falling asleep is the hardest part; a fictional patient.
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Falling asleep is the hardest part
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Scored 0–3, higher is worse; a fictional patient
+        </div>
       </CardFooter>
     </Card>
   )

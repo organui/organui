@@ -88,8 +88,13 @@ export function ChartAreaCensus() {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="text-sm text-muted-foreground">
-        Illustrative data for one hospital.
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Busiest in February, at 256 beds
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Illustrative data for one hospital
+        </div>
       </CardFooter>
     </Card>
   )
