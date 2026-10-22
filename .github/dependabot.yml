@@ -9,7 +9,7 @@ updates:
         patterns: ["*"]
   - package-ecosystem: bun
     # The model build scripts keep their own lockfiles outside the workspace.
-    directories: ["/", "/models", "/scripts/models"]
+    directories: ["/", "/models", "/scripts/models", "/scripts/models/joints"]
     schedule:
       interval: weekly
     groups:
@@ -19,3 +19,8 @@ updates:
       # Types follow the oldest supported Node (engines), not the newest release.
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: pip
+    # The dermatome map generator, run by hand like the model scripts.
+    directory: /packages/registry/scripts
+    schedule:
+      interval: weekly

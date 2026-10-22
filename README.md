@@ -110,13 +110,13 @@ bun run dev
 Then open `http://localhost:3000`. Run tasks from the root, so Turborepo
 builds and stages the registry first.
 
-| Path                    | Contents                                                                                             |
-| ----------------------- | ---------------------------------------------------------------------------------------------------- |
-| `apps/web`              | The website and documentation, which serves the registry at `/r`                                     |
-| `packages/registry`     | `registry.json` and every item's source, for Base UI (`base-nova`) and Radix (`radix-nova`)          |
-| `packages/registry-e2e` | Generated Next.js, Vite and Radix projects that install every item, and the Playwright browser tests |
-| `packages/ui`           | The website's own components and theme                                                               |
-| `models`                | Build scripts and attribution for organ models kept here                                             |
+| Path                       | Contents                                                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `apps/web`                 | The website and documentation, which serves the registry at `/r`                                                         |
+| `packages/registry`        | `registry.json` and every item's source, for Base UI (`base-nova`) and Radix (`radix-nova`)                              |
+| `packages/registry-e2e`    | Generated Next.js, Vite and Radix projects that install every item, and the Playwright browser tests                     |
+| `packages/ui`              | The website's own components and theme                                                                                   |
+| `models`, `scripts/models` | Build scripts and attribution for the organ models OrganUI hosts ([all of them](docs/architecture.md#models-built-here)) |
 
 `bun run format:check`, `bun run lint`, `bun run typecheck` and `bun run test`
 are the quick checks. CI also builds the registry, installs every item into the

@@ -26,11 +26,35 @@ CI runs the build, the installed-consumer checks and the browser tests on
 every pull request that changes more than prose, such as this file. They start several Chromium instances, so leave them to CI
 rather than running them locally.
 
-Registry components follow the [shadcn/ui](https://ui.shadcn.com) conventions:
-semantic tokens rather than raw colors, `flex` with `gap-*` for spacing, and
-existing components (`Empty`, `Alert`, `Table` and so on) before custom markup.
-Icons in registry items use `IconPlaceholder` with a name for each icon
-library, so `shadcn add` can write the installing project's own icons.
+## Design
+
+OrganUI is the healthcare and life-science layer on top of
+[shadcn/ui](https://ui.shadcn.com), not a second copy of it.
+
+- Compose shadcn's components and patterns (`Card`, `Chart`, `Item`,
+  `HoverCard`, the AI Elements' `Message` and sources) before writing your
+  own, and build only the clinical part on top: reference ranges and units,
+  status shown with an icon and a label, and the forms clinicians read. The
+  chart conventions are on [Clinical charts](https://organui.com/docs/clinical-charts).
+- Show values computed from the data, or from the same constant the rest of
+  the item uses, never typed in a second time.
+- When an item looks generic, redesign it under the same name rather than
+  deprecating it or adding a variant.
+- To see how shadcn does something, read
+  [its source](https://github.com/shadcn-ui/ui/tree/main/apps/v4); the site
+  follows the commits pinned in [docs/architecture.md](docs/architecture.md).
+- Follow shadcn's conventions: semantic tokens rather than raw colors, `flex`
+  with `gap-*` for spacing, and existing components (`Empty`, `Alert`,
+  `Table` and so on) before custom markup.
+- Draw icons with `IconPlaceholder`, giving a name for each icon library, so
+  `shadcn add` writes the installing project's own icons. Import it from
+  `@/icons/icon-placeholder`: the CLI rewrites `@/registry`, `@/components`,
+  `@/hooks` and `@/lib` imports before it replaces icons, so a placeholder
+  imported from one of those leaves a broken import. Add new icons to
+  `packages/ui/src/components/icon-placeholder.tsx`;
+  `packages/registry/tests/icons.test.ts` checks every name.
+
+## Adding or changing an item
 
 When you add or change an item:
 
@@ -41,6 +65,17 @@ When you add or change an item:
   `packages/registry` so the docs' API Reference matches.
 - For a new block, capture its phone pictures with
   `bun run screenshots --only <name>` in `apps/web`.
+- For a model, run its build script and commit the output; see
+  [Models built here](docs/architecture.md#models-built-here).
+
+## Dependency updates
+
+Dependabot proposes weekly updates for the workspace, the model scripts and
+GitHub Actions. A major version waits until the tools around it support it,
+such as ESLint plugins or typescript-eslint; say why on the pull request when
+you hold one back.
+
+## Pull requests
 
 Keep pull requests focused on one change and write the title as an imperative
 sentence, for example "Add a growth chart component".

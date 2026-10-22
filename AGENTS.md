@@ -4,6 +4,10 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+# Conventions
+
+Follow [CONTRIBUTING.md](CONTRIBUTING.md), especially its Design section, and [docs/architecture.md](docs/architecture.md) for where things live.
+
 # Testing
 
 Run the light checks locally: `bun run format:check`, `bun run lint`, `bun run typecheck` and `bun run test`.

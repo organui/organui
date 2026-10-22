@@ -6,7 +6,7 @@ t counts stations along the limb (arm: 2 elbow, 4 wrist, 6 fingertips; leg:
 3 knee, 5 ankle, 7 toes) and s runs from the lateral (0) to the medial (1)
 edge. Bands may overshoot; they are clipped to their part.
 
-  python3 -m pip install shapely
+  python3 -m pip install -r scripts/requirements.txt
   python3 scripts/dermatome-map.py registry/base-nova/dermatome-map/dermatome-map.tsx
   bunx prettier --write registry/base-nova/dermatome-map/dermatome-map.tsx
 """
