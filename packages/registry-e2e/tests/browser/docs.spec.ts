@@ -417,7 +417,6 @@ test("the header links each section and searches the whole site", async ({
     "Organs",
     "Blocks",
     "Charts",
-    "Create",
   ])
   await main.getByRole("link", { name: "Organs", exact: true }).click()
   await expect(page).toHaveURL(/\/docs\/components\/organs$/)

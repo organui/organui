@@ -16,7 +16,6 @@
   <a href="https://organui.com/docs/components">Components</a> ·
   <a href="https://organui.com/blocks">Blocks</a> ·
   <a href="https://organui.com/charts/area">Charts</a> ·
-  <a href="https://organui.com/create">Create</a> ·
   <a href="https://organui.com/docs/changelog">Changelog</a>
 </p>
 
@@ -46,8 +45,7 @@ export default function Page() {
 `@organui` is listed in shadcn's registry directory, so no setup is needed.
 The commands pin the shadcn version the registry is tested with.
 The code lands in your project, yours to change. `npx`, `pnpm dlx` and
-`yarn dlx` work the same way. New project? [Create](https://organui.com/create)
-picks the library, theme and items, and gives you the commands.
+`yarn dlx` work the same way.
 
 ### Base UI and Radix
 

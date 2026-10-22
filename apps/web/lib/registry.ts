@@ -329,7 +329,6 @@ export const mainNav: NavLink[] = [
   { title: organsPage.title, href: organsPage.href },
   { title: "Blocks", href: "/blocks" },
   { title: "Charts", href: "/charts/area" },
-  { title: "Create", href: "/create" },
 ]
 
 // Pages added in the latest release, marked with a dot in the sidebar.

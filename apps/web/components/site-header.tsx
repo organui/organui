@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { PlusIcon } from "lucide-react"
 import { CommandMenu } from "@/components/command-menu"
 import { GitHubLink } from "@/components/github-link"
 import { MainNav } from "@/components/main-nav"
@@ -7,12 +6,10 @@ import { MobileNav } from "@/components/mobile-nav"
 import { ModeSwitcher } from "@/components/mode-switcher"
 import { docsNav, mainNav } from "@/lib/registry"
 import { OrganUIMark } from "@workspace/ui/components/organui-mark"
-import { buttonVariants } from "@workspace/ui/components/button"
 import { Separator } from "@workspace/ui/components/separator"
-import { cn } from "@workspace/ui/lib/utils"
 
 // Shared by every page. Laid out after shadcn/ui's site header: navigation,
-// then search, the repository, the theme toggle and a link to start a project.
+// then search, the repository and the theme toggle.
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
@@ -40,21 +37,6 @@ export function SiteHeader() {
             className="data-vertical:h-4 data-vertical:self-center"
           />
           <ModeSwitcher />
-          {/* Phones have no room for it beside the menu and logo. */}
-          <Separator
-            orientation="vertical"
-            className="hidden sm:block data-vertical:h-4 data-vertical:self-center"
-          />
-          <Link
-            href="/create"
-            className={cn(
-              buttonVariants({ size: "sm" }),
-              "hidden h-[31px] rounded-lg sm:inline-flex"
-            )}
-          >
-            <PlusIcon data-icon="inline-start" />
-            New
-          </Link>
         </div>
       </div>
     </header>
