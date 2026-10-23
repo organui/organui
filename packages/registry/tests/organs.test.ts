@@ -7,7 +7,9 @@ import {
   type OrganModel,
 } from "../registry/base-nova/organ-viewer/organ-viewer"
 import {
+  AFFECTED,
   diseaseModel,
+  SPARED,
   type Disease,
 } from "../registry/base-nova/disease-viewer/disease-model"
 import { DiseaseViewer } from "../registry/base-nova/disease-viewer/disease-viewer"
@@ -136,18 +138,11 @@ for (const item of diseaseItems) {
         expect([...groups]).toEqual(["Affected", "Spared"])
         for (const structure of structures) {
           expect(structure.description?.length).toBeGreaterThan(0)
-          const original = baseStructures.find(({ id }) => id === structure.id)!
-          // Affected parts keep their colours; spared ones share a muted tone.
-          if (structure.group === "Affected")
-            expect(structure.color).toBe(original.color)
+          // Affected parts share the amber and spared ones the muted tone.
+          expect(structure.color).toBe(
+            structure.group === "Affected" ? AFFECTED : SPARED
+          )
         }
-        expect(
-          new Set(
-            structures
-              .filter(({ group }) => group === "Spared")
-              .map(({ color }) => color)
-          ).size
-        ).toBe(1)
       }
     // The model export is the default scale at the default stage, which the
     // site's loaders and the gallery picture use.
