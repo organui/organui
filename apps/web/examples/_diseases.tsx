@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "kidney-stones-demo": {
+    title: "Kidney stones",
+    file: "kidney-stones-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./kidney-stones-demo")
+      return <Example />
+    },
+  },
+  "kidney-stones-without-panel": {
+    title: "Kidney stones Without Panel",
+    file: "kidney-stones-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./kidney-stones-without-panel")
+      return <Example />
+    },
+  },
+  "kidney-stones-controlled": {
+    title: "Kidney stones Controlled",
+    file: "kidney-stones-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./kidney-stones-controlled")
+      return <Example />
+    },
+  },
 }

@@ -972,6 +972,21 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "kidney-stones",
+      "type": "registry:component",
+      "title": "Kidney stones",
+      "description": "A stone in the left kidney on the kidneys and ureters, from a silent renal stone through renal colic with hydronephrosis to an infected obstructed kidney, with the urine, CT and bloods at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/kidneys"],
+      "categories": ["disease", "urinary"],
+      "files": [
+        {
+          "path": "registry/base-nova/kidney-stones/kidney-stones.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Kidney stones docs: https://organui.com/docs/components/kidney-stones. It reuses the kidneys model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",

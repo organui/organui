@@ -92,6 +92,9 @@
       "@/components/kidneys": ["./registry/base-nova/kidneys/kidneys.tsx"],
       "@/components/larynx": ["./registry/base-nova/larynx/larynx.tsx"],
       "@/components/liver": ["./registry/base-nova/liver/liver.tsx"],
+      "@/components/kidney-stones": [
+        "./registry/base-nova/kidney-stones/kidney-stones.tsx"
+      ],
       "@/components/disease-viewer": [
         "./registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],

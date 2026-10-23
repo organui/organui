@@ -7,4 +7,8 @@ export const diseaseData: Record<string, () => Promise<Disease>> = {
     import("@workspace/registry/autoimmune-hepatitis").then(
       (module) => module.autoimmuneHepatitis
     ),
+  "kidney-stones": () =>
+    import("@workspace/registry/kidney-stones").then(
+      (module) => module.kidneyStones
+    ),
 }
