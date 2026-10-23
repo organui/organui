@@ -136,8 +136,35 @@
       "@/components/acute-angle-closure-glaucoma": [
         "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
       ],
+      "@/components/acute-appendicitis": [
+        "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
       "@/components/autoimmune-hepatitis": [
         "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      ],
+      "@/components/benign-prostatic-hyperplasia": [
+        "./registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx"
+      ],
+      "@/components/gallstone-disease": [
+        "./registry/base-nova/gallstone-disease/gallstone-disease.tsx"
+      ],
+      "@/components/graves-disease": [
+        "./registry/base-nova/graves-disease/graves-disease.tsx"
+      ],
+      "@/components/ischaemic-stroke": [
+        "./registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
+      "@/components/kidney-stones": [
+        "./registry/base-nova/kidney-stones/kidney-stones.tsx"
+      ],
+      "@/components/lobar-pneumonia": [
+        "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
+      ],
+      "@/components/peptic-ulcer-disease": [
+        "./registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx"
       ],
       // Removed by shadcn add, which writes the project's own icons instead.
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
