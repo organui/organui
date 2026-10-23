@@ -115,9 +115,17 @@ for (const item of diseaseItems) {
         const base = scale.model
         // The same GLB, views and credit; only the structures' text and
         // colours change, so every mesh id still matches the file.
-        const { structures, name, ...shared } = model
-        const { structures: baseStructures, name: baseName, ...same } = base
+        const { structures, name, defaultView, ...shared } = model
+        const {
+          structures: baseStructures,
+          name: baseName,
+          defaultView: baseView,
+          ...same
+        } = base
         expect(shared).toEqual(same)
+        // A scale can open on another of the model's own views.
+        expect(defaultView).toBe(scale.defaultView ?? baseView)
+        expect(base.views.map(({ name }) => name)).toContain(defaultView)
         expect(name).toBe(disease.name)
         expect(name).not.toBe(baseName)
         expect(structures.map(({ id }) => id).sort()).toEqual(

@@ -18,6 +18,8 @@ export type DiseaseScale = {
   /** The name the scale switch shows, such as "Liver" or "Lobule". */
   label: string
   model: OrganModel
+  /** The named view the model opens on, where the disease shows best. Defaults to the model's own. */
+  defaultView?: string
   /** Findings by structure ID. Structures without one are spared and keep their anatomical description. */
   findings: Readonly<Record<string, DiseaseFinding>>
 }
@@ -82,6 +84,7 @@ export function diseaseModel(
   return {
     ...scale.model,
     name: disease.name,
+    defaultView: scale.defaultView ?? scale.model.defaultView,
     structures: scale.model.structures
       .map((structure) => {
         const finding = findings[structure.id]
