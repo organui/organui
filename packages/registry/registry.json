@@ -972,6 +972,21 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "ischaemic-stroke",
+      "type": "registry:component",
+      "title": "Ischaemic stroke",
+      "description": "An ischaemic stroke of the left middle cerebral artery on the brain: the frontal, parietal and temporal lobes it supplies, with aphasia, weakness and field loss, from the hyperacute window through swelling to a healed cavity, with the scans and scores at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/brain"],
+      "categories": ["disease", "nervous"],
+      "files": [
+        {
+          "path": "registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Ischaemic stroke docs: https://organui.com/docs/components/ischaemic-stroke. It reuses the brain model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",

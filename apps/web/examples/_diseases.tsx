@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "ischaemic-stroke-demo": {
+    title: "Ischaemic stroke",
+    file: "ischaemic-stroke-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ischaemic-stroke-demo")
+      return <Example />
+    },
+  },
+  "ischaemic-stroke-without-panel": {
+    title: "Ischaemic stroke Without Panel",
+    file: "ischaemic-stroke-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./ischaemic-stroke-without-panel")
+      return <Example />
+    },
+  },
+  "ischaemic-stroke-controlled": {
+    title: "Ischaemic stroke Controlled",
+    file: "ischaemic-stroke-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./ischaemic-stroke-controlled")
+      return <Example />
+    },
+  },
 }

@@ -118,6 +118,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/ischaemic-stroke": [
+        "../../packages/registry/registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
       "@/components/disease-viewer": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],
