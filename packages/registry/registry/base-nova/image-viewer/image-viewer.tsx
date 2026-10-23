@@ -59,7 +59,7 @@ export type ImageViewerHandle = {
 
 export type ImageViewerTool = "window" | "pan"
 
-export type ImageViewerProps = {
+export type ImageViewerProps = Omit<React.ComponentProps<"div">, "ref"> & {
   /** The image slices, each with its width, height and pixel values. */
   slices: readonly ImageSlice[]
   /** Zero-based index of the shown slice, when controlled. */
@@ -84,8 +84,6 @@ export type ImageViewerProps = {
   controls?: boolean
   /** The accessible name of the image. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
   /** Moves through slices, zooms and resets the view from your own controls. */
   ref?: React.Ref<ImageViewerHandle>
 }
@@ -241,6 +239,7 @@ export function ImageViewer({
   label = "Medical image",
   className,
   ref,
+  ...props
 }: ImageViewerProps) {
   const stage = React.useRef<HTMLDivElement>(null)
   const canvas = React.useRef<HTMLCanvasElement>(null)
@@ -610,11 +609,15 @@ export function ImageViewer({
 
   return (
     <div
+      data-slot="image-viewer"
       className={cn(
         "flex h-[28rem] w-full flex-col overflow-hidden rounded-xl border bg-background text-sm text-foreground",
         className
       )}
+      {...props}
     >
+      {/* The stage stays black in both themes, as reading rooms do, so the
+          overlays on it are white rather than theme tokens. */}
       <div
         ref={stage}
         role="region"

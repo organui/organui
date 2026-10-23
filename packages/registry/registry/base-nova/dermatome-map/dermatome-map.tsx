@@ -196,7 +196,7 @@ export const dermatomes = [
 export type DermatomeId = (typeof dermatomes)[number]["id"]
 export type Dermatome = (typeof dermatomes)[number]
 
-export type DermatomeMapProps = {
+export type DermatomeMapProps = React.ComponentProps<"div"> & {
   /** The selected dermatome, such as L4, or null. */
   selectedId: DermatomeId | null
   /** Called with the dermatome a reader selects, or null. */
@@ -209,8 +209,6 @@ export type DermatomeMapProps = {
   showLabels?: boolean
   /** The accessible name of the map. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
 }
 
 type Shape = {
@@ -506,6 +504,7 @@ export function DermatomeMap({
   showLabels = true,
   label = "Dermatome map",
   className,
+  ...props
 }: DermatomeMapProps) {
   const [hoveredId, setHoveredId] = React.useState<DermatomeId | null>(null)
   const [activeId, setActiveId] = React.useState<DermatomeId>(
@@ -519,7 +518,9 @@ export function DermatomeMap({
   }
   const options = React.useRef(new Map<DermatomeId, HTMLElement>())
   const id = React.useId()
-  const shownId = hoveredId ?? selectedId
+  // Keyboard focus in the level list previews its level, as hover does.
+  const [listFocused, setListFocused] = React.useState(false)
+  const shownId = hoveredId ?? (listFocused ? activeId : selectedId)
   const shown = dermatomes.find((dermatome) => dermatome.id === shownId)
   const fill = (level: DermatomeId) => colors?.[level] ?? dermatomeColor(level)
   const hover = {
@@ -555,9 +556,11 @@ export function DermatomeMap({
 
   return (
     <div
+      data-slot="dermatome-map"
       role="group"
       aria-label={label}
       className={cn("@container/dermatome-map", className)}
+      {...props}
     >
       <div className="grid gap-6 @2xl/dermatome-map:grid-cols-[minmax(0,1fr)_18rem]">
         <div
@@ -585,6 +588,11 @@ export function DermatomeMap({
             aria-label="Spinal levels"
             aria-orientation="horizontal"
             onKeyDown={onKeyDown}
+            onFocus={() => setListFocused(true)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget))
+                setListFocused(false)
+            }}
             className="flex flex-col gap-3"
           >
             {regions.map((region) => (
@@ -627,7 +635,7 @@ export function DermatomeMap({
                         )}
                       >
                         <span
-                          aria-hidden
+                          aria-hidden="true"
                           className="size-2.5 shrink-0 rounded-full"
                           style={{ background: fill(dermatome.id) }}
                         />
@@ -700,6 +708,7 @@ function DermatomeFigure({
   const shown = shownId ? regions[shownId] : undefined
   return (
     <figure className="@container flex min-w-0 flex-col items-center gap-2">
+      <figcaption className="text-sm font-medium">{viewNames[view]}</figcaption>
       <svg
         viewBox="0 0 220 480"
         role="img"
@@ -767,9 +776,6 @@ function DermatomeFigure({
             ) : null
           )}
       </svg>
-      <figcaption className="text-xs text-muted-foreground">
-        {viewNames[view]}
-      </figcaption>
     </figure>
   )
 }

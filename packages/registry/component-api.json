@@ -1,7 +1,7 @@
 {
   "anatomy-tree": {
     "component": "AnatomyTree",
-    "element": null,
+    "element": "section",
     "props": [
       {
         "name": "data",
@@ -63,7 +63,7 @@
   },
   "body-map": {
     "component": "BodyMap",
-    "element": null,
+    "element": "div",
     "props": [
       {
         "name": "value",
@@ -105,20 +105,13 @@
         "type": "string",
         "required": false,
         "default": "\"Body map\"",
-        "description": "The accessible name of the map, and its legend."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
+        "description": "The accessible name of the map."
       }
     ]
   },
   "dermatome-map": {
     "component": "DermatomeMap",
-    "element": null,
+    "element": "div",
     "props": [
       {
         "name": "selectedId",
@@ -161,13 +154,6 @@
         "required": false,
         "default": "\"Dermatome map\"",
         "description": "The accessible name of the map."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
@@ -380,7 +366,7 @@
   },
   "image-viewer": {
     "component": "ImageViewer",
-    "element": null,
+    "element": "div",
     "props": [
       {
         "name": "slices",
@@ -465,13 +451,6 @@
         "required": false,
         "default": "\"Medical image\"",
         "description": "The accessible name of the image."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       },
       {
         "name": "ref",
