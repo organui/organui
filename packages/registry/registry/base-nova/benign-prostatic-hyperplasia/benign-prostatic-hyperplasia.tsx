@@ -90,13 +90,13 @@ export const benignProstaticHyperplasia: Disease = {
       id: "chronic-retention",
       label: "Chronic retention",
       summary:
-        "The bladder never empties. It stretches painlessly, leaks by overflow, and the pressure inside it backs up to the kidneys.",
+        "The bladder never empties fully. It stretches painlessly, leaks by overflow, and the pressure inside it backs up to the kidneys.",
       findings: {
         bladder: {
           "urinary-bladder": {
             affected: true,
             description:
-              "Thin-walled and distended with a large residual volume after voiding; it leaks by overflow, often at night.",
+              "Thick-walled and trabeculated, and distended with a large residual volume after voiding. The high pressure inside it leaks out by overflow, often at night.",
           },
           "right-ureter": {
             affected: true,

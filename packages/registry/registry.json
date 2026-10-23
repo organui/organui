@@ -975,7 +975,7 @@
       "name": "benign-prostatic-hyperplasia",
       "type": "registry:component",
       "title": "Benign prostatic hyperplasia",
-      "description": "Benign prostatic hyperplasia on the prostate and the bladder: the gland narrowing the urethra, the bladder thickening to push past it, then chronic retention backing up to the kidneys or acute retention, with symptom scores, flow and residual volumes at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "description": "Benign prostatic hyperplasia on the prostate and the bladder: the gland narrowing the urethra, the bladder thickening to push past it, then chronic retention backing up to the kidneys or acute retention, with symptom scores, flow and residual volumes at each stage. Models licensed CC BY-SA 2.1 JP (prostate and bladder).",
       "registryDependencies": [
         "@organui/disease-viewer",
         "@organui/prostate",
