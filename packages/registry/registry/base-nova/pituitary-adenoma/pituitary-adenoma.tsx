@@ -34,10 +34,10 @@ export const pituitaryAdenoma: Disease = {
           description:
             "Beside the sella, carrying the internal carotid and the nerves that move the eye. A growing tumour can invade it.",
         },
-        "tuber-cinereum": {
+        "hypophyseal-portal-veins": {
           affected: false,
           description:
-            "The pituitary stalk hangs from here, carrying dopamine down to keep prolactin in check.",
+            "Carry dopamine from the hypothalamus down the stalk, keeping prolactin in check.",
         },
         "sphenoid-bone": {
           affected: false,
@@ -71,10 +71,10 @@ export const pituitaryAdenoma: Disease = {
             description:
               "Pressed from below, so the crossing fibres from the nasal halves of each retina fail first: both outer visual fields go (bitemporal hemianopia), often unnoticed.",
           },
-          "tuber-cinereum": {
+          "hypophyseal-portal-veins": {
             affected: true,
             description:
-              "The stalk is compressed, so less dopamine reaches the gland and prolactin rises modestly (stalk effect), unlike the very high levels of a prolactinoma.",
+              "The stalk and its portal veins are compressed, so less dopamine reaches the gland and prolactin rises modestly (stalk effect), unlike the very high levels of a prolactinoma.",
           },
         },
       },
