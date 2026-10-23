@@ -103,8 +103,8 @@ export type OrganViewerProps = {
   src?: string
   /** The selected structure id, or null. */
   selectedId?: string | null
-  /** Called with the structure a reader selects. */
-  onSelectionChange?: (id: string) => void
+  /** Called with the structure a reader selects, or null when the view is reset. */
+  onSelectionChange?: (id: string | null) => void
   /** Missing IDs are visible, matching the anatomy tree's contract. */
   visibility?: Readonly<Record<string, boolean>>
   /** The named view shown first. */
@@ -341,11 +341,18 @@ export function OrganViewer({
   const latest = React.useRef({
     model,
     defaultView,
+    selectedId,
     onSelectionChange,
     onViewChange,
   })
   React.useLayoutEffect(() => {
-    latest.current = { model, defaultView, onSelectionChange, onViewChange }
+    latest.current = {
+      model,
+      defaultView,
+      selectedId,
+      onSelectionChange,
+      onViewChange,
+    }
   })
   const instructions = React.useId()
 
@@ -693,15 +700,23 @@ export function OrganViewer({
     engine?.paint(selectedId, shown)
   }, [engine, selectedId, shown])
 
+  // Resetting the view also clears the selection, so a controlled viewer
+  // returns to the state it opened in.
+  const reset = React.useCallback(() => {
+    engine?.reset()
+    if (latest.current.selectedId !== null)
+      latest.current.onSelectionChange?.(null)
+  }, [engine])
+
   React.useImperativeHandle(
     ref,
     () => ({
       setView: (name) => engine?.setView(name),
       zoom: (factor) => engine?.zoom(factor),
       rotate: (azimuth, polar) => engine?.rotate(azimuth, polar),
-      reset: () => engine?.reset(),
+      reset,
     }),
-    [engine]
+    [engine, reset]
   )
 
   const retry = () => {
@@ -843,7 +858,7 @@ export function OrganViewer({
                 aria-hidden="true"
               />
             </ToolbarButton>
-            <ToolbarButton label="Reset view" onClick={() => engine.reset()}>
+            <ToolbarButton label="Reset view" onClick={reset}>
               <IconPlaceholder
                 lucide="RotateCcwIcon"
                 tabler="IconRotate"
