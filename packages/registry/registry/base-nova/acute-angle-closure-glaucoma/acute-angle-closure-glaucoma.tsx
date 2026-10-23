@@ -106,6 +106,16 @@ export const acuteAngleClosureGlaucoma: Disease = {
             description:
               "The iris has stuck to the angle in places (synechiae), so drainage stays poor despite the laser hole.",
           },
+          iris: {
+            affected: true,
+            description:
+              "The laser hole is open, but the attack left patches of atrophy and stuck the iris root to the angle (peripheral anterior synechiae).",
+          },
+          cornea: {
+            affected: false,
+            description:
+              "Clear: the pressure is raised but rises slowly, so the eye is quiet and the damage goes unnoticed.",
+          },
         },
       },
       investigations: [
