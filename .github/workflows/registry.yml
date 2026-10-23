@@ -85,13 +85,29 @@ jobs:
       - run: bun scripts/vercel-build.ts
       - run: bun run test:cache
       # The browser download, keyed on the lockfile that pins Playwright.
-      # System packages still install each run.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('bun.lock') }}
+      # The system packages it installs (fonts, Xvfb, NSS) are kept too: an
+      # Ubuntu mirror can serve them at a few kB/s, which has taken 11 minutes.
+      # Keyed on the runner image, whose package versions they match; apt
+      # downloads only what changed since.
+      - id: runner-image
+        run: echo "version=$ImageOS-$ImageVersion" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/apt-archives
+          key: ${{ runner.os }}-playwright-deps-${{ steps.runner-image.outputs.version }}-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-playwright-deps-
+      - run: |
+          mkdir -p ~/.cache/apt-archives/partial
+          printf 'Dir::Cache::Archives "%s";\nBinary::apt::APT::Keep-Downloaded-Packages "true";\n' ~/.cache/apt-archives \
+            | sudo tee /etc/apt/apt.conf.d/99playwright-cache
       - run: bunx playwright install --with-deps chromium
         working-directory: packages/registry-e2e
+      # apt writes as root; the cache is saved as the runner user.
+      - run: sudo chown -R "$USER" ~/.cache/apt-archives
       # Turbo generates the consumers and reuses the cached website build.
       - run: bun run test:browser --log-order=stream
         env:
