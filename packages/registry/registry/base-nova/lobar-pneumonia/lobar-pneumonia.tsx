@@ -30,6 +30,9 @@ export const lobarPneumonia: Disease = {
       id: "lungs",
       label: "Lungs",
       model: lungsModel,
+      // From the side, the oblique fissure separates the lower lobe from
+      // the middle lobe in front of it.
+      defaultView: "Right lateral",
       findings: {
         ...consolidated(
           "Protein-rich fluid, bacteria and a few neutrophils flood the alveoli. The lobe is heavy and red, and fine crackles are heard over the right base."
