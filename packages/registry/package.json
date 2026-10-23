@@ -55,6 +55,7 @@
     "./kidneys": "./registry/base-nova/kidneys/kidneys.tsx",
     "./larynx": "./registry/base-nova/larynx/larynx.tsx",
     "./liver": "./registry/base-nova/liver/liver.tsx",
+    "./lobar-pneumonia": "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
     "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
     "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",

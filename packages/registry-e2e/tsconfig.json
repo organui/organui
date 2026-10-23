@@ -108,6 +108,9 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/lobar-pneumonia": [
+        "../registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
       "@/components/disease-viewer": [
         "../registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],
