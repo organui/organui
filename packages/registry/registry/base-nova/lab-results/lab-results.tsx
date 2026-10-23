@@ -49,7 +49,10 @@ export type LabResult = {
   decimals?: number
 }
 
-export type LabResultsTableProps = React.ComponentProps<"div"> & {
+export type LabResultsTableProps = Omit<
+  React.ComponentProps<"div">,
+  "results"
+> & {
   /** The results, each with its value, unit, range and history. */
   results: readonly LabResult[]
   /** Names the table for assistive technology and shows below it. */
