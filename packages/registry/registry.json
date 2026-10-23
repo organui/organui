@@ -361,7 +361,7 @@
     {
       "name": "liver-lobule",
       "type": "registry:component",
-      "title": "Liver Lobule",
+      "title": "Liver lobule",
       "description": "A classic liver lobule, from an original OrganUI schematic model: the central vein, hepatocyte plates in their three zones, sinusoids and the portal tracts at its corners. 11 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "registryDependencies": ["@organui/organ-viewer"],
       "categories": ["tissue", "digestive"],
@@ -371,7 +371,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Liver Lobule docs: https://organui.com/docs/components/liver-lobule. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
+      "docs": "Liver lobule docs: https://organui.com/docs/components/liver-lobule. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
     },
     {
       "name": "diaphragm",
@@ -931,7 +931,7 @@
     {
       "name": "autoimmune-hepatitis",
       "type": "registry:component",
-      "title": "Autoimmune Hepatitis",
+      "title": "Autoimmune hepatitis",
       "description": "Autoimmune hepatitis on the liver lobule: the portal infiltrate, interface hepatitis at the limiting plate and periportal injury, with the zones, veins and bile ducts it usually spares. 11 selectable structures and 3 named views. Model licensed CC0 1.0.",
       "registryDependencies": [
         "@organui/liver-lobule",
@@ -944,7 +944,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Autoimmune Hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
+      "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
       "name": "ai-disclaimer",

@@ -80,11 +80,12 @@ for (const item of diseaseItems) {
     const { structures: baseStructures, name: baseName, ...same } = base
     expect(shared).toEqual(same)
     expect(name).not.toBe(baseName)
-    expect(structures.map(({ id }) => id)).toEqual(
-      baseStructures.map(({ id }) => id)
+    expect(structures.map(({ id }) => id).sort()).toEqual(
+      baseStructures.map(({ id }) => id).sort()
     )
+    // The anatomy tree lists groups in structure order: affected first.
     const groups = new Set(structures.map(({ group }) => group))
-    expect([...groups].sort()).toEqual(["Affected", "Spared"])
+    expect([...groups]).toEqual(["Affected", "Spared"])
     for (const structure of structures) {
       expect(structure.description?.length).toBeGreaterThan(0)
       const original = baseStructures.find(({ id }) => id === structure.id)!

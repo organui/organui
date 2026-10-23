@@ -66,7 +66,7 @@ export const organExamples = {
     },
   },
   "autoimmune-hepatitis-demo": {
-    title: "Autoimmune Hepatitis",
+    title: "Autoimmune hepatitis",
     file: "autoimmune-hepatitis-demo.tsx",
     render: async () => {
       const { Example } = await import("./autoimmune-hepatitis-demo")
@@ -74,7 +74,7 @@ export const organExamples = {
     },
   },
   "autoimmune-hepatitis-without-controls": {
-    title: "Autoimmune Hepatitis Without Controls",
+    title: "Autoimmune hepatitis Without Controls",
     file: "autoimmune-hepatitis-without-controls.tsx",
     render: async () => {
       const { Example } =
@@ -83,7 +83,7 @@ export const organExamples = {
     },
   },
   "autoimmune-hepatitis-controlled": {
-    title: "Autoimmune Hepatitis Controlled Selection",
+    title: "Autoimmune hepatitis Controlled Selection",
     file: "autoimmune-hepatitis-controlled.tsx",
     render: async () => {
       const { Example } = await import("./autoimmune-hepatitis-controlled")
@@ -91,7 +91,7 @@ export const organExamples = {
     },
   },
   "autoimmune-hepatitis-with-anatomy": {
-    title: "Autoimmune Hepatitis With Anatomy Panel",
+    title: "Autoimmune hepatitis With Anatomy Panel",
     file: "autoimmune-hepatitis-with-anatomy.tsx",
     render: async () => {
       const { Example } = await import("./autoimmune-hepatitis-with-anatomy")
@@ -579,7 +579,7 @@ export const organExamples = {
     },
   },
   "liver-lobule-demo": {
-    title: "Liver Lobule",
+    title: "Liver lobule",
     file: "liver-lobule-demo.tsx",
     render: async () => {
       const { Example } = await import("./liver-lobule-demo")
@@ -587,7 +587,7 @@ export const organExamples = {
     },
   },
   "liver-lobule-without-controls": {
-    title: "Liver Lobule Without Controls",
+    title: "Liver lobule Without Controls",
     file: "liver-lobule-without-controls.tsx",
     render: async () => {
       const { Example } = await import("./liver-lobule-without-controls")
@@ -595,7 +595,7 @@ export const organExamples = {
     },
   },
   "liver-lobule-controlled": {
-    title: "Liver Lobule Controlled Selection",
+    title: "Liver lobule Controlled Selection",
     file: "liver-lobule-controlled.tsx",
     render: async () => {
       const { Example } = await import("./liver-lobule-controlled")
@@ -603,7 +603,7 @@ export const organExamples = {
     },
   },
   "liver-lobule-with-anatomy": {
-    title: "Liver Lobule With Anatomy Panel",
+    title: "Liver lobule With Anatomy Panel",
     file: "liver-lobule-with-anatomy.tsx",
     render: async () => {
       const { Example } = await import("./liver-lobule-with-anatomy")

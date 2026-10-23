@@ -54,20 +54,25 @@ const findings: Record<
 }
 
 // The liver lobule with autoimmune hepatitis mapped onto its structures: the
-// same GLB, views and credit, regrouped into affected and spared parts.
+// same GLB, views and credit, regrouped into affected and spared parts, the
+// affected ones listed first.
 export const autoimmuneHepatitisModel: OrganModel = {
   ...liverLobuleModel,
   name: "Autoimmune hepatitis",
-  structures: liverLobuleModel.structures.map((structure) => {
-    const finding = findings[structure.id]
-    return {
-      ...structure,
-      label: finding?.label ?? structure.label,
-      group: finding?.affected ? "Affected" : "Spared",
-      color: finding?.affected ? structure.color : SPARED,
-      description: finding?.description ?? structure.description,
-    }
-  }),
+  structures: liverLobuleModel.structures
+    .map((structure) => {
+      const finding = findings[structure.id]
+      return {
+        ...structure,
+        label: finding?.label ?? structure.label,
+        group: finding?.affected ? "Affected" : "Spared",
+        color: finding?.affected ? structure.color : SPARED,
+        description: finding?.description ?? structure.description,
+      }
+    })
+    .sort(
+      (a, b) => Number(b.group === "Affected") - Number(a.group === "Affected")
+    ),
 }
 
 export type AutoimmuneHepatitisProps = Omit<OrganViewerProps, "model">
