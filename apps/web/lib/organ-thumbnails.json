@@ -28,6 +28,7 @@
   "pharynx": "https://cdn.jsdelivr.net/gh/organui/pharynx-3d@c3759092b524ab4637d691168bdc08bbee1fcfbb/public/models/pharynx.glb",
   "pineal": "https://organui.com/models/pineal.glb",
   "pituitary": "https://organui.com/models/pituitary.glb",
+  "pituitary-adenoma": "https://organui.com/models/pituitary.glb",
   "prostate": "https://cdn.jsdelivr.net/gh/organui/prostate-3d@204c67a54226a19868abd0a5e8449a7f82827bf9/public/models/prostate.glb",
   "salivary-glands": "https://organui.com/models/salivary-glands.glb",
   "skeleton": "https://cdn.jsdelivr.net/gh/organui/skeleton-3d@120fc17278559057b37aff516eee89d263b604c6/public/models/skeleton.glb",
