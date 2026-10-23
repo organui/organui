@@ -11,6 +11,10 @@ const local = (model: OrganModel): OrganModel => ({
 })
 
 export const organModels: Record<string, () => Promise<OrganModel>> = {
+  "acl-rupture": () =>
+    import("@workspace/registry/acl-rupture").then((module) =>
+      local(module.aclRuptureModel)
+    ),
   adrenals: () =>
     import("@workspace/registry/adrenals").then(
       (module) => module.adrenalsModel
@@ -18,10 +22,6 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   appendix: () =>
     import("@workspace/registry/appendix").then((module) =>
       local(module.appendixModel)
-    ),
-  "acl-rupture": () =>
-    import("@workspace/registry/acl-rupture").then((module) =>
-      local(module.aclRuptureModel)
     ),
   "autoimmune-hepatitis": () =>
     import("@workspace/registry/autoimmune-hepatitis").then((module) =>
