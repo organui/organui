@@ -49,4 +49,52 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "lobar-pneumonia-demo": {
+    title: "Lobar pneumonia",
+    file: "lobar-pneumonia-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./lobar-pneumonia-demo")
+      return <Example />
+    },
+  },
+  "lobar-pneumonia-without-panel": {
+    title: "Lobar pneumonia Without Panel",
+    file: "lobar-pneumonia-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./lobar-pneumonia-without-panel")
+      return <Example />
+    },
+  },
+  "lobar-pneumonia-controlled": {
+    title: "Lobar pneumonia Controlled",
+    file: "lobar-pneumonia-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./lobar-pneumonia-controlled")
+      return <Example />
+    },
+  },
+  "myocardial-infarction-demo": {
+    title: "Myocardial infarction",
+    file: "myocardial-infarction-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./myocardial-infarction-demo")
+      return <Example />
+    },
+  },
+  "myocardial-infarction-without-panel": {
+    title: "Myocardial infarction Without Panel",
+    file: "myocardial-infarction-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./myocardial-infarction-without-panel")
+      return <Example />
+    },
+  },
+  "myocardial-infarction-controlled": {
+    title: "Myocardial infarction Controlled",
+    file: "myocardial-infarction-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./myocardial-infarction-controlled")
+      return <Example />
+    },
+  },
 }

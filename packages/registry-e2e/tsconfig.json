@@ -183,6 +183,12 @@
       "@/components/autoimmune-hepatitis": [
         "../registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
+      "@/components/lobar-pneumonia": [
+        "../registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "../registry/registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
+      ],
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["../ui/src/components/*"],
       "@/components/*": ["../registry/registry/base-nova/organ-viewer/*"]
