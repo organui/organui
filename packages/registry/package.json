@@ -82,6 +82,7 @@
     "./vestibular": "./registry/base-nova/vestibular/vestibular.tsx",
     "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
     "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
+    "./acl-rupture": "./registry/base-nova/acl-rupture/acl-rupture.tsx",
     "./acute-angle-closure-glaucoma": "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx",
     "./acute-appendicitis": "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",

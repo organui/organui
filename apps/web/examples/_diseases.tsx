@@ -1,6 +1,30 @@
 // Named documentation examples for the diseases, on the public components
 // consumers install. Imports stay explicit so each page loads only its own.
 export const diseaseExamples = {
+  "acl-rupture-demo": {
+    title: "ACL rupture",
+    file: "acl-rupture-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./acl-rupture-demo")
+      return <Example />
+    },
+  },
+  "acl-rupture-without-panel": {
+    title: "ACL rupture Without Panel",
+    file: "acl-rupture-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./acl-rupture-without-panel")
+      return <Example />
+    },
+  },
+  "acl-rupture-controlled": {
+    title: "ACL rupture Controlled",
+    file: "acl-rupture-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./acl-rupture-controlled")
+      return <Example />
+    },
+  },
   "acute-angle-closure-glaucoma-demo": {
     title: "Acute angle-closure glaucoma",
     file: "acute-angle-closure-glaucoma-demo.tsx",

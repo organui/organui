@@ -1,4 +1,5 @@
 {
+  "acl-rupture": "https://organui.com/models/joints.glb",
   "acute-angle-closure-glaucoma": "https://cdn.jsdelivr.net/gh/organui/eye-3d@99f74f1c096ae2813dd18e1ecb2c9cbbd701c530/public/models/eye.glb",
   "acute-appendicitis": "https://organui.com/models/appendix.glb",
   "adrenals": "https://cdn.jsdelivr.net/gh/organui/adrenals-3d@320ccd6e6355cd9f5a9d5854ebe3e363aab08b70/public/models/adrenals.glb",

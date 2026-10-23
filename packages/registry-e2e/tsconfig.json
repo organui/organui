@@ -177,6 +177,9 @@
       "@/components/disease-model": [
         "../registry/registry/base-nova/disease-viewer/disease-model.ts"
       ],
+      "@/components/acl-rupture": [
+        "../registry/registry/base-nova/acl-rupture/acl-rupture.tsx"
+      ],
       "@/components/acute-angle-closure-glaucoma": [
         "../registry/registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
       ],

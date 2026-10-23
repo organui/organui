@@ -953,6 +953,21 @@
       "docs": "Disease viewer docs: https://organui.com/docs/components/disease-viewer. Educational, not for diagnosis."
     },
     {
+      "name": "acl-rupture",
+      "type": "registry:component",
+      "title": "ACL rupture",
+      "description": "An anterior cruciate ligament rupture with the medial collateral ligament and medial meniscus, the unhappy triad, on the knees of the joints model: the acute injury, then reconstruction or an unstable knee heading for osteoarthritis, with the examination and imaging at each stage. Model licensed CC BY-SA 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/joints"],
+      "categories": ["disease", "musculoskeletal"],
+      "files": [
+        {
+          "path": "registry/base-nova/acl-rupture/acl-rupture.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "ACL rupture docs: https://organui.com/docs/components/acl-rupture. It reuses the joints model, licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "acute-angle-closure-glaucoma",
       "type": "registry:component",
       "title": "Acute angle-closure glaucoma",
