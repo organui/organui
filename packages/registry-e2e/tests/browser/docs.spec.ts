@@ -1388,7 +1388,8 @@ test("AI Elements cite sources, mark unsupported claims and record review", asyn
   ).toBeDisabled()
   await example.getByRole("button", { name: "Cancel" }).click()
   await example.getByRole("button", { name: "Approve" }).click()
-  await expect(example).toContainText("Approved by Dr A. Rivera")
+  await expect(example).toContainText("Approved")
+  await expect(example).toContainText("By Dr A. Rivera")
   await expect(example.getByRole("note")).toContainText(
     "AI-generated, reviewed"
   )

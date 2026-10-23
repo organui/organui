@@ -4,11 +4,6 @@ import * as React from "react"
 import { cn } from "cn"
 
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {
   Item,
   ItemActions,
   ItemContent,
@@ -18,6 +13,11 @@ import {
   ItemTitle,
 } from "@/components/ui/item"
 import { Progress } from "@/components/ui/progress"
+import {
+  TraceCollapsible,
+  TraceCollapsibleContent,
+  TraceCollapsibleTrigger,
+} from "@/components/ui/trace"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type Differential = {
@@ -104,22 +104,15 @@ function DifferentialItem({
       </ItemActions>
       {evidence && (
         <ItemFooter className="pl-6.5">
-          <Collapsible className="w-full">
-            <CollapsibleTrigger className="group/evidence inline-flex items-center gap-1 rounded-sm text-xs font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50">
+          {/* The same disclosure as ClinicalSources: Trace's trigger and its
+              indented content. */}
+          <TraceCollapsible>
+            <TraceCollapsibleTrigger className="text-xs font-medium">
               Evidence
               <span className="sr-only"> for {item.name}</span>
-              <IconPlaceholder
-                lucide="ChevronRightIcon"
-                tabler="IconChevronRight"
-                hugeicons="ArrowRight01Icon"
-                phosphor="CaretRightIcon"
-                remixicon="RiArrowRightSLine"
-                aria-hidden="true"
-                className="size-3.5 transition-transform group-aria-expanded/evidence:rotate-90"
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <div className="grid gap-3 pt-2 sm:grid-cols-2">
+            </TraceCollapsibleTrigger>
+            <TraceCollapsibleContent>
+              <div className="grid gap-3 sm:grid-cols-2">
                 <Findings
                   title="Supports"
                   icon={
@@ -151,8 +144,8 @@ function DifferentialItem({
                   findings={item.against}
                 />
               </div>
-            </CollapsibleContent>
-          </Collapsible>
+            </TraceCollapsibleContent>
+          </TraceCollapsible>
         </ItemFooter>
       )}
     </Item>

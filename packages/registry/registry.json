@@ -221,7 +221,7 @@
         "class-variance-authority@^0.7.1",
         "cn@^0.5.0"
       ],
-      "registryDependencies": ["button"],
+      "registryDependencies": ["button", "toggle"],
       "files": [
         {
           "path": "registry/base-nova/dermatome-map/dermatome-map.tsx",
@@ -968,7 +968,7 @@
       "description": "Suggested diagnoses ranked by model confidence, as shadcn Items, each with the findings for and against it.",
       "categories": ["ai"],
       "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["collapsible", "item", "progress"],
+      "registryDependencies": ["item", "progress", "trace"],
       "files": [
         {
           "path": "registry/base-nova/differential-list/differential-list.tsx",
@@ -984,7 +984,7 @@
       "description": "A clinician's sign-off on AI-generated content, built like shadcn's Confirmation: approve, or request changes or reject with a reason, recording who and when.",
       "categories": ["ai"],
       "dependencies": ["cn@^0.5.0"],
-      "registryDependencies": ["button", "field", "item", "textarea"],
+      "registryDependencies": ["badge", "button", "field", "item", "textarea"],
       "files": [
         {
           "path": "registry/base-nova/clinician-review/clinician-review.tsx",

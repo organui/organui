@@ -4,6 +4,7 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import { toggleVariants } from "@/components/ui/toggle"
 
 export type DermatomeView = "front" | "back"
 export type DermatomeRegion = "Cervical" | "Thoracic" | "Lumbar" | "Sacral"
@@ -621,10 +622,12 @@ export function DermatomeMap({
                         }}
                         onPointerEnter={() => hover.enter(dermatome.id)}
                         onPointerLeave={() => hover.leave(dermatome.id)}
+                        // Styled as shadcn's outline Toggle, keeping listbox
+                        // semantics. Selection also darkens the border, so it
+                        // differs from hover, which shares bg-muted.
                         className={cn(
-                          "flex h-7 min-w-11 cursor-pointer items-center gap-1.5 rounded-md border px-2 text-xs font-medium tabular-nums outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
-                          dermatome.id === selectedId &&
-                            "border-foreground bg-muted"
+                          toggleVariants({ variant: "outline", size: "sm" }),
+                          "min-w-11 cursor-pointer gap-1.5 text-xs tabular-nums select-none aria-selected:border-foreground aria-selected:bg-muted"
                         )}
                       >
                         <span

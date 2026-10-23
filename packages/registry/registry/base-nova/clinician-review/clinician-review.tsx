@@ -2,6 +2,7 @@
 
 import * as React from "react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 import {
@@ -10,7 +11,6 @@ import {
   ItemContent,
   ItemDescription,
   ItemFooter,
-  ItemMedia,
   ItemTitle,
 } from "@/components/ui/item"
 import { Textarea } from "@/components/ui/textarea"
@@ -64,7 +64,7 @@ function defaultFormatDate(date: string) {
 
 type Pending = "changes-requested" | "rejected"
 
-// Each status has its own shape, so it reads without colour.
+// Each status has its own shape, so the badge reads without colour.
 function StatusIcon({ status }: { status: ReviewStatus }) {
   switch (status) {
     case "pending":
@@ -76,6 +76,7 @@ function StatusIcon({ status }: { status: ReviewStatus }) {
           phosphor="ClockIcon"
           remixicon="RiTimeLine"
           aria-hidden="true"
+          data-icon="inline-start"
         />
       )
     case "approved":
@@ -87,6 +88,7 @@ function StatusIcon({ status }: { status: ReviewStatus }) {
           phosphor="CheckIcon"
           remixicon="RiCheckLine"
           aria-hidden="true"
+          data-icon="inline-start"
         />
       )
     case "changes-requested":
@@ -98,6 +100,7 @@ function StatusIcon({ status }: { status: ReviewStatus }) {
           phosphor="WarningCircleIcon"
           remixicon="RiErrorWarningLine"
           aria-hidden="true"
+          data-icon="inline-start"
         />
       )
     case "rejected":
@@ -109,6 +112,7 @@ function StatusIcon({ status }: { status: ReviewStatus }) {
           phosphor="XIcon"
           remixicon="RiCloseLine"
           aria-hidden="true"
+          data-icon="inline-start"
         />
       )
   }
@@ -155,15 +159,25 @@ export function ClinicianReview({
       className={className}
       {...props}
     >
-      <ItemMedia variant="icon">
-        <StatusIcon status={value.status} />
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle>{subject}</ItemTitle>
-        <ItemDescription aria-live="polite">
+      {/* The status is a Badge, as lab results and the charts show theirs,
+          and the region announces it with who decided. */}
+      <ItemContent aria-live="polite">
+        <ItemTitle className="flex-wrap gap-y-1">
+          {subject}
+          <Badge variant="outline">
+            <StatusIcon status={value.status} />
+            {reviewStatusLabels[value.status]}
+          </Badge>
+        </ItemTitle>
+        <ItemDescription>
           {decided
-            ? `${reviewStatusLabels[value.status]}${value.reviewer ? ` by ${value.reviewer}` : ""}${value.at ? `, ${formatDate(value.at)}` : ""}.`
-            : `${reviewStatusLabels.pending}. Review as ${reviewer} before this is used.`}
+            ? [
+                value.reviewer && `By ${value.reviewer}`,
+                value.at && formatDate(value.at),
+              ]
+                .filter(Boolean)
+                .join(", ") || "No reviewer recorded."
+            : `Review as ${reviewer} before this is used.`}
         </ItemDescription>
         {decided && value.comment && (
           <blockquote className="mt-1 border-l-2 pl-3 text-sm text-muted-foreground">
