@@ -118,6 +118,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/acute-appendicitis": [
+        "../../packages/registry/registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
       "@/components/disease-viewer": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],

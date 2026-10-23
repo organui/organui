@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "acute-appendicitis-demo": {
+    title: "Acute appendicitis",
+    file: "acute-appendicitis-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-appendicitis-demo")
+      return <Example />
+    },
+  },
+  "acute-appendicitis-without-panel": {
+    title: "Acute appendicitis Without Panel",
+    file: "acute-appendicitis-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-appendicitis-without-panel")
+      return <Example />
+    },
+  },
+  "acute-appendicitis-controlled": {
+    title: "Acute appendicitis Controlled",
+    file: "acute-appendicitis-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-appendicitis-controlled")
+      return <Example />
+    },
+  },
 }
