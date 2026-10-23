@@ -84,15 +84,17 @@ for (const item of diseaseItems) {
     expect([...disease.scales.map(({ id }) => id)].sort()).toEqual(
       [...bases].sort()
     )
-    for (const scale of disease.scales) {
+    for (const [index, scale] of disease.scales.entries()) {
       const baseItem = registry.items.find(({ name }) => name === scale.id)
       // Drawn on an organ, or on a tissue for what happens at that scale.
       const [kind] = baseItem!.categories
       expect(["organ", "tissue"]).toContain(kind!)
-      // The disease sits in the same body system as its bases.
-      expect(
-        item.categories.filter((category) => category !== "disease")
-      ).toEqual(baseItem!.categories.filter((category) => category !== kind))
+      // The disease sits in the body system of its default scale; another
+      // scale may be another system's organ, such as the eye in Graves'.
+      if (index === 0)
+        expect(
+          item.categories.filter((category) => category !== "disease")
+        ).toEqual(baseItem!.categories.filter((category) => category !== kind))
       expect(scale.model).toBe((await load(scale.id)).model)
     }
     // Every finding names a structure of its scale's model.
