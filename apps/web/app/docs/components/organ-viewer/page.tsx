@@ -51,9 +51,9 @@ export default async function Page() {
     <div className="flex flex-col gap-10">
       <DocsHeader href="/docs/components/organ-viewer" title="Organ viewer">
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
-          The 3D stage every OrganUI explorer shares. Give it a GLB and a
+          The 3D stage every OrganUI organ is built on. Give it any GLB and a
           description of its structures; it handles loading, framing, picking
-          and emphasis.
+          and emphasis. Switch models in the example: the viewer stays the same.
         </p>
       </DocsHeader>
       <ComponentPreview name="organ-viewer-demo" />
