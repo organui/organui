@@ -972,6 +972,25 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "graves-disease",
+      "type": "registry:component",
+      "title": "Graves' disease",
+      "description": "Graves' disease on the thyroid and the eye: a diffuse goitre, then thyroid eye disease swelling the extraocular muscles, through thyrotoxicosis, active eye disease and burnt-out fibrosis, with the thyroid function, antibodies and eye measurements at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": [
+        "@organui/disease-viewer",
+        "@organui/thyroid",
+        "@organui/eye"
+      ],
+      "categories": ["disease", "endocrine"],
+      "files": [
+        {
+          "path": "registry/base-nova/graves-disease/graves-disease.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Graves' disease docs: https://organui.com/docs/components/graves-disease. It reuses the thyroid model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en) and the eye model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",
