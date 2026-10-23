@@ -31,7 +31,7 @@ export const hodgkinLymphoma: Disease = {
         paracortex: {
           affected: true,
           description:
-            "Reed–Sternberg cells, large with owl-eye nuclei and positive for CD15 and CD30, sit in lacunae among lymphocytes, eosinophils and histiocytes. They are under 1% of the cells.",
+            "Lacunar cells, the nodular sclerosis form of the Reed–Sternberg cell (CD15 and CD30 positive), sit in clear spaces among lymphocytes, eosinophils and histiocytes, with occasional classic owl-eyed cells. They are under 1% of the cells.",
         },
         medulla: {
           affected: true,
