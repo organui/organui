@@ -4,7 +4,8 @@ import { neighbours } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
-// Previous and next pages in sidebar order, organs included.
+// Previous and next pages in sidebar order, organs included. Links shrink
+// and truncate long titles, such as a disease's, to fit a phone.
 export function DocsPager({ href }: { href: string }) {
   const { previous, next } = neighbours(href)
   if (!previous && !next) return null
@@ -18,7 +19,7 @@ export function DocsPager({ href }: { href: string }) {
           href={previous.href}
           className={cn(
             buttonVariants({ variant: "secondary", size: "sm" }),
-            "min-w-0 shadow-none"
+            "min-w-0 shrink shadow-none"
           )}
         >
           <ArrowLeftIcon data-icon="inline-start" />
@@ -33,7 +34,7 @@ export function DocsPager({ href }: { href: string }) {
           href={next.href}
           className={cn(
             buttonVariants({ variant: "secondary", size: "sm" }),
-            "ms-auto min-w-0 shadow-none"
+            "ms-auto min-w-0 shrink shadow-none"
           )}
         >
           <span className="sr-only">Next: </span>
