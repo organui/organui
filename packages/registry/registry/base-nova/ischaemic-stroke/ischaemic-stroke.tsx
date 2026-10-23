@@ -23,7 +23,7 @@ export const ischaemicStroke: Disease = {
         "left-frontal": {
           affected: true,
           description:
-            "The lateral motor cortex: the right face and arm are weaker than the leg. Broca's area is here, so speech becomes effortful and broken (expressive aphasia).",
+            "The lateral motor cortex: the right face and arm are weakest. An M1 occlusion also cuts off the deep branches to the internal capsule, so the leg is weak too. Broca's area is here, so speech becomes effortful and broken (expressive aphasia).",
         },
         "left-parietal": {
           affected: true,
@@ -48,7 +48,7 @@ export const ischaemicStroke: Disease = {
         cerebellum: {
           affected: false,
           description:
-            "The posterior circulation is spared, so coordination and balance are intact on the unaffected side.",
+            "The posterior circulation is spared, so coordination is intact; on the weak side, weakness limits testing it.",
         },
         pons: {
           affected: false,
@@ -121,7 +121,11 @@ export const ischaemicStroke: Disease = {
         },
       },
       investigations: [
-        { name: "NIHSS", result: "4", flag: "high" },
+        {
+          name: "Modified Rankin Scale",
+          result: "2, slight disability",
+          flag: "high",
+        },
         { name: "MRI", result: "Encephalomalacia", flag: "abnormal" },
         { name: "ECG", result: "Atrial fibrillation", flag: "abnormal" },
         { name: "Anticoagulation", result: "Started" },
