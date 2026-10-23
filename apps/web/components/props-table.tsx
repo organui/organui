@@ -14,7 +14,7 @@ import { DocsHeading } from "@/components/docs-heading"
 // every prop, read from the component's own types, doc comments and
 // defaults (packages/registry/component-api.json).
 export function PropsTable({ item }: { item: keyof typeof api }) {
-  const { component, props } = api[item]
+  const { component, props, element } = api[item]
   return (
     <section className="flex min-w-0 flex-col gap-4">
       <DocsHeading id="api-reference">API Reference</DocsHeading>
@@ -57,6 +57,13 @@ export function PropsTable({ item }: { item: keyof typeof api }) {
           ))}
         </TableBody>
       </Table>
+      {element && (
+        <p className="text-muted-foreground">
+          Any other prop, such as <code>className</code>, <code>id</code> or{" "}
+          <code>aria-*</code>, is passed to the root{" "}
+          <code>{`<${element}>`}</code>.
+        </p>
+      )}
     </section>
   )
 }

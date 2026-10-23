@@ -13,7 +13,12 @@ export type ComponentProp = {
   description: string
 }
 
-export type ComponentApi = { component: string; props: ComponentProp[] }
+export type ComponentApi = {
+  component: string
+  props: ComponentProp[]
+  /** The element that receives every other prop, from React.ComponentProps. */
+  element: string | null
+}
 
 // Registry item, its file, and the component documented there.
 export const documented = {
@@ -44,14 +49,24 @@ function readApi(file: string, component: string): ComponentApi {
     ts.ScriptKind.TSX
   )
   let members: ts.NodeArray<ts.TypeElement> | undefined
+  let element: string | null = null
   const defaults = new Map<string, string>()
   source.forEachChild((node) => {
     if (
       ts.isTypeAliasDeclaration(node) &&
-      node.name.text === `${component}Props` &&
-      ts.isTypeLiteralNode(node.type)
-    )
-      members = node.type.members
+      node.name.text === `${component}Props`
+    ) {
+      // Either { ... } or, as shadcn types its components,
+      // React.ComponentProps<"div"> & { ... }, possibly inside Omit<>.
+      const parts = ts.isIntersectionTypeNode(node.type)
+        ? node.type.types
+        : [node.type]
+      for (const part of parts) {
+        if (ts.isTypeLiteralNode(part)) members = part.members
+        const match = /ComponentProps<"(\w+)">/.exec(part.getText(source))
+        if (match) element = match[1]!
+      }
+    }
     if (ts.isFunctionDeclaration(node) && node.name?.text === component) {
       const binding = node.parameters[0]?.name
       if (binding && ts.isObjectBindingPattern(binding))
@@ -66,6 +81,7 @@ function readApi(file: string, component: string): ComponentApi {
   if (!members) throw new Error(`${file}: no ${component}Props type literal`)
   return {
     component,
+    element,
     props: members.filter(ts.isPropertySignature).map((member) => {
       const name = member.name.getText(source)
       const description = ts

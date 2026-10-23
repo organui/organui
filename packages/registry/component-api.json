@@ -1,6 +1,7 @@
 {
   "anatomy-tree": {
     "component": "AnatomyTree",
+    "element": null,
     "props": [
       {
         "name": "data",
@@ -62,6 +63,7 @@
   },
   "body-map": {
     "component": "BodyMap",
+    "element": null,
     "props": [
       {
         "name": "value",
@@ -116,6 +118,7 @@
   },
   "dermatome-map": {
     "component": "DermatomeMap",
+    "element": null,
     "props": [
       {
         "name": "selectedId",
@@ -170,6 +173,7 @@
   },
   "dna-helix": {
     "component": "DnaHelix",
+    "element": null,
     "props": [
       {
         "name": "sequence",
@@ -238,6 +242,7 @@
   },
   "ecg-trace": {
     "component": "EcgTrace",
+    "element": "figure",
     "props": [
       {
         "name": "samples",
@@ -315,18 +320,12 @@
         "required": false,
         "default": "\"ECG\"",
         "description": "The accessible name of the strip. Defaults to \"ECG\"."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "growth-chart": {
     "component": "GrowthChart",
+    "element": "figure",
     "props": [
       {
         "name": "standards",
@@ -376,18 +375,12 @@
         "required": false,
         "default": null,
         "description": "The accessible name of the chart."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "image-viewer": {
     "component": "ImageViewer",
+    "element": null,
     "props": [
       {
         "name": "slices",
@@ -491,6 +484,7 @@
   },
   "lab-results": {
     "component": "LabResultsTable",
+    "element": "div",
     "props": [
       {
         "name": "results",
@@ -519,18 +513,12 @@
         "required": false,
         "default": "true",
         "description": "Shows the trend column. Defaults to true."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "medication-schedule": {
     "component": "MedicationSchedule",
+    "element": "div",
     "props": [
       {
         "name": "medications",
@@ -601,18 +589,12 @@
         "required": false,
         "default": "\"Interaction warnings come only from the data this schedule is given. This is not medical advice.\"",
         "description": "Shown under the schedule. Pass null to hide it."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "molecule-viewer": {
     "component": "MoleculeViewer",
+    "element": null,
     "props": [
       {
         "name": "src",
@@ -751,6 +733,7 @@
   },
   "organ-viewer": {
     "component": "OrganViewer",
+    "element": null,
     "props": [
       {
         "name": "model",
@@ -840,6 +823,7 @@
   },
   "vital-signs": {
     "component": "VitalSigns",
+    "element": "div",
     "props": [
       {
         "name": "readings",
@@ -889,13 +873,6 @@
         "required": false,
         "default": null,
         "description": "Shown under the title, such as when the readings were taken."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   }
