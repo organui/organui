@@ -972,6 +972,24 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "gallstone-disease",
+      "type": "registry:component",
+      "title": "Gallstone disease",
+      "description": "Gallstone disease on the biliary tree: where the stone lodges decides the illness, from biliary colic in the cystic duct through cholecystitis to cholangitis in the common duct and pancreatitis at the ampulla, with the bloods and imaging for each. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": [
+        "@organui/disease-viewer",
+        "@organui/gallbladder"
+      ],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/gallstone-disease/gallstone-disease.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Gallstone disease docs: https://organui.com/docs/components/gallstone-disease. It reuses the gallbladder model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",

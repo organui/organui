@@ -108,6 +108,9 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/gallstone-disease": [
+        "../registry/registry/base-nova/gallstone-disease/gallstone-disease.tsx"
+      ],
       "@/components/disease-viewer": [
         "../registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],

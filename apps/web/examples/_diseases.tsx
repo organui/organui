@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "gallstone-disease-demo": {
+    title: "Gallstone disease",
+    file: "gallstone-disease-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./gallstone-disease-demo")
+      return <Example />
+    },
+  },
+  "gallstone-disease-without-panel": {
+    title: "Gallstone disease Without Panel",
+    file: "gallstone-disease-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./gallstone-disease-without-panel")
+      return <Example />
+    },
+  },
+  "gallstone-disease-controlled": {
+    title: "Gallstone disease Controlled",
+    file: "gallstone-disease-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./gallstone-disease-controlled")
+      return <Example />
+    },
+  },
 }
