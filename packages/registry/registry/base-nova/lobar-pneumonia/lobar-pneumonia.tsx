@@ -9,7 +9,7 @@ import {
 } from "@/components/disease-viewer"
 import { lungsModel } from "@/components/lungs"
 
-// The four segments of the right lower lobe, which consolidate together.
+// The model's four segments of the right lower lobe, which consolidate together.
 const lowerLobe = ["FMA7366", "FMA7364", "FMA7363", "FMA7362"]
 
 const consolidated = (description: string) =>
@@ -74,7 +74,7 @@ export const lobarPneumonia: Disease = {
         ),
       },
       investigations: [
-        { name: "SpO₂", result: "91% on air", flag: "low" },
+        { name: "SpO₂", result: "93% on air", flag: "low" },
         { name: "White cells", result: "Neutrophilia", flag: "high" },
         { name: "CRP", result: "Raised", flag: "high" },
         { name: "Chest X-ray", result: "RLL consolidation", flag: "abnormal" },
@@ -120,7 +120,7 @@ export const lobarPneumonia: Disease = {
     { name: "Temperature", result: "38.9 °C", flag: "high" },
     { name: "Respiratory rate", result: "26 / min", flag: "high" },
     { name: "CRP", result: "Raised", flag: "high" },
-    { name: "CURB-65", result: "1, treat at home" },
+    { name: "CURB-65", result: "0, treat at home" },
   ],
 }
 
