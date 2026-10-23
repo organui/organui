@@ -518,9 +518,7 @@ export function DermatomeMap({
   }
   const options = React.useRef(new Map<DermatomeId, HTMLElement>())
   const id = React.useId()
-  // Keyboard focus in the level list previews its level, as hover does.
-  const [listFocused, setListFocused] = React.useState(false)
-  const shownId = hoveredId ?? (listFocused ? activeId : selectedId)
+  const shownId = hoveredId ?? selectedId
   const shown = dermatomes.find((dermatome) => dermatome.id === shownId)
   const fill = (level: DermatomeId) => colors?.[level] ?? dermatomeColor(level)
   const hover = {
@@ -588,11 +586,6 @@ export function DermatomeMap({
             aria-label="Spinal levels"
             aria-orientation="horizontal"
             onKeyDown={onKeyDown}
-            onFocus={() => setListFocused(true)}
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget))
-                setListFocused(false)
-            }}
             className="flex flex-col gap-3"
           >
             {regions.map((region) => (

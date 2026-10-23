@@ -461,11 +461,12 @@ export function AnatomyTree({
                 )}
                 <span className="min-w-0">{node.label}</span>
               </TreeButton>
+              {/* Keeps the row's text "Heart Visible", which its name contains. */}{" "}
               <Button
                 variant="ghost"
                 size="xs"
                 // Icons join the label once the tree has room for them.
-                className="justify-start text-muted-foreground @sm/anatomy-tree:w-20"
+                className="justify-start text-muted-foreground group-aria-selected/row:text-accent-foreground @sm/anatomy-tree:w-20"
                 tabIndex={-1}
                 // Starts with the visible state so voice control can target it.
                 aria-label={`${state}: ${checked === true ? "hide" : "show"} ${node.label}`}
