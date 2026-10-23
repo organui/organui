@@ -119,8 +119,11 @@ export default function Page() {
           <code>stage</code> with <code>onStageChange</code> to drive the stage
           from your own timeline, or <code>defaultStage</code> to only choose
           where it starts. Selecting a structure in 3D shows its finding in the
-          panel, and selecting a finding highlights it in 3D. Changing the scale
-          clears the selection, because each model has its own structures.
+          panel, and selecting a finding highlights it in 3D. Spared structures
+          the disease says nothing about fold behind a button, so a whole-body
+          model lists only what matters; selecting one in 3D unfolds them.
+          Changing the scale clears the selection, because each model has its
+          own structures.
         </p>
         <p>
           <code>diseaseModel(disease, scale, stage)</code> returns the organ
