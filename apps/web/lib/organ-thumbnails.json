@@ -10,6 +10,7 @@
   "esophagus": "https://cdn.jsdelivr.net/gh/organui/esophagus-3d@ba0fddba344ae586f266586a9a30f3fce10f2aec/public/models/esophagus.glb",
   "eye": "https://cdn.jsdelivr.net/gh/organui/eye-3d@99f74f1c096ae2813dd18e1ecb2c9cbbd701c530/public/models/eye.glb",
   "gallbladder": "https://cdn.jsdelivr.net/gh/organui/gallbladder-3d@15b03b830abe55e1081ac929dcbe6318d84e4067/public/models/gallbladder.glb",
+  "gallstone-disease": "https://cdn.jsdelivr.net/gh/organui/gallbladder-3d@15b03b830abe55e1081ac929dcbe6318d84e4067/public/models/gallbladder.glb",
   "hair": "https://organui.com/models/hair.glb",
   "heart": "https://cdn.jsdelivr.net/gh/organui/heart-3d@c72ce6654ff8e282942f97750d3104f55ef4fc3d/public/models/heart.glb",
   "intestines": "https://cdn.jsdelivr.net/gh/organui/intestines-3d@8386b2327715f32b2ec62b403b94a3e5f6a307e2/public/models/intestines.glb",
