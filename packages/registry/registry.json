@@ -975,7 +975,7 @@
       "name": "graves-disease",
       "type": "registry:component",
       "title": "Graves' disease",
-      "description": "Graves' disease on the thyroid and the eye: a diffuse goitre, then thyroid eye disease swelling the extraocular muscles, through thyrotoxicosis, active eye disease and burnt-out fibrosis, with the thyroid function, antibodies and eye measurements at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "description": "Graves' disease on the thyroid and the eye: a diffuse goitre, then thyroid eye disease swelling the extraocular muscles, through thyrotoxicosis, active eye disease and burnt-out fibrosis, with the thyroid function, antibodies and eye measurements at each stage. Models licensed CC BY-SA 2.1 JP (thyroid and eye).",
       "registryDependencies": [
         "@organui/disease-viewer",
         "@organui/thyroid",

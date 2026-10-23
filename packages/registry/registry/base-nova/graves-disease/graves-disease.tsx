@@ -60,7 +60,7 @@ export const gravesDisease: Disease = {
         "levator-palpebrae": {
           affected: true,
           description:
-            "Overactive with the excess thyroid hormone, the upper lid retracts and lags behind the eye when looking down, giving a staring look.",
+            "Excess thyroid hormone drives the sympathetic Müller's muscle beneath it, so the upper lid retracts and lags behind the eye when looking down, giving a staring look.",
         },
         "inferior-rectus": {
           affected: false,
@@ -102,7 +102,7 @@ export const gravesDisease: Disease = {
           "superior-rectus": {
             affected: true,
             description:
-              "Enlarged with the levator above it, limiting upward gaze further.",
+              "Enlarged with the levator above it. Swollen and tight, it restricts looking down.",
           },
           cornea: {
             affected: true,
@@ -139,6 +139,16 @@ export const gravesDisease: Disease = {
             affected: true,
             description:
               "Treated with the right lobe; about half of people relapse after a course of carbimazole.",
+          },
+          isthmus: {
+            affected: true,
+            description:
+              "Treated with the lobes. The goitre shrinks with control, and is gone after radioiodine or surgery.",
+          },
+          "superior-thyroid-artery": {
+            affected: false,
+            description:
+              "Blood flow returns to normal once the thyroid is controlled, and the bruit goes.",
           },
         },
         eye: {
