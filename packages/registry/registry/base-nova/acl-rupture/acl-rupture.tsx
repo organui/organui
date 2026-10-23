@@ -10,7 +10,7 @@ import { jointsModel } from "@/components/joints"
 // whole-body joints model.
 export const aclRupture: Disease = {
   name: "ACL rupture",
-  code: "S83.5",
+  code: "S83.7",
   summary:
     "A twist on a planted foot tears the anterior cruciate ligament, often with the medial collateral ligament and medial meniscus. Without it the knee gives way when pivoting.",
   scales: [
@@ -118,6 +118,15 @@ export const aclRupture: Disease = {
             affected: true,
             description:
               "Absent; the stump has scarred to the posterior cruciate ligament. The tibia shifts forward with each pivot (positive pivot shift).",
+          },
+          "superficial-part-of-tibial-collateral-ligament": {
+            affected: false,
+            description:
+              "Healed without surgery, sometimes with a little residual laxity.",
+          },
+          "deep-part-of-tibial-collateral-ligament": {
+            affected: false,
+            description: "Healed with the superficial part.",
           },
           "medial-meniscus": {
             affected: true,
