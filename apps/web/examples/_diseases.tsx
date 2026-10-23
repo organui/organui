@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "ectopic-pregnancy-demo": {
+    title: "Ectopic pregnancy",
+    file: "ectopic-pregnancy-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./ectopic-pregnancy-demo")
+      return <Example />
+    },
+  },
+  "ectopic-pregnancy-without-panel": {
+    title: "Ectopic pregnancy Without Panel",
+    file: "ectopic-pregnancy-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./ectopic-pregnancy-without-panel")
+      return <Example />
+    },
+  },
+  "ectopic-pregnancy-controlled": {
+    title: "Ectopic pregnancy Controlled",
+    file: "ectopic-pregnancy-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./ectopic-pregnancy-controlled")
+      return <Example />
+    },
+  },
 }

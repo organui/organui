@@ -972,6 +972,21 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "ectopic-pregnancy",
+      "type": "registry:component",
+      "title": "Ectopic pregnancy",
+      "description": "A tubal ectopic pregnancy on the uterus and tubes: implantation in the ampulla with an empty uterus, then rupture bleeding from the mesosalpinx into the pelvis, with hCG, ultrasound and observations at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/uterus"],
+      "categories": ["disease", "reproductive"],
+      "files": [
+        {
+          "path": "registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Ectopic pregnancy docs: https://organui.com/docs/components/ectopic-pregnancy. It reuses the uterus model, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",
