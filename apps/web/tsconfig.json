@@ -79,6 +79,9 @@
       "@/components/cell": [
         "../../packages/registry/registry/base-nova/cell/cell.tsx"
       ],
+      "@/components/liver-lobule": [
+        "../../packages/registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
+      ],
       "@/components/diaphragm": [
         "../../packages/registry/registry/base-nova/diaphragm/diaphragm.tsx"
       ],

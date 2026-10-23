@@ -300,19 +300,27 @@ test("component index lists every component inside the docs layout", async ({
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
   )
-  // An A–Z list of links, as on shadcn/ui; the organs share one gallery link.
+  const galleried = [
+    ...organs,
+    ...components.filter(({ categories }) => categories?.includes("disease")),
+  ]
+  // An A–Z list of links, as on shadcn/ui; the organs and the diseases each
+  // share one gallery link.
   const index = page.getByRole("main").getByRole("list").first()
-  for (const item of components.filter((item) => !organs.includes(item)))
+  for (const item of components.filter((item) => !galleried.includes(item)))
     await expect(
       index.getByRole("link", { name: item.title ?? item.name, exact: true })
     ).toHaveAttribute("href", `/docs/components/${item.name}`)
-  for (const item of organs)
+  for (const item of galleried)
     await expect(
       index.getByRole("link", { name: item.title ?? item.name, exact: true })
     ).toHaveCount(0)
   await expect(
     index.getByRole("link", { name: "Organs", exact: true })
   ).toHaveAttribute("href", "/docs/components/organs")
+  await expect(
+    index.getByRole("link", { name: "Diseases", exact: true })
+  ).toHaveAttribute("href", "/docs/components/diseases")
   const titles = await index.getByRole("link").allTextContents()
   expect(titles).toEqual([...titles].sort((a, b) => a.localeCompare(b)))
   const pages = await Promise.all(
@@ -537,6 +545,64 @@ test("the organs gallery shows every organ as a picture and a link", async ({
   const axe = await new AxeBuilder({ page }).analyze()
   expect(axe.violations).toEqual([])
   await page.screenshot({ path: info.outputPath("organs.png"), fullPage: true })
+  expect(errors).toEqual([])
+})
+
+test("the diseases gallery shows every disease under its body system", async ({
+  page,
+  request,
+}, info) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  const items = registrySchema.parse(
+    await (await request.get("/r/registry.json")).json()
+  ).items
+  const diseases = items.filter(({ categories }) =>
+    categories?.includes("disease")
+  )
+  await page.goto("/docs/components/diseases")
+  await expect(
+    page.getByRole("heading", { name: "Diseases", level: 1 })
+  ).toBeVisible()
+  const main = page.getByRole("main")
+  await expect(main.getByRole("listitem")).toHaveCount(diseases.length)
+  for (const item of diseases) {
+    const card = main.getByRole("link", {
+      name: item.title ?? item.name,
+      exact: true,
+    })
+    await expect(card).toHaveAttribute("href", `/docs/components/${item.name}`)
+    await expect(card.locator("img")).toHaveAttribute(
+      "src",
+      new RegExp(`url=%2Fdiseases%2F${item.name}\\.webp`)
+    )
+    // Listed in the section of its body system, naming the model it is on.
+    const section = main.locator("section").filter({ has: card })
+    await expect(section.getByRole("heading", { level: 2 })).toHaveCount(1)
+    const base = items.find(
+      ({ name }) =>
+        name !== "organ-viewer" &&
+        item.registryDependencies?.includes(`@organui/${name}`)
+    )
+    await expect(
+      main.getByRole("listitem").filter({ has: card })
+    ).toContainText(base!.title!, { ignoreCase: true })
+  }
+  await expect(
+    main.getByRole("link", { name: "Licences", exact: true })
+  ).toHaveAttribute("href", "/docs/licences")
+  await expect(page.locator("canvas")).toHaveCount(0)
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  const axe = await new AxeBuilder({ page }).analyze()
+  expect(axe.violations).toEqual([])
+  await page.screenshot({
+    path: info.outputPath("diseases.png"),
+    fullPage: true,
+  })
   expect(errors).toEqual([])
 })
 

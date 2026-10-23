@@ -515,6 +515,7 @@ try {
         "categories" in item &&
         (item.categories?.includes("organ") ||
           item.categories?.includes("disease") ||
+          item.categories?.includes("tissue") ||
           item.categories?.includes("cell"))
     )
     // Install all organs together through the real CLI and compile their public

@@ -110,7 +110,7 @@ export function ${component}Demo() {
           <Link href="/docs/base-ui" className="underline">
             Base UI or Radix
           </Link>{" "}
-          style. Every organ, disease and the cell share that one{" "}
+          style. Every organ, tissue, disease and the cell share that one{" "}
           <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>

@@ -1,4 +1,4 @@
-import { liverModel } from "@/components/liver"
+import { liverLobuleModel } from "@/components/liver-lobule"
 import {
   OrganViewer,
   type OrganModel,
@@ -9,41 +9,56 @@ import {
 // parts read first without a severity colour.
 const SPARED = "#a9a59c"
 
-// What autoimmune hepatitis does to each structure of the liver model.
+// What autoimmune hepatitis does to each structure of the liver lobule.
 // Structures not listed are spared and keep their anatomical description.
 const findings: Record<
   string,
   { label?: string; description: string; affected: boolean }
 > = {
-  liver: {
-    label: "Hepatic parenchyma",
+  "portal-tract-stroma": {
+    label: "Portal tracts",
     affected: true,
     description:
-      "Interface hepatitis: lymphocytes and plasma cells spill from the portal tracts into the lobule and destroy the hepatocytes at its edge. Untreated, the injury bridges between tracts as fibrosis and ends in cirrhosis.",
+      "A dense infiltrate of lymphocytes and plasma cells fills the portal tracts. With interface hepatitis it is the histological hallmark, and fibrosis starts here, later bridging between tracts towards cirrhosis.",
   },
-  portal: {
+  "limiting-plate": {
     affected: true,
     description:
-      "Its branches run in the portal tracts, where the dense lymphoplasmacytic infiltrate begins. Once cirrhosis develops, portal pressure rises, causing varices, ascites and an enlarged spleen.",
+      "Interface hepatitis: the infiltrate breaks through the limiting plate and destroys the hepatocytes along it, the injury once called piecemeal necrosis.",
   },
-  biliary: {
+  "periportal-hepatocytes": {
+    affected: true,
+    description:
+      "Injured hepatocytes regenerate as rosettes, and lymphocytes can be seen inside them (emperipolesis). Plasma cells cluster among them.",
+  },
+  "midzonal-hepatocytes": {
     affected: false,
     description:
-      "The bile ducts are usually spared. Cholangitis on biopsy, or strictures on cholangiography, suggest an overlap with primary biliary cholangitis or primary sclerosing cholangitis.",
+      "Usually spared. In severe disease, bridging necrosis crosses this zone to link portal tracts with central veins.",
   },
-  "hepatic-veins": {
+  "centrilobular-hepatocytes": {
     affected: false,
     description:
-      "Not involved. Hepatic vein obstruction (Budd–Chiari syndrome) can look like acute hepatitis, so imaging excludes it.",
+      "Spared in typical chronic disease. An acute severe onset can show centrilobular necrosis, sometimes as the only finding.",
+  },
+  "central-vein": {
+    affected: false,
+    description:
+      "Usually spared. Inflammation around it (central perivenulitis) is seen in some acute presentations.",
+  },
+  "bile-ducts": {
+    affected: false,
+    description:
+      "Usually spared. Duct injury on biopsy, or strictures on cholangiography, suggest an overlap with primary biliary cholangitis or primary sclerosing cholangitis.",
   },
 }
 
-// The liver model with autoimmune hepatitis mapped onto its structures: the
+// The liver lobule with autoimmune hepatitis mapped onto its structures: the
 // same GLB, views and credit, regrouped into affected and spared parts.
 export const autoimmuneHepatitisModel: OrganModel = {
-  ...liverModel,
+  ...liverLobuleModel,
   name: "Autoimmune hepatitis",
-  structures: liverModel.structures.map((structure) => {
+  structures: liverLobuleModel.structures.map((structure) => {
     const finding = findings[structure.id]
     return {
       ...structure,

@@ -79,6 +79,9 @@
         "../registry/registry/base-nova/breast/breast.tsx"
       ],
       "@/components/cell": ["../registry/registry/base-nova/cell/cell.tsx"],
+      "@/components/liver-lobule": [
+        "../registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
+      ],
       "@/components/diaphragm": [
         "../registry/registry/base-nova/diaphragm/diaphragm.tsx"
       ],

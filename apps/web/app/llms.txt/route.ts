@@ -4,6 +4,7 @@ import {
   guides,
   installationGuides,
   organsPage,
+  diseasesPage,
   registryBlocks,
   registryItems,
   utilitiesIndex,
@@ -37,6 +38,15 @@ export function GET() {
       `## ${title}`,
       ...(id === "organs"
         ? [entry(organsPage.title, organsPage.href, organsPage.description)]
+        : []),
+      ...(id === "diseases"
+        ? [
+            entry(
+              diseasesPage.title,
+              diseasesPage.href,
+              diseasesPage.description
+            ),
+          ]
         : []),
       ...registryItems
         .filter((item) => item.group === id)

@@ -8,14 +8,14 @@ import {
 } from "../registry/base-nova/organ-viewer/organ-viewer"
 
 const directory = new URL("../registry/base-nova/", import.meta.url)
-// Items built on the shared viewer: the organs, the diseases drawn on them,
-// and the cell.
+// Items built on the shared viewer: the organs, tissues, the diseases drawn
+// on them, and the cell.
 const organItems = registry.items.filter(
   (item) =>
     "categories" in item &&
-    (item.categories?.includes("organ") ||
-      item.categories?.includes("disease") ||
-      item.categories?.includes("cell"))
+    ["organ", "tissue", "disease", "cell"].some((category) =>
+      item.categories?.includes(category)
+    )
 )
 const diseaseItems = organItems.filter(({ categories }) =>
   categories?.includes("disease")
@@ -57,11 +57,13 @@ for (const item of diseaseItems) {
     expect(item.registryDependencies).toContain("@organui/organ-viewer")
     const organName = organ!.replace("@organui/", "")
     const organItem = registry.items.find(({ name }) => name === organName)
-    expect(organItem?.categories).toContain("organ")
+    // Drawn on an organ, or on a tissue for what happens at that scale.
+    const [kind] = organItem!.categories
+    expect(["organ", "tissue"]).toContain(kind!)
     // The disease sits in the same body system as its organ.
     expect(
       item.categories.filter((category) => category !== "disease")
-    ).toEqual(organItem!.categories.filter((category) => category !== "organ"))
+    ).toEqual(organItem!.categories.filter((category) => category !== kind))
     const find = (module: Record<string, unknown>) =>
       Object.values(module).find(
         (value) => typeof value === "object"

@@ -1,11 +1,12 @@
 // Renders each organ at its default view to public/organs/<name>.webp for the
-// organs gallery, as shadcn/ui's scripts/capture-registry.mts captures block
+// organs gallery, and each disease to public/diseases/<name>.webp for the
+// diseases gallery, as shadcn/ui's scripts/capture-registry.mts captures block
 // screenshots. lib/organ-thumbnails.json records the model each image was
 // rendered from, so a test fails when a model changes and its image doesn't.
 //
-//   bun run thumbnails                 organs without an image
-//   bun run thumbnails --only heart    these organs, comma-separated
-//   bun run thumbnails --force         every organ
+//   bun run thumbnails                 organs and diseases without an image
+//   bun run thumbnails --only heart    these items, comma-separated
+//   bun run thumbnails --force         every organ and disease
 //
 // It runs `next dev` with ORGANUI_THUMBNAILS=1, the only way the uncredited
 // /thumbnail pages exist, and one browser renders one organ at a time.
@@ -29,21 +30,36 @@ const port = Number(values.port ?? 3210)
 const origin = `http://localhost:${port}`
 const root = new URL("../", import.meta.url)
 const manifestUrl = new URL("lib/organ-thumbnails.json", root)
-const outputDir = new URL("public/organs/", root)
-
-const organs = catalog.items
-  .filter((item) => "categories" in item && item.categories.includes("organ"))
-  .map(({ name }) => name)
+// Each gallery's items and the folder its pictures are served from.
+const galleries = { organ: "public/organs/", disease: "public/diseases/" }
+const pictures = new Map(
+  catalog.items.flatMap((item) => {
+    const kind = Object.keys(galleries).find(
+      (category) => "categories" in item && item.categories.includes(category)
+    ) as keyof typeof galleries | undefined
+    return kind
+      ? [
+          [
+            item.name,
+            new URL(`${item.name}.webp`, new URL(galleries[kind], root)),
+          ],
+        ]
+      : []
+  })
+)
 const only = values.only?.split(",").map((name) => name.trim())
-const unknown = only?.filter((name) => !organs.includes(name)) ?? []
-if (unknown.length) throw new Error(`Not an organ: ${unknown.join(", ")}`)
+const unknown = only?.filter((name) => !pictures.has(name)) ?? []
+if (unknown.length)
+  throw new Error(`Not an organ or disease: ${unknown.join(", ")}`)
 const targets =
   only ??
-  organs.filter(
-    (name) => values.force || !existsSync(new URL(`${name}.webp`, outputDir))
+  [...pictures.keys()].filter(
+    (name) => values.force || !existsSync(pictures.get(name)!)
   )
 if (targets.length === 0) {
-  console.log("Every organ has a thumbnail; use --only or --force to redo one.")
+  console.log(
+    "Every organ and disease has a thumbnail; use --only or --force to redo one."
+  )
   process.exit(0)
 }
 
@@ -75,7 +91,8 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 1000))
   }
 
-  await mkdir(outputDir, { recursive: true })
+  for (const folder of Object.values(galleries))
+    await mkdir(new URL(folder, root), { recursive: true })
   const browser = await chromium.launch({
     args: ["--enable-unsafe-swiftshader"],
   })
@@ -107,8 +124,8 @@ try {
       const webp = await sharp(png)
         .webp({ quality: 75, alphaQuality: 90, effort: 6 })
         .toBuffer()
-      await writeFile(new URL(`${name}.webp`, outputDir), webp)
-      // Saved after every organ, so a failure partway keeps the record
+      await writeFile(pictures.get(name)!, webp)
+      // Saved after every picture, so a failure partway keeps the record
       // true for each image already written.
       manifest[name] = model.src
       const sorted = Object.fromEntries(

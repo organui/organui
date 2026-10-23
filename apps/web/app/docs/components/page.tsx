@@ -4,6 +4,7 @@ import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import {
   componentsIndex,
+  diseasesPage,
   docsMetadata,
   organsPage,
   registryItems,
@@ -16,12 +17,14 @@ export const metadata = docsMetadata(
 )
 
 // An A–Z list of links, like shadcn/ui's components index. Each component's
-// page has its preview and install command; the organs share one gallery.
+// page has its preview and install command; the organs and the diseases each
+// share one gallery.
 const links = [
   ...registryItems
-    .filter((item) => !item.organ)
+    .filter((item) => !item.organ && !item.disease)
     .map(({ title, href }) => ({ title, href })),
-  { title: "Organs", href: organsPage.href },
+  { title: organsPage.title, href: organsPage.href },
+  { title: diseasesPage.title, href: diseasesPage.href },
 ].sort((a, b) => a.title.localeCompare(b.title))
 
 export default function Page() {

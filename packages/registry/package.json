@@ -42,6 +42,7 @@
     "./brain": "./registry/base-nova/brain/brain.tsx",
     "./breast": "./registry/base-nova/breast/breast.tsx",
     "./cell": "./registry/base-nova/cell/cell.tsx",
+    "./liver-lobule": "./registry/base-nova/liver-lobule/liver-lobule.tsx",
     "./diaphragm": "./registry/base-nova/diaphragm/diaphragm.tsx",
     "./ear": "./registry/base-nova/ear/ear.tsx",
     "./esophagus": "./registry/base-nova/esophagus/esophagus.tsx",

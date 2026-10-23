@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import bodySystems from "@workspace/registry/body-systems.json"
 import catalog from "@workspace/registry/registry.json"
 import { site } from "@/lib/site"
 
@@ -22,7 +23,7 @@ export const componentGroups = [
   {
     id: "molecular",
     title: "Molecular & cellular",
-    categories: ["molecular", "cell"],
+    categories: ["molecular", "cell", "tissue"],
   },
   // The viewer and the tree come first: every organ is built on them.
   { id: "organs", title: "Organs", categories: ["anatomy", "organ"] },
@@ -59,6 +60,8 @@ export const registryItems = catalog.items
       group: groupOf(categories),
       organ: categories.includes("organ"),
       disease: categories.includes("disease"),
+      // Organs, tissues and diseases each carry one body system.
+      system: bodySystems.find(({ id }) => categories.includes(id))?.id,
       // The organ a disease is drawn on: its one OrganUI dependency besides
       // the viewer.
       basedOn: categories.includes("disease")
@@ -69,12 +72,13 @@ export const registryItems = catalog.items
             )
             ?.replace("@organui/", "")
         : undefined,
-      // Items built on the organ viewer with a model: organs, diseases and
-      // the cell.
+      // Items built on the organ viewer with a model: organs, diseases, the
+      // cell and tissues.
       model:
         categories.includes("organ") ||
         categories.includes("disease") ||
-        categories.includes("cell"),
+        categories.includes("cell") ||
+        categories.includes("tissue"),
       title: item.title ?? item.name,
       description: item.description,
       href: `/docs/components/${item.name}`,
@@ -94,6 +98,8 @@ export const registryItems = catalog.items
 export type RegistryItem = (typeof registryItems)[number]
 
 export const organs = registryItems.filter(({ organ }) => organ)
+
+export const diseases = registryItems.filter(({ disease }) => disease)
 
 // TypeScript helpers that install in lib, under /docs/helpers.
 export const helperItems = catalog.items
@@ -340,6 +346,13 @@ export const organsPage: NavLink & { description: string } = {
   description: "Every organ as a picture, linking to its page.",
 }
 
+export const diseasesPage: NavLink & { description: string } = {
+  title: "Diseases",
+  href: "/docs/components/diseases",
+  description:
+    "Every disease by body system, each shown on the organ or tissue it affects.",
+}
+
 export const mainNav: NavLink[] = [
   { title: "Docs", href: "/docs" },
   { title: "Components", href: componentsIndex.href },
@@ -395,7 +408,8 @@ export const docsNav: DocsNavSection[] = [
 ]
 
 // Reading order for the previous and next links.
-// The organs gallery comes before the organs, after the viewer and tree.
+// The organs gallery comes before the organs, after the viewer and tree, and
+// the diseases gallery before the diseases.
 // The framework guides follow Installation. Every docs page is here once.
 export const pageOrder: NavLink[] = [
   ...guides.flatMap((guide) =>
@@ -406,6 +420,7 @@ export const pageOrder: NavLink[] = [
   componentsIndex,
   ...registryItems.flatMap(({ title, href, name }) => [
     ...(name === organs[0]?.name ? [organsPage] : []),
+    ...(name === diseases[0]?.name ? [diseasesPage] : []),
     { title, href },
   ]),
   aiIndex,

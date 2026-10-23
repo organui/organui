@@ -7,17 +7,24 @@ import thumbnails from "../lib/organ-thumbnails.json"
 
 const rendered = thumbnails as Record<string, string>
 
-const organs = catalog.items
-  .filter((item) => "categories" in item && item.categories.includes("organ"))
-  .map(({ name }) => name)
+// The organs and diseases galleries, each with its pictures' folder.
+const pictured = catalog.items.flatMap((item) => {
+  const categories: readonly string[] =
+    "categories" in item ? item.categories : []
+  if (categories.includes("organ"))
+    return [{ name: item.name, folder: "organs" }]
+  if (categories.includes("disease"))
+    return [{ name: item.name, folder: "diseases" }]
+  return []
+})
 
-// The gallery shows each organ's image with the credit of its current model,
-// so an image rendered from an older model would show it under the wrong
-// credit: rerun `bun run thumbnails --only <name>`.
-for (const name of organs) {
+// A gallery shows each image with the credit of its current model, so an
+// image rendered from an older model would show it under the wrong credit:
+// rerun `bun run thumbnails --only <name>`.
+for (const { name, folder } of pictured) {
   test(`${name} has a thumbnail of its current model`, async () => {
     expect(
-      existsSync(new URL(`../public/organs/${name}.webp`, import.meta.url))
+      existsSync(new URL(`../public/${folder}/${name}.webp`, import.meta.url))
     ).toBe(true)
     const model = await loadOrganModel(name)
     expect(rendered[name]).toBe(model.src)
@@ -31,8 +38,9 @@ for (const name of organs) {
   })
 }
 
-test("only organs have thumbnails", () => {
-  expect(
-    Object.keys(rendered).filter((name) => !organs.includes(name))
-  ).toEqual([])
+test("only organs and diseases have thumbnails", () => {
+  const names = pictured.map(({ name }) => name)
+  expect(Object.keys(rendered).filter((name) => !names.includes(name))).toEqual(
+    []
+  )
 })

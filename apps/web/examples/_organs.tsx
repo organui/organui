@@ -578,6 +578,38 @@ export const organExamples = {
       return <Example />
     },
   },
+  "liver-lobule-demo": {
+    title: "Liver Lobule",
+    file: "liver-lobule-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./liver-lobule-demo")
+      return <Example />
+    },
+  },
+  "liver-lobule-without-controls": {
+    title: "Liver Lobule Without Controls",
+    file: "liver-lobule-without-controls.tsx",
+    render: async () => {
+      const { Example } = await import("./liver-lobule-without-controls")
+      return <Example />
+    },
+  },
+  "liver-lobule-controlled": {
+    title: "Liver Lobule Controlled Selection",
+    file: "liver-lobule-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./liver-lobule-controlled")
+      return <Example />
+    },
+  },
+  "liver-lobule-with-anatomy": {
+    title: "Liver Lobule With Anatomy Panel",
+    file: "liver-lobule-with-anatomy.tsx",
+    render: async () => {
+      const { Example } = await import("./liver-lobule-with-anatomy")
+      return <Example />
+    },
+  },
   "lungs-demo": {
     title: "Lungs",
     file: "lungs-demo.tsx",
