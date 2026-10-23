@@ -25,4 +25,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "benign-prostatic-hyperplasia-demo": {
+    title: "Benign prostatic hyperplasia",
+    file: "benign-prostatic-hyperplasia-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./benign-prostatic-hyperplasia-demo")
+      return <Example />
+    },
+  },
+  "benign-prostatic-hyperplasia-without-panel": {
+    title: "Benign prostatic hyperplasia Without Panel",
+    file: "benign-prostatic-hyperplasia-without-panel.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./benign-prostatic-hyperplasia-without-panel")
+      return <Example />
+    },
+  },
+  "benign-prostatic-hyperplasia-controlled": {
+    title: "Benign prostatic hyperplasia Controlled",
+    file: "benign-prostatic-hyperplasia-controlled.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./benign-prostatic-hyperplasia-controlled")
+      return <Example />
+    },
+  },
 }

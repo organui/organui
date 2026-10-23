@@ -972,6 +972,25 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "benign-prostatic-hyperplasia",
+      "type": "registry:component",
+      "title": "Benign prostatic hyperplasia",
+      "description": "Benign prostatic hyperplasia on the prostate and the bladder: the gland narrowing the urethra, the bladder thickening to push past it, then chronic retention backing up to the kidneys or acute retention, with symptom scores, flow and residual volumes at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": [
+        "@organui/disease-viewer",
+        "@organui/prostate",
+        "@organui/bladder"
+      ],
+      "categories": ["disease", "reproductive"],
+      "files": [
+        {
+          "path": "registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Benign prostatic hyperplasia docs: https://organui.com/docs/components/benign-prostatic-hyperplasia. It reuses the prostate model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en) and the bladder model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",

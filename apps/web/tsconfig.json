@@ -118,6 +118,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/benign-prostatic-hyperplasia": [
+        "../../packages/registry/registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx"
+      ],
       "@/components/disease-viewer": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],
