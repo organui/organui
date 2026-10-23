@@ -972,6 +972,21 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "hodgkin-lymphoma",
+      "type": "registry:component",
+      "title": "Hodgkin lymphoma",
+      "description": "Classical Hodgkin lymphoma of the nodular sclerosis type on a lymph node: collagen bands from a thickened capsule, effaced follicles and Reed\u2013Sternberg cells in the paracortex, then remission after treatment, with biopsy, PET-CT staging and bloods at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/lymph"],
+      "categories": ["disease", "lymphatic"],
+      "files": [
+        {
+          "path": "registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Hodgkin lymphoma docs: https://organui.com/docs/components/hodgkin-lymphoma. It reuses the lymph node model, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",

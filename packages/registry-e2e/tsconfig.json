@@ -108,6 +108,9 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/hodgkin-lymphoma": [
+        "../registry/registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx"
+      ],
       "@/components/disease-viewer": [
         "../registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],

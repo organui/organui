@@ -118,6 +118,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/hodgkin-lymphoma": [
+        "../../packages/registry/registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx"
+      ],
       "@/components/disease-viewer": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],
