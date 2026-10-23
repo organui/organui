@@ -201,7 +201,7 @@ import { pancreasModel } from "@/components/pancreas"
 import { stomachModel } from "@/components/stomach"
 export default function BlockHarness({path}:{path:string}){
  if(path==="/workspace")return <AnatomyWorkspace model={heartModel}/>
- if(path==="/dashboard")return <PatientDashboard patient={examplePatient}/>
+ if(path==="/dashboard")return <main className="mx-auto w-full max-w-7xl p-4 md:p-6"><PatientDashboard patient={examplePatient}/></main>
  return <main style={{padding:24}}><h1>{path==="/organs"?"Organs":"Heart"}</h1>{path==="/organs"?<OrganSwitcher models={[heartModel,kidneysModel,stomachModel,pancreasModel]}/>:<OrganExplorer model={heartModel}/>}</main>
 }`
 // Uses each helper and CSS utility, so the build type-checks the helpers

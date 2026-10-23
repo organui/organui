@@ -53,7 +53,9 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
   >({})
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-6">
+    // The page provides the main landmark, so the dashboard also fits
+    // inside an app layout that has one.
+    <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2">
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -106,7 +108,7 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
       <p className="text-xs text-muted-foreground">
         Fictional patient and synthetic ECG. Not for clinical use.
       </p>
-    </main>
+    </div>
   )
 }
 
