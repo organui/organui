@@ -108,6 +108,9 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/acl-rupture": [
+        "../registry/registry/base-nova/acl-rupture/acl-rupture.tsx"
+      ],
       "@/components/disease-viewer": [
         "../registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],

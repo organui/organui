@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "acl-rupture-demo": {
+    title: "ACL rupture",
+    file: "acl-rupture-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./acl-rupture-demo")
+      return <Example />
+    },
+  },
+  "acl-rupture-without-panel": {
+    title: "ACL rupture Without Panel",
+    file: "acl-rupture-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./acl-rupture-without-panel")
+      return <Example />
+    },
+  },
+  "acl-rupture-controlled": {
+    title: "ACL rupture Controlled",
+    file: "acl-rupture-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./acl-rupture-controlled")
+      return <Example />
+    },
+  },
 }
