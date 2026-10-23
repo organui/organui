@@ -21,7 +21,7 @@ export const ectopicPregnancy: Disease = {
         ampulla: {
           affected: true,
           description:
-            "The embryo implants in the ampulla of one tube, where most ectopics occur. Previous infection, surgery or an IVF pregnancy raise the risk by damaging the tube's cilia.",
+            "The embryo implants in the ampulla of one tube, where most ectopics occur; the model marks both tubes' ampullae. Previous pelvic infection or tubal surgery raises the risk by damaging the tube's cilia, and IVF and smoking raise it too.",
         },
         body: {
           affected: false,
