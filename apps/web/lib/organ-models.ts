@@ -19,10 +19,6 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/appendix").then((module) =>
       local(module.appendixModel)
     ),
-  "hodgkin-lymphoma": () =>
-    import("@workspace/registry/hodgkin-lymphoma").then((module) =>
-      local(module.hodgkinLymphomaModel)
-    ),
   "autoimmune-hepatitis": () =>
     import("@workspace/registry/autoimmune-hepatitis").then((module) =>
       local(module.autoimmuneHepatitisModel)
@@ -61,6 +57,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     ),
   heart: () =>
     import("@workspace/registry/heart").then((module) => module.heartModel),
+  "hodgkin-lymphoma": () =>
+    import("@workspace/registry/hodgkin-lymphoma").then((module) =>
+      local(module.hodgkinLymphomaModel)
+    ),
   intestines: () =>
     import("@workspace/registry/intestines").then(
       (module) => module.intestinesModel
