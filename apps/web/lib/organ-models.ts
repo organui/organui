@@ -11,6 +11,14 @@ const local = (model: OrganModel): OrganModel => ({
 })
 
 export const organModels: Record<string, () => Promise<OrganModel>> = {
+  "acute-angle-closure-glaucoma": () =>
+    import("@workspace/registry/acute-angle-closure-glaucoma").then((module) =>
+      local(module.acuteAngleClosureGlaucomaModel)
+    ),
+  "acute-appendicitis": () =>
+    import("@workspace/registry/acute-appendicitis").then((module) =>
+      local(module.acuteAppendicitisModel)
+    ),
   adrenals: () =>
     import("@workspace/registry/adrenals").then(
       (module) => module.adrenalsModel
@@ -22,6 +30,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   "autoimmune-hepatitis": () =>
     import("@workspace/registry/autoimmune-hepatitis").then((module) =>
       local(module.autoimmuneHepatitisModel)
+    ),
+  "benign-prostatic-hyperplasia": () =>
+    import("@workspace/registry/benign-prostatic-hyperplasia").then((module) =>
+      local(module.benignProstaticHyperplasiaModel)
     ),
   bladder: () =>
     import("@workspace/registry/bladder").then((module) => module.bladderModel),
@@ -55,6 +67,14 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/gallbladder").then(
       (module) => module.gallbladderModel
     ),
+  "gallstone-disease": () =>
+    import("@workspace/registry/gallstone-disease").then((module) =>
+      local(module.gallstoneDiseaseModel)
+    ),
+  "graves-disease": () =>
+    import("@workspace/registry/graves-disease").then((module) =>
+      local(module.gravesDiseaseModel)
+    ),
   hair: () =>
     import("@workspace/registry/hair").then((module) =>
       local(module.hairModel)
@@ -65,9 +85,17 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/intestines").then(
       (module) => module.intestinesModel
     ),
+  "ischaemic-stroke": () =>
+    import("@workspace/registry/ischaemic-stroke").then((module) =>
+      local(module.ischaemicStrokeModel)
+    ),
   joints: () =>
     import("@workspace/registry/joints").then((module) =>
       local(module.jointsModel)
+    ),
+  "kidney-stones": () =>
+    import("@workspace/registry/kidney-stones").then((module) =>
+      local(module.kidneyStonesModel)
     ),
   kidneys: () =>
     import("@workspace/registry/kidneys").then((module) => module.kidneysModel),
@@ -79,12 +107,24 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/liver-lobule").then((module) =>
       local(module.liverLobuleModel)
     ),
+  "lobar-pneumonia": () =>
+    import("@workspace/registry/lobar-pneumonia").then((module) =>
+      local(module.lobarPneumoniaModel)
+    ),
   lungs: () =>
     import("@workspace/registry/lungs").then((module) => module.lungsModel),
   lymph: () =>
     import("@workspace/registry/lymph").then((module) => module.lymphModel),
+  melanoma: () =>
+    import("@workspace/registry/melanoma").then((module) =>
+      local(module.melanomaModel)
+    ),
   muscles: () =>
     import("@workspace/registry/muscles").then((module) => module.musclesModel),
+  "myocardial-infarction": () =>
+    import("@workspace/registry/myocardial-infarction").then((module) =>
+      local(module.myocardialInfarctionModel)
+    ),
   nails: () =>
     import("@workspace/registry/nails").then((module) =>
       local(module.nailsModel)
@@ -103,6 +143,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/parathyroid").then((module) =>
       local(module.parathyroidModel)
     ),
+  "peptic-ulcer-disease": () =>
+    import("@workspace/registry/peptic-ulcer-disease").then((module) =>
+      local(module.pepticUlcerDiseaseModel)
+    ),
   pharynx: () =>
     import("@workspace/registry/pharynx").then((module) => module.pharynxModel),
   pineal: () =>
@@ -112,6 +156,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   pituitary: () =>
     import("@workspace/registry/pituitary").then((module) =>
       local(module.pituitaryModel)
+    ),
+  "pituitary-adenoma": () =>
+    import("@workspace/registry/pituitary-adenoma").then((module) =>
+      local(module.pituitaryAdenomaModel)
     ),
   prostate: () =>
     import("@workspace/registry/prostate").then(
