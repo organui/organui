@@ -6,6 +6,11 @@ import {
   organDefaultVisibility,
   type OrganModel,
 } from "../registry/base-nova/organ-viewer/organ-viewer"
+import {
+  diseaseModel,
+  type Disease,
+} from "../registry/base-nova/disease-viewer/disease-model"
+import { DiseaseViewer } from "../registry/base-nova/disease-viewer/disease-viewer"
 
 const directory = new URL("../registry/base-nova/", import.meta.url)
 // Items built on the shared viewer: the organs, tissues, the diseases drawn
@@ -59,23 +64,28 @@ async function load(name: string) {
   return { module, model: models[0]!, models }
 }
 
-// A disease reuses the models of the organs or tissues it is drawn on, one
-// per scale, so it ships only its own file and depends on each of them as
-// well as the viewer it renders with.
+// A disease is data on the shared disease viewer: one scale per organ or
+// tissue it is drawn on, which it depends on and reuses the model of, and
+// stages that change which structures it affects.
 for (const item of diseaseItems) {
   test(`${item.name} maps its disease onto its bases' models`, async () => {
     expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
       `registry/base-nova/${item.name}/${item.name}.tsx`,
     ])
-    expect(item.registryDependencies).toContain("@organui/organ-viewer")
+    expect(item.registryDependencies).toContain("@organui/disease-viewer")
     const bases = item.registryDependencies
-      .filter((name) => name !== "@organui/organ-viewer")
+      .filter((name) => name !== "@organui/disease-viewer")
       .map((name) => name.replace("@organui/", ""))
-    expect(bases.length).toBeGreaterThan(0)
-    const baseModels: OrganModel[] = []
-    for (const base of bases) {
-      const baseItem = registry.items.find(({ name }) => name === base)
+    const { module } = await load(item.name)
+    const disease = module[camel(item.name)] as Disease
+    expect(disease.code).toMatch(/^[A-Z]\d{2}(\.\d{1,3})?$/)
+    // Each scale is one base, in the order the item lists them.
+    expect([...disease.scales.map(({ id }) => id)].sort()).toEqual(
+      [...bases].sort()
+    )
+    for (const scale of disease.scales) {
+      const baseItem = registry.items.find(({ name }) => name === scale.id)
       // Drawn on an organ, or on a tissue for what happens at that scale.
       const [kind] = baseItem!.categories
       expect(["organ", "tissue"]).toContain(kind!)
@@ -83,50 +93,61 @@ for (const item of diseaseItems) {
       expect(
         item.categories.filter((category) => category !== "disease")
       ).toEqual(baseItem!.categories.filter((category) => category !== kind))
-      baseModels.push((await load(base)).model)
+      expect(scale.model).toBe((await load(scale.id)).model)
     }
-    // One model per base, the first base's being the item's own.
-    const { module, models } = await load(item.name)
-    expect(models.map(({ src }) => src)).toEqual(
-      baseModels.map(({ src }) => src)
-    )
-    // The `scale` prop picks a model by its base's name, the first by default.
+    // Every finding names a structure of its scale's model.
+    const stages = disease.stages ?? []
+    expect(new Set(stages.map(({ id }) => id)).size).toBe(stages.length)
+    for (const [scaleId, findings] of [
+      ...disease.scales.map(({ id, findings }) => [id, findings] as const),
+      ...stages.flatMap(({ findings = {} }) => Object.entries(findings)),
+    ]) {
+      const scale = disease.scales.find(({ id }) => id === scaleId)
+      expect(scale).toBeDefined()
+      const ids = scale!.model.structures.map(({ id }) => id)
+      for (const id of Object.keys(findings)) expect(ids).toContain(id)
+    }
+    for (const scale of disease.scales)
+      for (const stage of stages.length ? stages : [undefined]) {
+        const model = diseaseModel(disease, scale.id, stage?.id)
+        const base = scale.model
+        // The same GLB, views and credit; only the structures' text and
+        // colours change, so every mesh id still matches the file.
+        const { structures, name, ...shared } = model
+        const { structures: baseStructures, name: baseName, ...same } = base
+        expect(shared).toEqual(same)
+        expect(name).toBe(disease.name)
+        expect(name).not.toBe(baseName)
+        expect(structures.map(({ id }) => id).sort()).toEqual(
+          baseStructures.map(({ id }) => id).sort()
+        )
+        // The anatomy tree lists groups in structure order: affected first.
+        const groups = new Set(structures.map(({ group }) => group))
+        expect([...groups]).toEqual(["Affected", "Spared"])
+        for (const structure of structures) {
+          expect(structure.description?.length).toBeGreaterThan(0)
+          const original = baseStructures.find(({ id }) => id === structure.id)!
+          // Affected parts keep their colours; spared ones share a muted tone.
+          if (structure.group === "Affected")
+            expect(structure.color).toBe(original.color)
+        }
+        expect(
+          new Set(
+            structures
+              .filter(({ group }) => group === "Spared")
+              .map(({ color }) => color)
+          ).size
+        ).toBe(1)
+      }
+    // The model export is the default scale at the default stage, which the
+    // site's loaders and the gallery picture use.
+    expect(module[`${camel(item.name)}Model`]).toEqual(diseaseModel(disease))
     const Component = module[
       camel(item.name).replace(/^\w/, (letter) => letter.toUpperCase())
-    ] as (props: { scale?: string }) => { props: { model: OrganModel } }
-    expect(Component({}).props.model).toBe(models[0]!)
-    bases.forEach((scale, index) =>
-      expect(Component({ scale }).props.model).toBe(models[index]!)
-    )
-    models.forEach((model, index) => {
-      const base = baseModels[index]!
-      // The same GLB, views and credit; only the structures' text and
-      // colours change, so every mesh id still matches the file.
-      const { structures, name, ...shared } = model
-      const { structures: baseStructures, name: baseName, ...same } = base
-      expect(shared).toEqual(same)
-      expect(name).not.toBe(baseName)
-      expect(structures.map(({ id }) => id).sort()).toEqual(
-        baseStructures.map(({ id }) => id).sort()
-      )
-      // The anatomy tree lists groups in structure order: affected first.
-      const groups = new Set(structures.map(({ group }) => group))
-      expect([...groups]).toEqual(["Affected", "Spared"])
-      for (const structure of structures) {
-        expect(structure.description?.length).toBeGreaterThan(0)
-        const original = baseStructures.find(({ id }) => id === structure.id)!
-        // Affected parts keep their colours; spared ones share a muted tone.
-        if (structure.group === "Affected")
-          expect(structure.color).toBe(original.color)
-      }
-      expect(
-        new Set(
-          structures
-            .filter(({ group }) => group === "Spared")
-            .map(({ color }) => color)
-        ).size
-      ).toBe(1)
-    })
+    ] as (props: object) => { type: unknown; props: object }
+    const element = Component({ panel: false })
+    expect(element.type).toBe(DiseaseViewer)
+    expect(element.props).toEqual({ disease, panel: false })
   })
 }
 
@@ -194,6 +215,7 @@ test("all organ public components preserve their model and consumer props", asyn
   const { OrganViewer } =
     await import("../registry/base-nova/organ-viewer/organ-viewer")
   for (const item of organItems) {
+    if (diseaseItems.includes(item)) continue
     const name = item.name
       .split("-")
       .map((word) => word[0]!.toUpperCase() + word.slice(1))
@@ -222,9 +244,11 @@ test("all organ public components preserve their model and consumer props", asyn
 
 test("each organ has public-component demos and a concrete example registry entry", async () => {
   const examples = new URL("../../../apps/web/examples/", import.meta.url)
-  // Organs register their demos in _organs.tsx, the cell in _examples.tsx.
+  // Organs register their demos in _organs.tsx, diseases in _diseases.tsx,
+  // the cell in _examples.tsx.
   const definitions = [
     await readFile(new URL("_organs.tsx", examples), "utf8"),
+    await readFile(new URL("_diseases.tsx", examples), "utf8"),
     await readFile(new URL("_examples.tsx", examples), "utf8"),
   ].join("\n")
   for (const item of organItems) {
@@ -232,12 +256,10 @@ test("each organ has public-component demos and a concrete example registry entr
       .split("-")
       .map((word) => word[0]!.toUpperCase() + word.slice(1))
       .join("")
-    for (const suffix of [
-      "demo",
-      "without-controls",
-      "controlled",
-      "with-anatomy",
-    ]) {
+    const suffixes = diseaseItems.includes(item)
+      ? ["demo", "without-panel", "controlled"]
+      : ["demo", "without-controls", "controlled", "with-anatomy"]
+    for (const suffix of suffixes) {
       const name = `${item.name}-${suffix}`
       expect(definitions).toContain(`"${name}":`)
       expect(definitions).toContain(`import("./${name}")`)
@@ -245,6 +267,7 @@ test("each organ has public-component demos and a concrete example registry entr
       expect(source).toContain(`from "@workspace/registry/${item.name}"`)
       expect(source).toContain(`<${component}`)
       expect(source).not.toContain("<OrganViewer")
+      expect(source).not.toContain("<DiseaseViewer")
       expect(source).not.toContain("{ model }")
     }
   }

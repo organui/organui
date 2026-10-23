@@ -76,17 +76,7 @@ const props = {
   { type: string; default: string; description: string }
 >
 
-type Prop = { type: string; default: string; description: string }
-
-// Items that add props of their own, such as a disease's `scale`, list them
-// first in `extra`.
-export function OrganApi({
-  component,
-  extra = {},
-}: {
-  component: string
-  extra?: Record<string, Prop>
-}) {
+export function OrganApi({ component }: { component: string }) {
   return (
     <section className="flex min-w-0 flex-col gap-4">
       <DocsHeading id="api-reference">API Reference</DocsHeading>
@@ -108,7 +98,7 @@ export function OrganApi({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {Object.entries({ ...extra, ...props }).map(([name, prop]) => (
+          {Object.entries(props).map(([name, prop]) => (
             <TableRow key={name}>
               <TableCell>
                 <code>{name}</code>

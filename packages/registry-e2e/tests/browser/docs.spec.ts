@@ -584,7 +584,7 @@ test("the diseases gallery shows every disease under its body system", async ({
     await expect(section.getByRole("heading", { level: 2 })).toHaveCount(1)
     const base = items.find(
       ({ name }) =>
-        name !== "organ-viewer" &&
+        name !== "disease-viewer" &&
         item.registryDependencies?.includes(`@organui/${name}`)
     )
     await expect(

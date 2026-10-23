@@ -65,47 +65,6 @@ export const organExamples = {
       return <Example />
     },
   },
-  "autoimmune-hepatitis-demo": {
-    title: "Autoimmune hepatitis",
-    file: "autoimmune-hepatitis-demo.tsx",
-    render: async () => {
-      const { Example } = await import("./autoimmune-hepatitis-demo")
-      return <Example />
-    },
-  },
-  "autoimmune-hepatitis-scales": {
-    title: "Autoimmune hepatitis Scales",
-    file: "autoimmune-hepatitis-scales.tsx",
-    render: async () => {
-      const { Example } = await import("./autoimmune-hepatitis-scales")
-      return <Example />
-    },
-  },
-  "autoimmune-hepatitis-without-controls": {
-    title: "Autoimmune hepatitis Without Controls",
-    file: "autoimmune-hepatitis-without-controls.tsx",
-    render: async () => {
-      const { Example } =
-        await import("./autoimmune-hepatitis-without-controls")
-      return <Example />
-    },
-  },
-  "autoimmune-hepatitis-controlled": {
-    title: "Autoimmune hepatitis Controlled Selection",
-    file: "autoimmune-hepatitis-controlled.tsx",
-    render: async () => {
-      const { Example } = await import("./autoimmune-hepatitis-controlled")
-      return <Example />
-    },
-  },
-  "autoimmune-hepatitis-with-anatomy": {
-    title: "Autoimmune hepatitis With Anatomy Panel",
-    file: "autoimmune-hepatitis-with-anatomy.tsx",
-    render: async () => {
-      const { Example } = await import("./autoimmune-hepatitis-with-anatomy")
-      return <Example />
-    },
-  },
   "bladder-demo": {
     title: "Bladder",
     file: "bladder-demo.tsx",

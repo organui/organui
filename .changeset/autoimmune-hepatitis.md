@@ -2,8 +2,8 @@
 "@workspace/registry": minor
 ---
 
-The first disease component: `autoimmune-hepatitis` shows the condition at two scales, chosen with its `scale` prop. On the whole liver (the default), the parenchyma and portal vein are affected, for the cirrhosis and portal hypertension it leads to. On a liver lobule (`scale="liver-lobule"`), the portal infiltrate, interface hepatitis at the limiting plate and the periportal hepatocytes are affected. The structures it usually spares are muted, and each structure describes what the disease does there. It installs the liver, the liver lobule and the organ viewer.
+Diseases, a new family of components on the organ viewer. `disease-viewer` shows a condition as findings on organ models: the structures it affects or spares at each stage and scale, beside a panel with its ICD-10 code, course, findings and key investigations. Selecting a structure in 3D or in the panel shows what the disease does there.
 
-`liver-lobule` is a new component on the organ viewer, from an original CC0 schematic model: the central vein, hepatocyte plates in their three zones, the limiting plate, sinusoids with Kupffer cells, and a portal tract with its venule, arteriole and bile duct at each corner.
+`autoimmune-hepatitis` is the first: on the whole liver and on a liver lobule, through active disease, fibrosis and cirrhosis. `liver-lobule` is a new component from an original CC0 schematic model: the central vein, hepatocyte plates in their three zones, the limiting plate, sinusoids with Kupffer cells, and a portal tract at each corner.
 
-The docs list diseases in their own sidebar group and in a diseases gallery grouped by body system.
+The organ viewer repaints when its model's colours change. The docs list diseases in their own sidebar group and in a gallery grouped by body system.

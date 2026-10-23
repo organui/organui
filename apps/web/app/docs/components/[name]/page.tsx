@@ -1,4 +1,3 @@
-import * as React from "react"
 import { ComponentPreview } from "@/components/component-preview"
 import { ComponentInstallation } from "@/components/component-installation"
 import { CodeSnippet } from "@/components/code-snippet"
@@ -8,6 +7,7 @@ import { DocsPager } from "@/components/docs-pager"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { DiseaseDocs } from "@/components/disease-docs"
 import { OrganApi } from "@/components/organ-api"
 import { OrganExamples } from "@/components/organ-examples"
 import { organModels } from "@/lib/organ-models"
@@ -46,20 +46,9 @@ export default async function Page({ params }: Props) {
   const found = itemFor(name)
   if (!found) notFound()
   const { item, load } = found
+  // Diseases have a page of their own: their course, findings and scales.
+  if (item.disease) return <DiseaseDocs item={item} />
   const model = await load()
-  // A disease is drawn on the models of its organs or tissues, one per
-  // scale, which install with it.
-  const bases = item.bases.flatMap(
-    (base) => registryItems.find(({ name }) => name === base) ?? []
-  )
-  const baseLinks = bases.map((base, index) => (
-    <React.Fragment key={base.name}>
-      {index > 0 && (index === bases.length - 1 ? " and " : ", ")}
-      <Link href={base.href} className="underline">
-        {base.title.toLowerCase()}
-      </Link>
-    </React.Fragment>
-  ))
   // Models built in this repository load from the site itself (see
   // organ-models.ts); give readers the public address.
   const hosted = model.src.startsWith("/")
@@ -76,18 +65,9 @@ export function ${component}Demo() {
     <div className="flex flex-col gap-10">
       <DocsHeader href={item.href} title={<>{item.title}</>}>
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
-          {bases.length > 0 ? (
-            <>
-              {model.name} in 3D on the {baseLinks}. Each structure is grouped
-              as affected or spared and says what the disease does there.
-            </>
-          ) : (
-            <>
-              An interactive 3D {model.name.toLowerCase()} with{" "}
-              {model.structures.length} selectable structures and{" "}
-              {model.views.length} named views.
-            </>
-          )}
+          An interactive 3D {model.name.toLowerCase()} with{" "}
+          {model.structures.length} selectable structures and{" "}
+          {model.views.length} named views.
         </p>
       </DocsHeader>
       <ComponentPreview key={name} name={`${name}-demo`} />
@@ -95,20 +75,8 @@ export function ${component}Demo() {
         <DocsHeading id="installation">Installation</DocsHeading>
         <ComponentInstallation name={name} command={item.install} />
         <p className="text-sm text-muted-foreground">
-          This adds <code>{name}.tsx</code> to your components directory.{" "}
-          {bases.length > 0 && (
-            <>
-              It imports its models from the {baseLinks}, which add{" "}
-              {bases.map((base, index) => (
-                <React.Fragment key={base.name}>
-                  {index > 0 && " and "}
-                  <code>{base.name}.tsx</code>
-                </React.Fragment>
-              ))}
-              .{" "}
-            </>
-          )}
-          Its dependency,{" "}
+          This adds <code>{name}.tsx</code> to your components directory. Its
+          dependency,{" "}
           <Link href="/docs/components/organ-viewer" className="underline">
             organ viewer
           </Link>
@@ -141,38 +109,8 @@ export function ${component}Demo() {
           visibility in each.
         </p>
       </section>
-      {bases.length > 1 && (
-        <section className="flex min-w-0 flex-col gap-4">
-          <DocsHeading id="scales">Scales</DocsHeading>
-          <p className="text-sm text-muted-foreground">
-            Set <code>scale</code> to{" "}
-            {bases.map((base, index) => (
-              <React.Fragment key={base.name}>
-                {index > 0 && (index === bases.length - 1 ? " or " : ", ")}
-                <code>&quot;{base.name}&quot;</code>
-              </React.Fragment>
-            ))}{" "}
-            to show the disease on that model. Each scale keeps its model&apos;s
-            structure IDs, so reset selection when you switch.
-          </p>
-          <ComponentPreview name={`${name}-scales`} />
-        </section>
-      )}
       <OrganExamples key={`${name}-examples`} name={name} />
-      <OrganApi
-        component={component}
-        extra={
-          bases.length > 1
-            ? {
-                scale: {
-                  type: bases.map((base) => `"${base.name}"`).join(" | "),
-                  default: `"${bases[0]!.name}"`,
-                  description: "Choose the model the disease is shown on.",
-                },
-              }
-            : undefined
-        }
-      />
+      <OrganApi component={component} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="views">Views</DocsHeading>
         <p>
