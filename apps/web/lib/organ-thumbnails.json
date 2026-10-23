@@ -12,6 +12,7 @@
   "gallbladder": "https://cdn.jsdelivr.net/gh/organui/gallbladder-3d@15b03b830abe55e1081ac929dcbe6318d84e4067/public/models/gallbladder.glb",
   "hair": "https://organui.com/models/hair.glb",
   "heart": "https://cdn.jsdelivr.net/gh/organui/heart-3d@c72ce6654ff8e282942f97750d3104f55ef4fc3d/public/models/heart.glb",
+  "hodgkin-lymphoma": "https://cdn.jsdelivr.net/gh/organui/lymph-3d@ce6d0cf9c1b632d0e109fc84139e14d0b5cbd651/public/models/lymph-node.glb",
   "intestines": "https://cdn.jsdelivr.net/gh/organui/intestines-3d@8386b2327715f32b2ec62b403b94a3e5f6a307e2/public/models/intestines.glb",
   "joints": "https://organui.com/models/joints.glb",
   "kidneys": "https://cdn.jsdelivr.net/gh/organui/kidneys-3d@880b7c9cdf9f2272eee7741b01ccb34454adb30c/public/models/kidneys.glb",
