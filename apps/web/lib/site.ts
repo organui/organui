@@ -6,6 +6,7 @@ export const site = {
   socialImage: "/opengraph-image",
   repo: "organui/organui",
   repository: "https://github.com/organui/organui",
+  x: "https://x.com/organui",
 } as const
 
 // Standalone 3D anatomy explorers, each in its own repository.
