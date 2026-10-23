@@ -51,7 +51,7 @@ export const melanoma: Disease = {
       id: "in-situ",
       label: "In situ",
       summary:
-        "Confined to the epidermis. Wide local excision with a 5 mm margin cures it.",
+        "Confined to the epidermis, so not yet invasive, and coded D03 rather than C43. Wide local excision with a 5 mm margin cures it.",
     },
     {
       id: "thin",
