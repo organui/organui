@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "peptic-ulcer-disease-demo": {
+    title: "Peptic ulcer disease",
+    file: "peptic-ulcer-disease-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./peptic-ulcer-disease-demo")
+      return <Example />
+    },
+  },
+  "peptic-ulcer-disease-without-panel": {
+    title: "Peptic ulcer disease Without Panel",
+    file: "peptic-ulcer-disease-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./peptic-ulcer-disease-without-panel")
+      return <Example />
+    },
+  },
+  "peptic-ulcer-disease-controlled": {
+    title: "Peptic ulcer disease Controlled",
+    file: "peptic-ulcer-disease-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./peptic-ulcer-disease-controlled")
+      return <Example />
+    },
+  },
 }
