@@ -53,8 +53,9 @@ export default function Page() {
           <DocsHeading id={section.id}>{section.title}</DocsHeading>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3">
             {section.items.map((item) => {
-              const base = registryItems.find(
-                ({ name }) => name === item.basedOn
+              const bases = item.bases.flatMap(
+                (base) =>
+                  registryItems.find(({ name }) => name === base)?.title ?? []
               )
               return (
                 <li key={item.name} className="flex flex-col gap-0.5">
@@ -72,9 +73,12 @@ export default function Page() {
                     />
                     <span className="text-sm font-medium">{item.title}</span>
                   </Link>
-                  {base && (
+                  {bases.length > 0 && (
                     <span className="text-xs text-muted-foreground">
-                      On the {base.title.toLowerCase()}
+                      On the{" "}
+                      {bases
+                        .map((title) => title.toLowerCase())
+                        .join(" and the ")}
                     </span>
                   )}
                 </li>

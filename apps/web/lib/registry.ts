@@ -64,14 +64,16 @@ export const registryItems = catalog.items
       system: bodySystems.find(({ id }) => categories.includes(id))?.id,
       // The organ a disease is drawn on: its one OrganUI dependency besides
       // the viewer.
-      basedOn: categories.includes("disease")
-        ? item.registryDependencies
-            ?.find(
+      // The organs or tissues a disease is drawn on, one per scale, the
+      // default first: its OrganUI dependencies besides the viewer.
+      bases: categories.includes("disease")
+        ? (item.registryDependencies ?? [])
+            .filter(
               (name) =>
                 name.startsWith("@organui/") && name !== "@organui/organ-viewer"
             )
-            ?.replace("@organui/", "")
-        : undefined,
+            .map((name) => name.replace("@organui/", ""))
+        : [],
       // Items built on the organ viewer with a model: organs, diseases, the
       // cell and tissues.
       model:

@@ -42,64 +42,91 @@ test("every organ file has exactly one registry item that depends on the viewer"
   }
 })
 
-// A disease reuses one organ's model, so it ships only its own file and
-// depends on that organ as well as the viewer it renders with.
+// Each item exports its model as `<camelName>Model`, such as spinalCordModel.
+const camel = (name: string) =>
+  name.replace(/-(\w)/g, (_, letter: string) => letter.toUpperCase())
+async function load(name: string) {
+  const module = (await import(
+    new URL(`${name}/${name}.tsx`, directory).href
+  )) as Record<string, unknown>
+  // Every model the file exports, the item's own one first.
+  const models = Object.entries(module)
+    .filter(([, value]) => typeof value === "object" && value !== null)
+    .sort(([a], [b]) =>
+      a === `${camel(name)}Model` ? -1 : b === `${camel(name)}Model` ? 1 : 0
+    )
+    .map(([, value]) => value as OrganModel)
+  return { module, model: models[0]!, models }
+}
+
+// A disease reuses the models of the organs or tissues it is drawn on, one
+// per scale, so it ships only its own file and depends on each of them as
+// well as the viewer it renders with.
 for (const item of diseaseItems) {
-  test(`${item.name} maps its disease onto one organ's model`, async () => {
+  test(`${item.name} maps its disease onto its bases' models`, async () => {
     expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
       `registry/base-nova/${item.name}/${item.name}.tsx`,
     ])
-    const [organ, ...rest] = item.registryDependencies.filter(
-      (name) => name !== "@organui/organ-viewer"
-    )
-    expect(rest).toEqual([])
     expect(item.registryDependencies).toContain("@organui/organ-viewer")
-    const organName = organ!.replace("@organui/", "")
-    const organItem = registry.items.find(({ name }) => name === organName)
-    // Drawn on an organ, or on a tissue for what happens at that scale.
-    const [kind] = organItem!.categories
-    expect(["organ", "tissue"]).toContain(kind!)
-    // The disease sits in the same body system as its organ.
-    expect(
-      item.categories.filter((category) => category !== "disease")
-    ).toEqual(organItem!.categories.filter((category) => category !== kind))
-    const find = (module: Record<string, unknown>) =>
-      Object.values(module).find(
-        (value) => typeof value === "object"
-      ) as OrganModel
-    const model = find(
-      await import(new URL(`${item.name}/${item.name}.tsx`, directory).href)
-    )
-    const base = find(
-      await import(new URL(`${organName}/${organName}.tsx`, directory).href)
-    )
-    // The same GLB, views and credit; only the structures' text and colours
-    // change, so every mesh id still matches the file.
-    const { structures, name, ...shared } = model
-    const { structures: baseStructures, name: baseName, ...same } = base
-    expect(shared).toEqual(same)
-    expect(name).not.toBe(baseName)
-    expect(structures.map(({ id }) => id).sort()).toEqual(
-      baseStructures.map(({ id }) => id).sort()
-    )
-    // The anatomy tree lists groups in structure order: affected first.
-    const groups = new Set(structures.map(({ group }) => group))
-    expect([...groups]).toEqual(["Affected", "Spared"])
-    for (const structure of structures) {
-      expect(structure.description?.length).toBeGreaterThan(0)
-      const original = baseStructures.find(({ id }) => id === structure.id)!
-      // Affected parts keep the organ's colours; spared ones share a muted tone.
-      if (structure.group === "Affected")
-        expect(structure.color).toBe(original.color)
+    const bases = item.registryDependencies
+      .filter((name) => name !== "@organui/organ-viewer")
+      .map((name) => name.replace("@organui/", ""))
+    expect(bases.length).toBeGreaterThan(0)
+    const baseModels: OrganModel[] = []
+    for (const base of bases) {
+      const baseItem = registry.items.find(({ name }) => name === base)
+      // Drawn on an organ, or on a tissue for what happens at that scale.
+      const [kind] = baseItem!.categories
+      expect(["organ", "tissue"]).toContain(kind!)
+      // The disease sits in the same body system as its bases.
+      expect(
+        item.categories.filter((category) => category !== "disease")
+      ).toEqual(baseItem!.categories.filter((category) => category !== kind))
+      baseModels.push((await load(base)).model)
     }
-    expect(
-      new Set(
-        structures
-          .filter(({ group }) => group === "Spared")
-          .map(({ color }) => color)
-      ).size
-    ).toBe(1)
+    // One model per base, the first base's being the item's own.
+    const { module, models } = await load(item.name)
+    expect(models.map(({ src }) => src)).toEqual(
+      baseModels.map(({ src }) => src)
+    )
+    // The `scale` prop picks a model by its base's name, the first by default.
+    const Component = module[
+      camel(item.name).replace(/^\w/, (letter) => letter.toUpperCase())
+    ] as (props: { scale?: string }) => { props: { model: OrganModel } }
+    expect(Component({}).props.model).toBe(models[0]!)
+    bases.forEach((scale, index) =>
+      expect(Component({ scale }).props.model).toBe(models[index]!)
+    )
+    models.forEach((model, index) => {
+      const base = baseModels[index]!
+      // The same GLB, views and credit; only the structures' text and
+      // colours change, so every mesh id still matches the file.
+      const { structures, name, ...shared } = model
+      const { structures: baseStructures, name: baseName, ...same } = base
+      expect(shared).toEqual(same)
+      expect(name).not.toBe(baseName)
+      expect(structures.map(({ id }) => id).sort()).toEqual(
+        baseStructures.map(({ id }) => id).sort()
+      )
+      // The anatomy tree lists groups in structure order: affected first.
+      const groups = new Set(structures.map(({ group }) => group))
+      expect([...groups]).toEqual(["Affected", "Spared"])
+      for (const structure of structures) {
+        expect(structure.description?.length).toBeGreaterThan(0)
+        const original = baseStructures.find(({ id }) => id === structure.id)!
+        // Affected parts keep their colours; spared ones share a muted tone.
+        if (structure.group === "Affected")
+          expect(structure.color).toBe(original.color)
+      }
+      expect(
+        new Set(
+          structures
+            .filter(({ group }) => group === "Spared")
+            .map(({ color }) => color)
+        ).size
+      ).toBe(1)
+    })
   })
 }
 
@@ -122,12 +149,7 @@ async function expectLocalModel(file: string, model: OrganModel) {
 
 for (const item of organItems) {
   test(`${item.name} describes a consistent, attributed model`, async () => {
-    const module = await import(
-      new URL(`${item.name}/${item.name}.tsx`, directory).href
-    )
-    const model = Object.values(module).find(
-      (value) => typeof value === "object"
-    ) as OrganModel
+    const { model } = await load(item.name)
     const ids = model.structures.map(({ id }) => id)
     expect(new Set(ids).size).toBe(ids.length)
     for (const { color, label, group } of model.structures) {
@@ -176,14 +198,12 @@ test("all organ public components preserve their model and consumer props", asyn
       .split("-")
       .map((word) => word[0]!.toUpperCase() + word.slice(1))
       .join("")
-    const module = await import(
-      new URL(`${item.name}/${item.name}.tsx`, directory).href
-    )
-    const Component = module[name]
+    const { module, model } = await load(item.name)
+    const Component = module[name] as (props: object) => {
+      type: unknown
+      props: Record<string, unknown>
+    }
     expect(typeof Component).toBe("function")
-    const model = Object.values(module).find(
-      (value) => typeof value === "object"
-    )
     const props = {
       controls: false,
       src: "/custom.glb",

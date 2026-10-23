@@ -932,8 +932,9 @@
       "name": "autoimmune-hepatitis",
       "type": "registry:component",
       "title": "Autoimmune hepatitis",
-      "description": "Autoimmune hepatitis on the liver lobule: the portal infiltrate, interface hepatitis at the limiting plate and periportal injury, with the zones, veins and bile ducts it usually spares. 11 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "description": "Autoimmune hepatitis at two scales: the whole liver, where it ends in cirrhosis and portal hypertension, and a liver lobule, with the portal infiltrate, interface hepatitis and periportal injury. Affected and spared structures each say what the disease does there. Models licensed CC BY 4.0 (liver) and CC0 1.0 (lobule).",
       "registryDependencies": [
+        "@organui/liver",
         "@organui/liver-lobule",
         "@organui/organ-viewer"
       ],
@@ -944,7 +945,7 @@
           "type": "registry:component"
         }
       ],
-      "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
+      "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
       "name": "ai-disclaimer",

@@ -73,6 +73,14 @@ export const organExamples = {
       return <Example />
     },
   },
+  "autoimmune-hepatitis-scales": {
+    title: "Autoimmune hepatitis Scales",
+    file: "autoimmune-hepatitis-scales.tsx",
+    render: async () => {
+      const { Example } = await import("./autoimmune-hepatitis-scales")
+      return <Example />
+    },
+  },
   "autoimmune-hepatitis-without-controls": {
     title: "Autoimmune hepatitis Without Controls",
     file: "autoimmune-hepatitis-without-controls.tsx",
