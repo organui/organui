@@ -7,6 +7,7 @@
   "breast": "https://organui.com/models/breast.glb",
   "diaphragm": "https://organui.com/models/diaphragm.glb",
   "ear": "https://cdn.jsdelivr.net/gh/organui/ear-3d@40ace7ed45cdbf604adda889e5db720ee6b1ce98/public/models/ear.glb",
+  "ectopic-pregnancy": "https://cdn.jsdelivr.net/gh/organui/uterus-3d@404a6039b2d667e2b4e08ae71d4964cd9b963cf1/public/models/reproductive.glb",
   "esophagus": "https://cdn.jsdelivr.net/gh/organui/esophagus-3d@ba0fddba344ae586f266586a9a30f3fce10f2aec/public/models/esophagus.glb",
   "eye": "https://cdn.jsdelivr.net/gh/organui/eye-3d@99f74f1c096ae2813dd18e1ecb2c9cbbd701c530/public/models/eye.glb",
   "gallbladder": "https://cdn.jsdelivr.net/gh/organui/gallbladder-3d@15b03b830abe55e1081ac929dcbe6318d84e4067/public/models/gallbladder.glb",
