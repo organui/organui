@@ -13,6 +13,7 @@
   "hair": "https://organui.com/models/hair.glb",
   "heart": "https://cdn.jsdelivr.net/gh/organui/heart-3d@c72ce6654ff8e282942f97750d3104f55ef4fc3d/public/models/heart.glb",
   "intestines": "https://cdn.jsdelivr.net/gh/organui/intestines-3d@8386b2327715f32b2ec62b403b94a3e5f6a307e2/public/models/intestines.glb",
+  "ischaemic-stroke": "https://cdn.jsdelivr.net/gh/organui/brain-3d@e2f8c172716d8f4e8db6080b7d23f38fabe3add8/public/models/brain.glb",
   "joints": "https://organui.com/models/joints.glb",
   "kidneys": "https://cdn.jsdelivr.net/gh/organui/kidneys-3d@880b7c9cdf9f2272eee7741b01ccb34454adb30c/public/models/kidneys.glb",
   "larynx": "https://cdn.jsdelivr.net/gh/organui/larynx-3d@aa18162e23a7617b1db91e5b929f05940fede2b2/public/models/larynx.glb",
