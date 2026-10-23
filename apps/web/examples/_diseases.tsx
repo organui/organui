@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "melanoma-demo": {
+    title: "Melanoma",
+    file: "melanoma-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./melanoma-demo")
+      return <Example />
+    },
+  },
+  "melanoma-without-panel": {
+    title: "Melanoma Without Panel",
+    file: "melanoma-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./melanoma-without-panel")
+      return <Example />
+    },
+  },
+  "melanoma-controlled": {
+    title: "Melanoma Controlled",
+    file: "melanoma-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./melanoma-controlled")
+      return <Example />
+    },
+  },
 }
