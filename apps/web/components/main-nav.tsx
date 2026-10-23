@@ -6,13 +6,21 @@ import type { NavLink } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
-// The section a page belongs to: the item whose address is the longest
-// prefix of it, so the organs gallery is Organs rather than Components, and
-// Docs covers the guides.
+// The section a page belongs to: the item that lists it among its pages, or
+// else whose address is the longest prefix of it, so the organs gallery is
+// Organs rather than Components, a disease is Diseases, and Docs covers the
+// guides.
 export function currentSection(items: NavLink[], pathname: string) {
+  const rank = ({ href, pages }: NavLink) =>
+    pages?.includes(pathname) ? Infinity : href.length
   return items
-    .filter(({ href }) => pathname === href || pathname.startsWith(`${href}/`))
-    .sort((a, b) => b.href.length - a.href.length)[0]?.href
+    .filter(
+      (item) =>
+        pathname === item.href ||
+        pathname.startsWith(`${item.href}/`) ||
+        item.pages?.includes(pathname)
+    )
+    .sort((a, b) => rank(b) - rank(a))[0]?.href
 }
 
 export function MainNav({

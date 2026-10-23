@@ -341,11 +341,18 @@ test("component index lists every component inside the docs layout", async ({
   await expect(
     docs.getByRole("link", { name: "Components", exact: true })
   ).toHaveAttribute("aria-current", "page")
-  // The sidebar lists every component, the organs among them.
+  // The sidebar lists every component, the organs among them; the diseases
+  // are browsed in their gallery.
+  const diseases = components.filter(({ categories }) =>
+    categories?.includes("disease")
+  )
   for (const item of components)
     await expect(
       docs.getByRole("link", { name: item.title ?? item.name, exact: true })
-    ).toHaveAttribute("href", `/docs/components/${item.name}`)
+    ).toHaveCount(diseases.includes(item) ? 0 : 1)
+  await expect(
+    docs.getByRole("link", { name: "Diseases", exact: true })
+  ).toHaveAttribute("href", "/docs/components/diseases")
   if (narrow) {
     // Tapping the current page still closes the menu.
     await docs.getByRole("link", { name: "Components", exact: true }).click()
@@ -373,6 +380,12 @@ test("component index lists every component inside the docs layout", async ({
   if (narrow) await menu.click()
   await expect(
     docs.getByRole("link", { name: organ!.title ?? organ!.name, exact: true })
+  ).toHaveAttribute("aria-current", "page")
+  // A disease's page is under Diseases, which the sidebar lists instead.
+  await page.goto(`/docs/components/${diseases[0]!.name}`)
+  if (narrow) await menu.click()
+  await expect(
+    docs.getByRole("link", { name: "Diseases", exact: true })
   ).toHaveAttribute("aria-current", "page")
   expect(errors).toEqual([])
 })
@@ -423,6 +436,7 @@ test("the header links each section and searches the whole site", async ({
     "Docs",
     "Components",
     "Organs",
+    "Diseases",
     "Blocks",
     "Charts",
     "Create",
