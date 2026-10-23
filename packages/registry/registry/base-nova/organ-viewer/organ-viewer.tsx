@@ -651,8 +651,13 @@ export function OrganViewer({
     const ghosts = new Map<string, Color>()
     setEngine({
       paint(selected, shown) {
+        // Colours come from the current model, so a model that recolours the
+        // same structures, such as a disease stage, repaints without a reload.
+        const colors = new Map(
+          latest.current.model.structures.map(({ id, color }) => [id, color])
+        )
         for (const [id, list] of meshes) {
-          const color = structures.get(id)!.color
+          const color = colors.get(id) ?? structures.get(id)!.color
           const state = !selected
             ? "normal"
             : id === selected
@@ -733,7 +738,7 @@ export function OrganViewer({
 
   React.useEffect(() => {
     engine?.paint(selectedId, shown)
-  }, [engine, selectedId, shown, tone])
+  }, [engine, selectedId, shown, tone, model])
 
   React.useImperativeHandle(
     ref,
