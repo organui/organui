@@ -199,11 +199,32 @@
       "@/components/disease-model": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-model.ts"
       ],
+      "@/components/acute-appendicitis": [
+        "../../packages/registry/registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
       "@/components/autoimmune-hepatitis": [
         "../../packages/registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
+      "@/components/gallstone-disease": [
+        "../../packages/registry/registry/base-nova/gallstone-disease/gallstone-disease.tsx"
+      ],
+      "@/components/graves-disease": [
+        "../../packages/registry/registry/base-nova/graves-disease/graves-disease.tsx"
+      ],
+      "@/components/ischaemic-stroke": [
+        "../../packages/registry/registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
       "@/components/kidney-stones": [
         "../../packages/registry/registry/base-nova/kidney-stones/kidney-stones.tsx"
+      ],
+      "@/components/lobar-pneumonia": [
+        "../../packages/registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "../../packages/registry/registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
+      ],
+      "@/components/peptic-ulcer-disease": [
+        "../../packages/registry/registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx"
       ],
       "@/icons/icon-placeholder": [
         "../../packages/ui/src/components/icon-placeholder.tsx"
