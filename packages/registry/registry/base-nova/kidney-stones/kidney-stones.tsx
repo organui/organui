@@ -38,7 +38,7 @@ export const kidneyStones: Disease = {
         "left-renal-artery": {
           affected: false,
           description:
-            "Not involved. A dissection or embolus here also causes sudden loin pain, but without blood in the urine from a stone.",
+            "Not involved. An embolus or dissection here also causes sudden loin pain and often blood in the urine; contrast CT shows the wedge-shaped infarct. In an older patient, a leaking aortic aneurysm must be excluded first.",
         },
       },
     },
