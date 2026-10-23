@@ -6,4 +6,4 @@ Patient charts read more like the record. Oxygen, glucose and insulin tooltips s
 
 Medication adherence draws its 80% threshold dashed and muted, as vaccine coverage does. Lab turnaround labels its axis in minutes and its readout over the last 30 days, with the 90% goal in its badge. Hazard ratios keep two decimals. Vaccinations and bed occupancy have legends. Several labels are clinically clearer: the lab panel, the ED four-hour standard (admitted, transferred or discharged), "Lack of appetite" among the symptoms, "Pain relief" on the outcomes radar, and the period and unit on census, blood pressure and vaccinations.
 
-The dashboard block's as-needed medication is no longer scheduled as needed.
+The dashboard block's noon ibuprofen dose is no longer labelled as needed.
