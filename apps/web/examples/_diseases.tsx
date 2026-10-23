@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "myocardial-infarction-demo": {
+    title: "Myocardial infarction",
+    file: "myocardial-infarction-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./myocardial-infarction-demo")
+      return <Example />
+    },
+  },
+  "myocardial-infarction-without-panel": {
+    title: "Myocardial infarction Without Panel",
+    file: "myocardial-infarction-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./myocardial-infarction-without-panel")
+      return <Example />
+    },
+  },
+  "myocardial-infarction-controlled": {
+    title: "Myocardial infarction Controlled",
+    file: "myocardial-infarction-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./myocardial-infarction-controlled")
+      return <Example />
+    },
+  },
 }

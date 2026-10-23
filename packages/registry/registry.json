@@ -972,6 +972,21 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "myocardial-infarction",
+      "type": "registry:component",
+      "title": "Myocardial infarction",
+      "description": "An anterior ST-elevation myocardial infarction on the heart: the blocked left anterior descending artery and the wall it supplies, from occlusion through the acute phase to a healed scar, with the ECG, troponin and echo at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/heart"],
+      "categories": ["disease", "cardiovascular"],
+      "files": [
+        {
+          "path": "registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Myocardial infarction docs: https://organui.com/docs/components/myocardial-infarction. It reuses the heart model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",
