@@ -42,7 +42,6 @@
     "./brain": "./registry/base-nova/brain/brain.tsx",
     "./breast": "./registry/base-nova/breast/breast.tsx",
     "./cell": "./registry/base-nova/cell/cell.tsx",
-    "./liver-lobule": "./registry/base-nova/liver-lobule/liver-lobule.tsx",
     "./diaphragm": "./registry/base-nova/diaphragm/diaphragm.tsx",
     "./ear": "./registry/base-nova/ear/ear.tsx",
     "./esophagus": "./registry/base-nova/esophagus/esophagus.tsx",
@@ -55,10 +54,7 @@
     "./kidneys": "./registry/base-nova/kidneys/kidneys.tsx",
     "./larynx": "./registry/base-nova/larynx/larynx.tsx",
     "./liver": "./registry/base-nova/liver/liver.tsx",
-    "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx",
-    "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
-    "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
-    "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
+    "./liver-lobule": "./registry/base-nova/liver-lobule/liver-lobule.tsx",
     "./lungs": "./registry/base-nova/lungs/lungs.tsx",
     "./lymph": "./registry/base-nova/lymph/lymph.tsx",
     "./muscles": "./registry/base-nova/muscles/muscles.tsx",
@@ -83,7 +79,11 @@
     "./tongue": "./registry/base-nova/tongue/tongue.tsx",
     "./uterus": "./registry/base-nova/uterus/uterus.tsx",
     "./vessels": "./registry/base-nova/vessels/vessels.tsx",
-    "./vestibular": "./registry/base-nova/vestibular/vestibular.tsx"
+    "./vestibular": "./registry/base-nova/vestibular/vestibular.tsx",
+    "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
+    "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
+    "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
+    "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx"
   },
   "scripts": {
     "build": "bun scripts/build.ts",
