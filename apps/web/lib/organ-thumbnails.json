@@ -1,4 +1,5 @@
 {
+  "acute-appendicitis": "https://organui.com/models/appendix.glb",
   "adrenals": "https://cdn.jsdelivr.net/gh/organui/adrenals-3d@320ccd6e6355cd9f5a9d5854ebe3e363aab08b70/public/models/adrenals.glb",
   "appendix": "https://organui.com/models/appendix.glb",
   "autoimmune-hepatitis": "https://cdn.jsdelivr.net/gh/organui/liver-3d@528ee1794670d3bfa23d581f91ba49d6af585b03/public/models/liver.glb",
