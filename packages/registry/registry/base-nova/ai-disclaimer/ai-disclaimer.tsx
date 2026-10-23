@@ -1,5 +1,4 @@
 import * as React from "react"
-import { cn } from "cn"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
@@ -9,9 +8,11 @@ export type AiReview = {
   by: string
   /** An ISO 8601 date-time. */
   at: string
+  /** The decision, as ClinicianReview records it. Defaults to approved. */
+  status?: "approved" | "changes-requested" | "rejected"
 }
 
-export type AiDisclaimerProps = {
+export type AiDisclaimerProps = React.ComponentProps<"div"> & {
   /** The model or service that produced the content. */
   model?: string
   /** When it was generated, an ISO 8601 date-time. */
@@ -20,9 +21,17 @@ export type AiDisclaimerProps = {
   review?: AiReview | null
   /** Replaces the default guidance. */
   children?: React.ReactNode
-  /** Defaults to a UTC date and time such as "Oct 21, 2026, 9:30 AM". */
+  /** Defaults to a UTC date and time such as "Oct 21, 2026, 9:30 AM UTC". */
   formatDate?: (date: string) => string
-  className?: string
+}
+
+const reviewText = {
+  approved: { title: "AI-generated, reviewed", by: "Reviewed by" },
+  "changes-requested": {
+    title: "AI-generated, changes requested",
+    by: "Changes requested by",
+  },
+  rejected: { title: "AI-generated, rejected", by: "Rejected by" },
 }
 
 const dateFormat = new Intl.DateTimeFormat("en-US", {
@@ -48,14 +57,21 @@ export function AiDisclaimer({
   children,
   formatDate = defaultFormatDate,
   className,
+  ...props
 }: AiDisclaimerProps) {
+  const text = review && reviewText[review.status ?? "approved"]
   const source = [
     model,
     generatedAt && `generated ${formatDate(generatedAt)}`,
   ].filter(Boolean)
   return (
     // A note, not an alert: it describes the content without interrupting.
-    <Alert role="note" className={cn(className)}>
+    <Alert
+      data-slot="ai-disclaimer"
+      role="note"
+      className={className}
+      {...props}
+    >
       <IconPlaceholder
         lucide="SparklesIcon"
         tabler="IconSparkles"
@@ -64,14 +80,12 @@ export function AiDisclaimer({
         remixicon="RiSparklingLine"
         aria-hidden="true"
       />
-      <AlertTitle>
-        {review ? "AI-generated, reviewed" : "AI-generated draft"}
-      </AlertTitle>
+      <AlertTitle>{text ? text.title : "AI-generated draft"}</AlertTitle>
       <AlertDescription>
         <p>
           {children ??
-            (review
-              ? `Reviewed by ${review.by}, ${formatDate(review.at)}.`
+            (review && text
+              ? `${text.by} ${review.by}, ${formatDate(review.at)}.${review.status && review.status !== "approved" ? " Don't rely on it until it is revised and approved." : ""}`
               : "Not yet reviewed by a clinician. Check it against the record before you rely on it; it is not a diagnosis.")}
         </p>
         {source.length > 0 && (

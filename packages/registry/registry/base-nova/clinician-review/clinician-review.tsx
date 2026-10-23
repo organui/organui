@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
@@ -30,8 +29,10 @@ export type ReviewDecision = {
   comment?: string
 }
 
-export type ClinicianReviewProps = {
+export type ClinicianReviewProps = React.ComponentProps<"div"> & {
+  /** The current decision; store it with the content it reviews. */
   value: ReviewDecision
+  /** Called with each new decision, or with pending after an undo. */
   onValueChange: (decision: ReviewDecision) => void
   /** The signed-in clinician, recorded with each decision. */
   reviewer: string
@@ -41,7 +42,6 @@ export type ClinicianReviewProps = {
   now?: () => string
   /** Defaults to a UTC date and time such as "Oct 21, 2026, 9:30 AM UTC". */
   formatDate?: (date: string) => string
-  className?: string
 }
 
 export const reviewStatusLabels: Record<ReviewStatus, string> = {
@@ -64,6 +64,56 @@ function defaultFormatDate(date: string) {
 
 type Pending = "changes-requested" | "rejected"
 
+// Each status has its own shape, so it reads without colour.
+function StatusIcon({ status }: { status: ReviewStatus }) {
+  switch (status) {
+    case "pending":
+      return (
+        <IconPlaceholder
+          lucide="ClockIcon"
+          tabler="IconClock"
+          hugeicons="Clock01Icon"
+          phosphor="ClockIcon"
+          remixicon="RiTimeLine"
+          aria-hidden="true"
+        />
+      )
+    case "approved":
+      return (
+        <IconPlaceholder
+          lucide="CheckIcon"
+          tabler="IconCheck"
+          hugeicons="Tick02Icon"
+          phosphor="CheckIcon"
+          remixicon="RiCheckLine"
+          aria-hidden="true"
+        />
+      )
+    case "changes-requested":
+      return (
+        <IconPlaceholder
+          lucide="CircleAlertIcon"
+          tabler="IconExclamationCircle"
+          hugeicons="AlertCircleIcon"
+          phosphor="WarningCircleIcon"
+          remixicon="RiErrorWarningLine"
+          aria-hidden="true"
+        />
+      )
+    case "rejected":
+      return (
+        <IconPlaceholder
+          lucide="XIcon"
+          tabler="IconX"
+          hugeicons="Cancel01Icon"
+          phosphor="XIcon"
+          remixicon="RiCloseLine"
+          aria-hidden="true"
+        />
+      )
+  }
+}
+
 /**
  * A clinician's sign-off on AI-generated content, built like shadcn's
  * Confirmation from an Item and Buttons: approve it, or request changes or
@@ -79,6 +129,7 @@ export function ClinicianReview({
   now = () => new Date().toISOString(),
   formatDate = defaultFormatDate,
   className,
+  ...props
 }: ClinicianReviewProps) {
   const [asking, setAsking] = React.useState<Pending | null>(null)
   const [comment, setComment] = React.useState("")
@@ -97,22 +148,21 @@ export function ClinicianReview({
 
   const decided = value.status !== "pending"
   return (
-    <Item variant="outline" className={cn(className)}>
+    <Item
+      data-slot="clinician-review"
+      data-status={value.status}
+      variant="outline"
+      className={className}
+      {...props}
+    >
       <ItemMedia variant="icon">
-        <IconPlaceholder
-          lucide="ShieldCheckIcon"
-          tabler="IconShieldCheck"
-          hugeicons="SecurityCheckIcon"
-          phosphor="ShieldCheckIcon"
-          remixicon="RiShieldCheckLine"
-          aria-hidden="true"
-        />
+        <StatusIcon status={value.status} />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>{subject}</ItemTitle>
         <ItemDescription aria-live="polite">
           {decided
-            ? `${reviewStatusLabels[value.status]} by ${value.reviewer ?? "unknown"}${value.at ? `, ${formatDate(value.at)}` : ""}.`
+            ? `${reviewStatusLabels[value.status]}${value.reviewer ? ` by ${value.reviewer}` : ""}${value.at ? `, ${formatDate(value.at)}` : ""}.`
             : `${reviewStatusLabels.pending}. Review as ${reviewer} before this is used.`}
         </ItemDescription>
         {decided && value.comment && (

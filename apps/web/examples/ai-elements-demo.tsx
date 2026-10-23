@@ -65,8 +65,12 @@ export function Example() {
             model="Example model"
             generatedAt="2026-10-21T09:30:00Z"
             review={
-              decision.status === "approved" && decision.reviewer && decision.at
-                ? { by: decision.reviewer, at: decision.at }
+              decision.status !== "pending" && decision.reviewer && decision.at
+                ? {
+                    by: decision.reviewer,
+                    at: decision.at,
+                    status: decision.status,
+                  }
                 : null
             }
           />

@@ -33,11 +33,11 @@ export type Differential = {
   against?: readonly string[]
 }
 
-export type DifferentialListProps = {
+export type DifferentialListProps = React.ComponentProps<"div"> & {
+  /** The suggested diagnoses, in any order; they show most confident first. */
   items: readonly Differential[]
   /** Names the list for assistive technology. */
   label?: string
-  className?: string
 }
 
 function percent(confidence: number) {
@@ -52,11 +52,16 @@ export function DifferentialList({
   items,
   label = "Differential diagnosis",
   className,
+  ...props
 }: DifferentialListProps) {
   const ranked = [...items].sort((a, b) => b.confidence - a.confidence)
   return (
-    <div className={cn("flex flex-col gap-3", className)}>
-      <ItemGroup aria-label={label} className="gap-2">
+    <div
+      data-slot="differential-list"
+      className={cn("flex flex-col gap-3", className)}
+      {...props}
+    >
+      <ItemGroup aria-label={label}>
         {ranked.map((item, index) => (
           <DifferentialItem key={item.id} item={item} rank={index + 1} />
         ))}
@@ -104,19 +109,47 @@ function DifferentialItem({
               Evidence
               <span className="sr-only"> for {item.name}</span>
               <IconPlaceholder
-                lucide="ChevronDownIcon"
-                tabler="IconChevronDown"
-                hugeicons="ArrowDown01Icon"
-                phosphor="CaretDownIcon"
-                remixicon="RiArrowDownSLine"
+                lucide="ChevronRightIcon"
+                tabler="IconChevronRight"
+                hugeicons="ArrowRight01Icon"
+                phosphor="CaretRightIcon"
+                remixicon="RiArrowRightSLine"
                 aria-hidden="true"
-                className="size-3.5 transition-transform group-aria-expanded/evidence:rotate-180"
+                className="size-3.5 transition-transform group-aria-expanded/evidence:rotate-90"
               />
             </CollapsibleTrigger>
             <CollapsibleContent>
               <div className="grid gap-3 pt-2 sm:grid-cols-2">
-                <Findings title="Supports" findings={item.supporting} />
-                <Findings title="Against" findings={item.against} />
+                <Findings
+                  title="Supports"
+                  icon={
+                    <IconPlaceholder
+                      lucide="PlusIcon"
+                      tabler="IconPlus"
+                      hugeicons="PlusSignIcon"
+                      phosphor="PlusIcon"
+                      remixicon="RiAddLine"
+                      aria-hidden="true"
+                      className="size-3.5"
+                    />
+                  }
+                  findings={item.supporting}
+                />
+                <Findings
+                  title="Against"
+                  icon={
+                    <IconPlaceholder
+                      lucide="MinusIcon"
+                      tabler="IconMinus"
+                      hugeicons="MinusSignIcon"
+                      phosphor="MinusIcon"
+                      remixicon="RiSubtractLine"
+                      aria-hidden="true"
+                      className="size-3.5"
+                    />
+                  }
+                  findings={item.against}
+                />
               </div>
             </CollapsibleContent>
           </Collapsible>
@@ -128,18 +161,23 @@ function DifferentialItem({
 
 function Findings({
   title,
+  icon,
   findings = [],
 }: {
   title: string
+  icon: React.ReactNode
   findings?: readonly string[]
 }) {
   if (findings.length === 0) return null
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs font-medium">{title}</span>
+      <span className="flex items-center gap-1 text-xs font-medium">
+        {icon}
+        {title}
+      </span>
       <ul className="flex list-disc flex-col gap-0.5 pl-4 text-muted-foreground">
-        {findings.map((finding) => (
-          <li key={finding}>{finding}</li>
+        {findings.map((finding, index) => (
+          <li key={index}>{finding}</li>
         ))}
       </ul>
     </div>
