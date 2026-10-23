@@ -359,21 +359,6 @@
       "docs": "Cell docs: https://organui.com/docs/components/cell. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
     },
     {
-      "name": "liver-lobule",
-      "type": "registry:component",
-      "title": "Liver lobule",
-      "description": "A classic liver lobule, from an original OrganUI schematic model: the central vein, hepatocyte plates in their three zones, sinusoids and the portal tracts at its corners. 11 selectable structures and 3 named views. Model licensed CC0 1.0.",
-      "registryDependencies": ["@organui/organ-viewer"],
-      "categories": ["tissue", "digestive"],
-      "files": [
-        {
-          "path": "registry/base-nova/liver-lobule/liver-lobule.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "docs": "Liver lobule docs: https://organui.com/docs/components/liver-lobule. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
-    },
-    {
       "name": "diaphragm",
       "type": "registry:component",
       "title": "Diaphragm",
@@ -552,6 +537,21 @@
         }
       ],
       "docs": "Liver docs: https://organui.com/docs/components/liver. The model is licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible."
+    },
+    {
+      "name": "liver-lobule",
+      "type": "registry:component",
+      "title": "Liver lobule",
+      "description": "A classic liver lobule, from an original OrganUI schematic model: the central vein, hepatocyte plates in their three zones, sinusoids and the portal tracts at its corners. 11 selectable structures and 3 named views. Model licensed CC0 1.0.",
+      "registryDependencies": ["@organui/organ-viewer"],
+      "categories": ["tissue", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/liver-lobule/liver-lobule.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Liver lobule docs: https://organui.com/docs/components/liver-lobule. The model is licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible."
     },
     {
       "name": "lungs",
@@ -953,6 +953,21 @@
       "docs": "Disease viewer docs: https://organui.com/docs/components/disease-viewer. Educational, not for diagnosis."
     },
     {
+      "name": "acute-appendicitis",
+      "type": "registry:component",
+      "title": "Acute appendicitis",
+      "description": "Acute appendicitis on the appendix and its neighbours, from early obstruction through suppuration to perforation, with the psoas sign, the scores and imaging at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/appendix"],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Acute appendicitis docs: https://organui.com/docs/components/acute-appendicitis. It reuses the appendix model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "autoimmune-hepatitis",
       "type": "registry:component",
       "title": "Autoimmune hepatitis",
@@ -970,21 +985,6 @@
         }
       ],
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
-    },
-    {
-      "name": "acute-appendicitis",
-      "type": "registry:component",
-      "title": "Acute appendicitis",
-      "description": "Acute appendicitis on the appendix and its neighbours, from early obstruction through suppuration to perforation, with the psoas sign, the scores and imaging at each stage. Model licensed CC BY-SA 2.1 JP.",
-      "registryDependencies": ["@organui/disease-viewer", "@organui/appendix"],
-      "categories": ["disease", "digestive"],
-      "files": [
-        {
-          "path": "registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
-          "type": "registry:component"
-        }
-      ],
-      "docs": "Acute appendicitis docs: https://organui.com/docs/components/acute-appendicitis. It reuses the appendix model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
       "name": "ai-disclaimer",
