@@ -7,4 +7,8 @@ export const diseaseData: Record<string, () => Promise<Disease>> = {
     import("@workspace/registry/autoimmune-hepatitis").then(
       (module) => module.autoimmuneHepatitis
     ),
+  "acute-angle-closure-glaucoma": () =>
+    import("@workspace/registry/acute-angle-closure-glaucoma").then(
+      (module) => module.acuteAngleClosureGlaucoma
+    ),
 }

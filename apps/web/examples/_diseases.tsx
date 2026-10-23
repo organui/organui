@@ -25,4 +25,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "acute-angle-closure-glaucoma-demo": {
+    title: "Acute angle-closure glaucoma",
+    file: "acute-angle-closure-glaucoma-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-angle-closure-glaucoma-demo")
+      return <Example />
+    },
+  },
+  "acute-angle-closure-glaucoma-without-panel": {
+    title: "Acute angle-closure glaucoma Without Panel",
+    file: "acute-angle-closure-glaucoma-without-panel.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./acute-angle-closure-glaucoma-without-panel")
+      return <Example />
+    },
+  },
+  "acute-angle-closure-glaucoma-controlled": {
+    title: "Acute angle-closure glaucoma Controlled",
+    file: "acute-angle-closure-glaucoma-controlled.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./acute-angle-closure-glaucoma-controlled")
+      return <Example />
+    },
+  },
 }

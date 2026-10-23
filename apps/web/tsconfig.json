@@ -118,6 +118,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/acute-angle-closure-glaucoma": [
+        "../../packages/registry/registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
+      ],
       "@/components/disease-viewer": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],
