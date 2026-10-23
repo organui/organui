@@ -79,9 +79,6 @@
         "../registry/registry/base-nova/breast/breast.tsx"
       ],
       "@/components/cell": ["../registry/registry/base-nova/cell/cell.tsx"],
-      "@/components/liver-lobule": [
-        "../registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
-      ],
       "@/components/diaphragm": [
         "../registry/registry/base-nova/diaphragm/diaphragm.tsx"
       ],
@@ -108,17 +105,8 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
-      "@/components/ectopic-pregnancy": [
-        "../registry/registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx"
-      ],
-      "@/components/disease-viewer": [
-        "../registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
-      ],
-      "@/components/disease-model": [
-        "../registry/registry/base-nova/disease-viewer/disease-model.ts"
-      ],
-      "@/components/autoimmune-hepatitis": [
-        "../registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      "@/components/liver-lobule": [
+        "../registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
       ],
       "@/components/lungs": ["../registry/registry/base-nova/lungs/lungs.tsx"],
       "@/components/lymph": ["../registry/registry/base-nova/lymph/lymph.tsx"],
@@ -182,6 +170,18 @@
       ],
       "@/components/vestibular": [
         "../registry/registry/base-nova/vestibular/vestibular.tsx"
+      ],
+      "@/components/disease-viewer": [
+        "../registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
+      ],
+      "@/components/disease-model": [
+        "../registry/registry/base-nova/disease-viewer/disease-model.ts"
+      ],
+      "@/components/autoimmune-hepatitis": [
+        "../registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      ],
+      "@/components/ectopic-pregnancy": [
+        "../registry/registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx"
       ],
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["../ui/src/components/*"],
