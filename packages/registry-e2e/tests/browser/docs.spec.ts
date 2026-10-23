@@ -2,7 +2,6 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
-import bodySystems from "@workspace/registry/body-systems.json"
 import { heartModel } from "@workspace/registry/heart"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
@@ -561,6 +560,13 @@ test("the diseases gallery shows every disease and filters by body system", asyn
   const diseases = items.filter(({ categories }) =>
     categories?.includes("disease")
   )
+  // Read at run time, as Node needs an import attribute for JSON modules.
+  const bodySystems = JSON.parse(
+    await readFile(
+      new URL(import.meta.resolve("@workspace/registry/body-systems.json")),
+      "utf8"
+    )
+  ) as { id: string; title: string }[]
   await page.goto("/docs/components/diseases")
   await expect(
     page.getByRole("heading", { name: "Diseases", level: 1 })
