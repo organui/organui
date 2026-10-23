@@ -66,7 +66,13 @@ export function ClinicalSources({
                   <TraceTitle className="whitespace-normal">
                     {source.title}
                   </TraceTitle>
-                  {meta && <TraceDescription>{meta}</TraceDescription>}
+                  {meta && (
+                    // Trace dims its description to 70%, too faint for
+                    // text a reviewer reads; muted-foreground meets AA.
+                    <TraceDescription className="text-muted-foreground">
+                      {meta}
+                    </TraceDescription>
+                  )}
                 </TraceLine>
               )
               return source.href ? (
