@@ -18,6 +18,8 @@ export const gallstoneDisease: Disease = {
       id: "gallbladder",
       label: "Biliary tree",
       model: gallbladderModel,
+      // From below, the gallbladder and its ducts show under the liver.
+      defaultView: "Inferior",
       findings: {
         gallbladder: {
           affected: true,
