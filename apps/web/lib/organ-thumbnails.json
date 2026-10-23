@@ -19,6 +19,7 @@
   "liver": "https://cdn.jsdelivr.net/gh/organui/liver-3d@528ee1794670d3bfa23d581f91ba49d6af585b03/public/models/liver.glb",
   "lungs": "https://cdn.jsdelivr.net/gh/organui/lungs-3d@5815084f43efe438ebfae3fd889ee2baf343dfbf/public/models/lungs.glb",
   "lymph": "https://cdn.jsdelivr.net/gh/organui/lymph-3d@ce6d0cf9c1b632d0e109fc84139e14d0b5cbd651/public/models/lymph-node.glb",
+  "melanoma": "https://cdn.jsdelivr.net/gh/organui/skin-3d@0e29b3087641e269183f1ecef7a997e412b584fb/public/models/skin.glb",
   "muscles": "https://cdn.jsdelivr.net/gh/organui/muscles-3d@1c746c36d12a78c5f3fd452dbe5d29ae869cad04/public/models/muscles.glb",
   "nails": "https://organui.com/models/nails.glb",
   "nerves": "https://organui.com/models/nerves.glb",
