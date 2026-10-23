@@ -37,7 +37,9 @@ function list(items: React.ReactNode[], last = "and") {
 }
 
 // A disease page: what the condition is, its course, the models it is shown
-// on and their licences, all read from the disease's own data.
+// on and their licences, all read from the disease's own data. The page is
+// wide so the model and its panel sit side by side; the text keeps the docs
+// column's measure.
 export async function DiseaseDocs({ item }: { item: RegistryItem }) {
   const disease = await diseaseData[item.name]!()
   const component = item.name
@@ -60,7 +62,7 @@ export function ${component}Demo() {
   return <${component} />
 }`
   return (
-    <div className="flex flex-col gap-10">
+    <div data-docs-wide className="flex flex-col gap-10">
       <DocsHeader href={item.href} title={item.title}>
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           {disease.summary}
@@ -74,139 +76,145 @@ export function ${component}Demo() {
         </div>
       </DocsHeader>
       <ComponentPreview key={item.name} name={`${item.name}-demo`} />
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="installation">Installation</DocsHeading>
-        <ComponentInstallation name={item.name} command={item.install} />
-        <p className="text-sm text-muted-foreground">
-          This adds <code>{item.name}.tsx</code>, the disease&apos;s data and
-          component, to your components directory. It is built on the{" "}
-          <Link href="/docs/components/disease-viewer" className="underline">
-            disease viewer
-          </Link>{" "}
-          and reuses the models of the {list(baseLinks)}, which install with it.
-        </p>
-        <a className="underline" href={item.json}>
-          View registry item JSON
-        </a>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="usage">Usage</DocsHeading>
-        <CodeSnippet label="Usage example" code={usage} />
-        <p>
-          Every structure is a finding: affected structures keep their colour
-          and spared ones are muted. Select one, in 3D or in the panel, to read
-          what the disease does there.
-        </p>
-      </section>
-      {stages.length > 1 && (
+      <div className="flex w-full max-w-160 flex-col gap-10">
         <section className="flex flex-col gap-4">
-          <DocsHeading id="course">Course</DocsHeading>
-          <p>
-            Set <code>stage</code> or <code>defaultStage</code> to one of these.
-            Each stage changes which structures are affected and the
-            investigations to expect.
+          <DocsHeading id="installation">Installation</DocsHeading>
+          <ComponentInstallation name={item.name} command={item.install} />
+          <p className="text-sm text-muted-foreground">
+            This adds <code>{item.name}.tsx</code>, the disease&apos;s data and
+            component, to your components directory. It is built on the{" "}
+            <Link href="/docs/components/disease-viewer" className="underline">
+              disease viewer
+            </Link>{" "}
+            and reuses the models of the {list(baseLinks)}, which install with
+            it.
           </p>
-          <ol className="flex flex-col gap-4 border-l pl-5">
-            {stages.map((stage) => {
-              const affected = bases.map(({ scale }) => ({
-                scale,
-                count: diseaseModel(
-                  disease,
-                  scale.id,
-                  stage.id
-                ).structures.filter(({ group }) => group === "Affected").length,
-              }))
-              return (
-                <li key={stage.id} className="flex flex-col gap-1">
-                  <span className="font-medium">
-                    {stage.label}{" "}
-                    <code className="text-xs font-normal text-muted-foreground">
-                      &quot;{stage.id}&quot;
-                    </code>
-                  </span>
-                  <p className="text-muted-foreground">{stage.summary}</p>
-                  <p className="text-sm text-muted-foreground">
-                    Affects{" "}
-                    {list(
-                      affected.map(({ scale, count }) => (
-                        <React.Fragment key={scale.id}>
-                          {count} {count === 1 ? "structure" : "structures"} of
-                          the {scale.label.toLowerCase()}
-                        </React.Fragment>
-                      ))
-                    )}
-                    .
-                  </p>
-                </li>
-              )
-            })}
-          </ol>
+          <a className="underline" href={item.json}>
+            View registry item JSON
+          </a>
         </section>
-      )}
-      {bases.length > 1 && (
         <section className="flex flex-col gap-4">
-          <DocsHeading id="scales">Scales</DocsHeading>
+          <DocsHeading id="usage">Usage</DocsHeading>
+          <CodeSnippet label="Usage example" code={usage} />
           <p>
-            Set <code>scale</code> or <code>defaultScale</code> to show the
-            disease on another model. Each has its own structure IDs, so the
-            viewer clears the selection when the scale changes.
+            Every structure is a finding: affected structures are amber and
+            spared ones muted. Select one, in 3D or in the panel, to read what
+            the disease does there.
+          </p>
+        </section>
+        {stages.length > 1 && (
+          <section className="flex flex-col gap-4">
+            <DocsHeading id="course">Course</DocsHeading>
+            <p>
+              Set <code>stage</code> or <code>defaultStage</code> to one of
+              these. Each stage changes which structures are affected and the
+              investigations to expect.
+            </p>
+            <ol className="flex flex-col gap-4 border-l pl-5">
+              {stages.map((stage) => {
+                const affected = bases.map(({ scale }) => ({
+                  scale,
+                  count: diseaseModel(
+                    disease,
+                    scale.id,
+                    stage.id
+                  ).structures.filter(({ group }) => group === "Affected")
+                    .length,
+                }))
+                return (
+                  <li key={stage.id} className="flex flex-col gap-1">
+                    <span className="font-medium">
+                      {stage.label}{" "}
+                      <code className="text-xs font-normal text-muted-foreground">
+                        &quot;{stage.id}&quot;
+                      </code>
+                    </span>
+                    <p className="text-muted-foreground">{stage.summary}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Affects{" "}
+                      {list(
+                        affected.map(({ scale, count }) => (
+                          <React.Fragment key={scale.id}>
+                            {count} {count === 1 ? "structure" : "structures"}{" "}
+                            of the {scale.label.toLowerCase()}
+                          </React.Fragment>
+                        ))
+                      )}
+                      .
+                    </p>
+                  </li>
+                )
+              })}
+            </ol>
+          </section>
+        )}
+        {bases.length > 1 && (
+          <section className="flex flex-col gap-4">
+            <DocsHeading id="scales">Scales</DocsHeading>
+            <p>
+              Set <code>scale</code> or <code>defaultScale</code> to show the
+              disease on another model. Each has its own structure IDs, so the
+              viewer clears the selection when the scale changes.
+            </p>
+            <ul className="flex flex-col gap-2">
+              {bases.map(({ scale, item: base }) => (
+                <li key={scale.id}>
+                  <code>&quot;{scale.id}&quot;</code>: the{" "}
+                  <Link href={base.href} className="underline">
+                    {base.title.toLowerCase()}
+                  </Link>
+                  , {scale.model.structures.length} structures.
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {variants.map(({ suffix, title, description }) => (
+          <section
+            key={suffix}
+            id={title.toLowerCase().replaceAll(" ", "-")}
+            className="flex min-w-0 flex-col gap-4"
+          >
+            <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+            <p className="text-sm text-muted-foreground">{description}</p>
+            <ComponentPreview name={`${item.name}-${suffix}`} />
+          </section>
+        ))}
+        <DiseaseApi component={component} disease={disease} />
+        <section className="flex flex-col gap-4">
+          <DocsHeading id="models-and-licences">
+            Models and licences
+          </DocsHeading>
+          <p>
+            The component code is MIT. Each model keeps its own licence, and the
+            viewer shows its credit; see{" "}
+            <Link href="/docs/licences" className="underline">
+              Licences
+            </Link>{" "}
+            before hiding it.
           </p>
           <ul className="flex flex-col gap-2">
-            {bases.map(({ scale, item: base }) => (
+            {bases.map(({ scale }) => (
               <li key={scale.id}>
-                <code>&quot;{scale.id}&quot;</code>: the{" "}
-                <Link href={base.href} className="underline">
-                  {base.title.toLowerCase()}
-                </Link>
-                , {scale.model.structures.length} structures.
+                <span className="font-medium">{scale.label}:</span>{" "}
+                {scale.model.attribution.credit},{" "}
+                <a
+                  className="underline"
+                  href={scale.model.attribution.licenseUrl}
+                >
+                  {scale.model.attribution.license}
+                </a>
+                .
               </li>
             ))}
           </ul>
+          <p className="text-sm text-muted-foreground">
+            Educational, not for diagnosis or clinical decisions. The findings
+            summarise typical disease; individual patients differ.
+          </p>
         </section>
-      )}
-      {variants.map(({ suffix, title, description }) => (
-        <section
-          key={suffix}
-          id={title.toLowerCase().replaceAll(" ", "-")}
-          className="flex min-w-0 flex-col gap-4"
-        >
-          <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-          <p className="text-sm text-muted-foreground">{description}</p>
-          <ComponentPreview name={`${item.name}-${suffix}`} />
-        </section>
-      ))}
-      <DiseaseApi component={component} disease={disease} />
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="models-and-licences">Models and licences</DocsHeading>
-        <p>
-          The component code is MIT. Each model keeps its own licence, and the
-          viewer shows its credit; see{" "}
-          <Link href="/docs/licences" className="underline">
-            Licences
-          </Link>{" "}
-          before hiding it.
-        </p>
-        <ul className="flex flex-col gap-2">
-          {bases.map(({ scale }) => (
-            <li key={scale.id}>
-              <span className="font-medium">{scale.label}:</span>{" "}
-              {scale.model.attribution.credit},{" "}
-              <a
-                className="underline"
-                href={scale.model.attribution.licenseUrl}
-              >
-                {scale.model.attribution.license}
-              </a>
-              .
-            </li>
-          ))}
-        </ul>
-        <p className="text-sm text-muted-foreground">
-          Educational, not for diagnosis or clinical decisions. The findings
-          summarise typical disease; individual patients differ.
-        </p>
-      </section>
-      <DocsPager href={item.href} />
+        <DocsPager href={item.href} />
+      </div>
     </div>
   )
 }
