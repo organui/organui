@@ -26,6 +26,8 @@ export const componentGroups = [
   },
   // The viewer and the tree come first: every organ is built on them.
   { id: "organs", title: "Organs", categories: ["anatomy", "organ"] },
+  // Each disease shows its pathology on an organ's model.
+  { id: "diseases", title: "Diseases", categories: ["disease"] },
 ] as const
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
@@ -56,8 +58,23 @@ export const registryItems = catalog.items
       name: item.name,
       group: groupOf(categories),
       organ: categories.includes("organ"),
-      // Items built on the organ viewer with a model: organs and the cell.
-      model: categories.includes("organ") || categories.includes("cell"),
+      disease: categories.includes("disease"),
+      // The organ a disease is drawn on: its one OrganUI dependency besides
+      // the viewer.
+      basedOn: categories.includes("disease")
+        ? item.registryDependencies
+            ?.find(
+              (name) =>
+                name.startsWith("@organui/") && name !== "@organui/organ-viewer"
+            )
+            ?.replace("@organui/", "")
+        : undefined,
+      // Items built on the organ viewer with a model: organs, diseases and
+      // the cell.
+      model:
+        categories.includes("organ") ||
+        categories.includes("disease") ||
+        categories.includes("cell"),
       title: item.title ?? item.name,
       description: item.description,
       href: `/docs/components/${item.name}`,

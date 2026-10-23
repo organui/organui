@@ -19,6 +19,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/appendix").then((module) =>
       local(module.appendixModel)
     ),
+  "autoimmune-hepatitis": () =>
+    import("@workspace/registry/autoimmune-hepatitis").then(
+      (module) => module.autoimmuneHepatitisModel
+    ),
   bladder: () =>
     import("@workspace/registry/bladder").then((module) => module.bladderModel),
   brain: () =>

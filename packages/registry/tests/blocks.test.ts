@@ -159,6 +159,7 @@ test("every component belongs to one docs group", () => {
     "cell",
     "anatomy",
     "organ",
+    "disease",
     "utility",
     "helper",
     "ai",
@@ -173,16 +174,18 @@ test("every component belongs to one docs group", () => {
   }
 })
 
-// Each organ carries one body system from body-systems.json, for grouping
-// organs (the site doesn't show them yet), and nothing else has one.
-test("every organ belongs to one body system", () => {
+// Each organ and disease carries one body system from body-systems.json, for
+// grouping them (the site doesn't show them yet), and nothing else has one.
+test("every organ and disease belongs to one body system", () => {
   const systems = bodySystems.map(({ id }) => id)
   for (const item of registry.items) {
     const categories: readonly string[] =
       "categories" in item ? item.categories : []
     expect(
       categories.filter((category) => systems.includes(category))
-    ).toHaveLength(categories.includes("organ") ? 1 : 0)
+    ).toHaveLength(
+      categories.includes("organ") || categories.includes("disease") ? 1 : 0
+    )
   }
   // Every system has organs, and no id repeats.
   expect(new Set(systems).size).toBe(systems.length)

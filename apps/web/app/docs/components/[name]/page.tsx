@@ -46,6 +46,11 @@ export default async function Page({ params }: Props) {
   if (!found) notFound()
   const { item, load } = found
   const model = await load()
+  // A disease is drawn on an organ's model, which installs with it.
+  const organItem = registryItems.find(({ name }) => name === item.basedOn)
+  const affected = model.structures.filter(
+    ({ group }) => group === "Affected"
+  ).length
   // Models built in this repository load from the site itself (see
   // organ-models.ts); give readers the public address.
   const hosted = model.src.startsWith("/")
@@ -62,9 +67,23 @@ export function ${component}Demo() {
     <div className="flex flex-col gap-10">
       <DocsHeader href={item.href} title={<>{item.title}</>}>
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
-          An interactive 3D {model.name.toLowerCase()} with{" "}
-          {model.structures.length} selectable structures and{" "}
-          {model.views.length} named views.
+          {organItem ? (
+            <>
+              {model.name} on the 3D{" "}
+              <Link href={organItem.href} className="underline">
+                {organItem.title.toLowerCase()}
+              </Link>
+              : {affected} affected and {model.structures.length - affected}{" "}
+              spared structures, each describing what the disease does there,
+              and {model.views.length} named views.
+            </>
+          ) : (
+            <>
+              An interactive 3D {model.name.toLowerCase()} with{" "}
+              {model.structures.length} selectable structures and{" "}
+              {model.views.length} named views.
+            </>
+          )}
         </p>
       </DocsHeader>
       <ComponentPreview key={name} name={`${name}-demo`} />
@@ -72,8 +91,17 @@ export function ${component}Demo() {
         <DocsHeading id="installation">Installation</DocsHeading>
         <ComponentInstallation name={name} command={item.install} />
         <p className="text-sm text-muted-foreground">
-          This adds <code>{name}.tsx</code> to your components directory. Its
-          dependency,{" "}
+          This adds <code>{name}.tsx</code> to your components directory.{" "}
+          {organItem && (
+            <>
+              It imports its model from the{" "}
+              <Link href={organItem.href} className="underline">
+                {organItem.title.toLowerCase()}
+              </Link>
+              , which adds <code>{organItem.name}.tsx</code>.{" "}
+            </>
+          )}
+          Its dependency,{" "}
           <Link href="/docs/components/organ-viewer" className="underline">
             organ viewer
           </Link>
@@ -82,7 +110,7 @@ export function ${component}Demo() {
           <Link href="/docs/base-ui" className="underline">
             Base UI or Radix
           </Link>{" "}
-          style. Every organ and the cell share that one{" "}
+          style. Every organ, disease and the cell share that one{" "}
           <code>organ-viewer.tsx</code>.
         </p>
         <a className="underline" href={item.json}>

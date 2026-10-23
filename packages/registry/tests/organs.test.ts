@@ -8,11 +8,17 @@ import {
 } from "../registry/base-nova/organ-viewer/organ-viewer"
 
 const directory = new URL("../registry/base-nova/", import.meta.url)
-// Items built on the shared viewer: the organs, and the cell.
+// Items built on the shared viewer: the organs, the diseases drawn on them,
+// and the cell.
 const organItems = registry.items.filter(
   (item) =>
     "categories" in item &&
-    (item.categories?.includes("organ") || item.categories?.includes("cell"))
+    (item.categories?.includes("organ") ||
+      item.categories?.includes("disease") ||
+      item.categories?.includes("cell"))
+)
+const diseaseItems = organItems.filter(({ categories }) =>
+  categories?.includes("disease")
 )
 
 // Like shadcn's charts on `chart`, each organ ships only its own file and
@@ -26,6 +32,7 @@ test("every organ file has exactly one registry item that depends on the viewer"
     organItems.filter(({ categories }) => categories?.includes("cell"))
   ).toHaveLength(1)
   for (const item of organItems) {
+    if (diseaseItems.includes(item)) continue
     expect(folders).toContain(item.name)
     expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
@@ -34,6 +41,64 @@ test("every organ file has exactly one registry item that depends on the viewer"
     expect(item.registryDependencies).toEqual(["@organui/organ-viewer"])
   }
 })
+
+// A disease reuses one organ's model, so it ships only its own file and
+// depends on that organ as well as the viewer it renders with.
+for (const item of diseaseItems) {
+  test(`${item.name} maps its disease onto one organ's model`, async () => {
+    expect(item.type).toBe("registry:component")
+    expect(item.files.map(({ path }) => path)).toEqual([
+      `registry/base-nova/${item.name}/${item.name}.tsx`,
+    ])
+    const [organ, ...rest] = item.registryDependencies.filter(
+      (name) => name !== "@organui/organ-viewer"
+    )
+    expect(rest).toEqual([])
+    expect(item.registryDependencies).toContain("@organui/organ-viewer")
+    const organName = organ!.replace("@organui/", "")
+    const organItem = registry.items.find(({ name }) => name === organName)
+    expect(organItem?.categories).toContain("organ")
+    // The disease sits in the same body system as its organ.
+    expect(
+      item.categories.filter((category) => category !== "disease")
+    ).toEqual(organItem!.categories.filter((category) => category !== "organ"))
+    const find = (module: Record<string, unknown>) =>
+      Object.values(module).find(
+        (value) => typeof value === "object"
+      ) as OrganModel
+    const model = find(
+      await import(new URL(`${item.name}/${item.name}.tsx`, directory).href)
+    )
+    const base = find(
+      await import(new URL(`${organName}/${organName}.tsx`, directory).href)
+    )
+    // The same GLB, views and credit; only the structures' text and colours
+    // change, so every mesh id still matches the file.
+    const { structures, name, ...shared } = model
+    const { structures: baseStructures, name: baseName, ...same } = base
+    expect(shared).toEqual(same)
+    expect(name).not.toBe(baseName)
+    expect(structures.map(({ id }) => id)).toEqual(
+      baseStructures.map(({ id }) => id)
+    )
+    const groups = new Set(structures.map(({ group }) => group))
+    expect([...groups].sort()).toEqual(["Affected", "Spared"])
+    for (const structure of structures) {
+      expect(structure.description?.length).toBeGreaterThan(0)
+      const original = baseStructures.find(({ id }) => id === structure.id)!
+      // Affected parts keep the organ's colours; spared ones share a muted tone.
+      if (structure.group === "Affected")
+        expect(structure.color).toBe(original.color)
+    }
+    expect(
+      new Set(
+        structures
+          .filter(({ group }) => group === "Spared")
+          .map(({ color }) => color)
+      ).size
+    ).toBe(1)
+  })
+}
 
 // A model built in this repository must be committed, match the size the
 // item declares and name one node after each structure.

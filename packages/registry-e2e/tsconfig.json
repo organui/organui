@@ -105,6 +105,9 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/autoimmune-hepatitis": [
+        "../registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      ],
       "@/components/lungs": ["../registry/registry/base-nova/lungs/lungs.tsx"],
       "@/components/lymph": ["../registry/registry/base-nova/lymph/lymph.tsx"],
       "@/components/muscles": [

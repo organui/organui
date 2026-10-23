@@ -115,6 +115,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/autoimmune-hepatitis": [
+        "../../packages/registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      ],
       "@/components/lungs": [
         "../../packages/registry/registry/base-nova/lungs/lungs.tsx"
       ],

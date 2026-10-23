@@ -85,6 +85,9 @@
       "@/components/kidneys": ["./registry/base-nova/kidneys/kidneys.tsx"],
       "@/components/larynx": ["./registry/base-nova/larynx/larynx.tsx"],
       "@/components/liver": ["./registry/base-nova/liver/liver.tsx"],
+      "@/components/autoimmune-hepatitis": [
+        "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      ],
       "@/components/lungs": ["./registry/base-nova/lungs/lungs.tsx"],
       "@/components/lymph": ["./registry/base-nova/lymph/lymph.tsx"],
       "@/components/muscles": ["./registry/base-nova/muscles/muscles.tsx"],

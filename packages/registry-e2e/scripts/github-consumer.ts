@@ -82,7 +82,9 @@ export async function githubConsumer(directory: string, cli: string) {
   const organs = catalog.items.filter(
     (item) =>
       "categories" in item &&
-      (item.categories?.includes("organ") || item.categories?.includes("cell"))
+      (item.categories?.includes("organ") ||
+        item.categories?.includes("disease") ||
+        item.categories?.includes("cell"))
   )
   if (ref)
     await put(

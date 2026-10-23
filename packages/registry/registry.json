@@ -914,6 +914,21 @@
       "docs": "Vestibular system docs: https://organui.com/docs/components/vestibular. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
+      "name": "autoimmune-hepatitis",
+      "type": "registry:component",
+      "title": "Autoimmune Hepatitis",
+      "description": "Autoimmune hepatitis on the liver model: interface hepatitis in the parenchyma and portal tracts, with the bile ducts and veins it spares. 7 selectable structures and 5 named views. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/liver", "@organui/organ-viewer"],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Autoimmune Hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. An educational model, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",
