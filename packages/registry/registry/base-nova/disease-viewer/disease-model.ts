@@ -54,9 +54,11 @@ export type Disease = {
   investigations?: readonly DiseaseInvestigation[]
 }
 
-// Structures the disease spares share one muted tone, so the affected ones
-// read first without a severity colour.
-const SPARED = "#a9a59c"
+// Affected structures share one amber, so a disease that involves a whole
+// organ still reads as disease, and spared ones one muted tone. Amber, not
+// red: red is kept for critical results.
+export const AFFECTED = "#e0892f"
+export const SPARED = "#a9a59c"
 
 export function scaleOf(disease: Disease, id?: string) {
   return disease.scales.find((scale) => scale.id === id) ?? disease.scales[0]!
@@ -92,7 +94,7 @@ export function diseaseModel(
           ...structure,
           label: finding?.label ?? structure.label,
           group: finding?.affected ? "Affected" : "Spared",
-          color: finding?.affected ? structure.color : SPARED,
+          color: finding?.affected ? AFFECTED : SPARED,
           description: finding?.description ?? structure.description,
         }
       })
