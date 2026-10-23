@@ -23,9 +23,10 @@ const props = {
     description: "Control the selected structure ID.",
   },
   onSelectionChange: {
-    type: "(id: string) => void",
+    type: "(id: string | null) => void",
     default: "—",
-    description: "Receive selection changes from the model.",
+    description:
+      "Receive selection changes from the model; null when the view is reset.",
   },
   visibility: {
     type: "Readonly<Record<string, boolean>>",
