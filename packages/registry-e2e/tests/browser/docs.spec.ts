@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
+import bodySystems from "@workspace/registry/body-systems.json"
 import { heartModel } from "@workspace/registry/heart"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
@@ -548,7 +549,7 @@ test("the organs gallery shows every organ as a picture and a link", async ({
   expect(errors).toEqual([])
 })
 
-test("the diseases gallery shows every disease under its body system", async ({
+test("the diseases gallery shows every disease and filters by body system", async ({
   page,
   request,
 }, info) => {
@@ -565,32 +566,45 @@ test("the diseases gallery shows every disease under its body system", async ({
     page.getByRole("heading", { name: "Diseases", level: 1 })
   ).toBeVisible()
   const main = page.getByRole("main")
-  await expect(main.getByRole("listitem")).toHaveCount(diseases.length)
+  const cards = main.getByRole("listitem")
+  await expect(cards).toHaveCount(diseases.length)
   for (const item of diseases) {
-    // Built from the page, so filter({ has }) can find it inside a section.
-    const card = page.getByRole("link", {
+    const card = main.getByRole("link", {
       name: item.title ?? item.name,
       exact: true,
     })
-    await expect(
-      main.getByRole("link", { name: item.title ?? item.name, exact: true })
-    ).toHaveAttribute("href", `/docs/components/${item.name}`)
+    await expect(card).toHaveAttribute("href", `/docs/components/${item.name}`)
     await expect(card.locator("img")).toHaveAttribute(
       "src",
       new RegExp(`url=%2Fdiseases%2F${item.name}\\.webp`)
     )
-    // Listed in the section of its body system, naming the model it is on.
-    const section = main.locator("section").filter({ has: card })
-    await expect(section.getByRole("heading", { level: 2 })).toHaveCount(1)
+    // Each card names its body system and the models it is drawn on.
+    const system = bodySystems.find(({ id }) => item.categories?.includes(id))!
     const base = items.find(
       ({ name }) =>
         name !== "disease-viewer" &&
         item.registryDependencies?.includes(`@organui/${name}`)
     )
-    await expect(
-      main.getByRole("listitem").filter({ has: card })
-    ).toContainText(base!.title!, { ignoreCase: true })
+    const text = cards.filter({
+      has: page.getByRole("link", {
+        name: item.title ?? item.name,
+        exact: true,
+      }),
+    })
+    await expect(text).toContainText(system.title)
+    await expect(text).toContainText(base!.title!, { ignoreCase: true })
   }
+  // Choosing a body system shows only its diseases.
+  const filter = main.getByRole("group", { name: "Body system" })
+  const first = bodySystems.find(({ id }) =>
+    diseases.some(({ categories }) => categories?.includes(id))
+  )!
+  await filter.getByRole("button", { name: first.title, exact: true }).click()
+  await expect(cards).toHaveCount(
+    diseases.filter(({ categories }) => categories?.includes(first.id)).length
+  )
+  await filter.getByRole("button", { name: "All", exact: true }).click()
+  await expect(cards).toHaveCount(diseases.length)
   await expect(
     main.getByRole("link", { name: "Licences", exact: true })
   ).toHaveAttribute("href", "/docs/licences")
