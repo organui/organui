@@ -20,10 +20,10 @@ export const myocardialInfarction: Disease = {
       model: heartModel,
       findings: {
         "left-coronary": {
-          label: "Left anterior descending artery",
+          label: "Left coronary artery (LAD)",
           affected: true,
           description:
-            "The culprit: a cholesterol plaque ruptures and a clot forms on it, blocking the artery. Emergency angioplasty (PCI) reopens it with a stent.",
+            "The culprit is its left anterior descending (LAD) branch: a cholesterol plaque ruptures and a clot forms on it, blocking the artery. Emergency angioplasty (PCI) reopens it with a stent.",
         },
         "ventricular-wall": {
           affected: true,
@@ -68,7 +68,7 @@ export const myocardialInfarction: Disease = {
       findings: {
         heart: {
           "left-coronary": {
-            label: "Left anterior descending artery",
+            label: "Left coronary artery (LAD)",
             affected: true,
             description:
               "Opened and stented. Two antiplatelet drugs stop a clot forming on the new stent.",
@@ -100,7 +100,7 @@ export const myocardialInfarction: Disease = {
       findings: {
         heart: {
           "left-coronary": {
-            label: "Left anterior descending artery",
+            label: "Left coronary artery (LAD)",
             affected: true,
             description:
               "Stented. Statins, antiplatelets and stopping smoking keep it and the other arteries open.",
