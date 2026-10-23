@@ -25,10 +25,15 @@ export const componentGroups = [
     title: "Molecular & cellular",
     categories: ["molecular", "cell", "tissue"],
   },
-  // The viewer and the tree come first: every organ is built on them.
-  { id: "organs", title: "Organs", categories: ["anatomy", "organ"] },
-  // The disease viewer comes first: every disease is built on it.
-  { id: "diseases", title: "Diseases", categories: ["pathology", "disease"] },
+  // The viewers and the tree the organs and diseases are built on, apart
+  // from them, so their pages don't read as one more organ or disease.
+  {
+    id: "building-blocks",
+    title: "Building blocks",
+    categories: ["anatomy", "pathology"],
+  },
+  { id: "organs", title: "Organs", categories: ["organ"] },
+  { id: "diseases", title: "Diseases", categories: ["disease"] },
 ] as const
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
@@ -62,8 +67,6 @@ export const registryItems = catalog.items
       disease: categories.includes("disease"),
       // Organs, tissues and diseases each carry one body system.
       system: bodySystems.find(({ id }) => categories.includes(id))?.id,
-      // The organ a disease is drawn on: its one OrganUI dependency besides
-      // the viewer.
       // The organs or tissues a disease is drawn on, one per scale, the
       // default first: its OrganUI dependencies besides the viewer.
       bases: categories.includes("disease")
@@ -90,14 +93,11 @@ export const registryItems = catalog.items
       install: install(item),
     }
   })
-  // Grouped in sidebar order; the viewers lead the organs and the diseases,
-  // then by title.
+  // Grouped in sidebar order, then by title.
   .sort(
     (a, b) =>
       componentGroups.findIndex(({ id }) => id === a.group) -
         componentGroups.findIndex(({ id }) => id === b.group) ||
-      Number(a.organ) - Number(b.organ) ||
-      Number(a.disease) - Number(b.disease) ||
       a.title.localeCompare(b.title)
   )
 
@@ -249,7 +249,12 @@ export const registryNamespace = JSON.stringify(
   2
 )
 
-export type NavLink = { title: string; href: string }
+export type NavLink = {
+  title: string
+  href: string
+  /** Pages outside its address that belong to it, such as each disease. */
+  pages?: string[]
+}
 
 export type DocsNavSection = { title: string; items: NavLink[] }
 
@@ -355,6 +360,8 @@ export const organsPage: NavLink & { description: string } = {
 export const diseasesPage: NavLink & { description: string } = {
   title: "Diseases",
   href: "/docs/components/diseases",
+  // The sidebar leaves the diseases out, so their gallery is their section.
+  pages: diseases.map(({ href }) => href),
   description:
     "Every disease by body system, each shown on the organ or tissue it affects.",
 }
@@ -363,6 +370,11 @@ export const mainNav: NavLink[] = [
   { title: "Docs", href: "/docs" },
   { title: "Components", href: componentsIndex.href },
   { title: organsPage.title, href: organsPage.href },
+  {
+    title: diseasesPage.title,
+    href: diseasesPage.href,
+    pages: diseasesPage.pages,
+  },
   { title: "Blocks", href: "/blocks" },
   { title: "Charts", href: "/charts/area" },
   { title: "Create", href: "/create" },
@@ -378,44 +390,54 @@ export const pagesNew: string[] = [
   utilitiesIndex.href,
 ]
 
-// The sidebar lists the guides and every component, the organs after the
-// viewer and the tree they're built on.
+// The sidebar lists the guides and every component but the diseases, which
+// grow one by one and are browsed in their gallery instead.
 export const docsNav: DocsNavSection[] = [
   {
     title: "Sections",
-    items: [...guides, componentsIndex, aiIndex, helpersIndex, utilitiesIndex],
+    items: [
+      ...guides,
+      componentsIndex,
+      diseasesPage,
+      aiIndex,
+      helpersIndex,
+      utilitiesIndex,
+    ],
   },
   { title: "Installation", items: installationGuides },
-  ...componentGroups.flatMap(({ id, title }) => [
-    // AI Elements and utilities come before the long list of organs.
-    ...(id === "organs"
-      ? [
-          {
-            title: aiIndex.title,
-            items: aiItems.map(({ title, href }) => ({ title, href })),
-          },
-          {
-            title: helpersIndex.title,
-            items: helperItems.map(({ title, href }) => ({ title, href })),
-          },
-          {
-            title: utilitiesIndex.title,
-            items: utilityItems.map(({ title, href }) => ({ title, href })),
-          },
-        ]
-      : []),
-    {
-      title,
-      items: registryItems
-        .filter((item) => item.group === id)
-        .map(({ title, href }) => ({ title, href })),
-    },
-  ]),
+  ...componentGroups
+    .filter(({ id }) => id !== "diseases")
+    .flatMap(({ id, title }) => [
+      // AI Elements and utilities come before the organs and what they're
+      // built on.
+      ...(id === "building-blocks"
+        ? [
+            {
+              title: aiIndex.title,
+              items: aiItems.map(({ title, href }) => ({ title, href })),
+            },
+            {
+              title: helpersIndex.title,
+              items: helperItems.map(({ title, href }) => ({ title, href })),
+            },
+            {
+              title: utilitiesIndex.title,
+              items: utilityItems.map(({ title, href }) => ({ title, href })),
+            },
+          ]
+        : []),
+      {
+        title,
+        items: registryItems
+          .filter((item) => item.group === id)
+          .map(({ title, href }) => ({ title, href })),
+      },
+    ]),
 ]
 
 // Reading order for the previous and next links.
-// The organs gallery comes before the organs, after the viewer and tree, and
-// the diseases gallery before the diseases.
+// The organs gallery comes before the organs and the diseases gallery before
+// the diseases.
 // The framework guides follow Installation. Every docs page is here once.
 export const pageOrder: NavLink[] = [
   ...guides.flatMap((guide) =>
