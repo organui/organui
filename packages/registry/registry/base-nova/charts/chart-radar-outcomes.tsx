@@ -28,7 +28,7 @@ const chartData = [
   { domain: "Mobility", before: 42, after: 71 },
   { domain: "Self-care", before: 55, after: 80 },
   { domain: "Activities", before: 38, after: 66 },
-  { domain: "Pain", before: 30, after: 64 },
+  { domain: "Pain relief", before: 30, after: 64 },
   { domain: "Mood", before: 58, after: 72 },
 ]
 
@@ -86,25 +86,15 @@ export function ChartRadarOutcomes() {
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
           {improved ? "Better in every domain" : "Better in some domains"}{" "}
-          {!improved ? (
-            <IconPlaceholder
-              lucide="TrendingDownIcon"
-              tabler="IconTrendingDown"
-              hugeicons="ChartDownIcon"
-              phosphor="TrendDownIcon"
-              remixicon="RiArrowDownLine"
-              className="size-4"
-            />
-          ) : (
-            <IconPlaceholder
-              lucide="TrendingUpIcon"
-              tabler="IconTrendingUp"
-              hugeicons="ChartUpIcon"
-              phosphor="TrendUpIcon"
-              remixicon="RiArrowUpLine"
-              className="size-4"
-            />
-          )}
+          {/* Both read as better, so both trend up. */}
+          <IconPlaceholder
+            lucide="TrendingUpIcon"
+            tabler="IconTrendingUp"
+            hugeicons="ChartUpIcon"
+            phosphor="TrendUpIcon"
+            remixicon="RiArrowUpLine"
+            className="size-4"
+          />
         </div>
         <div className="leading-none text-muted-foreground">
           {most.domain} improved most; a fictional patient

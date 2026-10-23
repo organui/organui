@@ -77,8 +77,8 @@ function ThresholdSpoke() {
         y1={start.y}
         x2={end.x}
         y2={end.y}
-        stroke="var(--foreground)"
-        strokeWidth={2}
+        stroke="var(--muted-foreground)"
+        strokeDasharray="4 4"
       />
       <text
         x={label.x}

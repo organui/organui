@@ -186,6 +186,8 @@ export const examplePatient: Patient = {
       ],
     },
   ],
+  // Each medication gets its own hue: a theme's chart colours can all be
+  // shades of one, which would make the doses hard to tell apart.
   medications: [
     {
       id: "metformin",
@@ -214,7 +216,7 @@ export const examplePatient: Patient = {
       id: "ibuprofen",
       name: "Ibuprofen",
       dose: "400 mg",
-      instructions: "With food, as needed for pain",
+      instructions: "With food",
       times: ["12:00"],
       color: "oklch(0.6 0.14 310)",
     },

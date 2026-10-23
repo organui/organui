@@ -64,7 +64,7 @@ export function ChartBarLabPanel() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Basic panel</CardTitle>
+        <CardTitle>Lab panel</CardTitle>
         <CardDescription>Results against reference ranges</CardDescription>
         <CardAction className="flex flex-col items-end gap-1.5">
           <div className="text-2xl leading-none font-semibold">

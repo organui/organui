@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/card"
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
@@ -36,7 +37,7 @@ const chartConfig = {
     color: "var(--chart-2)",
   },
   cleaning: {
-    label: "Being cleaned",
+    label: "Cleaning",
     color: "var(--chart-4)",
   },
   available: {
@@ -46,11 +47,9 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function ChartPieOccupancy() {
-  const total = React.useMemo(
-    () => chartData.reduce((sum, { beds }) => sum + beds, 0),
-    []
-  )
-  const occupied = Math.round((chartData[0]!.beds / total) * 100)
+  const total = chartData.reduce((sum, { beds }) => sum + beds, 0)
+  const occupiedBeds = chartData.find(({ status }) => status === "occupied")!
+  const occupied = Math.round((occupiedBeds.beds / total) * 100)
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -104,6 +103,7 @@ export function ChartPieOccupancy() {
                 }}
               />
             </Pie>
+            <ChartLegend content={<ChartLegendContent nameKey="status" />} />
           </PieChart>
         </ChartContainer>
       </CardContent>

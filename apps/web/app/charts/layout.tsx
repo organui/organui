@@ -24,7 +24,7 @@ export default function ChartsLayout({ children }: { children: ReactNode }) {
             Browse Charts
           </a>
           <a
-            href="https://ui.shadcn.com/docs/components/chart"
+            href="/docs/clinical-charts"
             className={cn(
               buttonVariants({ size: "sm", variant: "secondary" }),
               "h-[35px] px-4"

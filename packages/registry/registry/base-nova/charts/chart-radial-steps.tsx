@@ -38,7 +38,9 @@ export function ChartRadialSteps() {
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Steps</CardTitle>
-        <CardDescription>Today, toward a goal of {goal}</CardDescription>
+        <CardDescription>
+          Today, toward a goal of {goal.toLocaleString("en-US")}
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer

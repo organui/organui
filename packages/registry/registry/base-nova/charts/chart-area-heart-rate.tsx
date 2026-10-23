@@ -171,7 +171,7 @@ export function ChartAreaHeartRate() {
             </defs>
             <Area
               dataKey="heartRate"
-              type="natural"
+              type="monotone"
               fill="url(#fillHeartRate)"
               stroke="var(--color-heartRate)"
             />

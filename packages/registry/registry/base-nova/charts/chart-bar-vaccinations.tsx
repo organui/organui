@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/card"
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
@@ -49,7 +51,7 @@ export function ChartBarVaccinations() {
     <Card>
       <CardHeader>
         <CardTitle>Vaccinations</CardTitle>
-        <CardDescription>Doses given by age group</CardDescription>
+        <CardDescription>Doses given this year, by age group</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -67,6 +69,7 @@ export function ChartBarVaccinations() {
             />
             <Bar dataKey="first" fill="var(--color-first)" radius={4} />
             <Bar dataKey="second" fill="var(--color-second)" radius={4} />
+            <ChartLegend content={<ChartLegendContent />} />
           </BarChart>
         </ChartContainer>
       </CardContent>

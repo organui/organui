@@ -29,7 +29,7 @@ import {
 import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export const description =
-  "Emergency department visits seen within four hours, by weekday"
+  "Emergency department visits completed within four hours, by weekday"
 
 // Average visits per weekday, and how many were admitted, transferred or
 // discharged within four hours of arrival. Illustrative.
@@ -53,7 +53,8 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-// An operational target for the share seen within four hours; set yours.
+// An operational target for the share admitted, transferred or discharged
+// within four hours of arrival; set yours.
 const target = 78
 const visits = chartData.reduce((sum, { visits }) => sum + visits, 0)
 const withinFour = chartData.reduce(
@@ -69,12 +70,14 @@ export function ChartBarEdVisits() {
     <Card>
       <CardHeader>
         <CardTitle>ED four-hour performance</CardTitle>
-        <CardDescription>Share of visits seen within 4 hours</CardDescription>
+        <CardDescription>
+          Admitted, transferred or discharged within 4 hours
+        </CardDescription>
         <CardAction className="flex flex-col items-end gap-1.5">
           <div className="text-2xl leading-none font-semibold">
             {overall}%{" "}
             <span className="text-sm font-normal text-muted-foreground">
-              this week
+              overall
             </span>
           </div>
           <Badge variant="outline">
@@ -97,7 +100,7 @@ export function ChartBarEdVisits() {
                 data-icon="inline-start"
               />
             )}
-            {atTarget ? "Meets target" : "Below target"}
+            {atTarget ? "At target" : "Below target"}
           </Badge>
         </CardAction>
       </CardHeader>

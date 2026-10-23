@@ -26,7 +26,7 @@ const chartData = [
   { symptom: "Nausea", severity: 3 },
   { symptom: "Breathlessness", severity: 5 },
   { symptom: "Anxiety", severity: 4 },
-  { symptom: "Appetite", severity: 6 },
+  { symptom: "Lack of appetite", severity: 6 },
 ]
 
 const chartConfig = {
