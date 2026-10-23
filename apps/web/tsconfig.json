@@ -79,9 +79,6 @@
       "@/components/cell": [
         "../../packages/registry/registry/base-nova/cell/cell.tsx"
       ],
-      "@/components/liver-lobule": [
-        "../../packages/registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
-      ],
       "@/components/diaphragm": [
         "../../packages/registry/registry/base-nova/diaphragm/diaphragm.tsx"
       ],
@@ -118,14 +115,8 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
-      "@/components/disease-viewer": [
-        "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
-      ],
-      "@/components/disease-model": [
-        "../../packages/registry/registry/base-nova/disease-viewer/disease-model.ts"
-      ],
-      "@/components/autoimmune-hepatitis": [
-        "../../packages/registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      "@/components/liver-lobule": [
+        "../../packages/registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
       ],
       "@/components/lungs": [
         "../../packages/registry/registry/base-nova/lungs/lungs.tsx"
@@ -201,6 +192,15 @@
       ],
       "@/components/vestibular": [
         "../../packages/registry/registry/base-nova/vestibular/vestibular.tsx"
+      ],
+      "@/components/disease-viewer": [
+        "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
+      ],
+      "@/components/disease-model": [
+        "../../packages/registry/registry/base-nova/disease-viewer/disease-model.ts"
+      ],
+      "@/components/autoimmune-hepatitis": [
+        "../../packages/registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
       "@/icons/icon-placeholder": [
         "../../packages/ui/src/components/icon-placeholder.tsx"

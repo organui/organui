@@ -69,9 +69,6 @@
       "@/components/brain": ["./registry/base-nova/brain/brain.tsx"],
       "@/components/breast": ["./registry/base-nova/breast/breast.tsx"],
       "@/components/cell": ["./registry/base-nova/cell/cell.tsx"],
-      "@/components/liver-lobule": [
-        "./registry/base-nova/liver-lobule/liver-lobule.tsx"
-      ],
       "@/components/diaphragm": [
         "./registry/base-nova/diaphragm/diaphragm.tsx"
       ],
@@ -92,14 +89,8 @@
       "@/components/kidneys": ["./registry/base-nova/kidneys/kidneys.tsx"],
       "@/components/larynx": ["./registry/base-nova/larynx/larynx.tsx"],
       "@/components/liver": ["./registry/base-nova/liver/liver.tsx"],
-      "@/components/disease-viewer": [
-        "./registry/base-nova/disease-viewer/disease-viewer.tsx"
-      ],
-      "@/components/disease-model": [
-        "./registry/base-nova/disease-viewer/disease-model.ts"
-      ],
-      "@/components/autoimmune-hepatitis": [
-        "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      "@/components/liver-lobule": [
+        "./registry/base-nova/liver-lobule/liver-lobule.tsx"
       ],
       "@/components/lungs": ["./registry/base-nova/lungs/lungs.tsx"],
       "@/components/lymph": ["./registry/base-nova/lymph/lymph.tsx"],
@@ -135,6 +126,15 @@
       "@/components/vessels": ["./registry/base-nova/vessels/vessels.tsx"],
       "@/components/vestibular": [
         "./registry/base-nova/vestibular/vestibular.tsx"
+      ],
+      "@/components/disease-viewer": [
+        "./registry/base-nova/disease-viewer/disease-viewer.tsx"
+      ],
+      "@/components/disease-model": [
+        "./registry/base-nova/disease-viewer/disease-model.ts"
+      ],
+      "@/components/autoimmune-hepatitis": [
+        "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
       // Removed by shadcn add, which writes the project's own icons instead.
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
