@@ -135,6 +135,9 @@
       "@/components/lobar-pneumonia": [
         "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
       ],
+      "@/components/myocardial-infarction": [
+        "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
+      ],
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["./vendor/radix-nova/ui/*"],
       "@/components/organ-viewer": [

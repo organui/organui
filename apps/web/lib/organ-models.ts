@@ -85,6 +85,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/lymph").then((module) => module.lymphModel),
   muscles: () =>
     import("@workspace/registry/muscles").then((module) => module.musclesModel),
+  "myocardial-infarction": () =>
+    import("@workspace/registry/myocardial-infarction").then((module) =>
+      local(module.myocardialInfarctionModel)
+    ),
   nails: () =>
     import("@workspace/registry/nails").then((module) =>
       local(module.nailsModel)
