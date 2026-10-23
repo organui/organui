@@ -18,7 +18,6 @@ export const acuteAngleClosureGlaucoma: Disease = {
       id: "eye",
       label: "Eye",
       model: eyeModel,
-      defaultView: "Lateral",
       findings: {
         iris: {
           affected: true,
