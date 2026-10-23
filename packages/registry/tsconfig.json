@@ -133,11 +133,26 @@
       "@/components/disease-model": [
         "./registry/base-nova/disease-viewer/disease-model.ts"
       ],
+      "@/components/acute-appendicitis": [
+        "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
       "@/components/autoimmune-hepatitis": [
         "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
       "@/components/gallstone-disease": [
         "./registry/base-nova/gallstone-disease/gallstone-disease.tsx"
+      ],
+      "@/components/graves-disease": [
+        "./registry/base-nova/graves-disease/graves-disease.tsx"
+      ],
+      "@/components/ischaemic-stroke": [
+        "./registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
+      "@/components/lobar-pneumonia": [
+        "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
       ],
       // Removed by shadcn add, which writes the project's own icons instead.
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
