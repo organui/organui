@@ -567,11 +567,14 @@ test("the diseases gallery shows every disease under its body system", async ({
   const main = page.getByRole("main")
   await expect(main.getByRole("listitem")).toHaveCount(diseases.length)
   for (const item of diseases) {
-    const card = main.getByRole("link", {
+    // Built from the page, so filter({ has }) can find it inside a section.
+    const card = page.getByRole("link", {
       name: item.title ?? item.name,
       exact: true,
     })
-    await expect(card).toHaveAttribute("href", `/docs/components/${item.name}`)
+    await expect(
+      main.getByRole("link", { name: item.title ?? item.name, exact: true })
+    ).toHaveAttribute("href", `/docs/components/${item.name}`)
     await expect(card.locator("img")).toHaveAttribute(
       "src",
       new RegExp(`url=%2Fdiseases%2F${item.name}\\.webp`)
