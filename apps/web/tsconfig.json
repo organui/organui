@@ -118,6 +118,9 @@
       "@/components/liver": [
         "../../packages/registry/registry/base-nova/liver/liver.tsx"
       ],
+      "@/components/pituitary-adenoma": [
+        "../../packages/registry/registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
+      ],
       "@/components/disease-viewer": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-viewer.tsx"
       ],

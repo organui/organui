@@ -25,4 +25,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "pituitary-adenoma-demo": {
+    title: "Pituitary adenoma",
+    file: "pituitary-adenoma-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./pituitary-adenoma-demo")
+      return <Example />
+    },
+  },
+  "pituitary-adenoma-without-panel": {
+    title: "Pituitary adenoma Without Panel",
+    file: "pituitary-adenoma-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./pituitary-adenoma-without-panel")
+      return <Example />
+    },
+  },
+  "pituitary-adenoma-controlled": {
+    title: "Pituitary adenoma Controlled",
+    file: "pituitary-adenoma-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./pituitary-adenoma-controlled")
+      return <Example />
+    },
+  },
 }

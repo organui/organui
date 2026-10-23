@@ -972,6 +972,21 @@
       "docs": "Autoimmune hepatitis docs: https://organui.com/docs/components/autoimmune-hepatitis. It reuses the liver model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html), and the liver lobule model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. An educational model, not for diagnosis."
     },
     {
+      "name": "pituitary-adenoma",
+      "type": "registry:component",
+      "title": "Pituitary adenoma",
+      "description": "A non-functioning pituitary adenoma on the pituitary and its surroundings, from an incidental microadenoma to a macroadenoma pressing on the optic chiasm and stalk, and apoplexy into the cavernous sinus, with visual fields, MRI and pituitary hormones at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/pituitary"],
+      "categories": ["disease", "endocrine"],
+      "files": [
+        {
+          "path": "registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Pituitary adenoma docs: https://organui.com/docs/components/pituitary-adenoma. It reuses the pituitary model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",
