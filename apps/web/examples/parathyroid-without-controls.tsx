@@ -5,7 +5,6 @@ export function Example() {
     <Parathyroid
       label="Parathyroid without controls example"
       controls={false}
-      className="h-[28rem]"
     />
   )
 }

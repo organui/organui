@@ -23,7 +23,6 @@ export function Example() {
         selectedId={selectedId}
         onSelectionChange={setSelectedId}
         visibility={visibility}
-        className="h-[28rem]"
       />
       <AnatomyTree
         label="Hair anatomy"

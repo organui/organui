@@ -159,7 +159,7 @@
   },
   "dna-helix": {
     "component": "DnaHelix",
-    "element": null,
+    "element": "div",
     "props": [
       {
         "name": "sequence",
@@ -209,13 +209,6 @@
         "required": false,
         "default": "\"Interactive DNA double helix\"",
         "description": "The accessible name of the viewer."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       },
       {
         "name": "ref",
@@ -573,7 +566,7 @@
   },
   "molecule-viewer": {
     "component": "MoleculeViewer",
-    "element": null,
+    "element": "div",
     "props": [
       {
         "name": "src",
@@ -695,13 +688,6 @@
         "description": "The accessible name of the viewer."
       },
       {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
-      },
-      {
         "name": "ref",
         "type": "React.Ref<MoleculeViewerHandle>",
         "required": false,
@@ -712,7 +698,7 @@
   },
   "organ-viewer": {
     "component": "OrganViewer",
-    "element": null,
+    "element": "div",
     "props": [
       {
         "name": "model",
@@ -783,13 +769,6 @@
         "required": false,
         "default": "`Interactive ${model.name.toLowerCase()} model`",
         "description": "The accessible name of the viewer."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       },
       {
         "name": "ref",

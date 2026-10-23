@@ -14,7 +14,6 @@ export function Example() {
         label="Spinal cord controlled selection example"
         selectedId={selectedId}
         onSelectionChange={setSelectedId}
-        className="h-[28rem]"
       />
       <p role="status" className="text-sm text-muted-foreground">
         {selected ? `Selected: ${selected.label}` : "Select a structure in 3D."}

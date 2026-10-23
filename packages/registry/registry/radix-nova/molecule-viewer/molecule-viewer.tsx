@@ -40,6 +40,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Spinner } from "@/components/ui/spinner"
 import {
   Tooltip,
   TooltipContent,
@@ -99,7 +100,10 @@ export type MoleculeViewerHandle = {
   reset: () => void
 }
 
-export type MoleculeViewerProps = {
+export type MoleculeViewerProps = Omit<
+  React.ComponentProps<"div">,
+  "ref" | "onLoad"
+> & {
   /** URL of a PDB or mmCIF file. Ignored when `data` is given. */
   src?: string
   /** PDB or mmCIF text. */
@@ -137,8 +141,6 @@ export type MoleculeViewerProps = {
   attribution?: boolean
   /** The accessible name of the viewer. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
   /** Zooms, rotates and resets the camera from your own controls. */
   ref?: React.Ref<MoleculeViewerHandle>
 }
@@ -606,6 +608,45 @@ export function parseStructure(
 // Appearance
 
 const STAGE_TONE = new Color("#e4e3dc")
+
+// Faded parts blend towards the stage, so its tone follows the theme: the
+// theme's --muted, resolved through a canvas because three.js cannot parse
+// oklch(), and read again when the theme changes. Returns a count that
+// changes each time, for effects that repaint.
+function useStageTone(host: React.RefObject<HTMLElement | null>) {
+  const [version, setVersion] = React.useState(0)
+  React.useEffect(() => {
+    const read = () => {
+      const muted = host.current
+        ? getComputedStyle(host.current).getPropertyValue("--muted").trim()
+        : ""
+      const context = muted
+        ? document
+            .createElement("canvas")
+            .getContext("2d", { willReadFrequently: true })
+        : null
+      if (!context) return
+      context.fillStyle = muted
+      context.fillRect(0, 0, 1, 1)
+      const [r, g, b] = context.getImageData(0, 0, 1, 1).data
+      STAGE_TONE.setStyle(`rgb(${r}, ${g}, ${b})`)
+      setVersion((count) => count + 1)
+    }
+    read()
+    const observer = new MutationObserver(read)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style", "data-theme"],
+    })
+    const scheme = matchMedia("(prefers-color-scheme: dark)")
+    scheme.addEventListener("change", read)
+    return () => {
+      observer.disconnect()
+      scheme.removeEventListener("change", read)
+    }
+  }, [host])
+  return version
+}
 const CHAIN_COLORS = [
   "#4e79a7",
   "#e15759",
@@ -1352,8 +1393,10 @@ export function MoleculeViewer({
   label = "Interactive molecular structure",
   className,
   ref,
+  ...props
 }: MoleculeViewerProps) {
   const host = React.useRef<HTMLDivElement>(null)
+  const tone = useStageTone(host)
   const [attempt, setAttempt] = React.useState(0)
   const { structure = null, error = null } = useStructure(
     src,
@@ -1627,7 +1670,7 @@ export function MoleculeViewer({
 
   React.useEffect(() => {
     engine?.paint(scheme, selected)
-  }, [engine, representation, water, scheme, selected])
+  }, [engine, representation, water, scheme, selected, tone])
 
   React.useImperativeHandle(
     ref,
@@ -1646,7 +1689,10 @@ export function MoleculeViewer({
   const message = error
     ? {
         title: "The structure couldn’t load",
-        text: `${error} Check the file and your connection, then try again.`,
+        text:
+          data === undefined
+            ? `${error} Check the file and your connection, then try again.`
+            : `${error} Check the structure text.`,
       }
     : graphicsFailed
       ? {
@@ -1675,6 +1721,8 @@ export function MoleculeViewer({
 
   return (
     <div
+      data-slot="molecule-viewer"
+      {...props}
       className={cn(
         "flex h-[28rem] w-full flex-col overflow-hidden rounded-xl border bg-muted/30 text-sm text-foreground",
         className
@@ -1723,7 +1771,7 @@ export function MoleculeViewer({
               <AlertTitle>{message.title}</AlertTitle>
               <AlertDescription>
                 <p>{message.text}</p>
-                {src && data === undefined && (
+                {(graphicsFailed || (src && data === undefined)) && (
                   <Button
                     variant="outline"
                     size="sm"
@@ -1739,8 +1787,9 @@ export function MoleculeViewer({
         ) : !structure ? (
           <div
             role="status"
-            className="absolute inset-0 flex items-center justify-center p-6 text-muted-foreground"
+            className="absolute inset-0 flex items-center justify-center gap-2 p-6 text-muted-foreground"
           >
+            <Spinner aria-hidden="true" />
             Loading structure
           </div>
         ) : null}
@@ -1858,7 +1907,7 @@ export function MoleculeViewer({
             Drag to rotate · Scroll or pinch to zoom
           </p>
         )}
-        <div className="pointer-events-none absolute right-2 bottom-1.5 left-2 flex items-end justify-between gap-2 text-[11px] text-muted-foreground">
+        <div className="pointer-events-none absolute right-2 bottom-1.5 left-2 flex items-end justify-between gap-2 text-xs text-muted-foreground">
           <p aria-live="polite" className="min-w-0 truncate">
             {status}
           </p>

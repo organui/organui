@@ -1,5 +1,5 @@
 import { Nerves } from "@workspace/registry/nerves"
 
 export function Example() {
-  return <Nerves label="Nerves default example" className="h-[28rem]" />
+  return <Nerves label="Nerves default example" />
 }

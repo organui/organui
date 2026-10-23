@@ -1,3 +1,4 @@
+import type * as React from "react"
 import type { OrganViewerProps } from "@workspace/registry/organ-viewer"
 import { DocsHeading } from "@/components/docs-heading"
 import {
@@ -68,7 +69,10 @@ const props = {
     description: "Access setView, zoom, rotate and reset methods.",
   },
 } satisfies Record<
-  keyof Omit<OrganViewerProps, "model">,
+  // The viewer's own props; the root <div>'s are noted under the table.
+  | Exclude<keyof OrganViewerProps, "model" | keyof React.ComponentProps<"div">>
+  | "className"
+  | "ref",
   { type: string; default: string; description: string }
 >
 
@@ -110,6 +114,10 @@ export function OrganApi({ component }: { component: string }) {
           ))}
         </TableBody>
       </Table>
+      <p className="text-muted-foreground">
+        Any other prop, such as <code>id</code> or <code>aria-*</code>, is
+        passed to the root <code>{"<div>"}</code>.
+      </p>
     </section>
   )
 }

@@ -1,11 +1,5 @@
 import { Adrenals } from "@workspace/registry/adrenals"
 
 export function Example() {
-  return (
-    <Adrenals
-      label="Adrenals without controls example"
-      controls={false}
-      className="h-[28rem]"
-    />
-  )
+  return <Adrenals label="Adrenals without controls example" controls={false} />
 }

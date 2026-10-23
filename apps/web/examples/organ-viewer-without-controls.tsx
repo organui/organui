@@ -9,7 +9,6 @@ export function Example() {
       model={model}
       label={`${model.name} without controls example`}
       controls={false}
-      className="h-[28rem]"
     />
   )
 }
