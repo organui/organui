@@ -26,10 +26,9 @@ export const myocardialInfarction: Disease = {
             "The culprit: a cholesterol plaque ruptures and a clot forms on it, blocking the artery. Emergency angioplasty (PCI) reopens it with a stent.",
         },
         "ventricular-wall": {
-          label: "Anterior wall and septum",
           affected: true,
           description:
-            "Starved of oxygen, the muscle stops contracting within a minute. Cells start to die after about 20 minutes, from the inner layer outwards, so reperfusion within hours saves the outer wall.",
+            "The anterior wall and septum, which the LAD supplies. Starved of oxygen, the muscle stops contracting within a minute. Cells start to die after about 20 minutes, from the inner layer outwards, so reperfusion within hours saves the outer wall.",
         },
         "left-ventricle": {
           affected: true,
@@ -75,10 +74,9 @@ export const myocardialInfarction: Disease = {
               "Opened and stented. Two antiplatelet drugs stop a clot forming on the new stent.",
           },
           "ventricular-wall": {
-            label: "Anterior wall and septum",
             affected: true,
             description:
-              "Neutrophils, then macrophages, clear the dead muscle. Rarely the softened wall or septum ruptures, most often between days 3 and 7.",
+              "In the infarcted anterior wall and septum, neutrophils, then macrophages, clear the dead muscle. Rarely the softened wall or septum ruptures, most often between days 3 and 7.",
           },
           "left-ventricle": {
             affected: true,
@@ -108,10 +106,9 @@ export const myocardialInfarction: Disease = {
               "Stented. Statins, antiplatelets and stopping smoking keep it and the other arteries open.",
           },
           "ventricular-wall": {
-            label: "Anterior wall and septum",
             affected: true,
             description:
-              "A thin collagen scar that does not contract. If it bulges with each beat it is a ventricular aneurysm.",
+              "The anterior wall and septum are now a thin collagen scar that does not contract. If it bulges with each beat it is a ventricular aneurysm.",
           },
           "left-ventricle": {
             affected: true,
