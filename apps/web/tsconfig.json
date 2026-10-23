@@ -199,11 +199,50 @@
       "@/components/disease-model": [
         "../../packages/registry/registry/base-nova/disease-viewer/disease-model.ts"
       ],
+      "@/components/acute-angle-closure-glaucoma": [
+        "../../packages/registry/registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
+      ],
+      "@/components/acute-appendicitis": [
+        "../../packages/registry/registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
       "@/components/autoimmune-hepatitis": [
         "../../packages/registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
+      "@/components/benign-prostatic-hyperplasia": [
+        "../../packages/registry/registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx"
+      ],
+      "@/components/ectopic-pregnancy": [
+        "../../packages/registry/registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx"
+      ],
+      "@/components/gallstone-disease": [
+        "../../packages/registry/registry/base-nova/gallstone-disease/gallstone-disease.tsx"
+      ],
+      "@/components/graves-disease": [
+        "../../packages/registry/registry/base-nova/graves-disease/graves-disease.tsx"
+      ],
       "@/components/hodgkin-lymphoma": [
         "../../packages/registry/registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx"
+      ],
+      "@/components/ischaemic-stroke": [
+        "../../packages/registry/registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
+      "@/components/kidney-stones": [
+        "../../packages/registry/registry/base-nova/kidney-stones/kidney-stones.tsx"
+      ],
+      "@/components/lobar-pneumonia": [
+        "../../packages/registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/melanoma": [
+        "../../packages/registry/registry/base-nova/melanoma/melanoma.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "../../packages/registry/registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
+      ],
+      "@/components/peptic-ulcer-disease": [
+        "../../packages/registry/registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx"
+      ],
+      "@/components/pituitary-adenoma": [
+        "../../packages/registry/registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
       ],
       "@/icons/icon-placeholder": [
         "../../packages/ui/src/components/icon-placeholder.tsx"

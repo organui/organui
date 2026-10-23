@@ -82,8 +82,21 @@
     "./vestibular": "./registry/base-nova/vestibular/vestibular.tsx",
     "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
     "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
+    "./acute-angle-closure-glaucoma": "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx",
+    "./acute-appendicitis": "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
-    "./hodgkin-lymphoma": "./registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx"
+    "./benign-prostatic-hyperplasia": "./registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx",
+    "./ectopic-pregnancy": "./registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx",
+    "./gallstone-disease": "./registry/base-nova/gallstone-disease/gallstone-disease.tsx",
+    "./graves-disease": "./registry/base-nova/graves-disease/graves-disease.tsx",
+    "./hodgkin-lymphoma": "./registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx",
+    "./ischaemic-stroke": "./registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx",
+    "./kidney-stones": "./registry/base-nova/kidney-stones/kidney-stones.tsx",
+    "./lobar-pneumonia": "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
+    "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx",
+    "./myocardial-infarction": "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
+    "./peptic-ulcer-disease": "./registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx",
+    "./pituitary-adenoma": "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
   },
   "scripts": {
     "build": "bun scripts/build.ts",
