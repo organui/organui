@@ -82,8 +82,12 @@
     "./vestibular": "./registry/base-nova/vestibular/vestibular.tsx",
     "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
     "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
+    "./acute-appendicitis": "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
-    "./graves-disease": "./registry/base-nova/graves-disease/graves-disease.tsx"
+    "./graves-disease": "./registry/base-nova/graves-disease/graves-disease.tsx",
+    "./ischaemic-stroke": "./registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx",
+    "./lobar-pneumonia": "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
+    "./myocardial-infarction": "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
   },
   "scripts": {
     "build": "bun scripts/build.ts",

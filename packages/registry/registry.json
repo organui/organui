@@ -953,6 +953,21 @@
       "docs": "Disease viewer docs: https://organui.com/docs/components/disease-viewer. Educational, not for diagnosis."
     },
     {
+      "name": "acute-appendicitis",
+      "type": "registry:component",
+      "title": "Acute appendicitis",
+      "description": "Acute appendicitis on the appendix and its neighbours, from early obstruction through suppuration to perforation, with the psoas sign, the scores and imaging at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/appendix"],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Acute appendicitis docs: https://organui.com/docs/components/acute-appendicitis. It reuses the appendix model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "autoimmune-hepatitis",
       "type": "registry:component",
       "title": "Autoimmune hepatitis",
@@ -989,6 +1004,51 @@
         }
       ],
       "docs": "Graves' disease docs: https://organui.com/docs/components/graves-disease. It reuses the thyroid model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en) and the eye model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
+      "name": "ischaemic-stroke",
+      "type": "registry:component",
+      "title": "Ischaemic stroke",
+      "description": "An ischaemic stroke of the left middle cerebral artery on the brain: the frontal, parietal and temporal lobes it supplies, with aphasia, weakness and field loss, from the hyperacute window through swelling to a healed cavity, with the scans and scores at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/brain"],
+      "categories": ["disease", "nervous"],
+      "files": [
+        {
+          "path": "registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Ischaemic stroke docs: https://organui.com/docs/components/ischaemic-stroke. It reuses the brain model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
+      "name": "lobar-pneumonia",
+      "type": "registry:component",
+      "title": "Lobar pneumonia",
+      "description": "Lobar pneumonia of the right lower lobe on the lungs, through congestion, red and grey hepatisation to resolution, with the spared middle lobe's silhouette sign and the observations, bloods and X-ray at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/lungs"],
+      "categories": ["disease", "respiratory"],
+      "files": [
+        {
+          "path": "registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Lobar pneumonia docs: https://organui.com/docs/components/lobar-pneumonia. It reuses the lungs model, licensed CC BY-SA 2.1 JP (https://lifesciencedb.jp/bp3d/info/index.html#License); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
+      "name": "myocardial-infarction",
+      "type": "registry:component",
+      "title": "Myocardial infarction",
+      "description": "An anterior ST-elevation myocardial infarction on the heart: the blocked left anterior descending artery and the wall it supplies, from occlusion through the acute phase to a healed scar, with the ECG, troponin and echo at each stage. Model licensed CC BY 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/heart"],
+      "categories": ["disease", "cardiovascular"],
+      "files": [
+        {
+          "path": "registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Myocardial infarction docs: https://organui.com/docs/components/myocardial-infarction. It reuses the heart model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
       "name": "ai-disclaimer",

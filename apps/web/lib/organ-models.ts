@@ -11,6 +11,10 @@ const local = (model: OrganModel): OrganModel => ({
 })
 
 export const organModels: Record<string, () => Promise<OrganModel>> = {
+  "acute-appendicitis": () =>
+    import("@workspace/registry/acute-appendicitis").then((module) =>
+      local(module.acuteAppendicitisModel)
+    ),
   adrenals: () =>
     import("@workspace/registry/adrenals").then(
       (module) => module.adrenalsModel
@@ -65,6 +69,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/intestines").then(
       (module) => module.intestinesModel
     ),
+  "ischaemic-stroke": () =>
+    import("@workspace/registry/ischaemic-stroke").then((module) =>
+      local(module.ischaemicStrokeModel)
+    ),
   joints: () =>
     import("@workspace/registry/joints").then((module) =>
       local(module.jointsModel)
@@ -79,12 +87,20 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/liver-lobule").then((module) =>
       local(module.liverLobuleModel)
     ),
+  "lobar-pneumonia": () =>
+    import("@workspace/registry/lobar-pneumonia").then((module) =>
+      local(module.lobarPneumoniaModel)
+    ),
   lungs: () =>
     import("@workspace/registry/lungs").then((module) => module.lungsModel),
   lymph: () =>
     import("@workspace/registry/lymph").then((module) => module.lymphModel),
   muscles: () =>
     import("@workspace/registry/muscles").then((module) => module.musclesModel),
+  "myocardial-infarction": () =>
+    import("@workspace/registry/myocardial-infarction").then((module) =>
+      local(module.myocardialInfarctionModel)
+    ),
   nails: () =>
     import("@workspace/registry/nails").then((module) =>
       local(module.nailsModel)

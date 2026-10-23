@@ -177,11 +177,23 @@
       "@/components/disease-model": [
         "../registry/registry/base-nova/disease-viewer/disease-model.ts"
       ],
+      "@/components/acute-appendicitis": [
+        "../registry/registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
       "@/components/autoimmune-hepatitis": [
         "../registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
       ],
       "@/components/graves-disease": [
         "../registry/registry/base-nova/graves-disease/graves-disease.tsx"
+      ],
+      "@/components/ischaemic-stroke": [
+        "../registry/registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
+      "@/components/lobar-pneumonia": [
+        "../registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "../registry/registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
       ],
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["../ui/src/components/*"],
