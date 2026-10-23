@@ -25,6 +25,7 @@ export const documented = {
   "anatomy-tree": ["anatomy-tree/anatomy-tree.tsx", "AnatomyTree"],
   "body-map": ["body-map/body-map.tsx", "BodyMap"],
   "dermatome-map": ["dermatome-map/dermatome-map.tsx", "DermatomeMap"],
+  "disease-viewer": ["disease-viewer/disease-viewer.tsx", "DiseaseViewer"],
   "dna-helix": ["dna-helix/dna-helix.tsx", "DnaHelix"],
   "ecg-trace": ["ecg-trace/ecg-trace.tsx", "EcgTrace"],
   "growth-chart": ["growth-chart/growth-chart.tsx", "GrowthChart"],

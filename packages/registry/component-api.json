@@ -157,6 +157,82 @@
       }
     ]
   },
+  "disease-viewer": {
+    "component": "DiseaseViewer",
+    "element": null,
+    "props": [
+      {
+        "name": "disease",
+        "type": "Disease",
+        "required": true,
+        "default": null,
+        "description": "The disease: its scales, stages, findings and investigations."
+      },
+      {
+        "name": "scale",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The scale shown, by ID."
+      },
+      {
+        "name": "defaultScale",
+        "type": "string",
+        "required": false,
+        "default": "disease.scales[0]!.id",
+        "description": "The scale shown first when `scale` is not set. Defaults to the first."
+      },
+      {
+        "name": "onScaleChange",
+        "type": "(scale: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the scale a reader chooses."
+      },
+      {
+        "name": "stage",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The stage shown, by ID."
+      },
+      {
+        "name": "defaultStage",
+        "type": "string",
+        "required": false,
+        "default": "disease.stages?.[0]?.id ?? \"\"",
+        "description": "The stage shown first when `stage` is not set. Defaults to the first."
+      },
+      {
+        "name": "onStageChange",
+        "type": "(stage: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the stage a reader chooses."
+      },
+      {
+        "name": "selectedId",
+        "type": "string | null",
+        "required": false,
+        "default": null,
+        "description": "The selected structure ID, or null."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(id: string | null) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the structure a reader selects, or null when they clear it."
+      },
+      {
+        "name": "panel",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the panel with the stages, scales, findings and investigations. Defaults to true."
+      }
+    ]
+  },
   "dna-helix": {
     "component": "DnaHelix",
     "element": "div",

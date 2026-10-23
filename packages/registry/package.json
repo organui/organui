@@ -55,6 +55,8 @@
     "./kidneys": "./registry/base-nova/kidneys/kidneys.tsx",
     "./larynx": "./registry/base-nova/larynx/larynx.tsx",
     "./liver": "./registry/base-nova/liver/liver.tsx",
+    "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
+    "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
     "./lungs": "./registry/base-nova/lungs/lungs.tsx",
     "./lymph": "./registry/base-nova/lymph/lymph.tsx",

@@ -929,14 +929,38 @@
       "docs": "Vestibular system docs: https://organui.com/docs/components/vestibular. The model is licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible."
     },
     {
+      "name": "disease-viewer",
+      "type": "registry:component",
+      "title": "Disease viewer",
+      "description": "Shows a disease on organ models: the structures it affects or spares at each stage and scale, with a panel for its ICD-10 code, course, findings and key investigations. Every disease component is built on it.",
+      "categories": ["pathology"],
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": ["@organui/organ-viewer", "badge", "button"],
+      "files": [
+        {
+          "path": "registry/base-nova/disease-viewer/disease-viewer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/base-nova/disease-viewer/disease-model.ts",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Disease viewer docs: https://organui.com/docs/components/disease-viewer. Educational, not for diagnosis."
+    },
+    {
       "name": "autoimmune-hepatitis",
       "type": "registry:component",
       "title": "Autoimmune hepatitis",
       "description": "Autoimmune hepatitis at two scales: the whole liver, where it ends in cirrhosis and portal hypertension, and a liver lobule, with the portal infiltrate, interface hepatitis and periportal injury. Affected and spared structures each say what the disease does there. Models licensed CC BY 4.0 (liver) and CC0 1.0 (lobule).",
       "registryDependencies": [
+        "@organui/disease-viewer",
         "@organui/liver",
-        "@organui/liver-lobule",
-        "@organui/organ-viewer"
+        "@organui/liver-lobule"
       ],
       "categories": ["disease", "digestive"],
       "files": [

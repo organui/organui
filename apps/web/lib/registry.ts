@@ -27,8 +27,8 @@ export const componentGroups = [
   },
   // The viewer and the tree come first: every organ is built on them.
   { id: "organs", title: "Organs", categories: ["anatomy", "organ"] },
-  // Each disease shows its pathology on an organ's model.
-  { id: "diseases", title: "Diseases", categories: ["disease"] },
+  // The disease viewer comes first: every disease is built on it.
+  { id: "diseases", title: "Diseases", categories: ["pathology", "disease"] },
 ] as const
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
@@ -70,7 +70,9 @@ export const registryItems = catalog.items
         ? (item.registryDependencies ?? [])
             .filter(
               (name) =>
-                name.startsWith("@organui/") && name !== "@organui/organ-viewer"
+                name.startsWith("@organui/") &&
+                name !== "@organui/organ-viewer" &&
+                name !== "@organui/disease-viewer"
             )
             .map((name) => name.replace("@organui/", ""))
         : [],
@@ -88,12 +90,14 @@ export const registryItems = catalog.items
       install: install(item),
     }
   })
-  // Grouped in sidebar order; anatomy items lead the organs, then by title.
+  // Grouped in sidebar order; the viewers lead the organs and the diseases,
+  // then by title.
   .sort(
     (a, b) =>
       componentGroups.findIndex(({ id }) => id === a.group) -
         componentGroups.findIndex(({ id }) => id === b.group) ||
       Number(a.organ) - Number(b.organ) ||
+      Number(a.disease) - Number(b.disease) ||
       a.title.localeCompare(b.title)
   )
 
