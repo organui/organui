@@ -17,6 +17,7 @@
   "kidneys": "https://cdn.jsdelivr.net/gh/organui/kidneys-3d@880b7c9cdf9f2272eee7741b01ccb34454adb30c/public/models/kidneys.glb",
   "larynx": "https://cdn.jsdelivr.net/gh/organui/larynx-3d@aa18162e23a7617b1db91e5b929f05940fede2b2/public/models/larynx.glb",
   "liver": "https://cdn.jsdelivr.net/gh/organui/liver-3d@528ee1794670d3bfa23d581f91ba49d6af585b03/public/models/liver.glb",
+  "lobar-pneumonia": "https://cdn.jsdelivr.net/gh/organui/lungs-3d@5815084f43efe438ebfae3fd889ee2baf343dfbf/public/models/lungs.glb",
   "lungs": "https://cdn.jsdelivr.net/gh/organui/lungs-3d@5815084f43efe438ebfae3fd889ee2baf343dfbf/public/models/lungs.glb",
   "lymph": "https://cdn.jsdelivr.net/gh/organui/lymph-3d@ce6d0cf9c1b632d0e109fc84139e14d0b5cbd651/public/models/lymph-node.glb",
   "muscles": "https://cdn.jsdelivr.net/gh/organui/muscles-3d@1c746c36d12a78c5f3fd452dbe5d29ae869cad04/public/models/muscles.glb",
