@@ -101,6 +101,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "breast-cancer-demo": {
+    title: "Breast cancer",
+    file: "breast-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./breast-cancer-demo")
+      return <Example />
+    },
+  },
+  "breast-cancer-without-panel": {
+    title: "Breast cancer Without Panel",
+    file: "breast-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./breast-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "breast-cancer-controlled": {
+    title: "Breast cancer Controlled",
+    file: "breast-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./breast-cancer-controlled")
+      return <Example />
+    },
+  },
   "crohns-disease-demo": {
     title: "Crohn's disease",
     file: "crohns-disease-demo.tsx",
