@@ -33,7 +33,7 @@ export const autoimmuneHepatitis: Disease = {
         biliary: {
           affected: false,
           description:
-            "The bile ducts are usually spared. Strictures on cholangiography suggest an overlap with primary sclerosing cholangitis.",
+            "The bile ducts are usually spared. Strictures on cholangiography suggest autoimmune hepatitis with features of primary sclerosing cholangitis.",
         },
         "hepatic-veins": {
           affected: false,
@@ -61,7 +61,7 @@ export const autoimmuneHepatitis: Disease = {
         "periportal-hepatocytes": {
           affected: true,
           description:
-            "Injured hepatocytes regenerate as rosettes, and lymphocytes can be seen inside them (emperipolesis).",
+            "Injured hepatocytes regenerate as rosettes, and lymphocytes can be seen inside them (emperipolesis), though neither is specific.",
         },
         "midzonal-hepatocytes": {
           affected: false,
@@ -81,7 +81,7 @@ export const autoimmuneHepatitis: Disease = {
         "bile-ducts": {
           affected: false,
           description:
-            "Usually spared. Duct injury on biopsy suggests an overlap with primary biliary cholangitis or primary sclerosing cholangitis.",
+            "Usually spared. Duct injury on biopsy suggests autoimmune hepatitis with features of primary biliary or sclerosing cholangitis.",
         },
       },
     },
@@ -182,13 +182,13 @@ export const autoimmuneHepatitis: Disease = {
       label: "Steroids",
       time: "From diagnosis",
       description:
-        "Prednisolone brings the inflammation down, then azathioprine keeps it in remission. The aim is a normal ALT and IgG within six months.",
+        "Prednisolone, or budesonide without cirrhosis, brings the inflammation down; azathioprine is added after about two weeks, once TPMT is checked, so the steroid can be tapered. The aim is a normal ALT and IgG within six months.",
     },
     {
       stage: "fibrosis",
       label: "Elastography",
       description:
-        "Follows liver stiffness without repeating the biopsy. Fibrosis can regress while the disease stays in remission.",
+        "Follows liver stiffness without repeating the biopsy, once treatment has calmed the inflammation, which falsely raises it. Fibrosis can regress while the disease stays in remission.",
     },
     {
       stage: "cirrhosis",

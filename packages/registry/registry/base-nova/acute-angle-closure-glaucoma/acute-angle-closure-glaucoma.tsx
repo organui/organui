@@ -22,7 +22,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
         iris: {
           affected: true,
           description:
-            "In dim light the pupil half-dilates and the iris presses on the lens. Aqueous builds up behind it and pushes it forward against the drainage angle (pupil block).",
+            "In dim light the pupil half-dilates and the iris presses on the lens. Aqueous builds up behind it and bows the peripheral iris forward against the drainage angle (pupil block).",
         },
         "anterior-chamber": {
           affected: true,
@@ -47,7 +47,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
         retina: {
           affected: false,
           description:
-            "Not involved, though pressure on the optic nerve head reduces its blood supply.",
+            "Not involved, though very high pressure can block the retinal vessels (central retinal vein or artery occlusion).",
         },
       },
     },
@@ -58,7 +58,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
       label: "Attack",
       time: "Hours",
       summary:
-        "Lower the pressure now: acetazolamide, pressure-lowering drops and pilocarpine to pull the iris away from the angle, then laser.",
+        "Lower the pressure now: acetazolamide, pressure-lowering and steroid drops, then pilocarpine once the pressure falls, to pull the iris away from the angle. Mannitol if it does not come down. Then laser.",
     },
     {
       id: "iridotomy",
@@ -71,7 +71,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
           iris: {
             affected: true,
             description:
-              "Has a small laser hole near its root, so aqueous flows straight to the angle and pupil block cannot recur.",
+              "Has a small laser hole in its periphery, so aqueous flows straight to the angle and pupil block is relieved.",
           },
           "anterior-chamber": {
             affected: false,
@@ -88,7 +88,11 @@ export const acuteAngleClosureGlaucoma: Disease = {
         { name: "Eye pressure", result: "16 mmHg" },
         { name: "Gonioscopy", result: "Open angle" },
         { name: "Visual acuity", result: "6/9" },
-        { name: "Fellow eye", result: "Laser iridotomy" },
+        {
+          name: "Fellow eye gonioscopy",
+          result: "Narrow angle",
+          flag: "abnormal",
+        },
       ],
     },
     {
@@ -117,7 +121,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
           cornea: {
             affected: false,
             description:
-              "Clear: the pressure is raised but rises slowly, so the eye is quiet and the damage goes unnoticed.",
+              "Clear: the pressure is only moderately raised and builds slowly, so the eye is quiet while the damage goes on.",
           },
         },
       },
@@ -135,7 +139,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
       label: "Acetazolamide",
       time: "At once",
       description:
-        "Given by mouth or vein with pressure-lowering drops to bring the pressure down before laser.",
+        "500 mg by vein, as the patient is often vomiting, with pressure-lowering drops to bring the pressure down before laser.",
     },
     {
       stage: "iridotomy",

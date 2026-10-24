@@ -45,11 +45,13 @@ export const lobarPneumonia: Disease = {
         },
         FMA7360: {
           affected: false,
+          label: "Middle lobe, medial segment",
           description:
             "The middle lobe is spared, so the right heart border it touches stays sharp on X-ray while the diaphragm outline behind the lower lobe is lost (the silhouette sign).",
         },
         FMA7361: {
           affected: false,
+          label: "Middle lobe, lateral segment",
           description:
             "Spared. The oblique fissure confines the infection to the lower lobe.",
         },
@@ -87,7 +89,7 @@ export const lobarPneumonia: Disease = {
       label: "Grey",
       time: "Days 4–8",
       summary:
-        "Grey hepatisation: red cells break down and the lobe turns grey-brown; with antibiotics, the fever settles.",
+        "Grey hepatisation: red cells break down and the lobe turns grey-brown. Antibiotics usually settle the fever before this stage.",
       findings: {
         lungs: consolidated(
           "Neutrophils and fibrin remain while red cells are broken down. The lobe is still solid, but the infection is being contained."
@@ -115,7 +117,7 @@ export const lobarPneumonia: Disease = {
         { name: "CRP", result: "Normalising" },
         {
           name: "Chest X-ray",
-          result: "Repeat at 6 weeks if over 50 or smoking",
+          result: "Repeat only if symptoms persist or cancer risk is higher",
         },
       ],
     },

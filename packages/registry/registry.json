@@ -1024,7 +1024,7 @@
       "name": "ectopic-pregnancy",
       "type": "registry:component",
       "title": "Ectopic pregnancy",
-      "description": "A tubal ectopic pregnancy on the uterus and tubes: implantation in the ampulla with an empty uterus, then rupture bleeding from the mesosalpinx into the pelvis, with hCG, ultrasound and observations at each stage. Model licensed CC BY 4.0.",
+      "description": "A tubal ectopic pregnancy on the uterus and tubes: implantation in the ampulla with an empty uterus, then rupture bleeding from the mesosalpinx into the peritoneal cavity, with hCG, ultrasound and observations at each stage. Model licensed CC BY 4.0.",
       "registryDependencies": ["@organui/disease-viewer", "@organui/uterus"],
       "categories": ["disease", "reproductive"],
       "files": [
