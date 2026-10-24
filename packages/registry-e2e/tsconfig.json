@@ -219,6 +219,9 @@
       "@/components/kidney-stones": [
         "../registry/registry/base-nova/kidney-stones/kidney-stones.tsx"
       ],
+      "@/components/laryngeal-cancer": [
+        "../registry/registry/base-nova/laryngeal-cancer/laryngeal-cancer.tsx"
+      ],
       "@/components/lobar-pneumonia": [
         "../registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
       ],

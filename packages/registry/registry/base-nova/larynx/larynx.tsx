@@ -28,6 +28,11 @@ export const larynxModel: OrganModel = {
       name: "Superior",
       direction: [0, 1, 0.35],
     },
+    {
+      name: "Vocal cords",
+      direction: [0, 1, 0],
+      structureIds: ["vocal-ligaments", "arytenoid-cartilages", "vocalis"],
+    },
   ],
   structures: [
     {

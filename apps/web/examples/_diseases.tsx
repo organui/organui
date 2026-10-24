@@ -342,6 +342,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "laryngeal-cancer-demo": {
+    title: "Laryngeal cancer",
+    file: "laryngeal-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./laryngeal-cancer-demo")
+      return <Example />
+    },
+  },
+  "laryngeal-cancer-without-panel": {
+    title: "Laryngeal cancer Without Panel",
+    file: "laryngeal-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./laryngeal-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "laryngeal-cancer-controlled": {
+    title: "Laryngeal cancer Controlled",
+    file: "laryngeal-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./laryngeal-cancer-controlled")
+      return <Example />
+    },
+  },
   "lobar-pneumonia-demo": {
     title: "Lobar pneumonia",
     file: "lobar-pneumonia-demo.tsx",

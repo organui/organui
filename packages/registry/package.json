@@ -96,6 +96,7 @@
     "./hodgkin-lymphoma": "./registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx",
     "./ischaemic-stroke": "./registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx",
     "./kidney-stones": "./registry/base-nova/kidney-stones/kidney-stones.tsx",
+    "./laryngeal-cancer": "./registry/base-nova/laryngeal-cancer/laryngeal-cancer.tsx",
     "./lobar-pneumonia": "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
     "./lumbar-disc-herniation": "./registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx",
     "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx",
