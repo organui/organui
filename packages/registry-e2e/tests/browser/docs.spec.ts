@@ -1661,6 +1661,7 @@ test("component pages end with examples and an API reference", async ({
     ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
     ["patient-banner", "PatientBanner"],
+    ["news2-chart", "News2Chart"],
     ["problem-list", "ProblemList"],
     ["allergy-list", "AllergyList"],
     ["vital-signs", "VitalSigns"],

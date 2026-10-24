@@ -125,8 +125,9 @@ const labHarness = `import { LabResultsTable } from "@/components/ui/lab-results
 import { formatNhsNumber, PatientBanner } from "@/components/ui/patient-banner"
 import { AllergyList } from "@/components/ui/allergy-list"
 import { ProblemList } from "@/components/ui/problem-list"
+import { News2Chart } from "@/components/ui/news2-chart"
 export default function LabHarness(){
- return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed lab results</h1><PatientBanner patient={{name:{family:"Brennan",given:["Tom"],prefix:"Mr"},birthDate:"1979-06-03",sex:"Male",identifiers:[{label:"NHS number",value:formatNhsNumber("9996543218")}]}} allergies={["Codeine"]} alerts={["Falls risk"]} today={new Date("2026-10-25")}/><LabResultsTable caption="Electrolytes" results={[{id:"k",name:"Potassium",value:6.4,unit:"mmol/L",decimals:1,referenceRange:{low:3.5,high:5.1,criticalHigh:6},history:[{value:4.2,date:"2026-01-12"},{value:6.4,date:"2026-10-01"}]},{id:"na",name:"Sodium",value:140,unit:"mmol/L",referenceRange:{low:135,high:145}}]}/><AllergyList caption="Allergies" allergies={[{id:"codeine",substance:"Codeine",type:"intolerance",reactions:["Vomiting"],severity:"mild"}]}/><ProblemList caption="Problems" problems={[{id:"t2dm",name:"Type 2 diabetes mellitus",code:{system:"SNOMED CT",value:"44054006"},significance:"major",onset:"2012-03-06"}]}/></main>
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed lab results</h1><PatientBanner patient={{name:{family:"Brennan",given:["Tom"],prefix:"Mr"},birthDate:"1979-06-03",sex:"Male",identifiers:[{label:"NHS number",value:formatNhsNumber("9996543218")}]}} allergies={["Codeine"]} alerts={["Falls risk"]} today={new Date("2026-10-25")}/><LabResultsTable caption="Electrolytes" results={[{id:"k",name:"Potassium",value:6.4,unit:"mmol/L",decimals:1,referenceRange:{low:3.5,high:5.1,criticalHigh:6},history:[{value:4.2,date:"2026-01-12"},{value:6.4,date:"2026-10-01"}]},{id:"na",name:"Sodium",value:140,unit:"mmol/L",referenceRange:{low:135,high:145}}]}/><AllergyList caption="Allergies" allergies={[{id:"codeine",substance:"Codeine",type:"intolerance",reactions:["Vomiting"],severity:"mild"}]}/><ProblemList caption="Problems" problems={[{id:"t2dm",name:"Type 2 diabetes mellitus",code:{system:"SNOMED CT",value:"44054006"},significance:"major",onset:"2012-03-06"}]}/><News2Chart caption="Observations" observations={[{time:"2026-10-25T16:00:00Z",respirationRate:23,spo2:94,onOxygen:false,systolic:106,pulse:108,consciousness:"alert",temperature:38.7}]}/></main>
 }`
 const medicationHarness = `"use client"
 import { useState } from "react"
@@ -593,6 +594,7 @@ try {
       "patient-banner",
       "allergy-list",
       "problem-list",
+      "news2-chart",
     ])
       await run(
         [

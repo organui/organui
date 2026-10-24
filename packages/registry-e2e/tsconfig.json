@@ -39,6 +39,9 @@
       "@/components/ui/problem-list": [
         "../registry/registry/base-nova/problem-list/problem-list.tsx"
       ],
+      "@/components/ui/news2-chart": [
+        "../registry/registry/base-nova/news2-chart/news2-chart.tsx"
+      ],
       "@/components/ui/lab-results": [
         "../registry/registry/base-nova/lab-results/lab-results.tsx"
       ],

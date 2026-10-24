@@ -32,6 +32,7 @@ export const documented = {
   "image-viewer": ["image-viewer/image-viewer.tsx", "ImageViewer"],
   "lab-results": ["lab-results/lab-results.tsx", "LabResultsTable"],
   "patient-banner": ["patient-banner/patient-banner.tsx", "PatientBanner"],
+  "news2-chart": ["news2-chart/news2-chart.tsx", "News2Chart"],
   "problem-list": ["problem-list/problem-list.tsx", "ProblemList"],
   "allergy-list": ["allergy-list/allergy-list.tsx", "AllergyList"],
   "medication-schedule": [

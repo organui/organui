@@ -67,3 +67,14 @@ test("the installed allergy and problem lists show their rows", async ({
   await expect(problems).toContainText("Since Mar 6, 2012")
   expect(errors).toEqual([])
 })
+
+test("the installed NEWS2 chart scores the observations", async ({ page }) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/lab")
+  await expect(page.getByText("NEWS2 6 · Medium risk")).toBeVisible()
+  await expect(page.getByRole("table", { name: "Observations" })).toContainText(
+    "Oct 25, 16:00"
+  )
+  expect(errors).toEqual([])
+})

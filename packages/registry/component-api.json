@@ -612,6 +612,40 @@
       }
     ]
   },
+  "news2-chart": {
+    "component": "News2Chart",
+    "element": "div",
+    "props": [
+      {
+        "name": "observations",
+        "type": "readonly News2Observation[]",
+        "required": true,
+        "default": null,
+        "description": "Sets of observations, in any order; the newest shows first."
+      },
+      {
+        "name": "spo2Scale",
+        "type": "Spo2Scale",
+        "required": false,
+        "default": "1",
+        "description": "The SpO₂ scale the patient is prescribed. Defaults to 1."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatTime",
+        "type": "(time: string) => string",
+        "required": false,
+        "default": "defaultFormatTime",
+        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"."
+      }
+    ]
+  },
   "problem-list": {
     "component": "ProblemList",
     "element": "div",

@@ -247,6 +247,30 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "news2-chart-demo": {
+    title: "NEWS2 chart",
+    file: "news2-chart-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./news2-chart-demo")
+      return <Example />
+    },
+  },
+  "news2-chart-scale-2": {
+    title: "SpO₂ Scale 2",
+    file: "news2-chart-scale-2.tsx",
+    render: async () => {
+      const { Example } = await import("./news2-chart-scale-2")
+      return <Example />
+    },
+  },
+  "news2-chart-incomplete": {
+    title: "An Incomplete Set",
+    file: "news2-chart-incomplete.tsx",
+    render: async () => {
+      const { Example } = await import("./news2-chart-incomplete")
+      return <Example />
+    },
+  },
   "lab-results-demo": {
     title: "Lab results table",
     file: "lab-results-demo.tsx",

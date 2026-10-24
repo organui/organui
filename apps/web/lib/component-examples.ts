@@ -135,6 +135,20 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         'Onsets such as "Childhood" or a year read as written; only full dates are formatted.',
     },
   ],
+  "news2-chart": [
+    {
+      name: "news2-chart-scale-2",
+      title: "SpO₂ Scale 2",
+      description:
+        "For hypercapnic respiratory failure with a target of 88–92%: saturation above the target on oxygen scores too.",
+    },
+    {
+      name: "news2-chart-incomplete",
+      title: "An Incomplete Set",
+      description:
+        "A set missing a parameter shows what was recorded but no total.",
+    },
+  ],
   "patient-banner": [
     {
       name: "patient-banner-allergies",

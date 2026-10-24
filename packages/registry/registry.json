@@ -72,6 +72,22 @@
       "docs": "Problem list docs: https://organui.com/docs/components/problem-list"
     },
     {
+      "name": "news2-chart",
+      "type": "registry:ui",
+      "title": "NEWS2 chart",
+      "description": "Observations over time scored with NEWS2, the UK's National Early Warning Score: each parameter's points, the aggregate, the clinical risk and the response it calls for.",
+      "categories": ["clinical"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["table"],
+      "files": [
+        {
+          "path": "registry/base-nova/news2-chart/news2-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "NEWS2 chart docs: https://organui.com/docs/components/news2-chart"
+    },
+    {
       "name": "vital-signs",
       "type": "registry:ui",
       "title": "Vital signs",
