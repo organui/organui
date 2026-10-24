@@ -36,6 +36,7 @@
   "nerves": "https://organui.com/models/nerves.glb",
   "nose": "https://cdn.jsdelivr.net/gh/organui/nose-3d@e8acaadd578c9e3b9f7c5cbc6b4e6d8d05dc25f0/public/models/nose.glb",
   "pancreas": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@b96dcf3c234b2b6dba9473661b1d604532301a67/public/models/pancreas.glb",
+  "pancreatic-cancer": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@b96dcf3c234b2b6dba9473661b1d604532301a67/public/models/pancreas.glb",
   "parathyroid": "https://organui.com/models/parathyroid.glb",
   "peptic-ulcer-disease": "https://cdn.jsdelivr.net/gh/organui/stomach-3d@a945af4e28cc37da63143c685293e7dae7e7f6d5/public/models/stomach.glb",
   "pharynx": "https://cdn.jsdelivr.net/gh/organui/pharynx-3d@c3759092b524ab4637d691168bdc08bbee1fcfbb/public/models/pharynx.glb",

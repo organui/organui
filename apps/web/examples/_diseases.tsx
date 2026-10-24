@@ -317,6 +317,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "pancreatic-cancer-demo": {
+    title: "Pancreatic cancer",
+    file: "pancreatic-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./pancreatic-cancer-demo")
+      return <Example />
+    },
+  },
+  "pancreatic-cancer-without-panel": {
+    title: "Pancreatic cancer Without Panel",
+    file: "pancreatic-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./pancreatic-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "pancreatic-cancer-controlled": {
+    title: "Pancreatic cancer Controlled",
+    file: "pancreatic-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./pancreatic-cancer-controlled")
+      return <Example />
+    },
+  },
   "peptic-ulcer-disease-demo": {
     title: "Peptic ulcer disease",
     file: "peptic-ulcer-disease-demo.tsx",
