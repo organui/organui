@@ -635,7 +635,7 @@ function Investigations({
       </span>
       <dl
         aria-labelledby={id}
-        className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-1.5"
+        className="grid grid-cols-[minmax(min-content,1fr)_auto] gap-x-3 gap-y-1.5"
       >
         {investigations.map(({ name, result, flag }) => (
           <React.Fragment key={name}>
