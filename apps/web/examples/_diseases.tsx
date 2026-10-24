@@ -1,6 +1,31 @@
 // Named documentation examples for the diseases, on the public components
 // consumers install. Imports stay explicit so each page loads only its own.
 export const diseaseExamples = {
+  "abdominal-aortic-aneurysm-demo": {
+    title: "Abdominal aortic aneurysm",
+    file: "abdominal-aortic-aneurysm-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./abdominal-aortic-aneurysm-demo")
+      return <Example />
+    },
+  },
+  "abdominal-aortic-aneurysm-without-panel": {
+    title: "Abdominal aortic aneurysm Without Panel",
+    file: "abdominal-aortic-aneurysm-without-panel.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./abdominal-aortic-aneurysm-without-panel")
+      return <Example />
+    },
+  },
+  "abdominal-aortic-aneurysm-controlled": {
+    title: "Abdominal aortic aneurysm Controlled",
+    file: "abdominal-aortic-aneurysm-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./abdominal-aortic-aneurysm-controlled")
+      return <Example />
+    },
+  },
   "acute-angle-closure-glaucoma-demo": {
     title: "Acute angle-closure glaucoma",
     file: "acute-angle-closure-glaucoma-demo.tsx",

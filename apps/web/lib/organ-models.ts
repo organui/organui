@@ -11,6 +11,10 @@ const local = (model: OrganModel): OrganModel => ({
 })
 
 export const organModels: Record<string, () => Promise<OrganModel>> = {
+  "abdominal-aortic-aneurysm": () =>
+    import("@workspace/registry/abdominal-aortic-aneurysm").then((module) =>
+      local(module.abdominalAorticAneurysmModel)
+    ),
   "acute-angle-closure-glaucoma": () =>
     import("@workspace/registry/acute-angle-closure-glaucoma").then((module) =>
       local(module.acuteAngleClosureGlaucomaModel)
