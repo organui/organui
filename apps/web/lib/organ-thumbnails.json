@@ -49,6 +49,7 @@
   "pineal": "https://organui.com/models/pineal.glb",
   "pituitary": "https://organui.com/models/pituitary.glb",
   "pituitary-adenoma": "https://organui.com/models/pituitary.glb",
+  "primary-hyperparathyroidism": "https://organui.com/models/parathyroid.glb",
   "prostate": "https://cdn.jsdelivr.net/gh/organui/prostate-3d@204c67a54226a19868abd0a5e8449a7f82827bf9/public/models/prostate.glb",
   "rheumatoid-arthritis": "https://organui.com/models/joints.glb",
   "salivary-glands": "https://organui.com/models/salivary-glands.glb",

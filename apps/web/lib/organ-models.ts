@@ -193,6 +193,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/pituitary-adenoma").then((module) =>
       local(module.pituitaryAdenomaModel)
     ),
+  "primary-hyperparathyroidism": () =>
+    import("@workspace/registry/primary-hyperparathyroidism").then((module) =>
+      local(module.primaryHyperparathyroidismModel)
+    ),
   prostate: () =>
     import("@workspace/registry/prostate").then(
       (module) => module.prostateModel

@@ -104,6 +104,7 @@
     "./pancreatic-cancer": "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx",
     "./peptic-ulcer-disease": "./registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx",
     "./pituitary-adenoma": "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx",
+    "./primary-hyperparathyroidism": "./registry/base-nova/primary-hyperparathyroidism/primary-hyperparathyroidism.tsx",
     "./rheumatoid-arthritis": "./registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
   },
   "scripts": {
