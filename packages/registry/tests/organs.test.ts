@@ -102,6 +102,14 @@ for (const item of diseaseItems) {
     // Every finding names a structure of its scale's model.
     const stages = disease.stages ?? []
     expect(new Set(stages.map(({ id }) => id)).size).toBe(stages.length)
+    // Events sit on the timeline at a stage of the course, in its order, and
+    // a course starts with its first stage, not an alternative to it.
+    const order = (disease.events ?? []).map(({ stage }) =>
+      stages.findIndex(({ id }) => id === stage)
+    )
+    expect(order.every((index) => index >= 0)).toBe(true)
+    expect(order).toEqual([...order].sort((a, b) => a - b))
+    expect(stages[0]?.alternative).toBeFalsy()
     for (const [scaleId, findings] of [
       ...disease.scales.map(({ id, findings }) => [id, findings] as const),
       ...stages.flatMap(({ findings = {} }) => Object.entries(findings)),

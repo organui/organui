@@ -229,7 +229,14 @@
         "type": "boolean",
         "required": false,
         "default": "true",
-        "description": "Shows the panel with the stages, scales, findings and investigations. Defaults to true."
+        "description": "Shows the panel with the scales, findings and investigations. Defaults to true."
+      },
+      {
+        "name": "timeline",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a disease with one stage has none."
       }
     ]
   },

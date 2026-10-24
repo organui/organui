@@ -90,12 +90,14 @@ export const autoimmuneHepatitis: Disease = {
     {
       id: "active",
       label: "Active",
+      time: "At onset",
       summary:
         "Interface hepatitis with high transaminases and IgG. Most people respond to steroids and azathioprine.",
     },
     {
       id: "fibrosis",
       label: "Fibrosis",
+      time: "Months to years",
       summary:
         "Repeated injury lays down collagen that bridges portal tracts. Treatment can still reverse it.",
       findings: {
@@ -125,6 +127,7 @@ export const autoimmuneHepatitis: Disease = {
     {
       id: "cirrhosis",
       label: "Cirrhosis",
+      time: "Years",
       summary:
         "Regenerative nodules replace the lobules and portal pressure rises. About a third of adults already have cirrhosis at diagnosis.",
       findings: {
@@ -165,6 +168,39 @@ export const autoimmuneHepatitis: Disease = {
         { name: "INR", result: "Prolonged", flag: "high" },
         { name: "Ultrasound", result: "Nodular liver", flag: "abnormal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "active",
+      label: "Biopsy",
+      description:
+        "Confirms interface hepatitis, rules out other causes and stages any fibrosis before treatment starts.",
+    },
+    {
+      stage: "active",
+      label: "Steroids",
+      time: "From diagnosis",
+      description:
+        "Prednisolone brings the inflammation down, then azathioprine keeps it in remission. The aim is a normal ALT and IgG within six months.",
+    },
+    {
+      stage: "fibrosis",
+      label: "Elastography",
+      description:
+        "Follows liver stiffness without repeating the biopsy. Fibrosis can regress while the disease stays in remission.",
+    },
+    {
+      stage: "cirrhosis",
+      label: "Screening",
+      description:
+        "An ultrasound every six months looks for liver cancer; an endoscopy looks for varices that could bleed, unless liver stiffness and platelets show they are unlikely.",
+    },
+    {
+      stage: "cirrhosis",
+      label: "Transplant",
+      description:
+        "For liver failure, or a severe flare that steroids do not control. The disease can come back in the new liver.",
     },
   ],
   investigations: [

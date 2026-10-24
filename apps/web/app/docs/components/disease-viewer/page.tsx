@@ -37,7 +37,25 @@ export const kidneyStones: Disease = {
     },
   ],
   stages: [
-    { id: "colic", label: "Renal colic", summary: "Sudden loin-to-groin pain." },
+    {
+      id: "colic",
+      label: "Renal colic",
+      time: "Hours",
+      summary: "Sudden loin-to-groin pain.",
+    },
+    {
+      id: "passed",
+      label: "Passed",
+      time: "Days to weeks",
+      summary: "Most small stones pass on their own.",
+    },
+  ],
+  events: [
+    {
+      stage: "colic",
+      label: "CT",
+      description: "A low-dose CT shows the stone's size and position.",
+    },
   ],
   investigations: [
     { name: "Urine dipstick", result: "Blood", flag: "abnormal" },
@@ -53,8 +71,8 @@ export default function Page() {
           The view every OrganUI disease is built on. Describe a condition as
           findings on any organ model, as this example does for hypertrophic
           cardiomyopathy; it shows what is affected and spared at each stage and
-          scale, beside a panel with the condition&apos;s course and
-          investigations.
+          scale, with the course as a timeline under the model and a panel of
+          findings and investigations.
         </p>
       </DocsHeader>
       <ComponentPreview name="disease-viewer-demo" />
@@ -128,6 +146,17 @@ export default function Page() {
             button, so a whole-body model lists only what matters; selecting one
             in 3D unfolds them. Changing the scale clears the selection, because
             each model has its own structures.
+          </p>
+          <p>
+            A disease with more than one stage shows its course as a timeline
+            under the model: each stage at its <code>time</code> in a typical
+            course, and its <code>events</code>, such as a treatment or a test,
+            beneath it. Select a stage or an event to show it, or play the
+            course to step through it while the model fades from one stage to
+            the next. A stage marked <code>alternative</code> is another path
+            from the one before it, such as an untreated course beside a treated
+            one, and joins the track with a dashed line. Pass{" "}
+            <code>timeline=&#123;false&#125;</code> to hide it.
           </p>
           <p>
             <code>diseaseModel(disease, scale, stage)</code> returns the organ
