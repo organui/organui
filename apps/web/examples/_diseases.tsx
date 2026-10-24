@@ -438,6 +438,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "oesophageal-cancer-demo": {
+    title: "Oesophageal cancer",
+    file: "oesophageal-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./oesophageal-cancer-demo")
+      return <Example />
+    },
+  },
+  "oesophageal-cancer-without-panel": {
+    title: "Oesophageal cancer Without Panel",
+    file: "oesophageal-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./oesophageal-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "oesophageal-cancer-controlled": {
+    title: "Oesophageal cancer Controlled",
+    file: "oesophageal-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./oesophageal-cancer-controlled")
+      return <Example />
+    },
+  },
   "pancreatic-cancer-demo": {
     title: "Pancreatic cancer",
     file: "pancreatic-cancer-demo.tsx",

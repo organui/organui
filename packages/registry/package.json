@@ -100,6 +100,7 @@
     "./lumbar-disc-herniation": "./registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx",
     "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx",
     "./myocardial-infarction": "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
+    "./oesophageal-cancer": "./registry/base-nova/oesophageal-cancer/oesophageal-cancer.tsx",
     "./pancreatic-cancer": "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx",
     "./peptic-ulcer-disease": "./registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx",
     "./pituitary-adenoma": "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx",
