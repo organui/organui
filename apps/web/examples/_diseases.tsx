@@ -101,6 +101,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "crohns-disease-demo": {
+    title: "Crohn's disease",
+    file: "crohns-disease-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./crohns-disease-demo")
+      return <Example />
+    },
+  },
+  "crohns-disease-without-panel": {
+    title: "Crohn's disease Without Panel",
+    file: "crohns-disease-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./crohns-disease-without-panel")
+      return <Example />
+    },
+  },
+  "crohns-disease-controlled": {
+    title: "Crohn's disease Controlled",
+    file: "crohns-disease-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./crohns-disease-controlled")
+      return <Example />
+    },
+  },
   "ectopic-pregnancy-demo": {
     title: "Ectopic pregnancy",
     file: "ectopic-pregnancy-demo.tsx",

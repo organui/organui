@@ -141,6 +141,9 @@
       "@/components/benign-prostatic-hyperplasia": [
         "./registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx"
       ],
+      "@/components/crohns-disease": [
+        "./registry/base-nova/crohns-disease/crohns-disease.tsx"
+      ],
       "@/components/ectopic-pregnancy": [
         "./registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx"
       ],

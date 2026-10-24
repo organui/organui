@@ -1021,6 +1021,24 @@
       "docs": "Benign prostatic hyperplasia docs: https://organui.com/docs/components/benign-prostatic-hyperplasia. It reuses the prostate model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en) and the bladder model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "crohns-disease",
+      "type": "registry:component",
+      "title": "Crohn's disease",
+      "description": "Crohn's disease of the terminal ileum and right colon on the intestines: transmural, patchy inflammation with skip lesions and rectal sparing, then either a fibrotic stricture or a fistula and abscess, with calprotectin, imaging and bloods at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": [
+        "@organui/disease-viewer",
+        "@organui/intestines"
+      ],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/crohns-disease/crohns-disease.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Crohn's disease docs: https://organui.com/docs/components/crohns-disease. It reuses the intestines model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ectopic-pregnancy",
       "type": "registry:component",
       "title": "Ectopic pregnancy",

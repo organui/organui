@@ -86,6 +86,7 @@
     "./acute-appendicitis": "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
     "./benign-prostatic-hyperplasia": "./registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx",
+    "./crohns-disease": "./registry/base-nova/crohns-disease/crohns-disease.tsx",
     "./ectopic-pregnancy": "./registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx",
     "./gallstone-disease": "./registry/base-nova/gallstone-disease/gallstone-disease.tsx",
     "./graves-disease": "./registry/base-nova/graves-disease/graves-disease.tsx",
