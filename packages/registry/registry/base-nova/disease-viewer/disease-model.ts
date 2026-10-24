@@ -20,6 +20,8 @@ export type DiseaseScale = {
   model: OrganModel
   /** The named view the model opens on, where the disease shows best. Defaults to the model's own. */
   defaultView?: string
+  /** Structures drawn see-through so the disease inside them shows, such as the fat over a breast's lobes. Defaults to the model's own. */
+  translucentIds?: readonly string[]
   /** Findings by structure ID. Structures without one are spared and keep their anatomical description. */
   findings: Readonly<Record<string, DiseaseFinding>>
 }
@@ -104,6 +106,7 @@ export function diseaseModel(
     ...scale.model,
     name: disease.name,
     defaultView: scale.defaultView ?? scale.model.defaultView,
+    translucentIds: scale.translucentIds ?? scale.model.translucentIds,
     structures: scale.model.structures
       .map((structure) => {
         const finding = findings[structure.id]

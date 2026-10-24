@@ -18,6 +18,8 @@ export const breastCancer: Disease = {
       id: "breast",
       label: "Breasts",
       model: breastModel,
+      // The fat surrounds the lobes, so it is drawn see-through.
+      translucentIds: ["left-fat", "right-fat"],
       findings: {
         "left-mammary-lobes": {
           affected: true,
