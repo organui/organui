@@ -76,6 +76,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "addisons-disease-demo": {
+    title: "Addison's disease",
+    file: "addisons-disease-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./addisons-disease-demo")
+      return <Example />
+    },
+  },
+  "addisons-disease-without-panel": {
+    title: "Addison's disease Without Panel",
+    file: "addisons-disease-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./addisons-disease-without-panel")
+      return <Example />
+    },
+  },
+  "addisons-disease-controlled": {
+    title: "Addison's disease Controlled",
+    file: "addisons-disease-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./addisons-disease-controlled")
+      return <Example />
+    },
+  },
   "autoimmune-hepatitis-demo": {
     title: "Autoimmune hepatitis",
     file: "autoimmune-hepatitis-demo.tsx",
