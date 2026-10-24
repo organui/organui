@@ -669,6 +669,15 @@ test("a disease's timeline moves the model and panel through its course", async 
   await expect(
     demo.getByRole("button", { name: "Play the course" })
   ).toBeVisible()
+  // The stages are one tab stop, and the arrow keys move along the course.
+  await stage("Healed").focus()
+  await page.keyboard.press("ArrowLeft")
+  await expect(stage("Acute")).toBeFocused()
+  await expect(stage("Acute")).toHaveAttribute("aria-pressed", "true")
+  await expect(stage("Healed")).toHaveAttribute("tabindex", "-1")
+  await page.keyboard.press("Home")
+  await expect(stage("Occlusion")).toBeFocused()
+  await expect(said).toContainText("Occlusion:")
   expect(
     (
       await new AxeBuilder({ page })
