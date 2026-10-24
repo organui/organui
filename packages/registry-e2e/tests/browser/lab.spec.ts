@@ -33,3 +33,22 @@ test("installed lab results flag values and describe the trend", async ({
   expect(axe.violations).toEqual([])
   expect(errors).toEqual([])
 })
+
+test("the installed patient banner names the patient and their allergies", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/lab")
+  const banner = page.getByRole("region", {
+    name: "Patient: BRENNAN, Tom (Mr)",
+  })
+  await expect(
+    banner.getByRole("heading", { name: "BRENNAN, Tom (Mr)" })
+  ).toBeVisible()
+  await expect(banner).toContainText("03-Jun-1979 (47 years)")
+  await expect(banner).toContainText("999 654 3218")
+  await expect(banner).toContainText("Allergies: Codeine")
+  await expect(banner).toContainText("Falls risk")
+  expect(errors).toEqual([])
+})

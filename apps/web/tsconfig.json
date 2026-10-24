@@ -24,6 +24,9 @@
       "@/components/ui/ecg-trace": [
         "../../packages/registry/registry/base-nova/ecg-trace/ecg-trace.tsx"
       ],
+      "@/components/ui/patient-banner": [
+        "../../packages/registry/registry/base-nova/patient-banner/patient-banner.tsx"
+      ],
       "@/components/ui/lab-results": [
         "../../packages/registry/registry/base-nova/lab-results/lab-results.tsx"
       ],

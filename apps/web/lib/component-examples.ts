@@ -108,6 +108,20 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       description: "Hide the trend column for narrow layouts.",
     },
   ],
+  "patient-banner": [
+    {
+      name: "patient-banner-allergies",
+      title: "Allergy States",
+      description:
+        "Not recorded, no known allergies, and a recorded allergy each read differently.",
+    },
+    {
+      name: "patient-banner-baby",
+      title: "A Baby",
+      description:
+        "Age in months under two years, and in days under four weeks, with an alert.",
+    },
+  ],
   "medication-schedule": [
     {
       name: "medication-schedule-simple",

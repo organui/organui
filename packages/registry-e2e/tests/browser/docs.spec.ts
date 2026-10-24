@@ -1660,6 +1660,7 @@ test("component pages end with examples and an API reference", async ({
     ["growth-chart", "GrowthChart"],
     ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
+    ["patient-banner", "PatientBanner"],
     ["vital-signs", "VitalSigns"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)

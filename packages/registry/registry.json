@@ -24,6 +24,22 @@
       "docs": "Anatomy tree docs: https://organui.com/docs/components/anatomy-tree"
     },
     {
+      "name": "patient-banner",
+      "type": "registry:ui",
+      "title": "Patient banner",
+      "description": "The patient's identity at the top of a clinical screen: name, date of birth and age, sex, identifiers, alerts, and allergies that tell not recorded from none known.",
+      "categories": ["clinical"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["badge"],
+      "files": [
+        {
+          "path": "registry/base-nova/patient-banner/patient-banner.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Patient banner docs: https://organui.com/docs/components/patient-banner"
+    },
+    {
       "name": "vital-signs",
       "type": "registry:ui",
       "title": "Vital signs",

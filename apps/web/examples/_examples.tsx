@@ -175,6 +175,30 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "patient-banner-demo": {
+    title: "Patient banner",
+    file: "patient-banner-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./patient-banner-demo")
+      return <Example />
+    },
+  },
+  "patient-banner-allergies": {
+    title: "Allergy States",
+    file: "patient-banner-allergies.tsx",
+    render: async () => {
+      const { Example } = await import("./patient-banner-allergies")
+      return <Example />
+    },
+  },
+  "patient-banner-baby": {
+    title: "A Baby",
+    file: "patient-banner-baby.tsx",
+    render: async () => {
+      const { Example } = await import("./patient-banner-baby")
+      return <Example />
+    },
+  },
   "lab-results-demo": {
     title: "Lab results table",
     file: "lab-results-demo.tsx",

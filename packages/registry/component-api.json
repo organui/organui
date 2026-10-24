@@ -571,6 +571,47 @@
       }
     ]
   },
+  "patient-banner": {
+    "component": "PatientBanner",
+    "element": "section",
+    "props": [
+      {
+        "name": "patient",
+        "type": "Patient",
+        "required": true,
+        "default": null,
+        "description": "Name, date of birth, sex, identifiers and any date of death."
+      },
+      {
+        "name": "allergies",
+        "type": "PatientAllergies",
+        "required": false,
+        "default": null,
+        "description": "Substances, `\"none-known\"`, or nothing when not recorded."
+      },
+      {
+        "name": "alerts",
+        "type": "readonly string[]",
+        "required": false,
+        "default": "[]",
+        "description": "Warnings to see before anything else, such as \"DNACPR\" or \"Safeguarding\"."
+      },
+      {
+        "name": "today",
+        "type": "Date",
+        "required": false,
+        "default": null,
+        "description": "The day age is counted on. Defaults to today."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "formatBannerDate",
+        "description": "Defaults to an unambiguous UTC date such as \"12-Jan-1958\"."
+      }
+    ]
+  },
   "medication-schedule": {
     "component": "MedicationSchedule",
     "element": "div",
