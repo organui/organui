@@ -1,5 +1,5 @@
 {
-  "abdominal-aortic-aneurysm": "https://cdn.jsdelivr.net/gh/organui/vessels-3d@17257aaa53c885385515fd3b9fe0378da81582d0/public/models/vessels.glb",
+  "abdominal-aortic-aneurysm": "https://cdn.jsdelivr.net/gh/organui/vessels-3d@74be339badd85f1d3d93e585ed2a5a79c7679342/public/models/vessels.glb",
   "acute-angle-closure-glaucoma": "https://cdn.jsdelivr.net/gh/organui/eye-3d@99f74f1c096ae2813dd18e1ecb2c9cbbd701c530/public/models/eye.glb",
   "acute-appendicitis": "https://organui.com/models/appendix.glb",
   "adrenals": "https://cdn.jsdelivr.net/gh/organui/adrenals-3d@320ccd6e6355cd9f5a9d5854ebe3e363aab08b70/public/models/adrenals.glb",
@@ -39,8 +39,8 @@
   "nails": "https://organui.com/models/nails.glb",
   "nerves": "https://organui.com/models/nerves.glb",
   "nose": "https://cdn.jsdelivr.net/gh/organui/nose-3d@e8acaadd578c9e3b9f7c5cbc6b4e6d8d05dc25f0/public/models/nose.glb",
-  "pancreas": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@b96dcf3c234b2b6dba9473661b1d604532301a67/public/models/pancreas.glb",
-  "pancreatic-cancer": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@b96dcf3c234b2b6dba9473661b1d604532301a67/public/models/pancreas.glb",
+  "pancreas": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@72b1c4342d56cb233b9cfc13f183874e883dbece/public/models/pancreas.glb",
+  "pancreatic-cancer": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@72b1c4342d56cb233b9cfc13f183874e883dbece/public/models/pancreas.glb",
   "parathyroid": "https://organui.com/models/parathyroid.glb",
   "peptic-ulcer-disease": "https://cdn.jsdelivr.net/gh/organui/stomach-3d@a945af4e28cc37da63143c685293e7dae7e7f6d5/public/models/stomach.glb",
   "pharynx": "https://cdn.jsdelivr.net/gh/organui/pharynx-3d@c3759092b524ab4637d691168bdc08bbee1fcfbb/public/models/pharynx.glb",
@@ -60,6 +60,6 @@
   "thyroid": "https://cdn.jsdelivr.net/gh/organui/thyroid-3d@2c5ef5a464cc6bfcb322c7d074dec79543346f86/public/models/thyroid.glb",
   "tongue": "https://cdn.jsdelivr.net/gh/organui/tongue-3d@38841f8ebc82849f56e891b79b2daca9591e0806/public/models/tongue.glb",
   "uterus": "https://cdn.jsdelivr.net/gh/organui/uterus-3d@404a6039b2d667e2b4e08ae71d4964cd9b963cf1/public/models/reproductive.glb",
-  "vessels": "https://cdn.jsdelivr.net/gh/organui/vessels-3d@17257aaa53c885385515fd3b9fe0378da81582d0/public/models/vessels.glb",
+  "vessels": "https://cdn.jsdelivr.net/gh/organui/vessels-3d@74be339badd85f1d3d93e585ed2a5a79c7679342/public/models/vessels.glb",
   "vestibular": "https://organui.com/models/vestibular.glb"
 }
