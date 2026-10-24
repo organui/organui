@@ -998,6 +998,21 @@
       "docs": "Acute appendicitis docs: https://organui.com/docs/components/acute-appendicitis. It reuses the appendix model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "acute-otitis-media",
+      "type": "registry:component",
+      "title": "Acute otitis media",
+      "description": "Acute otitis media on the ear: a red, bulging eardrum and blocked auditory tube in a young child, then glue ear as fluid lingers or, as the alternative course, a perforated drum, with otoscopy, tympanometry and hearing at each stage. Model licensed CC BY-SA 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/ear"],
+      "categories": ["disease", "senses"],
+      "files": [
+        {
+          "path": "registry/base-nova/acute-otitis-media/acute-otitis-media.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Acute otitis media docs: https://organui.com/docs/components/acute-otitis-media. It reuses the ear model, licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "addisons-disease",
       "type": "registry:component",
       "title": "Addison's disease",

@@ -76,6 +76,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "acute-otitis-media-demo": {
+    title: "Acute otitis media",
+    file: "acute-otitis-media-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-otitis-media-demo")
+      return <Example />
+    },
+  },
+  "acute-otitis-media-without-panel": {
+    title: "Acute otitis media Without Panel",
+    file: "acute-otitis-media-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-otitis-media-without-panel")
+      return <Example />
+    },
+  },
+  "acute-otitis-media-controlled": {
+    title: "Acute otitis media Controlled",
+    file: "acute-otitis-media-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-otitis-media-controlled")
+      return <Example />
+    },
+  },
   "addisons-disease-demo": {
     title: "Addison's disease",
     file: "addisons-disease-demo.tsx",

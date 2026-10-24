@@ -23,6 +23,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/acute-appendicitis").then((module) =>
       local(module.acuteAppendicitisModel)
     ),
+  "acute-otitis-media": () =>
+    import("@workspace/registry/acute-otitis-media").then((module) =>
+      local(module.acuteOtitisMediaModel)
+    ),
   "addisons-disease": () =>
     import("@workspace/registry/addisons-disease").then((module) =>
       local(module.addisonsDiseaseModel)

@@ -15,6 +15,10 @@ export const diseaseData: Record<string, () => Promise<Disease>> = {
     import("@workspace/registry/acute-appendicitis").then(
       (module) => module.acuteAppendicitis
     ),
+  "acute-otitis-media": () =>
+    import("@workspace/registry/acute-otitis-media").then(
+      (module) => module.acuteOtitisMedia
+    ),
   "addisons-disease": () =>
     import("@workspace/registry/addisons-disease").then(
       (module) => module.addisonsDisease
