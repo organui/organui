@@ -59,6 +59,10 @@ export const diseaseData: Record<string, () => Promise<Disease>> = {
     import("@workspace/registry/lobar-pneumonia").then(
       (module) => module.lobarPneumonia
     ),
+  "lumbar-disc-herniation": () =>
+    import("@workspace/registry/lumbar-disc-herniation").then(
+      (module) => module.lumbarDiscHerniation
+    ),
   melanoma: () =>
     import("@workspace/registry/melanoma").then((module) => module.melanoma),
   "myocardial-infarction": () =>

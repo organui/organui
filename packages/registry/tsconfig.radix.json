@@ -171,6 +171,9 @@
       "@/components/lobar-pneumonia": [
         "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
       ],
+      "@/components/lumbar-disc-herniation": [
+        "./registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx"
+      ],
       "@/components/melanoma": ["./registry/base-nova/melanoma/melanoma.tsx"],
       "@/components/myocardial-infarction": [
         "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"

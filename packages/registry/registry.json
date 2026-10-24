@@ -1181,6 +1181,24 @@
       "docs": "Lobar pneumonia docs: https://organui.com/docs/components/lobar-pneumonia. It reuses the lungs model, licensed CC BY-SA 2.1 JP (https://lifesciencedb.jp/bp3d/info/index.html#License); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "lumbar-disc-herniation",
+      "type": "registry:component",
+      "title": "Lumbar disc herniation",
+      "description": "A posterolateral L5\u2013S1 disc herniation on the spine, compressing the S1 root of the cauda equina, from sciatica to recovery as the herniation regresses, or a massive central herniation causing cauda equina syndrome, with the neurological signs at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": [
+        "@organui/disease-viewer",
+        "@organui/spinal-cord"
+      ],
+      "categories": ["disease", "nervous"],
+      "files": [
+        {
+          "path": "registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Lumbar disc herniation docs: https://organui.com/docs/components/lumbar-disc-herniation. It reuses the spinal cord model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "melanoma",
       "type": "registry:component",
       "title": "Melanoma",

@@ -127,6 +127,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/lobar-pneumonia").then((module) =>
       local(module.lobarPneumoniaModel)
     ),
+  "lumbar-disc-herniation": () =>
+    import("@workspace/registry/lumbar-disc-herniation").then((module) =>
+      local(module.lumbarDiscHerniationModel)
+    ),
   lungs: () =>
     import("@workspace/registry/lungs").then((module) => module.lungsModel),
   lymph: () =>

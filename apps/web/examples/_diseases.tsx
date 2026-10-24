@@ -342,6 +342,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "lumbar-disc-herniation-demo": {
+    title: "Lumbar disc herniation",
+    file: "lumbar-disc-herniation-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./lumbar-disc-herniation-demo")
+      return <Example />
+    },
+  },
+  "lumbar-disc-herniation-without-panel": {
+    title: "Lumbar disc herniation Without Panel",
+    file: "lumbar-disc-herniation-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./lumbar-disc-herniation-without-panel")
+      return <Example />
+    },
+  },
+  "lumbar-disc-herniation-controlled": {
+    title: "Lumbar disc herniation Controlled",
+    file: "lumbar-disc-herniation-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./lumbar-disc-herniation-controlled")
+      return <Example />
+    },
+  },
   "melanoma-demo": {
     title: "Melanoma",
     file: "melanoma-demo.tsx",

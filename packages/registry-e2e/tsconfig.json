@@ -219,6 +219,9 @@
       "@/components/lobar-pneumonia": [
         "../registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
       ],
+      "@/components/lumbar-disc-herniation": [
+        "../registry/registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx"
+      ],
       "@/components/melanoma": [
         "../registry/registry/base-nova/melanoma/melanoma.tsx"
       ],
