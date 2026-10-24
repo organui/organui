@@ -153,6 +153,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     ),
   muscles: () =>
     import("@workspace/registry/muscles").then((module) => module.musclesModel),
+  "myasthenia-gravis": () =>
+    import("@workspace/registry/myasthenia-gravis").then((module) =>
+      local(module.myastheniaGravisModel)
+    ),
   "myocardial-infarction": () =>
     import("@workspace/registry/myocardial-infarction").then((module) =>
       local(module.myocardialInfarctionModel)

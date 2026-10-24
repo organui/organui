@@ -462,6 +462,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "myasthenia-gravis-demo": {
+    title: "Myasthenia gravis",
+    file: "myasthenia-gravis-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./myasthenia-gravis-demo")
+      return <Example />
+    },
+  },
+  "myasthenia-gravis-without-panel": {
+    title: "Myasthenia gravis Without Panel",
+    file: "myasthenia-gravis-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./myasthenia-gravis-without-panel")
+      return <Example />
+    },
+  },
+  "myasthenia-gravis-controlled": {
+    title: "Myasthenia gravis Controlled",
+    file: "myasthenia-gravis-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./myasthenia-gravis-controlled")
+      return <Example />
+    },
+  },
   "myocardial-infarction-demo": {
     title: "Myocardial infarction",
     file: "myocardial-infarction-demo.tsx",

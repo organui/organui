@@ -188,6 +188,9 @@
         "./registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx"
       ],
       "@/components/melanoma": ["./registry/base-nova/melanoma/melanoma.tsx"],
+      "@/components/myasthenia-gravis": [
+        "./registry/base-nova/myasthenia-gravis/myasthenia-gravis.tsx"
+      ],
       "@/components/myocardial-infarction": [
         "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
       ],
