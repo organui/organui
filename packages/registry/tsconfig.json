@@ -191,6 +191,9 @@
       "@/components/pituitary-adenoma": [
         "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
       ],
+      "@/components/rheumatoid-arthritis": [
+        "./registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
+      ],
       // Removed by shadcn add, which writes the project's own icons instead.
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["../ui/src/components/*"],
