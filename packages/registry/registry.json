@@ -1841,6 +1841,36 @@
       "docs": "Dashboard 01: https://organui.com/blocks#dashboard-01. The patient and readings are fictional; connect your own records before clinical use."
     },
     {
+      "name": "dashboard-02",
+      "type": "registry:block",
+      "title": "Dashboard 02",
+      "description": "One patient's record on a ward: the patient banner, NEWS2 over time, the latest labs, and allergies and problems, with fictional data to replace with your records.",
+      "meta": {
+        "iframeHeight": "1220px"
+      },
+      "registryDependencies": [
+        "card",
+        "@organui/patient-banner",
+        "@organui/news2-chart",
+        "@organui/lab-results",
+        "@organui/allergy-list",
+        "@organui/problem-list"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/blocks/dashboard-02/page.tsx",
+          "type": "registry:page",
+          "target": "app/record/page.tsx"
+        },
+        {
+          "path": "registry/base-nova/blocks/dashboard-02/components/patient-record.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": ["dashboard"],
+      "docs": "Dashboard 02: https://organui.com/blocks#dashboard-02. The patient and readings are fictional; connect your own records, such as with the fhir helper, before clinical use."
+    },
+    {
       "name": "chart-area-ed-arrivals",
       "type": "registry:block",
       "title": "ED arrivals area chart",

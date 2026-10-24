@@ -74,6 +74,9 @@
       "@/components/patient-dashboard": [
         "../../packages/registry/registry/base-nova/blocks/dashboard-01/components/patient-dashboard.tsx"
       ],
+      "@/components/patient-record": [
+        "../../packages/registry/registry/base-nova/blocks/dashboard-02/components/patient-record.tsx"
+      ],
       "@/components/adrenals": [
         "../../packages/registry/registry/base-nova/adrenals/adrenals.tsx"
       ],

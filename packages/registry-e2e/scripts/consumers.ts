@@ -198,6 +198,7 @@ export default function ImageHarness(){
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
 import { examplePatient, PatientDashboard } from "@/components/patient-dashboard"
+import { examplePatientRecord, PatientRecord } from "@/components/patient-record"
 import { AnatomyWorkspace } from "@/components/anatomy-workspace"
 import { OrganSwitcher } from "@/components/organ-switcher"
 import { heartModel } from "@/components/heart"
@@ -207,6 +208,7 @@ import { stomachModel } from "@/components/stomach"
 export default function BlockHarness({path}:{path:string}){
  if(path==="/workspace")return <AnatomyWorkspace model={heartModel}/>
  if(path==="/dashboard")return <main className="mx-auto w-full max-w-7xl p-4 md:p-6"><PatientDashboard patient={examplePatient}/></main>
+ if(path==="/record")return <main className="mx-auto w-full max-w-7xl p-4 md:p-6"><PatientRecord record={examplePatientRecord}/></main>
  return <main style={{padding:24}}><h1>{path==="/organs"?"Organs":"Heart"}</h1>{path==="/organs"?<OrganSwitcher models={[heartModel,kidneysModel,stomachModel,pancreasModel]}/>:<OrganExplorer model={heartModel}/>}</main>
 }`
 // Uses each helper and CSS utility, so the build type-checks the helpers
@@ -238,8 +240,14 @@ const aiElements = [
   "clinician-review",
   "ai-note",
 ]
-const blocks = ["explorer-01", "explorer-02", "explorer-03", "dashboard-01"]
-const pages = ["explorer", "workspace", "organs", "dashboard"]
+const blocks = [
+  "explorer-01",
+  "explorer-02",
+  "explorer-03",
+  "dashboard-01",
+  "dashboard-02",
+]
+const pages = ["explorer", "workspace", "organs", "dashboard", "record"]
 // Deliberately use distinct theme values to detect accidental theme overwrites.
 const css = `@import "tailwindcss";
 @theme inline { --color-background:var(--background);--color-foreground:var(--foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-border:var(--border);--color-ring:var(--ring); }
@@ -448,7 +456,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import GrowthHarness from "./growth-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/growth"?<GrowthHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs","/dashboard"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import GrowthHarness from "./growth-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/growth"?<GrowthHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs","/dashboard","/record"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(

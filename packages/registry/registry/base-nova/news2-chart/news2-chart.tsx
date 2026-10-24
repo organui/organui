@@ -360,7 +360,7 @@ export function News2Summary({
     score.total === 0
       ? {
           monitoring: "At least every 12 hours",
-          response: "Continue routine monitoring.",
+          response: "Continue routine care.",
         }
       : advice
   const critical = score.risk === "high"

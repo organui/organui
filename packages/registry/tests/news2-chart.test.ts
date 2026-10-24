@@ -177,6 +177,6 @@ test("a score of 0 asks only for routine monitoring", () => {
     createElement(News2Chart, { observations: [observations[1]!] })
   )
   expect(html).toContain("NEWS2 0 · Low risk")
-  expect(html).toContain("Continue routine monitoring.")
+  expect(html).toContain("Continue routine care.")
   expect(html).toContain("at least every 12 hours")
 })
