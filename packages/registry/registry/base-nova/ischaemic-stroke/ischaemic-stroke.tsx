@@ -67,14 +67,16 @@ export const ischaemicStroke: Disease = {
     {
       id: "hyperacute",
       label: "Hyperacute",
+      time: "0–24 h",
       summary:
-        "Up to 24 hours. Time is brain: thrombolysis within 4.5 hours and thrombectomy up to 24 hours reopen the artery and save the penumbra.",
+        "Time is brain: thrombolysis within 4.5 hours and thrombectomy up to 24 hours reopen the artery and save the penumbra.",
     },
     {
       id: "acute",
       label: "Acute",
+      time: "Days 2–7",
       summary:
-        "Days 2–7. The infarct is complete. Swelling peaks around days 3–5, and the risks are aspiration, a second stroke and, in large infarcts, brain shift.",
+        "The infarct is complete. Swelling peaks around days 3–5, and the risks are aspiration, a second stroke and, in large infarcts, brain shift.",
       findings: {
         brain: {
           "left-frontal": {
@@ -99,8 +101,9 @@ export const ischaemicStroke: Disease = {
     {
       id: "chronic",
       label: "Chronic",
+      time: "Months",
       summary:
-        "Months later. The dead tissue has gone and rehabilitation retrains what survives; anticoagulation prevents the next embolus.",
+        "The dead tissue has gone and rehabilitation retrains what survives; anticoagulation prevents the next embolus.",
       findings: {
         brain: {
           "left-frontal": {
@@ -130,6 +133,41 @@ export const ischaemicStroke: Disease = {
         { name: "ECG", result: "Atrial fibrillation", flag: "abnormal" },
         { name: "Anticoagulation", result: "Started" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "hyperacute",
+      label: "CT",
+      time: "On arrival",
+      description:
+        "A plain CT rules out bleeding before any clot-dissolving drug, and CT angiography finds the blocked artery.",
+    },
+    {
+      stage: "hyperacute",
+      label: "Thrombolysis",
+      time: "Within 4.5 h",
+      description: "Alteplase or tenecteplase dissolves the clot.",
+    },
+    {
+      stage: "hyperacute",
+      label: "Thrombectomy",
+      time: "Up to 24 h",
+      description:
+        "A catheter pulls the clot out of a large artery, up to 24 hours when imaging shows brain still to save.",
+    },
+    {
+      stage: "hyperacute",
+      label: "Swallow screen",
+      time: "Within 4 h",
+      description:
+        "Before anything by mouth, so that food and drink do not go into the lungs.",
+    },
+    {
+      stage: "chronic",
+      label: "Prevention",
+      description:
+        "Anticoagulation for the atrial fibrillation, a statin and blood pressure control, alongside rehabilitation.",
     },
   ],
   investigations: [

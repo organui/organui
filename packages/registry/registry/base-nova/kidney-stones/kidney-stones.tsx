@@ -47,12 +47,14 @@ export const kidneyStones: Disease = {
     {
       id: "renal-stone",
       label: "Renal stone",
+      time: "Years",
       summary:
         "A stone in the kidney. Small ones are watched; larger ones are broken up with shock waves or removed through a scope.",
     },
     {
       id: "colic",
       label: "Renal colic",
+      time: "Days to weeks",
       summary:
         "The stone moves into the ureter. Waves of severe loin-to-groin pain come with each contraction; most stones under 5 mm pass on their own.",
       findings: {
@@ -101,6 +103,34 @@ export const kidneyStones: Disease = {
         { name: "Creatinine", result: "Raised", flag: "high" },
         { name: "Lactate", result: "Raised", flag: "high" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "renal-stone",
+      label: "Lithotripsy",
+      description:
+        "Shock waves break up a kidney stone up to about 2 cm; larger ones are removed through the skin.",
+    },
+    {
+      stage: "colic",
+      label: "CT",
+      time: "Within 24 h",
+      description:
+        "A low-dose CT finds the stone, its size and where it has stuck.",
+    },
+    {
+      stage: "colic",
+      label: "Pain relief",
+      description:
+        "An anti-inflammatory first; an alpha blocker helps a stone of 5 to 10 mm pass.",
+    },
+    {
+      stage: "infected",
+      label: "Drainage",
+      time: "Urgent",
+      description:
+        "A stent or nephrostomy decompresses the kidney, with antibiotics; the stone is treated once the infection has cleared.",
     },
   ],
   investigations: [

@@ -51,6 +51,7 @@ export const pepticUlcerDisease: Disease = {
     {
       id: "ulcer",
       label: "Ulcer",
+      time: "Weeks",
       summary:
         "Pain and indigestion. Eradicating H. pylori, stopping NSAIDs and a proton pump inhibitor heal most ulcers in eight weeks.",
     },
@@ -83,6 +84,7 @@ export const pepticUlcerDisease: Disease = {
     {
       id: "perforation",
       label: "Perforation",
+      alternative: true,
       summary:
         "The ulcer goes through the whole wall. Acid and air escape into the peritoneum: sudden, severe pain and a rigid abdomen. Surgery closes it.",
       findings: {
@@ -109,6 +111,33 @@ export const pepticUlcerDisease: Disease = {
         { name: "Lactate", result: "Raised", flag: "high" },
         { name: "Amylase", result: "Mildly raised", flag: "high" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "ulcer",
+      label: "H. pylori test",
+      description:
+        "A breath or stool test. Eradication heals the ulcer and stops it coming back.",
+    },
+    {
+      stage: "bleeding",
+      label: "Blatchford score",
+      description:
+        "Decides who needs urgent endoscopy and who can safely go home.",
+    },
+    {
+      stage: "bleeding",
+      label: "Endoscopy",
+      time: "Within 24 h",
+      description:
+        "Clips or heat, often after an adrenaline injection, stop the bleeding; adrenaline is never used alone. A high-dose proton pump inhibitor follows.",
+    },
+    {
+      stage: "perforation",
+      label: "Surgery",
+      description:
+        "Free air under the diaphragm on an erect chest X-ray or CT, then laparoscopic repair with an omental patch.",
     },
   ],
   investigations: [

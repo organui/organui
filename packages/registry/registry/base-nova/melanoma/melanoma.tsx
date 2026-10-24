@@ -132,6 +132,32 @@ export const melanoma: Disease = {
       ],
     },
   ],
+  events: [
+    {
+      stage: "in-situ",
+      label: "Dermoscopy",
+      description:
+        "Asymmetry, an irregular border, several colours, a diameter over 6 mm or change over time raise suspicion; a dermatoscope looks closer.",
+    },
+    {
+      stage: "thin",
+      label: "Excision biopsy",
+      description:
+        "Removes the whole lesion with a 2 mm margin so the pathologist can measure the Breslow thickness, which sets the wider excision.",
+    },
+    {
+      stage: "thick",
+      label: "Sentinel node",
+      description:
+        "The first lymph node draining the site is removed and examined, to stage the disease and guide treatment after surgery.",
+    },
+    {
+      stage: "metastatic",
+      label: "Systemic therapy",
+      description:
+        "Immunotherapy with checkpoint inhibitors, or BRAF and MEK inhibitors when the tumour carries a BRAF mutation.",
+    },
+  ],
   investigations: [
     { name: "Dermoscopy", result: "Atypical network", flag: "abnormal" },
     { name: "Excision biopsy", result: "Melanoma in situ", flag: "abnormal" },

@@ -120,6 +120,33 @@ export const pituitaryAdenoma: Disease = {
       ],
     },
   ],
+  events: [
+    {
+      stage: "microadenoma",
+      label: "Hormone screen",
+      description:
+        "Prolactin, IGF-1, cortisol and thyroid tests look for a hormone the tumour makes and for any the gland has stopped making.",
+    },
+    {
+      stage: "macroadenoma",
+      label: "Visual fields",
+      description:
+        "Chiasm compression takes the upper outer quadrants first, then the outer half of each field (bitemporal hemianopia).",
+    },
+    {
+      stage: "macroadenoma",
+      label: "Surgery",
+      description:
+        "Removed through the nose (transsphenoidal surgery), except a prolactinoma, which shrinks on a dopamine agonist such as cabergoline.",
+    },
+    {
+      stage: "apoplexy",
+      label: "Hydrocortisone",
+      time: "At once",
+      description:
+        "Given as soon as blood is taken for cortisol, without waiting for the result, because sudden loss of cortisol can be fatal.",
+    },
+  ],
   investigations: [
     { name: "MRI", result: "8 mm adenoma", flag: "abnormal" },
     { name: "Prolactin", result: "Normal" },

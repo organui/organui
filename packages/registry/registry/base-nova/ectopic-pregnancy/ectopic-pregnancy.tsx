@@ -50,14 +50,16 @@ export const ectopicPregnancy: Disease = {
     {
       id: "unruptured",
       label: "Unruptured",
+      time: "Around 6 weeks",
       summary:
         "Six weeks of amenorrhoea, light bleeding and one-sided pain. A small, stable ectopic can be treated with methotrexate; otherwise the tube is removed.",
     },
     {
       id: "ruptured",
       label: "Ruptured",
+      time: "Weeks 6–8",
       summary:
-        "The tube bursts, usually at six to eight weeks: sudden severe pain, shoulder-tip pain from blood under the diaphragm, and collapse. Emergency surgery saves her.",
+        "The tube bursts: sudden severe pain, shoulder-tip pain from blood under the diaphragm, and collapse. Emergency surgery saves her.",
       findings: {
         uterus: {
           ampulla: {
@@ -82,6 +84,27 @@ export const ectopicPregnancy: Disease = {
           flag: "abnormal",
         },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "unruptured",
+      label: "hCG and scan",
+      description:
+        "A positive pregnancy test with no pregnancy in the uterus on a transvaginal scan; repeated hCG levels guide what to do.",
+    },
+    {
+      stage: "unruptured",
+      label: "Methotrexate",
+      description:
+        "For a small unruptured ectopic with a low hCG and no heartbeat; hCG is followed until it is negative.",
+    },
+    {
+      stage: "ruptured",
+      label: "Surgery",
+      time: "Immediately",
+      description:
+        "Laparoscopy removes the tube and stops the bleeding; anti-D is given if she is rhesus negative.",
     },
   ],
   investigations: [

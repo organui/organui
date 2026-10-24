@@ -263,10 +263,19 @@ function DiseaseTimeline({
     onStageChange(id)
   }
   const shown = event?.stage === stage.id ? event : null
+  // The stages on the way to the current one. An alternative stage follows
+  // the stage its siblings follow, not the sibling drawn before it.
+  const path = new Set<number>()
+  for (let i = index; i >= 0;) {
+    path.add(i)
+    let first = i
+    while (first > 0 && stages[first]!.alternative) first--
+    i = first - 1
+  }
   return (
     <div
       data-slot="disease-timeline"
-      className="flex min-w-0 flex-col gap-3 rounded-xl border p-3 text-sm"
+      className="@container flex min-w-0 flex-col gap-3 rounded-xl border p-3 text-sm"
     >
       <div className="flex items-start gap-2">
         <Button
@@ -303,27 +312,36 @@ function DiseaseTimeline({
             />
           )}
         </Button>
+        {/* Down the side in a narrow space, such as a phone; across once
+            each stage has room for its name. */}
         <ol
           aria-label="Course"
-          className="grid min-w-0 flex-1"
+          className="flex min-w-0 flex-1 flex-col @lg:grid"
           style={{
             gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))`,
           }}
         >
           {stages.map((item, i) => {
             const current = i === index
-            const reached = i <= index
+            const reached = path.has(i)
             const events = (disease.events ?? []).filter(
               (entry) => entry.stage === item.id
             )
             return (
-              <li key={item.id} className="flex min-w-0 flex-col gap-1">
+              <li
+                key={item.id}
+                className="flex min-w-0 gap-2 @lg:flex-col @lg:gap-1"
+              >
                 {/* The track: a line in from the previous stage, a dot, and a
                     line out to the next. An alternative stage is dashed. */}
-                <div aria-hidden="true" className="flex h-3 items-center">
+                <div
+                  aria-hidden="true"
+                  className="flex w-3 shrink-0 flex-col items-center @lg:h-3 @lg:w-auto @lg:flex-row"
+                >
                   <Segment
+                    edge="in"
                     hidden={i === 0}
-                    reached={reached}
+                    reached={reached && !item.alternative && path.has(i - 1)}
                     dashed={item.alternative}
                   />
                   <span
@@ -334,60 +352,65 @@ function DiseaseTimeline({
                     )}
                   />
                   <Segment
+                    edge="out"
                     hidden={i === stages.length - 1}
-                    reached={i < index}
+                    reached={
+                      reached && path.has(i + 1) && !stages[i + 1]!.alternative
+                    }
                     dashed={stages[i + 1]?.alternative}
                   />
                 </div>
-                <button
-                  type="button"
-                  aria-pressed={current}
-                  onClick={() => choose(item.id)}
-                  className="flex flex-col items-center rounded-md px-1 py-0.5 text-center transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
-                >
-                  <span
-                    className={cn(
-                      "leading-snug text-muted-foreground",
-                      current && "font-medium text-foreground"
-                    )}
+                <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pb-3 @lg:items-center @lg:pb-0">
+                  <button
+                    type="button"
+                    aria-pressed={current}
+                    onClick={() => choose(item.id)}
+                    className="flex max-w-full flex-col items-start rounded-md px-1 py-0.5 text-left transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring @lg:items-center @lg:text-center"
                   >
-                    {item.alternative && (
-                      <span className="font-normal text-muted-foreground">
-                        or{" "}
+                    <span
+                      className={cn(
+                        "leading-snug break-words hyphens-auto text-muted-foreground",
+                        current && "font-medium text-foreground"
+                      )}
+                    >
+                      {item.alternative && (
+                        <span className="font-normal text-muted-foreground">
+                          or{" "}
+                        </span>
+                      )}
+                      {item.label}
+                    </span>
+                    {item.time && (
+                      <span className="text-xs text-muted-foreground">
+                        {item.time}
                       </span>
                     )}
-                    {item.label}
-                  </span>
-                  {item.time && (
-                    <span className="text-xs text-muted-foreground">
-                      {item.time}
-                    </span>
+                  </button>
+                  {events.length > 0 && (
+                    <ul className="flex max-w-full flex-col items-start gap-0.5 @lg:items-center">
+                      {events.map((entry) => (
+                        <li key={entry.label}>
+                          <button
+                            type="button"
+                            aria-pressed={shown === entry}
+                            onClick={() => {
+                              setPlaying(false)
+                              onStageChange(entry.stage)
+                              setEvent(shown === entry ? null : entry)
+                            }}
+                            className="flex max-w-full items-center gap-1.5 rounded-md px-1.5 py-0.5 text-left text-xs break-words hyphens-auto text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-pressed:bg-muted aria-pressed:text-foreground"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="size-1.5 shrink-0 rotate-45 bg-current"
+                            />
+                            {entry.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                </button>
-                {events.length > 0 && (
-                  <ul className="flex flex-col items-center gap-0.5">
-                    {events.map((entry) => (
-                      <li key={entry.label}>
-                        <button
-                          type="button"
-                          aria-pressed={shown === entry}
-                          onClick={() => {
-                            setPlaying(false)
-                            onStageChange(entry.stage)
-                            setEvent(shown === entry ? null : entry)
-                          }}
-                          className="flex items-center gap-1.5 rounded-md px-1.5 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-pressed:bg-muted aria-pressed:text-foreground"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="size-1.5 shrink-0 rotate-45 bg-current"
-                          />
-                          {entry.label}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                </div>
               </li>
             )
           })}
@@ -413,11 +436,15 @@ function DiseaseTimeline({
   )
 }
 
+// One side of a stage's dot. Down the side, the line in is a short stub that
+// meets the line out of the stage above, which runs the length of its row.
 function Segment({
+  edge,
   hidden,
   reached,
   dashed,
 }: {
+  edge: "in" | "out"
   hidden: boolean
   reached: boolean
   dashed?: boolean
@@ -425,7 +452,8 @@ function Segment({
   return (
     <span
       className={cn(
-        "h-0 flex-1 border-t-2 border-foreground/15 transition-colors",
+        "w-0 border-l-2 border-foreground/15 transition-colors @lg:h-0 @lg:w-auto @lg:flex-1 @lg:border-t-2 @lg:border-l-0",
+        edge === "in" ? "h-1.5" : "flex-1",
         reached && "border-foreground",
         dashed && "border-dashed",
         hidden && "invisible"

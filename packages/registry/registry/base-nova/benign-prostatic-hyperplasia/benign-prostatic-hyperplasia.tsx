@@ -83,12 +83,14 @@ export const benignProstaticHyperplasia: Disease = {
     {
       id: "symptoms",
       label: "Symptoms",
+      time: "From about 50",
       summary:
         "Lower urinary tract symptoms that bother the patient. Lifestyle changes, then an alpha blocker, a 5-alpha reductase inhibitor or both.",
     },
     {
       id: "chronic-retention",
       label: "Chronic retention",
+      time: "Over years",
       summary:
         "The bladder never empties fully. It stretches painlessly, leaks by overflow, and the pressure inside it backs up to the kidneys.",
       findings: {
@@ -124,6 +126,7 @@ export const benignProstaticHyperplasia: Disease = {
     {
       id: "acute-retention",
       label: "Acute retention",
+      alternative: true,
       summary:
         "Suddenly unable to pass urine, with a painful, full bladder. Constipation, anticholinergics or alcohol often trigger it; a catheter brings instant relief.",
       findings: {
@@ -145,6 +148,32 @@ export const benignProstaticHyperplasia: Disease = {
         { name: "Creatinine", result: "Normal" },
         { name: "Urine dipstick", result: "Normal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "symptoms",
+      label: "Symptom score",
+      description:
+        "The IPSS and a frequency-volume chart measure how much the symptoms bother the patient and guide treatment.",
+    },
+    {
+      stage: "symptoms",
+      label: "Tablets",
+      description:
+        "An alpha blocker relaxes the prostate within days; a 5-alpha reductase inhibitor shrinks it over months.",
+    },
+    {
+      stage: "chronic-retention",
+      label: "Catheter",
+      description:
+        "Drains the bladder while kidney function recovers; surgery to the prostate (TURP) usually follows.",
+    },
+    {
+      stage: "acute-retention",
+      label: "Trial without catheter",
+      description:
+        "After a few days of drainage on an alpha blocker, the catheter comes out to see whether the patient can pass urine.",
     },
   ],
   investigations: [

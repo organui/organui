@@ -56,12 +56,14 @@ export const acuteAngleClosureGlaucoma: Disease = {
     {
       id: "attack",
       label: "Attack",
+      time: "Hours",
       summary:
-        "Hours old. Lower the pressure now: acetazolamide, pressure-lowering drops and pilocarpine to pull the iris away from the angle, then laser.",
+        "Lower the pressure now: acetazolamide, pressure-lowering drops and pilocarpine to pull the iris away from the angle, then laser.",
     },
     {
       id: "iridotomy",
       label: "Iridotomy",
+      time: "Days later",
       summary:
         "The attack is over. A laser hole in the peripheral iris lets aqueous bypass the pupil, the iris flattens and the angle reopens. The other eye is treated too.",
       findings: {
@@ -92,6 +94,7 @@ export const acuteAngleClosureGlaucoma: Disease = {
     {
       id: "glaucomatous",
       label: "Damaged",
+      alternative: true,
       summary:
         "Treatment came late. The angle has scarred shut in places and the optic nerve is damaged; the lost vision does not return.",
       findings: {
@@ -124,6 +127,33 @@ export const acuteAngleClosureGlaucoma: Disease = {
         { name: "Visual field", result: "Arcuate defect", flag: "abnormal" },
         { name: "Gonioscopy", result: "Synechial closure", flag: "abnormal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "attack",
+      label: "Acetazolamide",
+      time: "At once",
+      description:
+        "Given by mouth or vein with pressure-lowering drops to bring the pressure down before laser.",
+    },
+    {
+      stage: "iridotomy",
+      label: "Fellow eye",
+      description:
+        "The other eye has a laser iridotomy too, because it is likely to close in the same way.",
+    },
+    {
+      stage: "iridotomy",
+      label: "Lens surgery",
+      description:
+        "Removing the lens deepens the angle for good and is often the definitive treatment.",
+    },
+    {
+      stage: "glaucomatous",
+      label: "Visual fields",
+      description:
+        "Repeated over time to see whether the damage is still progressing despite treatment.",
     },
   ],
   investigations: [
