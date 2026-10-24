@@ -27,6 +27,12 @@
       "@/components/ui/patient-banner": [
         "./registry/base-nova/patient-banner/patient-banner.tsx"
       ],
+      "@/components/ui/allergy-list": [
+        "./registry/base-nova/allergy-list/allergy-list.tsx"
+      ],
+      "@/components/ui/problem-list": [
+        "./registry/base-nova/problem-list/problem-list.tsx"
+      ],
       "@/components/ui/lab-results": [
         "./registry/base-nova/lab-results/lab-results.tsx"
       ],

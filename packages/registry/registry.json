@@ -40,6 +40,38 @@
       "docs": "Patient banner docs: https://organui.com/docs/components/patient-banner"
     },
     {
+      "name": "allergy-list",
+      "type": "registry:ui",
+      "title": "Allergy list",
+      "description": "Recorded allergies and intolerances with reaction, severity and verification, telling not recorded from no known allergies.",
+      "categories": ["clinical"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["table"],
+      "files": [
+        {
+          "path": "registry/base-nova/allergy-list/allergy-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Allergy list docs: https://organui.com/docs/components/allergy-list"
+    },
+    {
+      "name": "problem-list",
+      "type": "registry:ui",
+      "title": "Problem list",
+      "description": "The patient's conditions, active and past, with coded terms such as SNOMED CT and onset and resolution dates.",
+      "categories": ["clinical"],
+      "dependencies": ["cn@^0.5.0"],
+      "registryDependencies": ["table"],
+      "files": [
+        {
+          "path": "registry/base-nova/problem-list/problem-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "docs": "Problem list docs: https://organui.com/docs/components/problem-list"
+    },
+    {
       "name": "vital-signs",
       "type": "registry:ui",
       "title": "Vital signs",

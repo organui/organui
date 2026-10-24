@@ -108,6 +108,33 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       description: "Hide the trend column for narrow layouts.",
     },
   ],
+  "allergy-list": [
+    {
+      name: "allergy-list-states",
+      title: "Not Recorded and None Known",
+      description:
+        "Not asking and finding no allergies are different records, and read differently.",
+    },
+    {
+      name: "allergy-list-banner",
+      title: "With the Patient Banner",
+      description:
+        "allergySummary turns the list into the banner's allergies, leaving out resolved ones.",
+    },
+  ],
+  "problem-list": [
+    {
+      name: "problem-list-no-codes",
+      title: "Without Codes",
+      description: "Hide the coded terms for a summary view.",
+    },
+    {
+      name: "problem-list-text-dates",
+      title: "Dates as Recorded",
+      description:
+        'Onsets such as "Childhood" or a year read as written; only full dates are formatted.',
+    },
+  ],
   "patient-banner": [
     {
       name: "patient-banner-allergies",

@@ -199,6 +199,54 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "allergy-list-demo": {
+    title: "Allergy list",
+    file: "allergy-list-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./allergy-list-demo")
+      return <Example />
+    },
+  },
+  "allergy-list-states": {
+    title: "Not Recorded and None Known",
+    file: "allergy-list-states.tsx",
+    render: async () => {
+      const { Example } = await import("./allergy-list-states")
+      return <Example />
+    },
+  },
+  "allergy-list-banner": {
+    title: "With the Patient Banner",
+    file: "allergy-list-banner.tsx",
+    render: async () => {
+      const { Example } = await import("./allergy-list-banner")
+      return <Example />
+    },
+  },
+  "problem-list-demo": {
+    title: "Problem list",
+    file: "problem-list-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./problem-list-demo")
+      return <Example />
+    },
+  },
+  "problem-list-no-codes": {
+    title: "Without Codes",
+    file: "problem-list-no-codes.tsx",
+    render: async () => {
+      const { Example } = await import("./problem-list-no-codes")
+      return <Example />
+    },
+  },
+  "problem-list-text-dates": {
+    title: "Dates as Recorded",
+    file: "problem-list-text-dates.tsx",
+    render: async () => {
+      const { Example } = await import("./problem-list-text-dates")
+      return <Example />
+    },
+  },
   "lab-results-demo": {
     title: "Lab results table",
     file: "lab-results-demo.tsx",

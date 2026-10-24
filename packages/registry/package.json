@@ -12,6 +12,8 @@
     "./image-viewer": "./registry/base-nova/image-viewer/image-viewer.tsx",
     "./image-viewer/*": "./registry/base-nova/image-viewer/*.ts",
     "./patient-banner": "./registry/base-nova/patient-banner/patient-banner.tsx",
+    "./allergy-list": "./registry/base-nova/allergy-list/allergy-list.tsx",
+    "./problem-list": "./registry/base-nova/problem-list/problem-list.tsx",
     "./lab-results": "./registry/base-nova/lab-results/lab-results.tsx",
     "./growth-chart": "./registry/base-nova/growth-chart/growth-chart.tsx",
     "./vital-signs": "./registry/base-nova/vital-signs/vital-signs.tsx",

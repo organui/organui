@@ -1,5 +1,7 @@
+import type { Allergy } from "@workspace/registry/allergy-list"
 import type { AnatomyNode } from "@workspace/registry/anatomy-tree"
 import type { LabResult } from "@workspace/registry/lab-results"
+import type { Problem } from "@workspace/registry/problem-list"
 
 // Original, simplified demo data shared by the docs page and the index preview.
 export const anatomyExampleData: AnatomyNode[] = [
@@ -119,5 +121,96 @@ export const labResultsExampleData: LabResult[] = [
     flag: "normal",
     date: "2026-10-01",
     referenceRange: { text: "Negative" },
+  },
+]
+
+// A fictional patient's record, shared by the allergy and problem list examples.
+export const allergyExampleData: Allergy[] = [
+  {
+    id: "penicillin",
+    substance: "Penicillin",
+    reactions: ["Anaphylaxis"],
+    severity: "severe",
+    verification: "confirmed",
+    recordedDate: "2003-05-14",
+  },
+  {
+    id: "latex",
+    substance: "Latex",
+    reactions: ["Contact dermatitis"],
+    severity: "moderate",
+    verification: "confirmed",
+    recordedDate: "2011-09-02",
+  },
+  {
+    id: "codeine",
+    substance: "Codeine",
+    type: "intolerance",
+    reactions: ["Vomiting"],
+    severity: "mild",
+    recordedDate: "2019-02-20",
+  },
+  {
+    id: "trimethoprim",
+    substance: "Trimethoprim",
+    reactions: ["Rash"],
+    severity: "mild",
+    verification: "unconfirmed",
+    recordedDate: "2021-07-08",
+  },
+  {
+    id: "egg",
+    substance: "Egg",
+    reactions: ["Hives"],
+    severity: "moderate",
+    status: "resolved",
+    recordedDate: "1961-03-01",
+  },
+]
+
+export const problemExampleData: Problem[] = [
+  {
+    id: "hypertension",
+    name: "Essential hypertension",
+    code: { system: "SNOMED CT", value: "59621000" },
+    significance: "major",
+    onset: "2009-11-17",
+  },
+  {
+    id: "diabetes",
+    name: "Type 2 diabetes mellitus",
+    code: { system: "SNOMED CT", value: "44054006" },
+    significance: "major",
+    onset: "2012-03-06",
+  },
+  {
+    id: "ckd",
+    name: "Chronic kidney disease stage 3A",
+    code: { system: "SNOMED CT", value: "700378005" },
+    significance: "major",
+    onset: "2023-06-02",
+  },
+  {
+    id: "knee",
+    name: "Osteoarthritis of knee",
+    code: { system: "SNOMED CT", value: "239873007" },
+    significance: "minor",
+    onset: "2018",
+  },
+  {
+    id: "pneumonia",
+    name: "Community acquired pneumonia",
+    code: { system: "SNOMED CT", value: "385093006" },
+    status: "resolved",
+    onset: "2024-01-08",
+    resolved: "2024-02-01",
+  },
+  {
+    id: "depression",
+    name: "Depressive disorder",
+    code: { system: "SNOMED CT", value: "35489007" },
+    status: "resolved",
+    onset: "2015-01-12",
+    resolved: "2016-06-30",
   },
 ]

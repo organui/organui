@@ -52,3 +52,18 @@ test("the installed patient banner names the patient and their allergies", async
   await expect(banner).toContainText("Falls risk")
   expect(errors).toEqual([])
 })
+
+test("the installed allergy and problem lists show their rows", async ({
+  page,
+}) => {
+  const errors: string[] = []
+  page.on("pageerror", (error) => errors.push(error.message))
+  await page.goto("/lab")
+  await expect(page.getByRole("table", { name: "Allergies" })).toContainText(
+    "Intolerance"
+  )
+  const problems = page.getByRole("table", { name: "Problems" })
+  await expect(problems).toContainText("SNOMED CT 44054006")
+  await expect(problems).toContainText("Since Mar 6, 2012")
+  expect(errors).toEqual([])
+})

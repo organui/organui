@@ -612,6 +612,67 @@
       }
     ]
   },
+  "problem-list": {
+    "component": "ProblemList",
+    "element": "div",
+    "props": [
+      {
+        "name": "problems",
+        "type": "readonly Problem[]",
+        "required": true,
+        "default": null,
+        "description": "The problems, active and past, in any order."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "showCodes",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows each problem's code beneath its name. Defaults to true."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Formats full ISO dates. Defaults to a UTC date such as \"Oct 1, 2026\"."
+      }
+    ]
+  },
+  "allergy-list": {
+    "component": "AllergyList",
+    "element": "div",
+    "props": [
+      {
+        "name": "allergies",
+        "type": "AllergyRecord",
+        "required": false,
+        "default": null,
+        "description": "The allergies, `\"none-known\"`, or nothing when not recorded."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Defaults to a UTC date such as \"Oct 1, 2026\"."
+      }
+    ]
+  },
   "medication-schedule": {
     "component": "MedicationSchedule",
     "element": "div",
