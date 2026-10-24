@@ -31,6 +31,7 @@
     "./ai-note": "./registry/base-nova/ai-note/ai-note.tsx",
     "./age": "./registry/base-nova/age/age.ts",
     "./z-scores": "./registry/base-nova/z-scores/z-scores.ts",
+    "./fhir": "./registry/base-nova/fhir/fhir.ts",
     "./reference-ranges": "./registry/base-nova/reference-ranges/reference-ranges.ts",
     "./clinical-units": "./registry/base-nova/clinical-units/clinical-units.ts",
     "./body-measurements": "./registry/base-nova/body-measurements/body-measurements.ts",

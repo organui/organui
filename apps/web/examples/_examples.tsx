@@ -303,6 +303,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "fhir-demo": {
+    title: "FHIR",
+    file: "fhir-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./fhir-demo")
+      return <Example />
+    },
+  },
   "reference-ranges-demo": {
     title: "Reference ranges",
     file: "reference-ranges-demo.tsx",

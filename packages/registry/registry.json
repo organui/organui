@@ -1624,6 +1624,21 @@
       "docs": "Body measurements docs: https://organui.com/docs/helpers/body-measurements"
     },
     {
+      "name": "fhir",
+      "type": "registry:lib",
+      "title": "FHIR",
+      "description": "Turns FHIR R4 Patient, AllergyIntolerance, Condition and Observation resources, or a Bundle of them, into the props of the patient banner, allergy list, problem list and lab results table.",
+      "categories": ["helper"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/base-nova/fhir/fhir.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "docs": "FHIR docs: https://organui.com/docs/helpers/fhir"
+    },
+    {
       "name": "utilities",
       "type": "registry:item",
       "title": "Utilities",

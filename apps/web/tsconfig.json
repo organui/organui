@@ -49,6 +49,7 @@
       "@/lib/z-scores": [
         "../../packages/registry/registry/base-nova/z-scores/z-scores.ts"
       ],
+      "@/lib/fhir": ["../../packages/registry/registry/base-nova/fhir/fhir.ts"],
       "@/lib/reference-ranges": [
         "../../packages/registry/registry/base-nova/reference-ranges/reference-ranges.ts"
       ],

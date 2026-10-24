@@ -47,6 +47,7 @@
       ],
       "@/lib/age": ["./registry/base-nova/age/age.ts"],
       "@/lib/z-scores": ["./registry/base-nova/z-scores/z-scores.ts"],
+      "@/lib/fhir": ["./registry/base-nova/fhir/fhir.ts"],
       "@/lib/reference-ranges": [
         "./registry/base-nova/reference-ranges/reference-ranges.ts"
       ],
