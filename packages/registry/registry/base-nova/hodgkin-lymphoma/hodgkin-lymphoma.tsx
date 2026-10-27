@@ -55,12 +55,14 @@ export const hodgkinLymphoma: Disease = {
     {
       id: "active",
       label: "Active",
+      time: "At diagnosis",
       summary:
         "A painless neck node, sometimes with fever, night sweats and weight loss (B symptoms). Biopsy and PET-CT give the type and the stage.",
     },
     {
       id: "remission",
       label: "Remission",
+      time: "After treatment",
       summary:
         "After chemotherapy such as ABVD, with or without radiotherapy. Most people are cured; follow-up watches for late effects of treatment.",
       findings: {
@@ -89,6 +91,32 @@ export const hodgkinLymphoma: Disease = {
         { name: "ESR", result: "Normal" },
         { name: "Blood count", result: "Normal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "active",
+      label: "Biopsy",
+      description:
+        "A whole node or a core of it, which shows the Reed–Sternberg cells; a needle aspirate is not enough.",
+    },
+    {
+      stage: "active",
+      label: "PET-CT",
+      description:
+        "Stages the disease, and is repeated after two cycles of chemotherapy to tailor the rest.",
+    },
+    {
+      stage: "active",
+      label: "Chemotherapy",
+      description:
+        "ABVD, with radiotherapy for some early-stage disease; advanced disease has nivolumab-AVD or BrECADD.",
+    },
+    {
+      stage: "remission",
+      label: "Follow-up",
+      description:
+        "Watches for relapse and for late effects of treatment: second cancers, heart and lung damage, and an underactive thyroid after neck radiotherapy.",
     },
   ],
   investigations: [

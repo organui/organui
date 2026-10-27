@@ -76,7 +76,13 @@ function propsFor(disease?: Disease): Record<string, Prop> {
       type: "boolean",
       default: "true",
       description:
-        "Show the stages, scales, findings and investigations beside the model.",
+        "Show the scales, findings and investigations beside the model.",
+    },
+    timeline: {
+      type: "boolean",
+      default: "true",
+      description:
+        "Show the course under the model, with its events and a play button. A disease with one stage has none.",
     },
     className: {
       type: "string",

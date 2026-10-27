@@ -53,6 +53,7 @@ export const gallstoneDisease: Disease = {
     {
       id: "biliary-colic",
       label: "Colic",
+      time: "Months to years",
       summary:
         "Biliary colic: pain after fatty meals that settles on its own. Elective laparoscopic cholecystectomy prevents the complications.",
     },
@@ -85,6 +86,7 @@ export const gallstoneDisease: Disease = {
     {
       id: "cholangitis",
       label: "Cholangitis",
+      alternative: true,
       summary:
         "A stone passes into the common bile duct and blocks it. Infected bile backs up into the liver: fever, jaundice and pain (Charcot's triad).",
       findings: {
@@ -120,6 +122,7 @@ export const gallstoneDisease: Disease = {
     {
       id: "pancreatitis",
       label: "Pancreatitis",
+      alternative: true,
       summary:
         "A small stone lodges where the bile and pancreatic ducts open into the duodenum. Pancreatic enzymes activate inside the gland and digest it.",
       findings: {
@@ -151,6 +154,32 @@ export const gallstoneDisease: Disease = {
         { name: "ALT", result: "Raised", flag: "high" },
         { name: "Glasgow score", result: "2, mild" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "biliary-colic",
+      label: "Ultrasound",
+      description:
+        "Shows the stones, and in cholecystitis a thick-walled gallbladder with fluid around it.",
+    },
+    {
+      stage: "biliary-colic",
+      label: "Cholecystectomy",
+      description:
+        "Laparoscopic removal of the gallbladder prevents the complications; after cholecystitis it is done within a week.",
+    },
+    {
+      stage: "cholangitis",
+      label: "ERCP",
+      description:
+        "Endoscopy through the duodenum drains the infected bile and clears the duct, alongside antibiotics.",
+    },
+    {
+      stage: "pancreatitis",
+      label: "Supportive care",
+      description:
+        "Fluids, pain relief and early feeding while severity is scored; mild cases have the gallbladder removed in the same admission.",
     },
   ],
   investigations: [

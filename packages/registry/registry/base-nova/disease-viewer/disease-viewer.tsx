@@ -9,6 +9,7 @@ import {
   scaleOf,
   stageOf,
   type Disease,
+  type DiseaseEvent,
   type DiseaseInvestigation,
   type DiseaseScale,
   type DiseaseStage,
@@ -59,8 +60,10 @@ export type DiseaseViewerProps = Omit<
   selectedId?: string | null
   /** Called with the structure a reader selects, or null when they clear it. */
   onSelectionChange?: (id: string | null) => void
-  /** Shows the panel with the stages, scales, findings and investigations. Defaults to true. */
+  /** Shows the panel with the scales, findings and investigations. Defaults to true. */
   panel?: boolean
+  /** Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a disease with one stage has none. */
+  timeline?: boolean
 }
 
 export function DiseaseViewer({
@@ -74,6 +77,7 @@ export function DiseaseViewer({
   selectedId: selectedProp,
   onSelectionChange,
   panel = true,
+  timeline = true,
   label,
   className,
   ...props
@@ -118,20 +122,31 @@ export function DiseaseViewer({
           panel && "@3xl:grid-cols-[minmax(0,1fr)_20rem]"
         )}
       >
-        <OrganViewer
-          // A new scale is a new model file.
-          key={scale.id}
-          model={model}
-          selectedId={selectedId}
-          onSelectionChange={setSelectedId}
-          label={
-            label ??
-            `Interactive ${disease.name.toLowerCase()} model${
-              disease.scales.length > 1 ? `, ${scale.label.toLowerCase()}` : ""
-            }`
-          }
-          {...props}
-        />
+        <div className="flex min-w-0 flex-col gap-3">
+          <OrganViewer
+            // A new scale is a new model file.
+            key={scale.id}
+            model={model}
+            selectedId={selectedId}
+            onSelectionChange={setSelectedId}
+            label={
+              label ??
+              `Interactive ${disease.name.toLowerCase()} model${
+                disease.scales.length > 1
+                  ? `, ${scale.label.toLowerCase()}`
+                  : ""
+              }`
+            }
+            {...props}
+          />
+          {timeline && stage && (disease.stages?.length ?? 0) > 1 && (
+            <DiseaseTimeline
+              disease={disease}
+              stage={stage}
+              onStageChange={setStageId}
+            />
+          )}
+        </div>
         {panel && (
           <DiseasePanel
             disease={disease}
@@ -140,7 +155,6 @@ export function DiseaseViewer({
             stage={stage}
             selectedId={selectedId}
             onScaleChange={changeScale}
-            onStageChange={setStageId}
             onSelectionChange={setSelectedId}
           />
         )}
@@ -156,7 +170,6 @@ function DiseasePanel({
   stage,
   selectedId,
   onScaleChange,
-  onStageChange,
   onSelectionChange,
 }: {
   disease: Disease
@@ -165,15 +178,16 @@ function DiseasePanel({
   stage?: DiseaseStage
   selectedId: string | null
   onScaleChange: (scale: string) => void
-  onStageChange: (stage: string) => void
   onSelectionChange: (id: string | null) => void
 }) {
   const title = React.useId()
   const investigations = stage?.investigations ?? disease.investigations ?? []
   return (
+    // Beside the model, the panel takes the height the model and timeline
+    // set, rather than setting it, and scrolls.
     <section
       aria-labelledby={title}
-      className="flex min-w-0 flex-col gap-5 rounded-xl border p-4 text-sm @3xl:max-h-[28rem] @3xl:overflow-y-auto"
+      className="flex min-w-0 flex-col gap-5 rounded-xl border p-4 text-sm @3xl:h-0 @3xl:min-h-full @3xl:overflow-y-auto"
     >
       <div className="flex flex-col gap-1.5">
         <div className="flex items-start justify-between gap-3">
@@ -187,19 +201,6 @@ function DiseasePanel({
         </div>
         <p className="text-muted-foreground">{disease.summary}</p>
       </div>
-      {disease.stages && disease.stages.length > 1 && stage && (
-        <div className="flex flex-col gap-2">
-          <Choice
-            label="Stage"
-            options={disease.stages}
-            value={stage.id}
-            onChange={onStageChange}
-          />
-          <p aria-live="polite" className="text-muted-foreground">
-            {stage.summary}
-          </p>
-        </div>
-      )}
       {disease.scales.length > 1 && (
         <Choice
           label="Scale"
@@ -227,6 +228,237 @@ function DiseasePanel({
         <Investigations investigations={investigations} />
       )}
     </section>
+  )
+}
+
+// The course as a timeline: each stage at its typical time, the events along
+// it, and play to step through. The model recolours as the stage changes.
+function DiseaseTimeline({
+  disease,
+  stage,
+  onStageChange,
+}: {
+  disease: Disease
+  stage: DiseaseStage
+  onStageChange: (stage: string) => void
+}) {
+  const stages = React.useMemo(() => disease.stages ?? [], [disease.stages])
+  const index = stages.findIndex(({ id }) => id === stage.id)
+  const [playing, setPlaying] = React.useState(false)
+  const [event, setEvent] = React.useState<DiseaseEvent | null>(null)
+  // Each stage shows for a few seconds, then the next; playing stops on the
+  // last stage of the course.
+  React.useEffect(() => {
+    const next = stages[index + 1]
+    if (!playing || !next) return
+    const timer = setTimeout(() => {
+      onStageChange(next.id)
+      if (index + 2 === stages.length) setPlaying(false)
+    }, 2500)
+    return () => clearTimeout(timer)
+  }, [playing, index, stages, onStageChange])
+  const choose = (id: string) => {
+    setPlaying(false)
+    setEvent(null)
+    onStageChange(id)
+  }
+  const shown = event?.stage === stage.id ? event : null
+  // The stages on the way to the current one. An alternative stage follows
+  // the stage its siblings follow, not the sibling drawn before it.
+  const path = new Set<number>()
+  for (let i = index; i >= 0;) {
+    path.add(i)
+    let first = i
+    while (first > 0 && stages[first]!.alternative) first--
+    i = first - 1
+  }
+  return (
+    <div
+      data-slot="disease-timeline"
+      className="@container flex min-w-0 flex-col gap-3 rounded-xl border p-3 text-sm"
+    >
+      <div className="flex items-start gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon-sm"
+          aria-label={playing ? "Pause the course" : "Play the course"}
+          onClick={() => {
+            setEvent(null)
+            // Playing from the end starts the course again.
+            if (!playing && index === stages.length - 1)
+              onStageChange(stages[0]!.id)
+            setPlaying(!playing)
+          }}
+          className="mt-0.5 shrink-0"
+        >
+          {playing ? (
+            <IconPlaceholder
+              lucide="PauseIcon"
+              tabler="IconPlayerPause"
+              hugeicons="PauseIcon"
+              phosphor="PauseIcon"
+              remixicon="RiPauseLine"
+              aria-hidden="true"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="PlayIcon"
+              tabler="IconPlayerPlay"
+              hugeicons="PlayIcon"
+              phosphor="PlayIcon"
+              remixicon="RiPlayLine"
+              aria-hidden="true"
+            />
+          )}
+        </Button>
+        {/* Down the side in a narrow space, such as a phone; across once
+            each stage has room for its name. */}
+        <ol
+          aria-label="Course"
+          className="flex min-w-0 flex-1 flex-col @lg:grid"
+          style={{
+            gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))`,
+          }}
+        >
+          {stages.map((item, i) => {
+            const current = i === index
+            const reached = path.has(i)
+            const events = (disease.events ?? []).filter(
+              (entry) => entry.stage === item.id
+            )
+            return (
+              <li
+                key={item.id}
+                className="flex min-w-0 gap-2 @lg:flex-col @lg:gap-1"
+              >
+                {/* The track: a line in from the previous stage, a dot, and a
+                    line out to the next. An alternative stage is dashed. */}
+                <div
+                  aria-hidden="true"
+                  className="flex w-3 shrink-0 flex-col items-center @lg:h-3 @lg:w-auto @lg:flex-row"
+                >
+                  <Segment
+                    edge="in"
+                    hidden={i === 0}
+                    reached={reached && !item.alternative && path.has(i - 1)}
+                    dashed={item.alternative}
+                  />
+                  <span
+                    className={cn(
+                      "size-2.5 shrink-0 rounded-full border-2 border-foreground/30 bg-background transition-colors",
+                      reached && "border-foreground",
+                      current && "bg-foreground"
+                    )}
+                  />
+                  <Segment
+                    edge="out"
+                    hidden={i === stages.length - 1}
+                    reached={
+                      reached && path.has(i + 1) && !stages[i + 1]!.alternative
+                    }
+                    dashed={stages[i + 1]?.alternative}
+                  />
+                </div>
+                <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pb-3 @lg:items-center @lg:pb-0">
+                  <button
+                    type="button"
+                    aria-pressed={current}
+                    onClick={() => choose(item.id)}
+                    className="flex max-w-full flex-col items-start rounded-md px-1 py-0.5 text-left transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring @lg:items-center @lg:text-center"
+                  >
+                    <span
+                      className={cn(
+                        "leading-snug break-words hyphens-auto text-muted-foreground",
+                        current && "font-medium text-foreground"
+                      )}
+                    >
+                      {item.alternative && (
+                        <span className="font-normal text-muted-foreground">
+                          or{" "}
+                        </span>
+                      )}
+                      {item.label}
+                    </span>
+                    {item.time && (
+                      <span className="text-xs text-muted-foreground">
+                        {item.time}
+                      </span>
+                    )}
+                  </button>
+                  {events.length > 0 && (
+                    <ul className="flex max-w-full flex-col items-start gap-0.5 @lg:items-center">
+                      {events.map((entry) => (
+                        <li key={entry.label}>
+                          <button
+                            type="button"
+                            aria-pressed={shown === entry}
+                            onClick={() => {
+                              setPlaying(false)
+                              onStageChange(entry.stage)
+                              setEvent(shown === entry ? null : entry)
+                            }}
+                            className="flex max-w-full items-center gap-1.5 rounded-md px-1.5 py-0.5 text-left text-xs break-words hyphens-auto text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-pressed:bg-muted aria-pressed:text-foreground"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="size-1.5 shrink-0 rotate-45 bg-current"
+                            />
+                            {entry.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+      <p aria-live="polite" className="text-muted-foreground">
+        {shown ? (
+          <>
+            <span className="font-medium text-foreground">
+              {shown.label}
+              {shown.time && `, ${shown.time.toLowerCase()}`}:
+            </span>{" "}
+            {shown.description}
+          </>
+        ) : (
+          <>
+            <span className="font-medium text-foreground">{stage.label}:</span>{" "}
+            {stage.summary}
+          </>
+        )}
+      </p>
+    </div>
+  )
+}
+
+// One side of a stage's dot. Down the side, the line in is a short stub that
+// meets the line out of the stage above, which runs the length of its row.
+function Segment({
+  edge,
+  hidden,
+  reached,
+  dashed,
+}: {
+  edge: "in" | "out"
+  hidden: boolean
+  reached: boolean
+  dashed?: boolean
+}) {
+  return (
+    <span
+      className={cn(
+        "w-0 border-l-2 border-foreground/15 transition-colors @lg:h-0 @lg:w-auto @lg:flex-1 @lg:border-t-2 @lg:border-l-0",
+        edge === "in" ? "h-1.5" : "flex-1",
+        reached && "border-foreground",
+        dashed && "border-dashed",
+        hidden && "invisible"
+      )}
+    />
   )
 }
 

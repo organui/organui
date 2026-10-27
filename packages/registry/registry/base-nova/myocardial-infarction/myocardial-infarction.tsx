@@ -57,14 +57,16 @@ export const myocardialInfarction: Disease = {
     {
       id: "occlusion",
       label: "Occlusion",
+      time: "0–12 h",
       summary:
-        "The first hours. ST elevation on the ECG means the artery is blocked; reopen it with PCI within 120 minutes of diagnosis.",
+        "ST elevation on the ECG means the artery is blocked; reopen it with PCI within 120 minutes of diagnosis.",
     },
     {
       id: "acute",
       label: "Acute",
+      time: "Days 1–7",
       summary:
-        "Days 1 to 7. Dead muscle is soft while white cells clear it, and the wall is weakest from day 3 to day 7.",
+        "Dead muscle is soft while white cells clear it, and the wall is weakest from day 3 to day 7.",
       findings: {
         heart: {
           "left-coronary": {
@@ -95,8 +97,9 @@ export const myocardialInfarction: Disease = {
     {
       id: "healed",
       label: "Healed",
+      time: "From 6 weeks",
       summary:
-        "From about six weeks. Collagen scar has replaced the muscle; treatment protects the rest of the heart and prevents the next event.",
+        "Collagen scar has replaced the muscle; treatment protects the rest of the heart and prevents the next event.",
       findings: {
         heart: {
           "left-coronary": {
@@ -123,6 +126,34 @@ export const myocardialInfarction: Disease = {
         { name: "LV ejection fraction", result: "Reduced", flag: "low" },
         { name: "LDL cholesterol", result: "Target < 1.4 mmol/L" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "occlusion",
+      label: "ECG",
+      time: "Within 10 min",
+      description:
+        "A 12-lead ECG within 10 minutes of first contact shows the ST elevation that sends the patient straight to the catheter lab.",
+    },
+    {
+      stage: "occlusion",
+      label: "PCI",
+      time: "Within 120 min",
+      description:
+        "Angioplasty reopens the artery with a stent. Where it cannot happen within 120 minutes of diagnosis, a clot-dissolving drug is given instead.",
+    },
+    {
+      stage: "acute",
+      label: "Echo",
+      description:
+        "Measures how well the ventricle pumps and looks for the complications of soft dead muscle: a clot at the apex, or a rupture of the wall or septum.",
+    },
+    {
+      stage: "healed",
+      label: "Prevention",
+      description:
+        "Two antiplatelet drugs for 12 months and a high-intensity statin; a beta blocker and an ACE inhibitor because the ventricle is weakened. Cardiac rehabilitation helps the return to activity.",
     },
   ],
   investigations: [

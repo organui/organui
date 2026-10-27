@@ -145,6 +145,8 @@ export function organDefaultVisibility(
 // rule whatever the organ's shape.
 const FRAME_FILL = 0.8
 const STAGE_TONE = new Color("#e4e3dc")
+// How long a recolour fades, in milliseconds.
+const FADE_MS = 450
 // A model without the item's structures is the wrong file, not a network
 // problem, so its message does not suggest checking the connection.
 const MISMATCH = "The model does not contain the expected structures."
@@ -539,10 +541,22 @@ export function OrganViewer({
     orbit.minDistance = closest * 1.25
     orbit.maxDistance = radius * 6
 
+    // Colours fading from one paint to the next, such as a disease moving to
+    // its next stage.
+    const fades = new Map<
+      MeshStandardMaterial,
+      { from: Color; to: Color; start: number }
+    >()
     let dirty = true
     const render = () => (dirty = true)
     let frame = 0
-    const tick = () => {
+    const tick = (now: number) => {
+      for (const [material, fade] of fades) {
+        const t = Math.min(1, (now - fade.start) / FADE_MS)
+        material.color.lerpColors(fade.from, fade.to, t * (2 - t))
+        if (t === 1) fades.delete(material)
+        dirty = true
+      }
       if (orbit.update() || dirty) {
         renderer.render(stage, camera)
         dirty = false
@@ -670,8 +684,25 @@ export function OrganViewer({
           for (const mesh of list) {
             const material = mesh.material as MeshStandardMaterial
             mesh.visible = shown[id] !== false
-            if (state === "ghosted") material.color.copy(ghost)
-            else material.color.set(color)
+            const target = state === "ghosted" ? ghost : new Color(color)
+            // A structure recoloured in the same state, such as at a disease's
+            // next stage, fades to its new colour. A first paint, a selection
+            // change and reduced motion apply at once.
+            const fade =
+              !motion.matches &&
+              material.userData.state === state &&
+              !material.color.equals(target)
+            if (!fade) {
+              fades.delete(material)
+              material.color.copy(target)
+            } else if (!fades.get(material)?.to.equals(target)) {
+              fades.set(material, {
+                from: material.color.clone(),
+                to: target.clone(),
+                start: performance.now(),
+              })
+            }
+            material.userData.state = state
             material.emissive.set(state === "selected" ? color : "#000000")
             material.emissiveIntensity = state === "selected" ? 0.35 : 0
             material.transparent = state === "ghosted"

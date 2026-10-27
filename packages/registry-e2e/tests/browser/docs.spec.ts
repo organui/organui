@@ -643,6 +643,41 @@ test("the diseases gallery shows every disease and filters by body system", asyn
   expect(errors).toEqual([])
 })
 
+test("a disease's timeline moves the model and panel through its course", async ({
+  page,
+}) => {
+  await page.goto("/docs/components/myocardial-infarction")
+  const demo = page.locator('[data-example="myocardial-infarction-demo"]')
+  const course = demo.getByRole("list", { name: "Course" })
+  const stage = (label: string) =>
+    course.getByRole("button", { name: new RegExp(`^${label} `) })
+  const said = demo.locator('[data-slot="disease-timeline"] [aria-live]')
+  await expect(stage("Occlusion")).toHaveAttribute("aria-pressed", "true")
+  await expect(said).toContainText("Occlusion:")
+  // An event opens its stage and says what happens then; the panel's
+  // investigations follow the stage.
+  await course.getByRole("button", { name: "Echo", exact: true }).click()
+  await expect(stage("Acute")).toHaveAttribute("aria-pressed", "true")
+  await expect(said).toContainText("Echo:")
+  await expect(demo.getByText("Q waves forming")).toBeVisible()
+  // Play steps through the rest of the course and stops at its end.
+  await demo.getByRole("button", { name: "Play the course" }).click()
+  await expect(stage("Healed")).toHaveAttribute("aria-pressed", "true", {
+    timeout: 6000,
+  })
+  await expect(said).toContainText("Healed:")
+  await expect(
+    demo.getByRole("button", { name: "Play the course" })
+  ).toBeVisible()
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .include('[data-example="myocardial-infarction-demo"]')
+        .analyze()
+    ).violations
+  ).toEqual([])
+})
+
 test("organ pages pair the viewer with the anatomy tree", async ({
   page,
   request,

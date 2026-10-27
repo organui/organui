@@ -79,12 +79,14 @@ export const gravesDisease: Disease = {
     {
       id: "thyrotoxic",
       label: "Thyrotoxic",
+      time: "At onset",
       summary:
         "Weight loss, tremor, heat intolerance and palpitations. Beta blockers ease the symptoms while carbimazole lowers hormone production.",
     },
     {
       id: "active-eye",
       label: "Active eye",
+      time: "Within 18 months",
       summary:
         "Active thyroid eye disease. The muscles and fat behind the eye swell and push it forward; stopping smoking and treating early limit the damage.",
       findings: {
@@ -126,8 +128,9 @@ export const gravesDisease: Disease = {
     {
       id: "inactive",
       label: "Inactive",
+      time: "After 1–2 years",
       summary:
-        "After one to two years the eye disease burns out. The thyroid is controlled; any remaining proptosis or squint can now be corrected surgically.",
+        "The eye disease burns out. The thyroid is controlled; any remaining proptosis or squint can now be corrected surgically.",
       findings: {
         thyroid: {
           "right-lobe": {
@@ -170,6 +173,33 @@ export const gravesDisease: Disease = {
         { name: "Clinical activity score", result: "0 of 7" },
         { name: "Exophthalmometry", result: "22 mm", flag: "high" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "thyrotoxic",
+      label: "TRAb",
+      description:
+        "TSH receptor antibodies confirm Graves' disease as the cause of the thyrotoxicosis.",
+    },
+    {
+      stage: "thyrotoxic",
+      label: "Carbimazole",
+      time: "12–18 months",
+      description:
+        "Lowers hormone production. About half of people relapse after stopping, and are then offered radioiodine or surgery.",
+    },
+    {
+      stage: "active-eye",
+      label: "Steroids",
+      description:
+        "Intravenous methylprednisolone with mycophenolate for moderate to severe active eye disease, selenium for mild. Everyone should stop smoking.",
+    },
+    {
+      stage: "inactive",
+      label: "Surgery",
+      description:
+        "Orbital decompression, then squint surgery, then eyelid surgery, in that order, once the disease has been inactive for months.",
     },
   ],
   investigations: [

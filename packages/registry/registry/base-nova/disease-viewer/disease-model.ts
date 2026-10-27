@@ -34,12 +34,27 @@ export type DiseaseInvestigation = {
 export type DiseaseStage = {
   id: string
   label: string
+  /** When the stage comes in a typical course, such as "Days 3–7". */
+  time?: string
+  /** Marks a stage that is an alternative to the one before it, not what follows it, such as an untreated course beside a treated one. */
+  alternative?: boolean
   /** What happens at this stage, in a sentence or two. */
   summary: string
   /** Findings that replace the scale's own at this stage, by scale ID, then structure ID. */
   findings?: Readonly<Record<string, Readonly<Record<string, DiseaseFinding>>>>
   /** Replaces the disease's investigations at this stage. */
   investigations?: readonly DiseaseInvestigation[]
+}
+
+export type DiseaseEvent = {
+  /** The stage it happens in, by ID. */
+  stage: string
+  /** A short name for the timeline, such as "PCI". */
+  label: string
+  /** When it happens, such as "Within 120 min". */
+  time?: string
+  /** What it is and why it matters then. */
+  description: string
 }
 
 export type Disease = {
@@ -51,6 +66,8 @@ export type Disease = {
   scales: readonly DiseaseScale[]
   /** The course of the disease, the default first. */
   stages?: readonly DiseaseStage[]
+  /** Treatments, tests and turning points along the course, in order. */
+  events?: readonly DiseaseEvent[]
   investigations?: readonly DiseaseInvestigation[]
 }
 
