@@ -11,7 +11,7 @@ export const acuteAppendicitis: Disease = {
   name: "Acute appendicitis",
   code: "K35.8",
   summary:
-    "The appendix's lumen blocks, mucus and bacteria build up behind it, and the inflamed wall can die and perforate within a day or two.",
+    "The appendix lumen becomes blocked, mucus and bacteria build up behind it, and the inflamed wall can die and perforate within a day or two.",
   scales: [
     {
       id: "appendix",
@@ -27,7 +27,7 @@ export const acuteAppendicitis: Disease = {
         colon: {
           affected: false,
           description:
-            "The caecum is not involved yet. Pressing on the left side of the abdomen pushes gas back towards it and hurts on the right (Rovsing's sign) once the appendix is inflamed.",
+            "The caecum is not involved yet. Pressing in the left iliac fossa hurts in the right (Rovsing's sign) once the appendix is inflamed.",
         },
         ileum: {
           affected: false,
@@ -46,12 +46,14 @@ export const acuteAppendicitis: Disease = {
     {
       id: "early",
       label: "Early",
+      time: "0–12 h",
       summary:
-        "The first 12 hours. Central abdominal pain, loss of appetite and nausea; the examination can still be unremarkable.",
+        "Central abdominal pain, loss of appetite and nausea; the examination can still be unremarkable.",
     },
     {
       id: "suppurative",
       label: "Suppurative",
+      time: "12–48 h",
       summary:
         "Bacteria invade the wall. The pain moves to the right iliac fossa as the inflamed appendix touches the parietal peritoneum.",
       findings: {
@@ -79,8 +81,9 @@ export const acuteAppendicitis: Disease = {
     {
       id: "perforated",
       label: "Perforated",
+      time: "After 48 h",
       summary:
-        "Usually after 48 hours. The dead wall gives way; pus forms an abscess or spreads as peritonitis. Pain may ease briefly, then the patient becomes unwell.",
+        "The dead wall gives way; pus forms an abscess or spreads as peritonitis. Pain may ease briefly, then the patient becomes unwell.",
       findings: {
         appendix: {
           appendix: {
@@ -112,6 +115,32 @@ export const acuteAppendicitis: Disease = {
         { name: "Lactate", result: "Raised", flag: "high" },
         { name: "CT", result: "Abscess, free fluid", flag: "abnormal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "early",
+      label: "Alvarado score",
+      description:
+        "Adds up the migrating pain, symptoms, tenderness, fever and white count; a low score makes appendicitis unlikely. The AIR and Adult Appendicitis scores are now preferred.",
+    },
+    {
+      stage: "suppurative",
+      label: "Imaging",
+      description:
+        "Ultrasound first in children and young women: an appendix over 6 mm that does not compress points to appendicitis. CT in other adults when the diagnosis is unsure.",
+    },
+    {
+      stage: "suppurative",
+      label: "Appendicectomy",
+      description:
+        "Laparoscopic removal with antibiotics, usually within 24 hours. Some uncomplicated cases without a faecolith settle with antibiotics alone.",
+    },
+    {
+      stage: "perforated",
+      label: "Drainage",
+      description:
+        "An abscess is drained, often through the skin under imaging, with antibiotics; generalised peritonitis needs surgery at once.",
     },
   ],
   investigations: [

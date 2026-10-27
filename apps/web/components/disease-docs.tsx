@@ -108,10 +108,14 @@ export function ${component}Demo() {
             <p>
               Set <code>stage</code> or <code>defaultStage</code> to one of
               these. Each stage changes which structures are affected and the
-              investigations to expect.
+              investigations to expect; the timeline under the model shows them
+              in order, with the events along the way.
             </p>
             <ol className="flex flex-col gap-4 border-l pl-5">
               {stages.map((stage) => {
+                const events = (disease.events ?? []).filter(
+                  (event) => event.stage === stage.id
+                )
                 const affected = bases.map(({ scale }) => ({
                   scale,
                   count: diseaseModel(
@@ -124,12 +128,41 @@ export function ${component}Demo() {
                 return (
                   <li key={stage.id} className="flex flex-col gap-1">
                     <span className="font-medium">
+                      {stage.alternative && (
+                        <span className="font-normal text-muted-foreground">
+                          Or{" "}
+                        </span>
+                      )}
                       {stage.label}{" "}
                       <code className="text-xs font-normal text-muted-foreground">
                         &quot;{stage.id}&quot;
                       </code>
+                      {stage.time && (
+                        <span className="font-normal text-muted-foreground">
+                          {" "}
+                          · {stage.time}
+                        </span>
+                      )}
                     </span>
                     <p className="text-muted-foreground">{stage.summary}</p>
+                    {events.length > 0 && (
+                      <ul className="flex flex-col gap-1 text-sm">
+                        {events.map((event) => (
+                          <li key={event.label}>
+                            <span className="font-medium">{event.label}</span>
+                            {event.time && (
+                              <span className="text-muted-foreground">
+                                {" "}
+                                ({event.time.toLowerCase()})
+                              </span>
+                            )}
+                            <span className="text-muted-foreground">
+                              : {event.description}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <p className="text-sm text-muted-foreground">
                       Affects{" "}
                       {list(

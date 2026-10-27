@@ -229,7 +229,14 @@
         "type": "boolean",
         "required": false,
         "default": "true",
-        "description": "Shows the panel with the stages, scales, findings and investigations. Defaults to true."
+        "description": "Shows the panel with the scales, findings and investigations. Defaults to true."
+      },
+      {
+        "name": "timeline",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a disease with one stage has none."
       }
     ]
   },
@@ -561,6 +568,142 @@
         "required": false,
         "default": "true",
         "description": "Shows the trend column. Defaults to true."
+      }
+    ]
+  },
+  "patient-banner": {
+    "component": "PatientBanner",
+    "element": "section",
+    "props": [
+      {
+        "name": "patient",
+        "type": "Patient",
+        "required": true,
+        "default": null,
+        "description": "Name, date of birth, sex, identifiers and any date of death."
+      },
+      {
+        "name": "allergies",
+        "type": "PatientAllergies",
+        "required": false,
+        "default": null,
+        "description": "Substances, `\"none-known\"`, or nothing when not recorded."
+      },
+      {
+        "name": "alerts",
+        "type": "readonly string[]",
+        "required": false,
+        "default": "[]",
+        "description": "Warnings to see before anything else, such as \"DNACPR\" or \"Safeguarding\"."
+      },
+      {
+        "name": "today",
+        "type": "Date",
+        "required": false,
+        "default": null,
+        "description": "The day age is counted on. Defaults to today."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "formatBannerDate",
+        "description": "Defaults to an unambiguous UTC date such as \"12-Jan-1958\"."
+      }
+    ]
+  },
+  "news2-chart": {
+    "component": "News2Chart",
+    "element": "div",
+    "props": [
+      {
+        "name": "observations",
+        "type": "readonly News2Observation[]",
+        "required": true,
+        "default": null,
+        "description": "Sets of observations, in any order; the newest shows first."
+      },
+      {
+        "name": "spo2Scale",
+        "type": "Spo2Scale",
+        "required": false,
+        "default": "1",
+        "description": "The SpO₂ scale the patient is prescribed. Defaults to 1."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatTime",
+        "type": "(time: string) => string",
+        "required": false,
+        "default": "defaultFormatTime",
+        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"."
+      }
+    ]
+  },
+  "problem-list": {
+    "component": "ProblemList",
+    "element": "div",
+    "props": [
+      {
+        "name": "problems",
+        "type": "readonly Problem[]",
+        "required": true,
+        "default": null,
+        "description": "The problems, active and past, in any order."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "showCodes",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows each problem's code beneath its name. Defaults to true."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Formats full ISO dates. Defaults to a UTC date such as \"Oct 1, 2026\"."
+      }
+    ]
+  },
+  "allergy-list": {
+    "component": "AllergyList",
+    "element": "div",
+    "props": [
+      {
+        "name": "allergies",
+        "type": "AllergyRecord",
+        "required": false,
+        "default": null,
+        "description": "The allergies, `\"none-known\"`, or nothing when not recorded."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Defaults to a UTC date such as \"Oct 1, 2026\"."
       }
     ]
   },

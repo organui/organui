@@ -20,7 +20,7 @@ export const myocardialInfarction: Disease = {
       model: heartModel,
       findings: {
         "left-coronary": {
-          label: "Left coronary artery (LAD)",
+          label: "Left coronary artery, LAD branch",
           affected: true,
           description:
             "The culprit is its left anterior descending (LAD) branch: a cholesterol plaque ruptures and a clot forms on it, blocking the artery. Emergency angioplasty (PCI) reopens it with a stent.",
@@ -33,12 +33,12 @@ export const myocardialInfarction: Disease = {
         "left-ventricle": {
           affected: true,
           description:
-            "With part of its wall still, the left ventricle empties less with each beat. A large infarct causes cardiogenic shock.",
+            "With part of its wall still, the left ventricle empties less with each beat. A large infarct can cause cardiogenic shock.",
         },
         "right-coronary": {
           affected: false,
           description:
-            "Supplies the inferior wall and is patent here; its occlusion causes an inferior infarction instead.",
+            "Usually supplies the inferior wall and is patent here; its occlusion causes an inferior infarction instead.",
         },
         "right-ventricle": {
           affected: false,
@@ -57,18 +57,20 @@ export const myocardialInfarction: Disease = {
     {
       id: "occlusion",
       label: "Occlusion",
+      time: "0–12 h",
       summary:
-        "The first hours. ST elevation on the ECG means the artery is blocked; reopen it with PCI within 120 minutes of diagnosis.",
+        "ST elevation on the ECG means the artery is blocked; reopen it with PCI, ideally within 90 minutes of diagnosis.",
     },
     {
       id: "acute",
       label: "Acute",
+      time: "Days 1–7",
       summary:
-        "Days 1 to 7. Dead muscle is soft while white cells clear it, and the wall is weakest from day 3 to day 7.",
+        "Dead muscle is soft while white cells clear it, and the wall is weakest from day 3 to day 7.",
       findings: {
         heart: {
           "left-coronary": {
-            label: "Left coronary artery (LAD)",
+            label: "Left coronary artery, LAD branch",
             affected: true,
             description:
               "Opened and stented. Two antiplatelet drugs stop a clot forming on the new stent.",
@@ -95,12 +97,13 @@ export const myocardialInfarction: Disease = {
     {
       id: "healed",
       label: "Healed",
+      time: "From 6 weeks",
       summary:
-        "From about six weeks. Collagen scar has replaced the muscle; treatment protects the rest of the heart and prevents the next event.",
+        "Collagen scar has replaced the muscle; treatment protects the rest of the heart and prevents the next event.",
       findings: {
         heart: {
           "left-coronary": {
-            label: "Left coronary artery (LAD)",
+            label: "Left coronary artery, LAD branch",
             affected: true,
             description:
               "Stented. Statins, antiplatelets and stopping smoking keep it and the other arteries open.",
@@ -113,7 +116,7 @@ export const myocardialInfarction: Disease = {
           "left-ventricle": {
             affected: true,
             description:
-              "Remodelling: the ventricle dilates to keep its output. ACE inhibitors and beta blockers limit it and heart failure.",
+              "Remodelling: the ventricle dilates to keep its output. ACE inhibitors and beta blockers limit it and the heart failure it leads to.",
           },
         },
       },
@@ -125,10 +128,38 @@ export const myocardialInfarction: Disease = {
       ],
     },
   ],
+  events: [
+    {
+      stage: "occlusion",
+      label: "ECG",
+      time: "Within 10 min",
+      description:
+        "A 12-lead ECG within 10 minutes of first contact shows the ST elevation that sends the patient straight to the catheter lab.",
+    },
+    {
+      stage: "occlusion",
+      label: "PCI",
+      time: "Within 120 min",
+      description:
+        "Angioplasty reopens the artery with a stent. Where it cannot happen within 120 minutes of diagnosis, a clot-dissolving drug is given instead.",
+    },
+    {
+      stage: "acute",
+      label: "Echo",
+      description:
+        "Measures how well the ventricle pumps and looks for the complications of soft dead muscle: a clot at the apex, or a rupture of the wall or septum.",
+    },
+    {
+      stage: "healed",
+      label: "Prevention",
+      description:
+        "Two antiplatelet drugs for 12 months and a high-intensity statin. Because the ventricle is weakened: a beta blocker, an ACE inhibitor, eplerenone and an SGLT2 inhibitor. Cardiac rehabilitation helps the return to activity.",
+    },
+  ],
   investigations: [
     { name: "ECG", result: "ST elevation V1–V4", flag: "abnormal" },
     { name: "Troponin", result: "Rising", flag: "high" },
-    { name: "Echo", result: "Anterior hypokinesia", flag: "abnormal" },
+    { name: "Echo", result: "Anterior akinesia", flag: "abnormal" },
     { name: "Angiogram", result: "LAD occluded", flag: "abnormal" },
   ],
 }

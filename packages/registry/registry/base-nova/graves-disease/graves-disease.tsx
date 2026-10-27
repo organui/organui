@@ -60,7 +60,7 @@ export const gravesDisease: Disease = {
         "levator-palpebrae": {
           affected: true,
           description:
-            "Excess thyroid hormone drives the sympathetic Müller's muscle beneath it, so the upper lid retracts and lags behind the eye when looking down, giving a staring look.",
+            "Excess thyroid hormone drives the sympathetic Müller's muscle beneath it, so the upper lid retracts and lags behind the eye when looking down, giving a staring look. Inflammation of the levator in eye disease retracts it too.",
         },
         "inferior-rectus": {
           affected: false,
@@ -79,12 +79,14 @@ export const gravesDisease: Disease = {
     {
       id: "thyrotoxic",
       label: "Thyrotoxic",
+      time: "At onset",
       summary:
         "Weight loss, tremor, heat intolerance and palpitations. Beta blockers ease the symptoms while carbimazole lowers hormone production.",
     },
     {
       id: "active-eye",
       label: "Active eye",
+      time: "Within 18 months",
       summary:
         "Active thyroid eye disease. The muscles and fat behind the eye swell and push it forward; stopping smoking and treating early limit the damage.",
       findings: {
@@ -126,14 +128,15 @@ export const gravesDisease: Disease = {
     {
       id: "inactive",
       label: "Inactive",
+      time: "After 1–2 years",
       summary:
-        "After one to two years the eye disease burns out. The thyroid is controlled; any remaining proptosis or squint can now be corrected surgically.",
+        "The eye disease burns out. The thyroid is controlled; any remaining proptosis or squint can now be corrected surgically.",
       findings: {
         thyroid: {
           "right-lobe": {
             affected: true,
             description:
-              "Treated: carbimazole for 12 to 18 months, or radioiodine or surgery, after which levothyroxine replaces the hormone for life.",
+              "Treated: carbimazole for 12 to 18 months, or radioiodine or surgery. After radioiodine or surgery, levothyroxine replaces the hormone for life.",
           },
           "left-lobe": {
             affected: true,
@@ -170,6 +173,33 @@ export const gravesDisease: Disease = {
         { name: "Clinical activity score", result: "0 of 7" },
         { name: "Exophthalmometry", result: "22 mm", flag: "high" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "thyrotoxic",
+      label: "TRAb",
+      description:
+        "TSH receptor antibodies confirm Graves' disease as the cause of the thyrotoxicosis.",
+    },
+    {
+      stage: "thyrotoxic",
+      label: "Carbimazole",
+      time: "12–18 months",
+      description:
+        "Lowers hormone production; a sore throat or fever needs an urgent blood count. About half of people relapse after stopping, and are then offered radioiodine or surgery. Radioiodine can worsen active eye disease.",
+    },
+    {
+      stage: "active-eye",
+      label: "Steroids",
+      description:
+        "Intravenous methylprednisolone with mycophenolate for moderate to severe active eye disease, or teprotumumab where available; selenium for six months for mild. Everyone should stop smoking and keep thyroid levels normal.",
+    },
+    {
+      stage: "inactive",
+      label: "Surgery",
+      description:
+        "Orbital decompression, then squint surgery, then eyelid surgery, in that order, once the disease has been inactive for at least six months.",
     },
   ],
   investigations: [

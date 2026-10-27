@@ -102,6 +102,14 @@ for (const item of diseaseItems) {
     // Every finding names a structure of its scale's model.
     const stages = disease.stages ?? []
     expect(new Set(stages.map(({ id }) => id)).size).toBe(stages.length)
+    // Events sit on the timeline at a stage of the course, in its order, and
+    // a course starts with its first stage, not an alternative to it.
+    const order = (disease.events ?? []).map(({ stage }) =>
+      stages.findIndex(({ id }) => id === stage)
+    )
+    expect(order.every((index) => index >= 0)).toBe(true)
+    expect(order).toEqual([...order].sort((a, b) => a - b))
+    expect(stages[0]?.alternative).toBeFalsy()
     for (const [scaleId, findings] of [
       ...disease.scales.map(({ id, findings }) => [id, findings] as const),
       ...stages.flatMap(({ findings = {} }) => Object.entries(findings)),
@@ -117,14 +125,20 @@ for (const item of diseaseItems) {
         const base = scale.model
         // The same GLB, views and credit; only the structures' text and
         // colours change, so every mesh id still matches the file.
-        const { structures, name, defaultView, ...shared } = model
+        const { structures, name, defaultView, translucentIds, ...shared } =
+          model
         const {
           structures: baseStructures,
           name: baseName,
           defaultView: baseView,
+          translucentIds: baseTranslucent,
           ...same
         } = base
         expect(shared).toEqual(same)
+        // A scale can draw structures of the model see-through.
+        expect(translucentIds).toEqual(scale.translucentIds ?? baseTranslucent)
+        for (const id of translucentIds ?? [])
+          expect(base.structures.map(({ id }) => id)).toContain(id)
         // A scale can open on another of the model's own views.
         expect(defaultView).toBe(scale.defaultView ?? baseView)
         expect(base.views.map(({ name }) => name)).toContain(defaultView)

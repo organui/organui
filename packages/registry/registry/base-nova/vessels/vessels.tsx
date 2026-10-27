@@ -4,12 +4,12 @@ import {
   type OrganViewerProps,
 } from "@/components/organ-viewer"
 
-// Generated from organui/vessels-3d at 17257aa. The GLB stays in that
+// Generated from organui/vessels-3d at 74be339. The GLB stays in that
 // repository under its own licence; see attribution.source.
 export const vesselsModel: OrganModel = {
   name: "Vessels",
-  src: "https://cdn.jsdelivr.net/gh/organui/vessels-3d@17257aaa53c885385515fd3b9fe0378da81582d0/public/models/vessels.glb",
-  bytes: 2417320,
+  src: "https://cdn.jsdelivr.net/gh/organui/vessels-3d@74be339badd85f1d3d93e585ed2a5a79c7679342/public/models/vessels.glb",
+  bytes: 2419320,
   defaultView: "Anterior",
   views: [
     {
@@ -31,7 +31,7 @@ export const vesselsModel: OrganModel = {
       structureIds: [
         "ascending-aorta",
         "aortic-arch",
-        "descending-aorta",
+        "thoracic-aorta",
         "brachiocephalic-trunk",
         "internal-thoracic-arteries",
         "pulmonary-trunk",
@@ -46,6 +46,7 @@ export const vesselsModel: OrganModel = {
       name: "Abdomen and pelvis",
       direction: [0, 0, 1],
       structureIds: [
+        "abdominal-aorta",
         "celiac-trunk",
         "hepatic-artery",
         "splenic-artery",
@@ -124,12 +125,12 @@ export const vesselsModel: OrganModel = {
         "Curves backward and to the left over the heart. The brachiocephalic trunk, left common carotid and left subclavian arteries leave its top.",
     },
     {
-      id: "descending-aorta",
-      label: "Descending aorta",
+      id: "thoracic-aorta",
+      label: "Thoracic aorta",
       group: "Chest",
       color: "#9e2c2b",
       description:
-        "Runs down the back of the chest and through the diaphragm into the abdomen, where it divides into the two common iliac arteries.",
+        "The descending aorta in the chest. It runs down beside the spine behind the heart, giving branches to the ribs, oesophagus and airways, to pass through the diaphragm.",
     },
     {
       id: "brachiocephalic-trunk",
@@ -274,6 +275,14 @@ export const vesselsModel: OrganModel = {
       color: "#88a3cc",
       description:
         "Surface veins on the little-finger side of the arm. Near the elbow they are a common site for drawing blood.",
+    },
+    {
+      id: "abdominal-aorta",
+      label: "Abdominal aorta",
+      group: "Abdomen",
+      color: "#a5302d",
+      description:
+        "Continues the aorta from the diaphragm down in front of the spine, giving off the arteries to the gut, kidneys and adrenals, and divides into the two common iliac arteries in front of the fourth lumbar vertebra.",
     },
     {
       id: "celiac-trunk",
@@ -495,7 +504,7 @@ export const vesselsModel: OrganModel = {
     license: "CC BY-SA 2.1 JP",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en",
     source:
-      "https://github.com/organui/vessels-3d/blob/17257aaa53c885385515fd3b9fe0378da81582d0/public/models/ATTRIBUTION.md",
+      "https://github.com/organui/vessels-3d/blob/74be339badd85f1d3d93e585ed2a5a79c7679342/public/models/ATTRIBUTION.md",
   },
 }
 

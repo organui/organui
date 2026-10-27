@@ -47,12 +47,14 @@ export const kidneyStones: Disease = {
     {
       id: "renal-stone",
       label: "Renal stone",
+      time: "Years",
       summary:
         "A stone in the kidney. Small ones are watched; larger ones are broken up with shock waves or removed through a scope.",
     },
     {
       id: "colic",
       label: "Renal colic",
+      time: "Days to weeks",
       summary:
         "The stone moves into the ureter. Waves of severe loin-to-groin pain come with each contraction; most stones under 5 mm pass on their own.",
       findings: {
@@ -60,18 +62,18 @@ export const kidneyStones: Disease = {
           "left-ureter": {
             affected: true,
             description:
-              "The stone lodges at the vesicoureteric junction, where the ureter enters the bladder. Peristalsis against it causes colic; tamsulosin helps it pass.",
+              "The stone lodges at the vesicoureteric junction, where the ureter enters the bladder. Peristalsis against it causes colic; tamsulosin may help it pass.",
           },
           "left-kidney": {
             affected: true,
             description:
-              "Urine backs up and the collecting system dilates (hydronephrosis). Kidney function is preserved while the other kidney works.",
+              "Urine backs up and the collecting system dilates (hydronephrosis). Creatinine stays normal because the other kidney compensates, but weeks of blockage can permanently damage this one.",
           },
         },
       },
       investigations: [
         { name: "Urine dipstick", result: "Blood", flag: "abnormal" },
-        { name: "CT KUB", result: "4 mm stone at VUJ", flag: "abnormal" },
+        { name: "CT KUB", result: "6 mm stone at VUJ", flag: "abnormal" },
         { name: "Creatinine", result: "Normal" },
         { name: "Temperature", result: "Normal" },
       ],
@@ -101,6 +103,34 @@ export const kidneyStones: Disease = {
         { name: "Creatinine", result: "Raised", flag: "high" },
         { name: "Lactate", result: "Raised", flag: "high" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "renal-stone",
+      label: "Lithotripsy",
+      description:
+        "Shock waves break up a kidney stone up to about 2 cm; larger ones are removed through the skin.",
+    },
+    {
+      stage: "colic",
+      label: "CT",
+      time: "Within 24 h",
+      description:
+        "A low-dose CT finds the stone, its size and where it has stuck.",
+    },
+    {
+      stage: "colic",
+      label: "Pain relief",
+      description:
+        "An anti-inflammatory first; an alpha blocker helps a stone of 5 to 10 mm pass.",
+    },
+    {
+      stage: "infected",
+      label: "Drainage",
+      time: "Urgent",
+      description:
+        "A stent or nephrostomy decompresses the kidney, with antibiotics; the stone is treated once the infection has cleared.",
     },
   ],
   investigations: [

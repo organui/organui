@@ -11,6 +11,10 @@ const local = (model: OrganModel): OrganModel => ({
 })
 
 export const organModels: Record<string, () => Promise<OrganModel>> = {
+  "abdominal-aortic-aneurysm": () =>
+    import("@workspace/registry/abdominal-aortic-aneurysm").then((module) =>
+      local(module.abdominalAorticAneurysmModel)
+    ),
   "acl-rupture": () =>
     import("@workspace/registry/acl-rupture").then((module) =>
       local(module.aclRuptureModel)
@@ -22,6 +26,14 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
   "acute-appendicitis": () =>
     import("@workspace/registry/acute-appendicitis").then((module) =>
       local(module.acuteAppendicitisModel)
+    ),
+  "acute-otitis-media": () =>
+    import("@workspace/registry/acute-otitis-media").then((module) =>
+      local(module.acuteOtitisMediaModel)
+    ),
+  "addisons-disease": () =>
+    import("@workspace/registry/addisons-disease").then((module) =>
+      local(module.addisonsDiseaseModel)
     ),
   adrenals: () =>
     import("@workspace/registry/adrenals").then(
@@ -47,9 +59,17 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/breast").then((module) =>
       local(module.breastModel)
     ),
+  "breast-cancer": () =>
+    import("@workspace/registry/breast-cancer").then((module) =>
+      local(module.breastCancerModel)
+    ),
   cell: () =>
     import("@workspace/registry/cell").then((module) =>
       local(module.cellModel)
+    ),
+  "crohns-disease": () =>
+    import("@workspace/registry/crohns-disease").then((module) =>
+      local(module.crohnsDiseaseModel)
     ),
   diaphragm: () =>
     import("@workspace/registry/diaphragm").then((module) =>
@@ -107,6 +127,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     ),
   kidneys: () =>
     import("@workspace/registry/kidneys").then((module) => module.kidneysModel),
+  "laryngeal-cancer": () =>
+    import("@workspace/registry/laryngeal-cancer").then((module) =>
+      local(module.laryngealCancerModel)
+    ),
   larynx: () =>
     import("@workspace/registry/larynx").then((module) => module.larynxModel),
   liver: () =>
@@ -119,6 +143,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/lobar-pneumonia").then((module) =>
       local(module.lobarPneumoniaModel)
     ),
+  "lumbar-disc-herniation": () =>
+    import("@workspace/registry/lumbar-disc-herniation").then((module) =>
+      local(module.lumbarDiscHerniationModel)
+    ),
   lungs: () =>
     import("@workspace/registry/lungs").then((module) => module.lungsModel),
   lymph: () =>
@@ -129,6 +157,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     ),
   muscles: () =>
     import("@workspace/registry/muscles").then((module) => module.musclesModel),
+  "myasthenia-gravis": () =>
+    import("@workspace/registry/myasthenia-gravis").then((module) =>
+      local(module.myastheniaGravisModel)
+    ),
   "myocardial-infarction": () =>
     import("@workspace/registry/myocardial-infarction").then((module) =>
       local(module.myocardialInfarctionModel)
@@ -143,9 +175,17 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     ),
   nose: () =>
     import("@workspace/registry/nose").then((module) => module.noseModel),
+  "oesophageal-cancer": () =>
+    import("@workspace/registry/oesophageal-cancer").then((module) =>
+      local(module.oesophagealCancerModel)
+    ),
   pancreas: () =>
     import("@workspace/registry/pancreas").then(
       (module) => module.pancreasModel
+    ),
+  "pancreatic-cancer": () =>
+    import("@workspace/registry/pancreatic-cancer").then((module) =>
+      local(module.pancreaticCancerModel)
     ),
   parathyroid: () =>
     import("@workspace/registry/parathyroid").then((module) =>
@@ -169,9 +209,17 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     import("@workspace/registry/pituitary-adenoma").then((module) =>
       local(module.pituitaryAdenomaModel)
     ),
+  "primary-hyperparathyroidism": () =>
+    import("@workspace/registry/primary-hyperparathyroidism").then((module) =>
+      local(module.primaryHyperparathyroidismModel)
+    ),
   prostate: () =>
     import("@workspace/registry/prostate").then(
       (module) => module.prostateModel
+    ),
+  "rheumatoid-arthritis": () =>
+    import("@workspace/registry/rheumatoid-arthritis").then((module) =>
+      local(module.rheumatoidArthritisModel)
     ),
   "salivary-glands": () =>
     import("@workspace/registry/salivary-glands").then((module) =>

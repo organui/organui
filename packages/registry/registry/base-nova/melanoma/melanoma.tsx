@@ -11,7 +11,7 @@ export const melanoma: Disease = {
   name: "Melanoma",
   code: "C43",
   summary:
-    "A cancer of melanocytes, the pigment cells at the base of the epidermis. How deep it has grown, its Breslow thickness, predicts survival better than anything else.",
+    "A cancer of melanocytes, the pigment cells at the base of the epidermis. For a melanoma that has not spread, how deep it has grown, its Breslow thickness, predicts survival best.",
   scales: [
     {
       id: "skin",
@@ -63,7 +63,7 @@ export const melanoma: Disease = {
           "papillary-dermis": {
             affected: true,
             description:
-              "Melanoma cells have crossed the basement membrane and grow downwards in nests (vertical growth). Excised with a 1 cm margin.",
+              "Melanoma cells have crossed the basement membrane into the papillary dermis, so it is now invasive. Excised with a 1 cm margin.",
           },
         },
       },
@@ -77,7 +77,7 @@ export const melanoma: Disease = {
       id: "thick",
       label: "Thick",
       summary:
-        "Breslow thickness over 2 mm, into the reticular dermis. A sentinel node biopsy finds out whether it has reached the lymph nodes.",
+        "Breslow thickness over 2 mm, into the reticular dermis. A sentinel node biopsy finds out whether it has reached the lymph nodes. At stage IIB, adjuvant immunotherapy is offered after surgery.",
       findings: {
         skin: {
           "papillary-dermis": {
@@ -92,7 +92,7 @@ export const melanoma: Disease = {
         },
       },
       investigations: [
-        { name: "Breslow thickness", result: "2.8 mm", flag: "high" },
+        { name: "Breslow thickness", result: "2.8 mm", flag: "abnormal" },
         { name: "Ulceration", result: "Present", flag: "abnormal" },
         { name: "Sentinel node", result: "Negative" },
         { name: "Stage", result: "IIB" },
@@ -115,7 +115,7 @@ export const melanoma: Disease = {
           },
           hypodermis: {
             affected: true,
-            description: "Reached: Clark level V, into the subcutaneous fat.",
+            description: "Reached: the tumour grows into the subcutaneous fat.",
           },
           veins: {
             affected: true,
@@ -125,11 +125,37 @@ export const melanoma: Disease = {
         },
       },
       investigations: [
-        { name: "Breslow thickness", result: "5.5 mm", flag: "high" },
+        { name: "Breslow thickness", result: "5.5 mm", flag: "abnormal" },
         { name: "LDH", result: "Raised", flag: "high" },
         { name: "PET-CT", result: "Lung metastases", flag: "abnormal" },
         { name: "BRAF V600E", result: "Mutated", flag: "abnormal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "in-situ",
+      label: "Dermoscopy",
+      description:
+        "Asymmetry, an irregular border, several colours, a diameter over 6 mm or change over time raise suspicion; a dermatoscope looks closer.",
+    },
+    {
+      stage: "in-situ",
+      label: "Excision biopsy",
+      description:
+        "Removes the whole lesion with a 2 mm margin so the pathologist can measure the Breslow thickness, which sets the wider excision.",
+    },
+    {
+      stage: "thick",
+      label: "Sentinel node",
+      description:
+        "The first lymph node draining the site is removed and examined, to stage the disease and guide treatment after surgery.",
+    },
+    {
+      stage: "metastatic",
+      label: "Systemic therapy",
+      description:
+        "Checkpoint inhibitor immunotherapy first, even when the tumour carries a BRAF mutation. BRAF and MEK inhibitors act faster and are kept for rapid, symptomatic disease or later lines.",
     },
   ],
   investigations: [

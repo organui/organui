@@ -1,6 +1,31 @@
 // Named documentation examples for the diseases, on the public components
 // consumers install. Imports stay explicit so each page loads only its own.
 export const diseaseExamples = {
+  "abdominal-aortic-aneurysm-demo": {
+    title: "Abdominal aortic aneurysm",
+    file: "abdominal-aortic-aneurysm-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./abdominal-aortic-aneurysm-demo")
+      return <Example />
+    },
+  },
+  "abdominal-aortic-aneurysm-without-panel": {
+    title: "Abdominal aortic aneurysm Without Panel",
+    file: "abdominal-aortic-aneurysm-without-panel.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./abdominal-aortic-aneurysm-without-panel")
+      return <Example />
+    },
+  },
+  "abdominal-aortic-aneurysm-controlled": {
+    title: "Abdominal aortic aneurysm Controlled",
+    file: "abdominal-aortic-aneurysm-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./abdominal-aortic-aneurysm-controlled")
+      return <Example />
+    },
+  },
   "acl-rupture-demo": {
     title: "ACL rupture",
     file: "acl-rupture-demo.tsx",
@@ -75,6 +100,54 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "acute-otitis-media-demo": {
+    title: "Acute otitis media",
+    file: "acute-otitis-media-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-otitis-media-demo")
+      return <Example />
+    },
+  },
+  "acute-otitis-media-without-panel": {
+    title: "Acute otitis media Without Panel",
+    file: "acute-otitis-media-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-otitis-media-without-panel")
+      return <Example />
+    },
+  },
+  "acute-otitis-media-controlled": {
+    title: "Acute otitis media Controlled",
+    file: "acute-otitis-media-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./acute-otitis-media-controlled")
+      return <Example />
+    },
+  },
+  "addisons-disease-demo": {
+    title: "Addison's disease",
+    file: "addisons-disease-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./addisons-disease-demo")
+      return <Example />
+    },
+  },
+  "addisons-disease-without-panel": {
+    title: "Addison's disease Without Panel",
+    file: "addisons-disease-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./addisons-disease-without-panel")
+      return <Example />
+    },
+  },
+  "addisons-disease-controlled": {
+    title: "Addison's disease Controlled",
+    file: "addisons-disease-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./addisons-disease-controlled")
+      return <Example />
+    },
+  },
   "autoimmune-hepatitis-demo": {
     title: "Autoimmune hepatitis",
     file: "autoimmune-hepatitis-demo.tsx",
@@ -122,6 +195,54 @@ export const diseaseExamples = {
     render: async () => {
       const { Example } =
         await import("./benign-prostatic-hyperplasia-controlled")
+      return <Example />
+    },
+  },
+  "breast-cancer-demo": {
+    title: "Breast cancer",
+    file: "breast-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./breast-cancer-demo")
+      return <Example />
+    },
+  },
+  "breast-cancer-without-panel": {
+    title: "Breast cancer Without Panel",
+    file: "breast-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./breast-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "breast-cancer-controlled": {
+    title: "Breast cancer Controlled",
+    file: "breast-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./breast-cancer-controlled")
+      return <Example />
+    },
+  },
+  "crohns-disease-demo": {
+    title: "Crohn's disease",
+    file: "crohns-disease-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./crohns-disease-demo")
+      return <Example />
+    },
+  },
+  "crohns-disease-without-panel": {
+    title: "Crohn's disease Without Panel",
+    file: "crohns-disease-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./crohns-disease-without-panel")
+      return <Example />
+    },
+  },
+  "crohns-disease-controlled": {
+    title: "Crohn's disease Controlled",
+    file: "crohns-disease-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./crohns-disease-controlled")
       return <Example />
     },
   },
@@ -269,6 +390,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "laryngeal-cancer-demo": {
+    title: "Laryngeal cancer",
+    file: "laryngeal-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./laryngeal-cancer-demo")
+      return <Example />
+    },
+  },
+  "laryngeal-cancer-without-panel": {
+    title: "Laryngeal cancer Without Panel",
+    file: "laryngeal-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./laryngeal-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "laryngeal-cancer-controlled": {
+    title: "Laryngeal cancer Controlled",
+    file: "laryngeal-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./laryngeal-cancer-controlled")
+      return <Example />
+    },
+  },
   "lobar-pneumonia-demo": {
     title: "Lobar pneumonia",
     file: "lobar-pneumonia-demo.tsx",
@@ -290,6 +435,30 @@ export const diseaseExamples = {
     file: "lobar-pneumonia-controlled.tsx",
     render: async () => {
       const { Example } = await import("./lobar-pneumonia-controlled")
+      return <Example />
+    },
+  },
+  "lumbar-disc-herniation-demo": {
+    title: "Lumbar disc herniation",
+    file: "lumbar-disc-herniation-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./lumbar-disc-herniation-demo")
+      return <Example />
+    },
+  },
+  "lumbar-disc-herniation-without-panel": {
+    title: "Lumbar disc herniation Without Panel",
+    file: "lumbar-disc-herniation-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./lumbar-disc-herniation-without-panel")
+      return <Example />
+    },
+  },
+  "lumbar-disc-herniation-controlled": {
+    title: "Lumbar disc herniation Controlled",
+    file: "lumbar-disc-herniation-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./lumbar-disc-herniation-controlled")
       return <Example />
     },
   },
@@ -317,6 +486,30 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "myasthenia-gravis-demo": {
+    title: "Myasthenia gravis",
+    file: "myasthenia-gravis-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./myasthenia-gravis-demo")
+      return <Example />
+    },
+  },
+  "myasthenia-gravis-without-panel": {
+    title: "Myasthenia gravis Without Panel",
+    file: "myasthenia-gravis-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./myasthenia-gravis-without-panel")
+      return <Example />
+    },
+  },
+  "myasthenia-gravis-controlled": {
+    title: "Myasthenia gravis Controlled",
+    file: "myasthenia-gravis-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./myasthenia-gravis-controlled")
+      return <Example />
+    },
+  },
   "myocardial-infarction-demo": {
     title: "Myocardial infarction",
     file: "myocardial-infarction-demo.tsx",
@@ -338,6 +531,54 @@ export const diseaseExamples = {
     file: "myocardial-infarction-controlled.tsx",
     render: async () => {
       const { Example } = await import("./myocardial-infarction-controlled")
+      return <Example />
+    },
+  },
+  "oesophageal-cancer-demo": {
+    title: "Oesophageal cancer",
+    file: "oesophageal-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./oesophageal-cancer-demo")
+      return <Example />
+    },
+  },
+  "oesophageal-cancer-without-panel": {
+    title: "Oesophageal cancer Without Panel",
+    file: "oesophageal-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./oesophageal-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "oesophageal-cancer-controlled": {
+    title: "Oesophageal cancer Controlled",
+    file: "oesophageal-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./oesophageal-cancer-controlled")
+      return <Example />
+    },
+  },
+  "pancreatic-cancer-demo": {
+    title: "Pancreatic cancer",
+    file: "pancreatic-cancer-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./pancreatic-cancer-demo")
+      return <Example />
+    },
+  },
+  "pancreatic-cancer-without-panel": {
+    title: "Pancreatic cancer Without Panel",
+    file: "pancreatic-cancer-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./pancreatic-cancer-without-panel")
+      return <Example />
+    },
+  },
+  "pancreatic-cancer-controlled": {
+    title: "Pancreatic cancer Controlled",
+    file: "pancreatic-cancer-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./pancreatic-cancer-controlled")
       return <Example />
     },
   },
@@ -386,6 +627,56 @@ export const diseaseExamples = {
     file: "pituitary-adenoma-controlled.tsx",
     render: async () => {
       const { Example } = await import("./pituitary-adenoma-controlled")
+      return <Example />
+    },
+  },
+  "primary-hyperparathyroidism-demo": {
+    title: "Primary hyperparathyroidism",
+    file: "primary-hyperparathyroidism-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./primary-hyperparathyroidism-demo")
+      return <Example />
+    },
+  },
+  "primary-hyperparathyroidism-without-panel": {
+    title: "Primary hyperparathyroidism Without Panel",
+    file: "primary-hyperparathyroidism-without-panel.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./primary-hyperparathyroidism-without-panel")
+      return <Example />
+    },
+  },
+  "primary-hyperparathyroidism-controlled": {
+    title: "Primary hyperparathyroidism Controlled",
+    file: "primary-hyperparathyroidism-controlled.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./primary-hyperparathyroidism-controlled")
+      return <Example />
+    },
+  },
+  "rheumatoid-arthritis-demo": {
+    title: "Rheumatoid arthritis",
+    file: "rheumatoid-arthritis-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./rheumatoid-arthritis-demo")
+      return <Example />
+    },
+  },
+  "rheumatoid-arthritis-without-panel": {
+    title: "Rheumatoid arthritis Without Panel",
+    file: "rheumatoid-arthritis-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./rheumatoid-arthritis-without-panel")
+      return <Example />
+    },
+  },
+  "rheumatoid-arthritis-controlled": {
+    title: "Rheumatoid arthritis Controlled",
+    file: "rheumatoid-arthritis-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./rheumatoid-arthritis-controlled")
       return <Example />
     },
   },

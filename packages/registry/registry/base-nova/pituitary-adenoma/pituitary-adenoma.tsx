@@ -22,7 +22,7 @@ export const pituitaryAdenoma: Disease = {
         "pituitary-gland": {
           affected: true,
           description:
-            "A microadenoma under 1 cm inside the sella, often found by chance on a scan. Most make no hormone and are simply watched.",
+            "A microadenoma under 1 cm inside the sella, often found by chance on a scan. Most found this way make no hormone and are simply watched.",
         },
         "optic-chiasm": {
           affected: false,
@@ -85,7 +85,11 @@ export const pituitaryAdenoma: Disease = {
           flag: "abnormal",
         },
         { name: "MRI", result: "2.4 cm macroadenoma", flag: "abnormal" },
-        { name: "Prolactin", result: "Mildly raised", flag: "high" },
+        {
+          name: "Prolactin",
+          result: "Mildly raised, also on dilution",
+          flag: "high",
+        },
         { name: "9 am cortisol", result: "Low", flag: "low" },
       ],
     },
@@ -93,7 +97,7 @@ export const pituitaryAdenoma: Disease = {
       id: "apoplexy",
       label: "Apoplexy",
       summary:
-        "The tumour suddenly bleeds or dies: thunderclap headache, vomiting, loss of vision and double vision. Give hydrocortisone first; surgery decompresses it.",
+        "The tumour suddenly bleeds or dies: thunderclap headache, vomiting, loss of vision and double vision. Give hydrocortisone first; surgery decompresses it if vision is severely reduced or worsening.",
       findings: {
         pituitary: {
           "pituitary-gland": {
@@ -108,16 +112,43 @@ export const pituitaryAdenoma: Disease = {
           "right-cavernous-sinus": {
             affected: true,
             description:
-              "Blood and swelling press on the oculomotor, trochlear and abducens nerves in its wall: a drooping lid and double vision.",
+              "Blood and swelling press on the oculomotor and trochlear nerves in its wall and the abducens nerve inside it: a drooping lid and double vision.",
           },
         },
       },
       investigations: [
-        { name: "9 am cortisol", result: "Very low", flag: "low" },
+        { name: "Random cortisol", result: "Very low", flag: "low" },
         { name: "Sodium", result: "Low", flag: "low" },
         { name: "MRI", result: "Haemorrhage in tumour", flag: "abnormal" },
         { name: "Visual acuity", result: "Falling", flag: "low" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "microadenoma",
+      label: "Hormone screen",
+      description:
+        "Prolactin, IGF-1, cortisol and thyroid tests look for a hormone the tumour makes and for any the gland has stopped making.",
+    },
+    {
+      stage: "macroadenoma",
+      label: "Visual fields",
+      description:
+        "Chiasm compression takes the upper outer quadrants first, then the outer half of each field (bitemporal hemianopia).",
+    },
+    {
+      stage: "macroadenoma",
+      label: "Surgery",
+      description:
+        "Removed through the nose (transsphenoidal surgery), except a prolactinoma, which shrinks on a dopamine agonist such as cabergoline.",
+    },
+    {
+      stage: "apoplexy",
+      label: "Hydrocortisone",
+      time: "At once",
+      description:
+        "Given as soon as blood is taken for cortisol, without waiting for the result, because sudden loss of cortisol can be fatal.",
     },
   ],
   investigations: [

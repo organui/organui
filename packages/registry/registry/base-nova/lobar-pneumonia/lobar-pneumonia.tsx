@@ -45,11 +45,13 @@ export const lobarPneumonia: Disease = {
         },
         FMA7360: {
           affected: false,
+          label: "Middle lobe, medial segment",
           description:
             "The middle lobe is spared, so the right heart border it touches stays sharp on X-ray while the diaphragm outline behind the lower lobe is lost (the silhouette sign).",
         },
         FMA7361: {
           affected: false,
+          label: "Middle lobe, lateral segment",
           description:
             "Spared. The oblique fissure confines the infection to the lower lobe.",
         },
@@ -60,14 +62,16 @@ export const lobarPneumonia: Disease = {
     {
       id: "congestion",
       label: "Congestion",
+      time: "Days 1–2",
       summary:
-        "Days 1–2. Fever, rigors and a cough; the lobe fills with fluid and bacteria multiply.",
+        "Fever, rigors and a cough; the lobe fills with fluid and bacteria multiply.",
     },
     {
       id: "red-hepatisation",
       label: "Red",
+      time: "Days 2–4",
       summary:
-        "Red hepatisation, days 2–4. The lobe is solid, red and airless, like liver; the cough brings up rust-coloured sputum.",
+        "Red hepatisation: the lobe is solid, red and airless, like liver; the cough brings up rust-coloured sputum.",
       findings: {
         lungs: consolidated(
           "Red cells, neutrophils and fibrin pack the alveoli. Percussion is dull and the breathing sounds bronchial, because sound carries through solid lung."
@@ -83,8 +87,9 @@ export const lobarPneumonia: Disease = {
     {
       id: "grey-hepatisation",
       label: "Grey",
+      time: "Days 4–8",
       summary:
-        "Grey hepatisation, days 4–8. Red cells break down and the lobe turns grey-brown; with antibiotics, the fever settles.",
+        "Grey hepatisation: red cells break down and the lobe turns grey-brown. Antibiotics usually settle the fever before this stage.",
       findings: {
         lungs: consolidated(
           "Neutrophils and fibrin remain while red cells are broken down. The lobe is still solid, but the infection is being contained."
@@ -99,8 +104,9 @@ export const lobarPneumonia: Disease = {
     {
       id: "resolution",
       label: "Resolution",
+      time: "From day 8",
       summary:
-        "From about day 8. Enzymes and macrophages clear the exudate and the lobe's structure returns to normal.",
+        "Enzymes and macrophages clear the exudate and the lobe's structure returns to normal.",
       findings: {
         lungs: consolidated(
           "The exudate is digested and coughed up or cleared by macrophages. The lung heals without a scar; the X-ray can take six weeks to clear."
@@ -111,9 +117,39 @@ export const lobarPneumonia: Disease = {
         { name: "CRP", result: "Normalising" },
         {
           name: "Chest X-ray",
-          result: "Repeat at 6 weeks if over 50 or smoking",
+          result: "Repeat only if symptoms persist or cancer risk is higher",
         },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "congestion",
+      label: "Chest X-ray",
+      time: "Within 4 h",
+      description:
+        "Makes the diagnosis: a consolidated lobe, with air bronchograms where open airways run through it.",
+    },
+    {
+      stage: "congestion",
+      label: "CURB-65",
+      time: "At diagnosis",
+      description:
+        "Scores confusion, urea, breathing rate, blood pressure and age 65 or over to decide between treatment at home, on the ward or in intensive care.",
+    },
+    {
+      stage: "congestion",
+      label: "Antibiotics",
+      time: "Within 4 h",
+      description:
+        "Amoxicillin for low-severity pneumonia, broadened as the score rises; within an hour if there is sepsis.",
+    },
+    {
+      stage: "resolution",
+      label: "Repeat X-ray",
+      time: "At 6 weeks",
+      description:
+        "Not routine after a full recovery; offered if symptoms persist or the risk of a hidden tumour is higher, as in smokers over 50.",
     },
   ],
   investigations: [
