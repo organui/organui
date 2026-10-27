@@ -370,11 +370,12 @@ export const mainNav: NavLink[] = [
   { title: "Docs", href: "/docs" },
   { title: "Components", href: componentsIndex.href },
   { title: organsPage.title, href: organsPage.href },
-  {
-    title: diseasesPage.title,
-    href: diseasesPage.href,
-    pages: diseasesPage.pages,
-  },
+  // Diseases need additional work.
+  // {
+  //   title: diseasesPage.title,
+  //   href: diseasesPage.href,
+  //   pages: diseasesPage.pages,
+  // },
   // Blocks need additional work.
   // { title: "Blocks", href: "/blocks" },
   { title: "Charts", href: "/charts/area" },
