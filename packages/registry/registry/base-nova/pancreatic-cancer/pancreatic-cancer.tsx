@@ -18,10 +18,15 @@ export const pancreaticCancer: Disease = {
       label: "Pancreas",
       model: pancreasModel,
       findings: {
-        pancreas: {
+        "pancreatic-head": {
           affected: true,
           description:
-            "A hard, poorly defined mass in the head. It squeezes the common bile duct running through the head, so painless jaundice is often the first sign, with dark urine, pale stools and itch.",
+            "A hard, poorly defined mass. It squeezes the common bile duct running through the head, so painless jaundice is often the first sign, with dark urine, pale stools and itch.",
+        },
+        "pancreatic-body-and-tail": {
+          affected: false,
+          description:
+            "Free of tumour, though behind the blocked duct the gland can waste away (atrophy).",
         },
         "pancreatic-duct": {
           affected: true,
@@ -81,7 +86,7 @@ export const pancreaticCancer: Disease = {
         "The tumour wraps around the superior mesenteric artery, so it cannot be removed; about 30% are found at this stage. Chemotherapy, sometimes with radiotherapy, can shrink it enough for surgery in a few.",
       findings: {
         pancreas: {
-          pancreas: {
+          "pancreatic-head": {
             affected: true,
             description:
               "The mass has grown through the back of the head and along the nerves around the arteries. Spreading into the nerve plexus there causes a boring pain through to the back.",

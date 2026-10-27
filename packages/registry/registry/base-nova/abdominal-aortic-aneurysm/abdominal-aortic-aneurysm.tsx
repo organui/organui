@@ -20,11 +20,15 @@ export const abdominalAorticAneurysm: Disease = {
       model: vesselsModel,
       defaultView: "Abdomen and pelvis",
       findings: {
-        "descending-aorta": {
+        "abdominal-aorta": {
           affected: true,
-          label: "Abdominal aorta",
           description:
             "Below the renal arteries the wall has weakened as elastin and smooth muscle break down, and the aorta has widened to 4.2 cm. A pulsatile, expansile mass may be felt above the navel, but most cause no symptoms.",
+        },
+        "thoracic-aorta": {
+          affected: false,
+          description:
+            "Normal here. An aneurysm can also form in the chest, so the CT angiogram before a repair covers the whole aorta.",
         },
         "renal-arteries": {
           affected: false,
@@ -74,9 +78,8 @@ export const abdominalAorticAneurysm: Disease = {
         "At 5.5 cm or more (5.0 cm in women) the risk of rupture outweighs the risk of repair, as it does for one over 4 cm growing more than 1 cm a year, or one causing symptoms. Repaired with a stent graft or open surgery.",
       findings: {
         vessels: {
-          "descending-aorta": {
+          "abdominal-aorta": {
             affected: true,
-            label: "Abdominal aorta",
             description:
               "Widened to 5.8 cm, lined with layered clot that leaves a channel for flow. Tenderness or back pain means it may be about to rupture and needs same-day review.",
           },
@@ -103,9 +106,8 @@ export const abdominalAorticAneurysm: Disease = {
         "Sudden abdominal or back pain and collapse, sometimes with a pulsatile mass. About 8 in 10 die, many before reaching hospital; the rest need repair within hours. Rupture is rare below 5.5 cm.",
       findings: {
         vessels: {
-          "descending-aorta": {
+          "abdominal-aorta": {
             affected: true,
-            label: "Abdominal aorta",
             description:
               "Ruptured through its back wall into the retroperitoneum, where the surrounding tissue briefly contains the bleeding. A rupture into the free abdomen is rapidly fatal.",
           },
