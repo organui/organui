@@ -1438,6 +1438,8 @@ test("helper and utility pages show a working example and pass an accessibility 
   page,
   request,
 }) => {
+  // An accessibility scan per page; the list grows with every helper.
+  test.setTimeout(90_000)
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   const helpers = registrySchema
