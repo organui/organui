@@ -516,7 +516,7 @@ function Choice({
             variant="ghost"
             aria-pressed={option.id === value}
             onClick={() => onChange(option.id)}
-            className="h-7 flex-1 px-2 text-muted-foreground aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:shadow-sm"
+            className="h-7 flex-1 px-2 text-foreground/60 aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:shadow-sm dark:text-muted-foreground"
           >
             {option.label}
           </Button>
