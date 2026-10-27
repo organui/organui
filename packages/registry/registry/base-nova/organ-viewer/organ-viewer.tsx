@@ -81,6 +81,8 @@ export type OrganModel = {
   defaultView: string
   /** Structures the explorer hides on first load. */
   hiddenIds?: readonly string[]
+  /** Structures drawn see-through, so the ones inside them show, such as fat over a gland. */
+  translucentIds?: readonly string[]
   attribution: {
     credit: string
     license: string
@@ -670,6 +672,7 @@ export function OrganViewer({
         const colors = new Map(
           latest.current.model.structures.map(({ id, color }) => [id, color])
         )
+        const translucent = new Set(latest.current.model.translucentIds)
         for (const [id, list] of meshes) {
           const color = colors.get(id) ?? structures.get(id)!.color
           const state = !selected
@@ -707,9 +710,11 @@ export function OrganViewer({
             material.userData.state = state
             material.emissive.set(state === "selected" ? color : "#000000")
             material.emissiveIntensity = state === "selected" ? 0.35 : 0
-            material.transparent = state === "ghosted"
-            material.opacity = state === "ghosted" ? 0.22 : 1
-            material.depthWrite = state !== "ghosted"
+            // A translucent structure stays see-through until it is selected.
+            const clear = state === "normal" && translucent.has(id) ? 0.3 : 1
+            material.transparent = state === "ghosted" || clear < 1
+            material.opacity = state === "ghosted" ? 0.22 : clear
+            material.depthWrite = state !== "ghosted" && clear === 1
             material.roughness = 0.58
             // glTF defaults to fully metallic when a file omits the factor.
             material.metalness = 0

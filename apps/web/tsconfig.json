@@ -211,6 +211,9 @@
       "@/components/benign-prostatic-hyperplasia": [
         "../../packages/registry/registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx"
       ],
+      "@/components/breast-cancer": [
+        "../../packages/registry/registry/base-nova/breast-cancer/breast-cancer.tsx"
+      ],
       "@/components/crohns-disease": [
         "../../packages/registry/registry/base-nova/crohns-disease/crohns-disease.tsx"
       ],

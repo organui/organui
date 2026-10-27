@@ -121,7 +121,10 @@ export default function Page() {
             for what happens under the microscope. Findings name structures of
             that model; a structure without one is spared and keeps its
             anatomical description. A stage replaces the findings and
-            investigations it lists, so it describes only what changes.
+            investigations it lists, so it describes only what changes. A
+            scale&apos;s <code>translucentIds</code> draws structures
+            see-through, such as the fat around a breast&apos;s lobes, so the
+            disease inside them shows.
           </p>
           <p>
             Affected structures share one amber, so a disease of a whole organ

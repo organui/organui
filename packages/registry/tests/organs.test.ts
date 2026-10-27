@@ -125,14 +125,20 @@ for (const item of diseaseItems) {
         const base = scale.model
         // The same GLB, views and credit; only the structures' text and
         // colours change, so every mesh id still matches the file.
-        const { structures, name, defaultView, ...shared } = model
+        const { structures, name, defaultView, translucentIds, ...shared } =
+          model
         const {
           structures: baseStructures,
           name: baseName,
           defaultView: baseView,
+          translucentIds: baseTranslucent,
           ...same
         } = base
         expect(shared).toEqual(same)
+        // A scale can draw structures of the model see-through.
+        expect(translucentIds).toEqual(scale.translucentIds ?? baseTranslucent)
+        for (const id of translucentIds ?? [])
+          expect(base.structures.map(({ id }) => id)).toContain(id)
         // A scale can open on another of the model's own views.
         expect(defaultView).toBe(scale.defaultView ?? baseView)
         expect(base.views.map(({ name }) => name)).toContain(defaultView)
