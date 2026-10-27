@@ -133,6 +133,9 @@
       "@/components/disease-model": [
         "./registry/base-nova/disease-viewer/disease-model.ts"
       ],
+      "@/components/abdominal-aortic-aneurysm": [
+        "./registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx"
+      ],
       "@/components/acute-angle-closure-glaucoma": [
         "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
       ],
