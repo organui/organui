@@ -152,6 +152,9 @@
       "@/components/abdominal-aortic-aneurysm": [
         "./registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx"
       ],
+      "@/components/acl-rupture": [
+        "./registry/base-nova/acl-rupture/acl-rupture.tsx"
+      ],
       "@/components/acute-angle-closure-glaucoma": [
         "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
       ],

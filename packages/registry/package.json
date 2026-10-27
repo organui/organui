@@ -88,6 +88,7 @@
     "./disease-viewer": "./registry/base-nova/disease-viewer/disease-viewer.tsx",
     "./disease-model": "./registry/base-nova/disease-viewer/disease-model.ts",
     "./abdominal-aortic-aneurysm": "./registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx",
+    "./acl-rupture": "./registry/base-nova/acl-rupture/acl-rupture.tsx",
     "./acute-angle-closure-glaucoma": "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx",
     "./acute-appendicitis": "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
     "./acute-otitis-media": "./registry/base-nova/acute-otitis-media/acute-otitis-media.tsx",

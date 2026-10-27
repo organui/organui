@@ -7,6 +7,10 @@ export const diseaseData: Record<string, () => Promise<Disease>> = {
     import("@workspace/registry/abdominal-aortic-aneurysm").then(
       (module) => module.abdominalAorticAneurysm
     ),
+  "acl-rupture": () =>
+    import("@workspace/registry/acl-rupture").then(
+      (module) => module.aclRupture
+    ),
   "acute-angle-closure-glaucoma": () =>
     import("@workspace/registry/acute-angle-closure-glaucoma").then(
       (module) => module.acuteAngleClosureGlaucoma

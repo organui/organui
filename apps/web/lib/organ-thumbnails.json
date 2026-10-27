@@ -1,5 +1,6 @@
 {
   "abdominal-aortic-aneurysm": "https://cdn.jsdelivr.net/gh/organui/vessels-3d@74be339badd85f1d3d93e585ed2a5a79c7679342/public/models/vessels.glb",
+  "acl-rupture": "https://organui.com/models/joints.glb",
   "acute-angle-closure-glaucoma": "https://cdn.jsdelivr.net/gh/organui/eye-3d@99f74f1c096ae2813dd18e1ecb2c9cbbd701c530/public/models/eye.glb",
   "acute-appendicitis": "https://organui.com/models/appendix.glb",
   "acute-otitis-media": "https://cdn.jsdelivr.net/gh/organui/ear-3d@40ace7ed45cdbf604adda889e5db720ee6b1ce98/public/models/ear.glb",
