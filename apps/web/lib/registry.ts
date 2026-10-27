@@ -375,7 +375,8 @@ export const mainNav: NavLink[] = [
     href: diseasesPage.href,
     pages: diseasesPage.pages,
   },
-  { title: "Blocks", href: "/blocks" },
+  // Blocks need additional work.
+  // { title: "Blocks", href: "/blocks" },
   { title: "Charts", href: "/charts/area" },
   { title: "Create", href: "/create" },
 ]

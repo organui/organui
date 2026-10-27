@@ -437,7 +437,6 @@ test("the header links each section and searches the whole site", async ({
     "Components",
     "Organs",
     "Diseases",
-    "Blocks",
     "Charts",
     "Create",
   ])
@@ -857,14 +856,8 @@ test("blocks gallery previews and installs every block", async ({
         type === "registry:block" && !categories?.includes("charts")
     )
   expect(blocks.length).toBeGreaterThan(0)
-  await page.goto("/docs")
-  if ((page.viewportSize()?.width ?? 0) < 768)
-    await page.getByRole("button", { name: "Menu", exact: true }).click()
-  await page
-    .getByRole("navigation", { name: "Main" })
-    .getByRole("link", { name: "Blocks", exact: true })
-    .click()
-  await expect(page).toHaveURL(/\/blocks$/)
+  // Blocks are off the header until they get more work, so open the page directly.
+  await page.goto("/blocks")
   await expect(
     page.getByRole("heading", { name: "Blocks", level: 1 })
   ).toBeVisible()
