@@ -40,6 +40,7 @@
   "nails": "https://organui.com/models/nails.glb",
   "nerves": "https://organui.com/models/nerves.glb",
   "nose": "https://cdn.jsdelivr.net/gh/organui/nose-3d@e8acaadd578c9e3b9f7c5cbc6b4e6d8d05dc25f0/public/models/nose.glb",
+  "oesophageal-cancer": "https://cdn.jsdelivr.net/gh/organui/esophagus-3d@ba0fddba344ae586f266586a9a30f3fce10f2aec/public/models/esophagus.glb",
   "pancreas": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@72b1c4342d56cb233b9cfc13f183874e883dbece/public/models/pancreas.glb",
   "pancreatic-cancer": "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@72b1c4342d56cb233b9cfc13f183874e883dbece/public/models/pancreas.glb",
   "parathyroid": "https://organui.com/models/parathyroid.glb",

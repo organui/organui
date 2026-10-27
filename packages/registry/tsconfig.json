@@ -185,6 +185,9 @@
       "@/components/myocardial-infarction": [
         "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
       ],
+      "@/components/oesophageal-cancer": [
+        "./registry/base-nova/oesophageal-cancer/oesophageal-cancer.tsx"
+      ],
       "@/components/pancreatic-cancer": [
         "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx"
       ],

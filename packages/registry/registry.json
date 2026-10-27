@@ -1244,6 +1244,21 @@
       "docs": "Myocardial infarction docs: https://organui.com/docs/components/myocardial-infarction. It reuses the heart model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "oesophageal-cancer",
+      "type": "registry:component",
+      "title": "Oesophageal cancer",
+      "description": "Adenocarcinoma of the lower oesophagus on the oesophagus: Barrett's oesophagus after years of reflux, an early cancer found at surveillance, or a locally advanced one found late that reaches the stomach and the nodes along the left gastric artery. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/esophagus"],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/oesophageal-cancer/oesophageal-cancer.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Oesophageal cancer docs: https://organui.com/docs/components/oesophageal-cancer. It reuses the esophagus model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "pancreatic-cancer",
       "type": "registry:component",
       "title": "Pancreatic cancer",

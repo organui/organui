@@ -159,6 +159,10 @@ export const organModels: Record<string, () => Promise<OrganModel>> = {
     ),
   nose: () =>
     import("@workspace/registry/nose").then((module) => module.noseModel),
+  "oesophageal-cancer": () =>
+    import("@workspace/registry/oesophageal-cancer").then((module) =>
+      local(module.oesophagealCancerModel)
+    ),
   pancreas: () =>
     import("@workspace/registry/pancreas").then(
       (module) => module.pancreasModel
