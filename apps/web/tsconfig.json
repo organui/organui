@@ -256,6 +256,9 @@
       "@/components/melanoma": [
         "../../packages/registry/registry/base-nova/melanoma/melanoma.tsx"
       ],
+      "@/components/myasthenia-gravis": [
+        "../../packages/registry/registry/base-nova/myasthenia-gravis/myasthenia-gravis.tsx"
+      ],
       "@/components/myocardial-infarction": [
         "../../packages/registry/registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
       ],

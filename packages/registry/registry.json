@@ -1259,6 +1259,25 @@
       "docs": "Melanoma docs: https://organui.com/docs/components/melanoma. It reuses the skin model, licensed CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "myasthenia-gravis",
+      "type": "registry:component",
+      "title": "Myasthenia gravis",
+      "description": "Myasthenia gravis with a thymoma on the eye and the thymus: fatigable ptosis and double vision with normal pupils, a thymoma in the left lobe, then generalised weakness or, as the alternative course, a myasthenic crisis. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": [
+        "@organui/disease-viewer",
+        "@organui/eye",
+        "@organui/thymus"
+      ],
+      "categories": ["disease", "senses"],
+      "files": [
+        {
+          "path": "registry/base-nova/myasthenia-gravis/myasthenia-gravis.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Myasthenia gravis docs: https://organui.com/docs/components/myasthenia-gravis. It reuses the eye model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en) and the thymus model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "myocardial-infarction",
       "type": "registry:component",
       "title": "Myocardial infarction",

@@ -101,6 +101,7 @@
     "./lobar-pneumonia": "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
     "./lumbar-disc-herniation": "./registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx",
     "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx",
+    "./myasthenia-gravis": "./registry/base-nova/myasthenia-gravis/myasthenia-gravis.tsx",
     "./myocardial-infarction": "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
     "./oesophageal-cancer": "./registry/base-nova/oesophageal-cancer/oesophageal-cancer.tsx",
     "./pancreatic-cancer": "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx",

@@ -38,6 +38,7 @@
   "lymph": "https://cdn.jsdelivr.net/gh/organui/lymph-3d@ce6d0cf9c1b632d0e109fc84139e14d0b5cbd651/public/models/lymph-node.glb",
   "melanoma": "https://cdn.jsdelivr.net/gh/organui/skin-3d@0e29b3087641e269183f1ecef7a997e412b584fb/public/models/skin.glb",
   "muscles": "https://cdn.jsdelivr.net/gh/organui/muscles-3d@1c746c36d12a78c5f3fd452dbe5d29ae869cad04/public/models/muscles.glb",
+  "myasthenia-gravis": "https://cdn.jsdelivr.net/gh/organui/eye-3d@99f74f1c096ae2813dd18e1ecb2c9cbbd701c530/public/models/eye.glb",
   "myocardial-infarction": "https://cdn.jsdelivr.net/gh/organui/heart-3d@c72ce6654ff8e282942f97750d3104f55ef4fc3d/public/models/heart.glb",
   "nails": "https://organui.com/models/nails.glb",
   "nerves": "https://organui.com/models/nerves.glb",
