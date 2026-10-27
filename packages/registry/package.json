@@ -96,6 +96,7 @@
     "./ischaemic-stroke": "./registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx",
     "./kidney-stones": "./registry/base-nova/kidney-stones/kidney-stones.tsx",
     "./lobar-pneumonia": "./registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx",
+    "./lumbar-disc-herniation": "./registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx",
     "./melanoma": "./registry/base-nova/melanoma/melanoma.tsx",
     "./myocardial-infarction": "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
     "./pancreatic-cancer": "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx",
