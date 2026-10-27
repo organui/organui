@@ -11,7 +11,7 @@ export const acuteAppendicitis: Disease = {
   name: "Acute appendicitis",
   code: "K35.8",
   summary:
-    "The appendix's lumen blocks, mucus and bacteria build up behind it, and the inflamed wall can die and perforate within a day or two.",
+    "The appendix lumen becomes blocked, mucus and bacteria build up behind it, and the inflamed wall can die and perforate within a day or two.",
   scales: [
     {
       id: "appendix",
@@ -27,7 +27,7 @@ export const acuteAppendicitis: Disease = {
         colon: {
           affected: false,
           description:
-            "The caecum is not involved yet. Pressing on the left side of the abdomen pushes gas back towards it and hurts on the right (Rovsing's sign) once the appendix is inflamed.",
+            "The caecum is not involved yet. Pressing in the left iliac fossa hurts in the right (Rovsing's sign) once the appendix is inflamed.",
         },
         ileum: {
           affected: false,
@@ -122,7 +122,7 @@ export const acuteAppendicitis: Disease = {
       stage: "early",
       label: "Alvarado score",
       description:
-        "Adds up the migrating pain, symptoms, tenderness, fever and white count; a high score makes appendicitis likely.",
+        "Adds up the migrating pain, symptoms, tenderness, fever and white count; a low score makes appendicitis unlikely. The AIR and Adult Appendicitis scores are now preferred.",
     },
     {
       stage: "suppurative",
@@ -134,7 +134,7 @@ export const acuteAppendicitis: Disease = {
       stage: "suppurative",
       label: "Appendicectomy",
       description:
-        "Laparoscopic removal with antibiotics, usually within 24 hours. Some uncomplicated cases settle with antibiotics alone.",
+        "Laparoscopic removal with antibiotics, usually within 24 hours. Some uncomplicated cases without a faecolith settle with antibiotics alone.",
     },
     {
       stage: "perforated",

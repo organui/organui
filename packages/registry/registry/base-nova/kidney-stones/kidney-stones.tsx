@@ -62,18 +62,18 @@ export const kidneyStones: Disease = {
           "left-ureter": {
             affected: true,
             description:
-              "The stone lodges at the vesicoureteric junction, where the ureter enters the bladder. Peristalsis against it causes colic; tamsulosin helps it pass.",
+              "The stone lodges at the vesicoureteric junction, where the ureter enters the bladder. Peristalsis against it causes colic; tamsulosin may help it pass.",
           },
           "left-kidney": {
             affected: true,
             description:
-              "Urine backs up and the collecting system dilates (hydronephrosis). Kidney function is preserved while the other kidney works.",
+              "Urine backs up and the collecting system dilates (hydronephrosis). Creatinine stays normal because the other kidney compensates, but weeks of blockage can permanently damage this one.",
           },
         },
       },
       investigations: [
         { name: "Urine dipstick", result: "Blood", flag: "abnormal" },
-        { name: "CT KUB", result: "4 mm stone at VUJ", flag: "abnormal" },
+        { name: "CT KUB", result: "6 mm stone at VUJ", flag: "abnormal" },
         { name: "Creatinine", result: "Normal" },
         { name: "Temperature", result: "Normal" },
       ],

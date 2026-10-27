@@ -12,7 +12,7 @@ export const pepticUlcerDisease: Disease = {
   name: "Peptic ulcer disease",
   code: "K25",
   summary:
-    "Helicobacter pylori or anti-inflammatory drugs weaken the stomach's mucosal barrier, and acid digests a crater into the wall. Treating the cause heals it.",
+    "Helicobacter pylori or NSAIDs, including aspirin, weaken the stomach's mucosal barrier, and acid digests a crater into the wall. Treating the cause heals it.",
   scales: [
     {
       id: "stomach",
@@ -27,7 +27,7 @@ export const pepticUlcerDisease: Disease = {
         "left-gastric-artery": {
           affected: false,
           description:
-            "Runs along the lesser curve just behind the ulcer, intact for now. A deepening ulcer can erode into it.",
+            "Runs along the lesser curve right beside the ulcer, intact for now. A deepening ulcer can erode into it.",
         },
         duodenum: {
           affected: false,
@@ -53,19 +53,19 @@ export const pepticUlcerDisease: Disease = {
       label: "Ulcer",
       time: "Weeks",
       summary:
-        "Pain and indigestion. Eradicating H. pylori, stopping NSAIDs and a proton pump inhibitor heal most ulcers in eight weeks.",
+        "Pain and indigestion. Eradicating H. pylori, stopping NSAIDs and a proton pump inhibitor heal most ulcers in eight weeks; a gastric ulcer is scoped again to confirm it has healed.",
     },
     {
       id: "bleeding",
       label: "Bleeding",
       summary:
-        "The ulcer erodes a vessel: vomiting blood or black, tarry stools. Resuscitate, then endoscopy within 24 hours stops it.",
+        "The ulcer erodes a vessel: vomiting blood or black, tarry stools. Resuscitate, then endoscopy within 24 hours, or at once if unstable, stops it.",
       findings: {
         stomach: {
           stomach: {
             affected: true,
             description:
-              "At endoscopy a visible vessel or clot in the ulcer base predicts rebleeding; it is injected, clipped or heat-sealed.",
+              "At endoscopy a visible vessel or clot in the ulcer base predicts rebleeding; it is clipped or heat-sealed, often after an adrenaline injection.",
           },
           "left-gastric-artery": {
             affected: true,
@@ -92,7 +92,7 @@ export const pepticUlcerDisease: Disease = {
           stomach: {
             affected: true,
             description:
-              "A hole through the lesser curve wall. Chemical then bacterial peritonitis follows; an omental patch repairs it.",
+              "A hole through the lesser curve wall. Chemical then bacterial peritonitis follows; an omental patch repairs it and its edge is biopsied for cancer.",
           },
           duodenum: {
             affected: false,
@@ -118,7 +118,7 @@ export const pepticUlcerDisease: Disease = {
       stage: "ulcer",
       label: "H. pylori test",
       description:
-        "A breath or stool test. Eradication heals the ulcer and stops it coming back.",
+        "A breath or stool test off PPIs for two weeks, or a biopsy at endoscopy. Eradication heals the ulcer and stops it coming back; a breath test after treatment confirms it worked.",
     },
     {
       stage: "bleeding",

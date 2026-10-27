@@ -20,7 +20,7 @@ export const myocardialInfarction: Disease = {
       model: heartModel,
       findings: {
         "left-coronary": {
-          label: "Left coronary artery (LAD)",
+          label: "Left coronary artery, LAD branch",
           affected: true,
           description:
             "The culprit is its left anterior descending (LAD) branch: a cholesterol plaque ruptures and a clot forms on it, blocking the artery. Emergency angioplasty (PCI) reopens it with a stent.",
@@ -33,12 +33,12 @@ export const myocardialInfarction: Disease = {
         "left-ventricle": {
           affected: true,
           description:
-            "With part of its wall still, the left ventricle empties less with each beat. A large infarct causes cardiogenic shock.",
+            "With part of its wall still, the left ventricle empties less with each beat. A large infarct can cause cardiogenic shock.",
         },
         "right-coronary": {
           affected: false,
           description:
-            "Supplies the inferior wall and is patent here; its occlusion causes an inferior infarction instead.",
+            "Usually supplies the inferior wall and is patent here; its occlusion causes an inferior infarction instead.",
         },
         "right-ventricle": {
           affected: false,
@@ -59,7 +59,7 @@ export const myocardialInfarction: Disease = {
       label: "Occlusion",
       time: "0–12 h",
       summary:
-        "ST elevation on the ECG means the artery is blocked; reopen it with PCI within 120 minutes of diagnosis.",
+        "ST elevation on the ECG means the artery is blocked; reopen it with PCI, ideally within 90 minutes of diagnosis.",
     },
     {
       id: "acute",
@@ -70,7 +70,7 @@ export const myocardialInfarction: Disease = {
       findings: {
         heart: {
           "left-coronary": {
-            label: "Left coronary artery (LAD)",
+            label: "Left coronary artery, LAD branch",
             affected: true,
             description:
               "Opened and stented. Two antiplatelet drugs stop a clot forming on the new stent.",
@@ -103,7 +103,7 @@ export const myocardialInfarction: Disease = {
       findings: {
         heart: {
           "left-coronary": {
-            label: "Left coronary artery (LAD)",
+            label: "Left coronary artery, LAD branch",
             affected: true,
             description:
               "Stented. Statins, antiplatelets and stopping smoking keep it and the other arteries open.",
@@ -116,7 +116,7 @@ export const myocardialInfarction: Disease = {
           "left-ventricle": {
             affected: true,
             description:
-              "Remodelling: the ventricle dilates to keep its output. ACE inhibitors and beta blockers limit it and heart failure.",
+              "Remodelling: the ventricle dilates to keep its output. ACE inhibitors and beta blockers limit it and the heart failure it leads to.",
           },
         },
       },
@@ -153,13 +153,13 @@ export const myocardialInfarction: Disease = {
       stage: "healed",
       label: "Prevention",
       description:
-        "Two antiplatelet drugs for 12 months and a high-intensity statin; a beta blocker and an ACE inhibitor because the ventricle is weakened. Cardiac rehabilitation helps the return to activity.",
+        "Two antiplatelet drugs for 12 months and a high-intensity statin. Because the ventricle is weakened: a beta blocker, an ACE inhibitor, eplerenone and an SGLT2 inhibitor. Cardiac rehabilitation helps the return to activity.",
     },
   ],
   investigations: [
     { name: "ECG", result: "ST elevation V1–V4", flag: "abnormal" },
     { name: "Troponin", result: "Rising", flag: "high" },
-    { name: "Echo", result: "Anterior hypokinesia", flag: "abnormal" },
+    { name: "Echo", result: "Anterior akinesia", flag: "abnormal" },
     { name: "Angiogram", result: "LAD occluded", flag: "abnormal" },
   ],
 }

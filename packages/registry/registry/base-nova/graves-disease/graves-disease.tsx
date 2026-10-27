@@ -60,7 +60,7 @@ export const gravesDisease: Disease = {
         "levator-palpebrae": {
           affected: true,
           description:
-            "Excess thyroid hormone drives the sympathetic Müller's muscle beneath it, so the upper lid retracts and lags behind the eye when looking down, giving a staring look.",
+            "Excess thyroid hormone drives the sympathetic Müller's muscle beneath it, so the upper lid retracts and lags behind the eye when looking down, giving a staring look. Inflammation of the levator in eye disease retracts it too.",
         },
         "inferior-rectus": {
           affected: false,
@@ -136,7 +136,7 @@ export const gravesDisease: Disease = {
           "right-lobe": {
             affected: true,
             description:
-              "Treated: carbimazole for 12 to 18 months, or radioiodine or surgery, after which levothyroxine replaces the hormone for life.",
+              "Treated: carbimazole for 12 to 18 months, or radioiodine or surgery. After radioiodine or surgery, levothyroxine replaces the hormone for life.",
           },
           "left-lobe": {
             affected: true,
@@ -187,19 +187,19 @@ export const gravesDisease: Disease = {
       label: "Carbimazole",
       time: "12–18 months",
       description:
-        "Lowers hormone production. About half of people relapse after stopping, and are then offered radioiodine or surgery.",
+        "Lowers hormone production; a sore throat or fever needs an urgent blood count. About half of people relapse after stopping, and are then offered radioiodine or surgery. Radioiodine can worsen active eye disease.",
     },
     {
       stage: "active-eye",
       label: "Steroids",
       description:
-        "Intravenous methylprednisolone with mycophenolate for moderate to severe active eye disease, selenium for mild. Everyone should stop smoking.",
+        "Intravenous methylprednisolone with mycophenolate for moderate to severe active eye disease, or teprotumumab where available; selenium for six months for mild. Everyone should stop smoking and keep thyroid levels normal.",
     },
     {
       stage: "inactive",
       label: "Surgery",
       description:
-        "Orbital decompression, then squint surgery, then eyelid surgery, in that order, once the disease has been inactive for months.",
+        "Orbital decompression, then squint surgery, then eyelid surgery, in that order, once the disease has been inactive for at least six months.",
     },
   ],
   investigations: [

@@ -12,7 +12,7 @@ export const gallstoneDisease: Disease = {
   name: "Gallstone disease",
   code: "K80",
   summary:
-    "Stones form in the gallbladder from bile overloaded with cholesterol. Most never cause trouble; the illness depends on where one gets stuck.",
+    "Stones form in the gallbladder, most from bile overloaded with cholesterol. Most never cause trouble; the illness depends on where one gets stuck.",
   scales: [
     {
       id: "gallbladder",
@@ -29,7 +29,7 @@ export const gallstoneDisease: Disease = {
         "cystic-duct": {
           affected: true,
           description:
-            "A stone is squeezed into the duct as the gallbladder contracts after a fatty meal. Steady right upper quadrant pain lasts under six hours, until it falls back.",
+            "A stone is squeezed into the duct as the gallbladder contracts after a fatty meal. Steady epigastric or right upper quadrant pain lasts under six hours, until it falls back.",
         },
         liver: {
           affected: false,
@@ -72,14 +72,18 @@ export const gallstoneDisease: Disease = {
           "cystic-duct": {
             affected: true,
             description:
-              "Blocked for hours. Without drainage the gallbladder can become gangrenous or perforate.",
+              "Blocked for hours. Untreated, the gallbladder can become gangrenous or perforate.",
           },
         },
       },
       investigations: [
         { name: "White cells", result: "Raised", flag: "high" },
         { name: "CRP", result: "Raised", flag: "high" },
-        { name: "Ultrasound", result: "Thick wall, fluid", flag: "abnormal" },
+        {
+          name: "Ultrasound",
+          result: "Stones, thick wall, fluid around it",
+          flag: "abnormal",
+        },
         { name: "Murphy's sign", result: "Positive", flag: "abnormal" },
       ],
     },
@@ -98,7 +102,7 @@ export const gallstoneDisease: Disease = {
           "common-hepatic-duct": {
             affected: true,
             description:
-              "The stone blocks the common duct below this one, and the ducts above dilate. ERCP removes the stone and drains the infection.",
+              "Dilated above a stone in the common bile duct below it. ERCP removes the stone and drains the infection.",
           },
           "intrahepatic-ducts": {
             affected: true,
@@ -141,6 +145,11 @@ export const gallstoneDisease: Disease = {
             description:
               "Swollen and inflamed: severe epigastric pain through to the back. Most attacks are mild; severe ones cause organ failure.",
           },
+          liver: {
+            affected: true,
+            description:
+              "The stone briefly blocks bile at the ampulla too, so ALT rises, a clue that gallstones caused the pancreatitis.",
+          },
           duodenum: {
             affected: true,
             description:
@@ -152,7 +161,7 @@ export const gallstoneDisease: Disease = {
         { name: "Lipase", result: "> 3× upper limit", flag: "high" },
         { name: "CRP at 48 h", result: "Raised", flag: "high" },
         { name: "ALT", result: "Raised", flag: "high" },
-        { name: "Glasgow score", result: "2, mild" },
+        { name: "Glasgow–Imrie score", result: "2, predicts mild" },
       ],
     },
   ],

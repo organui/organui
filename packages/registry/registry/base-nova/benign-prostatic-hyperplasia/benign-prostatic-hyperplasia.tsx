@@ -38,7 +38,7 @@ export const benignProstaticHyperplasia: Disease = {
         rectum: {
           affected: false,
           description:
-            "The gland is felt through its wall: smooth, firm and enlarged. A hard, irregular gland suggests cancer, which arises in the outer zone.",
+            "The gland is felt through its wall: smooth, firm and enlarged. A hard, irregular gland suggests cancer, which mostly arises in the peripheral zone.",
         },
         "seminal-vesicles": {
           affected: false,
@@ -60,7 +60,7 @@ export const benignProstaticHyperplasia: Disease = {
         prostate: {
           affected: true,
           description:
-            "Enlarged and bulging up into the bladder base, which can act like a valve over the outlet.",
+            "Enlarged, and its middle lobe can bulge up into the bladder base and act like a ball valve over the outlet.",
         },
         urethra: {
           affected: true,
@@ -85,7 +85,7 @@ export const benignProstaticHyperplasia: Disease = {
       label: "Symptoms",
       time: "From about 50",
       summary:
-        "Lower urinary tract symptoms that bother the patient. Lifestyle changes, then an alpha blocker, a 5-alpha reductase inhibitor or both.",
+        "Lower urinary tract symptoms that bother the patient. Lifestyle changes, then an alpha blocker; a 5-alpha reductase inhibitor if the gland is large, or both.",
     },
     {
       id: "chronic-retention",
@@ -139,7 +139,7 @@ export const benignProstaticHyperplasia: Disease = {
           "urinary-bladder": {
             affected: true,
             description:
-              "Painfully distended above the pubic bone. Transurethral resection of the prostate (TURP) prevents it happening again.",
+              "Painfully distended above the pubic bone. If a trial without catheter fails, surgery such as transurethral resection of the prostate (TURP) is offered.",
           },
         },
       },
@@ -161,13 +161,13 @@ export const benignProstaticHyperplasia: Disease = {
       stage: "symptoms",
       label: "Tablets",
       description:
-        "An alpha blocker relaxes the prostate within days; a 5-alpha reductase inhibitor shrinks it over months.",
+        "An alpha blocker relaxes the prostate within days; a 5-alpha reductase inhibitor shrinks it over months and halves the PSA.",
     },
     {
       stage: "chronic-retention",
       label: "Catheter",
       description:
-        "Drains the bladder while kidney function recovers; surgery to the prostate (TURP) usually follows.",
+        "Drains the bladder while kidney function recovers; the patient is watched for a large diuresis. Surgery to the prostate (TURP) usually follows, not a trial without catheter.",
     },
     {
       stage: "acute-retention",
