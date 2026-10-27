@@ -436,7 +436,6 @@ test("the header links each section and searches the whole site", async ({
     "Docs",
     "Components",
     "Organs",
-    "Diseases",
     "Charts",
     "Create",
   ])
