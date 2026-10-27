@@ -486,4 +486,28 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "rheumatoid-arthritis-demo": {
+    title: "Rheumatoid arthritis",
+    file: "rheumatoid-arthritis-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./rheumatoid-arthritis-demo")
+      return <Example />
+    },
+  },
+  "rheumatoid-arthritis-without-panel": {
+    title: "Rheumatoid arthritis Without Panel",
+    file: "rheumatoid-arthritis-without-panel.tsx",
+    render: async () => {
+      const { Example } = await import("./rheumatoid-arthritis-without-panel")
+      return <Example />
+    },
+  },
+  "rheumatoid-arthritis-controlled": {
+    title: "Rheumatoid arthritis Controlled",
+    file: "rheumatoid-arthritis-controlled.tsx",
+    render: async () => {
+      const { Example } = await import("./rheumatoid-arthritis-controlled")
+      return <Example />
+    },
+  },
 }

@@ -1274,6 +1274,21 @@
       "docs": "Pituitary adenoma docs: https://organui.com/docs/components/pituitary-adenoma. It reuses the pituitary model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "rheumatoid-arthritis",
+      "type": "registry:component",
+      "title": "Rheumatoid arthritis",
+      "description": "Seropositive rheumatoid arthritis on the joints: symmetrical synovitis of the knuckle, middle finger, wrist and toe joints with the end finger joints spared, then remission when treated to target or deformity and erosions when it is not, with antibodies, DAS28 and X-rays at each stage. Model licensed CC BY-SA 4.0.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/joints"],
+      "categories": ["disease", "musculoskeletal"],
+      "files": [
+        {
+          "path": "registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Rheumatoid arthritis docs: https://organui.com/docs/components/rheumatoid-arthritis. It reuses the joints model, licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "ai-disclaimer",
       "type": "registry:ui",
       "title": "AI disclaimer",

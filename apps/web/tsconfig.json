@@ -259,6 +259,9 @@
       "@/components/pituitary-adenoma": [
         "../../packages/registry/registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
       ],
+      "@/components/rheumatoid-arthritis": [
+        "../../packages/registry/registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
+      ],
       "@/icons/icon-placeholder": [
         "../../packages/ui/src/components/icon-placeholder.tsx"
       ],

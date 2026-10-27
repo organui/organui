@@ -101,7 +101,8 @@
     "./myocardial-infarction": "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx",
     "./pancreatic-cancer": "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx",
     "./peptic-ulcer-disease": "./registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx",
-    "./pituitary-adenoma": "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
+    "./pituitary-adenoma": "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx",
+    "./rheumatoid-arthritis": "./registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
   },
   "scripts": {
     "build": "bun scripts/build.ts",

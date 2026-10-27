@@ -187,6 +187,9 @@
       "@/components/pituitary-adenoma": [
         "./registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
       ],
+      "@/components/rheumatoid-arthritis": [
+        "./registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
+      ],
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["./vendor/radix-nova/ui/*"],
       "@/components/organ-viewer": [
