@@ -534,6 +534,32 @@ export const diseaseExamples = {
       return <Example />
     },
   },
+  "primary-hyperparathyroidism-demo": {
+    title: "Primary hyperparathyroidism",
+    file: "primary-hyperparathyroidism-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./primary-hyperparathyroidism-demo")
+      return <Example />
+    },
+  },
+  "primary-hyperparathyroidism-without-panel": {
+    title: "Primary hyperparathyroidism Without Panel",
+    file: "primary-hyperparathyroidism-without-panel.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./primary-hyperparathyroidism-without-panel")
+      return <Example />
+    },
+  },
+  "primary-hyperparathyroidism-controlled": {
+    title: "Primary hyperparathyroidism Controlled",
+    file: "primary-hyperparathyroidism-controlled.tsx",
+    render: async () => {
+      const { Example } =
+        await import("./primary-hyperparathyroidism-controlled")
+      return <Example />
+    },
+  },
   "rheumatoid-arthritis-demo": {
     title: "Rheumatoid arthritis",
     file: "rheumatoid-arthritis-demo.tsx",

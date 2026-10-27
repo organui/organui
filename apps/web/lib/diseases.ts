@@ -89,6 +89,10 @@ export const diseaseData: Record<string, () => Promise<Disease>> = {
     import("@workspace/registry/pituitary-adenoma").then(
       (module) => module.pituitaryAdenoma
     ),
+  "primary-hyperparathyroidism": () =>
+    import("@workspace/registry/primary-hyperparathyroidism").then(
+      (module) => module.primaryHyperparathyroidism
+    ),
   "rheumatoid-arthritis": () =>
     import("@workspace/registry/rheumatoid-arthritis").then(
       (module) => module.rheumatoidArthritis

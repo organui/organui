@@ -243,6 +243,9 @@
       "@/components/pituitary-adenoma": [
         "../registry/registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
       ],
+      "@/components/primary-hyperparathyroidism": [
+        "../registry/registry/base-nova/primary-hyperparathyroidism/primary-hyperparathyroidism.tsx"
+      ],
       "@/components/rheumatoid-arthritis": [
         "../registry/registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
       ],
