@@ -1181,6 +1181,21 @@
       "docs": "Kidney stones docs: https://organui.com/docs/components/kidney-stones. It reuses the kidneys model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "laryngeal-cancer",
+      "type": "registry:component",
+      "title": "Laryngeal cancer",
+      "description": "Squamous cell carcinoma of the left vocal cord on the larynx: an early cancer causing hoarseness, then a fixed cord as it invades the muscle, then erosion through the thyroid cartilage, with nasendoscopy, CT and biopsy at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/larynx"],
+      "categories": ["disease", "respiratory"],
+      "files": [
+        {
+          "path": "registry/base-nova/laryngeal-cancer/laryngeal-cancer.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Laryngeal cancer docs: https://organui.com/docs/components/laryngeal-cancer. It reuses the larynx model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "lobar-pneumonia",
       "type": "registry:component",
       "title": "Lobar pneumonia",

@@ -28,6 +28,7 @@
   "joints": "https://organui.com/models/joints.glb",
   "kidney-stones": "https://cdn.jsdelivr.net/gh/organui/kidneys-3d@880b7c9cdf9f2272eee7741b01ccb34454adb30c/public/models/kidneys.glb",
   "kidneys": "https://cdn.jsdelivr.net/gh/organui/kidneys-3d@880b7c9cdf9f2272eee7741b01ccb34454adb30c/public/models/kidneys.glb",
+  "laryngeal-cancer": "https://cdn.jsdelivr.net/gh/organui/larynx-3d@aa18162e23a7617b1db91e5b929f05940fede2b2/public/models/larynx.glb",
   "larynx": "https://cdn.jsdelivr.net/gh/organui/larynx-3d@aa18162e23a7617b1db91e5b929f05940fede2b2/public/models/larynx.glb",
   "liver": "https://cdn.jsdelivr.net/gh/organui/liver-3d@528ee1794670d3bfa23d581f91ba49d6af585b03/public/models/liver.glb",
   "lobar-pneumonia": "https://cdn.jsdelivr.net/gh/organui/lungs-3d@5815084f43efe438ebfae3fd889ee2baf343dfbf/public/models/lungs.glb",
