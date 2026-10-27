@@ -12,7 +12,7 @@ export const aclRupture: Disease = {
   name: "ACL rupture",
   code: "S83.7",
   summary:
-    "A twist on a planted foot tears the anterior cruciate ligament, often with the medial collateral ligament and medial meniscus. Without it the knee gives way when pivoting.",
+    "A twist on a planted foot tears the anterior cruciate ligament, often with the medial collateral ligament and medial meniscus. Without it the knee can give way when pivoting.",
   scales: [
     {
       id: "joints",
@@ -23,7 +23,7 @@ export const aclRupture: Disease = {
         "anterior-cruciate-ligament": {
           affected: true,
           description:
-            "Torn mid-substance with an audible pop. It stops the tibia sliding forward on the femur, so the Lachman test shows extra movement with a soft end point.",
+            "Torn, usually near its femoral end, with an audible pop. It stops the tibia sliding forward on the femur, so the Lachman test shows extra movement with a soft end point.",
         },
         "superficial-part-of-tibial-collateral-ligament": {
           affected: true,
@@ -38,7 +38,7 @@ export const aclRupture: Disease = {
         "medial-meniscus": {
           affected: true,
           description:
-            "Torn as it is pulled by the collateral ligament it is attached to. It catches and locks the knee.",
+            "Torn at its back and edge, where the collateral ligament holds it. It can catch. A torn piece that locks the knee needs urgent surgery.",
         },
         "articular-capsule-of-knee-joint": {
           affected: true,
@@ -53,7 +53,7 @@ export const aclRupture: Disease = {
         "lateral-meniscus": {
           affected: false,
           description:
-            "Intact here, though it is the meniscus most often torn in an isolated ACL injury.",
+            "Intact here, though it is the meniscus most often torn at the time of an ACL tear.",
         },
         "fibular-collateral-ligament": {
           affected: false,
@@ -66,25 +66,27 @@ export const aclRupture: Disease = {
     {
       id: "acute",
       label: "Acute",
+      time: "Weeks 0–6",
       summary:
         "Pain, a swollen knee within hours and inability to carry on playing. Rest, ice, a brace and physiotherapy start at once; MRI confirms what is torn.",
     },
     {
       id: "reconstructed",
       label: "Reconstructed",
+      time: "Months 2–12",
       summary:
-        "Active people who pivot have the ligament reconstructed once the knee settles. Return to sport takes about nine months of rehabilitation.",
+        "People who want to return to pivoting sport, or whose knee keeps giving way, have the ligament reconstructed once the knee settles. Return to sport takes at least nine months after surgery.",
       findings: {
         joints: {
           "anterior-cruciate-ligament": {
             affected: true,
             description:
-              "Replaced by a graft of hamstring or patellar tendon, passed through tunnels in the femur and tibia. It remodels into a ligament over a year.",
+              "Replaced by a graft of hamstring, patellar or quadriceps tendon, passed through tunnels in the femur and tibia. It remodels into a ligament over one to two years.",
           },
           "superficial-part-of-tibial-collateral-ligament": {
             affected: false,
             description:
-              "Healed in a brace; the medial collateral ligament heals without surgery.",
+              "Healed in a brace; the medial collateral ligament usually heals without surgery.",
           },
           "deep-part-of-tibial-collateral-ligament": {
             affected: false,
@@ -109,15 +111,17 @@ export const aclRupture: Disease = {
     },
     {
       id: "deficient",
-      label: "Untreated",
+      label: "Without reconstruction",
+      alternative: true,
+      time: "Years",
       summary:
-        "Without reconstruction, a pivoting athlete's knee keeps giving way. Each episode damages the menisci and cartilage, and osteoarthritis comes early.",
+        "Many knees do well with rehabilitation alone. In some the knee keeps giving way when pivoting. Each episode can tear the menisci and wear the cartilage, raising the risk of osteoarthritis.",
       findings: {
         joints: {
           "anterior-cruciate-ligament": {
             affected: true,
             description:
-              "Absent; the stump has scarred to the posterior cruciate ligament. The tibia shifts forward with each pivot (positive pivot shift).",
+              "Not functioning; the stump has scarred to the posterior cruciate ligament. The outer tibia slips forward and rotates when pivoting (positive pivot shift).",
           },
           "superficial-part-of-tibial-collateral-ligament": {
             affected: false,
@@ -149,6 +153,39 @@ export const aclRupture: Disease = {
         { name: "MRI", result: "Bucket-handle tear", flag: "abnormal" },
         { name: "X-ray", result: "Early joint space loss", flag: "abnormal" },
       ],
+    },
+  ],
+  events: [
+    {
+      stage: "acute",
+      label: "Lachman test",
+      description:
+        "The tibia slides forward on the femur with a soft end point; the most sensitive test for a torn ACL.",
+    },
+    {
+      stage: "acute",
+      label: "MRI",
+      description:
+        "Confirms the ACL tear and shows the collateral ligament, meniscus and bone bruising that come with it.",
+    },
+    {
+      stage: "reconstructed",
+      label: "Reconstruction",
+      description:
+        "Once the swelling settles and the knee moves fully, a tendon graft replaces the ligament, and a torn meniscus is repaired at the same operation.",
+    },
+    {
+      stage: "reconstructed",
+      label: "Return to sport",
+      time: "9 months after surgery",
+      description:
+        "After rehabilitation and tests of strength and hopping against the other leg; returning earlier raises the risk of tearing it again.",
+    },
+    {
+      stage: "deficient",
+      label: "Rehabilitation",
+      description:
+        "Structured strength and balance training, with or without giving up pivoting sport. If the knee still gives way, a delayed reconstruction is offered.",
     },
   ],
   investigations: [
