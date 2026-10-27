@@ -166,6 +166,9 @@
       "@/components/myocardial-infarction": [
         "./registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
       ],
+      "@/components/pancreatic-cancer": [
+        "./registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx"
+      ],
       "@/components/peptic-ulcer-disease": [
         "./registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx"
       ],

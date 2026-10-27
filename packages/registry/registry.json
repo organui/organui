@@ -1163,6 +1163,21 @@
       "docs": "Myocardial infarction docs: https://organui.com/docs/components/myocardial-infarction. It reuses the heart model, licensed CC BY 4.0 (https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "pancreatic-cancer",
+      "type": "registry:component",
+      "title": "Pancreatic cancer",
+      "description": "Adenocarcinoma of the head of the pancreas: the blocked bile and pancreatic ducts behind painless jaundice, and the mesenteric vessels that decide whether it can be removed, from a resectable tumour through local encasement of the superior mesenteric artery to metastatic disease, with CT, CA 19-9 and bloods at each stage. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/pancreas"],
+      "categories": ["disease", "digestive"],
+      "files": [
+        {
+          "path": "registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Pancreatic cancer docs: https://organui.com/docs/components/pancreatic-cancer. It reuses the pancreas model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "peptic-ulcer-disease",
       "type": "registry:component",
       "title": "Peptic ulcer disease",
