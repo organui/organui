@@ -76,6 +76,71 @@ formatPercentile(zToPercentile(z!)) // "87th"`,
       "The growth chart uses this file for its z-scores and percentiles.",
     ],
   },
+  fhir: {
+    usageLang: "tsx",
+    usage: `import {
+  allergiesFromFhir,
+  labResultsFromFhir,
+  patientFromFhir,
+  problemsFromFhir,
+  fhirResources,
+  type FhirBundle,
+  type FhirPatient,
+} from "@/lib/fhir"
+import { AllergyList, allergySummary } from "@/components/ui/allergy-list"
+import { PatientBanner } from "@/components/ui/patient-banner"
+
+// A Bundle from your FHIR server, such as $everything on a Patient.
+export function Record({ bundle }: { bundle: FhirBundle }) {
+  const [patient] = fhirResources<FhirPatient>(bundle, "Patient")
+  const allergies = allergiesFromFhir(bundle)
+  return (
+    <>
+      <PatientBanner
+        patient={patientFromFhir(patient!)}
+        allergies={allergySummary(allergies)}
+      />
+      <AllergyList allergies={allergies} />
+    </>
+  )
+}`,
+    reference: [
+      {
+        name: "patientFromFhir(patient)",
+        description:
+          "The patient banner's patient: the official name, else the first still in use; date of birth; administrative gender; identifiers with the NHS number first and spaced 3-3-4; and any date of death.",
+      },
+      {
+        name: "allergiesFromFhir(resources | bundle)",
+        description:
+          'The allergy list\'s allergies: substance, type, every reaction, the worst severity, verification, status and date. "No known allergy" (SNOMED CT 716186003) alone becomes "none-known"; no records stay undefined, as not recorded.',
+      },
+      {
+        name: "problemsFromFhir(resources | bundle)",
+        description:
+          "The problem list's problems: the name, its SNOMED CT code (else another), active or past status, and onset and resolution as dates or text.",
+      },
+      {
+        name: "labResultsFromFhir(resources | bundle)",
+        description:
+          "The lab results table's results: one row per test code, the latest result with its unit, range and the laboratory's interpretation as the flag, and the earlier numeric results as its history.",
+      },
+      {
+        name: "fhirResources(resources | bundle, resourceType)",
+        description:
+          "The resources of one type, from a list or a Bundle's entries.",
+      },
+      {
+        name: "conceptText(concept)",
+        description: "A CodeableConcept's text, or its first coding's display.",
+      },
+    ],
+    notes: [
+      "Records entered in error or refuted, and cancelled observations, are left out, as they are not part of the record.",
+      "Only the elements read are typed, so it works with resources from any FHIR R4 server or library. The results match the components' props by shape, so the file depends on none of them.",
+      "It reads FHIR R4 and the UK Core NHS number system. It does not fetch, validate or reconcile resources; check the mapping against your server's profiles.",
+    ],
+  },
   "reference-ranges": {
     usageLang: "tsx",
     usage: `import {

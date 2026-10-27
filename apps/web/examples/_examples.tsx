@@ -175,6 +175,102 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "patient-banner-demo": {
+    title: "Patient banner",
+    file: "patient-banner-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./patient-banner-demo")
+      return <Example />
+    },
+  },
+  "patient-banner-allergies": {
+    title: "Allergy States",
+    file: "patient-banner-allergies.tsx",
+    render: async () => {
+      const { Example } = await import("./patient-banner-allergies")
+      return <Example />
+    },
+  },
+  "patient-banner-baby": {
+    title: "A Baby",
+    file: "patient-banner-baby.tsx",
+    render: async () => {
+      const { Example } = await import("./patient-banner-baby")
+      return <Example />
+    },
+  },
+  "allergy-list-demo": {
+    title: "Allergy list",
+    file: "allergy-list-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./allergy-list-demo")
+      return <Example />
+    },
+  },
+  "allergy-list-states": {
+    title: "Not Recorded and None Known",
+    file: "allergy-list-states.tsx",
+    render: async () => {
+      const { Example } = await import("./allergy-list-states")
+      return <Example />
+    },
+  },
+  "allergy-list-banner": {
+    title: "With the Patient Banner",
+    file: "allergy-list-banner.tsx",
+    render: async () => {
+      const { Example } = await import("./allergy-list-banner")
+      return <Example />
+    },
+  },
+  "problem-list-demo": {
+    title: "Problem list",
+    file: "problem-list-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./problem-list-demo")
+      return <Example />
+    },
+  },
+  "problem-list-no-codes": {
+    title: "Without Codes",
+    file: "problem-list-no-codes.tsx",
+    render: async () => {
+      const { Example } = await import("./problem-list-no-codes")
+      return <Example />
+    },
+  },
+  "problem-list-text-dates": {
+    title: "Dates as Recorded",
+    file: "problem-list-text-dates.tsx",
+    render: async () => {
+      const { Example } = await import("./problem-list-text-dates")
+      return <Example />
+    },
+  },
+  "news2-chart-demo": {
+    title: "NEWS2 chart",
+    file: "news2-chart-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./news2-chart-demo")
+      return <Example />
+    },
+  },
+  "news2-chart-scale-2": {
+    title: "SpO₂ Scale 2",
+    file: "news2-chart-scale-2.tsx",
+    render: async () => {
+      const { Example } = await import("./news2-chart-scale-2")
+      return <Example />
+    },
+  },
+  "news2-chart-incomplete": {
+    title: "An Incomplete Set",
+    file: "news2-chart-incomplete.tsx",
+    render: async () => {
+      const { Example } = await import("./news2-chart-incomplete")
+      return <Example />
+    },
+  },
   "lab-results-demo": {
     title: "Lab results table",
     file: "lab-results-demo.tsx",
@@ -204,6 +300,14 @@ export const examples: Record<string, ExampleDefinition> = {
     file: "z-scores-demo.tsx",
     render: async () => {
       const { Example } = await import("./z-scores-demo")
+      return <Example />
+    },
+  },
+  "fhir-demo": {
+    title: "FHIR",
+    file: "fhir-demo.tsx",
+    render: async () => {
+      const { Example } = await import("./fhir-demo")
       return <Example />
     },
   },

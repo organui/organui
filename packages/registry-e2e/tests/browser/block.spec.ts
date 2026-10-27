@@ -129,3 +129,30 @@ test("dashboard-01 shows one patient and records doses", async ({ page }) => {
   ).toBeVisible()
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })
+
+test("dashboard-02 shows one patient's record", async ({ page }) => {
+  await page.goto("/record")
+  await expect(
+    page.getByRole("heading", { name: "Patient record", level: 1 })
+  ).toBeVisible()
+  const banner = page.getByRole("region", {
+    name: "Patient: OKAFOR, Grace Adaeze (Mrs)",
+  })
+  await expect(banner).toContainText("Penicillin (Anaphylaxis)")
+  await expect(page.getByText("NEWS2 0 · Low risk")).toBeVisible()
+  await expect(page.getByRole("table", { name: "Problem list" })).toContainText(
+    "Since 24-Oct-2026"
+  )
+  await expect(
+    page.getByRole("table", { name: "Lab results this admission" })
+  ).toContainText("C-reactive protein")
+  await expect(page.getByRole("table", { name: "Problem list" })).toContainText(
+    "SNOMED CT 44054006"
+  )
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    )
+  ).toBe(true)
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+})

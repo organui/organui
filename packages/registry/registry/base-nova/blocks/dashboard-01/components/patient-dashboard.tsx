@@ -19,6 +19,7 @@ import {
   type MedicationInteraction,
 } from "@/components/ui/medication-schedule"
 import { VitalSigns, type VitalReadings } from "@/components/ui/vital-signs"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type Patient = {
   name: string
@@ -61,8 +62,18 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
           <h1 className="text-2xl font-semibold tracking-tight">
             {patient.name}
           </h1>
+          {/* Outlined with an icon: red is kept for critical values. */}
           {patient.alerts?.map((alert) => (
-            <Badge key={alert} variant="destructive">
+            <Badge key={alert} variant="outline">
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiErrorWarningLine"
+                aria-hidden="true"
+                data-icon="inline-start"
+              />
               {alert}
             </Badge>
           ))}

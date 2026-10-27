@@ -24,6 +24,18 @@
       "@/components/ui/ecg-trace": [
         "./registry/base-nova/ecg-trace/ecg-trace.tsx"
       ],
+      "@/components/ui/patient-banner": [
+        "./registry/base-nova/patient-banner/patient-banner.tsx"
+      ],
+      "@/components/ui/allergy-list": [
+        "./registry/base-nova/allergy-list/allergy-list.tsx"
+      ],
+      "@/components/ui/problem-list": [
+        "./registry/base-nova/problem-list/problem-list.tsx"
+      ],
+      "@/components/ui/news2-chart": [
+        "./registry/base-nova/news2-chart/news2-chart.tsx"
+      ],
       "@/components/ui/lab-results": [
         "./registry/base-nova/lab-results/lab-results.tsx"
       ],
@@ -35,6 +47,7 @@
       ],
       "@/lib/age": ["./registry/base-nova/age/age.ts"],
       "@/lib/z-scores": ["./registry/base-nova/z-scores/z-scores.ts"],
+      "@/lib/fhir": ["./registry/base-nova/fhir/fhir.ts"],
       "@/lib/reference-ranges": [
         "./registry/base-nova/reference-ranges/reference-ranges.ts"
       ],
@@ -58,6 +71,9 @@
       ],
       "@/components/patient-dashboard": [
         "./registry/base-nova/blocks/dashboard-01/components/patient-dashboard.tsx"
+      ],
+      "@/components/patient-record": [
+        "./registry/base-nova/blocks/dashboard-02/components/patient-record.tsx"
       ],
       "@/components/adrenals": ["./registry/base-nova/adrenals/adrenals.tsx"],
       "@/components/appendix": ["./registry/base-nova/appendix/appendix.tsx"],
