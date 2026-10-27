@@ -263,6 +263,25 @@ function DiseaseTimeline({
     onStageChange(id)
   }
   const shown = event?.stage === stage.id ? event : null
+  // The stages are one tab stop: the arrow keys, Home and End move along the
+  // course and show each stage on the way.
+  const buttons = React.useRef<(HTMLButtonElement | null)[]>([])
+  const onKeyDown = (keyEvent: React.KeyboardEvent) => {
+    const last = stages.length - 1
+    const next = {
+      ArrowRight: index + 1,
+      ArrowDown: index + 1,
+      ArrowLeft: index - 1,
+      ArrowUp: index - 1,
+      Home: 0,
+      End: last,
+    }[keyEvent.key]
+    if (next === undefined) return
+    keyEvent.preventDefault()
+    const target = Math.min(Math.max(next, 0), last)
+    choose(stages[target]!.id)
+    buttons.current[target]?.focus()
+  }
   // The stages on the way to the current one. An alternative stage follows
   // the stage its siblings follow, not the sibling drawn before it.
   const path = new Set<number>()
@@ -362,9 +381,14 @@ function DiseaseTimeline({
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col items-start gap-1 pb-3 @lg:items-center @lg:pb-0">
                   <button
+                    ref={(button) => {
+                      buttons.current[i] = button
+                    }}
                     type="button"
                     aria-pressed={current}
+                    tabIndex={current ? 0 : -1}
                     onClick={() => choose(item.id)}
+                    onKeyDown={onKeyDown}
                     className="flex max-w-full flex-col items-start rounded-md px-1 py-0.5 text-left transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring @lg:items-center @lg:text-center"
                   >
                     <span
@@ -611,7 +635,7 @@ function Investigations({
       </span>
       <dl
         aria-labelledby={id}
-        className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-1.5"
+        className="grid grid-cols-[minmax(min-content,1fr)_auto] gap-x-3 gap-y-1.5"
       >
         {investigations.map(({ name, result, flag }) => (
           <React.Fragment key={name}>

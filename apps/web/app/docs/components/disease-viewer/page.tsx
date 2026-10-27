@@ -153,9 +153,10 @@ export default function Page() {
             course, and its <code>events</code>, such as a treatment or a test,
             beneath it. Select a stage or an event to show it, or play the
             course to step through it while the model fades from one stage to
-            the next. A stage marked <code>alternative</code> is another path
-            from the one before it, such as an untreated course beside a treated
-            one, and joins the track with a dashed line. Pass{" "}
+            the next. The stages are one tab stop: the arrow keys, Home and End
+            move along the course. A stage marked <code>alternative</code> is
+            another path from the one before it, such as an untreated course
+            beside a treated one, and joins the track with a dashed line. Pass{" "}
             <code>timeline=&#123;false&#125;</code> to hide it.
           </p>
           <p>
