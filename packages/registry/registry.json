@@ -998,6 +998,21 @@
       "docs": "Acute appendicitis docs: https://organui.com/docs/components/acute-appendicitis. It reuses the appendix model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
     },
     {
+      "name": "addisons-disease",
+      "type": "registry:component",
+      "title": "Addison's disease",
+      "description": "Autoimmune Addison's disease on the adrenals: both adrenal cortices destroyed, with low sodium, high potassium, low cortisol and high ACTH, then lifelong replacement or, as the alternative course, an adrenal crisis. Model licensed CC BY-SA 2.1 JP.",
+      "registryDependencies": ["@organui/disease-viewer", "@organui/adrenals"],
+      "categories": ["disease", "endocrine"],
+      "files": [
+        {
+          "path": "registry/base-nova/addisons-disease/addisons-disease.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Addison's disease docs: https://organui.com/docs/components/addisons-disease. It reuses the adrenals model, licensed CC BY-SA 2.1 JP (https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en); keep the viewer's credit visible. Educational, not for diagnosis."
+    },
+    {
       "name": "autoimmune-hepatitis",
       "type": "registry:component",
       "title": "Autoimmune hepatitis",

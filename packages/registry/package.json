@@ -85,6 +85,7 @@
     "./abdominal-aortic-aneurysm": "./registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx",
     "./acute-angle-closure-glaucoma": "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx",
     "./acute-appendicitis": "./registry/base-nova/acute-appendicitis/acute-appendicitis.tsx",
+    "./addisons-disease": "./registry/base-nova/addisons-disease/addisons-disease.tsx",
     "./autoimmune-hepatitis": "./registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx",
     "./benign-prostatic-hyperplasia": "./registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx",
     "./breast-cancer": "./registry/base-nova/breast-cancer/breast-cancer.tsx",
