@@ -1829,16 +1829,16 @@
       "name": "dashboard-01",
       "type": "registry:block",
       "title": "Dashboard 01",
-      "description": "One patient at a glance: vital signs, a live ECG, lab results with trends and the day's medicines, with fictional data to replace with your records.",
+      "description": "One patient at a glance: the patient banner, vital signs, a live ECG, lab results with trends and the day's medicines, with fictional data to replace with your records.",
       "meta": {
-        "iframeHeight": "1120px"
+        "iframeHeight": "1250px"
       },
       "registryDependencies": [
-        "badge",
         "card",
         "@organui/ecg-trace",
         "@organui/lab-results",
         "@organui/medication-schedule",
+        "@organui/patient-banner",
         "@organui/vital-signs"
       ],
       "files": [
