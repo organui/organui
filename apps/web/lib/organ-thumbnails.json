@@ -8,6 +8,7 @@
   "bladder": "https://cdn.jsdelivr.net/gh/organui/bladder-3d@36674f5d09ba1c9c58a3f76c944705c23ee91375/public/models/bladder.glb",
   "brain": "https://cdn.jsdelivr.net/gh/organui/brain-3d@e2f8c172716d8f4e8db6080b7d23f38fabe3add8/public/models/brain.glb",
   "breast": "https://organui.com/models/breast.glb",
+  "crohns-disease": "https://cdn.jsdelivr.net/gh/organui/intestines-3d@8386b2327715f32b2ec62b403b94a3e5f6a307e2/public/models/intestines.glb",
   "diaphragm": "https://organui.com/models/diaphragm.glb",
   "ear": "https://cdn.jsdelivr.net/gh/organui/ear-3d@40ace7ed45cdbf604adda889e5db720ee6b1ce98/public/models/ear.glb",
   "ectopic-pregnancy": "https://cdn.jsdelivr.net/gh/organui/uterus-3d@404a6039b2d667e2b4e08ae71d4964cd9b963cf1/public/models/reproductive.glb",
