@@ -594,7 +594,7 @@ test("the conditions gallery shows every condition and filters by body system", 
     await expect(card).toHaveAttribute("href", `/docs/components/${item.name}`)
     await expect(card.locator("img")).toHaveAttribute(
       "src",
-      new RegExp(`url=%2Fdiseases%2F${item.name}\\.webp`)
+      new RegExp(`url=%2Fconditions%2F${item.name}\\.webp`)
     )
     // Each card names its body system and the models it is drawn on.
     const system = bodySystems.find(({ id }) => item.categories?.includes(id))!
