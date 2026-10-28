@@ -9,7 +9,7 @@ import {
   RheumatoidArthritis,
   rheumatoidArthritis,
 } from "@workspace/registry/rheumatoid-arthritis"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = rheumatoidArthritis.stages ?? []
 
@@ -17,7 +17,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(rheumatoidArthritis.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(
+  const selected = conditionModel(
     rheumatoidArthritis,
     scale,
     stage

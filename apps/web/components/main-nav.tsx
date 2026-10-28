@@ -8,7 +8,7 @@ import { cn } from "@workspace/ui/lib/utils"
 
 // The section a page belongs to: the item that lists it among its pages, or
 // else whose address is the longest prefix of it, so the organs gallery is
-// Organs rather than Components, a disease is Diseases, and Docs covers the
+// Organs rather than Components, a condition is Conditions, and Docs covers the
 // guides.
 export function currentSection(items: NavLink[], pathname: string) {
   const rank = ({ href, pages }: NavLink) =>

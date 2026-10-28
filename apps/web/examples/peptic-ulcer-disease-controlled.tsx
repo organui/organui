@@ -9,7 +9,7 @@ import {
   PepticUlcerDisease,
   pepticUlcerDisease,
 } from "@workspace/registry/peptic-ulcer-disease"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = pepticUlcerDisease.stages ?? []
 
@@ -17,7 +17,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(pepticUlcerDisease.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(
+  const selected = conditionModel(
     pepticUlcerDisease,
     scale,
     stage

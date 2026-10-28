@@ -6,7 +6,7 @@ import {
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
 import { AclRupture, aclRupture } from "@workspace/registry/acl-rupture"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = aclRupture.stages ?? []
 
@@ -14,7 +14,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(aclRupture.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(aclRupture, scale, stage).structures.find(
+  const selected = conditionModel(aclRupture, scale, stage).structures.find(
     ({ id }) => id === selectedId
   )
   return (

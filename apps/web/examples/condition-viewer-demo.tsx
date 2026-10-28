@@ -1,11 +1,11 @@
 import { heartModel } from "@workspace/registry/heart"
-import type { Disease } from "@workspace/registry/disease-model"
-import { DiseaseViewer } from "@workspace/registry/disease-viewer"
+import type { Condition } from "@workspace/registry/condition-model"
+import { ConditionViewer } from "@workspace/registry/condition-viewer"
 
-// Your own disease on any organ model: findings name its structures, and the
+// Your own condition on any organ model: findings name its structures, and the
 // rest are spared. Each stage changes only what it lists, and events mark the
 // course's turning points on the timeline.
-const hypertrophicCardiomyopathy: Disease = {
+const hypertrophicCardiomyopathy: Condition = {
   name: "Hypertrophic cardiomyopathy",
   code: "I42.1",
   summary:
@@ -59,7 +59,7 @@ const hypertrophicCardiomyopathy: Disease = {
           "left-atrium": {
             affected: true,
             description:
-              "Enlarged, and often in atrial fibrillation. In this disease that means anticoagulation, whatever the usual stroke score.",
+              "Enlarged, and often in atrial fibrillation. In this condition that means anticoagulation, whatever the usual stroke score.",
           },
         },
       },
@@ -132,9 +132,9 @@ const hypertrophicCardiomyopathy: Disease = {
 
 export function Example() {
   return (
-    <DiseaseViewer
-      disease={hypertrophicCardiomyopathy}
-      label="Hypertrophic cardiomyopathy in the disease viewer"
+    <ConditionViewer
+      condition={hypertrophicCardiomyopathy}
+      label="Hypertrophic cardiomyopathy in the condition viewer"
     />
   )
 }

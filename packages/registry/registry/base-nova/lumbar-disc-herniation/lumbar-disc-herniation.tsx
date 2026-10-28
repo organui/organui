@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { spinalCordModel } from "@/components/spinal-cord"
 
 // A posterolateral L5–S1 disc herniation pressing on the S1 nerve root: the
 // commonest cause of sciatica, which mostly settles on its own, and rarely a
 // central herniation that compresses the whole cauda equina.
-export const lumbarDiscHerniation: Disease = {
+export const lumbarDiscHerniation: Condition = {
   name: "Lumbar disc herniation",
   code: "M51.1",
   summary:
@@ -164,10 +164,10 @@ export const lumbarDiscHerniation: Disease = {
 }
 
 /** The spine with sciatica, the stage the viewer opens on. */
-export const lumbarDiscHerniationModel = diseaseModel(lumbarDiscHerniation)
+export const lumbarDiscHerniationModel = conditionModel(lumbarDiscHerniation)
 
-export type LumbarDiscHerniationProps = Omit<DiseaseViewerProps, "disease">
+export type LumbarDiscHerniationProps = Omit<ConditionViewerProps, "condition">
 
 export function LumbarDiscHerniation(props: LumbarDiscHerniationProps) {
-  return <DiseaseViewer disease={lumbarDiscHerniation} {...props} />
+  return <ConditionViewer condition={lumbarDiscHerniation} {...props} />
 }

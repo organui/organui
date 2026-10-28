@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { kidneysModel } from "@/components/kidneys"
 
 // A stone in the left kidney that moves into the ureter: harmless while it
 // sits still, agonising when it moves, and an emergency when the kidney
 // behind it is infected.
-export const kidneyStones: Disease = {
+export const kidneyStones: Condition = {
   name: "Kidney stones",
   code: "N20.0",
   summary:
@@ -142,10 +142,10 @@ export const kidneyStones: Disease = {
 }
 
 /** The kidneys with a stone in the left kidney, the stage the viewer opens on. */
-export const kidneyStonesModel = diseaseModel(kidneyStones)
+export const kidneyStonesModel = conditionModel(kidneyStones)
 
-export type KidneyStonesProps = Omit<DiseaseViewerProps, "disease">
+export type KidneyStonesProps = Omit<ConditionViewerProps, "condition">
 
 export function KidneyStones(props: KidneyStonesProps) {
-  return <DiseaseViewer disease={kidneyStones} {...props} />
+  return <ConditionViewer condition={kidneyStones} {...props} />
 }

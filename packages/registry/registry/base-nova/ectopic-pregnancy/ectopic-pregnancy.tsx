@@ -1,13 +1,13 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { uterusModel } from "@/components/uterus"
 
 // A tubal ectopic pregnancy in the ampulla, the commonest site: the tube
 // cannot stretch, and when it ruptures the bleeding can kill.
-export const ectopicPregnancy: Disease = {
+export const ectopicPregnancy: Condition = {
   name: "Ectopic pregnancy",
   code: "O00.1",
   summary:
@@ -120,10 +120,10 @@ export const ectopicPregnancy: Disease = {
 }
 
 /** The tube before it ruptures, the stage the viewer opens on. */
-export const ectopicPregnancyModel = diseaseModel(ectopicPregnancy)
+export const ectopicPregnancyModel = conditionModel(ectopicPregnancy)
 
-export type EctopicPregnancyProps = Omit<DiseaseViewerProps, "disease">
+export type EctopicPregnancyProps = Omit<ConditionViewerProps, "condition">
 
 export function EctopicPregnancy(props: EctopicPregnancyProps) {
-  return <DiseaseViewer disease={ectopicPregnancy} {...props} />
+  return <ConditionViewer condition={ectopicPregnancy} {...props} />
 }

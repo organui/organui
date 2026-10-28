@@ -527,7 +527,7 @@ try {
       (item) =>
         "categories" in item &&
         (item.categories?.includes("organ") ||
-          item.categories?.includes("disease") ||
+          item.categories?.includes("condition") ||
           item.categories?.includes("tissue") ||
           item.categories?.includes("cell"))
     )

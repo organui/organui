@@ -1,8 +1,8 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { parathyroidModel } from "@/components/parathyroid"
 
 const suppressed =
@@ -11,7 +11,7 @@ const suppressed =
 // Primary hyperparathyroidism from a single adenoma, as in about 85% of
 // cases: one gland makes hormone whatever the calcium, and the other three
 // fall silent.
-export const primaryHyperparathyroidism: Disease = {
+export const primaryHyperparathyroidism: Condition = {
   name: "Primary hyperparathyroidism",
   code: "E21.0",
   summary:
@@ -151,17 +151,17 @@ export const primaryHyperparathyroidism: Disease = {
 }
 
 /** The parathyroids with an adenoma found by chance, the stage the viewer opens on. */
-export const primaryHyperparathyroidismModel = diseaseModel(
+export const primaryHyperparathyroidismModel = conditionModel(
   primaryHyperparathyroidism
 )
 
 export type PrimaryHyperparathyroidismProps = Omit<
-  DiseaseViewerProps,
-  "disease"
+  ConditionViewerProps,
+  "condition"
 >
 
 export function PrimaryHyperparathyroidism(
   props: PrimaryHyperparathyroidismProps
 ) {
-  return <DiseaseViewer disease={primaryHyperparathyroidism} {...props} />
+  return <ConditionViewer condition={primaryHyperparathyroidism} {...props} />
 }

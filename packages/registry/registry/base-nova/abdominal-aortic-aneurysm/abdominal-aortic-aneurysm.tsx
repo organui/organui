@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { vesselsModel } from "@/components/vessels"
 
 // An infrarenal abdominal aortic aneurysm, the commonest kind: silent while it
 // grows, so it is found by screening or by chance, and its size decides when
 // the risk of rupture outweighs the risk of repair.
-export const abdominalAorticAneurysm: Disease = {
+export const abdominalAorticAneurysm: Condition = {
   name: "Abdominal aortic aneurysm",
   code: "I71.4",
   summary:
@@ -172,12 +172,15 @@ export const abdominalAorticAneurysm: Disease = {
 }
 
 /** The vessels with a small aneurysm, the stage the viewer opens on. */
-export const abdominalAorticAneurysmModel = diseaseModel(
+export const abdominalAorticAneurysmModel = conditionModel(
   abdominalAorticAneurysm
 )
 
-export type AbdominalAorticAneurysmProps = Omit<DiseaseViewerProps, "disease">
+export type AbdominalAorticAneurysmProps = Omit<
+  ConditionViewerProps,
+  "condition"
+>
 
 export function AbdominalAorticAneurysm(props: AbdominalAorticAneurysmProps) {
-  return <DiseaseViewer disease={abdominalAorticAneurysm} {...props} />
+  return <ConditionViewer condition={abdominalAorticAneurysm} {...props} />
 }

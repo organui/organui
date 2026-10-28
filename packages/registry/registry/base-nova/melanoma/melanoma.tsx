@@ -1,13 +1,13 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { skinModel } from "@/components/skin"
 
 // Melanoma staged by depth: the deeper the tumour reaches through the
 // layers of the skin, measured as Breslow thickness, the worse the outlook.
-export const melanoma: Disease = {
+export const melanoma: Condition = {
   name: "Melanoma",
   code: "C43",
   summary:
@@ -166,10 +166,10 @@ export const melanoma: Disease = {
 }
 
 /** The skin with melanoma in situ, the stage the viewer opens on. */
-export const melanomaModel = diseaseModel(melanoma)
+export const melanomaModel = conditionModel(melanoma)
 
-export type MelanomaProps = Omit<DiseaseViewerProps, "disease">
+export type MelanomaProps = Omit<ConditionViewerProps, "condition">
 
 export function Melanoma(props: MelanomaProps) {
-  return <DiseaseViewer disease={melanoma} {...props} />
+  return <ConditionViewer condition={melanoma} {...props} />
 }

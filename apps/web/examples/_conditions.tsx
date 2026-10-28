@@ -1,6 +1,6 @@
-// Named documentation examples for the diseases, on the public components
+// Named documentation examples for the conditions, on the public components
 // consumers install. Imports stay explicit so each page loads only its own.
-export const diseaseExamples = {
+export const conditionExamples = {
   "abdominal-aortic-aneurysm-demo": {
     title: "Abdominal aortic aneurysm",
     file: "abdominal-aortic-aneurysm-demo.tsx",

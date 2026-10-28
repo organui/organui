@@ -5,15 +5,15 @@ import { cn } from "cn"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
-  diseaseModel,
+  conditionModel,
   scaleOf,
   stageOf,
-  type Disease,
-  type DiseaseEvent,
-  type DiseaseInvestigation,
-  type DiseaseScale,
-  type DiseaseStage,
-} from "@/components/disease-model"
+  type Condition,
+  type ConditionEvent,
+  type ConditionInvestigation,
+  type ConditionScale,
+  type ConditionStage,
+} from "@/components/condition-model"
 import {
   OrganViewer,
   type OrganModel,
@@ -38,12 +38,12 @@ function useControllable<T>(
   return [controlled ? value : inner, set] as const
 }
 
-export type DiseaseViewerProps = Omit<
+export type ConditionViewerProps = Omit<
   OrganViewerProps,
   "model" | "selectedId" | "onSelectionChange"
 > & {
-  /** The disease: its scales, stages, findings and investigations. */
-  disease: Disease
+  /** The condition: its scales, stages, findings and investigations. */
+  condition: Condition
   /** The scale shown, by ID. */
   scale?: string
   /** The scale shown first when `scale` is not set. Defaults to the first. */
@@ -62,17 +62,17 @@ export type DiseaseViewerProps = Omit<
   onSelectionChange?: (id: string | null) => void
   /** Shows the panel with the scales, findings and investigations. Defaults to true. */
   panel?: boolean
-  /** Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a disease with one stage has none. */
+  /** Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a condition with one stage has none. */
   timeline?: boolean
 }
 
-export function DiseaseViewer({
-  disease,
+export function ConditionViewer({
+  condition,
   scale: scaleProp,
-  defaultScale = disease.scales[0]!.id,
+  defaultScale = condition.scales[0]!.id,
   onScaleChange,
   stage: stageProp,
-  defaultStage = disease.stages?.[0]?.id ?? "",
+  defaultStage = condition.stages?.[0]?.id ?? "",
   onStageChange,
   selectedId: selectedProp,
   onSelectionChange,
@@ -81,7 +81,7 @@ export function DiseaseViewer({
   label,
   className,
   ...props
-}: DiseaseViewerProps) {
+}: ConditionViewerProps) {
   const [scaleId, setScaleId] = useControllable(
     scaleProp,
     defaultScale,
@@ -97,11 +97,11 @@ export function DiseaseViewer({
     null,
     onSelectionChange
   )
-  const scale = scaleOf(disease, scaleId)
-  const stage = stageOf(disease, stageId)
+  const scale = scaleOf(condition, scaleId)
+  const stage = stageOf(condition, stageId)
   const model = React.useMemo(
-    () => diseaseModel(disease, scale.id, stage?.id),
-    [disease, scale.id, stage?.id]
+    () => conditionModel(condition, scale.id, stage?.id),
+    [condition, scale.id, stage?.id]
   )
   const changeScale = (next: string) => {
     if (next === scale.id) return
@@ -113,7 +113,7 @@ export function DiseaseViewer({
     // Side by side when the component itself is wide enough, so it fits a
     // narrow column as well as a full page.
     <div
-      data-slot="disease-viewer"
+      data-slot="condition-viewer"
       className={cn("@container min-w-0", className)}
     >
       <div
@@ -131,25 +131,25 @@ export function DiseaseViewer({
             onSelectionChange={setSelectedId}
             label={
               label ??
-              `Interactive ${disease.name.toLowerCase()} model${
-                disease.scales.length > 1
+              `Interactive ${condition.name.toLowerCase()} model${
+                condition.scales.length > 1
                   ? `, ${scale.label.toLowerCase()}`
                   : ""
               }`
             }
             {...props}
           />
-          {timeline && stage && (disease.stages?.length ?? 0) > 1 && (
-            <DiseaseTimeline
-              disease={disease}
+          {timeline && stage && (condition.stages?.length ?? 0) > 1 && (
+            <ConditionTimeline
+              condition={condition}
               stage={stage}
               onStageChange={setStageId}
             />
           )}
         </div>
         {panel && (
-          <DiseasePanel
-            disease={disease}
+          <ConditionPanel
+            condition={condition}
             model={model}
             scale={scale}
             stage={stage}
@@ -163,8 +163,8 @@ export function DiseaseViewer({
   )
 }
 
-function DiseasePanel({
-  disease,
+function ConditionPanel({
+  condition,
   model,
   scale,
   stage,
@@ -172,16 +172,16 @@ function DiseasePanel({
   onScaleChange,
   onSelectionChange,
 }: {
-  disease: Disease
+  condition: Condition
   model: OrganModel
-  scale: DiseaseScale
-  stage?: DiseaseStage
+  scale: ConditionScale
+  stage?: ConditionStage
   selectedId: string | null
   onScaleChange: (scale: string) => void
   onSelectionChange: (id: string | null) => void
 }) {
   const title = React.useId()
-  const investigations = stage?.investigations ?? disease.investigations ?? []
+  const investigations = stage?.investigations ?? condition.investigations ?? []
   return (
     // Beside the model, the panel takes the height the model and timeline
     // set, rather than setting it, and scrolls.
@@ -192,19 +192,19 @@ function DiseasePanel({
       <div className="flex flex-col gap-1.5">
         <div className="flex items-start justify-between gap-3">
           <p id={title} className="leading-snug font-semibold">
-            {disease.name}
+            {condition.name}
           </p>
           <Badge variant="outline" className="shrink-0 font-mono">
             <span className="sr-only">ICD-10 </span>
-            {disease.code}
+            {condition.code}
           </Badge>
         </div>
-        <p className="text-muted-foreground">{disease.summary}</p>
+        <p className="text-muted-foreground">{condition.summary}</p>
       </div>
-      {disease.scales.length > 1 && (
+      {condition.scales.length > 1 && (
         <Choice
           label="Scale"
-          options={disease.scales}
+          options={condition.scales}
           value={scale.id}
           onChange={onScaleChange}
         />
@@ -233,19 +233,19 @@ function DiseasePanel({
 
 // The course as a timeline: each stage at its typical time, the events along
 // it, and play to step through. The model recolours as the stage changes.
-function DiseaseTimeline({
-  disease,
+function ConditionTimeline({
+  condition,
   stage,
   onStageChange,
 }: {
-  disease: Disease
-  stage: DiseaseStage
+  condition: Condition
+  stage: ConditionStage
   onStageChange: (stage: string) => void
 }) {
-  const stages = React.useMemo(() => disease.stages ?? [], [disease.stages])
+  const stages = React.useMemo(() => condition.stages ?? [], [condition.stages])
   const index = stages.findIndex(({ id }) => id === stage.id)
   const [playing, setPlaying] = React.useState(false)
-  const [event, setEvent] = React.useState<DiseaseEvent | null>(null)
+  const [event, setEvent] = React.useState<ConditionEvent | null>(null)
   // Each stage shows for a few seconds, then the next; playing stops on the
   // last stage of the course.
   React.useEffect(() => {
@@ -293,7 +293,7 @@ function DiseaseTimeline({
   }
   return (
     <div
-      data-slot="disease-timeline"
+      data-slot="condition-timeline"
       className="@container flex min-w-0 flex-col gap-3 rounded-xl border p-3 text-sm"
     >
       <div className="flex items-start gap-2">
@@ -343,7 +343,7 @@ function DiseaseTimeline({
           {stages.map((item, i) => {
             const current = i === index
             const reached = path.has(i)
-            const events = (disease.events ?? []).filter(
+            const events = (condition.events ?? []).filter(
               (entry) => entry.stage === item.id
             )
             return (
@@ -576,7 +576,7 @@ function Findings({
   }
   const affected = model.structures.filter(({ group }) => group === "Affected")
   const spared = model.structures.filter(({ group }) => group === "Spared")
-  // Spared structures the disease says something about come first; the rest
+  // Spared structures the condition says something about come first; the rest
   // of the model folds away, unless one of them is selected.
   const shown = spared.filter(({ id }) => noted.has(id))
   const folded = spared.filter(({ id }) => !noted.has(id))
@@ -625,7 +625,7 @@ const flagLabels = { high: "High", low: "Low", abnormal: "Abnormal" }
 function Investigations({
   investigations,
 }: {
-  investigations: readonly DiseaseInvestigation[]
+  investigations: readonly ConditionInvestigation[]
 }) {
   const id = React.useId()
   return (
@@ -664,7 +664,7 @@ function Investigations({
 function FlagIcon({
   flag,
 }: {
-  flag: NonNullable<DiseaseInvestigation["flag"]>
+  flag: NonNullable<ConditionInvestigation["flag"]>
 }) {
   if (flag === "high")
     return (

@@ -1,15 +1,15 @@
 import * as React from "react"
 import Link from "next/link"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 import { Badge } from "@workspace/ui/components/badge"
 import { CodeSnippet } from "@/components/code-snippet"
 import { ComponentInstallation } from "@/components/component-installation"
 import { ComponentPreview } from "@/components/component-preview"
-import { DiseaseApi } from "@/components/disease-api"
+import { ConditionApi } from "@/components/condition-api"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
-import { diseaseData } from "@/lib/diseases"
+import { conditionData } from "@/lib/conditions"
 import { registryItems, type RegistryItem } from "@/lib/registry"
 
 const variants = [
@@ -36,17 +36,17 @@ function list(items: React.ReactNode[], last = "and") {
   ))
 }
 
-// A disease page: what the condition is, its course, the models it is shown
-// on and their licences, all read from the disease's own data. The page is
+// A condition page: what the condition is, its course, the models it is shown
+// on and their licences, all read from the condition's own data. The page is
 // wide so the model and its panel sit side by side; the text keeps the docs
 // column's measure.
-export async function DiseaseDocs({ item }: { item: RegistryItem }) {
-  const disease = await diseaseData[item.name]!()
+export async function ConditionDocs({ item }: { item: RegistryItem }) {
+  const condition = await conditionData[item.name]!()
   const component = item.name
     .split("-")
     .map((word) => word[0]!.toUpperCase() + word.slice(1))
     .join("")
-  const bases = disease.scales.map((scale) => ({
+  const bases = condition.scales.map((scale) => ({
     scale,
     item: registryItems.find(({ name }) => name === scale.id)!,
   }))
@@ -55,7 +55,7 @@ export async function DiseaseDocs({ item }: { item: RegistryItem }) {
       {item.title.toLowerCase()}
     </Link>
   ))
-  const stages = disease.stages ?? []
+  const stages = condition.stages ?? []
   const usage = `import { ${component} } from "@/components/${item.name}"
 
 export function ${component}Demo() {
@@ -65,11 +65,11 @@ export function ${component}Demo() {
     <div data-docs-wide className="flex flex-col gap-10">
       <DocsHeader href={item.href} title={item.title}>
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
-          {disease.summary}
+          {condition.summary}
         </p>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
           <Badge variant="outline" className="font-mono">
-            ICD-10 {disease.code}
+            ICD-10 {condition.code}
           </Badge>
           <span>On the {list(baseLinks)}</span>
           {stages.length > 1 && <span>{stages.length} stages</span>}
@@ -81,10 +81,13 @@ export function ${component}Demo() {
           <DocsHeading id="installation">Installation</DocsHeading>
           <ComponentInstallation name={item.name} command={item.install} />
           <p className="text-sm text-muted-foreground">
-            This adds <code>{item.name}.tsx</code>, the disease&apos;s data and
-            component, to your components directory. It is built on the{" "}
-            <Link href="/docs/components/disease-viewer" className="underline">
-              disease viewer
+            This adds <code>{item.name}.tsx</code>, the condition&apos;s data
+            and component, to your components directory. It is built on the{" "}
+            <Link
+              href="/docs/components/condition-viewer"
+              className="underline"
+            >
+              condition viewer
             </Link>{" "}
             and reuses the models of the {list(baseLinks)}, which install with
             it.
@@ -99,7 +102,7 @@ export function ${component}Demo() {
           <p>
             Every structure is a finding: affected structures are amber and
             spared ones muted. Select one, in 3D or in the panel, to read what
-            the disease does there.
+            the condition does there.
           </p>
         </section>
         {stages.length > 1 && (
@@ -113,13 +116,13 @@ export function ${component}Demo() {
             </p>
             <ol className="flex flex-col gap-4 border-l pl-5">
               {stages.map((stage) => {
-                const events = (disease.events ?? []).filter(
+                const events = (condition.events ?? []).filter(
                   (event) => event.stage === stage.id
                 )
                 const affected = bases.map(({ scale }) => ({
                   scale,
-                  count: diseaseModel(
-                    disease,
+                  count: conditionModel(
+                    condition,
                     scale.id,
                     stage.id
                   ).structures.filter(({ group }) => group === "Affected")
@@ -186,7 +189,7 @@ export function ${component}Demo() {
             <DocsHeading id="scales">Scales</DocsHeading>
             <p>
               Set <code>scale</code> or <code>defaultScale</code> to show the
-              disease on another model. Each has its own structure IDs, so the
+              condition on another model. Each has its own structure IDs, so the
               viewer clears the selection when the scale changes.
             </p>
             <ul className="flex flex-col gap-2">
@@ -213,7 +216,7 @@ export function ${component}Demo() {
             <ComponentPreview name={`${item.name}-${suffix}`} />
           </section>
         ))}
-        <DiseaseApi component={component} disease={disease} />
+        <ConditionApi component={component} condition={condition} />
         <section className="flex flex-col gap-4">
           <DocsHeading id="models-and-licences">
             Models and licences
@@ -243,7 +246,7 @@ export function ${component}Demo() {
           </ul>
           <p className="text-sm text-muted-foreground">
             Educational, not for diagnosis or clinical decisions. The findings
-            summarise typical disease; individual patients differ.
+            summarise a typical course; individual patients differ.
           </p>
         </section>
         <DocsPager href={item.href} />

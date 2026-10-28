@@ -1,8 +1,8 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { eyeModel } from "@/components/eye"
 import { thymusModel } from "@/components/thymus"
 
@@ -12,7 +12,7 @@ const fatigable =
 // Myasthenia gravis with a thymoma: antibodies against the acetylcholine
 // receptor weaken the muscles that are used most, the eye muscles first,
 // and the thymus where the immune attack is thought to start holds a tumour.
-export const myastheniaGravis: Disease = {
+export const myastheniaGravis: Condition = {
   name: "Myasthenia gravis",
   code: "G70.0",
   summary:
@@ -177,10 +177,10 @@ export const myastheniaGravis: Disease = {
 }
 
 /** The eye at onset, the scale and stage the viewer opens on. */
-export const myastheniaGravisModel = diseaseModel(myastheniaGravis)
+export const myastheniaGravisModel = conditionModel(myastheniaGravis)
 
-export type MyastheniaGravisProps = Omit<DiseaseViewerProps, "disease">
+export type MyastheniaGravisProps = Omit<ConditionViewerProps, "condition">
 
 export function MyastheniaGravis(props: MyastheniaGravisProps) {
-  return <DiseaseViewer disease={myastheniaGravis} {...props} />
+  return <ConditionViewer condition={myastheniaGravis} {...props} />
 }

@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { brainModel } from "@/components/brain"
 
 // An ischaemic stroke of the left middle cerebral artery territory: an
 // embolus, here from atrial fibrillation, blocks the artery, and the lateral
 // frontal, parietal and temporal lobes it supplies lose their blood.
-export const ischaemicStroke: Disease = {
+export const ischaemicStroke: Condition = {
   name: "Ischaemic stroke",
   code: "I63.4",
   summary:
@@ -187,10 +187,10 @@ export const ischaemicStroke: Disease = {
 }
 
 /** The brain in the first hours, the stage the viewer opens on. */
-export const ischaemicStrokeModel = diseaseModel(ischaemicStroke)
+export const ischaemicStrokeModel = conditionModel(ischaemicStroke)
 
-export type IschaemicStrokeProps = Omit<DiseaseViewerProps, "disease">
+export type IschaemicStrokeProps = Omit<ConditionViewerProps, "condition">
 
 export function IschaemicStroke(props: IschaemicStrokeProps) {
-  return <DiseaseViewer disease={ischaemicStroke} {...props} />
+  return <ConditionViewer condition={ischaemicStroke} {...props} />
 }

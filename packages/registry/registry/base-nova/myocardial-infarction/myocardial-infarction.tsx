@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { heartModel } from "@/components/heart"
 
 // An anterior ST-elevation myocardial infarction: the left anterior
 // descending artery, a branch of the left coronary, blocks and the anterior
 // wall and septum it supplies die and scar.
-export const myocardialInfarction: Disease = {
+export const myocardialInfarction: Condition = {
   name: "Myocardial infarction",
   code: "I21.0",
   summary:
@@ -165,10 +165,10 @@ export const myocardialInfarction: Disease = {
 }
 
 /** The heart at occlusion, the stage the viewer opens on. */
-export const myocardialInfarctionModel = diseaseModel(myocardialInfarction)
+export const myocardialInfarctionModel = conditionModel(myocardialInfarction)
 
-export type MyocardialInfarctionProps = Omit<DiseaseViewerProps, "disease">
+export type MyocardialInfarctionProps = Omit<ConditionViewerProps, "condition">
 
 export function MyocardialInfarction(props: MyocardialInfarctionProps) {
-  return <DiseaseViewer disease={myocardialInfarction} {...props} />
+  return <ConditionViewer condition={myocardialInfarction} {...props} />
 }

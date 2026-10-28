@@ -1,13 +1,13 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { pancreasModel } from "@/components/pancreas"
 
 // Adenocarcinoma of the head of the pancreas: whether it can be removed
 // depends on the vessels behind the gland as much as on the tumour itself.
-export const pancreaticCancer: Disease = {
+export const pancreaticCancer: Condition = {
   name: "Pancreatic cancer",
   code: "C25.0",
   summary:
@@ -222,10 +222,10 @@ export const pancreaticCancer: Disease = {
 }
 
 /** The pancreas with a resectable tumour, the stage the viewer opens on. */
-export const pancreaticCancerModel = diseaseModel(pancreaticCancer)
+export const pancreaticCancerModel = conditionModel(pancreaticCancer)
 
-export type PancreaticCancerProps = Omit<DiseaseViewerProps, "disease">
+export type PancreaticCancerProps = Omit<ConditionViewerProps, "condition">
 
 export function PancreaticCancer(props: PancreaticCancerProps) {
-  return <DiseaseViewer disease={pancreaticCancer} {...props} />
+  return <ConditionViewer condition={pancreaticCancer} {...props} />
 }

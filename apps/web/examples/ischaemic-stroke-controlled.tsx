@@ -9,7 +9,7 @@ import {
   IschaemicStroke,
   ischaemicStroke,
 } from "@workspace/registry/ischaemic-stroke"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = ischaemicStroke.stages ?? []
 
@@ -17,9 +17,11 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(ischaemicStroke.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(ischaemicStroke, scale, stage).structures.find(
-    ({ id }) => id === selectedId
-  )
+  const selected = conditionModel(
+    ischaemicStroke,
+    scale,
+    stage
+  ).structures.find(({ id }) => id === selectedId)
   return (
     <div className="flex flex-col gap-3">
       {/* Your own control, such as a patient's timeline, drives the stage. */}

@@ -25,15 +25,15 @@ export const componentGroups = [
     title: "Molecular & cellular",
     categories: ["molecular", "cell", "tissue"],
   },
-  // The viewers and the tree the organs and diseases are built on, apart
-  // from them, so their pages don't read as one more organ or disease.
+  // The viewers and the tree the organs and conditions are built on, apart
+  // from them, so their pages don't read as one more organ or condition.
   {
     id: "building-blocks",
     title: "Building blocks",
     categories: ["anatomy", "pathology"],
   },
   { id: "organs", title: "Organs", categories: ["organ"] },
-  { id: "diseases", title: "Diseases", categories: ["disease"] },
+  { id: "conditions", title: "Conditions", categories: ["condition"] },
 ] as const
 
 export type ComponentGroupId = (typeof componentGroups)[number]["id"]
@@ -64,26 +64,26 @@ export const registryItems = catalog.items
       name: item.name,
       group: groupOf(categories),
       organ: categories.includes("organ"),
-      disease: categories.includes("disease"),
-      // Organs, tissues and diseases each carry one body system.
+      condition: categories.includes("condition"),
+      // Organs, tissues and conditions each carry one body system.
       system: bodySystems.find(({ id }) => categories.includes(id))?.id,
-      // The organs or tissues a disease is drawn on, one per scale, the
+      // The organs or tissues a condition is drawn on, one per scale, the
       // default first: its OrganUI dependencies besides the viewer.
-      bases: categories.includes("disease")
+      bases: categories.includes("condition")
         ? (item.registryDependencies ?? [])
             .filter(
               (name) =>
                 name.startsWith("@organui/") &&
                 name !== "@organui/organ-viewer" &&
-                name !== "@organui/disease-viewer"
+                name !== "@organui/condition-viewer"
             )
             .map((name) => name.replace("@organui/", ""))
         : [],
-      // Items built on the organ viewer with a model: organs, diseases, the
+      // Items built on the organ viewer with a model: organs, conditions, the
       // cell and tissues.
       model:
         categories.includes("organ") ||
-        categories.includes("disease") ||
+        categories.includes("condition") ||
         categories.includes("cell") ||
         categories.includes("tissue"),
       title: item.title ?? item.name,
@@ -105,7 +105,7 @@ export type RegistryItem = (typeof registryItems)[number]
 
 export const organs = registryItems.filter(({ organ }) => organ)
 
-export const diseases = registryItems.filter(({ disease }) => disease)
+export const conditions = registryItems.filter(({ condition }) => condition)
 
 // TypeScript helpers that install in lib, under /docs/helpers.
 export const helperItems = catalog.items
@@ -252,7 +252,7 @@ export const registryNamespace = JSON.stringify(
 export type NavLink = {
   title: string
   href: string
-  /** Pages outside its address that belong to it, such as each disease. */
+  /** Pages outside its address that belong to it, such as each condition. */
   pages?: string[]
 }
 
@@ -357,24 +357,24 @@ export const organsPage: NavLink & { description: string } = {
   description: "Every organ as a picture, linking to its page.",
 }
 
-export const diseasesPage: NavLink & { description: string } = {
-  title: "Diseases",
-  href: "/docs/components/diseases",
-  // The sidebar leaves the diseases out, so their gallery is their section.
-  pages: diseases.map(({ href }) => href),
+export const conditionsPage: NavLink & { description: string } = {
+  title: "Conditions",
+  href: "/docs/components/conditions",
+  // The sidebar leaves the conditions out, so their gallery is their section.
+  pages: conditions.map(({ href }) => href),
   description:
-    "Every disease by body system, each shown on the organ or tissue it affects.",
+    "Every condition by body system, each shown on the organ or tissue it affects.",
 }
 
 export const mainNav: NavLink[] = [
   { title: "Docs", href: "/docs" },
   { title: "Components", href: componentsIndex.href },
   { title: organsPage.title, href: organsPage.href },
-  // Diseases need additional work.
+  // Conditions need additional work.
   // {
-  //   title: diseasesPage.title,
-  //   href: diseasesPage.href,
-  //   pages: diseasesPage.pages,
+  //   title: conditionsPage.title,
+  //   href: conditionsPage.href,
+  //   pages: conditionsPage.pages,
   // },
   // Blocks need additional work.
   // { title: "Blocks", href: "/blocks" },
@@ -392,7 +392,7 @@ export const pagesNew: string[] = [
   utilitiesIndex.href,
 ]
 
-// The sidebar lists the guides and every component but the diseases, which
+// The sidebar lists the guides and every component but the conditions, which
 // grow one by one and are browsed in their gallery instead.
 export const docsNav: DocsNavSection[] = [
   {
@@ -400,7 +400,7 @@ export const docsNav: DocsNavSection[] = [
     items: [
       ...guides,
       componentsIndex,
-      diseasesPage,
+      conditionsPage,
       aiIndex,
       helpersIndex,
       utilitiesIndex,
@@ -408,7 +408,7 @@ export const docsNav: DocsNavSection[] = [
   },
   { title: "Installation", items: installationGuides },
   ...componentGroups
-    .filter(({ id }) => id !== "diseases")
+    .filter(({ id }) => id !== "conditions")
     .flatMap(({ id, title }) => [
       // AI Elements and utilities come before the organs and what they're
       // built on.
@@ -438,8 +438,8 @@ export const docsNav: DocsNavSection[] = [
 ]
 
 // Reading order for the previous and next links.
-// The organs gallery comes before the organs and the diseases gallery before
-// the diseases.
+// The organs gallery comes before the organs and the conditions gallery before
+// the conditions.
 // The framework guides follow Installation. Every docs page is here once.
 export const pageOrder: NavLink[] = [
   ...guides.flatMap((guide) =>
@@ -450,7 +450,7 @@ export const pageOrder: NavLink[] = [
   componentsIndex,
   ...registryItems.flatMap(({ title, href, name }) => [
     ...(name === organs[0]?.name ? [organsPage] : []),
-    ...(name === diseases[0]?.name ? [diseasesPage] : []),
+    ...(name === conditions[0]?.name ? [conditionsPage] : []),
     { title, href },
   ]),
   aiIndex,

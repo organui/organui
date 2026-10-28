@@ -6,7 +6,7 @@ import {
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
 import { BreastCancer, breastCancer } from "@workspace/registry/breast-cancer"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = breastCancer.stages ?? []
 
@@ -14,7 +14,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(breastCancer.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(breastCancer, scale, stage).structures.find(
+  const selected = conditionModel(breastCancer, scale, stage).structures.find(
     ({ id }) => id === selectedId
   )
   return (

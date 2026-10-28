@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { gallbladderModel } from "@/components/gallbladder"
 
 // Gallstone disease: where the stone lodges decides the illness, from biliary
 // colic in the cystic duct to cholangitis in the common duct and pancreatitis
 // at the ampulla.
-export const gallstoneDisease: Disease = {
+export const gallstoneDisease: Condition = {
   name: "Gallstone disease",
   code: "K80",
   summary:
@@ -200,10 +200,10 @@ export const gallstoneDisease: Disease = {
 }
 
 /** The biliary tree in biliary colic, the stage the viewer opens on. */
-export const gallstoneDiseaseModel = diseaseModel(gallstoneDisease)
+export const gallstoneDiseaseModel = conditionModel(gallstoneDisease)
 
-export type GallstoneDiseaseProps = Omit<DiseaseViewerProps, "disease">
+export type GallstoneDiseaseProps = Omit<ConditionViewerProps, "condition">
 
 export function GallstoneDisease(props: GallstoneDiseaseProps) {
-  return <DiseaseViewer disease={gallstoneDisease} {...props} />
+  return <ConditionViewer condition={gallstoneDisease} {...props} />
 }

@@ -9,7 +9,7 @@ import {
   GravesDisease,
   gravesDisease,
 } from "@workspace/registry/graves-disease"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = gravesDisease.stages ?? []
 
@@ -17,7 +17,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(gravesDisease.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(gravesDisease, scale, stage).structures.find(
+  const selected = conditionModel(gravesDisease, scale, stage).structures.find(
     ({ id }) => id === selectedId
   )
   return (

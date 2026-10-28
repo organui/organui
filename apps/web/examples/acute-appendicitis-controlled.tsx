@@ -9,7 +9,7 @@ import {
   AcuteAppendicitis,
   acuteAppendicitis,
 } from "@workspace/registry/acute-appendicitis"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = acuteAppendicitis.stages ?? []
 
@@ -17,7 +17,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(acuteAppendicitis.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(
+  const selected = conditionModel(
     acuteAppendicitis,
     scale,
     stage

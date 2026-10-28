@@ -1,12 +1,12 @@
 // Renders each organ at its default view to public/organs/<name>.webp for the
-// organs gallery, and each disease to public/diseases/<name>.webp for the
-// diseases gallery, as shadcn/ui's scripts/capture-registry.mts captures block
+// organs gallery, and each condition to public/conditions/<name>.webp for the
+// conditions gallery, as shadcn/ui's scripts/capture-registry.mts captures block
 // screenshots. lib/organ-thumbnails.json records the model each image was
 // rendered from, so a test fails when a model changes and its image doesn't.
 //
-//   bun run thumbnails                 organs and diseases without an image
+//   bun run thumbnails                 organs and conditions without an image
 //   bun run thumbnails --only heart    these items, comma-separated
-//   bun run thumbnails --force         every organ and disease
+//   bun run thumbnails --force         every organ and condition
 //
 // It runs `next dev` with ORGANUI_THUMBNAILS=1, the only way the uncredited
 // /thumbnail pages exist, and one browser renders one organ at a time.
@@ -31,7 +31,7 @@ const origin = `http://localhost:${port}`
 const root = new URL("../", import.meta.url)
 const manifestUrl = new URL("lib/organ-thumbnails.json", root)
 // Each gallery's items and the folder its pictures are served from.
-const galleries = { organ: "public/organs/", disease: "public/diseases/" }
+const galleries = { organ: "public/organs/", condition: "public/conditions/" }
 const pictures = new Map(
   catalog.items.flatMap((item) => {
     const kind = Object.keys(galleries).find(
@@ -50,7 +50,7 @@ const pictures = new Map(
 const only = values.only?.split(",").map((name) => name.trim())
 const unknown = only?.filter((name) => !pictures.has(name)) ?? []
 if (unknown.length)
-  throw new Error(`Not an organ or disease: ${unknown.join(", ")}`)
+  throw new Error(`Not an organ or condition: ${unknown.join(", ")}`)
 const targets =
   only ??
   [...pictures.keys()].filter(
@@ -58,7 +58,7 @@ const targets =
   )
 if (targets.length === 0) {
   console.log(
-    "Every organ and disease has a thumbnail; use --only or --force to redo one."
+    "Every organ and condition has a thumbnail; use --only or --force to redo one."
   )
   process.exit(0)
 }

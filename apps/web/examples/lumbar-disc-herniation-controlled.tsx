@@ -9,7 +9,7 @@ import {
   LumbarDiscHerniation,
   lumbarDiscHerniation,
 } from "@workspace/registry/lumbar-disc-herniation"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = lumbarDiscHerniation.stages ?? []
 
@@ -17,7 +17,7 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(lumbarDiscHerniation.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(
+  const selected = conditionModel(
     lumbarDiscHerniation,
     scale,
     stage

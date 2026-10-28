@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { jointsModel } from "@/components/joints"
 
 // A rupture of the anterior cruciate ligament with the medial collateral
 // ligament and medial meniscus, the "unhappy triad", on the knees of the
 // whole-body joints model.
-export const aclRupture: Disease = {
+export const aclRupture: Condition = {
   name: "ACL rupture",
   code: "S83.7",
   summary:
@@ -197,10 +197,10 @@ export const aclRupture: Disease = {
 }
 
 /** The knees just after the injury, the stage the viewer opens on. */
-export const aclRuptureModel = diseaseModel(aclRupture)
+export const aclRuptureModel = conditionModel(aclRupture)
 
-export type AclRuptureProps = Omit<DiseaseViewerProps, "disease">
+export type AclRuptureProps = Omit<ConditionViewerProps, "condition">
 
 export function AclRupture(props: AclRuptureProps) {
-  return <DiseaseViewer disease={aclRupture} {...props} />
+  return <ConditionViewer condition={aclRupture} {...props} />
 }

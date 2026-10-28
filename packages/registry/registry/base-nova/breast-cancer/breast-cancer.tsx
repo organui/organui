@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { breastModel } from "@/components/breast"
 
 // Breast cancer in the upper outer quadrant of the left breast, where most
 // arise because most of the gland is there, from cells still inside the
 // ducts to a tumour that tethers the skin and nipple.
-export const breastCancer: Disease = {
+export const breastCancer: Condition = {
   name: "Breast cancer",
   code: "C50.4",
   summary:
@@ -200,10 +200,10 @@ export const breastCancer: Disease = {
 }
 
 /** The breasts with ductal carcinoma in situ, the stage the viewer opens on. */
-export const breastCancerModel = diseaseModel(breastCancer)
+export const breastCancerModel = conditionModel(breastCancer)
 
-export type BreastCancerProps = Omit<DiseaseViewerProps, "disease">
+export type BreastCancerProps = Omit<ConditionViewerProps, "condition">
 
 export function BreastCancer(props: BreastCancerProps) {
-  return <DiseaseViewer disease={breastCancer} {...props} />
+  return <ConditionViewer condition={breastCancer} {...props} />
 }
