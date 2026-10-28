@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { pituitaryModel } from "@/components/pituitary"
 
 // A non-functioning pituitary adenoma: harmless while small, then pressing on
 // the optic chiasm above and the normal gland around it, and occasionally
 // bleeding into itself.
-export const pituitaryAdenoma: Disease = {
+export const pituitaryAdenoma: Condition = {
   name: "Pituitary adenoma",
   code: "D35.2",
   summary:
@@ -160,10 +160,10 @@ export const pituitaryAdenoma: Disease = {
 }
 
 /** The pituitary with a microadenoma, the stage the viewer opens on. */
-export const pituitaryAdenomaModel = diseaseModel(pituitaryAdenoma)
+export const pituitaryAdenomaModel = conditionModel(pituitaryAdenoma)
 
-export type PituitaryAdenomaProps = Omit<DiseaseViewerProps, "disease">
+export type PituitaryAdenomaProps = Omit<ConditionViewerProps, "condition">
 
 export function PituitaryAdenoma(props: PituitaryAdenomaProps) {
-  return <DiseaseViewer disease={pituitaryAdenoma} {...props} />
+  return <ConditionViewer condition={pituitaryAdenoma} {...props} />
 }

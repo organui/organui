@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { bladderModel } from "@/components/bladder"
 import { prostateModel } from "@/components/prostate"
 
 // Benign prostatic hyperplasia on the prostate, where the gland grows around
 // the urethra, and on the bladder, which pays for the obstruction.
-export const benignProstaticHyperplasia: Disease = {
+export const benignProstaticHyperplasia: Condition = {
   name: "Benign prostatic hyperplasia",
   code: "N40",
   summary:
@@ -185,17 +185,17 @@ export const benignProstaticHyperplasia: Disease = {
 }
 
 /** The prostate with symptoms, the scale and stage the viewer opens on. */
-export const benignProstaticHyperplasiaModel = diseaseModel(
+export const benignProstaticHyperplasiaModel = conditionModel(
   benignProstaticHyperplasia
 )
 
 export type BenignProstaticHyperplasiaProps = Omit<
-  DiseaseViewerProps,
-  "disease"
+  ConditionViewerProps,
+  "condition"
 >
 
 export function BenignProstaticHyperplasia(
   props: BenignProstaticHyperplasiaProps
 ) {
-  return <DiseaseViewer disease={benignProstaticHyperplasia} {...props} />
+  return <ConditionViewer condition={benignProstaticHyperplasia} {...props} />
 }

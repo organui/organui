@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { esophagusModel } from "@/components/esophagus"
 
 // Adenocarcinoma of the lower oesophagus, now the commonest type in the UK:
 // years of acid reflux turn the lining into Barrett's oesophagus, which can
 // become dysplastic and then cancerous.
-export const oesophagealCancer: Disease = {
+export const oesophagealCancer: Condition = {
   name: "Oesophageal cancer",
   code: "C15.5",
   summary:
@@ -170,10 +170,10 @@ export const oesophagealCancer: Disease = {
 }
 
 /** The oesophagus with Barrett's, the stage the viewer opens on. */
-export const oesophagealCancerModel = diseaseModel(oesophagealCancer)
+export const oesophagealCancerModel = conditionModel(oesophagealCancer)
 
-export type OesophagealCancerProps = Omit<DiseaseViewerProps, "disease">
+export type OesophagealCancerProps = Omit<ConditionViewerProps, "condition">
 
 export function OesophagealCancer(props: OesophagealCancerProps) {
-  return <DiseaseViewer disease={oesophagealCancer} {...props} />
+  return <ConditionViewer condition={oesophagealCancer} {...props} />
 }

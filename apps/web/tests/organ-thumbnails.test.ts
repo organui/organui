@@ -7,14 +7,14 @@ import thumbnails from "../lib/organ-thumbnails.json"
 
 const rendered = thumbnails as Record<string, string>
 
-// The organs and diseases galleries, each with its pictures' folder.
+// The organs and conditions galleries, each with its pictures' folder.
 const pictured = catalog.items.flatMap((item) => {
   const categories: readonly string[] =
     "categories" in item ? item.categories : []
   if (categories.includes("organ"))
     return [{ name: item.name, folder: "organs" }]
-  if (categories.includes("disease"))
-    return [{ name: item.name, folder: "diseases" }]
+  if (categories.includes("condition"))
+    return [{ name: item.name, folder: "conditions" }]
   return []
 })
 
@@ -38,7 +38,7 @@ for (const { name, folder } of pictured) {
   })
 }
 
-test("only organs and diseases have thumbnails", () => {
+test("only organs and conditions have thumbnails", () => {
   const names = pictured.map(({ name }) => name)
   expect(Object.keys(rendered).filter((name) => !names.includes(name))).toEqual(
     []

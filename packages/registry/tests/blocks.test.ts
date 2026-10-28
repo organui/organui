@@ -52,7 +52,7 @@ test("there are blocks and their names do not clash with components", () => {
 })
 
 // Clinical widgets composed from shadcn primitives install beside them in
-// components/ui; three.js scenes, the organs and diseases among them, install
+// components/ui; three.js scenes, the organs and conditions among them, install
 // in components.
 test("item types follow whether the item is a three.js scene", async () => {
   for (const item of components) {
@@ -65,7 +65,7 @@ test("item types follow whether the item is a three.js scene", async () => {
       (source) =>
         source.includes('from "three"') ||
         source.includes('from "@/components/organ-viewer"') ||
-        source.includes('from "@/components/disease-viewer"')
+        source.includes('from "@/components/condition-viewer"')
     )
     expect([item.name, item.type]).toEqual([
       item.name,
@@ -162,7 +162,7 @@ test("every component belongs to one docs group", () => {
     "tissue",
     "anatomy",
     "organ",
-    "disease",
+    "condition",
     "pathology",
     "utility",
     "helper",
@@ -178,9 +178,9 @@ test("every component belongs to one docs group", () => {
   }
 })
 
-// Each organ, tissue and disease carries one body system from
+// Each organ, tissue and condition carries one body system from
 // body-systems.json, for grouping them, and nothing else has one.
-test("every organ, tissue and disease belongs to one body system", () => {
+test("every organ, tissue and condition belongs to one body system", () => {
   const systems = bodySystems.map(({ id }) => id)
   for (const item of registry.items) {
     const categories: readonly string[] =
@@ -188,7 +188,7 @@ test("every organ, tissue and disease belongs to one body system", () => {
     expect(
       categories.filter((category) => systems.includes(category))
     ).toHaveLength(
-      ["organ", "tissue", "disease"].some((category) =>
+      ["organ", "tissue", "condition"].some((category) =>
         categories.includes(category)
       )
         ? 1

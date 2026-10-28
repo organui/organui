@@ -58,7 +58,7 @@ export default async function Page() {
       <section className="flex flex-col gap-4">
         <DocsHeading id="models">3D models</DocsHeading>
         <p>
-          Organs, diseases and the cell load a GLB model at runtime; the
+          Organs, conditions and the cell load a GLB model at runtime; the
           component file holds only its structures, views and credit. The models
           are under CC BY, CC BY-SA or CC0, per model. The BY licences require
           credit, and ShareAlike ones also cover adapted versions of the model.

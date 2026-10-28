@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { diseaseExamples } from "./_diseases"
+import { conditionExamples } from "./_conditions"
 import { organExamples } from "./_organs"
 
 // Every documentation example by name.
@@ -47,17 +47,17 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "disease-viewer-demo": {
-    title: "Disease viewer",
-    file: "disease-viewer-demo.tsx",
+  "condition-viewer-demo": {
+    title: "Condition viewer",
+    file: "condition-viewer-demo.tsx",
     lazy: true,
     render: async () => {
-      const { Example } = await import("./disease-viewer-demo")
+      const { Example } = await import("./condition-viewer-demo")
       return <Example />
     },
   },
   ...Object.fromEntries(
-    Object.entries({ ...organExamples, ...diseaseExamples }).map(
+    Object.entries({ ...organExamples, ...conditionExamples }).map(
       ([name, item]) => [name, { ...item, lazy: true }]
     )
   ),

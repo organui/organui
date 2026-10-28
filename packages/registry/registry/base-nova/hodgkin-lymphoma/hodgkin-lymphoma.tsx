@@ -1,13 +1,13 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { lymphModel } from "@/components/lymph"
 
 // Classical Hodgkin lymphoma of the nodular sclerosis type, the commonest in
 // young adults: a few malignant cells rebuild a whole lymph node around them.
-export const hodgkinLymphoma: Disease = {
+export const hodgkinLymphoma: Condition = {
   name: "Hodgkin lymphoma",
   code: "C81.1",
   summary:
@@ -128,10 +128,10 @@ export const hodgkinLymphoma: Disease = {
 }
 
 /** The node in active disease, the stage the viewer opens on. */
-export const hodgkinLymphomaModel = diseaseModel(hodgkinLymphoma)
+export const hodgkinLymphomaModel = conditionModel(hodgkinLymphoma)
 
-export type HodgkinLymphomaProps = Omit<DiseaseViewerProps, "disease">
+export type HodgkinLymphomaProps = Omit<ConditionViewerProps, "condition">
 
 export function HodgkinLymphoma(props: HodgkinLymphomaProps) {
-  return <DiseaseViewer disease={hodgkinLymphoma} {...props} />
+  return <ConditionViewer condition={hodgkinLymphoma} {...props} />
 }

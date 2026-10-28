@@ -4,7 +4,7 @@ import {
   guides,
   installationGuides,
   organsPage,
-  diseasesPage,
+  conditionsPage,
   registryBlocks,
   registryItems,
   utilitiesIndex,
@@ -39,12 +39,12 @@ export function GET() {
       ...(id === "organs"
         ? [entry(organsPage.title, organsPage.href, organsPage.description)]
         : []),
-      ...(id === "diseases"
+      ...(id === "conditions"
         ? [
             entry(
-              diseasesPage.title,
-              diseasesPage.href,
-              diseasesPage.description
+              conditionsPage.title,
+              conditionsPage.href,
+              conditionsPage.description
             ),
           ]
         : []),

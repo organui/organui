@@ -9,7 +9,7 @@ import {
   GallstoneDisease,
   gallstoneDisease,
 } from "@workspace/registry/gallstone-disease"
-import { diseaseModel } from "@workspace/registry/disease-model"
+import { conditionModel } from "@workspace/registry/condition-model"
 
 const stages = gallstoneDisease.stages ?? []
 
@@ -17,9 +17,11 @@ export function Example() {
   const [stage, setStage] = useState(stages[0]!.id)
   const [scale, setScale] = useState(gallstoneDisease.scales[0]!.id)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const selected = diseaseModel(gallstoneDisease, scale, stage).structures.find(
-    ({ id }) => id === selectedId
-  )
+  const selected = conditionModel(
+    gallstoneDisease,
+    scale,
+    stage
+  ).structures.find(({ id }) => id === selectedId)
   return (
     <div className="flex flex-col gap-3">
       {/* Your own control, such as a patient's timeline, drives the stage. */}

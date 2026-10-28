@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { larynxModel } from "@/components/larynx"
 
 // Squamous cell carcinoma of the glottis, the vocal cords: it changes the
 // voice while still tiny, so it is often found early, and the cords have so
 // few lymphatics that it seldom spreads until it leaves them.
-export const laryngealCancer: Disease = {
+export const laryngealCancer: Condition = {
   name: "Laryngeal cancer",
   code: "C32.0",
   summary:
@@ -185,10 +185,10 @@ export const laryngealCancer: Disease = {
 }
 
 /** The larynx with an early cancer of the left cord, the stage the viewer opens on. */
-export const laryngealCancerModel = diseaseModel(laryngealCancer)
+export const laryngealCancerModel = conditionModel(laryngealCancer)
 
-export type LaryngealCancerProps = Omit<DiseaseViewerProps, "disease">
+export type LaryngealCancerProps = Omit<ConditionViewerProps, "condition">
 
 export function LaryngealCancer(props: LaryngealCancerProps) {
-  return <DiseaseViewer disease={laryngealCancer} {...props} />
+  return <ConditionViewer condition={laryngealCancer} {...props} />
 }

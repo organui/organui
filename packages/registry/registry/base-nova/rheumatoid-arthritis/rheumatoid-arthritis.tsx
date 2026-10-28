@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { jointsModel } from "@/components/joints"
 
 // Seropositive rheumatoid arthritis: a symmetrical inflammation of the
 // synovium of the small joints of the hands and feet, where early treatment
 // to a target decides whether the joints are saved.
-export const rheumatoidArthritis: Disease = {
+export const rheumatoidArthritis: Condition = {
   name: "Rheumatoid arthritis",
   code: "M05.9",
   summary:
@@ -199,10 +199,10 @@ export const rheumatoidArthritis: Disease = {
 }
 
 /** The joints in early disease, the stage the viewer opens on. */
-export const rheumatoidArthritisModel = diseaseModel(rheumatoidArthritis)
+export const rheumatoidArthritisModel = conditionModel(rheumatoidArthritis)
 
-export type RheumatoidArthritisProps = Omit<DiseaseViewerProps, "disease">
+export type RheumatoidArthritisProps = Omit<ConditionViewerProps, "condition">
 
 export function RheumatoidArthritis(props: RheumatoidArthritisProps) {
-  return <DiseaseViewer disease={rheumatoidArthritis} {...props} />
+  return <ConditionViewer condition={rheumatoidArthritis} {...props} />
 }

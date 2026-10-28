@@ -8,7 +8,7 @@ import {
   ToggleGroupItem,
 } from "@workspace/ui/components/toggle-group"
 
-export type GalleryDisease = {
+export type GalleryCondition = {
   name: string
   title: string
   href: string
@@ -17,18 +17,18 @@ export type GalleryDisease = {
   bases: string[]
 }
 
-// Every disease as a picture, filtered by body system. The systems are those
-// with a disease, in body-systems.json order.
-export function DiseaseGallery({
-  diseases,
+// Every condition as a picture, filtered by body system. The systems are those
+// with a condition, in body-systems.json order.
+export function ConditionGallery({
+  conditions,
   systems,
 }: {
-  diseases: GalleryDisease[]
+  conditions: GalleryCondition[]
   systems: { id: string; title: string }[]
 }) {
   const [system, setSystem] = React.useState("all")
-  const shown = diseases.filter(
-    (disease) => system === "all" || disease.system === system
+  const shown = conditions.filter(
+    (condition) => system === "all" || condition.system === system
   )
   const titles = new Map(systems.map(({ id, title }) => [id, title]))
   return (
@@ -50,25 +50,25 @@ export function DiseaseGallery({
         ))}
       </ToggleGroup>
       <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
-        {shown.map((disease) => (
-          <li key={disease.name} className="flex flex-col gap-0.5">
+        {shown.map((condition) => (
+          <li key={condition.name} className="flex flex-col gap-0.5">
             <Link
-              href={disease.href}
+              href={condition.href}
               className="group flex flex-col gap-2 rounded-xl focus-visible:outline-2 focus-visible:outline-ring"
             >
               <Image
-                src={`/diseases/${disease.name}.webp`}
+                src={`/conditions/${condition.name}.webp`}
                 width={640}
                 height={480}
                 alt=""
                 sizes="(min-width: 1280px) 14rem, (min-width: 1024px) 20vw, (min-width: 640px) 30vw, 50vw"
                 className="aspect-[4/3] w-full rounded-xl bg-muted/40 object-contain transition-transform group-hover:scale-[1.03]"
               />
-              <span className="text-sm font-medium">{disease.title}</span>
+              <span className="text-sm font-medium">{condition.title}</span>
             </Link>
             <span className="text-xs text-muted-foreground">
-              {titles.get(disease.system)} ·{" "}
-              {disease.bases.map((base) => base.toLowerCase()).join(", ")}
+              {titles.get(condition.system)} ·{" "}
+              {condition.bases.map((base) => base.toLowerCase()).join(", ")}
             </span>
           </li>
         ))}

@@ -1,12 +1,12 @@
 import {
-  diseaseModel,
-  type Disease,
-  type DiseaseFinding,
-} from "@/components/disease-model"
+  conditionModel,
+  type Condition,
+  type ConditionFinding,
+} from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { lungsModel } from "@/components/lungs"
 
 // The model's four segments of the right lower lobe, which consolidate together.
@@ -15,12 +15,12 @@ const lowerLobe = ["FMA7366", "FMA7364", "FMA7363", "FMA7362"]
 const consolidated = (description: string) =>
   Object.fromEntries(
     lowerLobe.map((id) => [id, { affected: true, description }])
-  ) as Record<string, DiseaseFinding>
+  ) as Record<string, ConditionFinding>
 
 // Lobar pneumonia of the right lower lobe, usually pneumococcal: infection
 // fills the alveoli of the whole lobe, which passes through four classic
 // stages before it clears.
-export const lobarPneumonia: Disease = {
+export const lobarPneumonia: Condition = {
   name: "Lobar pneumonia",
   code: "J18.1",
   summary:
@@ -161,10 +161,10 @@ export const lobarPneumonia: Disease = {
 }
 
 /** The lungs at congestion, the stage the viewer opens on. */
-export const lobarPneumoniaModel = diseaseModel(lobarPneumonia)
+export const lobarPneumoniaModel = conditionModel(lobarPneumonia)
 
-export type LobarPneumoniaProps = Omit<DiseaseViewerProps, "disease">
+export type LobarPneumoniaProps = Omit<ConditionViewerProps, "condition">
 
 export function LobarPneumonia(props: LobarPneumoniaProps) {
-  return <DiseaseViewer disease={lobarPneumonia} {...props} />
+  return <ConditionViewer condition={lobarPneumonia} {...props} />
 }

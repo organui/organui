@@ -1,8 +1,8 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { eyeModel } from "@/components/eye"
 import { thyroidModel } from "@/components/thyroid"
 
@@ -11,7 +11,7 @@ const goitre =
 
 // Graves' disease on the thyroid, where the antibodies drive the gland, and
 // on the eye, where the same autoimmunity swells the muscles behind it.
-export const gravesDisease: Disease = {
+export const gravesDisease: Condition = {
   name: "Graves' disease",
   code: "E05.0",
   summary:
@@ -211,10 +211,10 @@ export const gravesDisease: Disease = {
 }
 
 /** The thyroid when thyrotoxic, the scale and stage the viewer opens on. */
-export const gravesDiseaseModel = diseaseModel(gravesDisease)
+export const gravesDiseaseModel = conditionModel(gravesDisease)
 
-export type GravesDiseaseProps = Omit<DiseaseViewerProps, "disease">
+export type GravesDiseaseProps = Omit<ConditionViewerProps, "condition">
 
 export function GravesDisease(props: GravesDiseaseProps) {
-  return <DiseaseViewer disease={gravesDisease} {...props} />
+  return <ConditionViewer condition={gravesDisease} {...props} />
 }

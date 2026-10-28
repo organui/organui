@@ -1,8 +1,8 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { earModel } from "@/components/ear"
 
 const bathed =
@@ -10,7 +10,7 @@ const bathed =
 
 // Acute otitis media in a young child: a cold blocks the auditory tube, and
 // the trapped middle ear fluid becomes infected behind the eardrum.
-export const acuteOtitisMedia: Disease = {
+export const acuteOtitisMedia: Condition = {
   name: "Acute otitis media",
   code: "H66.0",
   summary:
@@ -162,10 +162,10 @@ export const acuteOtitisMedia: Disease = {
 }
 
 /** The ear in acute infection, the stage the viewer opens on. */
-export const acuteOtitisMediaModel = diseaseModel(acuteOtitisMedia)
+export const acuteOtitisMediaModel = conditionModel(acuteOtitisMedia)
 
-export type AcuteOtitisMediaProps = Omit<DiseaseViewerProps, "disease">
+export type AcuteOtitisMediaProps = Omit<ConditionViewerProps, "condition">
 
 export function AcuteOtitisMedia(props: AcuteOtitisMediaProps) {
-  return <DiseaseViewer disease={acuteOtitisMedia} {...props} />
+  return <ConditionViewer condition={acuteOtitisMedia} {...props} />
 }

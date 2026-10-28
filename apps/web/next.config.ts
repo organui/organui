@@ -89,6 +89,23 @@ const nextConfig: NextConfig = {
         destination: "/docs/components/organs",
         permanent: true,
       },
+      // Conditions were called diseases until 0.6.0. The registry JSON
+      // redirects too, so `shadcn add` on the old name still installs.
+      {
+        source: "/docs/components/diseases",
+        destination: "/docs/components/conditions",
+        permanent: true,
+      },
+      {
+        source: "/docs/(components/)?disease-viewer",
+        destination: "/docs/components/condition-viewer",
+        permanent: true,
+      },
+      {
+        source: "/r/:path*/disease-viewer.json",
+        destination: "/r/:path*/condition-viewer.json",
+        permanent: true,
+      },
     ]
   },
 }

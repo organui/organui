@@ -1,5 +1,5 @@
 import Link from "next/link"
-import type { Disease } from "@workspace/registry/disease-model"
+import type { Condition } from "@workspace/registry/condition-model"
 import { DocsHeading } from "@/components/docs-heading"
 import {
   Table,
@@ -16,20 +16,20 @@ type Prop = { type: string; default: string; description: string }
 const union = (ids: readonly string[]) =>
   ids.length ? ids.map((id) => `"${id}"`).join(" | ") : "string"
 
-// The disease viewer's own props. With a disease, the scale and stage types
-// are its own IDs; without one (the viewer's page), the disease is a prop.
-function propsFor(disease?: Disease): Record<string, Prop> {
-  const scales = disease?.scales.map(({ id }) => id) ?? []
-  const stages = disease?.stages?.map(({ id }) => id) ?? []
+// The condition viewer's own props. With a condition, the scale and stage types
+// are its own IDs; without one (the viewer's page), the condition is a prop.
+function propsFor(condition?: Condition): Record<string, Prop> {
+  const scales = condition?.scales.map(({ id }) => id) ?? []
+  const stages = condition?.stages?.map(({ id }) => id) ?? []
   return {
-    ...(disease
+    ...(condition
       ? {}
       : {
-          disease: {
-            type: "Disease",
+          condition: {
+            type: "Condition",
             default: "—",
             description:
-              "The disease: its scales, stages, findings and investigations.",
+              "The condition: its scales, stages, findings and investigations.",
           },
         }),
     scale: {
@@ -82,7 +82,7 @@ function propsFor(disease?: Disease): Record<string, Prop> {
       type: "boolean",
       default: "true",
       description:
-        "Show the course under the model, with its events and a play button. A disease with one stage has none.",
+        "Show the course under the model, with its events and a play button. A condition with one stage has none.",
     },
     className: {
       type: "string",
@@ -92,12 +92,12 @@ function propsFor(disease?: Disease): Record<string, Prop> {
   }
 }
 
-export function DiseaseApi({
+export function ConditionApi({
   component,
-  disease,
+  condition,
 }: {
   component: string
-  disease?: Disease
+  condition?: Condition
 }) {
   return (
     <section className="flex min-w-0 flex-col gap-4">
@@ -120,7 +120,7 @@ export function DiseaseApi({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {Object.entries(propsFor(disease)).map(([name, prop]) => (
+          {Object.entries(propsFor(condition)).map(([name, prop]) => (
             <TableRow key={name}>
               <TableCell>
                 <code>{name}</code>

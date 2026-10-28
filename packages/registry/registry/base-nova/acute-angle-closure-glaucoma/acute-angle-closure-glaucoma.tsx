@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { eyeModel } from "@/components/eye"
 
 // Acute angle-closure glaucoma: in a crowded eye the iris blocks the
 // drainage angle, pressure soars within hours, and the optic nerve is lost
 // unless it comes down.
-export const acuteAngleClosureGlaucoma: Disease = {
+export const acuteAngleClosureGlaucoma: Condition = {
   name: "Acute angle-closure glaucoma",
   code: "H40.2",
   summary:
@@ -169,14 +169,17 @@ export const acuteAngleClosureGlaucoma: Disease = {
 }
 
 /** The eye during the attack, the stage the viewer opens on. */
-export const acuteAngleClosureGlaucomaModel = diseaseModel(
+export const acuteAngleClosureGlaucomaModel = conditionModel(
   acuteAngleClosureGlaucoma
 )
 
-export type AcuteAngleClosureGlaucomaProps = Omit<DiseaseViewerProps, "disease">
+export type AcuteAngleClosureGlaucomaProps = Omit<
+  ConditionViewerProps,
+  "condition"
+>
 
 export function AcuteAngleClosureGlaucoma(
   props: AcuteAngleClosureGlaucomaProps
 ) {
-  return <DiseaseViewer disease={acuteAngleClosureGlaucoma} {...props} />
+  return <ConditionViewer condition={acuteAngleClosureGlaucoma} {...props} />
 }

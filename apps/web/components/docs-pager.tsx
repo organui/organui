@@ -5,7 +5,7 @@ import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
 // Previous and next pages in sidebar order, organs included. Links shrink
-// and truncate long titles, such as a disease's, to fit a phone.
+// and truncate long titles, such as a condition's, to fit a phone.
 export function DocsPager({ href }: { href: string }) {
   const { previous, next } = neighbours(href)
   if (!previous && !next) return null

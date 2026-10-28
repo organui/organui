@@ -545,7 +545,7 @@ export function OrganViewer({
     orbit.minDistance = closest * 1.25
     orbit.maxDistance = radius * 6
 
-    // Colours fading from one paint to the next, such as a disease moving to
+    // Colours fading from one paint to the next, such as a condition moving to
     // its next stage.
     const fades = new Map<
       MeshStandardMaterial,
@@ -668,7 +668,7 @@ export function OrganViewer({
     setEngine({
       paint(selected, shown) {
         // Colours come from the current model, so a model that recolours the
-        // same structures, such as a disease stage, repaints without a reload.
+        // same structures, such as a condition stage, repaints without a reload.
         const colors = new Map(
           latest.current.model.structures.map(({ id, color }) => [id, color])
         )
@@ -690,7 +690,7 @@ export function OrganViewer({
             const material = mesh.material as MeshStandardMaterial
             mesh.visible = shown[id] !== false
             const target = state === "ghosted" ? ghost : new Color(color)
-            // A structure recoloured in the same state, such as at a disease's
+            // A structure recoloured in the same state, such as at a condition's
             // next stage, fades to its new colour. A first paint, a selection
             // change and reduced motion apply at once.
             const fade =

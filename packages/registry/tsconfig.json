@@ -143,11 +143,11 @@
       "@/components/vestibular": [
         "./registry/base-nova/vestibular/vestibular.tsx"
       ],
-      "@/components/disease-viewer": [
-        "./registry/base-nova/disease-viewer/disease-viewer.tsx"
+      "@/components/condition-viewer": [
+        "./registry/base-nova/condition-viewer/condition-viewer.tsx"
       ],
-      "@/components/disease-model": [
-        "./registry/base-nova/disease-viewer/disease-model.ts"
+      "@/components/condition-model": [
+        "./registry/base-nova/condition-viewer/condition-model.ts"
       ],
       "@/components/abdominal-aortic-aneurysm": [
         "./registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx"

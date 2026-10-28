@@ -157,16 +157,16 @@
       }
     ]
   },
-  "disease-viewer": {
-    "component": "DiseaseViewer",
+  "condition-viewer": {
+    "component": "ConditionViewer",
     "element": null,
     "props": [
       {
-        "name": "disease",
-        "type": "Disease",
+        "name": "condition",
+        "type": "Condition",
         "required": true,
         "default": null,
-        "description": "The disease: its scales, stages, findings and investigations."
+        "description": "The condition: its scales, stages, findings and investigations."
       },
       {
         "name": "scale",
@@ -179,7 +179,7 @@
         "name": "defaultScale",
         "type": "string",
         "required": false,
-        "default": "disease.scales[0]!.id",
+        "default": "condition.scales[0]!.id",
         "description": "The scale shown first when `scale` is not set. Defaults to the first."
       },
       {
@@ -200,7 +200,7 @@
         "name": "defaultStage",
         "type": "string",
         "required": false,
-        "default": "disease.stages?.[0]?.id ?? \"\"",
+        "default": "condition.stages?.[0]?.id ?? \"\"",
         "description": "The stage shown first when `stage` is not set. Defaults to the first."
       },
       {
@@ -236,7 +236,7 @@
         "type": "boolean",
         "required": false,
         "default": "true",
-        "description": "Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a disease with one stage has none."
+        "description": "Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a condition with one stage has none."
       }
     ]
   },

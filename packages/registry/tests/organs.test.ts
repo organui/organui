@@ -8,24 +8,24 @@ import {
 } from "../registry/base-nova/organ-viewer/organ-viewer"
 import {
   AFFECTED,
-  diseaseModel,
+  conditionModel,
   SPARED,
-  type Disease,
-} from "../registry/base-nova/disease-viewer/disease-model"
-import { DiseaseViewer } from "../registry/base-nova/disease-viewer/disease-viewer"
+  type Condition,
+} from "../registry/base-nova/condition-viewer/condition-model"
+import { ConditionViewer } from "../registry/base-nova/condition-viewer/condition-viewer"
 
 const directory = new URL("../registry/base-nova/", import.meta.url)
-// Items built on the shared viewer: the organs, tissues, the diseases drawn
+// Items built on the shared viewer: the organs, tissues, the conditions drawn
 // on them, and the cell.
 const organItems = registry.items.filter(
   (item) =>
     "categories" in item &&
-    ["organ", "tissue", "disease", "cell"].some((category) =>
+    ["organ", "tissue", "condition", "cell"].some((category) =>
       item.categories?.includes(category)
     )
 )
-const diseaseItems = organItems.filter(({ categories }) =>
-  categories?.includes("disease")
+const conditionItems = organItems.filter(({ categories }) =>
+  categories?.includes("condition")
 )
 
 // Like shadcn's charts on `chart`, each organ ships only its own file and
@@ -39,7 +39,7 @@ test("every organ file has exactly one registry item that depends on the viewer"
     organItems.filter(({ categories }) => categories?.includes("cell"))
   ).toHaveLength(1)
   for (const item of organItems) {
-    if (diseaseItems.includes(item)) continue
+    if (conditionItems.includes(item)) continue
     expect(folders).toContain(item.name)
     expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
@@ -66,62 +66,62 @@ async function load(name: string) {
   return { module, model: models[0]!, models }
 }
 
-// A disease is data on the shared disease viewer: one scale per organ or
+// A condition is data on the shared condition viewer: one scale per organ or
 // tissue it is drawn on, which it depends on and reuses the model of, and
 // stages that change which structures it affects.
-for (const item of diseaseItems) {
-  test(`${item.name} maps its disease onto its bases' models`, async () => {
+for (const item of conditionItems) {
+  test(`${item.name} maps its condition onto its bases' models`, async () => {
     expect(item.type).toBe("registry:component")
     expect(item.files.map(({ path }) => path)).toEqual([
       `registry/base-nova/${item.name}/${item.name}.tsx`,
     ])
-    expect(item.registryDependencies).toContain("@organui/disease-viewer")
+    expect(item.registryDependencies).toContain("@organui/condition-viewer")
     const bases = item.registryDependencies
-      .filter((name) => name !== "@organui/disease-viewer")
+      .filter((name) => name !== "@organui/condition-viewer")
       .map((name) => name.replace("@organui/", ""))
     const { module } = await load(item.name)
-    const disease = module[camel(item.name)] as Disease
-    expect(disease.code).toMatch(/^[A-Z]\d{2}(\.\d{1,3})?$/)
+    const condition = module[camel(item.name)] as Condition
+    expect(condition.code).toMatch(/^[A-Z]\d{2}(\.\d{1,3})?$/)
     // Each scale is one base, in the order the item lists them.
-    expect([...disease.scales.map(({ id }) => id)].sort()).toEqual(
+    expect([...condition.scales.map(({ id }) => id)].sort()).toEqual(
       [...bases].sort()
     )
-    for (const [index, scale] of disease.scales.entries()) {
+    for (const [index, scale] of condition.scales.entries()) {
       const baseItem = registry.items.find(({ name }) => name === scale.id)
       // Drawn on an organ, or on a tissue for what happens at that scale.
       const [kind] = baseItem!.categories
       expect(["organ", "tissue"]).toContain(kind!)
-      // The disease sits in the body system of its default scale; another
+      // The condition sits in the body system of its default scale; another
       // scale may be another system's organ, such as the eye in Graves'.
       if (index === 0)
         expect(
-          item.categories.filter((category) => category !== "disease")
+          item.categories.filter((category) => category !== "condition")
         ).toEqual(baseItem!.categories.filter((category) => category !== kind))
       expect(scale.model).toBe((await load(scale.id)).model)
     }
     // Every finding names a structure of its scale's model.
-    const stages = disease.stages ?? []
+    const stages = condition.stages ?? []
     expect(new Set(stages.map(({ id }) => id)).size).toBe(stages.length)
     // Events sit on the timeline at a stage of the course, in its order, and
     // a course starts with its first stage, not an alternative to it.
-    const order = (disease.events ?? []).map(({ stage }) =>
+    const order = (condition.events ?? []).map(({ stage }) =>
       stages.findIndex(({ id }) => id === stage)
     )
     expect(order.every((index) => index >= 0)).toBe(true)
     expect(order).toEqual([...order].sort((a, b) => a - b))
     expect(stages[0]?.alternative).toBeFalsy()
     for (const [scaleId, findings] of [
-      ...disease.scales.map(({ id, findings }) => [id, findings] as const),
+      ...condition.scales.map(({ id, findings }) => [id, findings] as const),
       ...stages.flatMap(({ findings = {} }) => Object.entries(findings)),
     ]) {
-      const scale = disease.scales.find(({ id }) => id === scaleId)
+      const scale = condition.scales.find(({ id }) => id === scaleId)
       expect(scale).toBeDefined()
       const ids = scale!.model.structures.map(({ id }) => id)
       for (const id of Object.keys(findings)) expect(ids).toContain(id)
     }
-    for (const scale of disease.scales)
+    for (const scale of condition.scales)
       for (const stage of stages.length ? stages : [undefined]) {
-        const model = diseaseModel(disease, scale.id, stage?.id)
+        const model = conditionModel(condition, scale.id, stage?.id)
         const base = scale.model
         // The same GLB, views and credit; only the structures' text and
         // colours change, so every mesh id still matches the file.
@@ -142,7 +142,7 @@ for (const item of diseaseItems) {
         // A scale can open on another of the model's own views.
         expect(defaultView).toBe(scale.defaultView ?? baseView)
         expect(base.views.map(({ name }) => name)).toContain(defaultView)
-        expect(name).toBe(disease.name)
+        expect(name).toBe(condition.name)
         expect(name).not.toBe(baseName)
         expect(structures.map(({ id }) => id).sort()).toEqual(
           baseStructures.map(({ id }) => id).sort()
@@ -160,13 +160,15 @@ for (const item of diseaseItems) {
       }
     // The model export is the default scale at the default stage, which the
     // site's loaders and the gallery picture use.
-    expect(module[`${camel(item.name)}Model`]).toEqual(diseaseModel(disease))
+    expect(module[`${camel(item.name)}Model`]).toEqual(
+      conditionModel(condition)
+    )
     const Component = module[
       camel(item.name).replace(/^\w/, (letter) => letter.toUpperCase())
     ] as (props: object) => { type: unknown; props: object }
     const element = Component({ panel: false })
-    expect(element.type).toBe(DiseaseViewer)
-    expect(element.props).toEqual({ disease, panel: false })
+    expect(element.type).toBe(ConditionViewer)
+    expect(element.props).toEqual({ condition, panel: false })
   })
 }
 
@@ -234,7 +236,7 @@ test("all organ public components preserve their model and consumer props", asyn
   const { OrganViewer } =
     await import("../registry/base-nova/organ-viewer/organ-viewer")
   for (const item of organItems) {
-    if (diseaseItems.includes(item)) continue
+    if (conditionItems.includes(item)) continue
     const name = item.name
       .split("-")
       .map((word) => word[0]!.toUpperCase() + word.slice(1))
@@ -263,11 +265,11 @@ test("all organ public components preserve their model and consumer props", asyn
 
 test("each organ has public-component demos and a concrete example registry entry", async () => {
   const examples = new URL("../../../apps/web/examples/", import.meta.url)
-  // Organs register their demos in _organs.tsx, diseases in _diseases.tsx,
+  // Organs register their demos in _organs.tsx, conditions in _conditions.tsx,
   // the cell in _examples.tsx.
   const definitions = [
     await readFile(new URL("_organs.tsx", examples), "utf8"),
-    await readFile(new URL("_diseases.tsx", examples), "utf8"),
+    await readFile(new URL("_conditions.tsx", examples), "utf8"),
     await readFile(new URL("_examples.tsx", examples), "utf8"),
   ].join("\n")
   for (const item of organItems) {
@@ -275,7 +277,7 @@ test("each organ has public-component demos and a concrete example registry entr
       .split("-")
       .map((word) => word[0]!.toUpperCase() + word.slice(1))
       .join("")
-    const suffixes = diseaseItems.includes(item)
+    const suffixes = conditionItems.includes(item)
       ? ["demo", "without-panel", "controlled"]
       : ["demo", "without-controls", "controlled", "with-anatomy"]
     for (const suffix of suffixes) {
@@ -286,7 +288,7 @@ test("each organ has public-component demos and a concrete example registry entr
       expect(source).toContain(`from "@workspace/registry/${item.name}"`)
       expect(source).toContain(`<${component}`)
       expect(source).not.toContain("<OrganViewer")
-      expect(source).not.toContain("<DiseaseViewer")
+      expect(source).not.toContain("<ConditionViewer")
       expect(source).not.toContain("{ model }")
     }
   }

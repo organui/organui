@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { liverModel } from "@/components/liver"
 import { liverLobuleModel } from "@/components/liver-lobule"
 
 // Autoimmune hepatitis on the whole liver, where its course shows, and on a
 // liver lobule, where the injury happens under the microscope.
-export const autoimmuneHepatitis: Disease = {
+export const autoimmuneHepatitis: Condition = {
   name: "Autoimmune hepatitis",
   code: "K75.4",
   summary:
@@ -212,10 +212,10 @@ export const autoimmuneHepatitis: Disease = {
 }
 
 /** The liver in active disease, the scale and stage the viewer opens on. */
-export const autoimmuneHepatitisModel = diseaseModel(autoimmuneHepatitis)
+export const autoimmuneHepatitisModel = conditionModel(autoimmuneHepatitis)
 
-export type AutoimmuneHepatitisProps = Omit<DiseaseViewerProps, "disease">
+export type AutoimmuneHepatitisProps = Omit<ConditionViewerProps, "condition">
 
 export function AutoimmuneHepatitis(props: AutoimmuneHepatitisProps) {
-  return <DiseaseViewer disease={autoimmuneHepatitis} {...props} />
+  return <ConditionViewer condition={autoimmuneHepatitis} {...props} />
 }

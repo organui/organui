@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { stomachModel } from "@/components/stomach"
 
 // A gastric ulcer on the lesser curve, where the left gastric artery runs
 // close behind it: the two complications that kill are bleeding and
 // perforation.
-export const pepticUlcerDisease: Disease = {
+export const pepticUlcerDisease: Condition = {
   name: "Peptic ulcer disease",
   code: "K25",
   summary:
@@ -149,10 +149,10 @@ export const pepticUlcerDisease: Disease = {
 }
 
 /** The stomach with an uncomplicated ulcer, the stage the viewer opens on. */
-export const pepticUlcerDiseaseModel = diseaseModel(pepticUlcerDisease)
+export const pepticUlcerDiseaseModel = conditionModel(pepticUlcerDisease)
 
-export type PepticUlcerDiseaseProps = Omit<DiseaseViewerProps, "disease">
+export type PepticUlcerDiseaseProps = Omit<ConditionViewerProps, "condition">
 
 export function PepticUlcerDisease(props: PepticUlcerDiseaseProps) {
-  return <DiseaseViewer disease={pepticUlcerDisease} {...props} />
+  return <ConditionViewer condition={pepticUlcerDisease} {...props} />
 }

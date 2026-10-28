@@ -1,13 +1,13 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { appendixModel } from "@/components/appendix"
 
 // Acute appendicitis: a blocked appendix becomes infected, its wall dies and,
 // left untreated, perforates. The neighbours it inflames explain the signs.
-export const acuteAppendicitis: Disease = {
+export const acuteAppendicitis: Condition = {
   name: "Acute appendicitis",
   code: "K35.8",
   summary:
@@ -152,10 +152,10 @@ export const acuteAppendicitis: Disease = {
 }
 
 /** The appendix early on, the stage the viewer opens on. */
-export const acuteAppendicitisModel = diseaseModel(acuteAppendicitis)
+export const acuteAppendicitisModel = conditionModel(acuteAppendicitis)
 
-export type AcuteAppendicitisProps = Omit<DiseaseViewerProps, "disease">
+export type AcuteAppendicitisProps = Omit<ConditionViewerProps, "condition">
 
 export function AcuteAppendicitis(props: AcuteAppendicitisProps) {
-  return <DiseaseViewer disease={acuteAppendicitis} {...props} />
+  return <ConditionViewer condition={acuteAppendicitis} {...props} />
 }

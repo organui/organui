@@ -1,9 +1,9 @@
 import { adrenalsModel } from "@/components/adrenals"
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 
 const cortex =
   "Small and thin: lymphocytes have destroyed the cortex, which makes cortisol and aldosterone. Symptoms start only once about 90% of it is gone. The medulla inside, which makes adrenaline, is spared."
@@ -11,7 +11,7 @@ const cortex =
 // Autoimmune Addison's disease, the commonest cause of primary adrenal
 // insufficiency where tuberculosis is rare: both glands fail together, so
 // cortisol and aldosterone are lost and the pituitary's ACTH climbs.
-export const addisonsDisease: Disease = {
+export const addisonsDisease: Condition = {
   name: "Addison's disease",
   code: "E27.1",
   summary:
@@ -151,10 +151,10 @@ export const addisonsDisease: Disease = {
 }
 
 /** The adrenals failing gradually, the stage the viewer opens on. */
-export const addisonsDiseaseModel = diseaseModel(addisonsDisease)
+export const addisonsDiseaseModel = conditionModel(addisonsDisease)
 
-export type AddisonsDiseaseProps = Omit<DiseaseViewerProps, "disease">
+export type AddisonsDiseaseProps = Omit<ConditionViewerProps, "condition">
 
 export function AddisonsDisease(props: AddisonsDiseaseProps) {
-  return <DiseaseViewer disease={addisonsDisease} {...props} />
+  return <ConditionViewer condition={addisonsDisease} {...props} />
 }

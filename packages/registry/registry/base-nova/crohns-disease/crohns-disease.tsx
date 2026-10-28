@@ -1,14 +1,14 @@
-import { diseaseModel, type Disease } from "@/components/disease-model"
+import { conditionModel, type Condition } from "@/components/condition-model"
 import {
-  DiseaseViewer,
-  type DiseaseViewerProps,
-} from "@/components/disease-viewer"
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
 import { intestinesModel } from "@/components/intestines"
 
 // Crohn's disease of the terminal ileum and right colon, its commonest
 // pattern: patchy inflammation through the whole bowel wall, which in time
 // either narrows the bowel or tunnels out of it.
-export const crohnsDisease: Disease = {
+export const crohnsDisease: Condition = {
   name: "Crohn's disease",
   code: "K50.8",
   summary:
@@ -167,10 +167,10 @@ export const crohnsDisease: Disease = {
 }
 
 /** The intestines in a flare, the stage the viewer opens on. */
-export const crohnsDiseaseModel = diseaseModel(crohnsDisease)
+export const crohnsDiseaseModel = conditionModel(crohnsDisease)
 
-export type CrohnsDiseaseProps = Omit<DiseaseViewerProps, "disease">
+export type CrohnsDiseaseProps = Omit<ConditionViewerProps, "condition">
 
 export function CrohnsDisease(props: CrohnsDiseaseProps) {
-  return <DiseaseViewer disease={crohnsDisease} {...props} />
+  return <ConditionViewer condition={crohnsDisease} {...props} />
 }
