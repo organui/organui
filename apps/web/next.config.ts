@@ -96,11 +96,13 @@ const nextConfig: NextConfig = {
         destination: "/docs/components/conditions",
         permanent: true,
       },
-      {
-        source: "/docs/(components/)?disease-viewer",
-        destination: "/docs/components/condition-viewer",
-        permanent: true,
-      },
+      ...["/docs/disease-viewer", "/docs/components/disease-viewer"].map(
+        (source) => ({
+          source,
+          destination: "/docs/components/condition-viewer",
+          permanent: true,
+        })
+      ),
       {
         source: "/r/:path*/disease-viewer.json",
         destination: "/r/:path*/condition-viewer.json",
