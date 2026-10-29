@@ -10,7 +10,7 @@ const [current, total] = (process.env.BROWSER_SHARD ?? "")
   .split("/")
   .map(Number)
 const items =
-  "**/{anatomy,organ,block,body-map,dermatome,ecg,growth,image,lab,medication,molecule,vitals}.spec.ts"
+  "**/{anatomy,organ,block,body-map,dermatome,ecg,growth,lab,scan,medication,molecule,vitals}.spec.ts"
 export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: true,
@@ -61,7 +61,7 @@ export default defineConfig({
     // The items with a Radix copy, installed on a Radix style.
     {
       name: "radix-desktop",
-      testMatch: "**/{anatomy,organ,block,image,molecule}.spec.ts",
+      testMatch: "**/{anatomy,organ,block,molecule,scan}.spec.ts",
       use: {
         baseURL: "http://127.0.0.1:4320",
         viewport: { width: 1280, height: 900 },

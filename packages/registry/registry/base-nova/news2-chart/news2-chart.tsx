@@ -297,8 +297,9 @@ function DefaultTimeHeading({
   const parsed = Date.parse(time)
   if (Number.isNaN(parsed)) return time
   const day = dayFormat.format(parsed)
-  const newDay =
-    previous === undefined || dayFormat.format(Date.parse(previous)) !== day
+  // A previous time that doesn't parse shows verbatim, so this one shows its day.
+  const before = previous === undefined ? NaN : Date.parse(previous)
+  const newDay = Number.isNaN(before) || dayFormat.format(before) !== day
   return (
     <>
       <span
