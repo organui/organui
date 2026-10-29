@@ -2,7 +2,6 @@
 
 import * as React from "react"
 
-import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
@@ -18,22 +17,30 @@ import {
   type Medication,
   type MedicationInteraction,
 } from "@/components/ui/medication-schedule"
+import {
+  formatNhsNumber,
+  formatPatientName,
+  PatientBanner,
+  type Patient,
+  type PatientAllergies,
+} from "@/components/ui/patient-banner"
 import { VitalSigns, type VitalReadings } from "@/components/ui/vital-signs"
-import { IconPlaceholder } from "@/icons/icon-placeholder"
 
-export type Patient = {
-  name: string
-  /** Shown under the name, such as age, ward and bed. */
-  details: string
-  /** Shown as badges beside the name, such as allergies. */
+export type PatientDashboardData = {
+  patient: Patient
+  /** Substances, `"none-known"`, or nothing when not recorded. */
+  allergies?: PatientAllergies
+  /** Warnings shown as badges in the banner, such as "Falls risk". */
   alerts?: readonly string[]
+  /** Where the patient is, such as ward, bed and admission date. */
+  location?: string
   vitals: VitalReadings
   /** When the vitals were taken. */
   vitalsTakenAt: string
   labs: readonly LabResult[]
   medications: readonly Medication[]
   interactions?: readonly MedicationInteraction[]
-  /** The day the schedule opens on, as YYYY-MM-DD. */
+  /** The day the schedule opens on, and ages are counted on, as YYYY-MM-DD. */
   date: string
   /** The current time, as HH:mm, to mark doses due. */
   now?: string
@@ -43,7 +50,11 @@ export type Patient = {
  * One patient at a glance: vitals, a live ECG, labs with trends and today's
  * medicines. Replace examplePatient with your own records.
  */
-export function PatientDashboard({ patient }: { patient: Patient }) {
+export function PatientDashboard({
+  patient,
+}: {
+  patient: PatientDashboardData
+}) {
   const stream = React.useMemo(
     () => syntheticEcgStream({ heartRate: patient.vitals.heartRate ?? 72 }),
     [patient.vitals.heartRate]
@@ -57,29 +68,20 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
     // The page provides the main landmark, so the dashboard also fits
     // inside an app layout that has one.
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-2xl font-semibold tracking-tight">
-            {patient.name}
-          </h1>
-          {/* Outlined with an icon: red is kept for critical values. */}
-          {patient.alerts?.map((alert) => (
-            <Badge key={alert} variant="outline">
-              <IconPlaceholder
-                lucide="TriangleAlertIcon"
-                tabler="IconAlertTriangle"
-                hugeicons="Alert02Icon"
-                phosphor="WarningIcon"
-                remixicon="RiErrorWarningLine"
-                aria-hidden="true"
-                data-icon="inline-start"
-              />
-              {alert}
-            </Badge>
-          ))}
-        </div>
-        <p className="text-sm text-muted-foreground">{patient.details}</p>
+      <header className="flex flex-col gap-1">
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Patient dashboard
+        </h1>
+        {patient.location && (
+          <p className="text-sm text-muted-foreground">{patient.location}</p>
+        )}
       </header>
+      <PatientBanner
+        patient={patient.patient}
+        allergies={patient.allergies}
+        alerts={patient.alerts}
+        today={new Date(patient.date)}
+      />
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <VitalSigns
           readings={patient.vitals}
@@ -102,7 +104,7 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
           <CardContent>
             <LabResultsTable
               results={patient.labs}
-              caption={`Lab results for ${patient.name}`}
+              caption={`Lab results for ${formatPatientName(patient.patient.name)}`}
             />
           </CardContent>
         </Card>
@@ -125,10 +127,18 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
 
 // A fictional patient, so the page shows something before you connect your
 // own records. Not a treatment plan or clinical guidance.
-export const examplePatient: Patient = {
-  name: "Sam Okafor",
-  details: "64 years · Ward 4B, bed 12 · Admitted Oct 17",
-  alerts: ["Penicillin allergy"],
+export const examplePatient: PatientDashboardData = {
+  patient: {
+    name: { family: "Okafor", given: ["Sam"], prefix: "Mr" },
+    birthDate: "1962-03-08",
+    sex: "Male",
+    identifiers: [
+      { label: "NHS number", value: formatNhsNumber("9991002014") },
+      { label: "Hospital number", value: "RX4 207731" },
+    ],
+  },
+  allergies: ["Penicillin (Rash)"],
+  location: "Ward 4B, bed 12 · Admitted 17-Oct-2026",
   vitals: {
     heartRate: 88,
     systolic: 142,

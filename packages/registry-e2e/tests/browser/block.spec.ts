@@ -114,7 +114,12 @@ test("explorer-03 switches organs and resets the selection", async ({
 
 test("dashboard-01 shows one patient and records doses", async ({ page }) => {
   await page.goto("/dashboard")
-  await expect(page.getByRole("heading", { name: "Sam Okafor" })).toBeVisible()
+  await expect(
+    page.getByRole("heading", { name: "Patient dashboard", level: 1 })
+  ).toBeVisible()
+  await expect(
+    page.getByRole("region", { name: "Patient: OKAFOR, Sam (Mr)" })
+  ).toContainText("Penicillin (Rash)")
   await expect(page.getByRole("region", { name: "Vital signs" })).toBeVisible()
   await expect(page.getByRole("table")).toContainText("Creatinine")
   await expect(
