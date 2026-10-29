@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
 import { currentSection } from "@/components/main-nav"
-import { pagesNew, type DocsNavSection } from "@/lib/registry"
+import { pagesNew, showComingSoon, type DocsNavSection } from "@/lib/registry"
 import { cn } from "@workspace/ui/lib/utils"
 
 const storageKey = "docs-sidebar-scroll"
@@ -71,23 +71,40 @@ export function DocsNav({
           <ul className="flex flex-col gap-0.5">
             {section.items.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onNavigate}
-                  aria-current={item.href === current ? "page" : undefined}
-                  className={link}
-                >
-                  {item.title}
-                  {pagesNew.includes(item.href) && (
-                    <>
-                      <span className="sr-only">(new)</span>
-                      <span
-                        aria-hidden="true"
-                        className="size-2 shrink-0 rounded-full bg-blue-500"
-                      />
-                    </>
-                  )}
-                </Link>
+                {item.soon && !showComingSoon ? (
+                  <span
+                    className={cn(
+                      link,
+                      "pointer-events-none text-muted-foreground"
+                    )}
+                  >
+                    {item.title}
+                    <span className="text-xs font-normal">Soon</span>
+                  </span>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={onNavigate}
+                    aria-current={item.href === current ? "page" : undefined}
+                    className={link}
+                  >
+                    {item.title}
+                    {pagesNew.includes(item.href) && (
+                      <>
+                        <span className="sr-only">(new)</span>
+                        <span
+                          aria-hidden="true"
+                          className="size-2 shrink-0 rounded-full bg-blue-500"
+                        />
+                      </>
+                    )}
+                    {item.soon && (
+                      <span className="text-xs font-normal text-muted-foreground">
+                        Soon
+                      </span>
+                    )}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

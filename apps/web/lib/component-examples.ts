@@ -1,4 +1,5 @@
 import type { ComponentExample } from "@/components/component-examples"
+import { showComingSoon } from "@/lib/registry"
 
 // The examples each component page shows after its usage.
 export const componentExamples: Record<string, ComponentExample[]> = {
@@ -115,12 +116,17 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       description:
         "Not asking and finding no allergies are different records, and read differently.",
     },
-    {
-      name: "allergy-list-banner",
-      title: "With the Patient Banner",
-      description:
-        "allergySummary turns the list into the banner's allergies, leaving out resolved ones.",
-    },
+    // The patient banner is coming soon.
+    ...(showComingSoon
+      ? [
+          {
+            name: "allergy-list-banner",
+            title: "With the Patient Banner",
+            description:
+              "allergySummary turns the list into the banner's allergies, leaving out resolved ones.",
+          },
+        ]
+      : []),
   ],
   "problem-list": [
     {

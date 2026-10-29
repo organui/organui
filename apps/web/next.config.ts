@@ -2,6 +2,7 @@ import type { NextConfig } from "next"
 import { readFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { join } from "node:path"
+import { comingSoon, showComingSoon } from "./lib/coming-soon"
 
 // Read rather than imported: Next.js loads this file as CommonJS or, on
 // Node's own TypeScript support, as ESM, and JSON imports differ between them.
@@ -79,6 +80,12 @@ const nextConfig: NextConfig = {
           destination: `/docs/components/${item.name}`,
           permanent: true,
         })),
+      // Coming soon: the docs link an install prints lands on the index.
+      ...(showComingSoon ? [] : [...comingSoon]).map((name) => ({
+        source: `/docs/components/${name}`,
+        destination: "/docs/components",
+        permanent: false,
+      })),
       // Charts open on their first type, as on shadcn/ui.
       { source: "/charts", destination: "/charts/area", permanent: false },
       // Themes live in Create, as on shadcn/ui.

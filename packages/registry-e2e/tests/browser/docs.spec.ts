@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { heartModel } from "@workspace/registry/heart"
+import { comingSoon } from "../../../../apps/web/lib/coming-soon.js"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
 
@@ -291,11 +292,12 @@ test("component index lists every component inside the docs layout", async ({
   // Blocks are listed on /blocks, AI Elements and utilities on their own
   // pages.
   const components = catalog.items.filter(
-    ({ type, categories }) =>
+    ({ type, categories, name }) =>
       type !== "registry:block" &&
       !categories?.includes("utility") &&
       !categories?.includes("helper") &&
-      !categories?.includes("ai")
+      !categories?.includes("ai") &&
+      !comingSoon.has(name)
   )
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
@@ -388,6 +390,33 @@ test("component index lists every component inside the docs layout", async ({
     docs.getByRole("link", { name: "Conditions", exact: true })
   ).toHaveAttribute("aria-current", "page")
   expect(errors).toEqual([])
+})
+
+// Items still being designed are listed in the sidebar without a link and
+// left out of the index; an installed item's docs link lands on the index.
+test("coming soon items are listed but not linked", async ({
+  page,
+  request,
+}) => {
+  for (const name of comingSoon) {
+    const response = await request.get(`/docs/components/${name}`, {
+      maxRedirects: 0,
+    })
+    expect(response.status()).toBe(307)
+    expect(
+      new URL(response.headers().location!, "http://localhost").pathname
+    ).toBe("/docs/components")
+  }
+  await page.goto("/docs/components")
+  // On a phone the sidebar is in the menu.
+  if ((page.viewportSize()?.width ?? 0) < 768)
+    await page.getByRole("button", { name: "Menu", exact: true }).click()
+  const sidebar = page.getByRole("navigation", { name: "Documentation" })
+  await expect(sidebar.getByText("Patient banner")).toContainText("Soon")
+  for (const name of comingSoon)
+    await expect(
+      page.locator(`a[href="/docs/components/${name}"]`)
+    ).toHaveCount(0)
 })
 
 // Items installed from v0.3.0 and earlier print /docs/<name> after install.
@@ -1654,7 +1683,6 @@ test("component pages end with examples and an API reference", async ({
     ["growth-chart", "GrowthChart"],
     ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
-    ["patient-banner", "PatientBanner"],
     ["news2-chart", "News2Chart"],
     ["problem-list", "ProblemList"],
     ["allergy-list", "AllergyList"],
@@ -1664,10 +1692,11 @@ test("component pages end with examples and an API reference", async ({
     await expect(
       page.getByRole("heading", { name: "Examples", level: 2 })
     ).toBeVisible()
-    // Each example has a linkable heading and a live preview.
+    // Each example has a linkable heading and a live preview. The allergy
+    // list has one while the patient banner it pairs with is coming soon.
     expect(
       await page.getByRole("heading", { level: 3 }).count()
-    ).toBeGreaterThanOrEqual(2)
+    ).toBeGreaterThanOrEqual(1)
     const props = page.getByRole("table", { name: `${component} props` })
     await expect(props).toBeVisible()
     expect(await props.getByRole("row").count()).toBeGreaterThan(2)

@@ -1,13 +1,10 @@
-import { AllergyList, allergySummary } from "@workspace/registry/allergy-list"
+import { AllergyList } from "@workspace/registry/allergy-list"
 import {
   allergiesFromFhir,
-  fhirResources,
-  patientFromFhir,
   problemsFromFhir,
   type FhirBundle,
   type FhirPatient,
 } from "@workspace/registry/fhir"
-import { PatientBanner } from "@workspace/registry/patient-banner"
 import { ProblemList } from "@workspace/registry/problem-list"
 
 const snomed = "http://snomed.info/sct"
@@ -75,16 +72,9 @@ const bundle: FhirBundle = {
 }
 
 export function Example() {
-  const [patient] = fhirResources<FhirPatient>(bundle, "Patient")
-  const allergies = allergiesFromFhir(bundle)
   return (
     <div className="flex w-full flex-col gap-6">
-      <PatientBanner
-        patient={patientFromFhir(patient!)}
-        allergies={allergySummary(allergies)}
-        today={new Date("2026-10-25")}
-      />
-      <AllergyList allergies={allergies} caption="Allergies" />
+      <AllergyList allergies={allergiesFromFhir(bundle)} caption="Allergies" />
       <ProblemList problems={problemsFromFhir(bundle)} caption="Problems" />
     </div>
   )

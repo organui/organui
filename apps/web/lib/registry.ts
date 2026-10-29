@@ -1,7 +1,10 @@
 import type { Metadata } from "next"
 import bodySystems from "@workspace/registry/body-systems.json"
 import catalog from "@workspace/registry/registry.json"
+import { comingSoon, showComingSoon } from "@/lib/coming-soon"
 import { site } from "@/lib/site"
+
+export { showComingSoon }
 
 export const shadcn = "shadcn@4.22.1"
 
@@ -49,7 +52,7 @@ function groupOf(categories: readonly string[] = []) {
 // The registry catalog is the single source for what the docs list, so a new
 // item appears in the sidebar and the index once it has a page at its href.
 // Blocks are listed on /blocks instead.
-export const registryItems = catalog.items
+const catalogItems = catalog.items
   .filter(
     (item) =>
       item.type !== "registry:block" &&
@@ -100,6 +103,10 @@ export const registryItems = catalog.items
         componentGroups.findIndex(({ id }) => id === b.group) ||
       a.title.localeCompare(b.title)
   )
+
+export const registryItems = catalogItems.filter(
+  ({ name }) => showComingSoon || !comingSoon.has(name)
+)
 
 export type RegistryItem = (typeof registryItems)[number]
 
@@ -254,6 +261,8 @@ export type NavLink = {
   href: string
   /** Pages outside its address that belong to it, such as each condition. */
   pages?: string[]
+  /** Listed as coming soon, without a link outside next dev. */
+  soon?: boolean
 }
 
 export type DocsNavSection = { title: string; items: NavLink[] }
@@ -430,9 +439,13 @@ export const docsNav: DocsNavSection[] = [
         : []),
       {
         title,
-        items: registryItems
+        items: catalogItems
           .filter((item) => item.group === id)
-          .map(({ title, href }) => ({ title, href })),
+          .map(({ title, href, name }) => ({
+            title,
+            href,
+            ...(comingSoon.has(name) && { soon: true }),
+          })),
       },
     ]),
 ]

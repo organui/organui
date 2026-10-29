@@ -78,29 +78,16 @@ formatPercentile(zToPercentile(z!)) // "87th"`,
   },
   fhir: {
     usageLang: "tsx",
-    usage: `import {
-  allergiesFromFhir,
-  labResultsFromFhir,
-  patientFromFhir,
-  problemsFromFhir,
-  fhirResources,
-  type FhirBundle,
-  type FhirPatient,
-} from "@/lib/fhir"
-import { AllergyList, allergySummary } from "@/components/ui/allergy-list"
-import { PatientBanner } from "@/components/ui/patient-banner"
+    usage: `import { allergiesFromFhir, problemsFromFhir, type FhirBundle } from "@/lib/fhir"
+import { AllergyList } from "@/components/ui/allergy-list"
+import { ProblemList } from "@/components/ui/problem-list"
 
 // A Bundle from your FHIR server, such as $everything on a Patient.
 export function Record({ bundle }: { bundle: FhirBundle }) {
-  const [patient] = fhirResources<FhirPatient>(bundle, "Patient")
-  const allergies = allergiesFromFhir(bundle)
   return (
     <>
-      <PatientBanner
-        patient={patientFromFhir(patient!)}
-        allergies={allergySummary(allergies)}
-      />
-      <AllergyList allergies={allergies} />
+      <AllergyList allergies={allergiesFromFhir(bundle)} />
+      <ProblemList problems={problemsFromFhir(bundle)} />
     </>
   )
 }`,
@@ -108,7 +95,7 @@ export function Record({ bundle }: { bundle: FhirBundle }) {
       {
         name: "patientFromFhir(patient)",
         description:
-          "The patient banner's patient: the official name, else the first still in use; date of birth; administrative gender; identifiers with the NHS number first and spaced 3-3-4; and any date of death.",
+          "The patient's name, date of birth and so on: the official name, else the first still in use; date of birth; administrative gender; identifiers with the NHS number first and spaced 3-3-4; and any date of death.",
       },
       {
         name: "allergiesFromFhir(resources | bundle)",
