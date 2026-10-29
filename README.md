@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/organui/organui/actions/workflows/registry.yml"><img src="https://github.com/organui/organui/actions/workflows/registry.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/organui/organui/actions/workflows/code-check.yml"><img src="https://github.com/organui/organui/actions/workflows/code-check.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/organui/organui/releases"><img src="https://img.shields.io/github/v/release/organui/organui?label=release" alt="Latest release" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT licence" /></a>
 </p>

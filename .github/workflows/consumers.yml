@@ -1,0 +1,56 @@
+name: Consumers
+# Installs the registry into fresh apps with the shadcn CLI, builds them and
+# tests the installed items in Chromium: one app per job. Radix, the shortest,
+# also installs through the GitHub source registry.
+on:
+  pull_request:
+    paths: &registry
+      - "packages/registry/**"
+      - "packages/registry-e2e/**"
+      - "packages/eslint-config/**"
+      - "packages/typescript-config/**"
+      - "package.json"
+      - "bun.lock"
+      - "turbo.json"
+      - ".nvmrc"
+      - ".github/actions/**"
+      - ".github/workflows/consumers.yml"
+  push:
+    branches: [master]
+    paths: *registry
+  # Run any branch without opening a PR: gh workflow run consumers.yml --ref <branch>
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  consumer:
+    name: bun run test:browser (${{ matrix.suite }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [next, vite, radix]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Shared with the browser tests, which build the same tasks.
+      - uses: ./.github/actions/setup
+        with:
+          turbo-cache: verify
+      - uses: ./.github/actions/playwright
+      # Turbo generates the consumer, then tests it.
+      - run: bun run test:browser --log-order=stream
+        env:
+          BROWSER_SUITE: ${{ matrix.suite }}
+          REGISTRY_GITHUB_REF: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: browser-failures-${{ matrix.suite }}
+          path: packages/registry-e2e/test-results
+          if-no-files-found: ignore
