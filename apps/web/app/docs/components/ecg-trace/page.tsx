@@ -119,7 +119,9 @@ export default function Page() {
           For real recordings pass your own <code>annotations</code>, each a
           wave (<code>P</code>, <code>QRS</code> or <code>T</code>) and its peak
           time in seconds, or <code>annotations=&#123;false&#125;</code> to hide
-          them. The heart rate is the median of the R to R intervals.
+          them. When beats are close enough for each T to run into the next P,
+          as above about 100 beats per minute at 25 mm/s, only QRS is labelled.
+          The heart rate is the median of the R to R intervals.
         </p>
       </section>
       <section className="flex flex-col gap-4">
