@@ -293,7 +293,7 @@ export function VitalSigns({
       <CardContent className="@container">
         {/* Two columns, or one row once every vital fits, so none is left
             alone on a row. */}
-        <dl className="grid grid-cols-2 gap-3 @2xl:auto-cols-fr @2xl:grid-flow-col @2xl:grid-cols-none">
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-5 @2xl:auto-cols-fr @2xl:grid-flow-col @2xl:grid-cols-none">
           {vitals.map((vital) => {
             const item = assessVital(
               vital,
@@ -308,7 +308,7 @@ export function VitalSigns({
                 key={vital}
                 data-vital={vital}
                 data-status={item.status}
-                className="flex min-w-0 flex-col gap-1.5 rounded-lg border p-3"
+                className="flex min-w-0 flex-col gap-1.5"
               >
                 <dt className="text-xs font-medium text-muted-foreground">
                   {item.label}
@@ -344,7 +344,7 @@ export function VitalSigns({
                   {item.statusLabel}
                 </dd>
                 <dd className="text-xs text-muted-foreground tabular-nums">
-                  Normal {item.range} {item.unit}
+                  Range {item.range} {item.unit}
                 </dd>
               </div>
             )

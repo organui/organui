@@ -10,7 +10,7 @@ test("installed vital signs flag readings in text, not colour alone", async ({
   const panel = page.getByRole("region", { name: "Vital signs", exact: true })
   const card = (vital: string) => panel.locator(`[data-vital="${vital}"]`)
   await expect(card("heartRate")).toHaveAttribute("data-status", "high")
-  await expect(card("heartRate")).toContainText("112bpmHighNormal 60–100 bpm")
+  await expect(card("heartRate")).toContainText("112bpmHighRange 60–100 bpm")
   await expect(card("bloodPressure")).toContainText("150/76mmHgHigh systolic")
   await expect(card("spo2")).toHaveAttribute("data-status", "missing")
   await expect(card("spo2")).toContainText("No reading")
@@ -22,10 +22,10 @@ test("installed vital signs flag readings in text, not colour alone", async ({
   const custom = page.getByRole("region", { name: "Fahrenheit", exact: true })
   await expect(custom.locator("[data-vital]")).toHaveCount(3)
   await expect(custom.locator('[data-vital="temperature"]')).toContainText(
-    "98.6°FNormalNormal 97.0–99.0 °F"
+    "98.6°FNormalRange 97.0–99.0 °F"
   )
   await expect(custom.locator('[data-vital="spo2"]')).toContainText(
-    "90%NormalNormal 88–92 %"
+    "90%NormalRange 88–92 %"
   )
   await expect(
     custom.locator('[data-vital="respiratoryRate"]')
