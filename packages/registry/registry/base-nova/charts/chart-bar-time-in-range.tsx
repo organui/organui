@@ -162,10 +162,30 @@ export function ChartBarTimeInRange() {
         <div className="flex items-center gap-2 leading-none font-medium">
           {latest.inRange >= first.inRange ? "Up" : "Down"}{" "}
           {Math.abs(latest.inRange - first.inRange)} points since{" "}
-          {first.week.toLowerCase()}
+          {first.week.toLowerCase()}{" "}
+          {latest.inRange < first.inRange ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          Targets: over {targets.inRange}% in range, under {targets.below}% low
+          Targets: over {targets.inRange}% in range, under {targets.below}% low;
+          a fictional patient
         </div>
       </CardFooter>
     </Card>

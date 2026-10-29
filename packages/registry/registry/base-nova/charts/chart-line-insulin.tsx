@@ -73,10 +73,7 @@ export function ChartLineInsulin() {
               tickMargin={8}
               tickFormatter={(value) => value.replace("Day ", "")}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
               dataKey="dose"
               type="step"

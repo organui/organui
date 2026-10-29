@@ -81,6 +81,8 @@ export type OrganModel = {
   defaultView: string
   /** Structures the explorer hides on first load. */
   hiddenIds?: readonly string[]
+  /** Structures drawn see-through, so the ones inside them show, such as fat over a gland. */
+  translucentIds?: readonly string[]
   attribution: {
     credit: string
     license: string
@@ -96,7 +98,7 @@ export type OrganViewerHandle = {
   reset: () => void
 }
 
-export type OrganViewerProps = {
+export type OrganViewerProps = Omit<React.ComponentProps<"div">, "ref"> & {
   /** The model: its GLB, structures, named views and credit. */
   model: OrganModel
   /** Overrides `model.src`, for example to serve the GLB yourself. */
@@ -117,8 +119,6 @@ export type OrganViewerProps = {
   attribution?: boolean
   /** The accessible name of the viewer. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
   /** Sets views, zooms, rotates and resets from your own controls. */
   ref?: React.Ref<OrganViewerHandle>
 }
@@ -147,6 +147,50 @@ export function organDefaultVisibility(
 // rule whatever the organ's shape.
 const FRAME_FILL = 0.8
 const STAGE_TONE = new Color("#e4e3dc")
+// How long a recolour fades, in milliseconds.
+const FADE_MS = 450
+// A model without the item's structures is the wrong file, not a network
+// problem, so its message does not suggest checking the connection.
+const MISMATCH = "The model does not contain the expected structures."
+
+// Faded parts blend towards the stage, so its tone follows the theme: the
+// theme's --muted, resolved through a canvas because three.js cannot parse
+// oklch(), and read again when the theme changes. Returns a count that
+// changes each time, for effects that repaint.
+function useStageTone(host: React.RefObject<HTMLElement | null>) {
+  const [version, setVersion] = React.useState(0)
+  React.useEffect(() => {
+    const read = () => {
+      const muted = host.current
+        ? getComputedStyle(host.current).getPropertyValue("--muted").trim()
+        : ""
+      const context = muted
+        ? document
+            .createElement("canvas")
+            .getContext("2d", { willReadFrequently: true })
+        : null
+      if (!context) return
+      context.fillStyle = muted
+      context.fillRect(0, 0, 1, 1)
+      const [r, g, b] = context.getImageData(0, 0, 1, 1).data
+      STAGE_TONE.setStyle(`rgb(${r}, ${g}, ${b})`)
+      setVersion((count) => count + 1)
+    }
+    read()
+    const observer = new MutationObserver(read)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style", "data-theme"],
+    })
+    const scheme = matchMedia("(prefers-color-scheme: dark)")
+    scheme.addEventListener("change", read)
+    return () => {
+      observer.disconnect()
+      scheme.removeEventListener("change", read)
+    }
+  }, [host])
+  return version
+}
 
 function surfacePoints(meshes: Mesh[], stride = 16) {
   const points: Vector3[] = []
@@ -317,8 +361,10 @@ export function OrganViewer({
   label = `Interactive ${model.name.toLowerCase()} model`,
   className,
   ref,
+  ...props
 }: OrganViewerProps) {
   const host = React.useRef<HTMLDivElement>(null)
+  const tone = useStageTone(host)
   const [attempt, setAttempt] = React.useState(0)
   // Load results are keyed by request so a new src or retry starts clean
   // without resetting state inside the effect.
@@ -378,8 +424,7 @@ export function OrganViewer({
           if (id) found.add(id)
         })
         const missing = [...known].filter((id) => !found.has(id))
-        if (missing.length)
-          throw new Error("The model does not contain the expected structures.")
+        if (missing.length) throw new Error(MISMATCH)
         setResult({ request, scene: group })
       })
       .catch((reason: unknown) => {
@@ -498,10 +543,22 @@ export function OrganViewer({
     orbit.minDistance = closest * 1.25
     orbit.maxDistance = radius * 6
 
+    // Colours fading from one paint to the next, such as a condition moving to
+    // its next stage.
+    const fades = new Map<
+      MeshStandardMaterial,
+      { from: Color; to: Color; start: number }
+    >()
     let dirty = true
     const render = () => (dirty = true)
     let frame = 0
-    const tick = () => {
+    const tick = (now: number) => {
+      for (const [material, fade] of fades) {
+        const t = Math.min(1, (now - fade.start) / FADE_MS)
+        material.color.lerpColors(fade.from, fade.to, t * (2 - t))
+        if (t === 1) fades.delete(material)
+        dirty = true
+      }
       if (orbit.update() || dirty) {
         renderer.render(stage, camera)
         dirty = false
@@ -608,28 +665,54 @@ export function OrganViewer({
     const ghosts = new Map<string, Color>()
     setEngine({
       paint(selected, shown) {
+        // Colours come from the current model, so a model that recolours the
+        // same structures, such as a condition stage, repaints without a reload.
+        const colors = new Map(
+          latest.current.model.structures.map(({ id, color }) => [id, color])
+        )
+        const translucent = new Set(latest.current.model.translucentIds)
         for (const [id, list] of meshes) {
-          const color = structures.get(id)!.color
+          const color = colors.get(id) ?? structures.get(id)!.color
           const state = !selected
             ? "normal"
             : id === selected
               ? "selected"
               : "ghosted"
-          let ghost = ghosts.get(color)
+          const key = `${color}/${STAGE_TONE.getHexString()}`
+          let ghost = ghosts.get(key)
           if (!ghost) {
             ghost = new Color(color).lerp(STAGE_TONE, 0.5)
-            ghosts.set(color, ghost)
+            ghosts.set(key, ghost)
           }
           for (const mesh of list) {
             const material = mesh.material as MeshStandardMaterial
             mesh.visible = shown[id] !== false
-            if (state === "ghosted") material.color.copy(ghost)
-            else material.color.set(color)
+            const target = state === "ghosted" ? ghost : new Color(color)
+            // A structure recoloured in the same state, such as at a condition's
+            // next stage, fades to its new colour. A first paint, a selection
+            // change and reduced motion apply at once.
+            const fade =
+              !motion.matches &&
+              material.userData.state === state &&
+              !material.color.equals(target)
+            if (!fade) {
+              fades.delete(material)
+              material.color.copy(target)
+            } else if (!fades.get(material)?.to.equals(target)) {
+              fades.set(material, {
+                from: material.color.clone(),
+                to: target.clone(),
+                start: performance.now(),
+              })
+            }
+            material.userData.state = state
             material.emissive.set(state === "selected" ? color : "#000000")
             material.emissiveIntensity = state === "selected" ? 0.35 : 0
-            material.transparent = state === "ghosted"
-            material.opacity = state === "ghosted" ? 0.22 : 1
-            material.depthWrite = state !== "ghosted"
+            // A translucent structure stays see-through until it is selected.
+            const clear = state === "normal" && translucent.has(id) ? 0.3 : 1
+            material.transparent = state === "ghosted" || clear < 1
+            material.opacity = state === "ghosted" ? 0.22 : clear
+            material.depthWrite = state !== "ghosted" && clear === 1
             material.roughness = 0.58
             // glTF defaults to fully metallic when a file omits the factor.
             material.metalness = 0
@@ -689,7 +772,7 @@ export function OrganViewer({
 
   React.useEffect(() => {
     engine?.paint(selectedId, shown)
-  }, [engine, selectedId, shown])
+  }, [engine, selectedId, shown, tone, model])
 
   React.useImperativeHandle(
     ref,
@@ -709,7 +792,10 @@ export function OrganViewer({
   const message = error
     ? {
         title: `The ${model.name.toLowerCase()} model couldn’t load`,
-        text: `${error} Check your connection and try again.`,
+        text:
+          error === MISMATCH
+            ? `${error} Check that src points to this model's file.`
+            : `${error} Check your connection and try again.`,
       }
     : graphicsFailed
       ? {
@@ -720,13 +806,15 @@ export function OrganViewer({
 
   return (
     <div
+      data-slot="organ-viewer"
+      {...props}
       ref={host}
       role="region"
       aria-label={label}
       aria-describedby={instructions}
       tabIndex={0}
       className={cn(
-        "relative h-96 w-full overflow-hidden rounded-xl border bg-muted/30 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-ring",
+        "relative h-[28rem] w-full overflow-hidden rounded-xl border bg-muted/30 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-ring",
         className
       )}
       onKeyDown={(event) => {

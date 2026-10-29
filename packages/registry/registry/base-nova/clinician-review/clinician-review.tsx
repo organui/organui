@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field"
 import {
@@ -11,7 +11,6 @@ import {
   ItemContent,
   ItemDescription,
   ItemFooter,
-  ItemMedia,
   ItemTitle,
 } from "@/components/ui/item"
 import { Textarea } from "@/components/ui/textarea"
@@ -30,8 +29,10 @@ export type ReviewDecision = {
   comment?: string
 }
 
-export type ClinicianReviewProps = {
+export type ClinicianReviewProps = React.ComponentProps<"div"> & {
+  /** The current decision; store it with the content it reviews. */
   value: ReviewDecision
+  /** Called with each new decision, or with pending after an undo. */
   onValueChange: (decision: ReviewDecision) => void
   /** The signed-in clinician, recorded with each decision. */
   reviewer: string
@@ -41,7 +42,6 @@ export type ClinicianReviewProps = {
   now?: () => string
   /** Defaults to a UTC date and time such as "Oct 21, 2026, 9:30 AM UTC". */
   formatDate?: (date: string) => string
-  className?: string
 }
 
 export const reviewStatusLabels: Record<ReviewStatus, string> = {
@@ -64,6 +64,60 @@ function defaultFormatDate(date: string) {
 
 type Pending = "changes-requested" | "rejected"
 
+// Each status has its own shape, so the badge reads without colour.
+function StatusIcon({ status }: { status: ReviewStatus }) {
+  switch (status) {
+    case "pending":
+      return (
+        <IconPlaceholder
+          lucide="ClockIcon"
+          tabler="IconClock"
+          hugeicons="Clock01Icon"
+          phosphor="ClockIcon"
+          remixicon="RiTimeLine"
+          aria-hidden="true"
+          data-icon="inline-start"
+        />
+      )
+    case "approved":
+      return (
+        <IconPlaceholder
+          lucide="CheckIcon"
+          tabler="IconCheck"
+          hugeicons="Tick02Icon"
+          phosphor="CheckIcon"
+          remixicon="RiCheckLine"
+          aria-hidden="true"
+          data-icon="inline-start"
+        />
+      )
+    case "changes-requested":
+      return (
+        <IconPlaceholder
+          lucide="CircleAlertIcon"
+          tabler="IconExclamationCircle"
+          hugeicons="AlertCircleIcon"
+          phosphor="WarningCircleIcon"
+          remixicon="RiErrorWarningLine"
+          aria-hidden="true"
+          data-icon="inline-start"
+        />
+      )
+    case "rejected":
+      return (
+        <IconPlaceholder
+          lucide="XIcon"
+          tabler="IconX"
+          hugeicons="Cancel01Icon"
+          phosphor="XIcon"
+          remixicon="RiCloseLine"
+          aria-hidden="true"
+          data-icon="inline-start"
+        />
+      )
+  }
+}
+
 /**
  * A clinician's sign-off on AI-generated content, built like shadcn's
  * Confirmation from an Item and Buttons: approve it, or request changes or
@@ -79,6 +133,7 @@ export function ClinicianReview({
   now = () => new Date().toISOString(),
   formatDate = defaultFormatDate,
   className,
+  ...props
 }: ClinicianReviewProps) {
   const [asking, setAsking] = React.useState<Pending | null>(null)
   const [comment, setComment] = React.useState("")
@@ -97,23 +152,32 @@ export function ClinicianReview({
 
   const decided = value.status !== "pending"
   return (
-    <Item variant="outline" className={cn(className)}>
-      <ItemMedia variant="icon">
-        <IconPlaceholder
-          lucide="ShieldCheckIcon"
-          tabler="IconShieldCheck"
-          hugeicons="SecurityCheckIcon"
-          phosphor="ShieldCheckIcon"
-          remixicon="RiShieldCheckLine"
-          aria-hidden="true"
-        />
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle>{subject}</ItemTitle>
-        <ItemDescription aria-live="polite">
+    <Item
+      data-slot="clinician-review"
+      data-status={value.status}
+      variant="outline"
+      className={className}
+      {...props}
+    >
+      {/* The status is a Badge, as lab results and the charts show theirs,
+          and the region announces it with who decided. */}
+      <ItemContent aria-live="polite">
+        <ItemTitle className="flex-wrap gap-y-1">
+          {subject}
+          <Badge variant="outline">
+            <StatusIcon status={value.status} />
+            {reviewStatusLabels[value.status]}
+          </Badge>
+        </ItemTitle>
+        <ItemDescription>
           {decided
-            ? `${reviewStatusLabels[value.status]} by ${value.reviewer ?? "unknown"}${value.at ? `, ${formatDate(value.at)}` : ""}.`
-            : `${reviewStatusLabels.pending}. Review as ${reviewer} before this is used.`}
+            ? [
+                value.reviewer && `By ${value.reviewer}`,
+                value.at && formatDate(value.at),
+              ]
+                .filter(Boolean)
+                .join(", ") || "No reviewer recorded."
+            : `Review as ${reviewer} before this is used.`}
         </ItemDescription>
         {decided && value.comment && (
           <blockquote className="mt-1 border-l-2 pl-3 text-sm text-muted-foreground">

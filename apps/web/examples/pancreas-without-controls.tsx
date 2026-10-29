@@ -1,11 +1,5 @@
 import { Pancreas } from "@workspace/registry/pancreas"
 
 export function Example() {
-  return (
-    <Pancreas
-      label="Pancreas without controls example"
-      controls={false}
-      className="h-[28rem]"
-    />
-  )
+  return <Pancreas label="Pancreas without controls example" controls={false} />
 }

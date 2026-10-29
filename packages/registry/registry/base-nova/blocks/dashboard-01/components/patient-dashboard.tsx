@@ -19,6 +19,7 @@ import {
   type MedicationInteraction,
 } from "@/components/ui/medication-schedule"
 import { VitalSigns, type VitalReadings } from "@/components/ui/vital-signs"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type Patient = {
   name: string
@@ -53,14 +54,26 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
   >({})
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-6">
+    // The page provides the main landmark, so the dashboard also fits
+    // inside an app layout that has one.
+    <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2">
           <h1 className="text-2xl font-semibold tracking-tight">
             {patient.name}
           </h1>
+          {/* Outlined with an icon: red is kept for critical values. */}
           {patient.alerts?.map((alert) => (
-            <Badge key={alert} variant="destructive">
+            <Badge key={alert} variant="outline">
+              <IconPlaceholder
+                lucide="TriangleAlertIcon"
+                tabler="IconAlertTriangle"
+                hugeicons="Alert02Icon"
+                phosphor="WarningIcon"
+                remixicon="RiErrorWarningLine"
+                aria-hidden="true"
+                data-icon="inline-start"
+              />
               {alert}
             </Badge>
           ))}
@@ -106,7 +119,7 @@ export function PatientDashboard({ patient }: { patient: Patient }) {
       <p className="text-xs text-muted-foreground">
         Fictional patient and synthetic ECG. Not for clinical use.
       </p>
-    </main>
+    </div>
   )
 }
 
@@ -186,6 +199,8 @@ export const examplePatient: Patient = {
       ],
     },
   ],
+  // Each medication gets its own hue: a theme's chart colours can all be
+  // shades of one, which would make the doses hard to tell apart.
   medications: [
     {
       id: "metformin",
@@ -214,7 +229,7 @@ export const examplePatient: Patient = {
       id: "ibuprofen",
       name: "Ibuprofen",
       dose: "400 mg",
-      instructions: "With food, as needed for pain",
+      instructions: "With food",
       times: ["12:00"],
       color: "oklch(0.6 0.14 310)",
     },

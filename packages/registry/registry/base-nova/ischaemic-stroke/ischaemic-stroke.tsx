@@ -1,0 +1,196 @@
+import { conditionModel, type Condition } from "@/components/condition-model"
+import {
+  ConditionViewer,
+  type ConditionViewerProps,
+} from "@/components/condition-viewer"
+import { brainModel } from "@/components/brain"
+
+// An ischaemic stroke of the left middle cerebral artery territory: an
+// embolus, here from atrial fibrillation, blocks the artery, and the lateral
+// frontal, parietal and temporal lobes it supplies lose their blood.
+export const ischaemicStroke: Condition = {
+  name: "Ischaemic stroke",
+  code: "I63.4",
+  summary:
+    "A clot blocks the left middle cerebral artery. A core of brain dies within minutes; the penumbra around it can be saved if the artery is reopened in time.",
+  scales: [
+    {
+      id: "brain",
+      label: "Brain",
+      model: brainModel,
+      defaultView: "Left lateral",
+      findings: {
+        "left-frontal": {
+          affected: true,
+          description:
+            "The lateral motor cortex: the right face and arm are weakest. The leg cortex on the medial surface is spared, but an M1 occlusion also cuts off the deep branches to the internal capsule, so the leg is weak too. Broca's area is here, so speech becomes effortful and broken.",
+        },
+        "left-parietal": {
+          affected: true,
+          description:
+            "The sensory cortex: touch and position sense are lost on the right side. Damage to the optic radiations below it adds a right-sided field loss.",
+        },
+        "left-temporal": {
+          affected: true,
+          description:
+            "Wernicke's area: understanding fails. With Broca's area also lost, this is a global aphasia, unable to speak or understand. The lower fibres of the optic radiation (Meyer's loop) run here; with the parietal fibres lost too, there is a right homonymous hemianopia.",
+        },
+        "left-occipital": {
+          affected: false,
+          description:
+            "Supplied by the posterior cerebral artery and spared, so the visual cortex itself works.",
+        },
+        "right-frontal": {
+          affected: false,
+          description:
+            "The other hemisphere is spared. A right MCA stroke would weaken the left side and cause neglect of the left of space instead of aphasia.",
+        },
+        cerebellum: {
+          affected: false,
+          description:
+            "The posterior circulation is spared, so coordination is intact; on the weak side, weakness limits testing it.",
+        },
+        pons: {
+          affected: false,
+          description:
+            "The brainstem is spared, so the patient is awake and breathing normally.",
+        },
+        "left-lateral-ventricle": {
+          affected: false,
+          description:
+            "Normal in the first hours; swelling compresses it later.",
+        },
+      },
+    },
+  ],
+  stages: [
+    {
+      id: "hyperacute",
+      label: "Hyperacute",
+      time: "0–24 h",
+      summary:
+        "Time is brain: thrombolysis within 4.5 hours and thrombectomy up to 24 hours reopen the artery and save the penumbra.",
+    },
+    {
+      id: "acute",
+      label: "Acute",
+      time: "Days 2–7",
+      summary:
+        "The infarct is complete. Swelling peaks around days 3–5, and the risks are aspiration, a second stroke and, in large infarcts, brain shift.",
+      findings: {
+        brain: {
+          "left-frontal": {
+            affected: true,
+            description:
+              "Infarcted and swollen. Swallowing is often impaired, so nothing by mouth until a swallow screen is passed.",
+          },
+          "left-lateral-ventricle": {
+            affected: true,
+            description:
+              "Squeezed by the swelling around it. A large MCA infarct can push the midline across (malignant oedema); decompressive hemicraniectomy within 48 hours saves lives in selected patients.",
+          },
+        },
+      },
+      investigations: [
+        { name: "CT head", result: "Left MCA hypodensity", flag: "abnormal" },
+        { name: "NIHSS", result: "12", flag: "high" },
+        { name: "Swallow screen", result: "Failed", flag: "abnormal" },
+        { name: "Carotid Doppler", result: "No stenosis" },
+      ],
+    },
+    {
+      id: "chronic",
+      label: "Chronic",
+      time: "Months",
+      summary:
+        "The dead tissue has gone and rehabilitation retrains what survives; the DOAC prevents the next embolus.",
+      findings: {
+        brain: {
+          "left-frontal": {
+            affected: true,
+            description:
+              "Replaced by a fluid-filled cavity (encephalomalacia). Neighbouring cortex takes over some movement and speech with therapy.",
+          },
+          "left-parietal": {
+            affected: true,
+            description:
+              "Gliosis and tissue loss; sensation often recovers less than movement.",
+          },
+          "left-lateral-ventricle": {
+            affected: true,
+            description:
+              "Enlarged towards the lost tissue (ex vacuo dilatation), the opposite of the acute swelling.",
+          },
+        },
+      },
+      investigations: [
+        {
+          name: "Modified Rankin Scale",
+          result: "2, slight disability",
+          flag: "high",
+        },
+        { name: "MRI", result: "Encephalomalacia", flag: "abnormal" },
+        { name: "ECG", result: "Atrial fibrillation", flag: "abnormal" },
+        { name: "Anticoagulation", result: "DOAC" },
+      ],
+    },
+  ],
+  events: [
+    {
+      stage: "hyperacute",
+      label: "CT",
+      time: "On arrival",
+      description:
+        "A plain CT rules out bleeding before any clot-dissolving drug, and CT angiography finds the blocked artery.",
+    },
+    {
+      stage: "hyperacute",
+      label: "Thrombolysis",
+      time: "Within 4.5 h",
+      description: "Alteplase or tenecteplase dissolves the clot.",
+    },
+    {
+      stage: "hyperacute",
+      label: "Thrombectomy",
+      time: "Up to 24 h",
+      description:
+        "A catheter pulls the clot out of a large artery, up to 24 hours when imaging shows brain still to save.",
+    },
+    {
+      stage: "hyperacute",
+      label: "Swallow screen",
+      time: "Within 4 h",
+      description:
+        "Before anything by mouth, so that food and drink do not go into the lungs.",
+    },
+    {
+      stage: "acute",
+      label: "Anticoagulation",
+      time: "Days 6–7",
+      description:
+        "A DOAC for the atrial fibrillation, started within days once a scan shows no bleeding; sooner after a small stroke. Aspirin covers the days before.",
+    },
+    {
+      stage: "chronic",
+      label: "Prevention",
+      description:
+        "A statin and blood pressure control, with the DOAC continued, alongside rehabilitation.",
+    },
+  ],
+  investigations: [
+    { name: "NIHSS", result: "16", flag: "high" },
+    { name: "CT head", result: "No bleed" },
+    { name: "CT angiogram", result: "Left M1 occlusion", flag: "abnormal" },
+    { name: "Glucose", result: "Normal" },
+    { name: "ECG", result: "Atrial fibrillation", flag: "abnormal" },
+  ],
+}
+
+/** The brain in the first hours, the stage the viewer opens on. */
+export const ischaemicStrokeModel = conditionModel(ischaemicStroke)
+
+export type IschaemicStrokeProps = Omit<ConditionViewerProps, "condition">
+
+export function IschaemicStroke(props: IschaemicStrokeProps) {
+  return <ConditionViewer condition={ischaemicStroke} {...props} />
+}

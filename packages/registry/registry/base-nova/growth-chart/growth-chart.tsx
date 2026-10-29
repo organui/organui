@@ -46,7 +46,7 @@ export type GrowthMeasurement = {
   /** Kilograms for weight, centimetres for length and head circumference. */
   value: number
 }
-export type GrowthChartProps = {
+export type GrowthChartProps = React.ComponentProps<"figure"> & {
   /** The LMS reference tables you supply, such as WHO's. */
   standards: GrowthStandards
   /** weight, length (length or height) or head circumference. */
@@ -61,8 +61,6 @@ export type GrowthChartProps = {
   ageRange?: readonly [number, number]
   /** The accessible name of the chart. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
 }
 
 export const growthMeasures: Record<
@@ -223,6 +221,7 @@ export function growthStandardsFromAnthro(tables: {
 }
 
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 })
+const formatZ = (z: number) => `${z >= 0 ? "+" : "−"}${Math.abs(z).toFixed(2)}`
 
 function niceStep(span: number, count: number) {
   const raw = span / count
@@ -257,6 +256,7 @@ export function GrowthChart({
   ageRange = [0, 24],
   label,
   className,
+  ...props
 }: GrowthChartProps) {
   const id = React.useId()
   const [ref, width] = useWidth(640)
@@ -302,7 +302,10 @@ export function GrowthChart({
       )
       .filter((line) => line.length > 1)
   )
-  const points = measurements
+  const inRange = measurements.filter(
+    ({ ageMonths }) => ageMonths >= from && ageMonths <= to
+  )
+  const points = inRange
     .map((measurement, index) => ({
       ...measurement,
       index,
@@ -314,10 +317,10 @@ export function GrowthChart({
         measurement.value
       ),
     }))
-    .filter(
-      ({ ageMonths, z }) => z !== null && ageMonths >= from && ageMonths <= to
-    )
+    .filter(({ z }) => z !== null)
     .sort((a, b) => a.ageMonths - b.ageMonths)
+  // Measurements in view that the standard has no reference for.
+  const uncovered = inRange.length - points.length
 
   const values = [
     ...curves.flat(2).map(({ value }) => value),
@@ -362,7 +365,11 @@ export function GrowthChart({
   // Without curves there is nothing to read measurements against.
   if (!curves[0]?.length)
     return (
-      <figure className={cn("flex flex-col gap-3", className)}>
+      <figure
+        data-slot="growth-chart"
+        className={cn("flex flex-col gap-3", className)}
+        {...props}
+      >
         <figcaption className="text-sm font-medium">{title}</figcaption>
         <Empty className="border">
           <EmptyHeader>
@@ -375,7 +382,11 @@ export function GrowthChart({
     )
 
   return (
-    <figure className={cn("flex flex-col gap-3", className)}>
+    <figure
+      data-slot="growth-chart"
+      className={cn("flex flex-col gap-3", className)}
+      {...props}
+    >
       <figcaption id={`${id}-title`} className="text-sm font-medium">
         {title}
       </figcaption>
@@ -387,14 +398,14 @@ export function GrowthChart({
           width={width}
           height={height}
           viewBox={`0 0 ${width} ${height}`}
-          className="block overflow-visible text-[11px] select-none"
+          className="block h-auto max-w-full overflow-visible text-[11px] select-none"
           onPointerLeave={() => setActive(null)}
         >
           <desc id={`${id}-description`}>
             Percentile curves from {formatAge(from)} to {formatAge(to)} with{" "}
             {points.length}{" "}
             {points.length === 1 ? "measurement" : "measurements"}. The table
-            after the chart lists every measurement.
+            after the chart lists each one.
           </desc>
           <g aria-hidden="true">
             {yTicks.map((value) => (
@@ -540,12 +551,18 @@ export function GrowthChart({
               {formatPercentile(zToPercentile(current.z!))} percentile
             </p>
             <p className="text-muted-foreground">
-              z-score {current.z! >= 0 ? "+" : "−"}
-              {Math.abs(current.z!).toFixed(2)}
+              z-score {formatZ(current.z!)}
             </p>
           </div>
         )}
       </div>
+      {uncovered > 0 && (
+        <p className="text-xs text-muted-foreground">
+          {uncovered} {uncovered === 1 ? "measurement is" : "measurements are"}{" "}
+          not plotted: the standard has no reference at{" "}
+          {uncovered === 1 ? "that age" : "those ages"}.
+        </p>
+      )}
       <table className="sr-only">
         <caption>{title}: measurements</caption>
         <thead>
@@ -562,7 +579,7 @@ export function GrowthChart({
               <td>{formatAge(point.ageMonths)}</td>
               <td>{number.format(point.value)}</td>
               <td>{formatPercentile(zToPercentile(point.z!))}</td>
-              <td>{point.z!.toFixed(2)}</td>
+              <td>{formatZ(point.z!)}</td>
             </tr>
           ))}
         </tbody>

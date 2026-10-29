@@ -232,7 +232,7 @@ export function ChartAreaEdArrivals() {
           {formatDate(peak.date)}
         </div>
         <div className="leading-none text-muted-foreground">
-          {daysOver} days over the surge level
+          {daysOver} days over the surge level; illustrative data
         </div>
       </CardFooter>
     </Card>

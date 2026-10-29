@@ -4,12 +4,12 @@ import {
   type OrganViewerProps,
 } from "@/components/organ-viewer"
 
-// Generated from organui/pancreas-3d at b96dcf3. The GLB stays in that
+// Generated from organui/pancreas-3d at 72b1c43. The GLB stays in that
 // repository under its own licence; see attribution.source.
 export const pancreasModel: OrganModel = {
   name: "Pancreas",
-  src: "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@b96dcf3c234b2b6dba9473661b1d604532301a67/public/models/pancreas.glb",
-  bytes: 881964,
+  src: "https://cdn.jsdelivr.net/gh/organui/pancreas-3d@72b1c4342d56cb233b9cfc13f183874e883dbece/public/models/pancreas.glb",
+  bytes: 883576,
   defaultView: "Anterior",
   views: [
     {
@@ -27,12 +27,20 @@ export const pancreasModel: OrganModel = {
   ],
   structures: [
     {
-      id: "pancreas",
-      label: "Pancreas",
+      id: "pancreatic-head",
+      label: "Head of pancreas",
       group: "Pancreas",
       color: "#dcb67e",
       description:
-        "A gland behind the stomach. Its head sits in the curve of the duodenum and its tail reaches the spleen.",
+        "The widest part of the gland, held in the curve of the duodenum. The common bile duct runs through it, so a tumour here causes jaundice early.",
+    },
+    {
+      id: "pancreatic-body-and-tail",
+      label: "Body and tail of pancreas",
+      group: "Pancreas",
+      color: "#d2a86e",
+      description:
+        "Runs from the neck across the spine to the tail at the spleen, with the splenic vein along its back. Tumours here cause no jaundice and are often found late.",
     },
     {
       id: "pancreatic-duct",
@@ -153,7 +161,7 @@ export const pancreasModel: OrganModel = {
     license: "CC BY-SA 2.1 JP",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en",
     source:
-      "https://github.com/organui/pancreas-3d/blob/b96dcf3c234b2b6dba9473661b1d604532301a67/public/models/ATTRIBUTION.md",
+      "https://github.com/organui/pancreas-3d/blob/72b1c4342d56cb233b9cfc13f183874e883dbece/public/models/ATTRIBUTION.md",
   },
 }
 

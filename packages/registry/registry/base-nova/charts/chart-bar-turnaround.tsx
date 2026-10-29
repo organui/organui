@@ -61,7 +61,9 @@ const target = 60
 const lastMonth = chartData.slice(-30)
 const withinTarget = lastMonth.filter(({ minutes }) => minutes <= target)
 const share = Math.round((withinTarget.length / lastMonth.length) * 100)
-const meets = share >= 90
+// The share of days within target the service aims for; set your own.
+const goal = 90
+const meets = share >= goal
 const slowest = chartData.reduce((a, b) => (b.minutes > a.minutes ? b : a))
 
 // Dates are UTC days, so they read the same on the server and in the browser.
@@ -86,7 +88,7 @@ export function ChartBarTurnaround() {
           <div className="text-2xl leading-none font-semibold">
             {share}%{" "}
             <span className="text-sm font-normal text-muted-foreground">
-              of days on target
+              of the last 30 days on target
             </span>
           </div>
           <Badge variant="outline">
@@ -109,7 +111,7 @@ export function ChartBarTurnaround() {
                 data-icon="inline-start"
               />
             )}
-            {meets ? "On track" : "Review weekends"}
+            {meets ? "At goal" : "Below goal"} of {goal}%
           </Badge>
         </CardAction>
       </CardHeader>
@@ -138,7 +140,7 @@ export function ChartBarTurnaround() {
               tickMargin={8}
               domain={[0, 80]}
               ticks={[0, 30, 60]}
-              tickFormatter={(value) => `${value}m`}
+              tickFormatter={(value) => `${value} min`}
             />
             <ChartTooltip
               cursor={false}

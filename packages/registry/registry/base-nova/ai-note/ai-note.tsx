@@ -18,20 +18,26 @@ export type AiNoteSegment =
 
 export type AiNoteSection = {
   id: string
+  /** The section's name, such as "Assessment". */
   title: string
+  /** The section's text, claim by claim. */
   content: readonly AiNoteSegment[]
 }
 
-export type AiNoteProps = {
+export type AiNoteProps = React.ComponentProps<"article"> & {
+  /** The note's sections, in order. */
   sections: readonly AiNoteSection[]
-  /** Every record the note cites. */
+  /** The records the note may cite; the list under it shows those it does. */
   sources?: readonly ClinicalSource[]
   /** Marks claims without a source. Defaults to true. */
   markUnsupported?: boolean
   /** Names the note for assistive technology. */
   label?: string
-  className?: string
 }
+
+// A dotted underline marks a claim without a source, here and in the key.
+const unsupportedMark =
+  "underline decoration-muted-foreground decoration-dotted decoration-2 underline-offset-4"
 
 /**
  * An AI-drafted clinical note: each claim cites the records it relies on,
@@ -44,16 +50,30 @@ export function AiNote({
   markUnsupported = true,
   label = "AI-drafted note",
   className,
+  ...props
 }: AiNoteProps) {
   const unsupported = sections.some((section) =>
     section.content.some(
       (segment) => typeof segment !== "string" && !segment.sources?.length
     )
   )
+  // The records the note cites, in the order it first cites them.
+  const citedIds = new Set(
+    sections.flatMap((section) =>
+      section.content.flatMap((segment) =>
+        typeof segment === "string" ? [] : (segment.sources ?? [])
+      )
+    )
+  )
+  const cited = [...citedIds].flatMap(
+    (id) => sources.find((source) => source.id === id) ?? []
+  )
   return (
     <article
+      data-slot="ai-note"
       aria-label={label}
       className={cn("flex flex-col gap-4 text-sm", className)}
+      {...props}
     >
       {sections.map((section) => (
         // Named sections rather than headings, so the note fits under any
@@ -74,10 +94,7 @@ export function AiNote({
               })
               if (cited.length === 0 && markUnsupported)
                 return (
-                  <span
-                    key={index}
-                    className="underline decoration-amber-500 decoration-dotted decoration-2 underline-offset-4"
-                  >
+                  <span key={index} className={unsupportedMark}>
                     {segment.text}
                     <span className="sr-only"> (no source)</span>
                   </span>
@@ -96,13 +113,11 @@ export function AiNote({
       ))}
       {markUnsupported && unsupported && (
         <p className="text-xs text-muted-foreground">
-          <span className="underline decoration-amber-500 decoration-dotted decoration-2 underline-offset-4">
-            Dotted text
-          </span>{" "}
-          has no source. Check it against the record.
+          <span className={unsupportedMark}>Dotted text</span> has no source.
+          Check it against the record.
         </p>
       )}
-      <ClinicalSources sources={sources} />
+      <ClinicalSources sources={cited} />
     </article>
   )
 }

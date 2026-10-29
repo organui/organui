@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -33,12 +34,25 @@ export function clinicalSourceMeta(source: ClinicalSource) {
  * A record cited in the sentence that relies on it. It opens on hover or
  * focus, as shadcn's Inline Citation does, and shows what the record says.
  */
-export function ClinicalCitation({ source }: { source: ClinicalSource }) {
+export function ClinicalCitation({
+  source,
+  className,
+}: {
+  /** The record cited. */
+  source: ClinicalSource
+  /** Classes for the chip. */
+  className?: string
+}) {
   const meta = clinicalSourceMeta(source)
   return (
     <HoverCard openDelay={10} closeDelay={100}>
       <HoverCardTrigger asChild>
-        <Button variant="secondary" size="xs" className="mx-0.5">
+        <Button
+          data-slot="clinical-citation"
+          variant="secondary"
+          size="xs"
+          className={cn("mx-0.5", className)}
+        >
           {source.label ?? source.title}
         </Button>
       </HoverCardTrigger>
@@ -51,7 +65,7 @@ export function ClinicalCitation({ source }: { source: ClinicalSource }) {
         {source.href && (
           <a
             href={source.href}
-            className="text-xs text-muted-foreground underline-offset-4 hover:underline"
+            className="w-fit rounded-sm text-xs text-muted-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             Open in the record
           </a>

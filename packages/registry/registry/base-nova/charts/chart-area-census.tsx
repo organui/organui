@@ -62,7 +62,9 @@ export function ChartAreaCensus() {
     <Card>
       <CardHeader>
         <CardTitle>Census</CardTitle>
-        <CardDescription>Average beds in use per day</CardDescription>
+        <CardDescription>
+          Average beds in use per day, January to June
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -86,7 +88,7 @@ export function ChartAreaCensus() {
             />
             <Area
               dataKey="observation"
-              type="natural"
+              type="monotone"
               fill="var(--color-observation)"
               fillOpacity={0.4}
               stroke="var(--color-observation)"
@@ -94,7 +96,7 @@ export function ChartAreaCensus() {
             />
             <Area
               dataKey="inpatient"
-              type="natural"
+              type="monotone"
               fill="var(--color-inpatient)"
               fillOpacity={0.4}
               stroke="var(--color-inpatient)"

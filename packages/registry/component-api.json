@@ -1,6 +1,7 @@
 {
   "anatomy-tree": {
     "component": "AnatomyTree",
+    "element": "section",
     "props": [
       {
         "name": "data",
@@ -62,6 +63,7 @@
   },
   "body-map": {
     "component": "BodyMap",
+    "element": "div",
     "props": [
       {
         "name": "value",
@@ -103,19 +105,13 @@
         "type": "string",
         "required": false,
         "default": "\"Body map\"",
-        "description": "The accessible name of the map, and its legend."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
+        "description": "The accessible name of the map."
       }
     ]
   },
   "dermatome-map": {
     "component": "DermatomeMap",
+    "element": "div",
     "props": [
       {
         "name": "selectedId",
@@ -158,18 +154,95 @@
         "required": false,
         "default": "\"Dermatome map\"",
         "description": "The accessible name of the map."
+      }
+    ]
+  },
+  "condition-viewer": {
+    "component": "ConditionViewer",
+    "element": null,
+    "props": [
+      {
+        "name": "condition",
+        "type": "Condition",
+        "required": true,
+        "default": null,
+        "description": "The condition: its scales, stages, findings and investigations."
       },
       {
-        "name": "className",
+        "name": "scale",
         "type": "string",
         "required": false,
         "default": null,
-        "description": "Classes for the root element."
+        "description": "The scale shown, by ID."
+      },
+      {
+        "name": "defaultScale",
+        "type": "string",
+        "required": false,
+        "default": "condition.scales[0]!.id",
+        "description": "The scale shown first when `scale` is not set. Defaults to the first."
+      },
+      {
+        "name": "onScaleChange",
+        "type": "(scale: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the scale a reader chooses."
+      },
+      {
+        "name": "stage",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The stage shown, by ID."
+      },
+      {
+        "name": "defaultStage",
+        "type": "string",
+        "required": false,
+        "default": "condition.stages?.[0]?.id ?? \"\"",
+        "description": "The stage shown first when `stage` is not set. Defaults to the first."
+      },
+      {
+        "name": "onStageChange",
+        "type": "(stage: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the stage a reader chooses."
+      },
+      {
+        "name": "selectedId",
+        "type": "string | null",
+        "required": false,
+        "default": null,
+        "description": "The selected structure ID, or null."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(id: string | null) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the structure a reader selects, or null when they clear it."
+      },
+      {
+        "name": "panel",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the panel with the scales, findings and investigations. Defaults to true."
+      },
+      {
+        "name": "timeline",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows the course under the model as a timeline, with its events and a play button. Defaults to true; a condition with one stage has none."
       }
     ]
   },
   "dna-helix": {
     "component": "DnaHelix",
+    "element": "div",
     "props": [
       {
         "name": "sequence",
@@ -221,13 +294,6 @@
         "description": "The accessible name of the viewer."
       },
       {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
-      },
-      {
         "name": "ref",
         "type": "React.Ref<DnaHelixHandle>",
         "required": false,
@@ -238,6 +304,7 @@
   },
   "ecg-trace": {
     "component": "EcgTrace",
+    "element": "figure",
     "props": [
       {
         "name": "samples",
@@ -315,18 +382,12 @@
         "required": false,
         "default": "\"ECG\"",
         "description": "The accessible name of the strip. Defaults to \"ECG\"."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "growth-chart": {
     "component": "GrowthChart",
+    "element": "figure",
     "props": [
       {
         "name": "standards",
@@ -376,18 +437,12 @@
         "required": false,
         "default": null,
         "description": "The accessible name of the chart."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "image-viewer": {
     "component": "ImageViewer",
+    "element": "div",
     "props": [
       {
         "name": "slices",
@@ -474,13 +529,6 @@
         "description": "The accessible name of the image."
       },
       {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
-      },
-      {
         "name": "ref",
         "type": "React.Ref<ImageViewerHandle>",
         "required": false,
@@ -491,6 +539,7 @@
   },
   "lab-results": {
     "component": "LabResultsTable",
+    "element": "div",
     "props": [
       {
         "name": "results",
@@ -519,18 +568,148 @@
         "required": false,
         "default": "true",
         "description": "Shows the trend column. Defaults to true."
+      }
+    ]
+  },
+  "patient-banner": {
+    "component": "PatientBanner",
+    "element": "section",
+    "props": [
+      {
+        "name": "patient",
+        "type": "Patient",
+        "required": true,
+        "default": null,
+        "description": "Name, date of birth, sex, identifiers and any date of death."
       },
       {
-        "name": "className",
-        "type": "string",
+        "name": "allergies",
+        "type": "PatientAllergies",
         "required": false,
         "default": null,
-        "description": "Classes for the root element."
+        "description": "Substances, `\"none-known\"`, or nothing when not recorded."
+      },
+      {
+        "name": "alerts",
+        "type": "readonly string[]",
+        "required": false,
+        "default": "[]",
+        "description": "Warnings to see before anything else, such as \"DNACPR\" or \"Safeguarding\"."
+      },
+      {
+        "name": "today",
+        "type": "Date",
+        "required": false,
+        "default": null,
+        "description": "The day age is counted on. Defaults to today."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "formatBannerDate",
+        "description": "Defaults to an unambiguous UTC date such as \"12-Jan-1958\"."
+      }
+    ]
+  },
+  "news2-chart": {
+    "component": "News2Chart",
+    "element": "div",
+    "props": [
+      {
+        "name": "observations",
+        "type": "readonly News2Observation[]",
+        "required": true,
+        "default": null,
+        "description": "Sets of observations, in any order; the newest shows first."
+      },
+      {
+        "name": "spo2Scale",
+        "type": "Spo2Scale",
+        "required": false,
+        "default": "1",
+        "description": "The SpO₂ scale the patient is prescribed. Defaults to 1."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatTime",
+        "type": "(time: string) => string",
+        "required": false,
+        "default": "defaultFormatTime",
+        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"."
+      }
+    ]
+  },
+  "problem-list": {
+    "component": "ProblemList",
+    "element": "div",
+    "props": [
+      {
+        "name": "problems",
+        "type": "readonly Problem[]",
+        "required": true,
+        "default": null,
+        "description": "The problems, active and past, in any order."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "showCodes",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Shows each problem's code beneath its name. Defaults to true."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Formats full ISO dates. Defaults to a UTC date such as \"Oct 1, 2026\"."
+      }
+    ]
+  },
+  "allergy-list": {
+    "component": "AllergyList",
+    "element": "div",
+    "props": [
+      {
+        "name": "allergies",
+        "type": "AllergyRecord",
+        "required": false,
+        "default": null,
+        "description": "The allergies, `\"none-known\"`, or nothing when not recorded."
+      },
+      {
+        "name": "caption",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Names the table for assistive technology and shows below it."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Defaults to a UTC date such as \"Oct 1, 2026\"."
       }
     ]
   },
   "medication-schedule": {
     "component": "MedicationSchedule",
+    "element": "div",
     "props": [
       {
         "name": "medications",
@@ -601,18 +780,12 @@
         "required": false,
         "default": "\"Interaction warnings come only from the data this schedule is given. This is not medical advice.\"",
         "description": "Shown under the schedule. Pass null to hide it."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   },
   "molecule-viewer": {
     "component": "MoleculeViewer",
+    "element": "div",
     "props": [
       {
         "name": "src",
@@ -734,13 +907,6 @@
         "description": "The accessible name of the viewer."
       },
       {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
-      },
-      {
         "name": "ref",
         "type": "React.Ref<MoleculeViewerHandle>",
         "required": false,
@@ -751,6 +917,7 @@
   },
   "organ-viewer": {
     "component": "OrganViewer",
+    "element": "div",
     "props": [
       {
         "name": "model",
@@ -823,13 +990,6 @@
         "description": "The accessible name of the viewer."
       },
       {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
-      },
-      {
         "name": "ref",
         "type": "React.Ref<OrganViewerHandle>",
         "required": false,
@@ -840,6 +1000,7 @@
   },
   "vital-signs": {
     "component": "VitalSigns",
+    "element": "div",
     "props": [
       {
         "name": "readings",
@@ -889,13 +1050,6 @@
         "required": false,
         "default": null,
         "description": "Shown under the title, such as when the readings were taken."
-      },
-      {
-        "name": "className",
-        "type": "string",
-        "required": false,
-        "default": null,
-        "description": "Classes for the root element."
       }
     ]
   }

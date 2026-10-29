@@ -223,10 +223,30 @@ export function ChartLineRehab() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          From {before.average} to {latest.average} bpm, 7-day average
+          From {before.average} to {latest.average} bpm, 7-day average{" "}
+          {latest.average! <= before.average! ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
-          {formatDate(milestones[0]!.date)} to {formatDate(latest.date)}
+          {formatDate(milestones[0]!.date)} to {formatDate(latest.date)}; a
+          fictional patient
         </div>
       </CardFooter>
     </Card>

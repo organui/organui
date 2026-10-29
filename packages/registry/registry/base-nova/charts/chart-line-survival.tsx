@@ -103,15 +103,15 @@ export function ChartLineSurvival() {
       <CardHeader>
         <CardTitle>Event-free survival</CardTitle>
         <CardDescription>Kaplan–Meier, by trial arm</CardDescription>
-        <CardAction className="flex flex-col items-end gap-1">
+        <CardAction className="flex flex-col items-end gap-1.5">
           <div className="text-2xl leading-none font-semibold">
-            {hazardRatio.value}{" "}
+            {hazardRatio.value.toFixed(2)}{" "}
             <span className="text-sm font-normal text-muted-foreground">
               HR
             </span>
           </div>
           <div className="text-xs text-muted-foreground">
-            95% CI {hazardRatio.low}–{hazardRatio.high}
+            95% CI {hazardRatio.low.toFixed(2)}–{hazardRatio.high.toFixed(2)}
           </div>
         </CardAction>
       </CardHeader>

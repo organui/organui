@@ -114,7 +114,8 @@ export function ChartLineForestPlot() {
                     <div className="flex items-baseline justify-between gap-4">
                       <span className="text-muted-foreground">HR</span>
                       <span className="font-mono font-medium tabular-nums">
-                        {row.ratio} ({row.low}–{row.high})
+                        {row.ratio.toFixed(2)} ({row.low.toFixed(2)}–
+                        {row.high.toFixed(2)})
                       </span>
                     </div>
                   </div>

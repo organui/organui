@@ -54,7 +54,7 @@ export type DnaHelixHandle = {
   reset: () => void
 }
 
-export type DnaHelixProps = {
+export type DnaHelixProps = Omit<React.ComponentProps<"div">, "ref"> & {
   /** One strand, read 5′ to 3′. Whitespace is ignored; only A, C, G and T are allowed. */
   sequence?: string
   /** Base pair index, from 0 at the 5′ end. */
@@ -69,8 +69,6 @@ export type DnaHelixProps = {
   controls?: boolean
   /** The accessible name of the viewer. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
   /** Rotates, zooms and resets the camera from your own controls. */
   ref?: React.Ref<DnaHelixHandle>
 }
@@ -124,6 +122,45 @@ const TWIST = (34.3 * Math.PI) / 180
 const RADIUS = 9
 const MINOR_GROOVE = (140 * Math.PI) / 180
 const STAGE_TONE = new Color("#e4e3dc")
+
+// Faded parts blend towards the stage, so its tone follows the theme: the
+// theme's --muted, resolved through a canvas because three.js cannot parse
+// oklch(), and read again when the theme changes. Returns a count that
+// changes each time, for effects that repaint.
+function useStageTone(host: React.RefObject<HTMLElement | null>) {
+  const [version, setVersion] = React.useState(0)
+  React.useEffect(() => {
+    const read = () => {
+      const muted = host.current
+        ? getComputedStyle(host.current).getPropertyValue("--muted").trim()
+        : ""
+      const context = muted
+        ? document
+            .createElement("canvas")
+            .getContext("2d", { willReadFrequently: true })
+        : null
+      if (!context) return
+      context.fillStyle = muted
+      context.fillRect(0, 0, 1, 1)
+      const [r, g, b] = context.getImageData(0, 0, 1, 1).data
+      STAGE_TONE.setStyle(`rgb(${r}, ${g}, ${b})`)
+      setVersion((count) => count + 1)
+    }
+    read()
+    const observer = new MutationObserver(read)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style", "data-theme"],
+    })
+    const scheme = matchMedia("(prefers-color-scheme: dark)")
+    scheme.addEventListener("change", read)
+    return () => {
+      observer.disconnect()
+      scheme.removeEventListener("change", read)
+    }
+  }, [host])
+  return version
+}
 const STRAND_COLORS = ["#6b7a8c", "#9a8770"] as const
 const UP = new Vector3(0, 1, 0)
 
@@ -393,8 +430,10 @@ export function DnaHelix({
   label = "Interactive DNA double helix",
   className,
   ref,
+  ...props
 }: DnaHelixProps) {
   const host = React.useRef<HTMLDivElement>(null)
+  const tone = useStageTone(host)
   const parsed = React.useMemo(() => {
     try {
       const pairs = dnaBasePairs(sequence)
@@ -631,7 +670,7 @@ export function DnaHelix({
 
   React.useEffect(() => {
     engine?.paint(selected)
-  }, [engine, selected])
+  }, [engine, selected, tone])
 
   React.useEffect(() => {
     engine?.spin(spinning)
@@ -665,8 +704,10 @@ export function DnaHelix({
 
   return (
     <div
+      data-slot="dna-helix"
+      {...props}
       className={cn(
-        "flex h-96 w-full flex-col overflow-hidden rounded-xl border bg-muted/30 text-sm text-foreground",
+        "flex h-[28rem] w-full flex-col overflow-hidden rounded-xl border bg-muted/30 text-sm text-foreground",
         className
       )}
     >
@@ -803,7 +844,7 @@ export function DnaHelix({
         )}
         <p
           aria-live="polite"
-          className="pointer-events-none absolute right-2 bottom-1.5 left-2 truncate text-[11px] text-muted-foreground"
+          className="pointer-events-none absolute right-2 bottom-1.5 left-2 truncate text-xs text-muted-foreground"
         >
           {status}
         </p>

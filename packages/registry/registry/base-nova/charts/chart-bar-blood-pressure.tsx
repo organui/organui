@@ -77,7 +77,9 @@ export function ChartBarBloodPressure() {
     <Card>
       <CardHeader>
         <CardTitle>Ambulatory blood pressure</CardTitle>
-        <CardDescription>Every two hours, over 24 hours</CardDescription>
+        <CardDescription>
+          Every two hours over 24 hours, in mmHg
+        </CardDescription>
         <CardAction className="flex flex-col items-end gap-1.5">
           <div className="text-2xl leading-none font-semibold">
             {dip}%{" "}

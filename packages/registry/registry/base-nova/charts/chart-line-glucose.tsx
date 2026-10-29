@@ -92,7 +92,11 @@ export function ChartLineGlucose() {
                 data-icon="inline-start"
               />
             )}
-            {inTarget ? "In target" : "Out of target"}
+            {inTarget
+              ? "At target"
+              : latest.glucose > targetRange.high
+                ? "Above target"
+                : "Below target"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -125,13 +129,10 @@ export function ChartLineGlucose() {
                 fontSize={11}
               />
             </ReferenceArea>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
               dataKey="glucose"
-              type="natural"
+              type="monotone"
               stroke="var(--color-glucose)"
               strokeWidth={2}
               dot={{ fill: "var(--color-glucose)" }}

@@ -38,7 +38,7 @@ export type VitalSign =
   "heartRate" | "bloodPressure" | "spo2" | "temperature" | "respiratoryRate"
 export type VitalStatus = "low" | "normal" | "high" | "missing"
 export type TemperatureUnit = "celsius" | "fahrenheit"
-export type VitalSignsProps = {
+export type VitalSignsProps = Omit<React.ComponentProps<"div">, "title"> & {
   /** The latest value of each vital; null when not measured. */
   readings: VitalReadings
   /** Merged over `adultVitalRanges`, one vital at a time. */
@@ -53,8 +53,6 @@ export type VitalSignsProps = {
   title?: string
   /** Shown under the title, such as when the readings were taken. */
   description?: React.ReactNode
-  /** Classes for the root element. */
-  className?: string
 }
 
 /**
@@ -274,18 +272,28 @@ export function VitalSigns({
   title = "Vital signs",
   description,
   className,
+  ...props
 }: VitalSignsProps) {
   const resolved = resolveVitalRanges(ranges, temperatureUnit)
+  const heading = React.useId()
   return (
-    <Card role="region" aria-label={title} className={cn("w-full", className)}>
+    <Card
+      data-slot="vital-signs"
+      role="region"
+      aria-labelledby={heading}
+      className={cn("w-full", className)}
+      {...props}
+    >
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle id={heading}>{title}</CardTitle>
         {description != null && (
           <CardDescription>{description}</CardDescription>
         )}
       </CardHeader>
-      <CardContent>
-        <dl className="grid grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))] gap-3">
+      <CardContent className="@container">
+        {/* Two columns, or one row once every vital fits, so none is left
+            alone on a row. */}
+        <dl className="grid grid-cols-2 gap-3 @2xl:auto-cols-fr @2xl:grid-flow-col @2xl:grid-cols-none">
           {vitals.map((vital) => {
             const item = assessVital(
               vital,
@@ -300,10 +308,7 @@ export function VitalSigns({
                 key={vital}
                 data-vital={vital}
                 data-status={item.status}
-                className={cn(
-                  "flex min-w-0 flex-col gap-1.5 rounded-lg border p-3",
-                  abnormal && "border-destructive"
-                )}
+                className="flex min-w-0 flex-col gap-1.5 rounded-lg border p-3"
               >
                 <dt className="text-xs font-medium text-muted-foreground">
                   {item.label}
@@ -335,10 +340,7 @@ export function VitalSigns({
                       : "font-medium text-muted-foreground"
                   )}
                 >
-                  <StatusIcon
-                    status={item.status}
-                    className={abnormal ? "text-destructive" : undefined}
-                  />
+                  <StatusIcon status={item.status} />
                   {item.statusLabel}
                 </dd>
                 <dd className="text-xs text-muted-foreground tabular-nums">

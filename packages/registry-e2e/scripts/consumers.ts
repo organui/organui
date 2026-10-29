@@ -119,10 +119,15 @@ const vitalsHarness = `import { VitalSigns } from "@/components/ui/vital-signs"
 export default function VitalsHarness(){
  return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed vital signs</h1><VitalSigns readings={{heartRate:112,systolic:150,diastolic:76,spo2:null,temperature:38.6}} description="Example readings"/><VitalSigns title="Fahrenheit" temperatureUnit="fahrenheit" ranges={{spo2:{low:88,high:92}}} vitals={["temperature","spo2","respiratoryRate"]} readings={{temperature:98.6,spo2:90,respiratoryRate:8}}/></main>
 }`
-// Lab results hold no state, so the Next.js page renders them on the server.
+// Lab results and the patient banner hold no state, so the Next.js page
+// renders them on the server.
 const labHarness = `import { LabResultsTable } from "@/components/ui/lab-results"
+import { formatNhsNumber, PatientBanner } from "@/components/ui/patient-banner"
+import { AllergyList } from "@/components/ui/allergy-list"
+import { ProblemList } from "@/components/ui/problem-list"
+import { News2Chart } from "@/components/ui/news2-chart"
 export default function LabHarness(){
- return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed lab results</h1><LabResultsTable caption="Electrolytes" results={[{id:"k",name:"Potassium",value:6.4,unit:"mmol/L",decimals:1,referenceRange:{low:3.5,high:5.1,criticalHigh:6},history:[{value:4.2,date:"2026-01-12"},{value:6.4,date:"2026-10-01"}]},{id:"na",name:"Sodium",value:140,unit:"mmol/L",referenceRange:{low:135,high:145}}]}/></main>
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed lab results</h1><PatientBanner patient={{name:{family:"Brennan",given:["Tom"],prefix:"Mr"},birthDate:"1979-06-03",sex:"Male",identifiers:[{label:"NHS number",value:formatNhsNumber("9996543218")}]}} allergies={["Codeine"]} alerts={["Falls risk"]} today={new Date("2026-10-25")}/><LabResultsTable caption="Electrolytes" results={[{id:"k",name:"Potassium",value:6.4,unit:"mmol/L",decimals:1,referenceRange:{low:3.5,high:5.1,criticalHigh:6},history:[{value:4.2,date:"2026-01-12"},{value:6.4,date:"2026-10-01"}]},{id:"na",name:"Sodium",value:140,unit:"mmol/L",referenceRange:{low:135,high:145}}]}/><AllergyList caption="Allergies" allergies={[{id:"codeine",substance:"Codeine",type:"intolerance",reactions:["Vomiting"],severity:"mild"}]}/><ProblemList caption="Problems" problems={[{id:"t2dm",name:"Type 2 diabetes mellitus",code:{system:"SNOMED CT",value:"44054006"},significance:"major",onset:"2012-03-06"}]}/><News2Chart caption="Observations" observations={[{time:"2026-10-25T16:00:00Z",respirationRate:23,spo2:94,onOxygen:false,systolic:106,pulse:108,consciousness:"alert",temperature:38.7}]}/></main>
 }`
 const medicationHarness = `"use client"
 import { useState } from "react"
@@ -193,6 +198,7 @@ export default function ImageHarness(){
 // for them. Next.js serves the installed pages at the same paths.
 const blockHarness = `import { OrganExplorer } from "@/components/organ-explorer"
 import { examplePatient, PatientDashboard } from "@/components/patient-dashboard"
+import { examplePatientRecord, PatientRecord } from "@/components/patient-record"
 import { AnatomyWorkspace } from "@/components/anatomy-workspace"
 import { OrganSwitcher } from "@/components/organ-switcher"
 import { heartModel } from "@/components/heart"
@@ -201,7 +207,8 @@ import { pancreasModel } from "@/components/pancreas"
 import { stomachModel } from "@/components/stomach"
 export default function BlockHarness({path}:{path:string}){
  if(path==="/workspace")return <AnatomyWorkspace model={heartModel}/>
- if(path==="/dashboard")return <PatientDashboard patient={examplePatient}/>
+ if(path==="/dashboard")return <main className="mx-auto w-full max-w-7xl p-4 md:p-6"><PatientDashboard patient={examplePatient}/></main>
+ if(path==="/record")return <main className="mx-auto w-full max-w-7xl p-4 md:p-6"><PatientRecord record={examplePatientRecord}/></main>
  return <main style={{padding:24}}><h1>{path==="/organs"?"Organs":"Heart"}</h1>{path==="/organs"?<OrganSwitcher models={[heartModel,kidneysModel,stomachModel,pancreasModel]}/>:<OrganExplorer model={heartModel}/>}</main>
 }`
 // Uses each helper and CSS utility, so the build type-checks the helpers
@@ -233,8 +240,14 @@ const aiElements = [
   "clinician-review",
   "ai-note",
 ]
-const blocks = ["explorer-01", "explorer-02", "explorer-03", "dashboard-01"]
-const pages = ["explorer", "workspace", "organs", "dashboard"]
+const blocks = [
+  "explorer-01",
+  "explorer-02",
+  "explorer-03",
+  "dashboard-01",
+  "dashboard-02",
+]
+const pages = ["explorer", "workspace", "organs", "dashboard", "record"]
 // Deliberately use distinct theme values to detect accidental theme overwrites.
 const css = `@import "tailwindcss";
 @theme inline { --color-background:var(--background);--color-foreground:var(--foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-border:var(--border);--color-ring:var(--ring); }
@@ -443,7 +456,7 @@ try {
       await put(
         dir,
         "src/main.tsx",
-        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import GrowthHarness from "./growth-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/growth"?<GrowthHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs","/dashboard"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
+        'import React from "react";import {createRoot} from "react-dom/client";import Harness from "./harness";import OrganHarness from "./organ-harness";import MoleculeHarness from "./molecule-harness";import EcgHarness from "./ecg-harness";import GrowthHarness from "./growth-harness";import BodyMapHarness from "./body-map-harness";import DermatomeHarness from "./dermatome-harness";import BlockHarness from "./block-harness";import LabHarness from "./lab-harness";import MedicationHarness from "./medication-harness";import VitalsHarness from "./vitals-harness";import ImageHarness from "./image-harness";import "./globals.css";const path=location.pathname;createRoot(document.getElementById("root")!).render(path==="/organ"?<OrganHarness/>:path==="/ecg"?<EcgHarness/>:path==="/growth"?<GrowthHarness/>:path==="/body-map"?<BodyMapHarness/>:path==="/dermatome"?<DermatomeHarness/>:path==="/molecule"?<MoleculeHarness/>:path==="/lab"?<LabHarness/>:path==="/medication"?<MedicationHarness/>:path==="/vitals"?<VitalsHarness/>:path==="/image"?<ImageHarness/>:["/explorer","/workspace","/organs","/dashboard","/record"].includes(path)?<BlockHarness path={path}/>:<Harness/>);'
       )
       await put(dir, "src/block-harness.tsx", source(blockHarness))
       await put(
@@ -514,6 +527,8 @@ try {
       (item) =>
         "categories" in item &&
         (item.categories?.includes("organ") ||
+          item.categories?.includes("condition") ||
+          item.categories?.includes("tissue") ||
           item.categories?.includes("cell"))
     )
     // Install all organs together through the real CLI and compile their public
@@ -584,6 +599,10 @@ try {
       "body-map",
       "image-viewer",
       "growth-chart",
+      "patient-banner",
+      "allergy-list",
+      "problem-list",
+      "news2-chart",
     ])
       await run(
         [

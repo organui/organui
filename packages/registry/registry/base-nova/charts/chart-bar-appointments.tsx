@@ -91,7 +91,7 @@ export function ChartBarAppointments() {
                 data-icon="inline-start"
               />
             )}
-            {atTarget ? "Within target" : "Above target"}
+            {atTarget ? "At target" : "Above target"}
           </Badge>
         </CardAction>
       </CardHeader>
@@ -173,7 +173,26 @@ export function ChartBarAppointments() {
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
           {latest.rate <= first.rate ? "Down" : "Up"} from {first.rate}% in{" "}
-          {first.month}
+          {first.month}{" "}
+          {latest.rate <= first.rate ? (
+            <IconPlaceholder
+              lucide="TrendingDownIcon"
+              tabler="IconTrendingDown"
+              hugeicons="ChartDownIcon"
+              phosphor="TrendDownIcon"
+              remixicon="RiArrowDownLine"
+              className="size-4"
+            />
+          ) : (
+            <IconPlaceholder
+              lucide="TrendingUpIcon"
+              tabler="IconTrendingUp"
+              hugeicons="ChartUpIcon"
+              phosphor="TrendUpIcon"
+              remixicon="RiArrowUpLine"
+              className="size-4"
+            />
+          )}
         </div>
         <div className="leading-none text-muted-foreground">
           Muted bars meet the target; illustrative data

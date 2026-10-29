@@ -4,6 +4,7 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import { toggleVariants } from "@/components/ui/toggle"
 
 export type DermatomeView = "front" | "back"
 export type DermatomeRegion = "Cervical" | "Thoracic" | "Lumbar" | "Sacral"
@@ -196,7 +197,7 @@ export const dermatomes = [
 export type DermatomeId = (typeof dermatomes)[number]["id"]
 export type Dermatome = (typeof dermatomes)[number]
 
-export type DermatomeMapProps = {
+export type DermatomeMapProps = React.ComponentProps<"div"> & {
   /** The selected dermatome, such as L4, or null. */
   selectedId: DermatomeId | null
   /** Called with the dermatome a reader selects, or null. */
@@ -209,8 +210,6 @@ export type DermatomeMapProps = {
   showLabels?: boolean
   /** The accessible name of the map. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
 }
 
 type Shape = {
@@ -506,6 +505,7 @@ export function DermatomeMap({
   showLabels = true,
   label = "Dermatome map",
   className,
+  ...props
 }: DermatomeMapProps) {
   const [hoveredId, setHoveredId] = React.useState<DermatomeId | null>(null)
   const [activeId, setActiveId] = React.useState<DermatomeId>(
@@ -555,9 +555,11 @@ export function DermatomeMap({
 
   return (
     <div
+      data-slot="dermatome-map"
       role="group"
       aria-label={label}
       className={cn("@container/dermatome-map", className)}
+      {...props}
     >
       <div className="grid gap-6 @2xl/dermatome-map:grid-cols-[minmax(0,1fr)_18rem]">
         <div
@@ -620,14 +622,16 @@ export function DermatomeMap({
                         }}
                         onPointerEnter={() => hover.enter(dermatome.id)}
                         onPointerLeave={() => hover.leave(dermatome.id)}
+                        // Styled as shadcn's outline Toggle, keeping listbox
+                        // semantics. Selection also darkens the border, so it
+                        // differs from hover, which shares bg-muted.
                         className={cn(
-                          "flex h-7 min-w-11 cursor-pointer items-center gap-1.5 rounded-md border px-2 text-xs font-medium tabular-nums outline-none select-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50",
-                          dermatome.id === selectedId &&
-                            "border-foreground bg-muted"
+                          toggleVariants({ variant: "outline", size: "sm" }),
+                          "min-w-11 cursor-pointer gap-1.5 text-xs tabular-nums select-none aria-selected:border-foreground aria-selected:bg-muted"
                         )}
                       >
                         <span
-                          aria-hidden
+                          aria-hidden="true"
                           className="size-2.5 shrink-0 rounded-full"
                           style={{ background: fill(dermatome.id) }}
                         />
@@ -700,6 +704,7 @@ function DermatomeFigure({
   const shown = shownId ? regions[shownId] : undefined
   return (
     <figure className="@container flex min-w-0 flex-col items-center gap-2">
+      <figcaption className="text-sm font-medium">{viewNames[view]}</figcaption>
       <svg
         viewBox="0 0 220 480"
         role="img"
@@ -767,9 +772,6 @@ function DermatomeFigure({
             ) : null
           )}
       </svg>
-      <figcaption className="text-xs text-muted-foreground">
-        {viewNames[view]}
-      </figcaption>
     </figure>
   )
 }

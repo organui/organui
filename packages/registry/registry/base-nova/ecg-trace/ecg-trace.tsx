@@ -12,7 +12,7 @@ export type EcgAnnotation = { wave: EcgWave; time: number }
 export type EcgStream = {
   subscribe(listener: (samples: readonly number[]) => void): () => void
 }
-export type EcgTraceProps = {
+export type EcgTraceProps = React.ComponentProps<"figure"> & {
   /** A recorded trace in millivolts. Ignored when `stream` is set. */
   samples?: readonly number[]
   /** A live source, drawn as a monitor sweep. */
@@ -41,11 +41,9 @@ export type EcgTraceProps = {
   calibration?: boolean
   /** The accessible name of the strip. Defaults to "ECG". */
   label?: string
-  /** Classes for the root element. */
-  className?: string
 }
 
-const calibrationWidth = 10 // mm, two large boxes
+const calibrationPulse = 0.2 // seconds, the standard 1 mV pulse
 const sweepGap = 0.2 // seconds blanked ahead of a live write head
 const minPxPerMm = 3 // below this the strip scrolls instead of shrinking
 
@@ -249,6 +247,7 @@ export function EcgTrace({
   calibration = true,
   label = "ECG",
   className,
+  ...props
 }: EcgTraceProps) {
   const seconds =
     duration ?? (stream ? 6 : (samples?.length ?? 0) / sampleRate || 10)
@@ -288,11 +287,14 @@ export function EcgTrace({
     }
   }, [stream, length, paused])
 
-  const width = (calibration ? calibrationWidth : 0) + seconds * speed
+  // The pulse is 0.2 s wide at the paper speed, with 2 mm before it and the
+  // space it takes rounded up to whole large boxes.
+  const pulse = calibrationPulse * speed
+  const offset = calibration ? Math.ceil((pulse + 5) / 5) * 5 : 0
+  const width = offset + seconds * speed
   const height = (range[1] - range[0]) * gain
   // Strip positions are sample indexes; x and y are millimetres.
-  const x = (position: number) =>
-    (calibration ? calibrationWidth : 0) + (position / sampleRate) * speed
+  const x = (position: number) => offset + (position / sampleRate) * speed
   const y = (value: number) =>
     Math.min(height, Math.max(0, (range[1] - value) * gain))
 
@@ -366,6 +368,7 @@ export function EcgTrace({
     <figure
       data-slot="ecg-trace"
       className={cn("flex min-w-0 flex-col gap-2", className)}
+      {...props}
     >
       <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm">
         <span>
@@ -420,7 +423,7 @@ export function EcgTrace({
           />
           {calibration && (
             <path
-              d={`M1 ${y(0)}H3V${y(1)}H8V${y(0)}H9`}
+              d={`M1 ${y(0)}H3V${y(1)}H${3 + pulse}V${y(0)}H${4 + pulse}`}
               fill="none"
               className="stroke-foreground"
               strokeWidth={1.5}

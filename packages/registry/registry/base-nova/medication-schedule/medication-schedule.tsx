@@ -58,7 +58,7 @@ export type DoseConflict = {
   interaction: MedicationInteraction
   doses: readonly [ScheduledDose, ScheduledDose]
 }
-export type MedicationScheduleProps = {
+export type MedicationScheduleProps = React.ComponentProps<"div"> & {
   /** The medications, each with its dose times and days. */
   medications: readonly Medication[]
   /** Interactions come from your own data source; none are bundled. */
@@ -79,8 +79,6 @@ export type MedicationScheduleProps = {
   label?: string
   /** Shown under the schedule. Pass null to hide it. */
   disclaimer?: React.ReactNode
-  /** Classes for the root element. */
-  className?: string
 }
 
 const day = 24 * 60
@@ -230,6 +228,46 @@ function hours(value: number) {
   return `${value} ${value === 1 ? "hour" : "hours"}`
 }
 
+// Each severity has its own shape, so warnings read without colour.
+function SeverityIcon({ severity }: { severity: InteractionSeverity }) {
+  switch (severity) {
+    case "major":
+      return (
+        <IconPlaceholder
+          lucide="TriangleAlertIcon"
+          tabler="IconAlertTriangle"
+          hugeicons="Alert02Icon"
+          phosphor="WarningIcon"
+          remixicon="RiErrorWarningLine"
+          aria-hidden="true"
+          className="text-destructive"
+        />
+      )
+    case "moderate":
+      return (
+        <IconPlaceholder
+          lucide="CircleAlertIcon"
+          tabler="IconExclamationCircle"
+          hugeicons="AlertCircleIcon"
+          phosphor="WarningCircleIcon"
+          remixicon="RiErrorWarningLine"
+          aria-hidden="true"
+        />
+      )
+    case "minor":
+      return (
+        <IconPlaceholder
+          lucide="InfoIcon"
+          tabler="IconInfoCircle"
+          hugeicons="InformationCircleIcon"
+          phosphor="InfoIcon"
+          remixicon="RiInformationLine"
+          aria-hidden="true"
+        />
+      )
+  }
+}
+
 export function MedicationSchedule({
   medications,
   interactions = [],
@@ -242,6 +280,7 @@ export function MedicationSchedule({
   label = "Medication schedule",
   disclaimer = "Interaction warnings come only from the data this schedule is given. This is not medical advice.",
   className,
+  ...props
 }: MedicationScheduleProps) {
   const index = medicationIndex(medications)
   const doses = dosesOn(medications, date)
@@ -259,17 +298,23 @@ export function MedicationSchedule({
   const scheduled = medications.filter(({ id }) =>
     doses.some(({ medication }) => medication.id === id)
   )
-  // Every other dose each dose is too close to, for its warning note.
+  // Every other dose each dose is too close to, for its warning note, and
+  // whether any of those interactions is major.
   const conflictsFor = new Map<string, ScheduledDose[]>()
-  for (const { doses: pair } of conflicts)
-    for (const [dose, other] of [pair, [pair[1], pair[0]]] as const)
+  const majorConflicts = new Set<string>()
+  for (const { interaction, doses: pair } of conflicts)
+    for (const [dose, other] of [pair, [pair[1], pair[0]]] as const) {
       conflictsFor.set(dose.key, [...(conflictsFor.get(dose.key) ?? []), other])
+      if (interaction.severity === "major") majorConflicts.add(dose.key)
+    }
 
   return (
     <Card
+      data-slot="medication-schedule"
       role="region"
       aria-labelledby={heading}
       className={cn("w-full", className)}
+      {...props}
     >
       <CardHeader>
         <CardDescription>{label}</CardDescription>
@@ -313,7 +358,7 @@ export function MedicationSchedule({
         )}
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-5">
+      <CardContent className="@container flex flex-col gap-5">
         {active.length > 0 && (
           <div className="flex flex-col gap-2">
             {active.map((interaction) => {
@@ -330,6 +375,7 @@ export function MedicationSchedule({
                     interaction.severity === "major" && "border-destructive"
                   )}
                 >
+                  <SeverityIcon severity={interaction.severity} />
                   <AlertTitle
                     className={cn(
                       interaction.severity === "major" && "text-destructive"
@@ -369,30 +415,24 @@ export function MedicationSchedule({
           <>
             {/* A visual summary; the dose list below carries the same facts. */}
             <div aria-hidden="true" className="flex flex-col gap-2">
-              <div className="relative h-4 text-[0.7rem] text-muted-foreground sm:ml-[9.25rem]">
-                {[0, 6, 12, 18, 24].map((hour) => (
-                  <span
-                    key={hour}
-                    className={cn(
-                      "absolute top-0",
-                      hour === 0
-                        ? "left-0"
-                        : hour === 24
-                          ? "right-0"
-                          : "-translate-x-1/2"
-                    )}
-                    style={
-                      hour % 24 ? { left: `${(hour / 24) * 100}%` } : undefined
-                    }
-                  >
-                    {String(hour).padStart(2, "0")}:00
-                  </span>
-                ))}
+              {/* Labels sit on the three gridlines, so they never collide. */}
+              <div className="grid @sm:grid-cols-[8.5rem_minmax(0,1fr)] @sm:gap-3">
+                <div className="relative h-4 text-xs text-muted-foreground tabular-nums @sm:col-start-2">
+                  {[6, 12, 18].map((hour) => (
+                    <span
+                      key={hour}
+                      className="absolute top-0 -translate-x-1/2"
+                      style={{ left: `${(hour / 24) * 100}%` }}
+                    >
+                      {String(hour).padStart(2, "0")}:00
+                    </span>
+                  ))}
+                </div>
               </div>
               {scheduled.map((medication) => (
                 <div
                   key={medication.id}
-                  className="grid gap-1 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:items-center sm:gap-3"
+                  className="grid gap-1 @sm:grid-cols-[8.5rem_minmax(0,1fr)] @sm:items-center @sm:gap-3"
                 >
                   <span className="truncate text-xs font-medium">
                     {medication.name}
@@ -427,7 +467,9 @@ export function MedicationSchedule({
                               "absolute top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background",
                               status === "skipped" && "opacity-40",
                               conflictsFor.has(dose.key) &&
-                                "ring-2 ring-destructive"
+                                (majorConflicts.has(dose.key)
+                                  ? "ring-2 ring-destructive"
+                                  : "ring-2 ring-foreground")
                             )}
                             style={{
                               left: `${(dose.minutes / day) * 100}%`,
@@ -487,7 +529,14 @@ export function MedicationSchedule({
                         </p>
                       )}
                       {close && (
-                        <p className="text-xs text-destructive">
+                        <p
+                          className={cn(
+                            "text-xs font-medium",
+                            majorConflicts.has(dose.key)
+                              ? "text-destructive"
+                              : "text-foreground"
+                          )}
+                        >
                           Within the separation window of{" "}
                           {close
                             .map(

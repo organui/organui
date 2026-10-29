@@ -7,6 +7,7 @@ import {
   TraceCollapsible,
   TraceCollapsibleContent,
   TraceCollapsibleTrigger,
+  TraceDescription,
   TraceIcon,
   TraceLine,
   TraceTitle,
@@ -21,16 +22,22 @@ import { IconPlaceholder } from "@/icons/icon-placeholder"
  * The records an AI answer used, under one line that opens into the list,
  * as shadcn's Sources does with its links.
  */
+export type ClinicalSourcesProps = React.ComponentProps<"div"> & {
+  /** The records the answer used. Nothing renders without any. */
+  sources: readonly ClinicalSource[]
+  /** Shows the list open at first. */
+  defaultOpen?: boolean
+}
+
 export function ClinicalSources({
   sources,
   defaultOpen = false,
-}: {
-  sources: readonly ClinicalSource[]
-  defaultOpen?: boolean
-}) {
+  className,
+  ...props
+}: ClinicalSourcesProps) {
   if (sources.length === 0) return null
   return (
-    <Trace>
+    <Trace data-slot="clinical-sources" className={className} {...props}>
       <TraceCollapsible defaultOpen={defaultOpen}>
         <TraceCollapsibleTrigger>
           <TraceLine>
@@ -52,17 +59,28 @@ export function ClinicalSources({
         <TraceCollapsibleContent>
           <Trace>
             {sources.map((source) => {
+              const meta = clinicalSourceMeta(source)
+              // Titles wrap rather than truncate: a reviewer reads them whole.
               const line = (
-                <TraceLine>
-                  <TraceTitle>
-                    {[source.title, clinicalSourceMeta(source)]
-                      .filter(Boolean)
-                      .join(" · ")}
+                <TraceLine className="items-baseline">
+                  <TraceTitle className="whitespace-normal">
+                    {source.title}
                   </TraceTitle>
+                  {meta && (
+                    // Trace dims its description to 70%, too faint for
+                    // text a reviewer reads; muted-foreground meets AA.
+                    <TraceDescription className="text-muted-foreground">
+                      {meta}
+                    </TraceDescription>
+                  )}
                 </TraceLine>
               )
               return source.href ? (
-                <a key={source.id} href={source.href}>
+                <a
+                  key={source.id}
+                  href={source.href}
+                  className="underline-offset-4 hover:underline"
+                >
                   {line}
                 </a>
               ) : (

@@ -16,7 +16,7 @@ export type BodyMapRegion = {
   /** Reflects the path across the body's midline. */
   mirrored?: boolean
 }
-export type BodyMapProps = {
+export type BodyMapProps = React.ComponentProps<"div"> & {
   /** The selected region ids. */
   value: readonly string[]
   /** Called with the new selection. */
@@ -27,10 +27,8 @@ export type BodyMapProps = {
   views?: readonly BodyMapView[]
   /** Submits one hidden input per selected region inside a form. */
   name?: string
-  /** The accessible name of the map, and its legend. */
+  /** The accessible name of the map. */
   label?: string
-  /** Classes for the root element. */
-  className?: string
 }
 
 const width = 200
@@ -220,6 +218,7 @@ export function BodyMap({
   name,
   label = "Body map",
   className,
+  ...props
 }: BodyMapProps) {
   const helpId = React.useId()
   const statusId = React.useId()
@@ -241,6 +240,7 @@ export function BodyMap({
       role="group"
       aria-label={label}
       className={cn("flex flex-col gap-4", className)}
+      {...props}
     >
       <p id={helpId} className="sr-only">
         Each view is one tab stop. Arrow keys move between regions; Space or
@@ -261,7 +261,9 @@ export function BodyMap({
             items.find((region) => selected.has(region.id)) ??
             items[0]
           const ring = items.find((region) => region.id === focusRing)
-          const hint = items.find((region) => region.id === hovered)?.label
+          // The pointer's region, else the one keyboard focus is on.
+          const hint = (items.find((region) => region.id === hovered) ?? ring)
+            ?.label
           // Facing the viewer, the person's right side is on the left.
           const [start, end] = view === "front" ? ["R", "L"] : ["L", "R"]
           return (

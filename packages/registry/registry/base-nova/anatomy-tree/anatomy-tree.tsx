@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 // These controls belong to the tree row: its hover and selection surface
 // stays on the treeitem, independent of the consumer's Button variants.
@@ -17,9 +18,10 @@ const treeButtonVariants = cva(
   {
     variants: {
       variant: {
-        expand: "size-8 hover:bg-accent hover:text-accent-foreground",
+        expand:
+          "size-8 text-muted-foreground hover:bg-accent hover:text-accent-foreground",
         label:
-          "min-w-0 flex-1 justify-start gap-2 py-2 text-start font-normal break-words whitespace-normal group-aria-selected/row:font-semibold",
+          "min-w-0 flex-1 justify-start gap-2 py-2 text-start font-normal break-words whitespace-normal group-aria-selected/row:font-medium",
       },
     },
   }
@@ -47,7 +49,7 @@ export type AnatomyNode = {
    */
   selectable?: boolean
 }
-export type AnatomyTreeProps = {
+export type AnatomyTreeProps = React.ComponentProps<"section"> & {
   /** The tree: structures with ids, labels and children. */
   data: readonly AnatomyNode[]
   /** The selected structure id, or null. */
@@ -216,6 +218,7 @@ export function AnatomyTree({
   defaultExpandedIds = [],
   label = "Anatomy",
   className,
+  ...props
 }: AnatomyTreeProps) {
   const index = React.useMemo(() => anatomyIndex(data), [data])
   const [expanded, setExpanded] = React.useState(
@@ -295,12 +298,14 @@ export function AnatomyTree({
   }
   return (
     <section
+      data-slot="anatomy-tree"
       className={cn(
-        "rounded-xl border bg-background p-4 text-foreground",
+        "@container/anatomy-tree flex flex-col gap-3 rounded-xl border bg-background p-4 text-foreground",
         className
       )}
+      {...props}
     >
-      <FieldGroup className="mb-3">
+      <FieldGroup>
         <Field>
           <FieldLabel htmlFor={searchId}>
             Search {label.toLocaleLowerCase()}
@@ -314,7 +319,7 @@ export function AnatomyTree({
           />
         </Field>
       </FieldGroup>
-      <p id={helpId} className="mb-3 text-xs text-muted-foreground">
+      <p id={helpId} className="text-xs text-muted-foreground">
         {groupsExpand
           ? "Arrows navigate and expand. Enter selects, or expands a group. Space toggles visibility."
           : "Arrows navigate and expand. Enter selects. Space toggles visibility."}
@@ -322,6 +327,7 @@ export function AnatomyTree({
       <div
         role="tree"
         aria-label={label}
+        className="flex flex-col gap-1"
         aria-describedby={helpId}
         onFocusCapture={(event) => {
           lastFocused.current = event.target
@@ -408,7 +414,7 @@ export function AnatomyTree({
                 if (event.key === "Enter") activate(node)
                 if (event.key === " ") toggleVisibility(node)
               }}
-              className="group/row my-1 flex min-h-10 items-center gap-1 rounded-md px-2 text-sm outline-offset-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring aria-selected:bg-accent aria-selected:font-semibold aria-selected:text-accent-foreground"
+              className="group/row flex min-h-10 items-center gap-1 rounded-md px-2 text-sm outline-offset-2 hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-ring aria-selected:bg-accent aria-selected:text-accent-foreground"
               style={{ paddingInlineStart: `${(level - 1) * 1.25 + 0.5}rem` }}
             >
               {branch ? (
@@ -422,7 +428,18 @@ export function AnatomyTree({
                     toggleExpanded(node.id)
                   }}
                 >
-                  {open ? "−" : "+"}
+                  <IconPlaceholder
+                    lucide="ChevronRightIcon"
+                    tabler="IconChevronRight"
+                    hugeicons="ArrowRight01Icon"
+                    phosphor="CaretRightIcon"
+                    remixicon="RiArrowRightSLine"
+                    aria-hidden="true"
+                    className={cn(
+                      "size-4 transition-transform motion-reduce:transition-none",
+                      open && "rotate-90"
+                    )}
+                  />
                 </TreeButton>
               ) : (
                 <span className="w-8 shrink-0" />
@@ -443,10 +460,13 @@ export function AnatomyTree({
                   />
                 )}
                 <span className="min-w-0">{node.label}</span>
-              </TreeButton>{" "}
+              </TreeButton>
+              {/* Keeps the row's text "Heart Visible", which its name contains. */}{" "}
               <Button
-                variant="outline"
+                variant="ghost"
                 size="xs"
+                // Icons join the label once the tree has room for them.
+                className="justify-start text-muted-foreground group-aria-selected/row:text-accent-foreground @sm/anatomy-tree:w-20"
                 tabIndex={-1}
                 // Starts with the visible state so voice control can target it.
                 aria-label={`${state}: ${checked === true ? "hide" : "show"} ${node.label}`}
@@ -455,6 +475,29 @@ export function AnatomyTree({
                   toggleVisibility(node)
                 }}
               >
+                {checked === false ? (
+                  <IconPlaceholder
+                    lucide="EyeOffIcon"
+                    tabler="IconEyeOff"
+                    hugeicons="ViewOffIcon"
+                    phosphor="EyeSlashIcon"
+                    remixicon="RiEyeOffLine"
+                    data-icon="inline-start"
+                    aria-hidden="true"
+                    className="hidden @sm/anatomy-tree:block"
+                  />
+                ) : (
+                  <IconPlaceholder
+                    lucide="EyeIcon"
+                    tabler="IconEye"
+                    hugeicons="ViewIcon"
+                    phosphor="EyeIcon"
+                    remixicon="RiEyeLine"
+                    data-icon="inline-start"
+                    aria-hidden="true"
+                    className="hidden @sm/anatomy-tree:block"
+                  />
+                )}
                 {state}
               </Button>
             </div>

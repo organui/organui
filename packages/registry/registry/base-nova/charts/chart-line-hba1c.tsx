@@ -99,7 +99,8 @@ export function ChartLineHba1c() {
           <LineChart
             accessibilityLayer
             data={chartData}
-            margin={{ top: 20, left: 12, right: 12 }}
+            // Room for half of the first and last quarter labels.
+            margin={{ top: 20, left: 20, right: 20 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -107,7 +108,9 @@ export function ChartLineHba1c() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 2)}
+              // "Q1 2025" as "Q1 '25", so the year stays on the axis.
+              tickFormatter={(value) => value.replace(" 20", " '")}
+              interval={0}
             />
             <YAxis hide domain={[6, 9]} />
             <ReferenceLine
@@ -128,7 +131,7 @@ export function ChartLineHba1c() {
             />
             <Line
               dataKey="hba1c"
-              type="natural"
+              type="monotone"
               stroke="var(--color-hba1c)"
               strokeWidth={2}
               dot={{ fill: "var(--color-hba1c)" }}

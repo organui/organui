@@ -49,7 +49,10 @@ export type LabResult = {
   decimals?: number
 }
 
-export type LabResultsTableProps = {
+export type LabResultsTableProps = Omit<
+  React.ComponentProps<"div">,
+  "results"
+> & {
   /** The results, each with its value, unit, range and history. */
   results: readonly LabResult[]
   /** Names the table for assistive technology and shows below it. */
@@ -58,8 +61,6 @@ export type LabResultsTableProps = {
   formatDate?: (date: string) => string
   /** Shows the trend column. Defaults to true. */
   showTrend?: boolean
-  /** Classes for the root element. */
-  className?: string
 }
 
 export function resultFlag(result: LabResult): LabFlag {
@@ -312,11 +313,13 @@ export function LabResultsTable({
   formatDate = defaultFormatDate,
   showTrend = true,
   className,
+  ...props
 }: LabResultsTableProps) {
   return (
     <div
       data-slot="lab-results"
       className={cn("@container w-full min-w-0", className)}
+      {...props}
     >
       <Table>
         {caption && <TableCaption>{caption}</TableCaption>}
@@ -331,6 +334,16 @@ export function LabResultsTable({
           </TableRow>
         </TableHeader>
         <TableBody>
+          {results.length === 0 && (
+            <TableRow>
+              <TableCell
+                colSpan={showTrend ? 4 : 3}
+                className="h-24 text-center text-muted-foreground"
+              >
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
           {results.map((result) => {
             const flag = resultFlag(result)
             const unit = result.unit ? ` ${result.unit}` : ""

@@ -4,6 +4,7 @@ import { isProduction, site } from "@/lib/site"
 
 import "./globals.css"
 import { Analytics } from "@/components/analytics"
+import { HostedModels } from "@/components/hosted-models"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@workspace/ui/lib/utils"
 
@@ -66,6 +67,7 @@ export default function RootLayout({
       )}
     >
       <body>
+        <HostedModels />
         <a
           href="#main"
           className="sr-only rounded-md bg-background px-3 py-2 text-sm font-medium focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:ring-2 focus:ring-ring"

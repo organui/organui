@@ -99,10 +99,7 @@ export function ChartAreaOxygen() {
               axisLine={false}
               tickMargin={8}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Area
               dataKey="flow"
               type="step"

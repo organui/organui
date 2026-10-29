@@ -30,6 +30,18 @@
       "@/components/ui/ecg-trace": [
         "../registry/registry/base-nova/ecg-trace/ecg-trace.tsx"
       ],
+      "@/components/ui/patient-banner": [
+        "../registry/registry/base-nova/patient-banner/patient-banner.tsx"
+      ],
+      "@/components/ui/allergy-list": [
+        "../registry/registry/base-nova/allergy-list/allergy-list.tsx"
+      ],
+      "@/components/ui/problem-list": [
+        "../registry/registry/base-nova/problem-list/problem-list.tsx"
+      ],
+      "@/components/ui/news2-chart": [
+        "../registry/registry/base-nova/news2-chart/news2-chart.tsx"
+      ],
       "@/components/ui/lab-results": [
         "../registry/registry/base-nova/lab-results/lab-results.tsx"
       ],
@@ -41,6 +53,7 @@
       ],
       "@/lib/age": ["../registry/registry/base-nova/age/age.ts"],
       "@/lib/z-scores": ["../registry/registry/base-nova/z-scores/z-scores.ts"],
+      "@/lib/fhir": ["../registry/registry/base-nova/fhir/fhir.ts"],
       "@/lib/reference-ranges": [
         "../registry/registry/base-nova/reference-ranges/reference-ranges.ts"
       ],
@@ -64,6 +77,9 @@
       ],
       "@/components/patient-dashboard": [
         "../registry/registry/base-nova/blocks/dashboard-01/components/patient-dashboard.tsx"
+      ],
+      "@/components/patient-record": [
+        "../registry/registry/base-nova/blocks/dashboard-02/components/patient-record.tsx"
       ],
       "@/components/adrenals": [
         "../registry/registry/base-nova/adrenals/adrenals.tsx"
@@ -105,6 +121,9 @@
         "../registry/registry/base-nova/larynx/larynx.tsx"
       ],
       "@/components/liver": ["../registry/registry/base-nova/liver/liver.tsx"],
+      "@/components/liver-lobule": [
+        "../registry/registry/base-nova/liver-lobule/liver-lobule.tsx"
+      ],
       "@/components/lungs": ["../registry/registry/base-nova/lungs/lungs.tsx"],
       "@/components/lymph": ["../registry/registry/base-nova/lymph/lymph.tsx"],
       "@/components/muscles": [
@@ -167,6 +186,96 @@
       ],
       "@/components/vestibular": [
         "../registry/registry/base-nova/vestibular/vestibular.tsx"
+      ],
+      "@/components/condition-viewer": [
+        "../registry/registry/base-nova/condition-viewer/condition-viewer.tsx"
+      ],
+      "@/components/condition-model": [
+        "../registry/registry/base-nova/condition-viewer/condition-model.ts"
+      ],
+      "@/components/abdominal-aortic-aneurysm": [
+        "../registry/registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx"
+      ],
+      "@/components/acl-rupture": [
+        "../registry/registry/base-nova/acl-rupture/acl-rupture.tsx"
+      ],
+      "@/components/acute-angle-closure-glaucoma": [
+        "../registry/registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx"
+      ],
+      "@/components/acute-appendicitis": [
+        "../registry/registry/base-nova/acute-appendicitis/acute-appendicitis.tsx"
+      ],
+      "@/components/acute-otitis-media": [
+        "../registry/registry/base-nova/acute-otitis-media/acute-otitis-media.tsx"
+      ],
+      "@/components/addisons-disease": [
+        "../registry/registry/base-nova/addisons-disease/addisons-disease.tsx"
+      ],
+      "@/components/autoimmune-hepatitis": [
+        "../registry/registry/base-nova/autoimmune-hepatitis/autoimmune-hepatitis.tsx"
+      ],
+      "@/components/benign-prostatic-hyperplasia": [
+        "../registry/registry/base-nova/benign-prostatic-hyperplasia/benign-prostatic-hyperplasia.tsx"
+      ],
+      "@/components/breast-cancer": [
+        "../registry/registry/base-nova/breast-cancer/breast-cancer.tsx"
+      ],
+      "@/components/crohns-disease": [
+        "../registry/registry/base-nova/crohns-disease/crohns-disease.tsx"
+      ],
+      "@/components/ectopic-pregnancy": [
+        "../registry/registry/base-nova/ectopic-pregnancy/ectopic-pregnancy.tsx"
+      ],
+      "@/components/gallstone-disease": [
+        "../registry/registry/base-nova/gallstone-disease/gallstone-disease.tsx"
+      ],
+      "@/components/graves-disease": [
+        "../registry/registry/base-nova/graves-disease/graves-disease.tsx"
+      ],
+      "@/components/hodgkin-lymphoma": [
+        "../registry/registry/base-nova/hodgkin-lymphoma/hodgkin-lymphoma.tsx"
+      ],
+      "@/components/ischaemic-stroke": [
+        "../registry/registry/base-nova/ischaemic-stroke/ischaemic-stroke.tsx"
+      ],
+      "@/components/kidney-stones": [
+        "../registry/registry/base-nova/kidney-stones/kidney-stones.tsx"
+      ],
+      "@/components/laryngeal-cancer": [
+        "../registry/registry/base-nova/laryngeal-cancer/laryngeal-cancer.tsx"
+      ],
+      "@/components/lobar-pneumonia": [
+        "../registry/registry/base-nova/lobar-pneumonia/lobar-pneumonia.tsx"
+      ],
+      "@/components/lumbar-disc-herniation": [
+        "../registry/registry/base-nova/lumbar-disc-herniation/lumbar-disc-herniation.tsx"
+      ],
+      "@/components/melanoma": [
+        "../registry/registry/base-nova/melanoma/melanoma.tsx"
+      ],
+      "@/components/myasthenia-gravis": [
+        "../registry/registry/base-nova/myasthenia-gravis/myasthenia-gravis.tsx"
+      ],
+      "@/components/myocardial-infarction": [
+        "../registry/registry/base-nova/myocardial-infarction/myocardial-infarction.tsx"
+      ],
+      "@/components/oesophageal-cancer": [
+        "../registry/registry/base-nova/oesophageal-cancer/oesophageal-cancer.tsx"
+      ],
+      "@/components/pancreatic-cancer": [
+        "../registry/registry/base-nova/pancreatic-cancer/pancreatic-cancer.tsx"
+      ],
+      "@/components/peptic-ulcer-disease": [
+        "../registry/registry/base-nova/peptic-ulcer-disease/peptic-ulcer-disease.tsx"
+      ],
+      "@/components/pituitary-adenoma": [
+        "../registry/registry/base-nova/pituitary-adenoma/pituitary-adenoma.tsx"
+      ],
+      "@/components/primary-hyperparathyroidism": [
+        "../registry/registry/base-nova/primary-hyperparathyroidism/primary-hyperparathyroidism.tsx"
+      ],
+      "@/components/rheumatoid-arthritis": [
+        "../registry/registry/base-nova/rheumatoid-arthritis/rheumatoid-arthritis.tsx"
       ],
       "@/icons/icon-placeholder": ["../ui/src/components/icon-placeholder.tsx"],
       "@/components/ui/*": ["../ui/src/components/*"],

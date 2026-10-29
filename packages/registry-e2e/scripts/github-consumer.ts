@@ -79,10 +79,16 @@ export async function githubConsumer(directory: string, cli: string) {
   const ref = process.env.REGISTRY_GITHUB_REF
   if (ref && !/^[0-9a-f]{40}$/.test(ref))
     throw new Error("REGISTRY_GITHUB_REF must be a full commit SHA")
+  // Conditions are left out: shadcn resolves their base item, such as
+  // @organui/liver-lobule, from organui.com rather than this ref, so a condition
+  // on a new base can't install until that base is published. The HTTP and
+  // namespace consumers install them from the working tree.
   const organs = catalog.items.filter(
     (item) =>
       "categories" in item &&
-      (item.categories?.includes("organ") || item.categories?.includes("cell"))
+      (item.categories?.includes("organ") ||
+        item.categories?.includes("tissue") ||
+        item.categories?.includes("cell"))
   )
   if (ref)
     await put(
