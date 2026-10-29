@@ -489,11 +489,11 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "ecg-trace-live": {
-    title: "Live Stream",
-    file: "ecg-trace-live.tsx",
+  "ecg-trace-recorded": {
+    title: "Recorded Strip",
+    file: "ecg-trace-recorded.tsx",
     render: async () => {
-      const { Example } = await import("./ecg-trace-live")
+      const { Example } = await import("./ecg-trace-recorded")
       return <Example />
     },
   },

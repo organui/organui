@@ -57,9 +57,10 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "ecg-trace": [
     {
-      name: "ecg-trace-live",
-      title: "Live Stream",
-      description: "A stream sweeps like a monitor and always offers Pause.",
+      name: "ecg-trace-recorded",
+      title: "Recorded Strip",
+      description:
+        "Samples you already have are drawn once, with no sweep and no Pause.",
     },
     {
       name: "ecg-trace-paper",
