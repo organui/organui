@@ -85,9 +85,10 @@ export default function Page() {
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, along with
           shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
-          <code>card</code>, <code>empty</code> and <code>item</code> if you do
-          not have them yet. It uses your existing theme tokens and installs no
-          global styles, date library or drug database.
+          <code>button-group</code>, <code>card</code>, <code>empty</code> and{" "}
+          <code>item</code> if you do not have them yet. It uses your existing
+          theme tokens and installs no global styles, date library or drug
+          database.
         </p>
         <a className="underline" href="/r/medication-schedule.json">
           View registry item JSON

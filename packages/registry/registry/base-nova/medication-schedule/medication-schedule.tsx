@@ -5,6 +5,7 @@ import { cn } from "cn"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { ButtonGroup } from "@/components/ui/button-group"
 import {
   Card,
   CardAction,
@@ -333,37 +334,39 @@ export function MedicationSchedule({
           {title}
         </CardTitle>
         {onDateChange && (
-          <CardAction className="flex gap-1">
-            <Button
-              variant="outline"
-              size="icon-sm"
-              aria-label="Previous day"
-              onClick={() => onDateChange(addDays(date, -1))}
-            >
-              <IconPlaceholder
-                lucide="ChevronLeftIcon"
-                tabler="IconChevronLeft"
-                hugeicons="ArrowLeft01Icon"
-                phosphor="CaretLeftIcon"
-                remixicon="RiArrowLeftSLine"
-                aria-hidden="true"
-              />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon-sm"
-              aria-label="Next day"
-              onClick={() => onDateChange(addDays(date, 1))}
-            >
-              <IconPlaceholder
-                lucide="ChevronRightIcon"
-                tabler="IconChevronRight"
-                hugeicons="ArrowRight01Icon"
-                phosphor="CaretRightIcon"
-                remixicon="RiArrowRightSLine"
-                aria-hidden="true"
-              />
-            </Button>
+          <CardAction>
+            <ButtonGroup aria-label="Change day">
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label="Previous day"
+                onClick={() => onDateChange(addDays(date, -1))}
+              >
+                <IconPlaceholder
+                  lucide="ChevronLeftIcon"
+                  tabler="IconChevronLeft"
+                  hugeicons="ArrowLeft01Icon"
+                  phosphor="CaretLeftIcon"
+                  remixicon="RiArrowLeftSLine"
+                  aria-hidden="true"
+                />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label="Next day"
+                onClick={() => onDateChange(addDays(date, 1))}
+              >
+                <IconPlaceholder
+                  lucide="ChevronRightIcon"
+                  tabler="IconChevronRight"
+                  hugeicons="ArrowRight01Icon"
+                  phosphor="CaretRightIcon"
+                  remixicon="RiArrowRightSLine"
+                  aria-hidden="true"
+                />
+              </Button>
+            </ButtonGroup>
           </CardAction>
         )}
       </CardHeader>
