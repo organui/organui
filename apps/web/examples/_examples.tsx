@@ -365,6 +365,22 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "ecg-grid-color": {
+    title: "ecg-grid-color",
+    file: "ecg-grid-color.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-grid-color")
+      return <Example />
+    },
+  },
+  "ecg-grid-size": {
+    title: "ecg-grid-size",
+    file: "ecg-grid-size.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-grid-size")
+      return <Example />
+    },
+  },
   "severity-demo": {
     title: "severity",
     file: "severity-demo.tsx",

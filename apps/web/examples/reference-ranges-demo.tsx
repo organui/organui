@@ -1,5 +1,11 @@
 "use client"
 import { useState } from "react"
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CheckIcon,
+  TriangleAlertIcon,
+} from "lucide-react"
 import { Field, FieldLabel } from "@workspace/ui/components/field"
 import { Slider } from "@workspace/ui/components/slider"
 import {
@@ -12,19 +18,32 @@ import {
 // A common adult range for serum potassium, for illustration only.
 const potassium = { low: 3.5, high: 5.1, criticalLow: 2.5, criticalHigh: 6 }
 
+// Red only for critical; high and low are bold with an arrow, as lab results
+// show them, so the flag reads without colour.
+const icons: Record<RangeFlag, typeof CheckIcon | null> = {
+  "critical-low": TriangleAlertIcon,
+  low: ArrowDownIcon,
+  normal: CheckIcon,
+  high: ArrowUpIcon,
+  "critical-high": TriangleAlertIcon,
+  abnormal: TriangleAlertIcon,
+  unflagged: null,
+}
+
 const tone: Record<RangeFlag, string> = {
   "critical-low": "text-severity-critical",
-  low: "text-severity-warning",
-  normal: "text-severity-normal",
-  high: "text-severity-warning",
+  low: "",
+  normal: "font-normal text-muted-foreground",
+  high: "",
   "critical-high": "text-severity-critical",
-  abnormal: "text-severity-warning",
-  unflagged: "text-muted-foreground",
+  abnormal: "",
+  unflagged: "font-normal text-muted-foreground",
 }
 
 export function Example() {
   const [value, setValue] = useState(5.6)
   const flag = flagValue(value, potassium)
+  const Icon = icons[flag]
   return (
     <div className="flex flex-col gap-6">
       <Field>
@@ -45,7 +64,10 @@ export function Example() {
       <dl className="grid grid-cols-2 gap-4 text-sm">
         <div className="flex flex-col gap-1">
           <dt className="text-muted-foreground">Flag</dt>
-          <dd className={`text-lg font-semibold ${tone[flag]}`}>
+          <dd
+            className={`flex items-center gap-1.5 text-lg font-semibold ${tone[flag]}`}
+          >
+            {Icon && <Icon aria-hidden="true" className="size-4 shrink-0" />}
             {rangeFlagLabels[flag]}
           </dd>
         </div>

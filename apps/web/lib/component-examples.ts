@@ -31,6 +31,20 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Visibility starts with the right heart hidden, so its branch shows as partly visible.",
     },
   ],
+  "ecg-grid": [
+    {
+      name: "ecg-grid-color",
+      title: "Colour",
+      description:
+        "ecg-grid-color-<color> takes any theme colour, such as sky-500, for a monitor's palette.",
+    },
+    {
+      name: "ecg-grid-size",
+      title: "Size",
+      description:
+        "ecg-grid-size-<number> sets the small square on the spacing scale; a bolder line still falls every fifth.",
+    },
+  ],
   "organ-viewer": [
     {
       name: "organ-viewer-models",
