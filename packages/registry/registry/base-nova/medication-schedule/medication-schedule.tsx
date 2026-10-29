@@ -15,6 +15,16 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type Medication = {
@@ -486,8 +496,8 @@ export function MedicationSchedule({
               ))}
             </div>
 
-            <ol aria-label="Doses" className="flex flex-col divide-y">
-              {doses.map((dose) => {
+            <ItemGroup aria-label="Doses" className="gap-0">
+              {doses.map((dose, i) => {
                 const status = Object.hasOwn(doseStatus, dose.key)
                   ? doseStatus[dose.key]
                   : undefined
@@ -495,81 +505,89 @@ export function MedicationSchedule({
                 const close = conflictsFor.get(dose.key)
                 const { medication } = dose
                 return (
-                  <li
-                    key={dose.key}
-                    className="flex items-center gap-3 py-2 first:pt-0 last:pb-0"
-                  >
-                    <time className="w-11 shrink-0 text-sm tabular-nums">
-                      {dose.time}
-                    </time>
-                    <span
-                      aria-hidden="true"
-                      className="size-2.5 shrink-0 rounded-full"
-                      style={{ background: medication.color ?? "currentColor" }}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p
-                        className={cn(
-                          "text-sm font-medium",
-                          status === "skipped" &&
-                            "text-muted-foreground line-through"
-                        )}
-                      >
-                        {medication.name}
-                        {medication.dose && (
-                          <span className="font-normal text-muted-foreground">
-                            {" "}
-                            {medication.dose}
-                          </span>
-                        )}
-                      </p>
-                      {medication.instructions && (
-                        <p className="text-xs text-muted-foreground">
-                          {medication.instructions}
-                        </p>
-                      )}
-                      {close && (
-                        <p
+                  <React.Fragment key={dose.key}>
+                    {i > 0 && <ItemSeparator />}
+                    <Item role="listitem" size="xs" className="px-0 py-0">
+                      <ItemMedia>
+                        <time className="w-11 text-sm tabular-nums">
+                          {dose.time}
+                        </time>
+                        <span
+                          aria-hidden="true"
+                          className="size-2.5 rounded-full"
+                          style={{
+                            background: medication.color ?? "currentColor",
+                          }}
+                        />
+                      </ItemMedia>
+                      <ItemContent>
+                        {/* Never clamped: a cut-off name could be another
+                            medication's. */}
+                        <ItemTitle
                           className={cn(
-                            "text-xs font-medium",
-                            majorConflicts.has(dose.key)
-                              ? "text-destructive"
-                              : "text-foreground"
+                            "line-clamp-none",
+                            status === "skipped" &&
+                              "text-muted-foreground line-through"
                           )}
                         >
-                          Within the separation window of{" "}
-                          {close
-                            .map(
-                              (other) =>
-                                `${other.medication.name} at ${other.time}`
-                            )
-                            .join(", ")}
-                        </p>
-                      )}
-                    </div>
-                    {onDoseStatusChange ? (
-                      <Button
-                        variant={status ? "secondary" : "outline"}
-                        size="sm"
-                        className="w-20"
-                        aria-label={`${medication.name} at ${dose.time}: ${text}`}
-                        onClick={() =>
-                          onDoseStatusChange(
-                            nextDoseStatus(doseStatus, dose.key)
-                          )
-                        }
-                      >
-                        {text}
-                      </Button>
-                    ) : (
-                      <span className="text-xs text-muted-foreground">
-                        {text}
-                      </span>
-                    )}
-                  </li>
+                          {medication.name}
+                          {medication.dose && (
+                            <span className="font-normal text-muted-foreground">
+                              {" "}
+                              {medication.dose}
+                            </span>
+                          )}
+                        </ItemTitle>
+                        {medication.instructions && (
+                          <ItemDescription className="line-clamp-none">
+                            {medication.instructions}
+                          </ItemDescription>
+                        )}
+                        {close && (
+                          <p
+                            className={cn(
+                              "text-xs font-medium",
+                              majorConflicts.has(dose.key)
+                                ? "text-destructive"
+                                : "text-foreground"
+                            )}
+                          >
+                            Within the separation window of{" "}
+                            {close
+                              .map(
+                                (other) =>
+                                  `${other.medication.name} at ${other.time}`
+                              )
+                              .join(", ")}
+                          </p>
+                        )}
+                      </ItemContent>
+                      <ItemActions>
+                        {onDoseStatusChange ? (
+                          <Button
+                            variant={status ? "secondary" : "outline"}
+                            size="sm"
+                            className="w-20"
+                            aria-label={`${medication.name} at ${dose.time}: ${text}`}
+                            onClick={() =>
+                              onDoseStatusChange(
+                                nextDoseStatus(doseStatus, dose.key)
+                              )
+                            }
+                          >
+                            {text}
+                          </Button>
+                        ) : (
+                          <span className="text-xs text-muted-foreground">
+                            {text}
+                          </span>
+                        )}
+                      </ItemActions>
+                    </Item>
+                  </React.Fragment>
                 )
               })}
-            </ol>
+            </ItemGroup>
           </>
         )}
       </CardContent>
