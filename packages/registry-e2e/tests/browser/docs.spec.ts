@@ -1685,18 +1685,16 @@ test("component pages end with examples and an API reference", async ({
     ["medication-schedule", "MedicationSchedule"],
     ["news2-chart", "News2Chart"],
     ["problem-list", "ProblemList"],
-    ["allergy-list", "AllergyList"],
     ["vital-signs", "VitalSigns"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)
     await expect(
       page.getByRole("heading", { name: "Examples", level: 2 })
     ).toBeVisible()
-    // Each example has a linkable heading and a live preview. The allergy
-    // list has one while the patient banner it pairs with is coming soon.
+    // Each example has a linkable heading and a live preview.
     expect(
       await page.getByRole("heading", { level: 3 }).count()
-    ).toBeGreaterThanOrEqual(1)
+    ).toBeGreaterThanOrEqual(2)
     const props = page.getByRole("table", { name: `${component} props` })
     await expect(props).toBeVisible()
     expect(await props.getByRole("row").count()).toBeGreaterThan(2)

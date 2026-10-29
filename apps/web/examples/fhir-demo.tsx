@@ -1,6 +1,4 @@
-import { AllergyList } from "@workspace/registry/allergy-list"
 import {
-  allergiesFromFhir,
   problemsFromFhir,
   type FhirBundle,
   type FhirPatient,
@@ -72,10 +70,5 @@ const bundle: FhirBundle = {
 }
 
 export function Example() {
-  return (
-    <div className="flex w-full flex-col gap-6">
-      <AllergyList allergies={allergiesFromFhir(bundle)} caption="Allergies" />
-      <ProblemList problems={problemsFromFhir(bundle)} caption="Problems" />
-    </div>
-  )
+  return <ProblemList problems={problemsFromFhir(bundle)} caption="Problems" />
 }

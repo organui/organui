@@ -78,18 +78,12 @@ formatPercentile(zToPercentile(z!)) // "87th"`,
   },
   fhir: {
     usageLang: "tsx",
-    usage: `import { allergiesFromFhir, problemsFromFhir, type FhirBundle } from "@/lib/fhir"
-import { AllergyList } from "@/components/ui/allergy-list"
+    usage: `import { problemsFromFhir, type FhirBundle } from "@/lib/fhir"
 import { ProblemList } from "@/components/ui/problem-list"
 
 // A Bundle from your FHIR server, such as $everything on a Patient.
 export function Record({ bundle }: { bundle: FhirBundle }) {
-  return (
-    <>
-      <AllergyList allergies={allergiesFromFhir(bundle)} />
-      <ProblemList problems={problemsFromFhir(bundle)} />
-    </>
-  )
+  return <ProblemList problems={problemsFromFhir(bundle)} />
 }`,
     reference: [
       {
@@ -100,7 +94,7 @@ export function Record({ bundle }: { bundle: FhirBundle }) {
       {
         name: "allergiesFromFhir(resources | bundle)",
         description:
-          'The allergy list\'s allergies: substance, type, every reaction, the worst severity, verification, status and date. "No known allergy" (SNOMED CT 716186003) alone becomes "none-known"; no records stay undefined, as not recorded.',
+          'Allergies: substance, type, every reaction, the worst severity, verification, status and date. "No known allergy" (SNOMED CT 716186003) alone becomes "none-known"; no records stay undefined, as not recorded.',
       },
       {
         name: "problemsFromFhir(resources | bundle)",
