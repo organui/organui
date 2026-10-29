@@ -57,6 +57,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "ecg-trace": [
     {
+      name: "ecg-trace-rate",
+      title: "Heart Rate",
+      description:
+        "Change the synthetic rate and the trace, heart rate and labels follow.",
+    },
+    {
       name: "ecg-trace-recorded",
       title: "Recorded Strip",
       description:

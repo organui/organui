@@ -489,6 +489,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "ecg-trace-rate": {
+    title: "Heart Rate",
+    file: "ecg-trace-rate.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-trace-rate")
+      return <Example />
+    },
+  },
   "ecg-trace-recorded": {
     title: "Recorded Strip",
     file: "ecg-trace-recorded.tsx",
