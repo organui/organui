@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -31,20 +31,14 @@ export function Scan() {
     slice={slice} onSliceChange={setSlice} />
 }`
 
-const dicom = `import { dicomSeries, parseDicom } from "@/lib/dicom"
-
-async function openFiles(files: FileList) {
-  const images = await Promise.all(
-    [...files].map(async (file) => parseDicom(await file.arrayBuffer()))
-  )
-  // { slices, pixelSpacing, window, unit }, ordered head to foot
-  return dicomSeries(images)
-}`
-
 const images = `<ImageViewer slices={[
   { src: "/scans/axial-001.png", label: "Axial 1" },
   { src: "/scans/axial-002.png", label: "Axial 2" },
 ]} />`
+
+const examples = Object.fromEntries(
+  componentExamples["image-viewer"]!.map((example) => [example.name, example])
+)
 
 export default function Page() {
   return (
@@ -101,8 +95,7 @@ export default function Page() {
         </p>
         <CodeSnippet label="Image URL example" code={images} />
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="window-and-level">Window and level</DocsHeading>
+      <ExampleSection example={examples["image-viewer-controlled"]!}>
         <p>
           The window maps values from <code>center - width / 2</code> to{" "}
           <code>center + width / 2</code> onto black through white, using the
@@ -114,24 +107,24 @@ export default function Page() {
         </p>
         <p>
           Slice and window can each be controlled with <code>slice</code> and{" "}
-          <code>window</code> plus their change callbacks, or left to the
-          component with <code>defaultSlice</code> and{" "}
+          <code>window</code> plus their change callbacks, as here, or left to
+          the component with <code>defaultSlice</code> and{" "}
           <code>defaultWindow</code>. A ref exposes <code>setSlice</code>,{" "}
           <code>zoom</code> and <code>reset</code>.
         </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="dicom-files">DICOM files</DocsHeading>
-        <CodeSnippet label="DICOM example" code={dicom} />
+      </ExampleSection>
+      <ExampleSection example={examples["image-viewer-dicom"]!}>
         <p>
           <code>parseDicom</code> reads single-frame grayscale Part 10 files in
           implicit or explicit little endian, applies rescale slope and
           intercept, and returns the stored window, pixel spacing and patient
           position. <code>dicomSeries</code> orders a series from head to foot.
           Compressed transfer syntaxes, color and multi-frame images throw a
-          readable error; use a full DICOM toolkit for those.
+          readable error; use a full DICOM toolkit for those. Files are read in
+          the browser, and nothing is uploaded.
         </p>
-      </section>
+      </ExampleSection>
+      <ExampleSection example={examples["image-viewer-no-controls"]!} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
@@ -149,7 +142,6 @@ export default function Page() {
           replace a screen-reader usability audit.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["image-viewer"]!} />
       <PropsTable item="image-viewer" />
       <DocsPager href="/docs/components/image-viewer" />
     </div>
