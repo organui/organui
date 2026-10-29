@@ -1,7 +1,6 @@
 import type { ReactNode } from "react"
 import { AiDisclaimer } from "@workspace/registry/ai-disclaimer"
 import { DifferentialList } from "@workspace/registry/differential-list"
-import { VitalSigns } from "@workspace/registry/vital-signs"
 import {
   Card,
   CardContent,
@@ -32,18 +31,6 @@ export function ThemeShowcase() {
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 p-4 *:min-w-0 md:grid-cols-2 md:p-6 xl:grid-cols-3">
       <div className="flex flex-col gap-4">
-        <Tile title="Vital signs">
-          <VitalSigns
-            readings={{
-              heartRate: 112,
-              systolic: 116,
-              diastolic: 74,
-              spo2: 96,
-              temperature: 38.6,
-            }}
-            description="Fever example"
-          />
-        </Tile>
         <Tile title="Body map">
           <HomeBodyMap />
         </Tile>

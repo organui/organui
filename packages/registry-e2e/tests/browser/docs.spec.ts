@@ -515,12 +515,12 @@ test("the header links each section and searches the whole site", async ({
   await expect(
     dialog.getByRole("option", { name: /Explorer 02/ })
   ).toBeVisible()
-  await input.fill("vital")
-  await dialog.getByRole("option", { name: /^Vital signs/ }).click()
-  await expect(page).toHaveURL(/\/docs\/components\/vital-signs$/)
+  await input.fill("lab res")
+  await dialog.getByRole("option", { name: /^Lab results table/ }).click()
+  await expect(page).toHaveURL(/\/docs\/components\/lab-results$/)
   await expect(dialog).toBeHidden()
   await expect(
-    page.getByRole("heading", { name: "Vital signs", level: 1 })
+    page.getByRole("heading", { name: "Lab results table", level: 1 })
   ).toBeVisible()
 
   // As on shadcn/ui, phones search from the keyboard shortcut only.
@@ -1000,6 +1000,7 @@ test("a public organ component loads its attributed hosted model", async ({
 test("vital signs example switches readings and states each status", async ({
   page,
 }, info) => {
+  test.skip(comingSoon.has("vital-signs"), "Vital signs is coming soon")
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/docs/components/vital-signs")
@@ -1221,7 +1222,7 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
     "dna-helix",
     "ecg-trace",
     "vital-signs",
-  ]) {
+  ].filter((name) => !comingSoon.has(name))) {
     await page.goto(`/docs/components/${name}`)
     await expect(page.locator("html")).toHaveClass(/dark/)
     if (name === "anatomy-tree") {
@@ -1618,7 +1619,7 @@ test("themes redirect to create, which gives the commands", async ({
   ).toContainText("/r/styles/{style}/{name}.json")
   await expect(
     dialog.getByRole("region", { name: "Add OrganUI items" })
-  ).toContainText("@organui/vital-signs @organui/lab-results")
+  ).toContainText("@organui/body-map @organui/lab-results")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
 })
@@ -1695,7 +1696,6 @@ test("component pages end with examples and an API reference", async ({
     ["growth-chart", "GrowthChart"],
     ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
-    ["vital-signs", "VitalSigns"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)
     await expect(

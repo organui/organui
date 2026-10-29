@@ -149,7 +149,7 @@ export function CreateStudio({
   const [template, setTemplate] = useState<string>("next")
   const [icons, setIcons] = useState<string>("lucide")
   const [theme, setTheme] = useState<ThemeChoice>(defaultThemeChoice)
-  const [selected, setSelected] = useState<string[]>(["vital-signs"])
+  const [selected, setSelected] = useState<string[]>(["body-map"])
 
   const preset = encodePreset({
     ...DEFAULT_PRESET_CONFIG,

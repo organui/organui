@@ -8,5 +8,6 @@ export const comingSoon: ReadonlySet<string> = new Set([
   "news2-chart",
   "patient-banner",
   "problem-list",
+  "vital-signs",
 ])
 export const showComingSoon = process.env.NODE_ENV === "development"
