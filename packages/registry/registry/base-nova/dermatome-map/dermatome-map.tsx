@@ -231,18 +231,20 @@ type ViewShapes = {
   regions: Partial<Record<DermatomeId, Shape>>
 }
 
-const regionHues: Record<DermatomeRegion, number> = {
-  Cervical: 245,
-  Thoracic: 170,
-  Lumbar: 75,
-  Sacral: 350,
+// One distinct hue per region. A theme's chart colours are shades of one hue,
+// so each region has its own variable to set instead.
+const regionColors: Record<DermatomeRegion, string> = {
+  Cervical: "var(--dermatome-cervical, oklch(0.68 0.11 245))",
+  Thoracic: "var(--dermatome-thoracic, oklch(0.68 0.11 170))",
+  Lumbar: "var(--dermatome-lumbar, oklch(0.68 0.11 75))",
+  Sacral: "var(--dermatome-sacral, oklch(0.68 0.11 350))",
 }
 
-/** The default fill: one hue per region, alternating lightness by level. */
+/** The default fill: its region's colour, every other level lighter. */
 export function dermatomeColor(id: DermatomeId) {
   const index = dermatomes.findIndex((dermatome) => dermatome.id === id)
-  const { region } = dermatomes[index]!
-  return `oklch(${index % 2 ? 0.8 : 0.68} 0.11 ${regionHues[region]})`
+  const color = regionColors[dermatomes[index]!.region]
+  return index % 2 ? `color-mix(in oklch, ${color} 65%, white)` : color
 }
 
 const viewNames: Record<DermatomeView, string> = {

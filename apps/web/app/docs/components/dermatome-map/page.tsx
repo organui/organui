@@ -86,7 +86,10 @@ export default function Page() {
           Pass <code>colors</code> to fill levels with your own CSS colors, for
           example to show a sensory exam. Levels you leave out keep the default
           palette, one hue per region, which <code>dermatomeColor</code>{" "}
-          returns.
+          returns. To match your theme, set <code>--dermatome-cervical</code>,{" "}
+          <code>--dermatome-thoracic</code>, <code>--dermatome-lumbar</code> and{" "}
+          <code>--dermatome-sacral</code> in your CSS; every other level is
+          drawn lighter.
         </p>
       </ExampleSection>
       <ExampleSection example={examples["dermatome-map-back"]!}>
