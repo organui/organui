@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -35,6 +35,10 @@ export function Panel() {
     visibility={visibility} onVisibilityChange={show}
     defaultExpandedIds={["heart"]} />
 }`
+const examples = Object.fromEntries(
+  componentExamples["anatomy-tree"]!.map((example) => [example.name, example])
+)
+
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
@@ -82,11 +86,25 @@ export default function Page() {
           changes selection. Keep the selected ID in your own state and use it
           to highlight your viewer.
         </p>
+        <p>
+          Data updates retain state by ID. If the focused row disappears, focus
+          returns to a visible ancestor or the first row; an empty result
+          returns focus to search. Removed selected IDs are not automatically
+          cleared: reconcile controlled state in your application. Visibility
+          callbacks remove IDs absent from the current dataset. New leaves
+          default to visible. Expansion defaults apply only on mount; use a
+          React key to reset the component.
+        </p>
+        <p>
+          Set <code>label</code> for the accessible tree name and search label,{" "}
+          <code>className</code> for the outer container, and{" "}
+          <code>defaultExpandedIds</code> for initial expansion. Edit the
+          installed source for row styling. Semantic background, foreground,
+          muted, accent, border, and ring tokens come from your theme. No theme
+          values are overwritten.
+        </p>
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="visibility-and-search">
-          Visibility and search
-        </DocsHeading>
+      <ExampleSection example={examples["anatomy-tree-state"]!}>
         <p>
           Visibility is controlled by a map of leaf IDs to booleans. Missing
           leaves are visible. Branches summarize their leaves as visible,
@@ -100,9 +118,22 @@ export default function Page() {
           their ancestors. Matching branches do not automatically include
           nonmatching children. Search temporarily expands results and disables
           collapse; clearing it restores your previous expansion. Selection
-          remains unchanged even when its row is filtered out.
+          remains unchanged even when its row is filtered out. When{" "}
+          <code>selectedId</code> changes to a row that is not shown, for
+          example after a pick in your 3D viewer, the tree expands its ancestors
+          and scrolls the row into view within its scrolling container, without
+          moving the page.
         </p>
-      </section>
+      </ExampleSection>
+      <ExampleSection example={examples["anatomy-tree-groups"]!}>
+        <p>
+          Mark a grouping with <code>selectable: false</code> when it has no
+          single structure to select: clicking or pressing Enter on it expands
+          or collapses it instead. Give any node a <code>color</code> to show a
+          matching swatch before its label.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["anatomy-tree-hidden"]!} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
@@ -112,38 +143,6 @@ export default function Page() {
           moves to its parent. Enter selects; Space changes visibility.
           Selection and checked visibility are exposed separately to assistive
           technology.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="data-updates">Data updates</DocsHeading>
-        <p>
-          Data updates retain state by ID. If the focused row disappears, focus
-          returns to a visible ancestor or the first row; an empty result
-          returns focus to search. Removed selected IDs are not automatically
-          cleared: reconcile controlled state in your application. Visibility
-          callbacks remove IDs absent from the current dataset. New leaves
-          default to visible. Expansion defaults apply only on mount; use a
-          React key to reset the component.
-        </p>
-        <p>
-          When <code>selectedId</code> changes to a row that is not shown, for
-          example after a pick in your 3D viewer, the tree expands its ancestors
-          and scrolls the row into view within its scrolling container, without
-          moving the page. Mark a grouping with <code>selectable: false</code>{" "}
-          when it has no single structure to select: clicking or pressing Enter
-          on it expands or collapses it instead. Give any node a{" "}
-          <code>color</code> to show a matching swatch before its label.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="customize">Customize</DocsHeading>
-        <p>
-          Set <code>label</code> for the accessible tree name and search label,{" "}
-          <code>className</code> for the outer container, and{" "}
-          <code>defaultExpandedIds</code> for initial expansion. Edit the
-          installed source for row styling. Semantic background, foreground,
-          muted, accent, border, and ring tokens come from your theme. No theme
-          values are overwritten.
         </p>
         <p className="text-sm text-muted-foreground">
           Designed for small to medium in-memory trees. No virtualization, lazy
@@ -156,7 +155,6 @@ export default function Page() {
           audit.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["anatomy-tree"]!} />
       <PropsTable item="anatomy-tree" />
       <DocsPager href="/docs/components/anatomy-tree" />
     </div>
