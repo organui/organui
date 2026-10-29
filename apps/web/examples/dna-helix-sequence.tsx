@@ -11,6 +11,7 @@ export function Example() {
   const field = useId()
   const helix = (
     <DnaHelix
+      label="DNA helix of your sequence"
       sequence={sequence}
       selectedIndex={selectedIndex}
       onSelectionChange={setSelectedIndex}

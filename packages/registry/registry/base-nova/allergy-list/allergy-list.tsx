@@ -223,8 +223,13 @@ export function AllergyList({
                     </span>
                   )}
                   {allergy.recordedDate && (
-                    <span className="block text-xs whitespace-nowrap text-muted-foreground @lg:hidden">
-                      Recorded {formatDate(allergy.recordedDate)}
+                    // Only the date keeps to one line, so a narrow table
+                    // wraps before "Recorded" rather than scrolling.
+                    <span className="block text-xs text-muted-foreground @lg:hidden">
+                      Recorded{" "}
+                      <span className="whitespace-nowrap">
+                        {formatDate(allergy.recordedDate)}
+                      </span>
                     </span>
                   )}
                 </TableHead>

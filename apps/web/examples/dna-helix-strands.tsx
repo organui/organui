@@ -7,6 +7,7 @@ export function Example() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   return (
     <DnaHelix
+      label="DNA helix with its strands"
       sequence="ATGCGTACCTGAGCTTAACGGATC"
       selectedIndex={selectedIndex}
       onSelectionChange={setSelectedIndex}

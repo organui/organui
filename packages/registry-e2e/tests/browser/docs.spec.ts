@@ -985,7 +985,15 @@ test("a public organ component loads its attributed hosted model", async ({
   )
   await page.goto("/docs/components/breast")
   await loaded
-  const viewer = page.getByRole("region", { name: "Breast default example" })
+  // The demo is bare, so the credit is checked in the Controls example.
+  const example = page.getByRole("group", {
+    name: "Breast Controls example",
+    exact: true,
+  })
+  await example.scrollIntoViewIfNeeded()
+  const viewer = example.getByRole("region", {
+    name: "Breast with controls example",
+  })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
   await viewer.getByRole("button", { name: "Model credit" }).click()
@@ -1320,14 +1328,16 @@ test("scan viewer docs scroll slices, window and read DICOM files", async ({
       })
     ),
   }))
-  await page.getByLabel("Open DICOM files").setInputFiles(files)
+  await page
+    .getByLabel("Open DICOM files", { exact: true })
+    .setInputFiles(files)
   await expect(state).toHaveText("Slice 2 of 3 · Window 80 / level 40")
   await expect(
     page
       .getByRole("region", { name: "3 DICOM files" })
       .getByRole("img", { name: "3 DICOM files, slice 2 of 3, Head phantom" })
   ).toBeVisible()
-  await page.getByLabel("Open DICOM files").setInputFiles({
+  await page.getByLabel("Open DICOM files", { exact: true }).setInputFiles({
     name: "notes.txt",
     mimeType: "text/plain",
     buffer: Buffer.from("not an image"),

@@ -24,7 +24,6 @@ import {
   ItemDescription,
   ItemGroup,
   ItemMedia,
-  ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
@@ -385,6 +384,9 @@ export function MedicationSchedule({
                   variant={
                     interaction.severity === "major" ? "destructive" : "default"
                   }
+                  // The title carries the red; the description stays muted, so
+                  // it reads at 4.5:1 on any theme's destructive.
+                  className="*:data-[slot=alert-description]:text-muted-foreground"
                 >
                   <SeverityIcon severity={interaction.severity} />
                   <AlertTitle>
@@ -501,87 +503,93 @@ export function MedicationSchedule({
                 const text = statusLabel[status ?? "todo"]
                 const close = conflictsFor.get(dose.key)
                 const { medication } = dose
+                // A border, not ItemSeparator: a list may hold only its items.
                 return (
-                  <React.Fragment key={dose.key}>
-                    {i > 0 && <ItemSeparator />}
-                    <Item role="listitem" size="xs" className="px-0 py-0">
-                      <ItemMedia>
-                        <time className="w-11 text-sm tabular-nums">
-                          {dose.time}
-                        </time>
-                        <span
-                          aria-hidden="true"
-                          className="size-2.5 rounded-full"
-                          style={{
-                            background: medication.color ?? "currentColor",
-                          }}
-                        />
-                      </ItemMedia>
-                      <ItemContent>
-                        {/* Never clamped: a cut-off name could be another
+                  <Item
+                    key={dose.key}
+                    role="listitem"
+                    size="xs"
+                    className={cn(
+                      "px-0 py-0",
+                      i > 0 && "mt-2 rounded-none border-t-border pt-2"
+                    )}
+                  >
+                    <ItemMedia>
+                      <time className="w-11 text-sm tabular-nums">
+                        {dose.time}
+                      </time>
+                      <span
+                        aria-hidden="true"
+                        className="size-2.5 rounded-full"
+                        style={{
+                          background: medication.color ?? "currentColor",
+                        }}
+                      />
+                    </ItemMedia>
+                    <ItemContent>
+                      {/* Never clamped: a cut-off name could be another
                             medication's. */}
-                        <ItemTitle
+                      <ItemTitle
+                        className={cn(
+                          "line-clamp-none",
+                          status === "skipped" &&
+                            "text-muted-foreground line-through"
+                        )}
+                      >
+                        {medication.name}
+                        {medication.dose && (
+                          <span className="font-normal text-muted-foreground">
+                            {" "}
+                            {medication.dose}
+                          </span>
+                        )}
+                      </ItemTitle>
+                      {medication.instructions && (
+                        <ItemDescription className="line-clamp-none">
+                          {medication.instructions}
+                        </ItemDescription>
+                      )}
+                      {close && (
+                        <p
                           className={cn(
-                            "line-clamp-none",
-                            status === "skipped" &&
-                              "text-muted-foreground line-through"
+                            "text-xs font-medium",
+                            majorConflicts.has(dose.key)
+                              ? "text-destructive"
+                              : "text-foreground"
                           )}
                         >
-                          {medication.name}
-                          {medication.dose && (
-                            <span className="font-normal text-muted-foreground">
-                              {" "}
-                              {medication.dose}
-                            </span>
-                          )}
-                        </ItemTitle>
-                        {medication.instructions && (
-                          <ItemDescription className="line-clamp-none">
-                            {medication.instructions}
-                          </ItemDescription>
-                        )}
-                        {close && (
-                          <p
-                            className={cn(
-                              "text-xs font-medium",
-                              majorConflicts.has(dose.key)
-                                ? "text-destructive"
-                                : "text-foreground"
-                            )}
-                          >
-                            Within the separation window of{" "}
-                            {close
-                              .map(
-                                (other) =>
-                                  `${other.medication.name} at ${other.time}`
-                              )
-                              .join(", ")}
-                          </p>
-                        )}
-                      </ItemContent>
-                      <ItemActions>
-                        {onDoseStatusChange ? (
-                          <Button
-                            variant={status ? "secondary" : "outline"}
-                            size="sm"
-                            className="w-20"
-                            aria-label={`${medication.name} at ${dose.time}: ${text}`}
-                            onClick={() =>
-                              onDoseStatusChange(
-                                nextDoseStatus(doseStatus, dose.key)
-                              )
-                            }
-                          >
-                            {text}
-                          </Button>
-                        ) : (
-                          <Badge variant={status ? "secondary" : "outline"}>
-                            {text}
-                          </Badge>
-                        )}
-                      </ItemActions>
-                    </Item>
-                  </React.Fragment>
+                          Within the separation window of{" "}
+                          {close
+                            .map(
+                              (other) =>
+                                `${other.medication.name} at ${other.time}`
+                            )
+                            .join(", ")}
+                        </p>
+                      )}
+                    </ItemContent>
+                    <ItemActions>
+                      {onDoseStatusChange ? (
+                        <Button
+                          variant={status ? "secondary" : "outline"}
+                          size="sm"
+                          className="w-20"
+                          aria-label={`${medication.name} at ${dose.time}: ${text}`}
+                          onClick={() =>
+                            onDoseStatusChange(
+                              nextDoseStatus(doseStatus, dose.key)
+                            )
+                          }
+                        >
+                          {text}
+                        </Button>
+                      ) : (
+                        <Badge variant={status ? "secondary" : "outline"}>
+                          {text}
+                        </Badge>
+                      )}
+                    </ItemActions>
+                  </Item>
                 )
               })}
             </ItemGroup>
