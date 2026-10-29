@@ -9,7 +9,7 @@
     },
     "test:browser": {
       "dependsOn": ["consumers", "web#build"],
-      "env": ["CI", "BROWSER_SUITE"],
+      "env": ["CI", "BROWSER_SUITE", "BROWSER_SHARD"],
       "cache": false
     }
   }

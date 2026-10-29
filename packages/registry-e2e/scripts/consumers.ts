@@ -252,8 +252,8 @@ const pages = ["explorer", "workspace", "organs", "dashboard", "record"]
 const css = `@import "tailwindcss";
 @theme inline { --color-background:var(--background);--color-foreground:var(--foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-border:var(--border);--color-ring:var(--ring); }
 :root{--background:#f4f7fb;--foreground:#142d45;--muted:#e5edf4;--muted-foreground:#48627a;--accent:#d7e8f5;--border:#94a9ba;--ring:#225d9b;}body{background:var(--background);color:var(--foreground);font-family:system-ui;}button{cursor:pointer;}`
-// CI generates only the consumer its browser suite visits; the docs suite,
-// which visits none, takes the GitHub consumer. Unset, all of them.
+// CI generates only the consumer its browser suite visits. The GitHub consumer,
+// which no suite visits, goes with Radix, the shortest. Unset, all of them.
 const suite = process.env.BROWSER_SUITE
 try {
   // Radix is a Next.js app on a Radix style, installing every item by name
@@ -800,7 +800,7 @@ try {
     )
     await run(["bun", "run", "build"], dir)
   }
-  if (!suite || suite === "docs")
+  if (!suite || suite === "radix")
     await githubConsumer(resolve(out, "github"), shadcn)
 } finally {
   server.stop()

@@ -2,15 +2,20 @@ import { defineConfig } from "@playwright/test"
 import { fileURLToPath } from "node:url"
 const web = fileURLToPath(new URL(".", import.meta.resolve("web/package.json")))
 // CI runs one suite per job (docs, next, vite or radix): its projects and the
-// one server they visit. Unset, everything runs.
+// one server they visit. Unset, everything runs. BROWSER_SHARD ("1/3") splits
+// a suite further.
 const suite = process.env.BROWSER_SUITE
 const inSuite = (name: string) => !suite || name === suite
+const [current, total] = (process.env.BROWSER_SHARD ?? "")
+  .split("/")
+  .map(Number)
 const items =
   "**/{anatomy,organ,block,body-map,dermatome,ecg,growth,image,lab,medication,molecule,vitals}.spec.ts"
 export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: true,
   retries: 0,
+  shard: current && total ? { current, total } : null,
   // Each worker renders WebGL in software. CI runs the suite in parallel;
   // locally one worker keeps a laptop usable (see AGENTS.md).
   workers: process.env.CI ? undefined : 1,
