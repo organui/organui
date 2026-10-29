@@ -77,6 +77,13 @@ export function ItemDocs({
           lang={doc.usageLang}
         />
       </section>
+      <section className="flex flex-col gap-4">
+        <DocsHeading id="notes">Notes</DocsHeading>
+        {doc.notes.map((note) => (
+          <p key={note}>{note}</p>
+        ))}
+      </section>
+      {/* The reference comes last, as on shadcn/ui. */}
       {api ??
         (reference && doc.reference && (
           <section className="flex min-w-0 flex-col gap-4">
@@ -107,12 +114,6 @@ export function ItemDocs({
             </Table>
           </section>
         ))}
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="notes">Notes</DocsHeading>
-        {doc.notes.map((note) => (
-          <p key={note}>{note}</p>
-        ))}
-      </section>
       <DocsPager href={item.href} />
     </div>
   )
