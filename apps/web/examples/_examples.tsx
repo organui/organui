@@ -476,6 +476,15 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "dna-helix-sequence": {
+    title: "Your Own Sequence",
+    file: "dna-helix-sequence.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./dna-helix-sequence")
+      return <Example />
+    },
+  },
   "dna-helix-still": {
     title: "Still",
     file: "dna-helix-still.tsx",

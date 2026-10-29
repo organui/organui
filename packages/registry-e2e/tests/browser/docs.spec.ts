@@ -1173,6 +1173,10 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
       await heart.press("Enter")
       await expect(heart).toHaveAttribute("aria-selected", "true")
     } else if (name === "dna-helix") {
+      // The example mounts when it scrolls into view, as 3D examples do.
+      await page
+        .locator('[data-example="dna-helix-sequence"]')
+        .scrollIntoViewIfNeeded()
       const sequence = page.getByRole("textbox", { name: "Sequence, 5′ to 3′" })
       await sequence.fill("ATGC")
       await expect(sequence).toHaveValue("ATGC")

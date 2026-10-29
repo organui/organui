@@ -57,6 +57,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "dna-helix": [
     {
+      name: "dna-helix-sequence",
+      title: "Your Own Sequence",
+      description:
+        "Type a strand, 5′ to 3′, and the helix pairs it; anything but A, C, G and T shows a message instead.",
+    },
+    {
       name: "dna-helix-still",
       title: "Still",
       description: "Without rotation or the strands below, as an illustration.",
