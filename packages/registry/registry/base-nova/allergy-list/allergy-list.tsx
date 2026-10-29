@@ -216,21 +216,14 @@ export function AllergyList({
                   scope="row"
                   className="h-auto py-2 font-normal whitespace-normal"
                 >
-                  <span
-                    className={cn(
-                      "font-medium",
-                      status !== "active" && "line-through"
-                    )}
-                  >
-                    {allergy.substance}
-                  </span>
+                  <span className="font-medium">{allergy.substance}</span>
                   {details.length > 0 && (
                     <span className="block text-xs text-muted-foreground">
                       {details.join(" · ")}
                     </span>
                   )}
                   {allergy.recordedDate && (
-                    <span className="block text-xs text-muted-foreground @lg:hidden">
+                    <span className="block text-xs whitespace-nowrap text-muted-foreground @lg:hidden">
                       Recorded {formatDate(allergy.recordedDate)}
                     </span>
                   )}
