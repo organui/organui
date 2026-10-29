@@ -157,6 +157,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "medication-schedule-date-picker": {
+    title: "With a Date Picker",
+    file: "medication-schedule-date-picker.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-date-picker")
+      return <Example />
+    },
+  },
   "medication-schedule-demo": {
     title: "Medication schedule",
     file: "medication-schedule-demo.tsx",

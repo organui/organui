@@ -176,6 +176,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Doses closer than an interaction's separation are flagged on the timeline and in the list.",
     },
     {
+      name: "medication-schedule-date-picker",
+      title: "With a Date Picker",
+      description:
+        "The date is yours to control, so shadcn's Popover and Calendar can jump to any day.",
+    },
+    {
       name: "medication-schedule-simple",
       title: "One Medication",
       description: "Twice a day, with no interactions and no disclaimer.",

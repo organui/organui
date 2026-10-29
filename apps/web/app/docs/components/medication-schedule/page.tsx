@@ -150,6 +150,20 @@ export default function Page() {
           <code>disclaimer</code>. Doses across midnight are not compared.
         </p>
       </ExampleSection>
+      <ExampleSection example={examples["medication-schedule-date-picker"]!}>
+        <p>
+          The date is controlled, so a date picker is a few lines in your app
+          rather than part of the component, which installs no date library.
+          This one is shadcn&apos;s{" "}
+          <a
+            className="underline"
+            href="https://ui.shadcn.com/docs/components/date-picker"
+          >
+            Date Picker
+          </a>
+          , a Popover with a Calendar, beside the day buttons.
+        </p>
+      </ExampleSection>
       <ExampleSection example={examples["medication-schedule-simple"]!} />
       <ExampleSection example={examples["medication-schedule-read-only"]!} />
       <section className="flex flex-col gap-4">
