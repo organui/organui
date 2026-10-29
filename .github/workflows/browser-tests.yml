@@ -14,6 +14,7 @@ on:
       - "bun.lock"
       - "turbo.json"
       - ".nvmrc"
+      - "scripts/**"
       - ".github/actions/**"
       - ".github/workflows/browser-tests.yml"
   push:
