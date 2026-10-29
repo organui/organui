@@ -14,7 +14,7 @@ import { Separator } from "@workspace/ui/components/separator"
 // import { cn } from "@workspace/ui/lib/utils"
 
 // Shared by every page. Laid out after shadcn/ui's site header: navigation,
-// then search, the repository, X, the theme toggle and a link to start a project.
+// then search, the repository, X and the theme toggle.
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
