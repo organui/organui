@@ -20,33 +20,6 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "organ-viewer-without-controls": {
-    title: "Organ viewer Without Controls",
-    file: "organ-viewer-without-controls.tsx",
-    lazy: true,
-    render: async () => {
-      const { Example } = await import("./organ-viewer-without-controls")
-      return <Example />
-    },
-  },
-  "organ-viewer-controlled": {
-    title: "Organ viewer Controlled Selection",
-    file: "organ-viewer-controlled.tsx",
-    lazy: true,
-    render: async () => {
-      const { Example } = await import("./organ-viewer-controlled")
-      return <Example />
-    },
-  },
-  "organ-viewer-with-anatomy": {
-    title: "Organ viewer With Anatomy Panel",
-    file: "organ-viewer-with-anatomy.tsx",
-    lazy: true,
-    render: async () => {
-      const { Example } = await import("./organ-viewer-with-anatomy")
-      return <Example />
-    },
-  },
   "condition-viewer-demo": {
     title: "Condition viewer",
     file: "condition-viewer-demo.tsx",
