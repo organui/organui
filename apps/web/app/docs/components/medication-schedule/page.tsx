@@ -139,8 +139,8 @@ export default function Page() {
           or more medication IDs, a <code>severity</code> of <code>minor</code>,{" "}
           <code>moderate</code> or <code>major</code>, and a{" "}
           <code>summary</code>. A warning appears on days when every medication
-          it names is due, most severe first, and major ones get a destructive
-          border and title. Give <code>separationHours</code> to flag same-day
+          it names is due, most severe first, and major ones use shadcn&apos;s
+          destructive alert. Give <code>separationHours</code> to flag same-day
           doses of those medications that are closer than that, on the timeline
           and in the dose list.
         </p>

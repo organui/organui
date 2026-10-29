@@ -252,7 +252,6 @@ function SeverityIcon({ severity }: { severity: InteractionSeverity }) {
           phosphor="WarningIcon"
           remixicon="RiErrorWarningLine"
           aria-hidden="true"
-          className="text-destructive"
         />
       )
     case "moderate":
@@ -380,21 +379,15 @@ export function MedicationSchedule({
                 (conflict) => conflict.interaction === interaction
               )
               return (
-                // shadcn's destructive variant tints the description below
-                // AA contrast, so major warnings mark the border and title.
                 <Alert
                   key={interaction.id}
                   data-severity={interaction.severity}
-                  className={cn(
-                    interaction.severity === "major" && "border-destructive"
-                  )}
+                  variant={
+                    interaction.severity === "major" ? "destructive" : "default"
+                  }
                 >
                   <SeverityIcon severity={interaction.severity} />
-                  <AlertTitle
-                    className={cn(
-                      interaction.severity === "major" && "text-destructive"
-                    )}
-                  >
+                  <AlertTitle>
                     {severityLabel[interaction.severity]} interaction:{" "}
                     {names(interaction.medicationIds, index)}
                   </AlertTitle>
