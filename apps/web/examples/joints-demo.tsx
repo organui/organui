@@ -1,5 +1,5 @@
 import { Joints } from "@workspace/registry/joints"
 
 export function Example() {
-  return <Joints label="Joints default example" />
+  return <Joints label="Joints default example" controls={false} />
 }

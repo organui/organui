@@ -279,7 +279,7 @@ test("each organ has public-component demos and a concrete example registry entr
       .join("")
     const suffixes = conditionItems.includes(item)
       ? ["demo", "without-panel", "controlled"]
-      : ["demo", "without-controls", "controlled", "with-anatomy"]
+      : ["demo", "controls", "controlled", "with-anatomy"]
     for (const suffix of suffixes) {
       const name = `${item.name}-${suffix}`
       expect(definitions).toContain(`"${name}":`)

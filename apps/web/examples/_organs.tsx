@@ -9,11 +9,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "adrenals-without-controls": {
-    title: "Adrenals Without Controls",
-    file: "adrenals-without-controls.tsx",
+  "adrenals-controls": {
+    title: "Adrenals Controls",
+    file: "adrenals-controls.tsx",
     render: async () => {
-      const { Example } = await import("./adrenals-without-controls")
+      const { Example } = await import("./adrenals-controls")
       return <Example />
     },
   },
@@ -41,11 +41,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "appendix-without-controls": {
-    title: "Appendix Without Controls",
-    file: "appendix-without-controls.tsx",
+  "appendix-controls": {
+    title: "Appendix Controls",
+    file: "appendix-controls.tsx",
     render: async () => {
-      const { Example } = await import("./appendix-without-controls")
+      const { Example } = await import("./appendix-controls")
       return <Example />
     },
   },
@@ -73,11 +73,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "bladder-without-controls": {
-    title: "Bladder Without Controls",
-    file: "bladder-without-controls.tsx",
+  "bladder-controls": {
+    title: "Bladder Controls",
+    file: "bladder-controls.tsx",
     render: async () => {
-      const { Example } = await import("./bladder-without-controls")
+      const { Example } = await import("./bladder-controls")
       return <Example />
     },
   },
@@ -105,11 +105,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "brain-without-controls": {
-    title: "Brain Without Controls",
-    file: "brain-without-controls.tsx",
+  "brain-controls": {
+    title: "Brain Controls",
+    file: "brain-controls.tsx",
     render: async () => {
-      const { Example } = await import("./brain-without-controls")
+      const { Example } = await import("./brain-controls")
       return <Example />
     },
   },
@@ -137,11 +137,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "breast-without-controls": {
-    title: "Breast Without Controls",
-    file: "breast-without-controls.tsx",
+  "breast-controls": {
+    title: "Breast Controls",
+    file: "breast-controls.tsx",
     render: async () => {
-      const { Example } = await import("./breast-without-controls")
+      const { Example } = await import("./breast-controls")
       return <Example />
     },
   },
@@ -169,11 +169,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "diaphragm-without-controls": {
-    title: "Diaphragm Without Controls",
-    file: "diaphragm-without-controls.tsx",
+  "diaphragm-controls": {
+    title: "Diaphragm Controls",
+    file: "diaphragm-controls.tsx",
     render: async () => {
-      const { Example } = await import("./diaphragm-without-controls")
+      const { Example } = await import("./diaphragm-controls")
       return <Example />
     },
   },
@@ -201,11 +201,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "ear-without-controls": {
-    title: "Ear Without Controls",
-    file: "ear-without-controls.tsx",
+  "ear-controls": {
+    title: "Ear Controls",
+    file: "ear-controls.tsx",
     render: async () => {
-      const { Example } = await import("./ear-without-controls")
+      const { Example } = await import("./ear-controls")
       return <Example />
     },
   },
@@ -233,11 +233,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "esophagus-without-controls": {
-    title: "Esophagus Without Controls",
-    file: "esophagus-without-controls.tsx",
+  "esophagus-controls": {
+    title: "Esophagus Controls",
+    file: "esophagus-controls.tsx",
     render: async () => {
-      const { Example } = await import("./esophagus-without-controls")
+      const { Example } = await import("./esophagus-controls")
       return <Example />
     },
   },
@@ -265,11 +265,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "eye-without-controls": {
-    title: "Eye Without Controls",
-    file: "eye-without-controls.tsx",
+  "eye-controls": {
+    title: "Eye Controls",
+    file: "eye-controls.tsx",
     render: async () => {
-      const { Example } = await import("./eye-without-controls")
+      const { Example } = await import("./eye-controls")
       return <Example />
     },
   },
@@ -297,11 +297,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "gallbladder-without-controls": {
-    title: "Gallbladder Without Controls",
-    file: "gallbladder-without-controls.tsx",
+  "gallbladder-controls": {
+    title: "Gallbladder Controls",
+    file: "gallbladder-controls.tsx",
     render: async () => {
-      const { Example } = await import("./gallbladder-without-controls")
+      const { Example } = await import("./gallbladder-controls")
       return <Example />
     },
   },
@@ -329,11 +329,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "hair-without-controls": {
-    title: "Hair Without Controls",
-    file: "hair-without-controls.tsx",
+  "hair-controls": {
+    title: "Hair Controls",
+    file: "hair-controls.tsx",
     render: async () => {
-      const { Example } = await import("./hair-without-controls")
+      const { Example } = await import("./hair-controls")
       return <Example />
     },
   },
@@ -361,11 +361,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "heart-without-controls": {
-    title: "Heart Without Controls",
-    file: "heart-without-controls.tsx",
+  "heart-controls": {
+    title: "Heart Controls",
+    file: "heart-controls.tsx",
     render: async () => {
-      const { Example } = await import("./heart-without-controls")
+      const { Example } = await import("./heart-controls")
       return <Example />
     },
   },
@@ -393,11 +393,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "intestines-without-controls": {
-    title: "Intestines Without Controls",
-    file: "intestines-without-controls.tsx",
+  "intestines-controls": {
+    title: "Intestines Controls",
+    file: "intestines-controls.tsx",
     render: async () => {
-      const { Example } = await import("./intestines-without-controls")
+      const { Example } = await import("./intestines-controls")
       return <Example />
     },
   },
@@ -425,11 +425,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "joints-without-controls": {
-    title: "Joints Without Controls",
-    file: "joints-without-controls.tsx",
+  "joints-controls": {
+    title: "Joints Controls",
+    file: "joints-controls.tsx",
     render: async () => {
-      const { Example } = await import("./joints-without-controls")
+      const { Example } = await import("./joints-controls")
       return <Example />
     },
   },
@@ -457,11 +457,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "kidneys-without-controls": {
-    title: "Kidneys Without Controls",
-    file: "kidneys-without-controls.tsx",
+  "kidneys-controls": {
+    title: "Kidneys Controls",
+    file: "kidneys-controls.tsx",
     render: async () => {
-      const { Example } = await import("./kidneys-without-controls")
+      const { Example } = await import("./kidneys-controls")
       return <Example />
     },
   },
@@ -489,11 +489,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "larynx-without-controls": {
-    title: "Larynx Without Controls",
-    file: "larynx-without-controls.tsx",
+  "larynx-controls": {
+    title: "Larynx Controls",
+    file: "larynx-controls.tsx",
     render: async () => {
-      const { Example } = await import("./larynx-without-controls")
+      const { Example } = await import("./larynx-controls")
       return <Example />
     },
   },
@@ -521,11 +521,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "liver-without-controls": {
-    title: "Liver Without Controls",
-    file: "liver-without-controls.tsx",
+  "liver-controls": {
+    title: "Liver Controls",
+    file: "liver-controls.tsx",
     render: async () => {
-      const { Example } = await import("./liver-without-controls")
+      const { Example } = await import("./liver-controls")
       return <Example />
     },
   },
@@ -553,11 +553,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "liver-lobule-without-controls": {
-    title: "Liver lobule Without Controls",
-    file: "liver-lobule-without-controls.tsx",
+  "liver-lobule-controls": {
+    title: "Liver lobule Controls",
+    file: "liver-lobule-controls.tsx",
     render: async () => {
-      const { Example } = await import("./liver-lobule-without-controls")
+      const { Example } = await import("./liver-lobule-controls")
       return <Example />
     },
   },
@@ -585,11 +585,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "lungs-without-controls": {
-    title: "Lungs Without Controls",
-    file: "lungs-without-controls.tsx",
+  "lungs-controls": {
+    title: "Lungs Controls",
+    file: "lungs-controls.tsx",
     render: async () => {
-      const { Example } = await import("./lungs-without-controls")
+      const { Example } = await import("./lungs-controls")
       return <Example />
     },
   },
@@ -617,11 +617,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "lymph-without-controls": {
-    title: "Lymph node Without Controls",
-    file: "lymph-without-controls.tsx",
+  "lymph-controls": {
+    title: "Lymph node Controls",
+    file: "lymph-controls.tsx",
     render: async () => {
-      const { Example } = await import("./lymph-without-controls")
+      const { Example } = await import("./lymph-controls")
       return <Example />
     },
   },
@@ -649,11 +649,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "muscles-without-controls": {
-    title: "Muscles Without Controls",
-    file: "muscles-without-controls.tsx",
+  "muscles-controls": {
+    title: "Muscles Controls",
+    file: "muscles-controls.tsx",
     render: async () => {
-      const { Example } = await import("./muscles-without-controls")
+      const { Example } = await import("./muscles-controls")
       return <Example />
     },
   },
@@ -681,11 +681,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "nails-without-controls": {
-    title: "Nails Without Controls",
-    file: "nails-without-controls.tsx",
+  "nails-controls": {
+    title: "Nails Controls",
+    file: "nails-controls.tsx",
     render: async () => {
-      const { Example } = await import("./nails-without-controls")
+      const { Example } = await import("./nails-controls")
       return <Example />
     },
   },
@@ -713,11 +713,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "nerves-without-controls": {
-    title: "Nerves Without Controls",
-    file: "nerves-without-controls.tsx",
+  "nerves-controls": {
+    title: "Nerves Controls",
+    file: "nerves-controls.tsx",
     render: async () => {
-      const { Example } = await import("./nerves-without-controls")
+      const { Example } = await import("./nerves-controls")
       return <Example />
     },
   },
@@ -745,11 +745,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "nose-without-controls": {
-    title: "Nose Without Controls",
-    file: "nose-without-controls.tsx",
+  "nose-controls": {
+    title: "Nose Controls",
+    file: "nose-controls.tsx",
     render: async () => {
-      const { Example } = await import("./nose-without-controls")
+      const { Example } = await import("./nose-controls")
       return <Example />
     },
   },
@@ -777,11 +777,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "pancreas-without-controls": {
-    title: "Pancreas Without Controls",
-    file: "pancreas-without-controls.tsx",
+  "pancreas-controls": {
+    title: "Pancreas Controls",
+    file: "pancreas-controls.tsx",
     render: async () => {
-      const { Example } = await import("./pancreas-without-controls")
+      const { Example } = await import("./pancreas-controls")
       return <Example />
     },
   },
@@ -809,11 +809,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "parathyroid-without-controls": {
-    title: "Parathyroid Without Controls",
-    file: "parathyroid-without-controls.tsx",
+  "parathyroid-controls": {
+    title: "Parathyroid Controls",
+    file: "parathyroid-controls.tsx",
     render: async () => {
-      const { Example } = await import("./parathyroid-without-controls")
+      const { Example } = await import("./parathyroid-controls")
       return <Example />
     },
   },
@@ -841,11 +841,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "pharynx-without-controls": {
-    title: "Pharynx Without Controls",
-    file: "pharynx-without-controls.tsx",
+  "pharynx-controls": {
+    title: "Pharynx Controls",
+    file: "pharynx-controls.tsx",
     render: async () => {
-      const { Example } = await import("./pharynx-without-controls")
+      const { Example } = await import("./pharynx-controls")
       return <Example />
     },
   },
@@ -873,11 +873,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "pineal-without-controls": {
-    title: "Pineal Without Controls",
-    file: "pineal-without-controls.tsx",
+  "pineal-controls": {
+    title: "Pineal Controls",
+    file: "pineal-controls.tsx",
     render: async () => {
-      const { Example } = await import("./pineal-without-controls")
+      const { Example } = await import("./pineal-controls")
       return <Example />
     },
   },
@@ -905,11 +905,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "pituitary-without-controls": {
-    title: "Pituitary Without Controls",
-    file: "pituitary-without-controls.tsx",
+  "pituitary-controls": {
+    title: "Pituitary Controls",
+    file: "pituitary-controls.tsx",
     render: async () => {
-      const { Example } = await import("./pituitary-without-controls")
+      const { Example } = await import("./pituitary-controls")
       return <Example />
     },
   },
@@ -937,11 +937,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "prostate-without-controls": {
-    title: "Prostate Without Controls",
-    file: "prostate-without-controls.tsx",
+  "prostate-controls": {
+    title: "Prostate Controls",
+    file: "prostate-controls.tsx",
     render: async () => {
-      const { Example } = await import("./prostate-without-controls")
+      const { Example } = await import("./prostate-controls")
       return <Example />
     },
   },
@@ -969,11 +969,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "salivary-glands-without-controls": {
-    title: "Salivary glands Without Controls",
-    file: "salivary-glands-without-controls.tsx",
+  "salivary-glands-controls": {
+    title: "Salivary glands Controls",
+    file: "salivary-glands-controls.tsx",
     render: async () => {
-      const { Example } = await import("./salivary-glands-without-controls")
+      const { Example } = await import("./salivary-glands-controls")
       return <Example />
     },
   },
@@ -1001,11 +1001,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "skeleton-without-controls": {
-    title: "Skeleton Without Controls",
-    file: "skeleton-without-controls.tsx",
+  "skeleton-controls": {
+    title: "Skeleton Controls",
+    file: "skeleton-controls.tsx",
     render: async () => {
-      const { Example } = await import("./skeleton-without-controls")
+      const { Example } = await import("./skeleton-controls")
       return <Example />
     },
   },
@@ -1033,11 +1033,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "skin-without-controls": {
-    title: "Skin Without Controls",
-    file: "skin-without-controls.tsx",
+  "skin-controls": {
+    title: "Skin Controls",
+    file: "skin-controls.tsx",
     render: async () => {
-      const { Example } = await import("./skin-without-controls")
+      const { Example } = await import("./skin-controls")
       return <Example />
     },
   },
@@ -1065,11 +1065,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "spinal-cord-without-controls": {
-    title: "Spinal cord Without Controls",
-    file: "spinal-cord-without-controls.tsx",
+  "spinal-cord-controls": {
+    title: "Spinal cord Controls",
+    file: "spinal-cord-controls.tsx",
     render: async () => {
-      const { Example } = await import("./spinal-cord-without-controls")
+      const { Example } = await import("./spinal-cord-controls")
       return <Example />
     },
   },
@@ -1097,11 +1097,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "spleen-without-controls": {
-    title: "Spleen Without Controls",
-    file: "spleen-without-controls.tsx",
+  "spleen-controls": {
+    title: "Spleen Controls",
+    file: "spleen-controls.tsx",
     render: async () => {
-      const { Example } = await import("./spleen-without-controls")
+      const { Example } = await import("./spleen-controls")
       return <Example />
     },
   },
@@ -1129,11 +1129,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "stomach-without-controls": {
-    title: "Stomach Without Controls",
-    file: "stomach-without-controls.tsx",
+  "stomach-controls": {
+    title: "Stomach Controls",
+    file: "stomach-controls.tsx",
     render: async () => {
-      const { Example } = await import("./stomach-without-controls")
+      const { Example } = await import("./stomach-controls")
       return <Example />
     },
   },
@@ -1161,11 +1161,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "teeth-without-controls": {
-    title: "Teeth Without Controls",
-    file: "teeth-without-controls.tsx",
+  "teeth-controls": {
+    title: "Teeth Controls",
+    file: "teeth-controls.tsx",
     render: async () => {
-      const { Example } = await import("./teeth-without-controls")
+      const { Example } = await import("./teeth-controls")
       return <Example />
     },
   },
@@ -1193,11 +1193,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "thymus-without-controls": {
-    title: "Thymus Without Controls",
-    file: "thymus-without-controls.tsx",
+  "thymus-controls": {
+    title: "Thymus Controls",
+    file: "thymus-controls.tsx",
     render: async () => {
-      const { Example } = await import("./thymus-without-controls")
+      const { Example } = await import("./thymus-controls")
       return <Example />
     },
   },
@@ -1225,11 +1225,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "thyroid-without-controls": {
-    title: "Thyroid Without Controls",
-    file: "thyroid-without-controls.tsx",
+  "thyroid-controls": {
+    title: "Thyroid Controls",
+    file: "thyroid-controls.tsx",
     render: async () => {
-      const { Example } = await import("./thyroid-without-controls")
+      const { Example } = await import("./thyroid-controls")
       return <Example />
     },
   },
@@ -1257,11 +1257,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "tongue-without-controls": {
-    title: "Tongue Without Controls",
-    file: "tongue-without-controls.tsx",
+  "tongue-controls": {
+    title: "Tongue Controls",
+    file: "tongue-controls.tsx",
     render: async () => {
-      const { Example } = await import("./tongue-without-controls")
+      const { Example } = await import("./tongue-controls")
       return <Example />
     },
   },
@@ -1289,11 +1289,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "uterus-without-controls": {
-    title: "Uterus Without Controls",
-    file: "uterus-without-controls.tsx",
+  "uterus-controls": {
+    title: "Uterus Controls",
+    file: "uterus-controls.tsx",
     render: async () => {
-      const { Example } = await import("./uterus-without-controls")
+      const { Example } = await import("./uterus-controls")
       return <Example />
     },
   },
@@ -1321,11 +1321,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "vessels-without-controls": {
-    title: "Vessels Without Controls",
-    file: "vessels-without-controls.tsx",
+  "vessels-controls": {
+    title: "Vessels Controls",
+    file: "vessels-controls.tsx",
     render: async () => {
-      const { Example } = await import("./vessels-without-controls")
+      const { Example } = await import("./vessels-controls")
       return <Example />
     },
   },
@@ -1353,11 +1353,11 @@ export const organExamples = {
       return <Example />
     },
   },
-  "vestibular-without-controls": {
-    title: "Vestibular system Without Controls",
-    file: "vestibular-without-controls.tsx",
+  "vestibular-controls": {
+    title: "Vestibular system Controls",
+    file: "vestibular-controls.tsx",
     render: async () => {
-      const { Example } = await import("./vestibular-without-controls")
+      const { Example } = await import("./vestibular-controls")
       return <Example />
     },
   },

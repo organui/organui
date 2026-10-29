@@ -53,12 +53,12 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "cell-without-controls": {
-    title: "Cell Without Controls",
-    file: "cell-without-controls.tsx",
+  "cell-controls": {
+    title: "Cell Controls",
+    file: "cell-controls.tsx",
     lazy: true,
     render: async () => {
-      const { Example } = await import("./cell-without-controls")
+      const { Example } = await import("./cell-controls")
       return <Example />
     },
   },

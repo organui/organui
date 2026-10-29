@@ -1,5 +1,5 @@
 import { SpinalCord } from "@workspace/registry/spinal-cord"
 
 export function Example() {
-  return <SpinalCord label="Spinal cord default example" />
+  return <SpinalCord label="Spinal cord default example" controls={false} />
 }

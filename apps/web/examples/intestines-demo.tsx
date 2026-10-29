@@ -1,5 +1,5 @@
 import { Intestines } from "@workspace/registry/intestines"
 
 export function Example() {
-  return <Intestines label="Intestines default example" />
+  return <Intestines label="Intestines default example" controls={false} />
 }

@@ -1,5 +1,5 @@
 import { Kidneys } from "@workspace/registry/kidneys"
 
 export function Example() {
-  return <Kidneys label="Kidneys default example" />
+  return <Kidneys label="Kidneys default example" controls={false} />
 }

@@ -747,17 +747,15 @@ test("organ pages pair the viewer with the anatomy tree", async ({
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
   const demo = page.getByRole("group", { name: "Heart example", exact: true })
-  await expect(
-    demo.getByRole("toolbar", { name: "View controls" })
-  ).toBeVisible()
+  // The demo is bare; the Controls example below shows the toolbar.
+  await expect(demo.locator("canvas")).toHaveCount(1)
+  await expect(demo.getByRole("toolbar")).toHaveCount(0)
   await demo.getByRole("button", { name: "View Code", exact: true }).click()
   await expect(demo.getByLabel("Heart code")).toContainText(
     'from "@/components/heart"'
   )
   await expect(demo.getByLabel("Heart code")).toContainText("<Heart")
-  await expect(demo.getByLabel("Heart code")).not.toContainText(
-    "controls={false}"
-  )
+  await expect(demo.getByLabel("Heart code")).toContainText("controls={false}")
   // Revealing code preserves the live default demo and its context.
   await expect(demo.locator("canvas")).toHaveCount(1)
   const headings = await page
@@ -766,26 +764,26 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   expect(headings.indexOf("Installation")).toBeLessThan(
     headings.indexOf("Usage")
   )
-  expect(headings.indexOf("Usage")).toBeLessThan(
-    headings.indexOf("Without Controls")
-  )
-  const withoutControls = page.getByRole("group", {
-    name: "Heart Without Controls example",
+  expect(headings.indexOf("Usage")).toBeLessThan(headings.indexOf("Controls"))
+  const withControls = page.getByRole("group", {
+    name: "Heart Controls example",
     exact: true,
   })
-  await withoutControls.scrollIntoViewIfNeeded()
+  await withControls.scrollIntoViewIfNeeded()
   await expect(
-    withoutControls.getByRole("region", {
-      name: "Heart without controls example",
+    withControls.getByRole("region", {
+      name: "Heart with controls example",
     })
   ).toBeVisible()
-  await expect(withoutControls.getByRole("toolbar")).toHaveCount(0)
-  await withoutControls
+  await expect(
+    withControls.getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  await withControls
     .getByRole("button", { name: "View Code", exact: true })
     .click()
   await expect(
-    withoutControls.getByLabel("Heart Without Controls code")
-  ).toContainText("controls={false}")
+    withControls.getByLabel("Heart Controls code")
+  ).not.toContainText("controls={false}")
   const controlled = page.getByRole("group", {
     name: "Heart Controlled Selection example",
     exact: true,

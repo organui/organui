@@ -1,5 +1,5 @@
 import { Nose } from "@workspace/registry/nose"
 
 export function Example() {
-  return <Nose label="Nose default example" />
+  return <Nose label="Nose default example" controls={false} />
 }

@@ -1,5 +1,5 @@
 import { Ear } from "@workspace/registry/ear"
 
 export function Example() {
-  return <Ear label="Ear default example" />
+  return <Ear label="Ear default example" controls={false} />
 }

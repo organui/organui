@@ -1,5 +1,5 @@
 import { Pineal } from "@workspace/registry/pineal"
 
 export function Example() {
-  return <Pineal label="Pineal default example" />
+  return <Pineal label="Pineal default example" controls={false} />
 }
