@@ -42,7 +42,14 @@ export function PropsTable({ item }: { item: keyof typeof api }) {
               </TableCell>
               <TableCell className="whitespace-normal">
                 <code className="break-words">{prop.type}</code>
-                <p className="mt-1 text-muted-foreground">{prop.description}</p>
+                <p className="mt-1 text-muted-foreground">
+                  {/* `code` in a JSDoc comment shows as code. */}
+                  {prop.description
+                    .split(/`([^`]+)`/)
+                    .map((part, index) =>
+                      index % 2 ? <code key={index}>{part}</code> : part
+                    )}
+                </p>
               </TableCell>
               <TableCell className="align-top">
                 {prop.required ? (

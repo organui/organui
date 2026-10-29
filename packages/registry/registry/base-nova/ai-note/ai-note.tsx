@@ -25,11 +25,14 @@ export type AiNoteSection = {
 }
 
 export type AiNoteProps = React.ComponentProps<"article"> & {
-  /** The note's sections, in order. */
+  /**
+   * The note's sections, in order: `{ id, title, content }`, where content
+   * mixes plain strings, which join claims, with claims: `{ text, sources }`.
+   */
   sections: readonly AiNoteSection[]
   /** The records the note may cite; the list under it shows those it does. */
   sources?: readonly ClinicalSource[]
-  /** Marks claims without a source. Defaults to true. */
+  /** Underlines claims without a source and says so to screen readers. */
   markUnsupported?: boolean
   /** Names the note for assistive technology. */
   label?: string

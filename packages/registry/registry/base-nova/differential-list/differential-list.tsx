@@ -34,7 +34,11 @@ export type Differential = {
 }
 
 export type DifferentialListProps = React.ComponentProps<"div"> & {
-  /** The suggested diagnoses, in any order; they show most confident first. */
+  /**
+   * The suggested diagnoses, `{ id, name, confidence, code?, supporting?,
+   * against? }`, with confidence from 0 to 1. In any order; they show most
+   * confident first.
+   */
   items: readonly Differential[]
   /** Names the list for assistive technology. */
   label?: string

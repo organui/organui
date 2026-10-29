@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@workspace/ui/components/table"
+import type { ReactNode } from "react"
 import { CodeSnippet } from "@/components/code-snippet"
 import { ComponentInstallation } from "@/components/component-installation"
 import { ComponentPreview } from "@/components/component-preview"
@@ -17,8 +18,8 @@ import { DocsPager } from "@/components/docs-pager"
 export type ItemDoc = {
   usage: string
   usageLang: "tsx" | "css"
-  // Functions, props or classes, by `name`.
-  reference: { name: string; description: string }[]
+  // Functions, props or classes, by `name`, when no generated table is given.
+  reference?: { name: string; description: string }[]
   notes: string[]
 }
 
@@ -28,6 +29,7 @@ export function ItemDocs({
   item,
   doc,
   reference,
+  api,
   installNote,
   css,
   oneLibrary,
@@ -41,7 +43,9 @@ export function ItemDocs({
   }
   doc: ItemDoc
   // The reference table's heading and first column, such as "Props".
-  reference: { heading: string; column: string; caption: string }
+  reference?: { heading: string; column: string; caption: string }
+  // A generated API table, such as PropsTable, in place of the reference.
+  api?: ReactNode
   installNote: string
   // CSS the item adds, for its manual installation.
   css?: string
@@ -73,33 +77,36 @@ export function ItemDocs({
           lang={doc.usageLang}
         />
       </section>
-      <section className="flex min-w-0 flex-col gap-4">
-        <DocsHeading id="reference">{reference.heading}</DocsHeading>
-        <Table
-          tabIndex={0}
-          className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
-        >
-          <TableCaption>{reference.caption}</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{reference.column}</TableHead>
-              <TableHead>Description</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {doc.reference.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell>
-                  <code>{row.name}</code>
-                </TableCell>
-                <TableCell className="whitespace-normal">
-                  {row.description}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </section>
+      {api ??
+        (reference && doc.reference && (
+          <section className="flex min-w-0 flex-col gap-4">
+            <DocsHeading id="reference">{reference.heading}</DocsHeading>
+            <Table
+              tabIndex={0}
+              className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+            >
+              <TableCaption>{reference.caption}</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{reference.column}</TableHead>
+                  <TableHead>Description</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {doc.reference.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell>
+                      <code>{row.name}</code>
+                    </TableCell>
+                    <TableCell className="whitespace-normal">
+                      {row.description}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </section>
+        ))}
       <section className="flex flex-col gap-4">
         <DocsHeading id="notes">Notes</DocsHeading>
         {doc.notes.map((note) => (

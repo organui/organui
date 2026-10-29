@@ -30,7 +30,11 @@ export type ReviewDecision = {
 }
 
 export type ClinicianReviewProps = React.ComponentProps<"div"> & {
-  /** The current decision; store it with the content it reviews. */
+  /**
+   * The current decision, `{ status, reviewer?, at?, comment? }`, where status
+   * is pending, approved, changes-requested or rejected. Store it with the
+   * content it reviews.
+   */
   value: ReviewDecision
   /** Called with each new decision, or with pending after an undo. */
   onValueChange: (decision: ReviewDecision) => void

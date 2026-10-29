@@ -72,7 +72,7 @@ export default async function Page({ params }: Props) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {doc.reference.map((row) => (
+            {doc.reference?.map((row) => (
               <TableRow key={row.name}>
                 <TableCell>
                   <code>{row.name}</code>
