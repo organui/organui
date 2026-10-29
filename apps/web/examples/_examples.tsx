@@ -106,6 +106,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "body-map-value": {
+    title: "Selected Regions",
+    file: "body-map-value.tsx",
+    render: async () => {
+      const { Example } = await import("./body-map-value")
+      return <Example />
+    },
+  },
   "body-map-demo": {
     title: "Body map",
     file: "body-map-demo.tsx",

@@ -19,6 +19,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "body-map": [
     {
+      name: "body-map-value",
+      title: "Selected Regions",
+      description:
+        "The value is an array of region IDs, yours to store with the rest of the record.",
+    },
+    {
       name: "body-map-front",
       title: "One View",
       description: "Show only the front, for forms that ask about one side.",
