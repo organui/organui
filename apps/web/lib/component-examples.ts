@@ -170,6 +170,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Step through the days or mark doses taken or skipped, and the callbacks hand each change to your app.",
     },
     {
+      name: "medication-schedule-interactions",
+      title: "Interactions",
+      description:
+        "Doses closer than an interaction's separation are flagged on the timeline and in the list.",
+    },
+    {
       name: "medication-schedule-simple",
       title: "One Medication",
       description: "Twice a day, with no interactions and no disclaimer.",

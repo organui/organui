@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -44,6 +44,13 @@ export function Schedule() {
     interactions={interactions} date={date} onDateChange={setDate}
     doseStatus={doseStatus} onDoseStatusChange={setDoseStatus} />
 }`
+
+const examples = Object.fromEntries(
+  componentExamples["medication-schedule"]!.map((example) => [
+    example.name,
+    example,
+  ])
+)
 
 export default function Page() {
   return (
@@ -104,9 +111,16 @@ export default function Page() {
           to mark the current time on the timeline; the component never reads
           the clock itself.
         </p>
+        <p>
+          Set <code>label</code> for the accessible name, <code>locale</code>{" "}
+          for the date heading, <code>className</code> for the outer container
+          and <code>color</code> on a medication for its swatch and markers. The
+          helpers <code>dosesOn</code>, <code>activeInteractions</code>,{" "}
+          <code>doseConflicts</code> and <code>nextDoseStatus</code> are
+          exported for your own views, such as reminders or a weekly summary.
+        </p>
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="dose-tracking">Dose tracking</DocsHeading>
+      <ExampleSection example={examples["medication-schedule-tracking"]!}>
         <p>
           Dose status is a map from dose keys, such as{" "}
           <code>levothyroxine@2026-10-19T07:00</code>, to{" "}
@@ -116,17 +130,8 @@ export default function Page() {
           taken, to skipped and back; the callback receives the whole new map
           for you to store. Without it the status is shown as text.
         </p>
-        <p>
-          The timeline is a visual summary and is hidden from assistive
-          technology. The ordered dose list carries the same times, names,
-          statuses and warnings, and each status button names its medication and
-          time.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="interaction-warnings">
-          Interaction warnings
-        </DocsHeading>
+      </ExampleSection>
+      <ExampleSection example={examples["medication-schedule-interactions"]!}>
         <p>
           The component ships no drug database and makes no clinical judgement.
           It shows only the <code>interactions</code> you pass, each naming two
@@ -143,23 +148,22 @@ export default function Page() {
           the default disclaimer or replace it with your own through{" "}
           <code>disclaimer</code>. Doses across midnight are not compared.
         </p>
-      </section>
+      </ExampleSection>
+      <ExampleSection example={examples["medication-schedule-simple"]!} />
+      <ExampleSection example={examples["medication-schedule-read-only"]!} />
       <section className="flex flex-col gap-4">
-        <DocsHeading id="customize">Customize</DocsHeading>
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
-          Set <code>label</code> for the accessible name, <code>locale</code>{" "}
-          for the date heading, <code>className</code> for the outer container
-          and <code>color</code> on a medication for its swatch and markers. The
-          helpers <code>dosesOn</code>, <code>activeInteractions</code>,{" "}
-          <code>doseConflicts</code> and <code>nextDoseStatus</code> are
-          exported for your own views, such as reminders or a weekly summary.
+          The timeline is a visual summary and is hidden from assistive
+          technology. The ordered dose list carries the same times, names,
+          statuses and warnings, and each status button names its medication and
+          time.
         </p>
         <p className="text-sm text-muted-foreground">
           A display component, not a medical device. No reminders,
           notifications, as-needed dosing, titration or dose calculations.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["medication-schedule"]!} />
       <PropsTable item="medication-schedule" />
       <DocsPager href="/docs/components/medication-schedule" />
     </div>

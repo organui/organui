@@ -149,6 +149,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "medication-schedule-interactions": {
+    title: "Interactions",
+    file: "medication-schedule-interactions.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-interactions")
+      return <Example />
+    },
+  },
   "medication-schedule-demo": {
     title: "Medication schedule",
     file: "medication-schedule-demo.tsx",
