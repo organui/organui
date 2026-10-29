@@ -173,7 +173,8 @@ export function ClinicianReview({
             {reviewStatusLabels[value.status]}
           </Badge>
         </ItemTitle>
-        <ItemDescription>
+        {/* Never clamped: who reviewed it, and when, must read in full. */}
+        <ItemDescription className="line-clamp-none">
           {decided
             ? [
                 value.reviewer && `By ${value.reviewer}`,
