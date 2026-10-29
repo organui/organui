@@ -1698,13 +1698,11 @@ test("component pages end with examples and an API reference", async ({
     ["medication-schedule", "MedicationSchedule"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)
-    await expect(
-      page.getByRole("heading", { name: "Examples", level: 2 })
-    ).toBeVisible()
-    // Each example has a linkable heading and a live preview.
-    expect(
-      await page.getByRole("heading", { level: 3 }).count()
-    ).toBeGreaterThanOrEqual(2)
+    // As on shadcn/ui, each example is its own section with a linkable
+    // heading and a live preview, after the page's own demo.
+    await expect
+      .poll(() => page.locator("[data-example]").count())
+      .toBeGreaterThanOrEqual(3)
     const props = page.getByRole("table", { name: `${component} props` })
     await expect(props).toBeVisible()
     expect(await props.getByRole("row").count()).toBeGreaterThan(2)
