@@ -4,6 +4,13 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "@/components/ui/item"
 import { toggleVariants } from "@/components/ui/toggle"
 
 export type DermatomeView = "front" | "back"
@@ -642,37 +649,43 @@ export function DermatomeMap({
               </div>
             ))}
           </div>
-          <div className="flex min-h-36 flex-col gap-1.5 rounded-lg border p-3 text-sm">
-            {shown ? (
-              <>
-                <p className="font-medium">
-                  {shown.id}{" "}
-                  <span className="font-normal text-muted-foreground">
-                    {shown.region}
-                  </span>
-                </p>
-                <p>{shown.area}</p>
-                <p className="text-muted-foreground">
-                  Key sensory point: {shown.keyPoint}
-                </p>
-              </>
-            ) : (
-              <p className="text-muted-foreground">
-                Select a level, or a region on the body, to see the skin a
-                spinal nerve supplies.
-              </p>
-            )}
+          {/* A fixed height, so previewing a level does not move the page. */}
+          <Item variant="outline" className="min-h-36 items-start">
+            <ItemContent>
+              {shown ? (
+                <>
+                  <ItemTitle>
+                    {shown.id}
+                    <span className="font-normal text-muted-foreground">
+                      {shown.region}
+                    </span>
+                  </ItemTitle>
+                  <ItemDescription className="line-clamp-none">
+                    {shown.area}
+                  </ItemDescription>
+                  <ItemDescription className="line-clamp-none">
+                    Key sensory point: {shown.keyPoint}
+                  </ItemDescription>
+                </>
+              ) : (
+                <ItemDescription className="line-clamp-none">
+                  Select a level, or a region on the body, to see the skin a
+                  spinal nerve supplies.
+                </ItemDescription>
+              )}
+            </ItemContent>
             {selectedId && (
-              <Button
-                variant="outline"
-                size="sm"
-                className="mt-auto self-start"
-                onClick={() => onSelectionChange(null)}
-              >
-                Clear selection
-              </Button>
+              <ItemActions>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onSelectionChange(null)}
+                >
+                  Clear selection
+                </Button>
+              </ItemActions>
             )}
-          </div>
+          </Item>
         </div>
       </div>
     </div>

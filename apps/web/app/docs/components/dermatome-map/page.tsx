@@ -59,8 +59,9 @@ export default function Page() {
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, along with
-          shadcn&apos;s <code>button</code> if you do not have it yet. The
-          figures are inline SVG, so there are no images or 3D packages to load.
+          shadcn&apos;s <code>button</code>, <code>item</code> and{" "}
+          <code>toggle</code> if you do not have them yet. The figures are
+          inline SVG, so there are no images or 3D packages to load.
         </p>
         <a className="underline" href="/r/dermatome-map.json">
           View registry item JSON
