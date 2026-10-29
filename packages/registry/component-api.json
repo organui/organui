@@ -942,10 +942,10 @@
       },
       {
         "name": "onSelectionChange",
-        "type": "(id: string) => void",
+        "type": "(id: string | null) => void",
         "required": false,
         "default": null,
-        "description": "Called with the structure a reader selects."
+        "description": "Called with the structure a reader selects, or null when the view is reset."
       },
       {
         "name": "visibility",
