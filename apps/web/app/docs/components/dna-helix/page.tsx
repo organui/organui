@@ -57,9 +57,9 @@ export default function Page() {
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your components directory and adds three.js,
-          plus shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
-          <code>popover</code> and <code>tooltip</code>. Its buttons are
-          composed with Base UI&apos;s <code>render</code> prop;{" "}
+          plus shadcn&apos;s <code>alert</code>, <code>button</code> and{" "}
+          <code>tooltip</code>. Its buttons are composed with Base UI&apos;s{" "}
+          <code>render</code> prop;{" "}
           <Link href="/docs/base-ui" className="underline">
             Radix projects
           </Link>{" "}
