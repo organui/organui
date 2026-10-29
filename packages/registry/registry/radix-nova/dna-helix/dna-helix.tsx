@@ -30,6 +30,11 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -841,12 +846,40 @@ export function DnaHelix({
             Drag to rotate · Scroll or pinch to zoom
           </p>
         )}
-        <p
-          aria-live="polite"
-          className="pointer-events-none absolute right-2 bottom-1.5 left-2 truncate text-xs text-muted-foreground"
-        >
+        {/* Announced as it changes; shown behind the info button, as the
+            organ viewer shows its credit. */}
+        <p aria-live="polite" className="sr-only">
           {status}
         </p>
+        {status && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon-xs"
+                aria-label="Helix details"
+                className="absolute right-2 bottom-2 text-muted-foreground"
+              >
+                <IconPlaceholder
+                  lucide="InfoIcon"
+                  tabler="IconInfoCircle"
+                  hugeicons="InformationCircleIcon"
+                  phosphor="InfoIcon"
+                  remixicon="RiInformationLine"
+                  aria-hidden="true"
+                />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              side="top"
+              align="end"
+              aria-label="Helix details"
+              className="w-64 text-xs"
+            >
+              {status}
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
       {strands && pairs && (
         <Strands pairs={pairs} selected={selected} onSelect={select} />

@@ -33,6 +33,11 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -1907,19 +1912,48 @@ export function MoleculeViewer({
             Drag to rotate · Scroll or pinch to zoom
           </p>
         )}
-        <div className="pointer-events-none absolute right-2 bottom-1.5 left-2 flex items-end justify-between gap-2 text-xs text-muted-foreground">
-          <p aria-live="polite" className="min-w-0 truncate">
-            {status}
-          </p>
-          {attribution && structure?.id && (
-            <a
-              href={`https://www.rcsb.org/structure/${encodeURIComponent(structure.id)}`}
-              className="pointer-events-auto shrink-0 underline-offset-2 hover:underline"
+        {/* Announced as it changes; shown behind the info button with the
+            entry's link, as the organ viewer shows its credit. */}
+        <p aria-live="polite" className="sr-only">
+          {status}
+        </p>
+        {status && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon-xs"
+                aria-label="Structure details"
+                className="absolute right-2 bottom-2 text-muted-foreground"
+              >
+                <IconPlaceholder
+                  lucide="InfoIcon"
+                  tabler="IconInfoCircle"
+                  hugeicons="InformationCircleIcon"
+                  phosphor="InfoIcon"
+                  remixicon="RiInformationLine"
+                  aria-hidden="true"
+                />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              side="top"
+              align="end"
+              aria-label="Structure details"
+              className="w-64 text-xs"
             >
-              PDB {structure.id}
-            </a>
-          )}
-        </div>
+              <p>{status}</p>
+              {attribution && structure?.id && (
+                <a
+                  href={`https://www.rcsb.org/structure/${encodeURIComponent(structure.id)}`}
+                  className="text-muted-foreground underline-offset-2 hover:underline"
+                >
+                  PDB {structure.id}
+                </a>
+              )}
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
       {sequence && structure && (
         <SequenceStrip
