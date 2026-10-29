@@ -213,6 +213,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "molecule-viewer": [
     {
+      name: "molecule-viewer-selection",
+      title: "Residue Selection",
+      description:
+        "Pick a residue on the model or in the sequence, and the callback gives its ID and record.",
+    },
+    {
       name: "molecule-viewer-spacefill",
       title: "Spacefill",
       description: "Atoms as spheres, coloured by element.",

@@ -574,6 +574,15 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "molecule-viewer-selection": {
+    title: "Residue Selection",
+    file: "molecule-viewer-selection.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./molecule-viewer-selection")
+      return <Example />
+    },
+  },
   "molecule-viewer-spacefill": {
     title: "Spacefill",
     file: "molecule-viewer-spacefill.tsx",
