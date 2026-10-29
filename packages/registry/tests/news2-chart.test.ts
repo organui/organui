@@ -159,9 +159,11 @@ const observations: News2Observation[] = [
 
 test("the chart runs newest first and summarises the latest set", () => {
   const html = renderToStaticMarkup(createElement(News2Chart, { observations }))
-  expect(html.indexOf("Oct 25, 14:00")).toBeLessThan(
-    html.lastIndexOf("Oct 25, 08:00")
-  )
+  const head = html.slice(html.indexOf("<thead"), html.indexOf("</thead>"))
+  expect(head.indexOf("14:00")).toBeLessThan(head.indexOf("08:00"))
+  // The day shows once, above its first column, and is read out on the rest.
+  expect(head.match(/Oct 25/g)).toHaveLength(3)
+  expect(head.match(/sr-only">Oct 25/g)).toHaveLength(2)
   expect(html).toContain(
     'aria-label="NEWS2 observations, Oct 25, 08:00 to Oct 25, 14:00"'
   )

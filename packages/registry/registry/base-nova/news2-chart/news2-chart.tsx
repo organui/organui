@@ -247,7 +247,10 @@ export type News2ChartProps = React.ComponentProps<"div"> & {
   spo2Scale?: Spo2Scale
   /** Names the table for assistive technology and shows below it. */
   caption?: React.ReactNode
-  /** Defaults to a UTC date and 24-hour time such as "Oct 25, 14:00". */
+  /**
+   * Defaults to a UTC date and 24-hour time such as "Oct 25, 14:00"; the
+   * column headings then show the day only where it changes.
+   */
   formatTime?: (time: string) => string
 }
 
@@ -260,10 +263,55 @@ const timeFormat = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 })
 
+const dayFormat = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  timeZone: "UTC",
+})
+
+const clockFormat = new Intl.DateTimeFormat("en-US", {
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+  timeZone: "UTC",
+})
+
 // A fixed locale and time zone render the same on the server and the client.
 function defaultFormatTime(time: string) {
   const parsed = Date.parse(time)
   return Number.isNaN(parsed) ? time : timeFormat.format(parsed)
+}
+
+/**
+ * A column heading with the default format: the time, and the day above it
+ * only where the day changes, so columns stay narrow. The day is still read
+ * out on every column.
+ */
+function DefaultTimeHeading({
+  time,
+  previous,
+}: {
+  time: string
+  previous?: string
+}) {
+  const parsed = Date.parse(time)
+  if (Number.isNaN(parsed)) return time
+  const day = dayFormat.format(parsed)
+  const newDay =
+    previous === undefined || dayFormat.format(Date.parse(previous)) !== day
+  return (
+    <>
+      <span
+        className={cn(
+          "block text-xs font-normal text-muted-foreground",
+          !newDay && "sr-only"
+        )}
+      >
+        {day}
+      </span>
+      {clockFormat.format(parsed)}
+    </>
+  )
 }
 
 const consciousnessLabels: Record<Consciousness, string> = {
@@ -280,11 +328,15 @@ function formatReading(
 ) {
   switch (parameter) {
     case "onOxygen":
-      return observation.onOxygen === undefined
-        ? undefined
-        : observation.onOxygen
-          ? "Oxygen"
-          : "Air"
+      if (observation.onOxygen === undefined) return undefined
+      if (!observation.onOxygen) return "Air"
+      // As the NEWS2 chart writes it, narrow enough for an equal column.
+      return (
+        <>
+          <span aria-hidden>O₂</span>
+          <span className="sr-only">Oxygen</span>
+        </>
+      )
     case "consciousness":
       return observation.consciousness
         ? consciousnessLabels[observation.consciousness]
@@ -303,6 +355,12 @@ const units: Partial<Record<News2Parameter, string>> = {
   pulse: "/min",
   temperature: "°C",
 }
+
+// The parameter column stays put while the sets scroll under it, so it needs
+// a solid background: the surface it sits on, page or card, with the row's
+// hover tint mixed in.
+const sticky =
+  "sticky left-0 z-10 bg-(--news2-surface) group-hover/row:bg-[color-mix(in_oklab,var(--muted)_50%,var(--news2-surface))]"
 
 function Alarm() {
   return (
@@ -324,9 +382,10 @@ function Points({ points }: { points: number }) {
       data-slot="news2-points"
       data-points={points}
       className={cn(
-        "ml-1.5 inline-flex min-w-5 items-center justify-center rounded-sm border px-1 text-xs tabular-nums",
-        points === 0 && "border-transparent text-muted-foreground",
+        "ml-1.5 inline-flex min-w-5 items-center justify-center rounded-sm border border-transparent px-1 text-xs tabular-nums",
+        points === 0 && "text-muted-foreground",
         points > 0 && "font-semibold",
+        // A single parameter scoring 3 calls for an urgent review.
         points === 3 && "border-destructive text-destructive"
       )}
     >
@@ -412,7 +471,10 @@ export function News2Chart({
   return (
     <div
       data-slot="news2-chart"
-      className={cn("flex w-full min-w-0 flex-col gap-3", className)}
+      className={cn(
+        "flex w-full min-w-0 flex-col gap-3 [--news2-surface:var(--background)] in-data-[slot=card]:[--news2-surface:var(--card)]",
+        className
+      )}
       {...props}
     >
       {latest && <News2Summary score={latest.score} />}
@@ -426,20 +488,26 @@ export function News2Chart({
         <Table>
           {caption && <TableCaption>{caption}</TableCaption>}
           <TableHeader>
-            <TableRow>
-              <TableHead
-                scope="col"
-                className="sticky left-0 z-10 bg-background"
-              >
+            <TableRow className="group/row">
+              <TableHead scope="col" className={sticky}>
                 <span className="sr-only">Parameter</span>
               </TableHead>
-              {columns.map(({ observation }) => (
+              {columns.map(({ observation }, index) => (
                 <TableHead
                   key={observation.time}
                   scope="col"
-                  className="text-right tabular-nums"
+                  // Every set gets the same width, whatever its readings.
+                  style={{ width: `${100 / columns.length}%` }}
+                  className="h-auto py-2 text-right align-bottom tabular-nums"
                 >
-                  {formatTime(observation.time)}
+                  {formatTime === defaultFormatTime ? (
+                    <DefaultTimeHeading
+                      time={observation.time}
+                      previous={columns[index - 1]?.observation.time}
+                    />
+                  ) : (
+                    formatTime(observation.time)
+                  )}
                 </TableHead>
               ))}
             </TableRow>
@@ -454,11 +522,12 @@ export function News2Chart({
             )}
             {columns.length > 0 &&
               news2Parameters.map((parameter) => (
-                <TableRow key={parameter} data-parameter={parameter}>
-                  <TableHead
-                    scope="row"
-                    className="sticky left-0 z-10 bg-background font-normal"
-                  >
+                <TableRow
+                  key={parameter}
+                  data-parameter={parameter}
+                  className="group/row"
+                >
+                  <TableHead scope="row" className={cn(sticky, "font-normal")}>
                     {news2ParameterLabels[parameter]}
                     {parameter === "spo2" && (
                       <span className="text-muted-foreground">
@@ -500,11 +569,8 @@ export function News2Chart({
                 </TableRow>
               ))}
             {columns.length > 0 && (
-              <TableRow className="border-t-2">
-                <TableHead
-                  scope="row"
-                  className="sticky left-0 z-10 bg-background font-semibold"
-                >
+              <TableRow className="group/row border-t-2">
+                <TableHead scope="row" className={cn(sticky, "font-semibold")}>
                   NEWS2
                 </TableHead>
                 {columns.map(({ observation, score }) => (
@@ -524,6 +590,9 @@ export function News2Chart({
                       <span className="inline-flex items-center gap-1">
                         {score.risk !== "low" && <Alarm />}
                         {score.total}
+                        {/* As wide as a reading's points, so totals line up
+                            with the readings above them. */}
+                        <span aria-hidden className="ml-0.5 min-w-5" />
                       </span>
                     )}
                   </TableCell>

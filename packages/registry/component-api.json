@@ -642,7 +642,7 @@
         "type": "(time: string) => string",
         "required": false,
         "default": "defaultFormatTime",
-        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"."
+        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"; the column headings then show the day only where it changes."
       }
     ]
   },

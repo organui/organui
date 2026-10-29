@@ -124,7 +124,8 @@ export default function Page() {
           Sets run from newest to oldest, sorted by <code>time</code>, so the
           latest is always in view, and the parameter names stay put while a
           long run scrolls sideways inside the table, not the page. Times show
-          as UTC dates with a 24-hour clock; pass <code>formatTime</code> for
+          in UTC with a 24-hour clock, and the day only above the first set of
+          each day, so the columns stay narrow; pass <code>formatTime</code> for
           your own. The scrolling area can be focused and scrolled with the
           keyboard, and is named for the span of times it covers.
         </p>
