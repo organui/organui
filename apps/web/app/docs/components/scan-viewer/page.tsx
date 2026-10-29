@@ -92,15 +92,22 @@ export default function Page() {
         </p>
         <CodeSnippet label="Image URL example" code={images} />
       </section>
+      <ExampleSection example={examples["scan-viewer-controls"]!}>
+        <p>
+          Pass <code>presets</code>, such as the included brain, soft tissue,
+          lung and bone <code>ctWindowPresets</code>, to offer named windows in
+          the toolbar. Pass <code>controls=&#123;false&#125;</code> to hide the
+          toolbar and slider, as the demo at the top does: the image still
+          scrolls through slices, zooms and windows.
+        </p>
+      </ExampleSection>
       <ExampleSection example={examples["scan-viewer-controlled"]!}>
         <p>
           The window maps values from <code>center - width / 2</code> to{" "}
           <code>center + width / 2</code> onto black through white, using the
           DICOM linear function. Drag across the image to change it: right
-          widens the window and down raises the level. Pass <code>presets</code>
-          , such as the included brain, soft tissue, lung and bone{" "}
-          <code>ctWindowPresets</code>, to offer named windows. Without a window
-          or presets the viewer starts from the first slice&apos;s range.
+          widens the window and down raises the level. Without a window or
+          presets the viewer starts from the first slice&apos;s range.
         </p>
         <p>
           Slice and window can each be controlled with <code>slice</code> and{" "}
@@ -121,7 +128,6 @@ export default function Page() {
           the browser, and nothing is uploaded.
         </p>
       </ExampleSection>
-      <ExampleSection example={examples["scan-viewer-no-controls"]!} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>

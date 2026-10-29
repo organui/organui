@@ -552,11 +552,11 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "scan-viewer-no-controls": {
-    title: "Without Controls",
-    file: "scan-viewer-no-controls.tsx",
+  "scan-viewer-controls": {
+    title: "Controls and Presets",
+    file: "scan-viewer-controls.tsx",
     render: async () => {
-      const { Example } = await import("./scan-viewer-no-controls")
+      const { Example } = await import("./scan-viewer-controls")
       return <Example />
     },
   },

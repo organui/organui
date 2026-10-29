@@ -101,6 +101,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "scan-viewer": [
     {
+      name: "scan-viewer-controls",
+      title: "Controls and Presets",
+      description:
+        "By default a toolbar offers window presets, the window and pan tools and zoom, with a slice slider below.",
+    },
+    {
       name: "scan-viewer-controlled",
       title: "Controlled Slice and Window",
       description:
@@ -111,12 +117,6 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       title: "Open DICOM Files",
       description:
         "Read a series from files the user picks, in the browser, with nothing uploaded.",
-    },
-    {
-      name: "scan-viewer-no-controls",
-      title: "Without Controls",
-      description:
-        "No toolbar or slider; the image still scrolls, zooms and windows.",
     },
   ],
   "lab-results": [
