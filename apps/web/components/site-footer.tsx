@@ -33,7 +33,7 @@ export function SiteFooter() {
             <GitHubIcon className="size-4.5" />
           </a>
           <a
-            href="https://x.com/organui"
+            href={site.x}
             aria-label="OrganUI on X"
             className="inline-flex size-9 items-center justify-center rounded-lg outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
           >
