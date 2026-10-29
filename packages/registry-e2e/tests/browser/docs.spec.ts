@@ -515,12 +515,12 @@ test("the header links each section and searches the whole site", async ({
   await expect(
     dialog.getByRole("option", { name: /Explorer 02/ })
   ).toBeVisible()
-  await input.fill("lab res")
-  await dialog.getByRole("option", { name: /^Lab results table/ }).click()
-  await expect(page).toHaveURL(/\/docs\/components\/lab-results$/)
+  await input.fill("growth")
+  await dialog.getByRole("option", { name: /^Growth chart/ }).click()
+  await expect(page).toHaveURL(/\/docs\/components\/growth-chart$/)
   await expect(dialog).toBeHidden()
   await expect(
-    page.getByRole("heading", { name: "Lab results table", level: 1 })
+    page.getByRole("heading", { name: "Growth chart", level: 1 })
   ).toBeVisible()
 
   // As on shadcn/ui, phones search from the keyboard shortcut only.
@@ -1034,6 +1034,7 @@ test("lab results flag values in words and fit a phone", async ({
   page,
   request,
 }, info) => {
+  test.skip(comingSoon.has("lab-results"), "Lab results is coming soon")
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/docs/components/lab-results")
@@ -1607,7 +1608,7 @@ test("themes redirect to create, which gives the commands", async ({
   await settings.getByRole("combobox", { name: "Theme" }).click()
   await page.getByRole("option", { name: "Blue" }).click()
   await settings.getByRole("button", { name: /OrganUI items/ }).click()
-  await page.getByRole("checkbox", { name: "Lab results table" }).click()
+  await page.getByRole("checkbox", { name: "Growth chart" }).click()
   await page.keyboard.press("Escape")
   await expect(settings).not.toContainText("--preset b0")
   await getCode.click()
@@ -1619,7 +1620,7 @@ test("themes redirect to create, which gives the commands", async ({
   ).toContainText("/r/styles/{style}/{name}.json")
   await expect(
     dialog.getByRole("region", { name: "Add OrganUI items" })
-  ).toContainText("@organui/body-map @organui/lab-results")
+  ).toContainText("@organui/body-map @organui/growth-chart")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
 })
@@ -1694,7 +1695,6 @@ test("component pages end with examples and an API reference", async ({
     ["dermatome-map", "DermatomeMap"],
     ["ecg-trace", "EcgTrace"],
     ["growth-chart", "GrowthChart"],
-    ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)

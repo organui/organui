@@ -5,6 +5,7 @@
 export const comingSoon: ReadonlySet<string> = new Set([
   "allergy-list",
   "fhir",
+  "lab-results",
   "news2-chart",
   "patient-banner",
   "problem-list",

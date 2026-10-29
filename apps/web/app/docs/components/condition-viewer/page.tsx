@@ -146,11 +146,7 @@ export default function Page() {
             Affected structures share one amber, so a condition of a whole organ
             still shows, and spared ones a muted tone. Red is kept for critical
             results. An abnormal investigation is bold with an arrow for high or
-            low, as in the{" "}
-            <Link href="/docs/components/lab-results" className="underline">
-              lab results table
-            </Link>
-            .
+            low, as in clinical results tables.
           </p>
         </section>
         <section className="flex flex-col gap-4">
