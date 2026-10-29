@@ -37,7 +37,8 @@ export const exampleMedications: Medication[] = [
     name: "Warfarin",
     dose: "5 mg",
     times: ["18:00"],
-    color: "oklch(0.6 0.18 25)",
+    // Not red, which the page keeps for critical warnings.
+    color: "oklch(0.6 0.03 260)",
   },
   {
     id: "ibuprofen",
