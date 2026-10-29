@@ -20,6 +20,8 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldLegend,
+  FieldSet,
 } from "@workspace/ui/components/field"
 import { Input } from "@workspace/ui/components/input"
 import { Textarea } from "@workspace/ui/components/textarea"
@@ -82,19 +84,20 @@ export function Example() {
               name="regions"
               control={form.control}
               render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
+                <FieldSet data-invalid={fieldState.invalid}>
+                  <FieldLegend variant="label">Where is the pain?</FieldLegend>
+                  <FieldDescription>
+                    Select every region that hurts, front and back.
+                  </FieldDescription>
                   <BodyMap
                     value={field.value}
                     onValueChange={field.onChange}
                     label="Where is the pain?"
                   />
-                  <FieldDescription>
-                    Select every region that hurts, front and back.
-                  </FieldDescription>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
-                </Field>
+                </FieldSet>
               )}
             />
             <Controller
