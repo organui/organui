@@ -5,6 +5,8 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
+import { ExampleSection } from "@/components/component-examples"
+import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, organsPage, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
@@ -69,6 +71,10 @@ const handle = `const viewer = useRef<OrganViewerHandle>(null)
 // viewer.current?.rotate(0.2)  // radians around the target
 // viewer.current?.reset()
 <OrganViewer ref={viewer} model={kidneyModel} controls={false} />`
+
+const examples = Object.fromEntries(
+  componentExamples["organ-viewer"]!.map((example) => [example.name, example])
+)
 
 export default function Page() {
   return (
@@ -170,6 +176,14 @@ export default function Page() {
         </p>
         <CodeSnippet label="Render example" code={render} />
       </section>
+      <ExampleSection example={examples["organ-viewer-models"]!}>
+        <p>
+          A new model is a new file to load, so give the viewer a{" "}
+          <code>key</code> per model. The toolbar offers the model&apos;s named
+          views, zoom and reset; <code>controls=&#123;false&#125;</code> hides
+          it, as the demo at the top does.
+        </p>
+      </ExampleSection>
       <section className="flex flex-col gap-4">
         <DocsHeading id="selection-and-visibility">
           Selection and visibility

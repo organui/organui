@@ -20,6 +20,15 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "organ-viewer-models": {
+    title: "Any Model",
+    file: "organ-viewer-models.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./organ-viewer-models")
+      return <Example />
+    },
+  },
   "condition-viewer-demo": {
     title: "Condition viewer",
     file: "condition-viewer-demo.tsx",

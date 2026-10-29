@@ -23,6 +23,14 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Visibility starts with the right heart hidden, so its branch shows as partly visible.",
     },
   ],
+  "organ-viewer": [
+    {
+      name: "organ-viewer-models",
+      title: "Any Model",
+      description:
+        "One viewer, any model: switch organs and the stage stays the same, with its view menu, zoom and reset.",
+    },
+  ],
   "body-map": [
     {
       name: "body-map-value",
