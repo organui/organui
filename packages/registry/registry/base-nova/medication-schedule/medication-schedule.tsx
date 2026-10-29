@@ -4,6 +4,7 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 import {
@@ -581,9 +582,9 @@ export function MedicationSchedule({
                             {text}
                           </Button>
                         ) : (
-                          <span className="text-xs text-muted-foreground">
+                          <Badge variant={status ? "secondary" : "outline"}>
                             {text}
-                          </span>
+                          </Badge>
                         )}
                       </ItemActions>
                     </Item>

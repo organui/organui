@@ -184,7 +184,7 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       name: "medication-schedule-read-only",
       title: "Read-only",
       description:
-        "Without callbacks there are no day buttons and dose status is text.",
+        "Without callbacks there are no day buttons and dose status is a badge.",
     },
   ],
   "molecule-viewer": [

@@ -267,6 +267,7 @@
       ],
       "registryDependencies": [
         "alert",
+        "badge",
         "button",
         "button-group",
         "card",
