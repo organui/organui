@@ -4,6 +4,13 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "@/components/ui/item"
 import { toggleVariants } from "@/components/ui/toggle"
 
 export type DermatomeView = "front" | "back"
@@ -224,18 +231,20 @@ type ViewShapes = {
   regions: Partial<Record<DermatomeId, Shape>>
 }
 
-const regionHues: Record<DermatomeRegion, number> = {
-  Cervical: 245,
-  Thoracic: 170,
-  Lumbar: 75,
-  Sacral: 350,
+// One distinct hue per region. A theme's chart colours are shades of one hue,
+// so each region has its own variable to set instead.
+const regionColors: Record<DermatomeRegion, string> = {
+  Cervical: "var(--dermatome-cervical, oklch(0.68 0.11 245))",
+  Thoracic: "var(--dermatome-thoracic, oklch(0.68 0.11 170))",
+  Lumbar: "var(--dermatome-lumbar, oklch(0.68 0.11 75))",
+  Sacral: "var(--dermatome-sacral, oklch(0.68 0.11 350))",
 }
 
-/** The default fill: one hue per region, alternating lightness by level. */
+/** The default fill: its region's colour, every other level lighter. */
 export function dermatomeColor(id: DermatomeId) {
   const index = dermatomes.findIndex((dermatome) => dermatome.id === id)
-  const { region } = dermatomes[index]!
-  return `oklch(${index % 2 ? 0.8 : 0.68} 0.11 ${regionHues[region]})`
+  const color = regionColors[dermatomes[index]!.region]
+  return index % 2 ? `color-mix(in oklch, ${color} 65%, white)` : color
 }
 
 const viewNames: Record<DermatomeView, string> = {
@@ -642,37 +651,43 @@ export function DermatomeMap({
               </div>
             ))}
           </div>
-          <div className="flex min-h-36 flex-col gap-1.5 rounded-lg border p-3 text-sm">
-            {shown ? (
-              <>
-                <p className="font-medium">
-                  {shown.id}{" "}
-                  <span className="font-normal text-muted-foreground">
-                    {shown.region}
-                  </span>
-                </p>
-                <p>{shown.area}</p>
-                <p className="text-muted-foreground">
-                  Key sensory point: {shown.keyPoint}
-                </p>
-              </>
-            ) : (
-              <p className="text-muted-foreground">
-                Select a level, or a region on the body, to see the skin a
-                spinal nerve supplies.
-              </p>
-            )}
+          {/* A fixed height, so previewing a level does not move the page. */}
+          <Item variant="outline" className="min-h-36 items-start">
+            <ItemContent>
+              {shown ? (
+                <>
+                  <ItemTitle>
+                    {shown.id}
+                    <span className="font-normal text-muted-foreground">
+                      {shown.region}
+                    </span>
+                  </ItemTitle>
+                  <ItemDescription className="line-clamp-none">
+                    {shown.area}
+                  </ItemDescription>
+                  <ItemDescription className="line-clamp-none">
+                    Key sensory point: {shown.keyPoint}
+                  </ItemDescription>
+                </>
+              ) : (
+                <ItemDescription className="line-clamp-none">
+                  Select a level, or a region on the body, to see the skin a
+                  spinal nerve supplies.
+                </ItemDescription>
+              )}
+            </ItemContent>
             {selectedId && (
-              <Button
-                variant="outline"
-                size="sm"
-                className="mt-auto self-start"
-                onClick={() => onSelectionChange(null)}
-              >
-                Clear selection
-              </Button>
+              <ItemActions>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onSelectionChange(null)}
+                >
+                  Clear selection
+                </Button>
+              </ItemActions>
             )}
-          </div>
+          </Item>
         </div>
       </div>
     </div>

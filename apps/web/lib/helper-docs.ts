@@ -36,7 +36,6 @@ formatAge(correctedAgeInMonths(birth, measured, 32)) // "9.5 months"`,
     ],
     notes: [
       "Pass dates at UTC midnight, such as new Date(\"2025-02-10\"), so ages don't shift with the reader's time zone.",
-      "The growth chart uses this file for its ages.",
     ],
   },
   "z-scores": {
@@ -72,8 +71,7 @@ formatPercentile(zToPercentile(z!)) // "87th"`,
       },
     ],
     notes: [
-      "The file ships no reference data. Take L, M and S from the standard you use, such as WHO or CDC, under its terms; the growth chart's page says where to get them.",
-      "The growth chart uses this file for its z-scores and percentiles.",
+      "The file ships no reference data. Take L, M and S from the standard you use, such as WHO or CDC, under its terms.",
     ],
   },
   fhir: {

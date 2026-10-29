@@ -10,11 +10,13 @@ import {
   TableRow,
 } from "@workspace/ui/components/table"
 import { CodeSnippet } from "@/components/code-snippet"
+import { ComponentExamples } from "@/components/component-examples"
 import { ComponentPreview } from "@/components/component-preview"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { UtilitiesInstallation } from "@/components/utilities-installation"
+import { componentExamples } from "@/lib/component-examples"
 import { docsMetadata, utilityItems } from "@/lib/registry"
 import { utilityDocs } from "@/lib/utility-docs"
 
@@ -72,7 +74,7 @@ export default async function Page({ params }: Props) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {doc.reference.map((row) => (
+            {doc.reference?.map((row) => (
               <TableRow key={row.name}>
                 <TableCell>
                   <code>{row.name}</code>
@@ -90,6 +92,9 @@ export default async function Page({ params }: Props) {
           lang={doc.usageLang}
         />
       </section>
+      {componentExamples[name] && (
+        <ComponentExamples examples={componentExamples[name]!} />
+      )}
       <section className="flex flex-col gap-4">
         <DocsHeading id="notes">Notes</DocsHeading>
         {doc.notes.map((note) => (

@@ -2,6 +2,7 @@ import type { NextConfig } from "next"
 import { readFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { join } from "node:path"
+import { comingSoon, offSite, showComingSoon } from "./lib/coming-soon"
 
 // Read rather than imported: Next.js loads this file as CommonJS or, on
 // Node's own TypeScript support, as ESM, and JSON imports differ between them.
@@ -79,6 +80,23 @@ const nextConfig: NextConfig = {
           destination: `/docs/components/${item.name}`,
           permanent: true,
         })),
+      // Coming soon and off the site: the docs link an install prints lands
+      // on the index.
+      ...catalog.items
+        .filter(
+          ({ name }) =>
+            offSite.has(name) || (!showComingSoon && comingSoon.has(name))
+        )
+        .map(({ name, categories }) => {
+          const section = categories?.includes("helper")
+            ? "/docs/helpers"
+            : "/docs/components"
+          return {
+            source: `${section}/${name}`,
+            destination: section,
+            permanent: false,
+          }
+        }),
       // Charts open on their first type, as on shadcn/ui.
       { source: "/charts", destination: "/charts/area", permanent: false },
       // Themes live in Create, as on shadcn/ui.
@@ -106,6 +124,20 @@ const nextConfig: NextConfig = {
       {
         source: "/r/:path*/disease-viewer.json",
         destination: "/r/:path*/condition-viewer.json",
+        permanent: true,
+      },
+      // The scan viewer was the image viewer until 0.6.0. Its registry JSON
+      // redirects too, so `shadcn add` on the old name still installs.
+      ...["/docs/image-viewer", "/docs/components/image-viewer"].map(
+        (source) => ({
+          source,
+          destination: "/docs/components/scan-viewer",
+          permanent: true,
+        })
+      ),
+      {
+        source: "/r/:path*/image-viewer.json",
+        destination: "/r/:path*/scan-viewer.json",
         permanent: true,
       },
     ]

@@ -134,14 +134,14 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex items-baseline gap-1.5">
-      <dt className="text-muted-foreground">{label}</dt>
-      <dd className="font-medium tabular-nums">{children}</dd>
+    <div className="flex flex-col gap-0.5">
+      <dt className="text-xs text-muted-foreground">{label}</dt>
+      <dd className="tabular-nums">{children}</dd>
     </div>
   )
 }
 
-function Allergies({ allergies }: { allergies?: PatientAllergies }) {
+function AllergiesValue({ allergies }: { allergies?: PatientAllergies }) {
   if (allergies === undefined || allergies.length === 0)
     return (
       <span
@@ -158,7 +158,7 @@ function Allergies({ allergies }: { allergies?: PatientAllergies }) {
           aria-hidden="true"
           className="size-4 shrink-0"
         />
-        Allergies not recorded
+        Not recorded
       </span>
     )
   if (allergies === "none-known")
@@ -177,14 +177,14 @@ function Allergies({ allergies }: { allergies?: PatientAllergies }) {
           aria-hidden="true"
           className="size-4 shrink-0 text-muted-foreground"
         />
-        No known allergies
+        None known
       </span>
     )
   return (
     <span
       data-slot="patient-allergies"
       data-state="recorded"
-      className="inline-flex items-start gap-1.5 font-semibold"
+      className="inline-flex items-start gap-1.5 font-medium"
     >
       <IconPlaceholder
         lucide="TriangleAlertIcon"
@@ -195,9 +195,7 @@ function Allergies({ allergies }: { allergies?: PatientAllergies }) {
         aria-hidden="true"
         className="mt-0.5 size-4 shrink-0"
       />
-      <span>
-        Allergies: <span className="font-normal">{allergies.join(", ")}</span>
-      </span>
+      {allergies.join(", ")}
     </span>
   )
 }
@@ -220,48 +218,61 @@ export function PatientBanner({
       data-slot="patient-banner"
       aria-label={`Patient: ${name}`}
       className={cn(
-        "@container flex w-full min-w-0 flex-col gap-2 rounded-lg border bg-card px-4 py-3 text-sm text-card-foreground",
+        "@container w-full min-w-0 rounded-lg border bg-card px-4 py-3 text-sm text-card-foreground",
         className
       )}
       {...props}
     >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <h2 className="text-base font-semibold tracking-tight">{name}</h2>
-        {patient.deceasedDate && (
-          <Badge variant="secondary">
-            Died {formatDate(patient.deceasedDate)}
-          </Badge>
-        )}
-        {alerts.map((alert) => (
-          <Badge key={alert} variant="outline" data-slot="patient-alert">
-            <IconPlaceholder
-              lucide="CircleAlertIcon"
-              tabler="IconAlertCircle"
-              hugeicons="AlertCircleIcon"
-              phosphor="WarningCircleIcon"
-              remixicon="RiErrorWarningLine"
-              aria-hidden="true"
-              data-icon="inline-start"
-            />
-            {alert}
-          </Badge>
-        ))}
-      </div>
-      <dl className="flex flex-wrap gap-x-5 gap-y-1">
-        <Field label="Born">
-          {formatDate(patient.birthDate)}
-          {age && (
-            <span className="font-normal text-muted-foreground"> ({age})</span>
+      {/* The grid sits inside the banner's own container, so its columns and
+          its children's placement answer to the same width. */}
+      <div className="grid gap-x-6 gap-y-2 @3xl:grid-cols-[1fr_auto]">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 @3xl:col-start-1">
+          <h2 className="text-base font-medium">{name}</h2>
+          {patient.deceasedDate && (
+            <Badge variant="secondary">
+              Died {formatDate(patient.deceasedDate)}
+            </Badge>
           )}
-        </Field>
-        {patient.sex && <Field label="Sex">{patient.sex}</Field>}
-        {patient.identifiers?.map((identifier) => (
-          <Field key={identifier.label} label={identifier.label}>
-            {identifier.value}
+          {alerts.map((alert) => (
+            <Badge key={alert} variant="outline" data-slot="patient-alert">
+              <IconPlaceholder
+                lucide="CircleAlertIcon"
+                tabler="IconAlertCircle"
+                hugeicons="AlertCircleIcon"
+                phosphor="WarningCircleIcon"
+                remixicon="RiErrorWarningLine"
+                aria-hidden="true"
+                data-icon="inline-start"
+              />
+              {alert}
+            </Badge>
+          ))}
+        </div>
+        {/* Each label above its value, so a narrow banner wraps whole
+          fields rather than splitting one across lines. */}
+        <dl className="flex flex-wrap gap-x-6 gap-y-2 @3xl:col-start-1">
+          <Field label="Born">
+            {formatDate(patient.birthDate)}
+            {age && <span className="text-muted-foreground"> ({age})</span>}
           </Field>
-        ))}
-      </dl>
-      <Allergies allergies={allergies} />
+          {patient.sex && <Field label="Sex">{patient.sex}</Field>}
+          {patient.identifiers?.map((identifier) => (
+            <Field
+              key={`${identifier.label}:${identifier.value}`}
+              label={identifier.label}
+            >
+              {identifier.value}
+            </Field>
+          ))}
+        </dl>
+        {/* Apart from the details, as the safety line, and beside the name
+          once there is room, where the NHS banner keeps them. */}
+        <dl className="mt-1 @3xl:col-start-2 @3xl:row-start-2 @3xl:mt-0 @3xl:max-w-sm @3xl:justify-self-end">
+          <Field label="Allergies">
+            <AllergiesValue allergies={allergies} />
+          </Field>
+        </dl>
+      </div>
     </section>
   )
 }

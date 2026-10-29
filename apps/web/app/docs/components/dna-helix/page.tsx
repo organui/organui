@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -31,6 +31,10 @@ export function GenePanel() {
     />
   )
 }`
+
+const examples = Object.fromEntries(
+  componentExamples["dna-helix"]!.map((example) => [example.name, example])
+)
 
 export default function Page() {
   return (
@@ -70,20 +74,43 @@ export default function Page() {
         <DocsHeading id="usage">Usage</DocsHeading>
         <CodeSnippet label="Usage example" code={usage} />
         <p>
-          <code>sequence</code> is one strand read 5′ to 3′; whitespace and case
-          are ignored, and any letter other than A, C, G or T shows a message
-          instead of a helix. Selection is controlled: pass{" "}
-          <code>selectedIndex</code>, counted from 0 at the 5′ end, and update
-          it from <code>onSelectionChange</code>, which also passes the pair
-          with its partner base and hydrogen bond count.{" "}
-          <code>dnaBasePairs(sequence)</code> returns the same pairs without
+          <code>sequence</code> is one strand read 5′ to 3′.{" "}
+          <code>dnaBasePairs(sequence)</code> returns its pairs without
           rendering.
         </p>
       </section>
+      <ExampleSection example={examples["dna-helix-strands"]!}>
+        <p>
+          Pass <code>controls=&#123;false&#125;</code> to hide the buttons and{" "}
+          <code>strands=&#123;false&#125;</code> to hide the strands, as the
+          demo at the top does. Without the buttons, your own UI can drive the
+          helix through its ref, which exposes <code>zoom</code>,{" "}
+          <code>rotate</code> and <code>reset</code>.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["dna-helix-sequence"]!}>
+        <p>
+          Whitespace and case are ignored, and any letter other than A, C, G or
+          T shows a message instead of a helix.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["dna-helix-still"]!}>
+        <p>
+          The helix turns slowly about its axis until the user pauses it, moves
+          the camera, or prefers reduced motion; pass{" "}
+          <code>autoRotate=&#123;false&#125;</code> to keep it still.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["dna-helix-controlled"]!}>
+        <p>
+          Selection is controlled: pass <code>selectedIndex</code>, counted from
+          0 at the 5′ end, and update it from <code>onSelectionChange</code>,
+          which also passes the pair with its partner base and hydrogen bond
+          count. Clicking a base pair or a base in the strands selects it.
+        </p>
+      </ExampleSection>
       <section className="flex flex-col gap-4">
-        <DocsHeading id="geometry-and-behaviour">
-          Geometry and behaviour
-        </DocsHeading>
+        <DocsHeading id="geometry">Geometry</DocsHeading>
         <p>
           The helix is right-handed B-DNA: 3.38 Å rise and 34.3° twist per pair,
           about 10.5 pairs a turn, with phosphates 9 Å from the axis and the
@@ -92,22 +119,16 @@ export default function Page() {
           nucleotides in the molecule viewer. It is a schematic: base geometry,
           sugars and sequence-dependent shape are not modelled.
         </p>
-        <p>
-          The helix turns slowly about its axis until the user pauses it, moves
-          the camera, or prefers reduced motion; pass{" "}
-          <code>autoRotate=&#123;false&#125;</code> to keep it still. Click a
-          base pair, or use the strands below the stage, which are one tab stop
-          moved with the arrow keys, Home and End. Drag or the arrow keys
-          rotate; scroll, pinch, plus and minus zoom.
-        </p>
-        <p className="text-sm text-muted-foreground">
-          WebGL is required. Pass <code>strands=&#123;false&#125;</code> to hide
-          the sequence strip and <code>controls=&#123;false&#125;</code> to hide
-          the buttons; the ref exposes <code>zoom</code>, <code>rotate</code>{" "}
-          and <code>reset</code>.
-        </p>
       </section>
-      <ComponentExamples examples={componentExamples["dna-helix"]!} />
+      <section className="flex flex-col gap-4">
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
+        <p>
+          The strands below the stage are one tab stop, moved with the arrow
+          keys, Home and End. Drag or the arrow keys rotate; scroll, pinch, plus
+          and minus zoom.
+        </p>
+        <p className="text-sm text-muted-foreground">WebGL is required.</p>
+      </section>
       <PropsTable item="dna-helix" />
       <DocsPager href="/docs/components/dna-helix" />
     </div>

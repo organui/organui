@@ -15,7 +15,7 @@ export function Example() {
       onValueChange={setDecision}
       reviewer="Dr A. Rivera"
       subject="Emergency department note, drafted by AI"
-      className="w-full max-w-md"
+      className="w-full"
     />
   )
 }

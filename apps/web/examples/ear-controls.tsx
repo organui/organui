@@ -1,0 +1,5 @@
+import { Ear } from "@workspace/registry/ear"
+
+export function Example() {
+  return <Ear label="Ear with controls example" />
+}

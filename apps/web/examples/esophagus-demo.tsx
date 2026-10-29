@@ -1,5 +1,5 @@
 import { Esophagus } from "@workspace/registry/esophagus"
 
 export function Example() {
-  return <Esophagus label="Esophagus default example" />
+  return <Esophagus label="Esophagus default example" controls={false} />
 }

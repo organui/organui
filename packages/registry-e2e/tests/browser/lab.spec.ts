@@ -48,7 +48,7 @@ test("the installed patient banner names the patient and their allergies", async
   ).toBeVisible()
   await expect(banner).toContainText("03-Jun-1979 (47 years)")
   await expect(banner).toContainText("999 654 3218")
-  await expect(banner).toContainText("Allergies: Codeine")
+  await expect(banner).toContainText("AllergiesCodeine")
   await expect(banner).toContainText("Falls risk")
   expect(errors).toEqual([])
 })
@@ -73,8 +73,8 @@ test("the installed NEWS2 chart scores the observations", async ({ page }) => {
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/lab")
   await expect(page.getByText("NEWS2 6 · Medium risk")).toBeVisible()
-  await expect(page.getByRole("table", { name: "Observations" })).toContainText(
-    "Oct 25, 16:00"
-  )
+  await expect(
+    page.getByRole("columnheader", { name: /^Oct 25\s*16:00$/ })
+  ).toBeVisible()
   expect(errors).toEqual([])
 })

@@ -46,6 +46,7 @@ export type EcgTraceProps = React.ComponentProps<"figure"> & {
 const calibrationPulse = 0.2 // seconds, the standard 1 mV pulse
 const sweepGap = 0.2 // seconds blanked ahead of a live write head
 const minPxPerMm = 3 // below this the strip scrolls instead of shrinking
+const minLabelGap = 5 // mm of paper; closer wave labels run into each other
 
 // A regular synthetic beat: P, Q, R, S and T as Gaussians in mV, with times
 // in seconds from the R peak. T moves with the RR interval, as QT does.
@@ -339,7 +340,7 @@ export function EcgTrace({
   )
   const rate = ecgHeartRate(detected)
   const baseline = median(history)
-  const labels =
+  const placed =
     annotations === false
       ? []
       : detected.flatMap(({ wave, time }) => {
@@ -359,6 +360,15 @@ export function EcgTrace({
             },
           ]
         })
+  // At fast rates each T runs into the next P. Then only QRS is labelled,
+  // on every beat, rather than some beats losing a label.
+  const waves = placed
+    .filter(({ wave }) => wave !== "QRS")
+    .sort((a, b) => a.x - b.x)
+  const crowded = waves.some(
+    (label, i) => i > 0 && label.x - waves[i - 1]!.x < minLabelGap
+  )
+  const labels = crowded ? placed.filter(({ wave }) => wave === "QRS") : placed
 
   const summary = `${label}, lead ${lead}, ${Math.round(seconds * 10) / 10} seconds at ${speed} mm/s and ${gain} mm/mV, ${
     rate === null ? "heart rate not measured" : `about ${rate} beats per minute`

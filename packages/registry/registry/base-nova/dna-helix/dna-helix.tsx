@@ -387,9 +387,9 @@ function Strands({
           onFocus={() => setFocus(pair.index)}
           onClick={() => onSelect(pair.index)}
           className={cn(
-            "flex min-w-5 flex-col items-center rounded px-0.5 py-0.5 leading-tight hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring",
-            pair.index === selected &&
-              "bg-primary text-primary-foreground hover:bg-primary"
+            "flex flex-col items-center gap-0.5 rounded-md p-px hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring",
+            // An outline, not a fill, so the selected pair keeps its colours.
+            pair.index === selected && "bg-muted ring-1 ring-foreground"
           )}
         >
           {[pair.base, pair.partner].map((base, strand) => (
@@ -397,12 +397,13 @@ function Strands({
             // so voice control matches them against the accessible name.
             <React.Fragment key={strand}>
               {strand > 0 && " "}
-              <span className="flex items-center gap-0.5">
-                <span
-                  aria-hidden="true"
-                  className="size-1.5 rounded-full"
-                  style={{ backgroundColor: nucleobaseColors[base] }}
-                />
+              {/* The base's colour behind its letter, as one tile. */}
+              <span
+                className="flex size-4.5 items-center justify-center rounded-sm"
+                style={{
+                  backgroundColor: `color-mix(in oklch, ${nucleobaseColors[base]} 30%, transparent)`,
+                }}
+              >
                 {base}
               </span>
             </React.Fragment>
@@ -842,10 +843,9 @@ export function DnaHelix({
             Drag to rotate · Scroll or pinch to zoom
           </p>
         )}
-        <p
-          aria-live="polite"
-          className="pointer-events-none absolute right-2 bottom-1.5 left-2 truncate text-xs text-muted-foreground"
-        >
+        {/* Announced as it changes. Apps that show the pair get it from
+            onSelectionChange. */}
+        <p aria-live="polite" className="sr-only">
           {status}
         </p>
       </div>

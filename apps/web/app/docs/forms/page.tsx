@@ -36,17 +36,18 @@ const anatomy = `<Controller
   name="regions"
   control={form.control}
   render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
+    <FieldSet data-invalid={fieldState.invalid}>
+      <FieldLegend variant="label">Where is the pain?</FieldLegend>
+      <FieldDescription>
+        Select every region that hurts, front and back.
+      </FieldDescription>
       <BodyMap
         value={field.value}
         onValueChange={field.onChange}
         label="Where is the pain?"
       />
-      <FieldDescription>
-        Select every region that hurts, front and back.
-      </FieldDescription>
       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
+    </FieldSet>
   )}
 />`
 
@@ -54,14 +55,15 @@ const dermatome = `<Controller
   name="level"
   control={form.control}
   render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
+    <FieldSet data-invalid={fieldState.invalid}>
+      <FieldLegend variant="label">Level of reduced sensation</FieldLegend>
       <DermatomeMap
         selectedId={field.value}
         onSelectionChange={field.onChange}
         label="Level of reduced sensation"
       />
       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
+    </FieldSet>
   )}
 />`
 
@@ -113,7 +115,8 @@ export default function Page() {
           </li>
           <li>
             shadcn&apos;s <code>Field</code> lays out the label, description and
-            error, and marks the field invalid.
+            error, and marks the field invalid; <code>FieldSet</code> does the
+            same for a group, such as the body map&apos;s regions.
           </li>
           <li>Zod validates on the client through zodResolver.</li>
         </ul>
@@ -132,7 +135,9 @@ export default function Page() {
         <p>
           The body map&apos;s <code>value</code> and <code>onValueChange</code>{" "}
           take the field&apos;s <code>value</code> and <code>onChange</code>.
-          Its label names it, so it needs no <code>FieldLabel</code>.
+          Its regions are a group of checkboxes, so it sits in a{" "}
+          <code>FieldSet</code> whose <code>FieldLegend</code> asks the question
+          on screen, as shadcn&apos;s checkbox groups do.
         </p>
         <CodeSnippet label="Body map field" code={anatomy} />
       </section>

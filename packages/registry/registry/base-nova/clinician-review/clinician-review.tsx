@@ -30,7 +30,11 @@ export type ReviewDecision = {
 }
 
 export type ClinicianReviewProps = React.ComponentProps<"div"> & {
-  /** The current decision; store it with the content it reviews. */
+  /**
+   * The current decision, `{ status, reviewer?, at?, comment? }`, where status
+   * is pending, approved, changes-requested or rejected. Store it with the
+   * content it reviews.
+   */
   value: ReviewDecision
   /** Called with each new decision, or with pending after an undo. */
   onValueChange: (decision: ReviewDecision) => void
@@ -169,7 +173,8 @@ export function ClinicianReview({
             {reviewStatusLabels[value.status]}
           </Badge>
         </ItemTitle>
-        <ItemDescription>
+        {/* Never clamped: who reviewed it, and when, must read in full. */}
+        <ItemDescription className="line-clamp-none">
           {decided
             ? [
                 value.reviewer && `By ${value.reviewer}`,

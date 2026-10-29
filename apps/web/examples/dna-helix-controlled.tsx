@@ -12,6 +12,7 @@ export function Example() {
   return (
     <div className="flex w-full flex-col gap-4">
       <DnaHelix
+        label="DNA helix with controlled selection"
         sequence={sequence}
         selectedIndex={selectedIndex}
         onSelectionChange={setSelectedIndex}

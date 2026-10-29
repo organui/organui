@@ -1,5 +1,5 @@
 import { Skeleton } from "@workspace/registry/skeleton"
 
 export function Example() {
-  return <Skeleton label="Skeleton default example" />
+  return <Skeleton label="Skeleton default example" controls={false} />
 }

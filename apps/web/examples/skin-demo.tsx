@@ -1,5 +1,5 @@
 import { Skin } from "@workspace/registry/skin"
 
 export function Example() {
-  return <Skin label="Skin default example" />
+  return <Skin label="Skin default example" controls={false} />
 }

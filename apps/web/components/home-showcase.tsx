@@ -7,9 +7,6 @@ import {
   HomeEcg,
   HomeMedicationSchedule,
 } from "@/components/home-demos"
-import { Example as GrowthChart } from "@/examples/growth-chart-demo"
-import { Example as LabResults } from "@/examples/lab-results-demo"
-import { Example as VitalSigns } from "@/examples/vital-signs-demo"
 import { organs, organsPage } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
 import {
@@ -49,7 +46,7 @@ export function HomeShowcase() {
             src="/home/showcase-light.webp"
             width={2432}
             height={2800}
-            alt="Components for vital signs, anatomy, ECG, medication, growth and lab results"
+            alt="Components for anatomy, ECG and medication"
             sizes="140vw"
             priority
             className="h-auto w-[140vw] max-w-none dark:hidden"
@@ -58,23 +55,20 @@ export function HomeShowcase() {
             src="/home/showcase-dark.webp"
             width={2432}
             height={2800}
-            alt="Components for vital signs, anatomy, ECG, medication, growth and lab results"
+            alt="Components for anatomy, ECG and medication"
             sizes="140vw"
             priority
             className="hidden h-auto w-[140vw] max-w-none dark:block"
           />
         </div>
-        {/* Three columns on wide screens, two below. */}
+        {/* Two columns of about equal height. */}
         <div
           data-showcase-cards
-          className="hidden grid-cols-2 items-start gap-4 *:min-w-0 md:grid xl:grid-cols-3"
+          className="hidden grid-cols-2 items-start gap-4 *:min-w-0 md:grid"
         >
           <div className="flex flex-col gap-4">
             <Tile title="Organs" href={organsPage.href}>
               <OrganPicks />
-            </Tile>
-            <Tile title="Vital signs" href="/docs/components/vital-signs">
-              <VitalSigns />
             </Tile>
             <Tile title="Body map" href="/docs/components/body-map">
               <HomeBodyMap />
@@ -89,14 +83,6 @@ export function HomeShowcase() {
               href="/docs/components/medication-schedule"
             >
               <HomeMedicationSchedule />
-            </Tile>
-          </div>
-          <div className="flex flex-col gap-4 md:col-span-2 md:grid md:grid-cols-2 xl:col-span-1 xl:flex">
-            <Tile title="Growth chart" href="/docs/components/growth-chart">
-              <GrowthChart />
-            </Tile>
-            <Tile title="Lab results" href="/docs/components/lab-results">
-              <LabResults />
             </Tile>
           </div>
         </div>

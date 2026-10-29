@@ -8,7 +8,7 @@ import { PropsTable } from "@/components/props-table"
 import { ComponentExamples } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
-import { docsMetadata, shadcn } from "@/lib/registry"
+import { docsMetadata, shadcn, showComingSoon } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
@@ -101,21 +101,23 @@ export default function Page() {
           because a missing answer is a reason to ask.
         </p>
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="with-the-patient-banner">
-          With the patient banner
-        </DocsHeading>
-        <p>
-          <code>allergySummary</code> turns the list into the{" "}
-          <Link href="/docs/components/patient-banner" className="underline">
-            patient banner&apos;s
-          </Link>{" "}
-          <code>allergies</code>: each active substance with its first reaction,
-          such as <code>Penicillin (Anaphylaxis)</code>. Resolved allergies are
-          left out, and a list where every allergy has resolved becomes no known
-          allergies.
-        </p>
-      </section>
+      {showComingSoon && (
+        <section className="flex flex-col gap-4">
+          <DocsHeading id="with-the-patient-banner">
+            With the patient banner
+          </DocsHeading>
+          <p>
+            <code>allergySummary</code> turns the list into the{" "}
+            <Link href="/docs/components/patient-banner" className="underline">
+              patient banner&apos;s
+            </Link>{" "}
+            <code>allergies</code>: each active substance with its first
+            reaction, such as <code>Penicillin (Anaphylaxis)</code>. Resolved
+            allergies are left out, and a list where every allergy has resolved
+            becomes no known allergies.
+          </p>
+        </section>
+      )}
       <section className="flex flex-col gap-4">
         <DocsHeading id="layout">Layout</DocsHeading>
         <p>

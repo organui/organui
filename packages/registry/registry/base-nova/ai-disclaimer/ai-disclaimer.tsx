@@ -17,7 +17,7 @@ export type AiDisclaimerProps = React.ComponentProps<"div"> & {
   model?: string
   /** When it was generated, an ISO 8601 date-time. */
   generatedAt?: string
-  /** Who reviewed it and when, once someone has. */
+  /** Who reviewed it and when, once someone has; the title and text then say so. */
   review?: AiReview | null
   /** Replaces the default guidance. */
   children?: React.ReactNode

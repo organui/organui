@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
@@ -36,12 +36,9 @@ export function Monitor({ socket }: { socket: WebSocket }) {
   return <EcgTrace stream={stream} sampleRate={250} duration={6} />
 }`
 
-const synthetic = `import {
-  EcgTrace, syntheticEcg, syntheticEcgStream,
-} from "@/components/ui/ecg-trace"
-
-<EcgTrace samples={syntheticEcg({ heartRate: 60, duration: 10 })} />
-<EcgTrace stream={syntheticEcgStream({ heartRate: 90 })} />`
+const examples = Object.fromEntries(
+  componentExamples["ecg-trace"]!.map((example) => [example.name, example])
+)
 
 export default function Page() {
   return (
@@ -81,24 +78,44 @@ export default function Page() {
           whole recording unless you set <code>duration</code> in seconds. One
           lead per component; stack several for a multi-lead view.
         </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="live-streams">Live streams</DocsHeading>
         <CodeSnippet label="Live stream example" code={live} />
         <p>
-          A <code>stream</code> is any object whose <code>subscribe</code> takes
-          a listener for chunks of samples and returns an unsubscribe function.
-          The strip sweeps like a bedside monitor: it overwrites the window in
-          place, with a short blank bar ahead of the write head, and shows 6
-          seconds unless you set <code>duration</code>. Memoize the stream so
-          the sweep is not reset on every render. The Pause button freezes the
-          sweep and drops samples until it resumes.
+          For a live trace, pass a <code>stream</code> instead: any object whose{" "}
+          <code>subscribe</code> takes a listener for chunks of samples and
+          returns an unsubscribe function. The strip sweeps like a bedside
+          monitor: it overwrites the window in place, with a short blank bar
+          ahead of the write head, and shows 6 seconds unless you set{" "}
+          <code>duration</code>. Memoize the stream so the sweep is not reset on
+          every render. The Pause button freezes the sweep and drops samples
+          until it resumes.
         </p>
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="paper-labels-and-rate">
-          Paper, labels and rate
-        </DocsHeading>
+      <ExampleSection example={examples["ecg-trace-rate"]!}>
+        <p>
+          Labels and the heart rate come from <code>detectEcgWaves</code>, a
+          simple slope and amplitude heuristic tuned for clean sinus rhythms.
+          Change the rate and they follow. When beats are close enough for each
+          T to run into the next P, as above about 100 beats per minute at 25
+          mm/s, only QRS is labelled. The heart rate is the median of the R to R
+          intervals.
+        </p>
+        <p>
+          For real recordings pass your own <code>annotations</code>, each a
+          wave (<code>P</code>, <code>QRS</code> or <code>T</code>) and its peak
+          time in seconds, or <code>annotations=&#123;false&#125;</code> to hide
+          them.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["ecg-trace-recorded"]!}>
+        <p>
+          Samples you already have are drawn once, with no sweep and no Pause.
+          These come from <code>syntheticEcg</code>, which with{" "}
+          <code>syntheticEcgStream</code> generates an original, regular sinus
+          rhythm from Gaussian P, Q, R, S and T waves, for demos and tests. It
+          is not a recording and models no arrhythmia.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["ecg-trace-paper"]!}>
         <p>
           The grid follows standard ECG paper: 1 mm small boxes and 5 mm large
           boxes, at 25 mm/s and 10 mm/mV by default. Change <code>speed</code>{" "}
@@ -113,25 +130,7 @@ export default function Page() {
           <code>--ecg-grid</code> to any colour in your CSS; the small and large
           boxes draw it at 15% and 35% opacity.
         </p>
-        <p>
-          Labels and the heart rate come from <code>detectEcgWaves</code>, a
-          simple slope and amplitude heuristic tuned for clean sinus rhythms.
-          For real recordings pass your own <code>annotations</code>, each a
-          wave (<code>P</code>, <code>QRS</code> or <code>T</code>) and its peak
-          time in seconds, or <code>annotations=&#123;false&#125;</code> to hide
-          them. The heart rate is the median of the R to R intervals.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="synthetic-rhythm">Synthetic rhythm</DocsHeading>
-        <CodeSnippet label="Synthetic rhythm example" code={synthetic} />
-        <p>
-          <code>syntheticEcg</code> and <code>syntheticEcgStream</code> generate
-          an original, regular sinus rhythm from Gaussian P, Q, R, S and T
-          waves, for demos and tests. It is not a recording and models no
-          arrhythmia.
-        </p>
-      </section>
+      </ExampleSection>
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
@@ -146,7 +145,6 @@ export default function Page() {
           it for diagnosis or clinical decisions.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["ecg-trace"]!} />
       <PropsTable item="ecg-trace" />
       <DocsPager href="/docs/components/ecg-trace" />
     </div>

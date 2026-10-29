@@ -1,7 +1,10 @@
 import type { Metadata } from "next"
 import bodySystems from "@workspace/registry/body-systems.json"
 import catalog from "@workspace/registry/registry.json"
+import { comingSoon, offSite, showComingSoon } from "@/lib/coming-soon"
 import { site } from "@/lib/site"
+
+export { showComingSoon }
 
 export const shadcn = "shadcn@4.22.1"
 
@@ -49,13 +52,14 @@ function groupOf(categories: readonly string[] = []) {
 // The registry catalog is the single source for what the docs list, so a new
 // item appears in the sidebar and the index once it has a page at its href.
 // Blocks are listed on /blocks instead.
-export const registryItems = catalog.items
+const catalogItems = catalog.items
   .filter(
     (item) =>
       item.type !== "registry:block" &&
       !item.categories?.includes("utility") &&
       !item.categories?.includes("helper") &&
-      !item.categories?.includes("ai")
+      !item.categories?.includes("ai") &&
+      !offSite.has(item.name)
   )
   .map((item) => {
     const categories: readonly string[] =
@@ -101,6 +105,10 @@ export const registryItems = catalog.items
       a.title.localeCompare(b.title)
   )
 
+export const registryItems = catalogItems.filter(
+  ({ name }) => showComingSoon || !comingSoon.has(name)
+)
+
 export type RegistryItem = (typeof registryItems)[number]
 
 export const organs = registryItems.filter(({ organ }) => organ)
@@ -108,7 +116,7 @@ export const organs = registryItems.filter(({ organ }) => organ)
 export const conditions = registryItems.filter(({ condition }) => condition)
 
 // TypeScript helpers that install in lib, under /docs/helpers.
-export const helperItems = catalog.items
+const catalogHelpers = catalog.items
   .filter((item) => item.categories?.includes("helper"))
   .map((item) => ({
     name: item.name,
@@ -119,6 +127,10 @@ export const helperItems = catalog.items
     install: install(item),
   }))
   .sort((a, b) => a.title.localeCompare(b.title))
+
+export const helperItems = catalogHelpers.filter(
+  ({ name }) => showComingSoon || !comingSoon.has(name)
+)
 
 const utilitiesItem = catalog.items.find(({ name }) => name === "utilities")
 if (!utilitiesItem) throw new Error("No utilities item in the registry")
@@ -254,6 +266,8 @@ export type NavLink = {
   href: string
   /** Pages outside its address that belong to it, such as each condition. */
   pages?: string[]
+  /** Listed as coming soon, without a link outside next dev. */
+  soon?: boolean
 }
 
 export type DocsNavSection = { title: string; items: NavLink[] }
@@ -420,7 +434,11 @@ export const docsNav: DocsNavSection[] = [
             },
             {
               title: helpersIndex.title,
-              items: helperItems.map(({ title, href }) => ({ title, href })),
+              items: catalogHelpers.map(({ title, href, name }) => ({
+                title,
+                href,
+                ...(comingSoon.has(name) && { soon: true }),
+              })),
             },
             {
               title: utilitiesIndex.title,
@@ -430,9 +448,13 @@ export const docsNav: DocsNavSection[] = [
         : []),
       {
         title,
-        items: registryItems
+        items: catalogItems
           .filter((item) => item.group === id)
-          .map(({ title, href }) => ({ title, href })),
+          .map(({ title, href, name }) => ({
+            title,
+            href,
+            ...(comingSoon.has(name) && { soon: true }),
+          })),
       },
     ]),
 ]

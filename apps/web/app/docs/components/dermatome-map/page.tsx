@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -26,15 +26,9 @@ export function SensoryExam() {
   return <DermatomeMap selectedId={selectedId} onSelectionChange={select} />
 }`
 
-const results = `// Color levels by a sensory score, for example light touch.
-const colors = { C6: "var(--destructive)", C7: "oklch(0.8 0.12 85)" }
-
-<DermatomeMap
-  selectedId={selectedId}
-  onSelectionChange={select}
-  colors={colors}
-  views={["front"]}
-/>`
+const examples = Object.fromEntries(
+  componentExamples["dermatome-map"]!.map((example) => [example.name, example])
+)
 
 export default function Page() {
   return (
@@ -65,8 +59,9 @@ export default function Page() {
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, along with
-          shadcn&apos;s <code>button</code> if you do not have it yet. The
-          figures are inline SVG, so there are no images or 3D packages to load.
+          shadcn&apos;s <code>button</code>, <code>item</code> and{" "}
+          <code>toggle</code> if you do not have them yet. The figures are
+          inline SVG, so there are no images or 3D packages to load.
         </p>
         <a className="underline" href="/r/dermatome-map.json">
           View registry item JSON
@@ -86,17 +81,23 @@ export default function Page() {
           point.
         </p>
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="show-results">Show results</DocsHeading>
-        <CodeSnippet label="Colors example" code={results} />
+      <ExampleSection example={examples["dermatome-map-results"]!}>
         <p>
           Pass <code>colors</code> to fill levels with your own CSS colors, for
           example to show a sensory exam. Levels you leave out keep the default
           palette, one hue per region, which <code>dermatomeColor</code>{" "}
-          returns. Set <code>views</code> to show only the front or back, and{" "}
+          returns. To match your theme, set <code>--dermatome-cervical</code>,{" "}
+          <code>--dermatome-thoracic</code>, <code>--dermatome-lumbar</code> and{" "}
+          <code>--dermatome-sacral</code> in your CSS; every other level is
+          drawn lighter.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["dermatome-map-back"]!}>
+        <p>
+          Set <code>views</code> to show only the front or back, and{" "}
           <code>showLabels</code> to hide the level labels.
         </p>
-      </section>
+      </ExampleSection>
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
@@ -115,7 +116,6 @@ export default function Page() {
           unassigned.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["dermatome-map"]!} />
       <PropsTable item="dermatome-map" />
       <DocsPager href="/docs/components/dermatome-map" />
     </div>

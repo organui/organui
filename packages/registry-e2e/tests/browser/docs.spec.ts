@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { heartModel } from "@workspace/registry/heart"
+import { comingSoon, offSite } from "../../../../apps/web/lib/coming-soon.js"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
 
@@ -37,7 +38,9 @@ test("documentation interaction, styling and registry serving", async ({
   await demo
     .getByRole("button", { name: "Left ventricle", exact: true })
     .click()
-  await expect(demo.getByRole("status")).toHaveText("Selected: lv")
+  await expect(
+    demo.getByRole("treeitem", { name: /^Left ventricle, / })
+  ).toHaveAttribute("aria-selected", "true")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -291,11 +294,13 @@ test("component index lists every component inside the docs layout", async ({
   // Blocks are listed on /blocks, AI Elements and utilities on their own
   // pages.
   const components = catalog.items.filter(
-    ({ type, categories }) =>
+    ({ type, categories, name }) =>
       type !== "registry:block" &&
       !categories?.includes("utility") &&
       !categories?.includes("helper") &&
-      !categories?.includes("ai")
+      !categories?.includes("ai") &&
+      !comingSoon.has(name) &&
+      !offSite.has(name)
   )
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
@@ -390,6 +395,42 @@ test("component index lists every component inside the docs layout", async ({
   expect(errors).toEqual([])
 })
 
+// Items still being designed are listed in the sidebar without a link and
+// left out of the index; an installed item's docs link lands on its index.
+test("coming soon items are listed but not linked", async ({
+  page,
+  request,
+}) => {
+  // Helpers redirect to the helpers index, components to theirs.
+  const sections = registrySchema
+    .parse(await (await request.get("/r/registry.json")).json())
+    .items.filter(({ name }) => comingSoon.has(name))
+    .map(({ name, categories }) => ({
+      name,
+      section: categories?.includes("helper")
+        ? "/docs/helpers"
+        : "/docs/components",
+    }))
+  expect(sections).toHaveLength(comingSoon.size)
+  for (const { name, section } of sections) {
+    const response = await request.get(`${section}/${name}`, {
+      maxRedirects: 0,
+    })
+    expect(response.status()).toBe(307)
+    expect(
+      new URL(response.headers().location!, "http://localhost").pathname
+    ).toBe(section)
+  }
+  await page.goto("/docs/components")
+  // On a phone the sidebar is in the menu.
+  if ((page.viewportSize()?.width ?? 0) < 768)
+    await page.getByRole("button", { name: "Menu", exact: true }).click()
+  const sidebar = page.getByRole("navigation", { name: "Documentation" })
+  await expect(sidebar.getByText("Patient banner")).toContainText("Soon")
+  for (const { name, section } of sections)
+    await expect(page.locator(`a[href="${section}/${name}"]`)).toHaveCount(0)
+})
+
 // Items installed from v0.3.0 and earlier print /docs/<name> after install.
 test("old component addresses redirect permanently", async ({ request }) => {
   const catalog = registrySchema.parse(
@@ -477,12 +518,12 @@ test("the header links each section and searches the whole site", async ({
   await expect(
     dialog.getByRole("option", { name: /Explorer 02/ })
   ).toBeVisible()
-  await input.fill("vital")
-  await dialog.getByRole("option", { name: /^Vital signs/ }).click()
-  await expect(page).toHaveURL(/\/docs\/components\/vital-signs$/)
+  await input.fill("medication")
+  await dialog.getByRole("option", { name: /^Medication schedule/ }).click()
+  await expect(page).toHaveURL(/\/docs\/components\/medication-schedule$/)
   await expect(dialog).toBeHidden()
   await expect(
-    page.getByRole("heading", { name: "Vital signs", level: 1 })
+    page.getByRole("heading", { name: "Medication schedule", level: 1 })
   ).toBeVisible()
 
   // As on shadcn/ui, phones search from the keyboard shortcut only.
@@ -706,17 +747,15 @@ test("organ pages pair the viewer with the anatomy tree", async ({
     page.getByRole("heading", { name: "Heart", level: 1 })
   ).toBeVisible()
   const demo = page.getByRole("group", { name: "Heart example", exact: true })
-  await expect(
-    demo.getByRole("toolbar", { name: "View controls" })
-  ).toBeVisible()
+  // The demo is bare; the Controls example below shows the toolbar.
+  await expect(demo.locator("canvas")).toHaveCount(1)
+  await expect(demo.getByRole("toolbar")).toHaveCount(0)
   await demo.getByRole("button", { name: "View Code", exact: true }).click()
   await expect(demo.getByLabel("Heart code")).toContainText(
     'from "@/components/heart"'
   )
   await expect(demo.getByLabel("Heart code")).toContainText("<Heart")
-  await expect(demo.getByLabel("Heart code")).not.toContainText(
-    "controls={false}"
-  )
+  await expect(demo.getByLabel("Heart code")).toContainText("controls={false}")
   // Revealing code preserves the live default demo and its context.
   await expect(demo.locator("canvas")).toHaveCount(1)
   const headings = await page
@@ -725,26 +764,26 @@ test("organ pages pair the viewer with the anatomy tree", async ({
   expect(headings.indexOf("Installation")).toBeLessThan(
     headings.indexOf("Usage")
   )
-  expect(headings.indexOf("Usage")).toBeLessThan(
-    headings.indexOf("Without Controls")
-  )
-  const withoutControls = page.getByRole("group", {
-    name: "Heart Without Controls example",
+  expect(headings.indexOf("Usage")).toBeLessThan(headings.indexOf("Controls"))
+  const withControls = page.getByRole("group", {
+    name: "Heart Controls example",
     exact: true,
   })
-  await withoutControls.scrollIntoViewIfNeeded()
+  await withControls.scrollIntoViewIfNeeded()
   await expect(
-    withoutControls.getByRole("region", {
-      name: "Heart without controls example",
+    withControls.getByRole("region", {
+      name: "Heart with controls example",
     })
   ).toBeVisible()
-  await expect(withoutControls.getByRole("toolbar")).toHaveCount(0)
-  await withoutControls
+  await expect(
+    withControls.getByRole("toolbar", { name: "View controls" })
+  ).toBeVisible()
+  await withControls
     .getByRole("button", { name: "View Code", exact: true })
     .click()
   await expect(
-    withoutControls.getByLabel("Heart Without Controls code")
-  ).toContainText("controls={false}")
+    withControls.getByLabel("Heart Controls code")
+  ).not.toContainText("controls={false}")
   const controlled = page.getByRole("group", {
     name: "Heart Controlled Selection example",
     exact: true,
@@ -946,7 +985,15 @@ test("a public organ component loads its attributed hosted model", async ({
   )
   await page.goto("/docs/components/breast")
   await loaded
-  const viewer = page.getByRole("region", { name: "Breast default example" })
+  // The demo is bare, so the credit is checked in the Controls example.
+  const example = page.getByRole("group", {
+    name: "Breast Controls example",
+    exact: true,
+  })
+  await example.scrollIntoViewIfNeeded()
+  const viewer = example.getByRole("region", {
+    name: "Breast with controls example",
+  })
   await expect(viewer.getByRole("toolbar")).toBeVisible()
   await expect(viewer.getByRole("alert")).toHaveCount(0)
   await viewer.getByRole("button", { name: "Model credit" }).click()
@@ -962,6 +1009,7 @@ test("a public organ component loads its attributed hosted model", async ({
 test("vital signs example switches readings and states each status", async ({
   page,
 }, info) => {
+  test.skip(comingSoon.has("vital-signs"), "Vital signs is coming soon")
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/docs/components/vital-signs")
@@ -995,6 +1043,7 @@ test("lab results flag values in words and fit a phone", async ({
   page,
   request,
 }, info) => {
+  test.skip(comingSoon.has("lab-results"), "Lab results is coming soon")
   const errors: string[] = []
   page.on("pageerror", (error) => errors.push(error.message))
   await page.goto("/docs/components/lab-results")
@@ -1099,78 +1148,6 @@ test("the ECG trace page runs a live strip at the chosen rate", async ({
   expect(errors).toEqual([])
 })
 
-// Made-up tables in WHO's anthro layout, served in place of WHO's files so the
-// test neither fetches nor depends on the real standards.
-function anthroTable(median: (day: number) => number, loh = false) {
-  const lines = [`sex\tage\tl\tm\ts${loh ? "\tloh" : ""}`]
-  for (const sex of [1, 2])
-    for (let day = 0; day <= 1856; day++)
-      lines.push(
-        [
-          sex,
-          day,
-          1,
-          median(day),
-          0.1,
-          ...(loh ? [day < 731 ? "L" : "H"] : []),
-        ].join("\t")
-      )
-  return lines.join("\n")
-}
-
-test("the growth chart demo loads its tables and switches measures", async ({
-  page,
-}) => {
-  const errors: string[] = []
-  page.on("pageerror", (error) => errors.push(error.message))
-  const tables: Record<string, string> = {
-    "weianthro.txt": anthroTable((day) => 3.2 + day / 120),
-    "lenanthro.txt": anthroTable((day) => 50 + day / 30, true),
-    "hcanthro.txt": anthroTable((day) => 34 + day / 150),
-  }
-  await page.route(
-    "https://raw.githubusercontent.com/WorldHealthOrganization/anthro/**",
-    (route) => {
-      const name = new URL(route.request().url()).pathname.split("/").at(-1)!
-      return tables[name]
-        ? route.fulfill({
-            body: tables[name],
-            headers: { "access-control-allow-origin": "*" },
-          })
-        : route.abort()
-    }
-  )
-  await page.goto("/docs/components/growth-chart")
-  await expect(
-    page.getByRole("heading", { name: "Growth chart", level: 1 })
-  ).toBeVisible()
-  const chart = page.getByRole("group", { name: "Weight-for-age, girls" })
-  const points = chart.getByRole("img", { name: /^\d+ (months?|years): / })
-  await expect(points).toHaveCount(10)
-  await page.getByRole("button", { name: "Boys", exact: true }).click()
-  await page.getByRole("button", { name: "Head", exact: true }).click()
-  await expect(
-    page.getByRole("group", { name: "Head circumference-for-age, boys" })
-  ).toBeVisible()
-  await page.getByRole("button", { name: "Length/height", exact: true }).click()
-  await page.getByRole("button", { name: "0–5 years", exact: true }).click()
-  const length = page.getByRole("group", {
-    name: "Length/height-for-age, boys",
-  })
-  await length.getByRole("img", { name: /^6 months: 65\.5 cm, / }).focus()
-  await expect(
-    length.getByRole("img", { name: /^6 months: 65\.5 cm, / })
-  ).toBeFocused()
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth
-    )
-  ).toBe(true)
-  const axe = await new AxeBuilder({ page }).analyze()
-  expect(axe.violations).toEqual([])
-  expect(errors).toEqual([])
-})
-
 test("tree, sequence field and option groups remain usable in dark mode", async ({
   page,
 }, info) => {
@@ -1183,7 +1160,7 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
     "dna-helix",
     "ecg-trace",
     "vital-signs",
-  ]) {
+  ].filter((name) => !comingSoon.has(name))) {
     await page.goto(`/docs/components/${name}`)
     await expect(page.locator("html")).toHaveClass(/dark/)
     if (name === "anatomy-tree") {
@@ -1202,6 +1179,10 @@ test("tree, sequence field and option groups remain usable in dark mode", async 
       await heart.press("Enter")
       await expect(heart).toHaveAttribute("aria-selected", "true")
     } else if (name === "dna-helix") {
+      // The example mounts when it scrolls into view, as 3D examples do.
+      await page
+        .locator('[data-example="dna-helix-sequence"]')
+        .scrollIntoViewIfNeeded()
       const sequence = page.getByRole("textbox", { name: "Sequence, 5′ to 3′" })
       await sequence.fill("ATGC")
       await expect(sequence).toHaveValue("ATGC")
@@ -1233,8 +1214,9 @@ test("component previews reveal copyable code without resetting the demo", async
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"])
   await page.goto("/docs/components/anatomy-tree")
+  // The example that shows its state, so a reset would show.
   const example = page.getByRole("group", {
-    name: "Anatomy tree example",
+    name: "Selection and Visibility example",
     exact: true,
   })
   await example
@@ -1245,12 +1227,12 @@ test("component previews reveal copyable code without resetting the demo", async
   const reveal = example.getByRole("button", { name: "View Code", exact: true })
   await reveal.focus()
   await reveal.press("Enter")
-  const snippet = example.getByLabel("Anatomy tree code")
+  const snippet = example.getByLabel("Selection and Visibility code")
   await expect(snippet).toBeFocused()
   const expectedSource = (
     await readFile(
       new URL(
-        "examples/anatomy-tree-demo.tsx",
+        "examples/anatomy-tree-state.tsx",
         import.meta.resolve("web/package.json")
       ),
       "utf8"
@@ -1276,7 +1258,7 @@ test("component previews reveal copyable code without resetting the demo", async
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })
 
-test("image viewer docs scroll slices, window and read DICOM files", async ({
+test("scan viewer docs scroll slices, window and read DICOM files", async ({
   page,
 }, info) => {
   const errors: string[] = []
@@ -1284,9 +1266,9 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text())
   })
-  await page.goto("/docs/components/image-viewer")
-  // The main demo; the examples below it have their own.
-  const demo = page.locator('[data-example="image-viewer-demo"]')
+  await page.goto("/docs/components/scan-viewer")
+  // The Open DICOM Files example, which shows the viewer's state.
+  const demo = page.locator('[data-example="scan-viewer-dicom"]')
   const state = page.getByRole("status").filter({ hasText: "Slice" })
   await expect(state).toHaveText("Slice 16 of 32 · Window 80 / level 40")
   const stage = page.getByRole("region", { name: "Head phantom" })
@@ -1346,14 +1328,16 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
       })
     ),
   }))
-  await page.getByLabel("Open DICOM files").setInputFiles(files)
+  await page
+    .getByLabel("Open DICOM files", { exact: true })
+    .setInputFiles(files)
   await expect(state).toHaveText("Slice 2 of 3 · Window 80 / level 40")
   await expect(
     page
       .getByRole("region", { name: "3 DICOM files" })
       .getByRole("img", { name: "3 DICOM files, slice 2 of 3, Head phantom" })
   ).toBeVisible()
-  await page.getByLabel("Open DICOM files").setInputFiles({
+  await page.getByLabel("Open DICOM files", { exact: true }).setInputFiles({
     name: "notes.txt",
     mimeType: "text/plain",
     buffer: Buffer.from("not an image"),
@@ -1363,7 +1347,7 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
     "This is not a DICOM Part 10 file."
   )
   await page.screenshot({
-    path: info.outputPath("image-viewer.png"),
+    path: info.outputPath("scan-viewer.png"),
     fullPage: true,
   })
   expect(errors).toEqual([])
@@ -1436,7 +1420,10 @@ test("helper and utility pages show a working example and pass an accessibility 
   page.on("pageerror", (error) => errors.push(error.message))
   const helpers = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
-    .items.filter(({ categories }) => categories?.includes("helper"))
+    .items.filter(
+      ({ categories, name }) =>
+        categories?.includes("helper") && !comingSoon.has(name)
+    )
   expect(helpers.length).toBeGreaterThan(0)
   const pages = [
     ...helpers.map((item) => ({
@@ -1565,7 +1552,7 @@ test("themes redirect to create, which gives the commands", async ({
   await settings.getByRole("combobox", { name: "Theme" }).click()
   await page.getByRole("option", { name: "Blue" }).click()
   await settings.getByRole("button", { name: /OrganUI items/ }).click()
-  await page.getByRole("checkbox", { name: "Lab results table" }).click()
+  await page.getByRole("checkbox", { name: "Medication schedule" }).click()
   await page.keyboard.press("Escape")
   await expect(settings).not.toContainText("--preset b0")
   await getCode.click()
@@ -1577,7 +1564,7 @@ test("themes redirect to create, which gives the commands", async ({
   ).toContainText("/r/styles/{style}/{name}.json")
   await expect(
     dialog.getByRole("region", { name: "Add OrganUI items" })
-  ).toContainText("@organui/vital-signs @organui/lab-results")
+  ).toContainText("@organui/body-map @organui/medication-schedule")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
 })
@@ -1651,23 +1638,14 @@ test("component pages end with examples and an API reference", async ({
     ["body-map", "BodyMap"],
     ["dermatome-map", "DermatomeMap"],
     ["ecg-trace", "EcgTrace"],
-    ["growth-chart", "GrowthChart"],
-    ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
-    ["patient-banner", "PatientBanner"],
-    ["news2-chart", "News2Chart"],
-    ["problem-list", "ProblemList"],
-    ["allergy-list", "AllergyList"],
-    ["vital-signs", "VitalSigns"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)
-    await expect(
-      page.getByRole("heading", { name: "Examples", level: 2 })
-    ).toBeVisible()
-    // Each example has a linkable heading and a live preview.
-    expect(
-      await page.getByRole("heading", { level: 3 }).count()
-    ).toBeGreaterThanOrEqual(2)
+    // As on shadcn/ui, each example is its own section with a linkable
+    // heading and a live preview, after the page's own demo.
+    await expect
+      .poll(() => page.locator("[data-example]").count())
+      .toBeGreaterThanOrEqual(3)
     const props = page.getByRole("table", { name: `${component} props` })
     await expect(props).toBeVisible()
     expect(await props.getByRole("row").count()).toBeGreaterThan(2)

@@ -3,10 +3,10 @@ import { examples } from "./_examples"
 
 export const organExampleVariants = [
   {
-    suffix: "without-controls",
-    title: "Without Controls",
+    suffix: "controls",
+    title: "Controls",
     description:
-      "Hide the built-in view, zoom, and reset controls while keeping camera interaction and attribution.",
+      "By default the stage has a view menu, zoom and reset. The demo at the top hides them with controls={false}, keeping camera interaction and attribution.",
   },
   {
     suffix: "controlled",

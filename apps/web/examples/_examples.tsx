@@ -20,30 +20,12 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "organ-viewer-without-controls": {
-    title: "Organ viewer Without Controls",
-    file: "organ-viewer-without-controls.tsx",
+  "organ-viewer-models": {
+    title: "Any Model",
+    file: "organ-viewer-models.tsx",
     lazy: true,
     render: async () => {
-      const { Example } = await import("./organ-viewer-without-controls")
-      return <Example />
-    },
-  },
-  "organ-viewer-controlled": {
-    title: "Organ viewer Controlled Selection",
-    file: "organ-viewer-controlled.tsx",
-    lazy: true,
-    render: async () => {
-      const { Example } = await import("./organ-viewer-controlled")
-      return <Example />
-    },
-  },
-  "organ-viewer-with-anatomy": {
-    title: "Organ viewer With Anatomy Panel",
-    file: "organ-viewer-with-anatomy.tsx",
-    lazy: true,
-    render: async () => {
-      const { Example } = await import("./organ-viewer-with-anatomy")
+      const { Example } = await import("./organ-viewer-models")
       return <Example />
     },
   },
@@ -71,12 +53,12 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "cell-without-controls": {
-    title: "Cell Without Controls",
-    file: "cell-without-controls.tsx",
+  "cell-controls": {
+    title: "Cell Controls",
+    file: "cell-controls.tsx",
     lazy: true,
     render: async () => {
-      const { Example } = await import("./cell-without-controls")
+      const { Example } = await import("./cell-controls")
       return <Example />
     },
   },
@@ -98,11 +80,27 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "anatomy-tree-state": {
+    title: "Selection and Visibility",
+    file: "anatomy-tree-state.tsx",
+    render: async () => {
+      const { Example } = await import("./anatomy-tree-state")
+      return <Example />
+    },
+  },
   "anatomy-tree-demo": {
     title: "Anatomy tree",
     file: "anatomy-tree-demo.tsx",
     render: async () => {
       const { Example } = await import("./anatomy-tree-demo")
+      return <Example />
+    },
+  },
+  "body-map-value": {
+    title: "Selected Regions",
+    file: "body-map-value.tsx",
+    render: async () => {
+      const { Example } = await import("./body-map-value")
       return <Example />
     },
   },
@@ -122,14 +120,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "image-viewer-demo": {
-    title: "Medical image viewer",
-    file: "image-viewer-demo.tsx",
+  "scan-viewer-demo": {
+    title: "Scan viewer",
+    file: "scan-viewer-demo.tsx",
     // Generating the head phantom blocks the main thread for 70–170 ms on a
     // laptop, several times that on a phone, so index cards wait for a click.
     lazy: true,
     render: async () => {
-      const { Example } = await import("./image-viewer-demo")
+      const { Example } = await import("./scan-viewer-demo")
       return <Example />
     },
   },
@@ -138,6 +136,30 @@ export const examples: Record<string, ExampleDefinition> = {
     file: "vital-signs-demo.tsx",
     render: async () => {
       const { Example } = await import("./vital-signs-demo")
+      return <Example />
+    },
+  },
+  "medication-schedule-tracking": {
+    title: "Dose Tracking",
+    file: "medication-schedule-tracking.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-tracking")
+      return <Example />
+    },
+  },
+  "medication-schedule-interactions": {
+    title: "Interactions",
+    file: "medication-schedule-interactions.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-interactions")
+      return <Example />
+    },
+  },
+  "medication-schedule-date-picker": {
+    title: "With a Date Picker",
+    file: "medication-schedule-date-picker.tsx",
+    render: async () => {
+      const { Example } = await import("./medication-schedule-date-picker")
       return <Example />
     },
   },
@@ -279,14 +301,6 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "growth-chart-demo": {
-    title: "Growth chart",
-    file: "growth-chart-demo.tsx",
-    render: async () => {
-      const { Example } = await import("./growth-chart-demo")
-      return <Example />
-    },
-  },
   "age-demo": {
     title: "Age",
     file: "age-demo.tsx",
@@ -351,6 +365,22 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "ecg-grid-color": {
+    title: "ecg-grid-color",
+    file: "ecg-grid-color.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-grid-color")
+      return <Example />
+    },
+  },
+  "ecg-grid-size": {
+    title: "ecg-grid-size",
+    file: "ecg-grid-size.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-grid-size")
+      return <Example />
+    },
+  },
   "severity-demo": {
     title: "severity",
     file: "severity-demo.tsx",
@@ -372,6 +402,14 @@ export const examples: Record<string, ExampleDefinition> = {
     file: "ai-disclaimer-demo.tsx",
     render: async () => {
       const { Example } = await import("./ai-disclaimer-demo")
+      return <Example />
+    },
+  },
+  "ai-disclaimer-reviewed": {
+    title: "Reviewed",
+    file: "ai-disclaimer-reviewed.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-disclaimer-reviewed")
       return <Example />
     },
   },
@@ -471,6 +509,24 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "dna-helix-strands": {
+    title: "Strands and Controls",
+    file: "dna-helix-strands.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./dna-helix-strands")
+      return <Example />
+    },
+  },
+  "dna-helix-sequence": {
+    title: "Your Own Sequence",
+    file: "dna-helix-sequence.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./dna-helix-sequence")
+      return <Example />
+    },
+  },
   "dna-helix-still": {
     title: "Still",
     file: "dna-helix-still.tsx",
@@ -489,11 +545,19 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "ecg-trace-live": {
-    title: "Live Stream",
-    file: "ecg-trace-live.tsx",
+  "ecg-trace-rate": {
+    title: "Heart Rate",
+    file: "ecg-trace-rate.tsx",
     render: async () => {
-      const { Example } = await import("./ecg-trace-live")
+      const { Example } = await import("./ecg-trace-rate")
+      return <Example />
+    },
+  },
+  "ecg-trace-recorded": {
+    title: "Recorded Strip",
+    file: "ecg-trace-recorded.tsx",
+    render: async () => {
+      const { Example } = await import("./ecg-trace-recorded")
       return <Example />
     },
   },
@@ -505,35 +569,27 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "growth-chart-length": {
-    title: "Length and Height",
-    file: "growth-chart-length.tsx",
-    render: async () => {
-      const { Example } = await import("./growth-chart-length")
-      return <Example />
-    },
-  },
-  "growth-chart-head": {
-    title: "Chosen Percentiles",
-    file: "growth-chart-head.tsx",
-    render: async () => {
-      const { Example } = await import("./growth-chart-head")
-      return <Example />
-    },
-  },
-  "image-viewer-controlled": {
+  "scan-viewer-controlled": {
     title: "Controlled Slice and Window",
-    file: "image-viewer-controlled.tsx",
+    file: "scan-viewer-controlled.tsx",
     render: async () => {
-      const { Example } = await import("./image-viewer-controlled")
+      const { Example } = await import("./scan-viewer-controlled")
       return <Example />
     },
   },
-  "image-viewer-no-controls": {
-    title: "Without Controls",
-    file: "image-viewer-no-controls.tsx",
+  "scan-viewer-dicom": {
+    title: "Open DICOM Files",
+    file: "scan-viewer-dicom.tsx",
     render: async () => {
-      const { Example } = await import("./image-viewer-no-controls")
+      const { Example } = await import("./scan-viewer-dicom")
+      return <Example />
+    },
+  },
+  "scan-viewer-controls": {
+    title: "Controls and Presets",
+    file: "scan-viewer-controls.tsx",
+    render: async () => {
+      const { Example } = await import("./scan-viewer-controls")
       return <Example />
     },
   },
@@ -569,6 +625,15 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "molecule-viewer-selection": {
+    title: "Residue Selection",
+    file: "molecule-viewer-selection.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./molecule-viewer-selection")
+      return <Example />
+    },
+  },
   "molecule-viewer-spacefill": {
     title: "Spacefill",
     file: "molecule-viewer-spacefill.tsx",
@@ -578,12 +643,12 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "molecule-viewer-no-controls": {
-    title: "Without Controls",
-    file: "molecule-viewer-no-controls.tsx",
+  "molecule-viewer-controls": {
+    title: "Controls and Sequence",
+    file: "molecule-viewer-controls.tsx",
     lazy: true,
     render: async () => {
-      const { Example } = await import("./molecule-viewer-no-controls")
+      const { Example } = await import("./molecule-viewer-controls")
       return <Example />
     },
   },

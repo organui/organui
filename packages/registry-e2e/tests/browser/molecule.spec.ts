@@ -20,10 +20,13 @@ test("residues are picked on the stage and in the sequence", async ({
   })
   const residue = page.getByLabel("Residue", { exact: true })
   await expect(residue).toHaveText("none")
-  await expect(viewer.getByRole("link", { name: "PDB 1CRN" })).toHaveAttribute(
+  // The entry's link sits behind the info button, with the summary.
+  await viewer.getByRole("button", { name: "Structure details" }).click()
+  await expect(page.getByRole("link", { name: "PDB 1CRN" })).toHaveAttribute(
     "href",
     "https://www.rcsb.org/structure/1CRN"
   )
+  await page.keyboard.press("Escape")
   // Spacefill fills the middle of the stage, so a click there hits an atom.
   await viewer.getByRole("combobox", { name: "Style" }).click()
   await page.getByRole("option", { name: "Spacefill" }).click()

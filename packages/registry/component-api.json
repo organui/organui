@@ -440,8 +440,8 @@
       }
     ]
   },
-  "image-viewer": {
-    "component": "ImageViewer",
+  "scan-viewer": {
+    "component": "ScanViewer",
     "element": "div",
     "props": [
       {
@@ -530,7 +530,7 @@
       },
       {
         "name": "ref",
-        "type": "React.Ref<ImageViewerHandle>",
+        "type": "React.Ref<ScanViewerHandle>",
         "required": false,
         "default": null,
         "description": "Moves through slices, zooms and resets the view from your own controls."
@@ -642,7 +642,7 @@
         "type": "(time: string) => string",
         "required": false,
         "default": "defaultFormatTime",
-        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"."
+        "description": "Defaults to a UTC date and 24-hour time such as \"Oct 25, 14:00\"; the column headings then show the day only where it changes."
       }
     ]
   },
@@ -1050,6 +1050,189 @@
         "required": false,
         "default": null,
         "description": "Shown under the title, such as when the readings were taken."
+      }
+    ]
+  },
+  "ai-disclaimer": {
+    "component": "AiDisclaimer",
+    "element": "div",
+    "props": [
+      {
+        "name": "model",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The model or service that produced the content."
+      },
+      {
+        "name": "generatedAt",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "When it was generated, an ISO 8601 date-time."
+      },
+      {
+        "name": "review",
+        "type": "AiReview | null",
+        "required": false,
+        "default": "null",
+        "description": "Who reviewed it and when, once someone has; the title and text then say so."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Replaces the default guidance."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Defaults to a UTC date and time such as \"Oct 21, 2026, 9:30 AM UTC\"."
+      }
+    ]
+  },
+  "ai-note": {
+    "component": "AiNote",
+    "element": "article",
+    "props": [
+      {
+        "name": "sections",
+        "type": "readonly AiNoteSection[]",
+        "required": true,
+        "default": null,
+        "description": "The note's sections, in order: `{ id, title, content }`, where content mixes plain strings, which join claims, with claims: `{ text, sources }`."
+      },
+      {
+        "name": "sources",
+        "type": "readonly ClinicalSource[]",
+        "required": false,
+        "default": "[]",
+        "description": "The records the note may cite; the list under it shows those it does."
+      },
+      {
+        "name": "markUnsupported",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Underlines claims without a source and says so to screen readers."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"AI-drafted note\"",
+        "description": "Names the note for assistive technology."
+      }
+    ]
+  },
+  "clinical-citation": {
+    "component": "ClinicalCitation",
+    "element": null,
+    "props": [
+      {
+        "name": "source",
+        "type": "ClinicalSource",
+        "required": true,
+        "default": null,
+        "description": "The record cited: `{ id, title, label?, kind?, date?, detail?, href? }`. `label` is the chip's text, `detail` quotes the part relied on and `href` opens it in your record."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Classes for the chip."
+      }
+    ]
+  },
+  "clinical-sources": {
+    "component": "ClinicalSources",
+    "element": "div",
+    "props": [
+      {
+        "name": "sources",
+        "type": "readonly ClinicalSource[]",
+        "required": true,
+        "default": null,
+        "description": "The records the answer used. Nothing renders without any."
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": "Shows the list open at first."
+      }
+    ]
+  },
+  "clinician-review": {
+    "component": "ClinicianReview",
+    "element": "div",
+    "props": [
+      {
+        "name": "value",
+        "type": "ReviewDecision",
+        "required": true,
+        "default": null,
+        "description": "The current decision, `{ status, reviewer?, at?, comment? }`, where status is pending, approved, changes-requested or rejected. Store it with the content it reviews."
+      },
+      {
+        "name": "onValueChange",
+        "type": "(decision: ReviewDecision) => void",
+        "required": true,
+        "default": null,
+        "description": "Called with each new decision, or with pending after an undo."
+      },
+      {
+        "name": "reviewer",
+        "type": "string",
+        "required": true,
+        "default": null,
+        "description": "The signed-in clinician, recorded with each decision."
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "required": false,
+        "default": "\"AI-generated content\"",
+        "description": "What is being reviewed, such as \"Discharge summary\"."
+      },
+      {
+        "name": "now",
+        "type": "() => string",
+        "required": false,
+        "default": "() => new Date().toISOString()",
+        "description": "The time recorded with a decision. Defaults to now, as ISO 8601."
+      },
+      {
+        "name": "formatDate",
+        "type": "(date: string) => string",
+        "required": false,
+        "default": "defaultFormatDate",
+        "description": "Defaults to a UTC date and time such as \"Oct 21, 2026, 9:30 AM UTC\"."
+      }
+    ]
+  },
+  "differential-list": {
+    "component": "DifferentialList",
+    "element": "div",
+    "props": [
+      {
+        "name": "items",
+        "type": "readonly Differential[]",
+        "required": true,
+        "default": null,
+        "description": "The suggested diagnoses, `{ id, name, confidence, code?, supporting?, against? }`, with confidence from 0 to 1. In any order; they show most confident first."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"Differential diagnosis\"",
+        "description": "Names the list for assistive technology."
       }
     ]
   }

@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -45,6 +45,13 @@ export function Schedule() {
     doseStatus={doseStatus} onDoseStatusChange={setDoseStatus} />
 }`
 
+const examples = Object.fromEntries(
+  componentExamples["medication-schedule"]!.map((example) => [
+    example.name,
+    example,
+  ])
+)
+
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
@@ -77,10 +84,11 @@ export default function Page() {
         </p>
         <p className="text-sm text-muted-foreground">
           The source installs into your configured UI directory, along with
-          shadcn&apos;s <code>alert</code>, <code>button</code> and{" "}
-          <code>empty</code> if you do not have them yet. It uses your existing
-          theme tokens and installs no global styles, date library or drug
-          database.
+          shadcn&apos;s <code>alert</code>, <code>badge</code>,{" "}
+          <code>button</code>, <code>button-group</code>, <code>card</code>,{" "}
+          <code>empty</code> and <code>item</code> if you do not have them yet.
+          It uses your existing theme tokens and installs no global styles, date
+          library or drug database.
         </p>
         <a className="underline" href="/r/medication-schedule.json">
           View registry item JSON
@@ -104,48 +112,6 @@ export default function Page() {
           to mark the current time on the timeline; the component never reads
           the clock itself.
         </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="dose-tracking">Dose tracking</DocsHeading>
-        <p>
-          Dose status is a map from dose keys, such as{" "}
-          <code>levothyroxine@2026-10-19T07:00</code>, to{" "}
-          <code>&quot;taken&quot;</code> or <code>&quot;skipped&quot;</code>.
-          Missing doses are still to take. With <code>onDoseStatusChange</code>,
-          each dose in the list becomes a button that cycles from to take, to
-          taken, to skipped and back; the callback receives the whole new map
-          for you to store. Without it the status is shown as text.
-        </p>
-        <p>
-          The timeline is a visual summary and is hidden from assistive
-          technology. The ordered dose list carries the same times, names,
-          statuses and warnings, and each status button names its medication and
-          time.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="interaction-warnings">
-          Interaction warnings
-        </DocsHeading>
-        <p>
-          The component ships no drug database and makes no clinical judgement.
-          It shows only the <code>interactions</code> you pass, each naming two
-          or more medication IDs, a <code>severity</code> of <code>minor</code>,{" "}
-          <code>moderate</code> or <code>major</code>, and a{" "}
-          <code>summary</code>. A warning appears on days when every medication
-          it names is due, most severe first, and major ones get a destructive
-          border and title. Give <code>separationHours</code> to flag same-day
-          doses of those medications that are closer than that, on the timeline
-          and in the dose list.
-        </p>
-        <p>
-          Source your interactions from a reviewed clinical service, and keep
-          the default disclaimer or replace it with your own through{" "}
-          <code>disclaimer</code>. Doses across midnight are not compared.
-        </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="customize">Customize</DocsHeading>
         <p>
           Set <code>label</code> for the accessible name, <code>locale</code>{" "}
           for the date heading, <code>className</code> for the outer container
@@ -154,12 +120,65 @@ export default function Page() {
           <code>doseConflicts</code> and <code>nextDoseStatus</code> are
           exported for your own views, such as reminders or a weekly summary.
         </p>
+      </section>
+      <ExampleSection example={examples["medication-schedule-tracking"]!}>
+        <p>
+          Dose status is a map from dose keys, such as{" "}
+          <code>levothyroxine@2026-10-19T07:00</code>, to{" "}
+          <code>&quot;taken&quot;</code> or <code>&quot;skipped&quot;</code>.
+          Missing doses are still to take. With <code>onDoseStatusChange</code>,
+          each dose in the list becomes a button that cycles from to take, to
+          taken, to skipped and back; the callback receives the whole new map
+          for you to store. Without it the status is shown as a badge.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["medication-schedule-interactions"]!}>
+        <p>
+          The component ships no drug database and makes no clinical judgement.
+          It shows only the <code>interactions</code> you pass, each naming two
+          or more medication IDs, a <code>severity</code> of <code>minor</code>,{" "}
+          <code>moderate</code> or <code>major</code>, and a{" "}
+          <code>summary</code>. A warning appears on days when every medication
+          it names is due, most severe first, and major ones use shadcn&apos;s
+          destructive alert. Give <code>separationHours</code> to flag same-day
+          doses of those medications that are closer than that, on the timeline
+          and in the dose list.
+        </p>
+        <p>
+          Source your interactions from a reviewed clinical service, and keep
+          the default disclaimer or replace it with your own through{" "}
+          <code>disclaimer</code>. Doses across midnight are not compared.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["medication-schedule-date-picker"]!}>
+        <p>
+          The date is controlled, so a date picker is a few lines in your app
+          rather than part of the component, which installs no date library.
+          This one is shadcn&apos;s{" "}
+          <a
+            className="underline"
+            href="https://ui.shadcn.com/docs/components/date-picker"
+          >
+            Date Picker
+          </a>
+          , a Popover with a Calendar, beside the day buttons.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["medication-schedule-simple"]!} />
+      <ExampleSection example={examples["medication-schedule-read-only"]!} />
+      <section className="flex flex-col gap-4">
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
+        <p>
+          The timeline is a visual summary and is hidden from assistive
+          technology. The ordered dose list carries the same times, names,
+          statuses and warnings, and each status button names its medication and
+          time.
+        </p>
         <p className="text-sm text-muted-foreground">
           A display component, not a medical device. No reminders,
           notifications, as-needed dosing, titration or dose calculations.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["medication-schedule"]!} />
       <PropsTable item="medication-schedule" />
       <DocsPager href="/docs/components/medication-schedule" />
     </div>

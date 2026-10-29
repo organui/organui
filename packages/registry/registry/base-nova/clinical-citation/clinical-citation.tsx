@@ -34,15 +34,18 @@ export function clinicalSourceMeta(source: ClinicalSource) {
  * A record cited in the sentence that relies on it. It opens on hover or
  * focus, as shadcn's Inline Citation does, and shows what the record says.
  */
-export function ClinicalCitation({
-  source,
-  className,
-}: {
-  /** The record cited. */
+export type ClinicalCitationProps = {
+  /**
+   * The record cited: `{ id, title, label?, kind?, date?, detail?, href? }`.
+   * `label` is the chip's text, `detail` quotes the part relied on and
+   * `href` opens it in your record.
+   */
   source: ClinicalSource
   /** Classes for the chip. */
   className?: string
-}) {
+}
+
+export function ClinicalCitation({ source, className }: ClinicalCitationProps) {
   const meta = clinicalSourceMeta(source)
   return (
     <HoverCard>

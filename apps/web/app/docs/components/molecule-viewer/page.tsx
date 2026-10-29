@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -38,6 +38,13 @@ const structure = parseStructure(text) // PDB or mmCIF, detected
 structure.residues[0] // { id: "A:1", name: "THR", kind: "protein", secondary: "sheet", ... }
 structure.bonds       // atom index pairs inferred from covalent radii`
 
+const examples = Object.fromEntries(
+  componentExamples["molecule-viewer"]!.map((example) => [
+    example.name,
+    example,
+  ])
+)
+
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
@@ -64,8 +71,9 @@ export default function Page() {
         <p className="text-sm text-muted-foreground">
           The source installs into your components directory and adds three.js,
           plus shadcn&apos;s <code>alert</code>, <code>button</code>,{" "}
-          <code>select</code> and <code>tooltip</code> for its controls. Its
-          toolbar composes them with Base UI&apos;s <code>render</code> prop;{" "}
+          <code>popover</code>, <code>select</code>, <code>spinner</code> and{" "}
+          <code>tooltip</code> for its controls. Its toolbar composes them with
+          Base UI&apos;s <code>render</code> prop;{" "}
           <Link href="/docs/base-ui" className="underline">
             Radix projects
           </Link>{" "}
@@ -95,9 +103,24 @@ export default function Page() {
           drawn as coil. Bonds, including disulfides, are inferred from covalent
           radii; metal ions are left unbonded.
         </p>
+        <p>
+          The parser is exported too, for structures you want to read without
+          drawing them:
+        </p>
+        <CodeSnippet label="Parser example" code={parse} />
       </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="behaviour">Behaviour</DocsHeading>
+      <ExampleSection example={examples["molecule-viewer-controls"]!}>
+        <p>
+          Pass <code>controls=&#123;false&#125;</code> to hide the menus and
+          buttons and <code>sequence=&#123;false&#125;</code> to hide the
+          sequence, as the demo at the top does. Without the buttons, your own
+          UI can drive the viewer through its ref, which exposes{" "}
+          <code>zoom</code>, <code>rotate</code> and <code>reset</code>. When
+          the file names its PDB ID, the viewer links the entry on RCSB PDB;
+          pass <code>attribution=&#123;false&#125;</code> to hide it.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["molecule-viewer-selection"]!}>
         <p>
           Selection is controlled and works on residues: pass{" "}
           <code>selectedId</code>, such as <code>A:16</code> (chain, author
@@ -105,31 +128,29 @@ export default function Page() {
           <code>onSelectionChange</code>, which also passes the residue record.
           The selected residue keeps its colour while everything else fades; in
           the cartoon style its atoms are drawn as ball and stick on the ribbon.
-          The sequence strip below the stage selects the same way and is one tab
-          stop, moved with the arrow keys, Home and End.
+          The sequence strip below the stage selects the same way.
         </p>
+      </ExampleSection>
+      <ExampleSection example={examples["molecule-viewer-spacefill"]!}>
         <p>
-          The style and colour menus are uncontrolled by default. Set{" "}
-          <code>representation</code> (<code>cartoon</code>,{" "}
-          <code>ball-and-stick</code>, <code>spacefill</code>) or{" "}
-          <code>colorScheme</code> (<code>secondary</code>, <code>chain</code>,{" "}
-          <code>element</code>, <code>residue</code>, <code>rainbow</code>) with
-          their change callbacks to control them. Ligands are always drawn as
-          atoms; water is hidden unless you pass <code>water</code>.
+          The style and colour menus are uncontrolled by default; this example
+          only sets where they start. To control them, set{" "}
+          <code>representation</code> to <code>cartoon</code>,{" "}
+          <code>ball-and-stick</code> or <code>spacefill</code>, or{" "}
+          <code>colorScheme</code> to <code>secondary</code>, <code>chain</code>
+          , <code>element</code>, <code>residue</code> or <code>rainbow</code>,
+          with their change callbacks. Ligands are always drawn as atoms; water
+          is hidden unless you pass <code>water</code>.
         </p>
+      </ExampleSection>
+      <section className="flex flex-col gap-4">
+        <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           Drag or the arrow keys rotate; scroll, pinch, plus and minus zoom. The
-          ref exposes <code>zoom</code>, <code>rotate</code> and{" "}
-          <code>reset</code>. When the file names its PDB ID, the viewer links
-          the entry on RCSB PDB; pass <code>attribution=&#123;false&#125;</code>{" "}
-          to hide it.
+          sequence strip is one tab stop, moved with the arrow keys, Home and
+          End, and is the keyboard and screen-reader route to selecting a
+          residue.
         </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="use-the-parser-on-its-own">
-          Use the parser on its own
-        </DocsHeading>
-        <CodeSnippet label="Parser example" code={parse} />
         <p className="text-sm text-muted-foreground">
           WebGL is required. When it cannot start, or the file cannot be read,
           the viewer shows a message with a retry button. Very large assemblies
@@ -137,7 +158,6 @@ export default function Page() {
           to the chains you need first.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["molecule-viewer"]!} />
       <PropsTable item="molecule-viewer" />
       <DocsPager href="/docs/components/molecule-viewer" />
     </div>

@@ -216,22 +216,20 @@ export function AllergyList({
                   scope="row"
                   className="h-auto py-2 font-normal whitespace-normal"
                 >
-                  <span
-                    className={cn(
-                      "font-medium",
-                      status !== "active" && "line-through"
-                    )}
-                  >
-                    {allergy.substance}
-                  </span>
+                  <span className="font-medium">{allergy.substance}</span>
                   {details.length > 0 && (
                     <span className="block text-xs text-muted-foreground">
                       {details.join(" · ")}
                     </span>
                   )}
                   {allergy.recordedDate && (
+                    // Only the date keeps to one line, so a narrow table
+                    // wraps before "Recorded" rather than scrolling.
                     <span className="block text-xs text-muted-foreground @lg:hidden">
-                      Recorded {formatDate(allergy.recordedDate)}
+                      Recorded{" "}
+                      <span className="whitespace-nowrap">
+                        {formatDate(allergy.recordedDate)}
+                      </span>
                     </span>
                   )}
                 </TableHead>

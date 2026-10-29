@@ -5,7 +5,7 @@ import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
 import { PropsTable } from "@/components/props-table"
-import { ComponentExamples } from "@/components/component-examples"
+import { ExampleSection } from "@/components/component-examples"
 import { componentExamples } from "@/lib/component-examples"
 import Link from "next/link"
 import { docsMetadata, shadcn } from "@/lib/registry"
@@ -45,6 +45,10 @@ const regions = bodyMapRegions
 
 <BodyMap regions={regions} views={["front"]} value={value}
   onValueChange={(ids) => setValue(ids.slice(-1))} />`
+
+const examples = Object.fromEntries(
+  componentExamples["body-map"]!.map((example) => [example.name, example])
+)
 
 export default function Page() {
   return (
@@ -87,21 +91,46 @@ export default function Page() {
         <DocsHeading id="usage">Usage</DocsHeading>
         <CodeSnippet label="State wiring example" code={usage} />
         <p>
-          Selection is controlled. <code>value</code> is the list of selected
-          region IDs in the order they were picked, and{" "}
-          <code>onValueChange</code> receives the next list. IDs that are not
-          among the regions are dropped from that list. With <code>name</code>,
-          each selected ID is submitted as a hidden input, so a plain form posts{" "}
-          <code>regions=right-knee&amp;regions=…</code>.
-        </p>
-        <p>
           Sides are the patient&apos;s. From the front, the patient&apos;s right
           is on the viewer&apos;s left; from the back it is on the viewer&apos;s
           right. Small R and L markers beside each view say so. Front and back
           regions have separate IDs, such as <code>right-knee</code> and{" "}
           <code>right-knee-back</code>.
         </p>
+        <CodeSnippet label="Custom regions example" code={custom} />
+        <p>
+          <code>bodyMapRegions</code> exports the default regions. Pass your own
+          list to <code>regions</code> to rename, remove or redraw them; paths
+          share a 200 by 440 coordinate space and paired shapes set{" "}
+          <code>mirrored</code> to reflect across the midline. Use{" "}
+          <code>label</code> for the group&apos;s accessible name and{" "}
+          <code>className</code> for the outer container. To allow one region
+          only, keep the last ID as shown above. Edit the installed source to
+          shade regions by severity.
+        </p>
       </section>
+      <ExampleSection example={examples["body-map-value"]!}>
+        <p>
+          Selection is controlled. <code>value</code> is the list of selected
+          region IDs in the order they were picked, and{" "}
+          <code>onValueChange</code> receives the next list. IDs that are not
+          among the regions are dropped from that list.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["body-map-front"]!}>
+        <p>
+          Pass <code>views</code> to show one side, such as{" "}
+          <code>&#123;[&quot;front&quot;]&#125;</code> for a form that asks
+          about the front only.
+        </p>
+      </ExampleSection>
+      <ExampleSection example={examples["body-map-form"]!}>
+        <p>
+          With <code>name</code>, each selected ID is submitted as a hidden
+          input, like a group of checkboxes, so a plain form posts{" "}
+          <code>regions=right-knee&amp;regions=…</code>.
+        </p>
+      </ExampleSection>
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
@@ -112,27 +141,12 @@ export default function Page() {
           the selection. Selected regions are also listed as buttons that remove
           them, which is the quickest way to undo a pick on a small screen.
         </p>
-      </section>
-      <section className="flex flex-col gap-4">
-        <DocsHeading id="customize">Customize</DocsHeading>
-        <CodeSnippet label="Custom regions example" code={custom} />
-        <p>
-          <code>bodyMapRegions</code> exports the default regions. Pass your own
-          list to <code>regions</code> to rename, remove or redraw them; paths
-          share a 200 by 440 coordinate space and paired shapes set{" "}
-          <code>mirrored</code> to reflect across the midline. Use{" "}
-          <code>views</code> to show one side, <code>label</code> for the
-          group&apos;s accessible name and <code>className</code> for the outer
-          container. To allow one region only, keep the last ID as shown above.
-          Edit the installed source to shade regions by severity.
-        </p>
         <p className="text-sm text-muted-foreground">
           The outline and regions were drawn for this component as a simplified,
           non-clinical diagram. They do not follow a validated pain-drawing
           instrument or dermatome boundaries.
         </p>
       </section>
-      <ComponentExamples examples={componentExamples["body-map"]!} />
       <PropsTable item="body-map" />
       <DocsPager href="/docs/components/body-map" />
     </div>

@@ -1,8 +1,23 @@
 import type { ComponentExample } from "@/components/component-examples"
+import { showComingSoon } from "@/lib/registry"
 
 // The examples each component page shows after its usage.
 export const componentExamples: Record<string, ComponentExample[]> = {
+  "ai-disclaimer": [
+    {
+      name: "ai-disclaimer-reviewed",
+      title: "Reviewed",
+      description:
+        "Pass review once a clinician has checked the content, and the disclaimer says who and when.",
+    },
+  ],
   "anatomy-tree": [
+    {
+      name: "anatomy-tree-state",
+      title: "Selection and Visibility",
+      description:
+        "Selecting a structure or changing its visibility hands the new state to your app, to drive your own viewer.",
+    },
     {
       name: "anatomy-tree-groups",
       title: "Groups and Colours",
@@ -16,7 +31,35 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Visibility starts with the right heart hidden, so its branch shows as partly visible.",
     },
   ],
+  "ecg-grid": [
+    {
+      name: "ecg-grid-color",
+      title: "Colour",
+      description:
+        "ecg-grid-color-<color> takes any theme colour, such as sky-500, for a monitor's palette.",
+    },
+    {
+      name: "ecg-grid-size",
+      title: "Size",
+      description:
+        "ecg-grid-size-<number> sets the small square on the spacing scale; a bolder line still falls every fifth.",
+    },
+  ],
+  "organ-viewer": [
+    {
+      name: "organ-viewer-models",
+      title: "Any Model",
+      description:
+        "One viewer, any model: switch organs and the stage stays the same, with its view menu, zoom and reset.",
+    },
+  ],
   "body-map": [
+    {
+      name: "body-map-value",
+      title: "Selected Regions",
+      description:
+        "The value is an array of region IDs, yours to store with the rest of the record.",
+    },
     {
       name: "body-map-front",
       title: "One View",
@@ -44,6 +87,18 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "dna-helix": [
     {
+      name: "dna-helix-strands",
+      title: "Strands and Controls",
+      description:
+        "By default the stage has buttons to pause, zoom and reset, and both strands sit below it, selectable like the pairs.",
+    },
+    {
+      name: "dna-helix-sequence",
+      title: "Your Own Sequence",
+      description:
+        "Type a strand, 5′ to 3′, and the helix pairs it; anything but A, C, G and T shows a message instead.",
+    },
+    {
       name: "dna-helix-still",
       title: "Still",
       description: "Without rotation or the strands below, as an illustration.",
@@ -56,9 +111,16 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "ecg-trace": [
     {
-      name: "ecg-trace-live",
-      title: "Live Stream",
-      description: "A stream sweeps like a monitor and always offers Pause.",
+      name: "ecg-trace-rate",
+      title: "Heart Rate",
+      description:
+        "Change the synthetic rate and the trace, heart rate and labels follow.",
+    },
+    {
+      name: "ecg-trace-recorded",
+      title: "Recorded Strip",
+      description:
+        "Samples you already have are drawn once, with no sweep and no Pause.",
     },
     {
       name: "ecg-trace-paper",
@@ -67,32 +129,24 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Faster paper and more gain, without wave labels, for a closer look.",
     },
   ],
-  "growth-chart": [
+  "scan-viewer": [
     {
-      name: "growth-chart-length",
-      title: "Length and Height",
+      name: "scan-viewer-controls",
+      title: "Controls and Presets",
       description:
-        "Lying length to 24 months, then standing height, which steps down by about 0.7 cm.",
+        "By default a toolbar offers window presets, the window and pan tools and zoom, with a slice slider below.",
     },
     {
-      name: "growth-chart-head",
-      title: "Chosen Percentiles",
-      description:
-        "Head circumference with only the 3rd, 50th and 97th curves.",
-    },
-  ],
-  "image-viewer": [
-    {
-      name: "image-viewer-controlled",
+      name: "scan-viewer-controlled",
       title: "Controlled Slice and Window",
       description:
         "Slice and window come from your state, so your own controls can drive them.",
     },
     {
-      name: "image-viewer-no-controls",
-      title: "Without Controls",
+      name: "scan-viewer-dicom",
+      title: "Open DICOM Files",
       description:
-        "No toolbar or slider; the image still scrolls, zooms and windows.",
+        "Read a series from files the user picks, in the browser, with nothing uploaded.",
     },
   ],
   "lab-results": [
@@ -115,12 +169,17 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       description:
         "Not asking and finding no allergies are different records, and read differently.",
     },
-    {
-      name: "allergy-list-banner",
-      title: "With the Patient Banner",
-      description:
-        "allergySummary turns the list into the banner's allergies, leaving out resolved ones.",
-    },
+    // The patient banner is coming soon.
+    ...(showComingSoon
+      ? [
+          {
+            name: "allergy-list-banner",
+            title: "With the Patient Banner",
+            description:
+              "allergySummary turns the list into the banner's allergies, leaving out resolved ones.",
+          },
+        ]
+      : []),
   ],
   "problem-list": [
     {
@@ -165,6 +224,24 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "medication-schedule": [
     {
+      name: "medication-schedule-tracking",
+      title: "Dose Tracking",
+      description:
+        "Step through the days or mark doses taken or skipped, and the callbacks hand each change to your app.",
+    },
+    {
+      name: "medication-schedule-interactions",
+      title: "Interactions",
+      description:
+        "Doses closer than an interaction's separation are flagged on the timeline and in the list.",
+    },
+    {
+      name: "medication-schedule-date-picker",
+      title: "With a Date Picker",
+      description:
+        "The date is yours to control, so shadcn's Popover and Calendar can jump to any day.",
+    },
+    {
       name: "medication-schedule-simple",
       title: "One Medication",
       description: "Twice a day, with no interactions and no disclaimer.",
@@ -173,20 +250,26 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       name: "medication-schedule-read-only",
       title: "Read-only",
       description:
-        "Without callbacks there are no day buttons and dose status is text.",
+        "Without callbacks there are no day buttons and dose status is a badge.",
     },
   ],
   "molecule-viewer": [
     {
+      name: "molecule-viewer-controls",
+      title: "Controls and Sequence",
+      description:
+        "By default the stage has style and colour menus, zoom and reset, and the sequence sits below it.",
+    },
+    {
+      name: "molecule-viewer-selection",
+      title: "Residue Selection",
+      description:
+        "Pick a residue on the model or in the sequence, and the callback gives its ID and record.",
+    },
+    {
       name: "molecule-viewer-spacefill",
       title: "Spacefill",
       description: "Atoms as spheres, coloured by element.",
-    },
-    {
-      name: "molecule-viewer-no-controls",
-      title: "Without Controls",
-      description:
-        "Only the structure, coloured as a rainbow. It still rotates.",
     },
   ],
   "vital-signs": [

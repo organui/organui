@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { ItemDocs } from "@/components/item-docs"
+import { PropsTable } from "@/components/props-table"
 import { aiDocs } from "@/lib/ai-docs"
 import { aiItems, docsMetadata } from "@/lib/registry"
 
@@ -34,11 +35,9 @@ export default async function Page({ params }: Props) {
     <ItemDocs
       item={item}
       doc={doc}
-      reference={{
-        heading: "API Reference",
-        column: "Prop",
-        caption: `${item.title} props`,
-      }}
+      api={
+        <PropsTable item={name as Parameters<typeof PropsTable>[0]["item"]} />
+      }
       installNote={`This adds components/ui/${name}.tsx, built on shadcn's components in your project's Base UI or Radix style.`}
     />
   )

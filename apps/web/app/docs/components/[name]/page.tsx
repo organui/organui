@@ -110,7 +110,6 @@ export function ${component}Demo() {
         </p>
       </section>
       <OrganExamples key={`${name}-examples`} name={name} />
-      <OrganApi component={component} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="views">Views</DocsHeading>
         <p>
@@ -149,6 +148,8 @@ export function ${component}Demo() {
           An educational model, not for diagnosis or clinical decisions.
         </p>
       </section>
+      {/* The API reference comes last, as on shadcn/ui. */}
+      <OrganApi component={component} />
       <DocsPager href={item.href} />
     </div>
   )

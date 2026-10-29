@@ -32,7 +32,7 @@ export const documented = {
   "dna-helix": ["dna-helix/dna-helix.tsx", "DnaHelix"],
   "ecg-trace": ["ecg-trace/ecg-trace.tsx", "EcgTrace"],
   "growth-chart": ["growth-chart/growth-chart.tsx", "GrowthChart"],
-  "image-viewer": ["image-viewer/image-viewer.tsx", "ImageViewer"],
+  "scan-viewer": ["scan-viewer/scan-viewer.tsx", "ScanViewer"],
   "lab-results": ["lab-results/lab-results.tsx", "LabResultsTable"],
   "patient-banner": ["patient-banner/patient-banner.tsx", "PatientBanner"],
   "news2-chart": ["news2-chart/news2-chart.tsx", "News2Chart"],
@@ -45,6 +45,24 @@ export const documented = {
   "molecule-viewer": ["molecule-viewer/molecule-viewer.tsx", "MoleculeViewer"],
   "organ-viewer": ["organ-viewer/organ-viewer.tsx", "OrganViewer"],
   "vital-signs": ["vital-signs/vital-signs.tsx", "VitalSigns"],
+  "ai-disclaimer": ["ai-disclaimer/ai-disclaimer.tsx", "AiDisclaimer"],
+  "ai-note": ["ai-note/ai-note.tsx", "AiNote"],
+  "clinical-citation": [
+    "clinical-citation/clinical-citation.tsx",
+    "ClinicalCitation",
+  ],
+  "clinical-sources": [
+    "clinical-sources/clinical-sources.tsx",
+    "ClinicalSources",
+  ],
+  "clinician-review": [
+    "clinician-review/clinician-review.tsx",
+    "ClinicianReview",
+  ],
+  "differential-list": [
+    "differential-list/differential-list.tsx",
+    "DifferentialList",
+  ],
 } as const
 
 function readApi(file: string, component: string): ComponentApi {

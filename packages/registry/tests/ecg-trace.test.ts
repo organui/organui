@@ -92,6 +92,20 @@ test("a recorded strip renders the grid, labels and its summary", () => {
   expect(given).toContain("about 60 beats per minute")
 })
 
+test("a fast rhythm keeps QRS on every beat but drops crowded P and T", () => {
+  const strip = (heartRate: number) =>
+    renderToStaticMarkup(
+      createElement(EcgTrace, { samples: syntheticEcg({ heartRate }) })
+    )
+  const normal = strip(72)
+  expect(normal).toContain(">P<")
+  expect(normal).toContain(">T<")
+  const fast = strip(110)
+  expect(fast.match(/>QRS</g)!.length).toBeGreaterThan(15)
+  expect(fast).not.toContain(">P<")
+  expect(fast).not.toContain(">T<")
+})
+
 test("a stream renders an empty live strip with a pause control", () => {
   const html = renderToStaticMarkup(
     createElement(EcgTrace, { stream: syntheticEcgStream() })

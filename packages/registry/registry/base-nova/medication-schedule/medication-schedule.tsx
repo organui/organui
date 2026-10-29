@@ -4,7 +4,9 @@ import * as React from "react"
 import { cn } from "cn"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ButtonGroup } from "@/components/ui/button-group"
 import {
   Card,
   CardAction,
@@ -15,6 +17,15 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Empty, EmptyDescription, EmptyHeader } from "@/components/ui/empty"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
 import { IconPlaceholder } from "@/icons/icon-placeholder"
 
 export type Medication = {
@@ -240,7 +251,6 @@ function SeverityIcon({ severity }: { severity: InteractionSeverity }) {
           phosphor="WarningIcon"
           remixicon="RiErrorWarningLine"
           aria-hidden="true"
-          className="text-destructive"
         />
       )
     case "moderate":
@@ -323,37 +333,39 @@ export function MedicationSchedule({
           {title}
         </CardTitle>
         {onDateChange && (
-          <CardAction className="flex gap-1">
-            <Button
-              variant="outline"
-              size="icon-sm"
-              aria-label="Previous day"
-              onClick={() => onDateChange(addDays(date, -1))}
-            >
-              <IconPlaceholder
-                lucide="ChevronLeftIcon"
-                tabler="IconChevronLeft"
-                hugeicons="ArrowLeft01Icon"
-                phosphor="CaretLeftIcon"
-                remixicon="RiArrowLeftSLine"
-                aria-hidden="true"
-              />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon-sm"
-              aria-label="Next day"
-              onClick={() => onDateChange(addDays(date, 1))}
-            >
-              <IconPlaceholder
-                lucide="ChevronRightIcon"
-                tabler="IconChevronRight"
-                hugeicons="ArrowRight01Icon"
-                phosphor="CaretRightIcon"
-                remixicon="RiArrowRightSLine"
-                aria-hidden="true"
-              />
-            </Button>
+          <CardAction>
+            <ButtonGroup aria-label="Change day">
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label="Previous day"
+                onClick={() => onDateChange(addDays(date, -1))}
+              >
+                <IconPlaceholder
+                  lucide="ChevronLeftIcon"
+                  tabler="IconChevronLeft"
+                  hugeicons="ArrowLeft01Icon"
+                  phosphor="CaretLeftIcon"
+                  remixicon="RiArrowLeftSLine"
+                  aria-hidden="true"
+                />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon-sm"
+                aria-label="Next day"
+                onClick={() => onDateChange(addDays(date, 1))}
+              >
+                <IconPlaceholder
+                  lucide="ChevronRightIcon"
+                  tabler="IconChevronRight"
+                  hugeicons="ArrowRight01Icon"
+                  phosphor="CaretRightIcon"
+                  remixicon="RiArrowRightSLine"
+                  aria-hidden="true"
+                />
+              </Button>
+            </ButtonGroup>
           </CardAction>
         )}
       </CardHeader>
@@ -366,21 +378,18 @@ export function MedicationSchedule({
                 (conflict) => conflict.interaction === interaction
               )
               return (
-                // shadcn's destructive variant tints the description below
-                // AA contrast, so major warnings mark the border and title.
                 <Alert
                   key={interaction.id}
                   data-severity={interaction.severity}
-                  className={cn(
-                    interaction.severity === "major" && "border-destructive"
-                  )}
+                  variant={
+                    interaction.severity === "major" ? "destructive" : "default"
+                  }
+                  // The title carries the red; the description stays muted, so
+                  // it reads at 4.5:1 on any theme's destructive.
+                  className="*:data-[slot=alert-description]:text-muted-foreground"
                 >
                   <SeverityIcon severity={interaction.severity} />
-                  <AlertTitle
-                    className={cn(
-                      interaction.severity === "major" && "text-destructive"
-                    )}
-                  >
+                  <AlertTitle>
                     {severityLabel[interaction.severity]} interaction:{" "}
                     {names(interaction.medicationIds, index)}
                   </AlertTitle>
@@ -486,31 +495,43 @@ export function MedicationSchedule({
               ))}
             </div>
 
-            <ol aria-label="Doses" className="flex flex-col divide-y">
-              {doses.map((dose) => {
+            <ItemGroup aria-label="Doses" className="gap-0">
+              {doses.map((dose, i) => {
                 const status = Object.hasOwn(doseStatus, dose.key)
                   ? doseStatus[dose.key]
                   : undefined
                 const text = statusLabel[status ?? "todo"]
                 const close = conflictsFor.get(dose.key)
                 const { medication } = dose
+                // A border, not ItemSeparator: a list may hold only its items.
                 return (
-                  <li
+                  <Item
                     key={dose.key}
-                    className="flex items-center gap-3 py-2 first:pt-0 last:pb-0"
+                    role="listitem"
+                    size="xs"
+                    className={cn(
+                      "px-0 py-0",
+                      i > 0 && "mt-2 rounded-none border-t-border pt-2"
+                    )}
                   >
-                    <time className="w-11 shrink-0 text-sm tabular-nums">
-                      {dose.time}
-                    </time>
-                    <span
-                      aria-hidden="true"
-                      className="size-2.5 shrink-0 rounded-full"
-                      style={{ background: medication.color ?? "currentColor" }}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p
+                    <ItemMedia>
+                      <time className="w-11 text-sm tabular-nums">
+                        {dose.time}
+                      </time>
+                      <span
+                        aria-hidden="true"
+                        className="size-2.5 rounded-full"
+                        style={{
+                          background: medication.color ?? "currentColor",
+                        }}
+                      />
+                    </ItemMedia>
+                    <ItemContent>
+                      {/* Never clamped: a cut-off name could be another
+                            medication's. */}
+                      <ItemTitle
                         className={cn(
-                          "text-sm font-medium",
+                          "line-clamp-none",
                           status === "skipped" &&
                             "text-muted-foreground line-through"
                         )}
@@ -522,11 +543,11 @@ export function MedicationSchedule({
                             {medication.dose}
                           </span>
                         )}
-                      </p>
+                      </ItemTitle>
                       {medication.instructions && (
-                        <p className="text-xs text-muted-foreground">
+                        <ItemDescription className="line-clamp-none">
                           {medication.instructions}
-                        </p>
+                        </ItemDescription>
                       )}
                       {close && (
                         <p
@@ -546,30 +567,32 @@ export function MedicationSchedule({
                             .join(", ")}
                         </p>
                       )}
-                    </div>
-                    {onDoseStatusChange ? (
-                      <Button
-                        variant={status ? "secondary" : "outline"}
-                        size="sm"
-                        className="w-20"
-                        aria-label={`${medication.name} at ${dose.time}: ${text}`}
-                        onClick={() =>
-                          onDoseStatusChange(
-                            nextDoseStatus(doseStatus, dose.key)
-                          )
-                        }
-                      >
-                        {text}
-                      </Button>
-                    ) : (
-                      <span className="text-xs text-muted-foreground">
-                        {text}
-                      </span>
-                    )}
-                  </li>
+                    </ItemContent>
+                    <ItemActions>
+                      {onDoseStatusChange ? (
+                        <Button
+                          variant={status ? "secondary" : "outline"}
+                          size="sm"
+                          className="w-20"
+                          aria-label={`${medication.name} at ${dose.time}: ${text}`}
+                          onClick={() =>
+                            onDoseStatusChange(
+                              nextDoseStatus(doseStatus, dose.key)
+                            )
+                          }
+                        >
+                          {text}
+                        </Button>
+                      ) : (
+                        <Badge variant={status ? "secondary" : "outline"}>
+                          {text}
+                        </Badge>
+                      )}
+                    </ItemActions>
+                  </Item>
                 )
               })}
-            </ol>
+            </ItemGroup>
           </>
         )}
       </CardContent>
