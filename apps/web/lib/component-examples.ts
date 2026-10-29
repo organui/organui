@@ -89,6 +89,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Slice and window come from your state, so your own controls can drive them.",
     },
     {
+      name: "image-viewer-dicom",
+      title: "Open DICOM Files",
+      description:
+        "Read a series from files the user picks, in the browser, with nothing uploaded.",
+    },
+    {
       name: "image-viewer-no-controls",
       title: "Without Controls",
       description:

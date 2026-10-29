@@ -545,6 +545,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "image-viewer-dicom": {
+    title: "Open DICOM Files",
+    file: "image-viewer-dicom.tsx",
+    render: async () => {
+      const { Example } = await import("./image-viewer-dicom")
+      return <Example />
+    },
+  },
   "image-viewer-no-controls": {
     title: "Without Controls",
     file: "image-viewer-no-controls.tsx",

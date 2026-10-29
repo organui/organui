@@ -1254,8 +1254,8 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
     if (message.type() === "error") errors.push(message.text())
   })
   await page.goto("/docs/components/image-viewer")
-  // The main demo; the examples below it have their own.
-  const demo = page.locator('[data-example="image-viewer-demo"]')
+  // The Open DICOM Files example, which shows the viewer's state.
+  const demo = page.locator('[data-example="image-viewer-dicom"]')
   const state = page.getByRole("status").filter({ hasText: "Slice" })
   await expect(state).toHaveText("Slice 16 of 32 · Window 80 / level 40")
   const stage = page.getByRole("region", { name: "Head phantom" })
