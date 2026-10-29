@@ -610,12 +610,12 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "molecule-viewer-no-controls": {
-    title: "Without Controls",
-    file: "molecule-viewer-no-controls.tsx",
+  "molecule-viewer-controls": {
+    title: "Controls and Sequence",
+    file: "molecule-viewer-controls.tsx",
     lazy: true,
     render: async () => {
-      const { Example } = await import("./molecule-viewer-no-controls")
+      const { Example } = await import("./molecule-viewer-controls")
       return <Example />
     },
   },

@@ -108,6 +108,17 @@ export default function Page() {
         </p>
         <CodeSnippet label="Parser example" code={parse} />
       </section>
+      <ExampleSection example={examples["molecule-viewer-controls"]!}>
+        <p>
+          Pass <code>controls=&#123;false&#125;</code> to hide the menus and
+          buttons and <code>sequence=&#123;false&#125;</code> to hide the
+          sequence, as the demo at the top does. Without the buttons, your own
+          UI can drive the viewer through its ref, which exposes{" "}
+          <code>zoom</code>, <code>rotate</code> and <code>reset</code>. When
+          the file names its PDB ID, the viewer links the entry on RCSB PDB;
+          pass <code>attribution=&#123;false&#125;</code> to hide it.
+        </p>
+      </ExampleSection>
       <ExampleSection example={examples["molecule-viewer-selection"]!}>
         <p>
           Selection is controlled and works on residues: pass{" "}
@@ -129,15 +140,6 @@ export default function Page() {
           , <code>element</code>, <code>residue</code> or <code>rainbow</code>,
           with their change callbacks. Ligands are always drawn as atoms; water
           is hidden unless you pass <code>water</code>.
-        </p>
-      </ExampleSection>
-      <ExampleSection example={examples["molecule-viewer-no-controls"]!}>
-        <p>
-          With <code>controls=&#123;false&#125;</code> the menus and buttons go,
-          and your own UI can drive the viewer through its ref, which exposes{" "}
-          <code>zoom</code>, <code>rotate</code> and <code>reset</code>. When
-          the file names its PDB ID, the viewer links the entry on RCSB PDB;
-          pass <code>attribution=&#123;false&#125;</code> to hide it.
         </p>
       </ExampleSection>
       <section className="flex flex-col gap-4">

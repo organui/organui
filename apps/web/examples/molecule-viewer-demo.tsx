@@ -6,6 +6,8 @@ export function Example() {
     <div className="flex w-full flex-col gap-3">
       <MoleculeViewer
         src="/models/crambin.pdb"
+        controls={false}
+        sequence={false}
         label="Interactive crambin structure"
       />
       <p className="text-xs text-muted-foreground">

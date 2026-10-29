@@ -225,6 +225,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "molecule-viewer": [
     {
+      name: "molecule-viewer-controls",
+      title: "Controls and Sequence",
+      description:
+        "By default the stage has style and colour menus, zoom and reset, and the sequence sits below it.",
+    },
+    {
       name: "molecule-viewer-selection",
       title: "Residue Selection",
       description:
@@ -234,12 +240,6 @@ export const componentExamples: Record<string, ComponentExample[]> = {
       name: "molecule-viewer-spacefill",
       title: "Spacefill",
       description: "Atoms as spheres, coloured by element.",
-    },
-    {
-      name: "molecule-viewer-no-controls",
-      title: "Without Controls",
-      description:
-        "Only the structure, coloured as a rainbow. It still rotates.",
     },
   ],
   "vital-signs": [
