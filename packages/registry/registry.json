@@ -319,7 +319,7 @@
         "progress",
         "select",
         "slider",
-        "toggle",
+        "toggle-group",
         "tooltip"
       ],
       "files": [

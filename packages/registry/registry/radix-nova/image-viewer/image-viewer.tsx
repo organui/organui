@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
-import { Toggle } from "@/components/ui/toggle"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Tooltip,
   TooltipContent,
@@ -193,27 +193,21 @@ function ToolbarButton({
   )
 }
 
-function ToolToggle({
+function ToolItem({
+  value,
   label,
-  pressed,
-  onPressedChange,
   children,
 }: {
+  value: ImageViewerTool
   label: string
-  pressed: boolean
-  onPressedChange: () => void
   children: React.ReactNode
 }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Toggle
-          aria-label={label}
-          pressed={pressed}
-          onPressedChange={onPressedChange}
-        >
+        <ToggleGroupItem value={value} aria-label={label}>
           {children}
-        </Toggle>
+        </ToggleGroupItem>
       </TooltipTrigger>
       <TooltipContent side="bottom">{label}</TooltipContent>
     </Tooltip>
@@ -784,34 +778,37 @@ export function ImageViewer({
                   </SelectContent>
                 </Select>
               )}
-              <ToolToggle
-                label="Window tool"
-                pressed={tool === "window"}
-                onPressedChange={() => setTool("window")}
+              {/* One tool at a time: dragging windows or pans. */}
+              <ToggleGroup
+                type="single"
+                aria-label="Drag tool"
+                spacing={0.5}
+                value={tool}
+                onValueChange={(next) => {
+                  if (next) setTool(next as ImageViewerTool)
+                }}
               >
-                <IconPlaceholder
-                  lucide="ContrastIcon"
-                  tabler="IconContrast"
-                  hugeicons="ContrastIcon"
-                  phosphor="CircleHalfIcon"
-                  remixicon="RiContrastLine"
-                  aria-hidden="true"
-                />
-              </ToolToggle>
-              <ToolToggle
-                label="Pan tool"
-                pressed={tool === "pan"}
-                onPressedChange={() => setTool("pan")}
-              >
-                <IconPlaceholder
-                  lucide="MoveIcon"
-                  tabler="IconArrowsMove"
-                  hugeicons="ArrowAllDirectionIcon"
-                  phosphor="ArrowsOutCardinalIcon"
-                  remixicon="RiDragMove2Line"
-                  aria-hidden="true"
-                />
-              </ToolToggle>
+                <ToolItem value="window" label="Window tool">
+                  <IconPlaceholder
+                    lucide="ContrastIcon"
+                    tabler="IconContrast"
+                    hugeicons="ContrastIcon"
+                    phosphor="CircleHalfIcon"
+                    remixicon="RiContrastLine"
+                    aria-hidden="true"
+                  />
+                </ToolItem>
+                <ToolItem value="pan" label="Pan tool">
+                  <IconPlaceholder
+                    lucide="MoveIcon"
+                    tabler="IconArrowsMove"
+                    hugeicons="ArrowAllDirectionIcon"
+                    phosphor="ArrowsOutCardinalIcon"
+                    remixicon="RiDragMove2Line"
+                    aria-hidden="true"
+                  />
+                </ToolItem>
+              </ToggleGroup>
               <ToolbarButton label="Zoom in" onClick={() => zoomAt(1.25)}>
                 <IconPlaceholder
                   lucide="PlusIcon"

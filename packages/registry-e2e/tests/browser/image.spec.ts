@@ -25,9 +25,14 @@ test("scrolls slices, applies presets and stays accessible", async ({
   await page.getByRole("combobox", { name: "Window preset" }).click()
   await page.getByRole("option", { name: "Lung" }).click()
   await expect(window).toHaveText("1500/-600")
-  await page.getByRole("button", { name: "Pan tool" }).click()
-  await expect(page.getByRole("button", { name: "Pan tool" })).toHaveAttribute(
-    "aria-pressed",
+  // A single-choice toggle group: Base UI's items are pressed buttons,
+  // Radix's are checked radios.
+  const pan = page.getByLabel("Pan tool", { exact: true })
+  await pan.click()
+  await expect(pan).toHaveAttribute(
+    (await pan.getAttribute("role")) === "radio"
+      ? "aria-checked"
+      : "aria-pressed",
     "true"
   )
   const axe = await new AxeBuilder({ page }).analyze()
