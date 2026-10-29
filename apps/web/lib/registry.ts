@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import bodySystems from "@workspace/registry/body-systems.json"
 import catalog from "@workspace/registry/registry.json"
-import { comingSoon, showComingSoon } from "@/lib/coming-soon"
+import { comingSoon, offSite, showComingSoon } from "@/lib/coming-soon"
 import { site } from "@/lib/site"
 
 export { showComingSoon }
@@ -58,7 +58,8 @@ const catalogItems = catalog.items
       item.type !== "registry:block" &&
       !item.categories?.includes("utility") &&
       !item.categories?.includes("helper") &&
-      !item.categories?.includes("ai")
+      !item.categories?.includes("ai") &&
+      !offSite.has(item.name)
   )
   .map((item) => {
     const categories: readonly string[] =

@@ -279,14 +279,6 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "growth-chart-demo": {
-    title: "Growth chart",
-    file: "growth-chart-demo.tsx",
-    render: async () => {
-      const { Example } = await import("./growth-chart-demo")
-      return <Example />
-    },
-  },
   "age-demo": {
     title: "Age",
     file: "age-demo.tsx",
@@ -510,22 +502,6 @@ export const examples: Record<string, ExampleDefinition> = {
     file: "ecg-trace-paper.tsx",
     render: async () => {
       const { Example } = await import("./ecg-trace-paper")
-      return <Example />
-    },
-  },
-  "growth-chart-length": {
-    title: "Length and Height",
-    file: "growth-chart-length.tsx",
-    render: async () => {
-      const { Example } = await import("./growth-chart-length")
-      return <Example />
-    },
-  },
-  "growth-chart-head": {
-    title: "Chosen Percentiles",
-    file: "growth-chart-head.tsx",
-    render: async () => {
-      const { Example } = await import("./growth-chart-head")
       return <Example />
     },
   },

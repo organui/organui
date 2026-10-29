@@ -29,7 +29,7 @@ const readExampleSource = cache(async (file: string) => {
       "@/lib/$1"
     )
     .replace(
-      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|image-viewer|growth-chart|lab-results|patient-banner|news2-chart|problem-list|allergy-list|ai-disclaimer|clinical-citation|clinical-sources|differential-list|clinician-review|ai-note)/g,
+      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|image-viewer|lab-results|patient-banner|news2-chart|problem-list|allergy-list|ai-disclaimer|clinical-citation|clinical-sources|differential-list|clinician-review|ai-note)/g,
       "@/components/ui/$1"
     )
     .replace(

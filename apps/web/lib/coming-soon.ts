@@ -12,3 +12,8 @@ export const comingSoon: ReadonlySet<string> = new Set([
   "vital-signs",
 ])
 export const showComingSoon = process.env.NODE_ENV === "development"
+
+// Items that stay installable, so existing installs keep updating, but are
+// left off the site altogether. Their docs links redirect to their section's
+// index.
+export const offSite: ReadonlySet<string> = new Set(["growth-chart"])

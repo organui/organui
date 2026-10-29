@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test"
 import { readFile } from "node:fs/promises"
 import { registrySchema, registryItemSchema } from "shadcn/schema"
 import { heartModel } from "@workspace/registry/heart"
-import { comingSoon } from "../../../../apps/web/lib/coming-soon.js"
+import { comingSoon, offSite } from "../../../../apps/web/lib/coming-soon.js"
 import { fixtureGlb } from "../../scripts/fixture-glb.js"
 import { dicomFile } from "../../../registry/tests/fixture-dicom.js"
 
@@ -297,7 +297,8 @@ test("component index lists every component inside the docs layout", async ({
       !categories?.includes("utility") &&
       !categories?.includes("helper") &&
       !categories?.includes("ai") &&
-      !comingSoon.has(name)
+      !comingSoon.has(name) &&
+      !offSite.has(name)
   )
   const organs = components.filter(({ categories }) =>
     categories?.includes("organ")
@@ -515,12 +516,12 @@ test("the header links each section and searches the whole site", async ({
   await expect(
     dialog.getByRole("option", { name: /Explorer 02/ })
   ).toBeVisible()
-  await input.fill("growth")
-  await dialog.getByRole("option", { name: /^Growth chart/ }).click()
-  await expect(page).toHaveURL(/\/docs\/components\/growth-chart$/)
+  await input.fill("medication")
+  await dialog.getByRole("option", { name: /^Medication schedule/ }).click()
+  await expect(page).toHaveURL(/\/docs\/components\/medication-schedule$/)
   await expect(dialog).toBeHidden()
   await expect(
-    page.getByRole("heading", { name: "Growth chart", level: 1 })
+    page.getByRole("heading", { name: "Medication schedule", level: 1 })
   ).toBeVisible()
 
   // As on shadcn/ui, phones search from the keyboard shortcut only.
@@ -1139,78 +1140,6 @@ test("the ECG trace page runs a live strip at the chosen rate", async ({
   expect(errors).toEqual([])
 })
 
-// Made-up tables in WHO's anthro layout, served in place of WHO's files so the
-// test neither fetches nor depends on the real standards.
-function anthroTable(median: (day: number) => number, loh = false) {
-  const lines = [`sex\tage\tl\tm\ts${loh ? "\tloh" : ""}`]
-  for (const sex of [1, 2])
-    for (let day = 0; day <= 1856; day++)
-      lines.push(
-        [
-          sex,
-          day,
-          1,
-          median(day),
-          0.1,
-          ...(loh ? [day < 731 ? "L" : "H"] : []),
-        ].join("\t")
-      )
-  return lines.join("\n")
-}
-
-test("the growth chart demo loads its tables and switches measures", async ({
-  page,
-}) => {
-  const errors: string[] = []
-  page.on("pageerror", (error) => errors.push(error.message))
-  const tables: Record<string, string> = {
-    "weianthro.txt": anthroTable((day) => 3.2 + day / 120),
-    "lenanthro.txt": anthroTable((day) => 50 + day / 30, true),
-    "hcanthro.txt": anthroTable((day) => 34 + day / 150),
-  }
-  await page.route(
-    "https://raw.githubusercontent.com/WorldHealthOrganization/anthro/**",
-    (route) => {
-      const name = new URL(route.request().url()).pathname.split("/").at(-1)!
-      return tables[name]
-        ? route.fulfill({
-            body: tables[name],
-            headers: { "access-control-allow-origin": "*" },
-          })
-        : route.abort()
-    }
-  )
-  await page.goto("/docs/components/growth-chart")
-  await expect(
-    page.getByRole("heading", { name: "Growth chart", level: 1 })
-  ).toBeVisible()
-  const chart = page.getByRole("group", { name: "Weight-for-age, girls" })
-  const points = chart.getByRole("img", { name: /^\d+ (months?|years): / })
-  await expect(points).toHaveCount(10)
-  await page.getByRole("button", { name: "Boys", exact: true }).click()
-  await page.getByRole("button", { name: "Head", exact: true }).click()
-  await expect(
-    page.getByRole("group", { name: "Head circumference-for-age, boys" })
-  ).toBeVisible()
-  await page.getByRole("button", { name: "Length/height", exact: true }).click()
-  await page.getByRole("button", { name: "0–5 years", exact: true }).click()
-  const length = page.getByRole("group", {
-    name: "Length/height-for-age, boys",
-  })
-  await length.getByRole("img", { name: /^6 months: 65\.5 cm, / }).focus()
-  await expect(
-    length.getByRole("img", { name: /^6 months: 65\.5 cm, / })
-  ).toBeFocused()
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= window.innerWidth
-    )
-  ).toBe(true)
-  const axe = await new AxeBuilder({ page }).analyze()
-  expect(axe.violations).toEqual([])
-  expect(errors).toEqual([])
-})
-
 test("tree, sequence field and option groups remain usable in dark mode", async ({
   page,
 }, info) => {
@@ -1608,7 +1537,7 @@ test("themes redirect to create, which gives the commands", async ({
   await settings.getByRole("combobox", { name: "Theme" }).click()
   await page.getByRole("option", { name: "Blue" }).click()
   await settings.getByRole("button", { name: /OrganUI items/ }).click()
-  await page.getByRole("checkbox", { name: "Growth chart" }).click()
+  await page.getByRole("checkbox", { name: "Medication schedule" }).click()
   await page.keyboard.press("Escape")
   await expect(settings).not.toContainText("--preset b0")
   await getCode.click()
@@ -1620,7 +1549,7 @@ test("themes redirect to create, which gives the commands", async ({
   ).toContainText("/r/styles/{style}/{name}.json")
   await expect(
     dialog.getByRole("region", { name: "Add OrganUI items" })
-  ).toContainText("@organui/body-map @organui/growth-chart")
+  ).toContainText("@organui/body-map @organui/medication-schedule")
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   expect(errors).toEqual([])
 })
@@ -1694,7 +1623,6 @@ test("component pages end with examples and an API reference", async ({
     ["body-map", "BodyMap"],
     ["dermatome-map", "DermatomeMap"],
     ["ecg-trace", "EcgTrace"],
-    ["growth-chart", "GrowthChart"],
     ["medication-schedule", "MedicationSchedule"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)

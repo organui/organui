@@ -7,7 +7,6 @@ import {
   HomeEcg,
   HomeMedicationSchedule,
 } from "@/components/home-demos"
-import { Example as GrowthChart } from "@/examples/growth-chart-demo"
 import { organs, organsPage } from "@/lib/registry"
 import { buttonVariants } from "@workspace/ui/components/button"
 import {
@@ -47,7 +46,7 @@ export function HomeShowcase() {
             src="/home/showcase-light.webp"
             width={2432}
             height={2800}
-            alt="Components for anatomy, ECG, medication and growth"
+            alt="Components for anatomy, ECG and medication"
             sizes="140vw"
             priority
             className="h-auto w-[140vw] max-w-none dark:hidden"
@@ -56,7 +55,7 @@ export function HomeShowcase() {
             src="/home/showcase-dark.webp"
             width={2432}
             height={2800}
-            alt="Components for anatomy, ECG, medication and growth"
+            alt="Components for anatomy, ECG and medication"
             sizes="140vw"
             priority
             className="hidden h-auto w-[140vw] max-w-none dark:block"
@@ -73,9 +72,6 @@ export function HomeShowcase() {
             </Tile>
             <Tile title="Body map" href="/docs/components/body-map">
               <HomeBodyMap />
-            </Tile>
-            <Tile title="Growth chart" href="/docs/components/growth-chart">
-              <GrowthChart />
             </Tile>
           </div>
           <div className="flex flex-col gap-4">

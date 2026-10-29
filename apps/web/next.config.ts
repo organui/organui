@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 import { readFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import { join } from "node:path"
-import { comingSoon, showComingSoon } from "./lib/coming-soon"
+import { comingSoon, offSite, showComingSoon } from "./lib/coming-soon"
 
 // Read rather than imported: Next.js loads this file as CommonJS or, on
 // Node's own TypeScript support, as ESM, and JSON imports differ between them.
@@ -80,9 +80,13 @@ const nextConfig: NextConfig = {
           destination: `/docs/components/${item.name}`,
           permanent: true,
         })),
-      // Coming soon: the docs link an install prints lands on the index.
+      // Coming soon and off the site: the docs link an install prints lands
+      // on the index.
       ...catalog.items
-        .filter(({ name }) => !showComingSoon && comingSoon.has(name))
+        .filter(
+          ({ name }) =>
+            offSite.has(name) || (!showComingSoon && comingSoon.has(name))
+        )
         .map(({ name, categories }) => {
           const section = categories?.includes("helper")
             ? "/docs/helpers"

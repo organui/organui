@@ -75,20 +75,6 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Faster paper and more gain, without wave labels, for a closer look.",
     },
   ],
-  "growth-chart": [
-    {
-      name: "growth-chart-length",
-      title: "Length and Height",
-      description:
-        "Lying length to 24 months, then standing height, which steps down by about 0.7 cm.",
-    },
-    {
-      name: "growth-chart-head",
-      title: "Chosen Percentiles",
-      description:
-        "Head circumference with only the 3rd, 50th and 97th curves.",
-    },
-  ],
   "image-viewer": [
     {
       name: "image-viewer-controlled",

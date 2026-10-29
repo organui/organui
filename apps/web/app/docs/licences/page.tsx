@@ -142,28 +142,6 @@ export default async function Page() {
             <code>attribution=&#123;false&#125;</code>.
           </li>
           <li>
-            <Link href="/docs/components/growth-chart" className="underline">
-              Growth chart
-            </Link>{" "}
-            ships no growth data and no code that downloads it: you pass the
-            reference tables. Only this site&apos;s demo fetches the WHO Child
-            Growth Standards, © World Health Organization, under{" "}
-            <a
-              className="underline"
-              href="https://www.gnu.org/licenses/gpl-3.0.html"
-            >
-              GPL-3
-            </a>
-            ; WHO requires{" "}
-            <a
-              className="underline"
-              href="https://www.who.int/about/policies/publishing/copyright"
-            >
-              permission for commercial use
-            </a>
-            .
-          </li>
-          <li>
             The image viewer&apos;s head phantom, the synthetic ECG, and the
             vital signs, lab results and medication examples are generated or
             written for OrganUI, and MIT like the code.
