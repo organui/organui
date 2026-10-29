@@ -3,20 +3,20 @@ import registry from "../registry.json"
 import {
   dicomSeries,
   parseDicom,
-} from "../registry/base-nova/image-viewer/dicom"
-import { createHeadPhantom } from "../registry/base-nova/image-viewer/head-phantom"
+} from "../registry/base-nova/scan-viewer/dicom"
+import { createHeadPhantom } from "../registry/base-nova/scan-viewer/head-phantom"
 import {
   ctWindowPresets,
   windowLevel,
-} from "../registry/base-nova/image-viewer/image-viewer"
+} from "../registry/base-nova/scan-viewer/scan-viewer"
 import { dicomFile } from "./fixture-dicom"
 
 test("the item ships the viewer with its DICOM reader and phantom", () => {
-  const item = registry.items.find(({ name }) => name === "image-viewer")
+  const item = registry.items.find(({ name }) => name === "scan-viewer")
   expect(item?.files.map(({ path }) => path)).toEqual([
-    "registry/base-nova/image-viewer/image-viewer.tsx",
-    "registry/base-nova/image-viewer/dicom.ts",
-    "registry/base-nova/image-viewer/head-phantom.ts",
+    "registry/base-nova/scan-viewer/scan-viewer.tsx",
+    "registry/base-nova/scan-viewer/dicom.ts",
+    "registry/base-nova/scan-viewer/head-phantom.ts",
   ])
 })
 

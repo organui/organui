@@ -126,6 +126,20 @@ const nextConfig: NextConfig = {
         destination: "/r/:path*/condition-viewer.json",
         permanent: true,
       },
+      // The scan viewer was the image viewer until 0.6.0. Its registry JSON
+      // redirects too, so `shadcn add` on the old name still installs.
+      ...["/docs/image-viewer", "/docs/components/image-viewer"].map(
+        (source) => ({
+          source,
+          destination: "/docs/components/scan-viewer",
+          permanent: true,
+        })
+      ),
+      {
+        source: "/r/:path*/image-viewer.json",
+        destination: "/r/:path*/scan-viewer.json",
+        permanent: true,
+      },
     ]
   },
 }

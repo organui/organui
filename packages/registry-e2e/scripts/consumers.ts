@@ -184,7 +184,7 @@ export default function BodyMapHarness(){
 // The image harness shows the installed phantom and type-checks the DICOM reader.
 const imageHarness = `"use client"
 import { useState } from "react"
-import { ImageViewer, ctWindowPresets, type ImageWindow } from "@/components/ui/image-viewer"
+import { ScanViewer, ctWindowPresets, type ImageWindow } from "@/components/ui/scan-viewer"
 import { parseDicom } from "@/lib/dicom"
 import { createHeadPhantom } from "@/lib/head-phantom"
 const phantom = createHeadPhantom()
@@ -192,7 +192,7 @@ export const readDicom: (buffer: ArrayBuffer) => { width: number } = parseDicom
 export default function ImageHarness(){
  const [slice,setSlice]=useState(15)
  const [window,setWindow]=useState<ImageWindow|null>(null)
- return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed image viewer</h1><ImageViewer {...phantom} label="Head phantom" presets={ctWindowPresets} slice={slice} onSliceChange={setSlice} onWindowChange={setWindow}/><output aria-label="Slice">{slice}</output><output aria-label="Window">{window?\`\${window.width}/\${window.center}\`:"default"}</output></main>
+ return <main style={{maxWidth:720,margin:"auto",padding:20}}><h1>Installed scan viewer</h1><ScanViewer {...phantom} label="Head phantom" presets={ctWindowPresets} slice={slice} onSliceChange={setSlice} onWindowChange={setWindow}/><output aria-label="Slice">{slice}</output><output aria-label="Window">{window?\`\${window.width}/\${window.center}\`:"default"}</output></main>
 }`
 // Vite has no file routing, so the CLI skips block pages there; these stand in
 // for them. Next.js serves the installed pages at the same paths.
@@ -601,7 +601,7 @@ try {
       "ecg-trace",
       "dermatome-map",
       "body-map",
-      "image-viewer",
+      "scan-viewer",
       "growth-chart",
       "patient-banner",
       "allergy-list",
@@ -663,7 +663,7 @@ try {
       "ecg-trace",
       "dermatome-map",
       "body-map",
-      "image-viewer",
+      "scan-viewer",
       "growth-chart",
     ]) {
       const installed = await readFile(

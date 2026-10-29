@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
 
-// Installed image viewer showing the installed head phantom.
+// Installed scan viewer showing the installed head phantom.
 test("scrolls slices, applies presets and stays accessible", async ({
   page,
 }) => {

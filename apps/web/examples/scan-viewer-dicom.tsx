@@ -4,13 +4,13 @@ import { Button } from "@workspace/ui/components/button"
 import { Field, FieldError, FieldLabel } from "@workspace/ui/components/field"
 import { Input } from "@workspace/ui/components/input"
 import {
-  ImageViewer,
+  ScanViewer,
   ctWindowPresets,
   type ImageSlice,
   type ImageWindow,
-} from "@workspace/registry/image-viewer"
-import { dicomSeries, parseDicom } from "@workspace/registry/image-viewer/dicom"
-import { createHeadPhantom } from "@workspace/registry/image-viewer/head-phantom"
+} from "@workspace/registry/scan-viewer"
+import { dicomSeries, parseDicom } from "@workspace/registry/scan-viewer/dicom"
+import { createHeadPhantom } from "@workspace/registry/scan-viewer/head-phantom"
 
 type Series = {
   name: string
@@ -62,7 +62,7 @@ export function Example() {
 
   return (
     <div className="flex flex-col gap-4">
-      <ImageViewer
+      <ScanViewer
         slices={series.slices}
         pixelSpacing={series.pixelSpacing}
         unit={series.unit}

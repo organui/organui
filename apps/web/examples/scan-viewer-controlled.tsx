@@ -1,11 +1,11 @@
 "use client"
 import { useState } from "react"
 import {
-  ImageViewer,
+  ScanViewer,
   ctWindowPresets,
   type ImageWindow,
-} from "@workspace/registry/image-viewer"
-import { createHeadPhantom } from "@workspace/registry/image-viewer/head-phantom"
+} from "@workspace/registry/scan-viewer"
+import { createHeadPhantom } from "@workspace/registry/scan-viewer/head-phantom"
 import { Button } from "@workspace/ui/components/button"
 
 const phantom = createHeadPhantom()
@@ -16,7 +16,7 @@ export function Example() {
   const [window, setWindow] = useState<ImageWindow>(ctWindowPresets[0]!)
   return (
     <div className="flex w-full flex-col gap-3">
-      <ImageViewer
+      <ScanViewer
         {...phantom}
         slice={slice}
         onSliceChange={setSlice}

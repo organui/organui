@@ -1,13 +1,13 @@
 "use client"
-import { ImageViewer } from "@workspace/registry/image-viewer"
-import { createHeadPhantom } from "@workspace/registry/image-viewer/head-phantom"
+import { ScanViewer } from "@workspace/registry/scan-viewer"
+import { createHeadPhantom } from "@workspace/registry/scan-viewer/head-phantom"
 
 const phantom = createHeadPhantom()
 
 // No toolbar or slider: the image still scrolls, zooms and windows.
 export function Example() {
   return (
-    <ImageViewer
+    <ScanViewer
       {...phantom}
       defaultSlice={15}
       controls={false}

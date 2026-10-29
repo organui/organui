@@ -142,7 +142,7 @@ export default async function Page() {
             <code>attribution=&#123;false&#125;</code>.
           </li>
           <li>
-            The image viewer&apos;s head phantom, the synthetic ECG, and the
+            The scan viewer&apos;s head phantom, the synthetic ECG, and the
             vital signs, lab results and medication examples are generated or
             written for OrganUI, and MIT like the code.
           </li>

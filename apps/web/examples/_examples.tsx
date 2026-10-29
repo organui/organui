@@ -130,14 +130,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "image-viewer-demo": {
-    title: "Medical image viewer",
-    file: "image-viewer-demo.tsx",
+  "scan-viewer-demo": {
+    title: "Scan viewer",
+    file: "scan-viewer-demo.tsx",
     // Generating the head phantom blocks the main thread for 70–170 ms on a
     // laptop, several times that on a phone, so index cards wait for a click.
     lazy: true,
     render: async () => {
-      const { Example } = await import("./image-viewer-demo")
+      const { Example } = await import("./scan-viewer-demo")
       return <Example />
     },
   },
@@ -537,27 +537,27 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
-  "image-viewer-controlled": {
+  "scan-viewer-controlled": {
     title: "Controlled Slice and Window",
-    file: "image-viewer-controlled.tsx",
+    file: "scan-viewer-controlled.tsx",
     render: async () => {
-      const { Example } = await import("./image-viewer-controlled")
+      const { Example } = await import("./scan-viewer-controlled")
       return <Example />
     },
   },
-  "image-viewer-dicom": {
+  "scan-viewer-dicom": {
     title: "Open DICOM Files",
-    file: "image-viewer-dicom.tsx",
+    file: "scan-viewer-dicom.tsx",
     render: async () => {
-      const { Example } = await import("./image-viewer-dicom")
+      const { Example } = await import("./scan-viewer-dicom")
       return <Example />
     },
   },
-  "image-viewer-no-controls": {
+  "scan-viewer-no-controls": {
     title: "Without Controls",
-    file: "image-viewer-no-controls.tsx",
+    file: "scan-viewer-no-controls.tsx",
     render: async () => {
-      const { Example } = await import("./image-viewer-no-controls")
+      const { Example } = await import("./scan-viewer-no-controls")
       return <Example />
     },
   },

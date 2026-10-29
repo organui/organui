@@ -1,13 +1,13 @@
 "use client"
-import { ImageViewer, ctWindowPresets } from "@workspace/registry/image-viewer"
-import { createHeadPhantom } from "@workspace/registry/image-viewer/head-phantom"
+import { ScanViewer, ctWindowPresets } from "@workspace/registry/scan-viewer"
+import { createHeadPhantom } from "@workspace/registry/scan-viewer/head-phantom"
 
 const phantom = createHeadPhantom()
 
 export function Example() {
   return (
     <div className="flex w-full flex-col gap-3">
-      <ImageViewer
+      <ScanViewer
         {...phantom}
         presets={ctWindowPresets}
         defaultSlice={15}

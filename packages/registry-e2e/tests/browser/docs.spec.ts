@@ -1245,7 +1245,7 @@ test("component previews reveal copyable code without resetting the demo", async
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })
 
-test("image viewer docs scroll slices, window and read DICOM files", async ({
+test("scan viewer docs scroll slices, window and read DICOM files", async ({
   page,
 }, info) => {
   const errors: string[] = []
@@ -1253,9 +1253,9 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text())
   })
-  await page.goto("/docs/components/image-viewer")
+  await page.goto("/docs/components/scan-viewer")
   // The Open DICOM Files example, which shows the viewer's state.
-  const demo = page.locator('[data-example="image-viewer-dicom"]')
+  const demo = page.locator('[data-example="scan-viewer-dicom"]')
   const state = page.getByRole("status").filter({ hasText: "Slice" })
   await expect(state).toHaveText("Slice 16 of 32 · Window 80 / level 40")
   const stage = page.getByRole("region", { name: "Head phantom" })
@@ -1332,7 +1332,7 @@ test("image viewer docs scroll slices, window and read DICOM files", async ({
     "This is not a DICOM Part 10 file."
   )
   await page.screenshot({
-    path: info.outputPath("image-viewer.png"),
+    path: info.outputPath("scan-viewer.png"),
     fullPage: true,
   })
   expect(errors).toEqual([])

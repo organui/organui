@@ -440,8 +440,8 @@
       }
     ]
   },
-  "image-viewer": {
-    "component": "ImageViewer",
+  "scan-viewer": {
+    "component": "ScanViewer",
     "element": "div",
     "props": [
       {
@@ -530,7 +530,7 @@
       },
       {
         "name": "ref",
-        "type": "React.Ref<ImageViewerHandle>",
+        "type": "React.Ref<ScanViewerHandle>",
         "required": false,
         "default": null,
         "description": "Moves through slices, zooms and resets the view from your own controls."

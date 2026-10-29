@@ -25,11 +25,11 @@ const readExampleSource = cache(async (file: string) => {
       "@/components/organ-explorer"
     )
     .replace(
-      /@workspace\/registry\/image-viewer\/(dicom|head-phantom)/g,
+      /@workspace\/registry\/scan-viewer\/(dicom|head-phantom)/g,
       "@/lib/$1"
     )
     .replace(
-      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|image-viewer|lab-results|patient-banner|news2-chart|problem-list|allergy-list|ai-disclaimer|clinical-citation|clinical-sources|differential-list|clinician-review|ai-note)/g,
+      /@workspace\/registry\/(anatomy-tree|body-map|ecg-trace|vital-signs|medication-schedule|dermatome-map|scan-viewer|lab-results|patient-banner|news2-chart|problem-list|allergy-list|ai-disclaimer|clinical-citation|clinical-sources|differential-list|clinician-review|ai-note)/g,
       "@/components/ui/$1"
     )
     .replace(

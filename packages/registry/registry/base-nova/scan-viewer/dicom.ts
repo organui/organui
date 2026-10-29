@@ -1,6 +1,6 @@
 // A small reader for uncompressed, single-frame grayscale DICOM files, such
 // as most CT and MR series. It is not a validated medical device and reads
-// only what the image viewer needs.
+// only what the scan viewer needs.
 
 export type DicomImage = {
   /** Modality values (Hounsfield units for CT): stored values after rescale slope and intercept. */
@@ -245,7 +245,7 @@ export function parseDicom(buffer: ArrayBuffer): DicomImage {
 
 /**
  * Orders the images of one series from head to foot (or by Slice Location,
- * then Instance Number) and returns props for the image viewer.
+ * then Instance Number) and returns props for the scan viewer.
  */
 export function dicomSeries(images: readonly DicomImage[]) {
   const key = (image: DicomImage) =>

@@ -51,15 +51,15 @@ export const ctWindowPresets: readonly WindowPreset[] = [
   { name: "Bone", center: 400, width: 1800 },
 ]
 
-export type ImageViewerHandle = {
+export type ScanViewerHandle = {
   setSlice: (index: number) => void
   zoom: (factor: number) => void
   reset: () => void
 }
 
-export type ImageViewerTool = "window" | "pan"
+export type ScanViewerTool = "window" | "pan"
 
-export type ImageViewerProps = Omit<React.ComponentProps<"div">, "ref"> & {
+export type ScanViewerProps = Omit<React.ComponentProps<"div">, "ref"> & {
   /** The image slices, each with its width, height and pixel values. */
   slices: readonly ImageSlice[]
   /** Zero-based index of the shown slice, when controlled. */
@@ -85,7 +85,7 @@ export type ImageViewerProps = Omit<React.ComponentProps<"div">, "ref"> & {
   /** The accessible name of the image. */
   label?: string
   /** Moves through slices, zooms and resets the view from your own controls. */
-  ref?: React.Ref<ImageViewerHandle>
+  ref?: React.Ref<ScanViewerHandle>
 }
 
 /**
@@ -178,15 +178,17 @@ function ToolbarButton({
 }) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label={label}
-          onClick={onClick}
-        >
-          {children}
-        </Button>
+      <TooltipTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={label}
+            onClick={onClick}
+          />
+        }
+      >
+        {children}
       </TooltipTrigger>
       <TooltipContent side="bottom">{label}</TooltipContent>
     </Tooltip>
@@ -198,23 +200,23 @@ function ToolItem({
   label,
   children,
 }: {
-  value: ImageViewerTool
+  value: ScanViewerTool
   label: string
   children: React.ReactNode
 }) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <ToggleGroupItem value={value} aria-label={label}>
-          {children}
-        </ToggleGroupItem>
+      <TooltipTrigger
+        render={<ToggleGroupItem value={value} aria-label={label} />}
+      >
+        {children}
       </TooltipTrigger>
       <TooltipContent side="bottom">{label}</TooltipContent>
     </Tooltip>
   )
 }
 
-export function ImageViewer({
+export function ScanViewer({
   slices,
   slice: sliceProp,
   defaultSlice = 0,
@@ -230,18 +232,11 @@ export function ImageViewer({
   className,
   ref,
   ...props
-}: ImageViewerProps) {
+}: ScanViewerProps) {
   const stage = React.useRef<HTMLDivElement>(null)
   const canvas = React.useRef<HTMLCanvasElement>(null)
   const instructions = React.useId()
   const sliceLabel = React.useId()
-  const slider = React.useRef<HTMLSpanElement>(null)
-  // Radix's slider names its root, not the thumb people focus; name the thumb.
-  React.useEffect(() => {
-    slider.current
-      ?.querySelector('[role="slider"]')
-      ?.setAttribute("aria-labelledby", sliceLabel)
-  })
   const count = slices.length
 
   const [ownSlice, setOwnSlice] = React.useState(defaultSlice)
@@ -341,7 +336,7 @@ export function ImageViewer({
 
   const [view, setView] = React.useState({ zoom: 1, x: 0, y: 0 })
   const [size, setSize] = React.useState({ width: 0, height: 0 })
-  const [tool, setTool] = React.useState<ImageViewerTool>("window")
+  const [tool, setTool] = React.useState<ScanViewerTool>("window")
   const [hover, setHover] = React.useState<{
     x: number
     y: number
@@ -495,7 +490,7 @@ export function ImageViewer({
 
   const pointers = React.useRef(new Map<number, { x: number; y: number }>())
   const drag = React.useRef<{
-    mode: ImageViewerTool | "pinch"
+    mode: ScanViewerTool | "pinch"
     window: ImageWindow | null
     distance: number
   } | null>(null)
@@ -606,7 +601,7 @@ export function ImageViewer({
 
   return (
     <div
-      data-slot="image-viewer"
+      data-slot="scan-viewer"
       className={cn(
         "flex h-[28rem] w-full flex-col overflow-hidden rounded-xl border bg-background text-sm text-foreground",
         className
@@ -754,7 +749,7 @@ export function ImageViewer({
             >
               {presets.length > 0 && (
                 <Select
-                  value={preset ?? ""}
+                  value={preset}
                   onValueChange={(next) => {
                     const match = presets.find(({ name }) => name === next)
                     if (match)
@@ -780,12 +775,11 @@ export function ImageViewer({
               )}
               {/* One tool at a time: dragging windows or pans. */}
               <ToggleGroup
-                type="single"
                 aria-label="Drag tool"
                 spacing={0.5}
-                value={tool}
+                value={[tool]}
                 onValueChange={(next) => {
-                  if (next) setTool(next as ImageViewerTool)
+                  if (next[0]) setTool(next[0] as ScanViewerTool)
                 }}
               >
                 <ToolItem value="window" label="Window tool">
@@ -849,12 +843,14 @@ export function ImageViewer({
             Slice
           </span>
           <Slider
-            ref={slider}
             aria-labelledby={sliceLabel}
             min={1}
             max={count}
+            // An array, so shadcn's slider renders a single thumb.
             value={[index + 1]}
-            onValueChange={([next]) => changeSlice(next! - 1)}
+            onValueChange={(next) =>
+              changeSlice((Array.isArray(next) ? next[0]! : next) - 1)
+            }
             className="flex-1"
           />
           <span className="min-w-14 text-right text-xs text-muted-foreground tabular-nums">

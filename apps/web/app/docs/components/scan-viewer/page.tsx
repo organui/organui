@@ -12,47 +12,44 @@ import { docsMetadata, shadcn } from "@/lib/registry"
 import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
-  "Medical image viewer",
+  "Scan viewer",
   "A CT and MRI slice viewer with window and level, zoom, pan and an in-browser DICOM reader, for healthcare interfaces.",
-  "/docs/components/image-viewer"
+  "/docs/components/scan-viewer"
 )
 
 const usage = `"use client"
 import { useState } from "react"
-import { ImageViewer, ctWindowPresets } from "@/components/ui/image-viewer"
+import { ScanViewer, ctWindowPresets } from "@/components/ui/scan-viewer"
 import { createHeadPhantom } from "@/lib/head-phantom"
 
 const phantom = createHeadPhantom()
 
 export function Scan() {
   const [slice, setSlice] = useState(15)
-  return <ImageViewer {...phantom}
+  return <ScanViewer {...phantom}
     presets={ctWindowPresets}
     slice={slice} onSliceChange={setSlice} />
 }`
 
-const images = `<ImageViewer slices={[
+const images = `<ScanViewer slices={[
   { src: "/scans/axial-001.png", label: "Axial 1" },
   { src: "/scans/axial-002.png", label: "Axial 2" },
 ]} />`
 
 const examples = Object.fromEntries(
-  componentExamples["image-viewer"]!.map((example) => [example.name, example])
+  componentExamples["scan-viewer"]!.map((example) => [example.name, example])
 )
 
 export default function Page() {
   return (
     <div className="flex flex-col gap-10">
-      <DocsHeader
-        href="/docs/components/image-viewer"
-        title="Medical image viewer"
-      >
+      <DocsHeader href="/docs/components/scan-viewer" title="Scan viewer">
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           Scroll through a stack of CT or MRI slices, adjust window and level,
           zoom and pan, and read uncompressed DICOM files in the browser.
         </p>
       </DocsHeader>
-      <ComponentPreview name="image-viewer-demo" />
+      <ComponentPreview name="scan-viewer-demo" />
       <section className="flex flex-col gap-4">
         <DocsHeading id="installation">Installation</DocsHeading>
         <p>
@@ -63,11 +60,11 @@ export default function Page() {
           , run:
         </p>
         <ComponentInstallation
-          name="image-viewer"
-          command={`bunx ${shadcn} add ${site.url}/r/image-viewer.json`}
+          name="scan-viewer"
+          command={`bunx ${shadcn} add ${site.url}/r/scan-viewer.json`}
         />
         <p>
-          Or by name: <code>bunx {shadcn} add @organui/image-viewer</code>.
+          Or by name: <code>bunx {shadcn} add @organui/scan-viewer</code>.
         </p>
         <p className="text-sm text-muted-foreground">
           The viewer installs into your configured UI directory, with the DICOM
@@ -77,7 +74,7 @@ export default function Page() {
           not have them yet. It draws on a 2D canvas and adds no imaging
           packages.
         </p>
-        <a className="underline" href="/r/image-viewer.json">
+        <a className="underline" href="/r/scan-viewer.json">
           View registry item JSON
         </a>
       </section>
@@ -95,7 +92,7 @@ export default function Page() {
         </p>
         <CodeSnippet label="Image URL example" code={images} />
       </section>
-      <ExampleSection example={examples["image-viewer-controlled"]!}>
+      <ExampleSection example={examples["scan-viewer-controlled"]!}>
         <p>
           The window maps values from <code>center - width / 2</code> to{" "}
           <code>center + width / 2</code> onto black through white, using the
@@ -113,7 +110,7 @@ export default function Page() {
           <code>zoom</code> and <code>reset</code>.
         </p>
       </ExampleSection>
-      <ExampleSection example={examples["image-viewer-dicom"]!}>
+      <ExampleSection example={examples["scan-viewer-dicom"]!}>
         <p>
           <code>parseDicom</code> reads single-frame grayscale Part 10 files in
           implicit or explicit little endian, applies rescale slope and
@@ -124,7 +121,7 @@ export default function Page() {
           the browser, and nothing is uploaded.
         </p>
       </ExampleSection>
-      <ExampleSection example={examples["image-viewer-no-controls"]!} />
+      <ExampleSection example={examples["scan-viewer-no-controls"]!} />
       <section className="flex flex-col gap-4">
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
@@ -142,8 +139,8 @@ export default function Page() {
           replace a screen-reader usability audit.
         </p>
       </section>
-      <PropsTable item="image-viewer" />
-      <DocsPager href="/docs/components/image-viewer" />
+      <PropsTable item="scan-viewer" />
+      <DocsPager href="/docs/components/scan-viewer" />
     </div>
   )
 }

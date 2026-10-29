@@ -81,21 +81,21 @@ export const componentExamples: Record<string, ComponentExample[]> = {
         "Faster paper and more gain, without wave labels, for a closer look.",
     },
   ],
-  "image-viewer": [
+  "scan-viewer": [
     {
-      name: "image-viewer-controlled",
+      name: "scan-viewer-controlled",
       title: "Controlled Slice and Window",
       description:
         "Slice and window come from your state, so your own controls can drive them.",
     },
     {
-      name: "image-viewer-dicom",
+      name: "scan-viewer-dicom",
       title: "Open DICOM Files",
       description:
         "Read a series from files the user picks, in the browser, with nothing uploaded.",
     },
     {
-      name: "image-viewer-no-controls",
+      name: "scan-viewer-no-controls",
       title: "Without Controls",
       description:
         "No toolbar or slider; the image still scrolls, zooms and windows.",

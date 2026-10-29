@@ -32,7 +32,7 @@ export const documented = {
   "dna-helix": ["dna-helix/dna-helix.tsx", "DnaHelix"],
   "ecg-trace": ["ecg-trace/ecg-trace.tsx", "EcgTrace"],
   "growth-chart": ["growth-chart/growth-chart.tsx", "GrowthChart"],
-  "image-viewer": ["image-viewer/image-viewer.tsx", "ImageViewer"],
+  "scan-viewer": ["scan-viewer/scan-viewer.tsx", "ScanViewer"],
   "lab-results": ["lab-results/lab-results.tsx", "LabResultsTable"],
   "patient-banner": ["patient-banner/patient-banner.tsx", "PatientBanner"],
   "news2-chart": ["news2-chart/news2-chart.tsx", "News2Chart"],

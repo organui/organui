@@ -1,4 +1,4 @@
-// A synthetic head CT for trying the image viewer without patient data: the
+// A synthetic head CT for trying the scan viewer without patient data: the
 // 3D Shepp–Logan phantom (Kak and Slaney, Principles of Computerized
 // Tomographic Imaging, 1988), with each ellipsoid given an approximate
 // Hounsfield value. It is generated, so it carries no licence terms or
@@ -57,7 +57,7 @@ export type HeadPhantomOptions = {
 
 /**
  * Axial slices of the phantom from the top of the head down, as props for
- * the image viewer: raw values in Hounsfield units and their pixel spacing.
+ * the scan viewer: raw values in Hounsfield units and their pixel spacing.
  */
 export function createHeadPhantom({
   size = 128,
