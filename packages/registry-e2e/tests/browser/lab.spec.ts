@@ -48,7 +48,7 @@ test("the installed patient banner names the patient and their allergies", async
   ).toBeVisible()
   await expect(banner).toContainText("03-Jun-1979 (47 years)")
   await expect(banner).toContainText("999 654 3218")
-  await expect(banner).toContainText("Allergies: Codeine")
+  await expect(banner).toContainText("AllergiesCodeine")
   await expect(banner).toContainText("Falls risk")
   expect(errors).toEqual([])
 })

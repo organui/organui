@@ -135,8 +135,9 @@ export default function Page() {
         <p>
           The banner is a <code>section</code> named for the patient, with the
           name as its heading and the details in a description list. It sizes to
-          its container, and the details wrap onto more lines on a phone rather
-          than scrolling sideways.
+          its container: at 48rem and wider the allergies join the details on
+          one row, at the far end, and on a phone the details wrap whole fields
+          onto more lines rather than scrolling sideways.
         </p>
         <p className="text-sm text-muted-foreground">
           A display component. It does not look up, match or verify patients;

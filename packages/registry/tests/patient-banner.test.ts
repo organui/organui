@@ -78,9 +78,9 @@ test("the banner names its section for the patient", () => {
 })
 
 test("allergies not recorded, none known and recorded read differently", () => {
-  expect(render({})).toContain("Allergies not recorded")
-  expect(render({ allergies: [] })).toContain("Allergies not recorded")
-  expect(render({ allergies: "none-known" })).toContain("No known allergies")
+  expect(render({})).toContain("Not recorded")
+  expect(render({ allergies: [] })).toContain("Not recorded")
+  expect(render({ allergies: "none-known" })).toContain("None known")
   const recorded = render({ allergies: ["Codeine", "Latex"] })
   expect(recorded).toContain('data-state="recorded"')
   expect(recorded).toContain("Codeine, Latex")
