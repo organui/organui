@@ -482,7 +482,7 @@ export function docsMetadata(
   const images = [
     {
       url: `/og?${query}`,
-      alt: `${title} — OrganUI`,
+      alt: `${title} · OrganUI`,
       width: 1200,
       height: 630,
     },
@@ -494,7 +494,7 @@ export function docsMetadata(
     openGraph: {
       type: "website",
       siteName: site.name,
-      title: `${title} — OrganUI`,
+      title: `${title} · OrganUI`,
       description,
       url: path,
       images,
@@ -502,7 +502,7 @@ export function docsMetadata(
     twitter: {
       card: "summary_large_image",
       site: "@organui",
-      title: `${title} — OrganUI`,
+      title: `${title} · OrganUI`,
       description,
       images,
     },

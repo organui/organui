@@ -18,7 +18,7 @@ const fontMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   applicationName: site.name,
-  title: { default: site.title, template: "%s — OrganUI" },
+  title: { default: site.title, template: "%s · OrganUI" },
   description: site.description,
   alternates: {
     types: { "application/rss+xml": [{ url: "/rss.xml", title: "Changelog" }] },
