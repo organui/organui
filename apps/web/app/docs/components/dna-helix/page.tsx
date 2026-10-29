@@ -76,12 +76,18 @@ export default function Page() {
         <p>
           <code>sequence</code> is one strand read 5′ to 3′.{" "}
           <code>dnaBasePairs(sequence)</code> returns its pairs without
-          rendering. Pass <code>strands=&#123;false&#125;</code> to hide the
-          sequence strip and <code>controls=&#123;false&#125;</code> to hide the
-          buttons; the ref exposes <code>zoom</code>, <code>rotate</code> and{" "}
-          <code>reset</code>.
+          rendering.
         </p>
       </section>
+      <ExampleSection example={examples["dna-helix-strands"]!}>
+        <p>
+          Pass <code>controls=&#123;false&#125;</code> to hide the buttons and{" "}
+          <code>strands=&#123;false&#125;</code> to hide the strands, as the
+          demo at the top does. Without the buttons, your own UI can drive the
+          helix through its ref, which exposes <code>zoom</code>,{" "}
+          <code>rotate</code> and <code>reset</code>.
+        </p>
+      </ExampleSection>
       <ExampleSection example={examples["dna-helix-sequence"]!}>
         <p>
           Whitespace and case are ignored, and any letter other than A, C, G or

@@ -57,6 +57,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "dna-helix": [
     {
+      name: "dna-helix-strands",
+      title: "Strands and Controls",
+      description:
+        "By default the stage has buttons to pause, zoom and reset, and both strands sit below it, selectable like the pairs.",
+    },
+    {
       name: "dna-helix-sequence",
       title: "Your Own Sequence",
       description:
