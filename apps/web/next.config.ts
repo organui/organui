@@ -81,11 +81,18 @@ const nextConfig: NextConfig = {
           permanent: true,
         })),
       // Coming soon: the docs link an install prints lands on the index.
-      ...(showComingSoon ? [] : [...comingSoon]).map((name) => ({
-        source: `/docs/components/${name}`,
-        destination: "/docs/components",
-        permanent: false,
-      })),
+      ...catalog.items
+        .filter(({ name }) => !showComingSoon && comingSoon.has(name))
+        .map(({ name, categories }) => {
+          const section = categories?.includes("helper")
+            ? "/docs/helpers"
+            : "/docs/components"
+          return {
+            source: `${section}/${name}`,
+            destination: section,
+            permanent: false,
+          }
+        }),
       // Charts open on their first type, as on shadcn/ui.
       { source: "/charts", destination: "/charts/area", permanent: false },
       // Themes live in Create, as on shadcn/ui.

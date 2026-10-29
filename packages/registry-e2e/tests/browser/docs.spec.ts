@@ -393,19 +393,30 @@ test("component index lists every component inside the docs layout", async ({
 })
 
 // Items still being designed are listed in the sidebar without a link and
-// left out of the index; an installed item's docs link lands on the index.
+// left out of the index; an installed item's docs link lands on its index.
 test("coming soon items are listed but not linked", async ({
   page,
   request,
 }) => {
-  for (const name of comingSoon) {
-    const response = await request.get(`/docs/components/${name}`, {
+  // Helpers redirect to the helpers index, components to theirs.
+  const sections = registrySchema
+    .parse(await (await request.get("/r/registry.json")).json())
+    .items.filter(({ name }) => comingSoon.has(name))
+    .map(({ name, categories }) => ({
+      name,
+      section: categories?.includes("helper")
+        ? "/docs/helpers"
+        : "/docs/components",
+    }))
+  expect(sections).toHaveLength(comingSoon.size)
+  for (const { name, section } of sections) {
+    const response = await request.get(`${section}/${name}`, {
       maxRedirects: 0,
     })
     expect(response.status()).toBe(307)
     expect(
       new URL(response.headers().location!, "http://localhost").pathname
-    ).toBe("/docs/components")
+    ).toBe(section)
   }
   await page.goto("/docs/components")
   // On a phone the sidebar is in the menu.
@@ -413,10 +424,8 @@ test("coming soon items are listed but not linked", async ({
     await page.getByRole("button", { name: "Menu", exact: true }).click()
   const sidebar = page.getByRole("navigation", { name: "Documentation" })
   await expect(sidebar.getByText("Patient banner")).toContainText("Soon")
-  for (const name of comingSoon)
-    await expect(
-      page.locator(`a[href="/docs/components/${name}"]`)
-    ).toHaveCount(0)
+  for (const { name, section } of sections)
+    await expect(page.locator(`a[href="${section}/${name}"]`)).toHaveCount(0)
 })
 
 // Items installed from v0.3.0 and earlier print /docs/<name> after install.
@@ -1465,7 +1474,10 @@ test("helper and utility pages show a working example and pass an accessibility 
   page.on("pageerror", (error) => errors.push(error.message))
   const helpers = registrySchema
     .parse(await (await request.get("/r/registry.json")).json())
-    .items.filter(({ categories }) => categories?.includes("helper"))
+    .items.filter(
+      ({ categories, name }) =>
+        categories?.includes("helper") && !comingSoon.has(name)
+    )
   expect(helpers.length).toBeGreaterThan(0)
   const pages = [
     ...helpers.map((item) => ({
@@ -1684,7 +1696,6 @@ test("component pages end with examples and an API reference", async ({
     ["lab-results", "LabResultsTable"],
     ["medication-schedule", "MedicationSchedule"],
     ["news2-chart", "News2Chart"],
-    ["problem-list", "ProblemList"],
     ["vital-signs", "VitalSigns"],
   ] as const) {
     await page.goto(`/docs/components/${name}`)

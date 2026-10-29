@@ -115,7 +115,7 @@ export const organs = registryItems.filter(({ organ }) => organ)
 export const conditions = registryItems.filter(({ condition }) => condition)
 
 // TypeScript helpers that install in lib, under /docs/helpers.
-export const helperItems = catalog.items
+const catalogHelpers = catalog.items
   .filter((item) => item.categories?.includes("helper"))
   .map((item) => ({
     name: item.name,
@@ -126,6 +126,10 @@ export const helperItems = catalog.items
     install: install(item),
   }))
   .sort((a, b) => a.title.localeCompare(b.title))
+
+export const helperItems = catalogHelpers.filter(
+  ({ name }) => showComingSoon || !comingSoon.has(name)
+)
 
 const utilitiesItem = catalog.items.find(({ name }) => name === "utilities")
 if (!utilitiesItem) throw new Error("No utilities item in the registry")
@@ -429,7 +433,11 @@ export const docsNav: DocsNavSection[] = [
             },
             {
               title: helpersIndex.title,
-              items: helperItems.map(({ title, href }) => ({ title, href })),
+              items: catalogHelpers.map(({ title, href, name }) => ({
+                title,
+                href,
+                ...(comingSoon.has(name) && { soon: true }),
+              })),
             },
             {
               title: utilitiesIndex.title,
