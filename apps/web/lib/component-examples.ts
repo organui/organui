@@ -164,6 +164,12 @@ export const componentExamples: Record<string, ComponentExample[]> = {
   ],
   "medication-schedule": [
     {
+      name: "medication-schedule-tracking",
+      title: "Dose Tracking",
+      description:
+        "Step through the days or mark doses taken or skipped, and the callbacks hand each change to your app.",
+    },
+    {
       name: "medication-schedule-simple",
       title: "One Medication",
       description: "Twice a day, with no interactions and no disclaimer.",
