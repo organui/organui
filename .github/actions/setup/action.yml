@@ -1,0 +1,28 @@
+name: Set up
+description: Node, Bun, the Bun and Turbo caches, and the workspace install.
+inputs:
+  turbo-cache:
+    description: Name of the Turbo cache. Jobs that build the same tasks share one.
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version-file: .nvmrc
+    - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      with:
+        bun-version: "1.4.2"
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.bun/install/cache
+        key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+        restore-keys: ${{ runner.os }}-bun-
+    # Turbo's local cache, kept between runs so unchanged packages replay.
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: .turbo/cache
+        key: ${{ runner.os }}-turbo-${{ inputs.turbo-cache }}-${{ github.sha }}
+        restore-keys: ${{ runner.os }}-turbo-${{ inputs.turbo-cache }}-
+    - run: bun install --frozen-lockfile
+      shell: bash

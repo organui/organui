@@ -1,0 +1,68 @@
+name: Code check
+on:
+  # Prose that no check reads. Changesets aren't listed: the changeset job
+  # verifies them.
+  pull_request:
+    paths-ignore: &prose
+      - "*.md"
+      - "docs/**"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/pull_request_template.md"
+  push:
+    branches: [master]
+    paths-ignore: *prose
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  # A pull request that changes what the registry installs carries a
+  # changeset, which becomes its line in the release notes.
+  changeset:
+    name: bunx changeset status
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        with:
+          turbo-cache: changeset
+      - run: bunx changeset status --since=origin/${{ github.base_ref }}
+  format:
+    name: bun run format:check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        with:
+          turbo-cache: format
+      - run: bun run format:check
+  # Pull requests check only the packages they change and their dependents;
+  # master checks everything.
+  turbo:
+    name: bun run ${{ matrix.task }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        task: [lint, typecheck, test]
+    steps:
+      # History for --affected, which compares a pull request with its base.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+        with:
+          turbo-cache: ${{ matrix.task }}
+      - run: bunx turbo run ${{ matrix.task }} ${{ github.event_name == 'pull_request' && '--affected' || '' }}

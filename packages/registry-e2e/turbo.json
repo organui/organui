@@ -4,12 +4,12 @@
   "tasks": {
     "consumers": {
       "dependsOn": ["@workspace/registry#build"],
-      "env": ["REGISTRY_GITHUB_REF"],
+      "env": ["REGISTRY_GITHUB_REF", "BROWSER_SUITE"],
       "cache": false
     },
     "test:browser": {
       "dependsOn": ["consumers", "web#build"],
-      "env": ["CI"],
+      "env": ["CI", "BROWSER_SUITE", "BROWSER_SHARD"],
       "cache": false
     }
   }
