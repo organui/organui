@@ -71,6 +71,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "anatomy-tree-state": {
+    title: "Selection and Visibility",
+    file: "anatomy-tree-state.tsx",
+    render: async () => {
+      const { Example } = await import("./anatomy-tree-state")
+      return <Example />
+    },
+  },
   "anatomy-tree-demo": {
     title: "Anatomy tree",
     file: "anatomy-tree-demo.tsx",

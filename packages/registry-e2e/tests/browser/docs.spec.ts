@@ -38,7 +38,9 @@ test("documentation interaction, styling and registry serving", async ({
   await demo
     .getByRole("button", { name: "Left ventricle", exact: true })
     .click()
-  await expect(demo.getByRole("status")).toHaveText("Selected: lv")
+  await expect(
+    demo.getByRole("treeitem", { name: /^Left ventricle, / })
+  ).toHaveAttribute("aria-selected", "true")
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
@@ -1202,8 +1204,9 @@ test("component previews reveal copyable code without resetting the demo", async
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"])
   await page.goto("/docs/components/anatomy-tree")
+  // The example that shows its state, so a reset would show.
   const example = page.getByRole("group", {
-    name: "Anatomy tree example",
+    name: "Selection and Visibility example",
     exact: true,
   })
   await example
@@ -1214,12 +1217,12 @@ test("component previews reveal copyable code without resetting the demo", async
   const reveal = example.getByRole("button", { name: "View Code", exact: true })
   await reveal.focus()
   await reveal.press("Enter")
-  const snippet = example.getByLabel("Anatomy tree code")
+  const snippet = example.getByLabel("Selection and Visibility code")
   await expect(snippet).toBeFocused()
   const expectedSource = (
     await readFile(
       new URL(
-        "examples/anatomy-tree-demo.tsx",
+        "examples/anatomy-tree-state.tsx",
         import.meta.resolve("web/package.json")
       ),
       "utf8"

@@ -5,6 +5,12 @@ import { showComingSoon } from "@/lib/registry"
 export const componentExamples: Record<string, ComponentExample[]> = {
   "anatomy-tree": [
     {
+      name: "anatomy-tree-state",
+      title: "Selection and Visibility",
+      description:
+        "Selecting a structure or changing its visibility hands the new state to your app, to drive your own viewer.",
+    },
+    {
       name: "anatomy-tree-groups",
       title: "Groups and Colours",
       description:
