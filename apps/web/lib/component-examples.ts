@@ -3,6 +3,14 @@ import { showComingSoon } from "@/lib/registry"
 
 // The examples each component page shows after its usage.
 export const componentExamples: Record<string, ComponentExample[]> = {
+  "ai-disclaimer": [
+    {
+      name: "ai-disclaimer-reviewed",
+      title: "Reviewed",
+      description:
+        "Pass review once a clinician has checked the content, and the disclaimer says who and when.",
+    },
+  ],
   "anatomy-tree": [
     {
       name: "anatomy-tree-state",

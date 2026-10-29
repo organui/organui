@@ -14,6 +14,8 @@ import { ComponentPreview } from "@/components/component-preview"
 import { DocsHeader } from "@/components/docs-header"
 import { DocsHeading } from "@/components/docs-heading"
 import { DocsPager } from "@/components/docs-pager"
+import { ComponentExamples } from "@/components/component-examples"
+import { componentExamples } from "@/lib/component-examples"
 
 export type ItemDoc = {
   usage: string
@@ -77,6 +79,9 @@ export function ItemDocs({
           lang={doc.usageLang}
         />
       </section>
+      {componentExamples[item.name] && (
+        <ComponentExamples examples={componentExamples[item.name]!} />
+      )}
       <section className="flex flex-col gap-4">
         <DocsHeading id="notes">Notes</DocsHeading>
         {doc.notes.map((note) => (

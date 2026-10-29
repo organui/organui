@@ -389,6 +389,14 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "ai-disclaimer-reviewed": {
+    title: "Reviewed",
+    file: "ai-disclaimer-reviewed.tsx",
+    render: async () => {
+      const { Example } = await import("./ai-disclaimer-reviewed")
+      return <Example />
+    },
+  },
   "ai-note-demo": {
     title: "AI note",
     file: "ai-note-demo.tsx",
