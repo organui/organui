@@ -138,9 +138,10 @@
   mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
 }
 
-/* A bright band moves along the trace, as a monitor's sweep does. */
+/* A bright band moves along the trace, as a monitor's sweep does, at the
+   heart's 72 bpm: a beat is 150 of the 1520 units the band travels. */
 .home-sweep {
-  animation: home-sweep 3.2s linear infinite;
+  animation: home-sweep 8.44s linear infinite;
 }
 
 .home-glow {
