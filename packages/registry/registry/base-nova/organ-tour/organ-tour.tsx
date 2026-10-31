@@ -208,15 +208,16 @@ export function OrganTour({
           </Badge>
         </div>
         {/* Beside the model, the panel takes the height the model sets, rather
-            than setting it, and scrolls. */}
+            than setting it. Its content scrolls and the buttons stay in view,
+            as an answer's explanation can run long. */}
         <section
           aria-label={tour.name}
-          className="flex min-w-0 flex-col gap-5 rounded-xl border p-4 text-sm @3xl:h-0 @3xl:min-h-full @3xl:overflow-y-auto"
+          className="flex min-w-0 flex-col gap-4 rounded-xl border p-4 text-sm @3xl:h-0 @3xl:min-h-full"
         >
-          {finished ? (
-            <TourSummary chapters={asked} results={results} onReview={go} />
-          ) : (
-            <>
+          <div className="flex min-h-0 flex-1 flex-col gap-5 @3xl:overflow-y-auto">
+            {finished ? (
+              <TourSummary chapters={asked} results={results} onReview={go} />
+            ) : (
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-2">
                   <div aria-hidden="true" className="flex gap-1">
@@ -255,57 +256,59 @@ export function OrganTour({
                   )
                 )}
               </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  onClick={onBack}
-                  disabled={index === 0 && step === 0}
-                >
-                  Back
-                </Button>
-                <Button
-                  className="flex-1"
-                  onClick={onNext}
-                  disabled={!caption && choice === null}
-                >
-                  {!lastStep
-                    ? step === chapter.captions.length - 1
-                      ? "Check understanding"
-                      : "Next"
-                    : next
-                      ? `Next: ${next.label}`
-                      : "Finish"}
-                </Button>
-              </div>
-            </>
+            )}
+            <ol aria-label="Chapters" className="mt-auto flex flex-col gap-0.5">
+              {chapters.map((item) => {
+                const current = !finished && item.id === chapter.id
+                const result = results[item.id]
+                return (
+                  <li key={item.id}>
+                    <Button
+                      variant={current ? "secondary" : "ghost"}
+                      size="sm"
+                      aria-current={current ? "step" : undefined}
+                      onClick={() => go(item.id)}
+                      className="w-full justify-start gap-2 font-normal"
+                    >
+                      <span className="min-w-0 flex-1 truncate text-left">
+                        {item.label}
+                      </span>
+                      {result !== undefined && (
+                        <TourResult correct={result} className="size-3.5" />
+                      )}
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {formatSpan(item.span)}
+                      </span>
+                    </Button>
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+          {!finished && (
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={onBack}
+                disabled={index === 0 && step === 0}
+              >
+                Back
+              </Button>
+              <Button
+                className="flex-1"
+                onClick={onNext}
+                disabled={!caption && choice === null}
+              >
+                {!lastStep
+                  ? step === chapter.captions.length - 1
+                    ? "Check understanding"
+                    : "Next"
+                  : next
+                    ? `Next: ${next.label}`
+                    : "Finish"}
+              </Button>
+            </div>
           )}
-          <ol aria-label="Chapters" className="mt-auto flex flex-col gap-0.5">
-            {chapters.map((item) => {
-              const current = !finished && item.id === chapter.id
-              const result = results[item.id]
-              return (
-                <li key={item.id}>
-                  <Button
-                    variant={current ? "secondary" : "ghost"}
-                    size="sm"
-                    aria-current={current ? "step" : undefined}
-                    onClick={() => go(item.id)}
-                    className="w-full justify-start gap-2 font-normal"
-                  >
-                    <span className="min-w-0 flex-1 truncate text-left">
-                      {item.label}
-                    </span>
-                    {result !== undefined && (
-                      <TourResult correct={result} className="size-3.5" />
-                    )}
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {formatSpan(item.span)}
-                    </span>
-                  </Button>
-                </li>
-              )
-            })}
-          </ol>
         </section>
       </div>
     </div>
