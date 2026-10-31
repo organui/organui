@@ -65,7 +65,8 @@ test("item types follow whether the item is a three.js scene", async () => {
       (source) =>
         source.includes('from "three"') ||
         source.includes('from "@/components/organ-viewer"') ||
-        source.includes('from "@/components/condition-viewer"')
+        source.includes('from "@/components/condition-viewer"') ||
+        source.includes('from "@/components/organ-tour"')
     )
     expect([item.name, item.type]).toEqual([
       item.name,
@@ -123,9 +124,10 @@ for (const item of registry.items) {
       if (!dependency.startsWith("@organui/")) continue
       const name = dependency.replace("@organui/", "")
       expect(names.has(name)).toBe(true)
-      expect(used).toContain(
-        [...owners].find(([, owner]) => owner === name)![0]
-      )
+      // An item can ship several files; using any of them counts.
+      expect(
+        [...owners].some(([path, owner]) => owner === name && used.has(path))
+      ).toBe(true)
     }
   })
 }

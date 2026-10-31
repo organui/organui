@@ -38,6 +38,15 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "autoimmune-hepatitis-tour-demo": {
+    title: "Autoimmune hepatitis tour",
+    file: "autoimmune-hepatitis-tour-demo.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./autoimmune-hepatitis-tour-demo")
+      return <Example />
+    },
+  },
   "organ-tour-demo": {
     title: "Organ tour",
     file: "organ-tour-demo.tsx",

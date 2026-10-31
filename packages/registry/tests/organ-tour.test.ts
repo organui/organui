@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test"
 import { createElement } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
+import { autoimmuneHepatitisTour } from "../registry/base-nova/autoimmune-hepatitis-tour/autoimmune-hepatitis-tour"
 import type { OrganModel } from "../registry/base-nova/organ-viewer/organ-viewer"
 import {
   formatSpan,
@@ -96,3 +97,23 @@ test("a chapter without a question goes straight to the next chapter", () => {
   expect(html).toContain("Next: The cell")
   expect(html).not.toContain("Check understanding")
 })
+
+for (const ready of [autoimmuneHepatitisTour]) {
+  test(`${ready.name} names only what its models have`, () => {
+    const ids = ready.chapters.map(({ id }) => id)
+    expect(new Set(ids).size).toBe(ids.length)
+    for (const { model, span, captions, question } of ready.chapters) {
+      expect(span).toBeGreaterThan(0)
+      expect(captions.length).toBeGreaterThan(0)
+      const structures = model.structures.map(({ id }) => id)
+      const views = model.views.map(({ name }) => name)
+      for (const { structureId, view } of captions) {
+        if (structureId) expect(structures).toContain(structureId)
+        if (view) expect(views).toContain(view)
+      }
+      if (!question) continue
+      expect(new Set(question.options).size).toBe(question.options.length)
+      expect(question.options[question.answer]).toBeDefined()
+    }
+  })
+}

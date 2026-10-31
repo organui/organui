@@ -99,6 +99,16 @@ export default function Page() {
             </Link>
             , so affected structures stay amber.
           </p>
+          <p>
+            Or install one ready-made: the{" "}
+            <Link
+              href="/docs/components/autoimmune-hepatitis-tour"
+              className="underline"
+            >
+              autoimmune hepatitis tour
+            </Link>{" "}
+            is the example above.
+          </p>
           <CodeSnippet label="Organ tour example" code={usage} />
           <p>
             Captions name a <code>structureId</code> to highlight and a{" "}
