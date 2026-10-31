@@ -48,7 +48,7 @@ export const thyroidModel: OrganModel = {
       group: "Thyroid gland",
       color: "#a5564d",
       description:
-        "The narrow bridge that joins the two lobes across the front of the trachea, just below the cricoid cartilage.",
+        "The narrow bridge that joins the two lobes across the front of the trachea, usually over its second to fourth rings.",
     },
     {
       id: "right-superior-parathyroid",
@@ -101,7 +101,7 @@ export const thyroidModel: OrganModel = {
       group: "Larynx and trachea",
       color: "#b3bcae",
       description:
-        "A ring of cartilage at the bottom of the larynx. The isthmus of the thyroid lies just below it.",
+        "A ring of cartilage at the bottom of the larynx. The isthmus of the thyroid crosses the trachea a little below it.",
     },
     {
       id: "trachea",

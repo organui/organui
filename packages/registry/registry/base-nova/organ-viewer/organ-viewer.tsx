@@ -7,8 +7,10 @@ import {
   Box3,
   Color,
   DirectionalLight,
+  DoubleSide,
   HemisphereLight,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   PerspectiveCamera,
   Raycaster,
@@ -68,6 +70,12 @@ export type OrganView = {
   direction: readonly [number, number, number]
   /** Frame only these structures. Defaults to the whole model. */
   structureIds?: readonly string[]
+  /**
+   * Fade everything outside `structureIds` while this view is shown, for a
+   * region such as the hand that sits right beside other anatomy. The fade
+   * stays as the reader rotates, until another view is chosen.
+   */
+  focus?: boolean
 }
 
 export type OrganModel = {
@@ -149,6 +157,11 @@ const FRAME_FILL = 0.8
 const STAGE_TONE = new Color("#e4e3dc")
 // How long a recolour fades, in milliseconds.
 const FADE_MS = 450
+// How long the camera takes to fly to a named view, in milliseconds.
+const FLIGHT_MS = 650
+// Opacity of a faded structure, and of a see-through one at rest.
+const GHOST_OPACITY = 0.22
+const TRANSLUCENT_OPACITY = 0.35
 // A model without the item's structures is the wrong file, not a network
 // problem, so its message does not suggest checking the connection.
 const MISMATCH = "The model does not contain the expected structures."
@@ -277,6 +290,28 @@ function dispose(model: Group) {
   })
 }
 
+// A translucent structure first writes its depth with no colour, so only its
+// nearest surface is tinted. Without it, the folds of a shell such as fat over
+// a gland stack into dark bands wherever the surface overlaps itself.
+const DEPTH_ONLY = new MeshBasicMaterial({
+  colorWrite: false,
+  side: DoubleSide,
+  transparent: true,
+})
+function depthPrepass(mesh: Mesh, enabled: boolean) {
+  let prepass = mesh.userData.depthPrepass as Mesh | undefined
+  if (enabled && !prepass) {
+    prepass = new Mesh(mesh.geometry, DEPTH_ONLY)
+    prepass.raycast = () => {}
+    prepass.userData.prepass = true
+    prepass.renderOrder = 1
+    mesh.userData.depthPrepass = prepass
+    mesh.add(prepass)
+  }
+  if (prepass) prepass.visible = enabled
+  mesh.renderOrder = enabled ? 2 : 0
+}
+
 async function loadModel(
   src: string,
   expected: number | undefined,
@@ -384,6 +419,12 @@ export function OrganViewer({
   const [engine, setEngine] = React.useState<Engine | null>(null)
   const [view, setView] = React.useState<string | null>(defaultView)
   const [interacted, setInteracted] = React.useState(false)
+  const [hover, setHover] = React.useState<{
+    label: string
+    x: number
+    y: number
+    flip: boolean
+  } | null>(null)
   const latest = React.useRef({
     model,
     defaultView,
@@ -461,6 +502,7 @@ export function OrganViewer({
     const meshes = new Map<string, Mesh[]>()
     const known = new Set(structures.keys())
     scene.traverse((object) => {
+      if (object.userData.prepass) return
       const id = object instanceof Mesh && structureId(object, known)
       if (!id) return
       // Materials may be shared in the GLB, but emphasis is per structure.
@@ -553,8 +595,38 @@ export function OrganViewer({
     >()
     let dirty = true
     const render = () => (dirty = true)
+    // The camera's path to a named view: the target moves straight, and the
+    // camera swings around it so it never cuts through the model.
+    let flight: {
+      from: { target: Vector3; offset: Spherical }
+      to: { target: Vector3; offset: Spherical }
+      start: number
+    } | null = null
+    const fly = (now: number) => {
+      if (!flight) return
+      const t = Math.min(1, (now - flight.start) / FLIGHT_MS)
+      const k = t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2
+      const { from, to } = flight
+      // Turn the short way round.
+      const turn =
+        ((((to.offset.theta - from.offset.theta) % (2 * Math.PI)) +
+          3 * Math.PI) %
+          (2 * Math.PI)) -
+        Math.PI
+      const offset = new Spherical(
+        from.offset.radius + (to.offset.radius - from.offset.radius) * k,
+        from.offset.phi + (to.offset.phi - from.offset.phi) * k,
+        from.offset.theta + turn * k
+      )
+      orbit.target.lerpVectors(from.target, to.target, k)
+      camera.position.setFromSpherical(offset).add(orbit.target)
+      camera.lookAt(orbit.target)
+      if (t === 1) flight = null
+      dirty = true
+    }
     let frame = 0
     const tick = (now: number) => {
+      fly(now)
       for (const [material, fade] of fades) {
         const t = Math.min(1, (now - fade.start) / FADE_MS)
         material.color.lerpColors(fade.from, fade.to, t * (2 - t))
@@ -568,10 +640,102 @@ export function OrganViewer({
       frame = requestAnimationFrame(tick)
     }
 
+    // The selection and visibility last painted, so the viewer can repaint
+    // itself when the focus or the hovered structure changes.
+    let painted: [string | null, Readonly<Record<string, boolean>>] | null =
+      null
+    let hovered: string | null = null
+    const ghosts = new Map<string, Color>()
+    function paint() {
+      if (!painted) return
+      const [selected, shown] = painted
+      // Colours come from the current model, so a model that recolours the
+      // same structures, such as a condition stage, repaints without a reload.
+      const colors = new Map(
+        latest.current.model.structures.map(({ id, color }) => [id, color])
+      )
+      const translucent = new Set(latest.current.model.translucentIds)
+      for (const [id, list] of meshes) {
+        const color = colors.get(id) ?? structures.get(id)!.color
+        const state = selected
+          ? id === selected
+            ? "selected"
+            : "ghosted"
+          : focus && !focus.has(id)
+            ? "ghosted"
+            : "normal"
+        const key = `${color}/${STAGE_TONE.getHexString()}`
+        let ghost = ghosts.get(key)
+        if (!ghost) {
+          ghost = new Color(color).lerp(STAGE_TONE, 0.5)
+          ghosts.set(key, ghost)
+        }
+        const hover = id === hovered && state !== "selected"
+        // A translucent structure stays see-through until it is selected.
+        const opacity =
+          state === "ghosted"
+            ? hover
+              ? GHOST_OPACITY * 2
+              : GHOST_OPACITY
+            : state === "normal" && translucent.has(id)
+              ? TRANSLUCENT_OPACITY
+              : 1
+        for (const mesh of list) {
+          const material = mesh.material as MeshStandardMaterial
+          mesh.visible = shown[id] !== false
+          const target = state === "ghosted" ? ghost : new Color(color)
+          // A structure recoloured in the same state, such as at a condition's
+          // next stage, fades to its new colour. A first paint, a selection
+          // change and reduced motion apply at once.
+          const fade =
+            !motion.matches &&
+            material.userData.state === state &&
+            !material.color.equals(target)
+          if (!fade) {
+            fades.delete(material)
+            material.color.copy(target)
+          } else if (!fades.get(material)?.to.equals(target)) {
+            fades.set(material, {
+              from: material.color.clone(),
+              to: target.clone(),
+              start: performance.now(),
+            })
+          }
+          material.userData.state = state
+          material.emissive.set(
+            state === "selected" || hover ? color : "#000000"
+          )
+          material.emissiveIntensity =
+            state === "selected" ? 0.35 : hover ? 0.2 : 0
+          const transparent = opacity < 1
+          // Switching transparency recompiles the shader, so only then.
+          if (material.transparent !== transparent) material.needsUpdate = true
+          material.transparent = transparent
+          material.opacity = opacity
+          material.depthWrite = !transparent
+          material.roughness = 0.58
+          // glTF defaults to fully metallic when a file omits the factor.
+          material.metalness = 0
+          depthPrepass(mesh, transparent && state !== "ghosted")
+        }
+      }
+      render()
+    }
     let current: string | null = latest.current.defaultView
-    const preset = (name: string) => {
+    // The focused view whose surroundings are faded, kept while the reader
+    // rotates away from it.
+    let focus: Set<string> | null = null
+    const preset = (name: string, animate = false) => {
       const target = framing.get(name) ?? framing.values().next().value
       if (!target) return
+      const start = {
+        target: orbit.target.clone(),
+        offset: new Spherical().setFromVector3(
+          camera.position.clone().sub(orbit.target)
+        ),
+      }
+      flight = null
+      // reset() clears any damping left over from a drag.
       orbit.reset()
       const direction = new Vector3(...target.entry.direction).normalize()
       const distance = Math.min(
@@ -594,7 +758,26 @@ export function OrganViewer({
         .add(target.target)
       camera.lookAt(target.target)
       orbit.update()
+      if (animate && !motion.matches && start.offset.radius > 0)
+        flight = {
+          from: start,
+          to: {
+            target: orbit.target.clone(),
+            offset: new Spherical().setFromVector3(
+              camera.position.clone().sub(orbit.target)
+            ),
+          },
+          start: performance.now(),
+        }
+      if (flight) fly(flight.start)
       current = target.entry.name
+      const nextFocus = target.entry.focus
+        ? new Set(target.entry.structureIds)
+        : null
+      if (String([...(focus ?? [])]) !== String([...(nextFocus ?? [])])) {
+        focus = nextFocus
+        paint()
+      }
       changeView(current)
       render()
     }
@@ -609,7 +792,7 @@ export function OrganViewer({
       camera.aspect = aspect
       camera.updateProjectionMatrix()
       // A named view is refitted; a free camera keeps its target and distance.
-      if (changed && current) preset(current)
+      if (changed && current) preset(current, Boolean(flight))
       render()
     }
     const observer = new ResizeObserver(resize)
@@ -621,7 +804,10 @@ export function OrganViewer({
 
     let interacting = false
     const lastRotation = camera.quaternion.clone()
-    const onStart = () => (interacting = true)
+    const onStart = () => {
+      interacting = true
+      flight = null
+    }
     const onEnd = () => (interacting = false)
     const onChange = () => {
       if (interacting) {
@@ -639,11 +825,7 @@ export function OrganViewer({
     orbit.addEventListener("change", onChange)
 
     const raycaster = new Raycaster()
-    const down = new Vector2()
-    const onPointerDown = (event: PointerEvent) =>
-      down.set(event.clientX, event.clientY)
-    const onPointerUp = (event: PointerEvent) => {
-      if (down.distanceTo(new Vector2(event.clientX, event.clientY)) > 4) return
+    const pick = (event: PointerEvent) => {
       const bounds = canvas.getBoundingClientRect()
       raycaster.setFromCamera(
         new Vector2(
@@ -653,9 +835,57 @@ export function OrganViewer({
         camera
       )
       const mesh = pickVisibleMesh(raycaster.intersectObjects(allMeshes, false))
-      const id = mesh && structureId(mesh, known)
+      return (mesh && structureId(mesh, known)) || null
+    }
+    // The structure under a mouse pointer lights up and is named beside it,
+    // so readers can tell what a click will select. Touch has no hover.
+    const hover = (id: string | null, event?: PointerEvent) => {
+      if (id !== hovered) {
+        hovered = id
+        canvas.style.cursor = id ? "pointer" : ""
+        paint()
+      }
+      const bounds = canvas.getBoundingClientRect()
+      setHover(
+        id && event
+          ? {
+              label: structures.get(id)!.label,
+              x: event.clientX - bounds.left,
+              y: event.clientY - bounds.top,
+              // Near the right edge the label sits on the pointer's left.
+              flip: event.clientX - bounds.left > bounds.width - 200,
+            }
+          : null
+      )
+    }
+    let pointer: PointerEvent | null = null
+    let pending = 0
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return
+      if (event.buttons) return hover(null)
+      pointer = event
+      // One pick per frame however fast the pointer moves.
+      pending ||= requestAnimationFrame(() => {
+        pending = 0
+        if (pointer) hover(pick(pointer), pointer)
+      })
+    }
+    const onPointerLeave = () => {
+      pointer = null
+      hover(null)
+    }
+    const down = new Vector2()
+    const onPointerDown = (event: PointerEvent) => {
+      down.set(event.clientX, event.clientY)
+      hover(null)
+    }
+    const onPointerUp = (event: PointerEvent) => {
+      if (down.distanceTo(new Vector2(event.clientX, event.clientY)) > 4) return
+      const id = pick(event)
       if (id) latest.current.onSelectionChange?.(id)
     }
+    canvas.addEventListener("pointermove", onPointerMove)
+    canvas.addEventListener("pointerleave", onPointerLeave)
     canvas.addEventListener("pointerdown", onPointerDown)
     canvas.addEventListener("pointerup", onPointerUp)
     const onContextLost = (event: Event) => {
@@ -664,67 +894,13 @@ export function OrganViewer({
     }
     canvas.addEventListener("webglcontextlost", onContextLost)
 
-    const ghosts = new Map<string, Color>()
     setEngine({
       paint(selected, shown) {
-        // Colours come from the current model, so a model that recolours the
-        // same structures, such as a condition stage, repaints without a reload.
-        const colors = new Map(
-          latest.current.model.structures.map(({ id, color }) => [id, color])
-        )
-        const translucent = new Set(latest.current.model.translucentIds)
-        for (const [id, list] of meshes) {
-          const color = colors.get(id) ?? structures.get(id)!.color
-          const state = !selected
-            ? "normal"
-            : id === selected
-              ? "selected"
-              : "ghosted"
-          const key = `${color}/${STAGE_TONE.getHexString()}`
-          let ghost = ghosts.get(key)
-          if (!ghost) {
-            ghost = new Color(color).lerp(STAGE_TONE, 0.5)
-            ghosts.set(key, ghost)
-          }
-          for (const mesh of list) {
-            const material = mesh.material as MeshStandardMaterial
-            mesh.visible = shown[id] !== false
-            const target = state === "ghosted" ? ghost : new Color(color)
-            // A structure recoloured in the same state, such as at a condition's
-            // next stage, fades to its new colour. A first paint, a selection
-            // change and reduced motion apply at once.
-            const fade =
-              !motion.matches &&
-              material.userData.state === state &&
-              !material.color.equals(target)
-            if (!fade) {
-              fades.delete(material)
-              material.color.copy(target)
-            } else if (!fades.get(material)?.to.equals(target)) {
-              fades.set(material, {
-                from: material.color.clone(),
-                to: target.clone(),
-                start: performance.now(),
-              })
-            }
-            material.userData.state = state
-            material.emissive.set(state === "selected" ? color : "#000000")
-            material.emissiveIntensity = state === "selected" ? 0.35 : 0
-            // A translucent structure stays see-through until it is selected.
-            const clear = state === "normal" && translucent.has(id) ? 0.3 : 1
-            material.transparent = state === "ghosted" || clear < 1
-            material.opacity = state === "ghosted" ? 0.22 : clear
-            material.depthWrite = state !== "ghosted" && clear === 1
-            material.roughness = 0.58
-            // glTF defaults to fully metallic when a file omits the factor.
-            material.metalness = 0
-            material.needsUpdate = true
-          }
-        }
-        render()
+        painted = [selected, shown]
+        paint()
       },
-      setView: preset,
-      reset: () => preset(latest.current.defaultView),
+      setView: (name) => preset(name, true),
+      reset: () => preset(latest.current.defaultView, true),
       zoom(factor) {
         const offset = camera.position.clone().sub(orbit.target)
         offset.setLength(
@@ -759,9 +935,13 @@ export function OrganViewer({
 
     return () => {
       cancelAnimationFrame(frame)
+      cancelAnimationFrame(pending)
       setEngine(null)
+      setHover(null)
       observer.disconnect()
       motion.removeEventListener("change", applyMotion)
+      canvas.removeEventListener("pointermove", onPointerMove)
+      canvas.removeEventListener("pointerleave", onPointerLeave)
       canvas.removeEventListener("pointerdown", onPointerDown)
       canvas.removeEventListener("pointerup", onPointerUp)
       canvas.removeEventListener("webglcontextlost", onContextLost)
@@ -943,6 +1123,22 @@ export function OrganViewer({
             </ToolbarButton>
           </div>
         </TooltipProvider>
+      )}
+      {hover && (
+        <span
+          aria-hidden="true"
+          data-slot="organ-viewer-hover-label"
+          className="pointer-events-none absolute z-10 max-w-48 truncate rounded-md border bg-popover px-2 py-1 text-xs font-medium text-popover-foreground shadow-sm"
+          style={{
+            left: hover.x,
+            top: hover.y,
+            transform: hover.flip
+              ? "translate(calc(-100% - 14px), -50%)"
+              : "translate(14px, -50%)",
+          }}
+        >
+          {hover.label}
+        </span>
       )}
       {engine && !interacted && (
         <p

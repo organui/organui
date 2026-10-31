@@ -18,7 +18,7 @@ export const benignProstaticHyperplasia: Condition = {
       id: "prostate",
       label: "Prostate",
       model: prostateModel,
-      defaultView: "Lateral",
+      defaultView: "Right lateral",
       findings: {
         prostate: {
           affected: true,

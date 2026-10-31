@@ -17,7 +17,7 @@ export const eyeModel: OrganModel = {
       direction: [0, 0, 1],
     },
     {
-      name: "Lateral",
+      name: "Right lateral",
       direction: [-1, 0, 0],
     },
     {

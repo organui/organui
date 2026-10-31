@@ -11,6 +11,7 @@ export const gallbladderModel: OrganModel = {
   src: "https://cdn.jsdelivr.net/gh/organui/gallbladder-3d@15b03b830abe55e1081ac929dcbe6318d84e4067/public/models/gallbladder.glb",
   bytes: 3838836,
   defaultView: "Anterior",
+  translucentIds: ["liver", "pancreas"],
   views: [
     {
       name: "Anterior",

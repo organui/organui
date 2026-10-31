@@ -23,12 +23,17 @@ export const parathyroidModel: OrganModel = {
       structureIds: [
         "right-superior-parathyroid",
         "right-inferior-parathyroid",
+        "right-lobe",
       ],
     },
     {
       name: "Left glands",
       direction: [0.4, 0, -1],
-      structureIds: ["left-superior-parathyroid", "left-inferior-parathyroid"],
+      structureIds: [
+        "left-superior-parathyroid",
+        "left-inferior-parathyroid",
+        "left-lobe",
+      ],
     },
     {
       name: "Anterior",

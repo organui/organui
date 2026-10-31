@@ -21,6 +21,11 @@ export const pinealModel: OrganModel = {
   src: "https://organui.com/models/pineal.glb",
   bytes: 1107736,
   defaultView: "Posterior",
+  translucentIds: [
+    "right-internal-cerebral-vein",
+    "great-cerebral-vein",
+    "straight-sinus",
+  ],
   views: [
     {
       name: "Posterior",

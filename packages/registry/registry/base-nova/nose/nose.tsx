@@ -11,6 +11,7 @@ export const noseModel: OrganModel = {
   src: "https://cdn.jsdelivr.net/gh/organui/nose-3d@e8acaadd578c9e3b9f7c5cbc6b4e6d8d05dc25f0/public/models/nose.glb",
   bytes: 3795692,
   defaultView: "Oblique",
+  translucentIds: ["frontal-bone"],
   views: [
     {
       name: "Anterior",
@@ -21,7 +22,7 @@ export const noseModel: OrganModel = {
       direction: [0.85, 0.2, 1],
     },
     {
-      name: "Lateral",
+      name: "Left lateral",
       direction: [1, 0, 0],
     },
   ],
