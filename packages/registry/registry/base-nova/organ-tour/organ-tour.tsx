@@ -368,6 +368,12 @@ function TourCheck({
 }) {
   const answered = choice !== null
   const correct = choice === question.answer
+  // The explanation is what the reader needs next, and in the panel beside the
+  // model it can open below the fold.
+  const explanation = React.useRef<HTMLDivElement>(null)
+  React.useEffect(() => {
+    if (answered) explanation.current?.scrollIntoView({ block: "nearest" })
+  }, [answered])
   return (
     <div className="flex flex-col gap-3">
       <p className="text-base leading-snug font-medium">{question.question}</p>
@@ -403,7 +409,7 @@ function TourCheck({
         })}
       </div>
       {answered && (
-        <Alert>
+        <Alert ref={explanation}>
           <AlertTitle>{correct ? "That's right" : "Not quite"}</AlertTitle>
           <AlertDescription>
             <p>{question.explanation}</p>
