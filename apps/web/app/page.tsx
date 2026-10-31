@@ -21,11 +21,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
+    <div className="flex min-h-svh flex-col">
       <SiteHeader />
-      <main id="main" className="flex flex-col">
-        <section className="mx-auto flex max-w-3xl flex-col items-center gap-8 px-6 py-20 text-center md:py-28 lg:py-32">
-          <h1 className="text-4xl leading-[1.1] font-semibold tracking-tighter text-balance text-primary sm:text-5xl">
+      <main
+        id="main"
+        className="flex flex-1 flex-col items-center justify-center gap-8 px-6 py-4 sm:gap-12 sm:py-10 md:gap-16"
+      >
+        <section className="flex max-w-3xl flex-col items-center gap-6 text-center sm:gap-8">
+          <h1 className="text-[2rem] leading-[1.1] font-semibold tracking-tighter text-balance text-primary sm:text-4xl md:text-5xl">
             Healthcare &amp; life science UI for humans and agents
           </h1>
           <div className="flex items-center justify-center gap-2">
@@ -46,7 +49,7 @@ export default function Page() {
             </Link>
           </div>
         </section>
-        <section className="mx-auto flex max-w-3xl flex-col items-center gap-3 px-6 py-16 text-center text-sm md:py-20">
+        <section className="flex max-w-3xl flex-col items-center gap-2 text-center text-sm sm:gap-3">
           <h2 className="text-base font-semibold tracking-tight">
             3D anatomy explorers
           </h2>
@@ -54,7 +57,7 @@ export default function Page() {
             Standalone explorers, each in its own repository.
           </p>
           <nav aria-label="3D anatomy explorers">
-            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1 leading-loose">
+            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-0.5 leading-7 sm:gap-y-1 sm:leading-loose">
               {explorers.map((explorer) => (
                 <li key={explorer.name}>
                   <a
@@ -70,6 +73,6 @@ export default function Page() {
         </section>
       </main>
       <SiteFooter />
-    </>
+    </div>
   )
 }
