@@ -302,6 +302,47 @@
       }
     ]
   },
+  "organ-tour": {
+    "component": "OrganTour",
+    "element": null,
+    "props": [
+      {
+        "name": "tour",
+        "type": "Tour",
+        "required": true,
+        "default": null,
+        "description": "The tour: its chapters, captions and teach-back questions."
+      },
+      {
+        "name": "chapter",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "The chapter shown, by ID."
+      },
+      {
+        "name": "defaultChapter",
+        "type": "string",
+        "required": false,
+        "default": "tour.chapters[0]!.id",
+        "description": "The chapter shown first when `chapter` is not set. Defaults to the first."
+      },
+      {
+        "name": "onChapterChange",
+        "type": "(chapter: string) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with the chapter a reader moves to."
+      },
+      {
+        "name": "onAnswer",
+        "type": "(chapter: string, correct: boolean) => void",
+        "required": false,
+        "default": null,
+        "description": "Called with a chapter's ID and whether the reader answered its question rightly, for your own record of the conversation."
+      }
+    ]
+  },
   "ecg-trace": {
     "component": "EcgTrace",
     "element": "figure",

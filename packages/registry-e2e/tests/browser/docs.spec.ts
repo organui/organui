@@ -601,6 +601,42 @@ test("the organs gallery shows every organ as a picture and a link", async ({
   expect(errors).toEqual([])
 })
 
+test("the organ tour steps through a chapter and collects what to go over", async ({
+  page,
+}) => {
+  await page.goto("/docs/components/organ-tour")
+  const tour = page.locator('[data-slot="organ-tour"]').first()
+  await expect(tour.getByText("step 1 of 3")).toBeVisible({ timeout: 30_000 })
+  const scale = tour.locator('[data-slot="organ-tour-scale"]')
+  await expect(scale).toHaveText("×1 · 22 cm")
+  await tour.getByRole("button", { name: "Next", exact: true }).click()
+  await expect(tour.getByText("step 2 of 3")).toBeVisible()
+  await tour.getByRole("button", { name: "Check understanding" }).click()
+  const next = tour.getByRole("button", { name: "Next: Inside the liver" })
+  await expect(next).toBeDisabled()
+  // A wrong answer is final, explained, and offers the chapter again.
+  await tour.getByRole("button", { name: /^I caught an infection/ }).click()
+  await expect(tour.getByRole("alert")).toContainText("Not quite")
+  await tour.getByRole("button", { name: /^My immune system/ }).click()
+  await expect(tour.getByRole("alert")).toContainText("Not quite")
+  await expect(next).toBeEnabled()
+  await next.click()
+  await expect(scale).toHaveText("×150 · 1.5 mm")
+  await tour.getByRole("button", { name: /^Why treatment matters/ }).click()
+  await expect(
+    tour.getByRole("list", { name: "Chapters" }).getByRole("button", {
+      name: /^Why treatment matters/,
+    })
+  ).toHaveAttribute("aria-current", "step")
+  for (const name of ["Next", "Check understanding"])
+    await tour.getByRole("button", { name, exact: true }).click()
+  await tour.getByRole("button", { name: /^Keep taking it/ }).click()
+  await tour.getByRole("button", { name: "Finish" }).click()
+  await expect(tour.getByText("1 of 4 understood")).toBeVisible()
+  await tour.getByRole("button", { name: "Go over Your liver" }).click()
+  await expect(tour.getByText("step 1 of 3")).toBeVisible()
+})
+
 test("the conditions gallery shows every condition and filters by body system", async ({
   page,
   request,
