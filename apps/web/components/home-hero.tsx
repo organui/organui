@@ -5,7 +5,6 @@ import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
 import { HomeHeart } from "@/components/home-heart"
-import { HomeInstall } from "@/components/home-install"
 
 // One heartbeat, PQRST, drawn on a 150 wide cell around a baseline at 100.
 function beat(x: number) {
@@ -27,8 +26,6 @@ function beat(x: number) {
 
 // The rate the hero heart beats at, and the ECG sweep runs at.
 const heartRate = 72
-
-const heart = organs.find(({ name }) => name === "heart")
 
 const trace = `M0 100 ${Array.from({ length: 8 }, (_, index) => beat(index * 150)).join(" ")}`
 
@@ -106,11 +103,6 @@ export function HomeHero() {
             <ArrowRightIcon data-icon="inline-end" />
           </Link>
         </div>
-        {heart && (
-          <div className="pt-5">
-            <HomeInstall command={heart.install} />
-          </div>
-        )}
       </div>
       <a
         href="/docs/licences"
