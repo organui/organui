@@ -88,6 +88,7 @@
     "./condition-viewer": "./registry/base-nova/condition-viewer/condition-viewer.tsx",
     "./condition-model": "./registry/base-nova/condition-viewer/condition-model.ts",
     "./organ-tour": "./registry/base-nova/organ-tour/organ-tour.tsx",
+    "./autoimmune-hepatitis-tour": "./registry/base-nova/autoimmune-hepatitis-tour/autoimmune-hepatitis-tour.tsx",
     "./abdominal-aortic-aneurysm": "./registry/base-nova/abdominal-aortic-aneurysm/abdominal-aortic-aneurysm.tsx",
     "./acl-rupture": "./registry/base-nova/acl-rupture/acl-rupture.tsx",
     "./acute-angle-closure-glaucoma": "./registry/base-nova/acute-angle-closure-glaucoma/acute-angle-closure-glaucoma.tsx",

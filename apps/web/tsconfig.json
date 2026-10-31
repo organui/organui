@@ -209,6 +209,9 @@
       "@/components/vestibular": [
         "../../packages/registry/registry/base-nova/vestibular/vestibular.tsx"
       ],
+      "@/components/organ-tour": [
+        "../../packages/registry/registry/base-nova/organ-tour/organ-tour.tsx"
+      ],
       "@/components/condition-viewer": [
         "../../packages/registry/registry/base-nova/condition-viewer/condition-viewer.tsx"
       ],
