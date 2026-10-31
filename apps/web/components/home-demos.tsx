@@ -13,7 +13,7 @@ import {
   exampleMedications,
 } from "@/lib/medication-example"
 
-// The components alone, for the home page; the docs demos add panels that
+// The components alone, for the theme showcase; the docs demos add panels that
 // explain their state.
 
 export function HomeEcg() {
