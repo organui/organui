@@ -36,11 +36,8 @@ The independent organ explorer repositories document their source-specific
 anatomy asset licenses and attribution. Models hosted from
 `apps/web/public/models/` keep their own licenses (for example, the nerves
 model is CC BY-SA 4.0), documented in the `<organ>.ATTRIBUTION.md` file beside
-each GLB or, for nerves, in `models/nerves/ATTRIBUTION.md`. The home page's
-heart point cloud, `apps/web/public/home/heart.bin`, is sampled from the
-heart-3d model (BodyParts3D, CC BY 4.0) and credited in
-`apps/web/public/home/heart.ATTRIBUTION.md`. Those notices are unaffected by
-the website code license.
+each GLB or, for nerves, in `models/nerves/ATTRIBUTION.md`. Those notices are
+unaffected by the website code license.
 
 ## Growth standards
 

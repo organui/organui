@@ -127,27 +127,3 @@
 [data-slot="sheet-overlay"]:has(~ [data-chart-code]) {
   @apply bg-black/50 backdrop-blur-none duration-500 data-ending-style:duration-300;
 }
-
-/* Home page. Decoration only: the sweep stops for reduced motion. */
-
-/* A bright band moves along the trace, as a monitor's sweep does, at the
-   heart's 72 bpm: a beat is 150 of the 1520 units the band travels. */
-.home-sweep {
-  animation: home-sweep 8.44s linear infinite;
-}
-
-.home-glow {
-  filter: drop-shadow(0 0 6px currentColor);
-}
-
-@keyframes home-sweep {
-  to {
-    transform: translateX(1520px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-sweep {
-    animation: none;
-  }
-}

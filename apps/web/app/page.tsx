@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { explorers, site } from "@/lib/site"
+import { buttonVariants } from "@workspace/ui/components/button"
+import { cn } from "@workspace/ui/lib/utils"
 
-import { HomeHero } from "@/components/home-hero"
 import { HomeShowcase } from "@/components/home-showcase"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -23,7 +25,28 @@ export default function Page() {
     <>
       <SiteHeader />
       <main id="main" className="flex flex-col">
-        <HomeHero />
+        <section className="mx-auto flex max-w-3xl flex-col items-center gap-8 px-6 py-20 text-center md:py-28 lg:py-32">
+          <h1 className="text-4xl leading-[1.1] font-semibold tracking-tighter text-balance text-primary sm:text-5xl">
+            Healthcare &amp; life science UI for humans and agents
+          </h1>
+          <div className="flex items-center justify-center gap-2">
+            <Link
+              href="/docs"
+              className={cn(buttonVariants({ size: "sm" }), "h-[35px] px-4")}
+            >
+              Get Started
+            </Link>
+            <Link
+              href="/docs/components"
+              className={cn(
+                buttonVariants({ size: "sm", variant: "ghost" }),
+                "h-[35px] px-4"
+              )}
+            >
+              Browse Components
+            </Link>
+          </div>
+        </section>
         <HomeShowcase />
         <section className="mx-auto flex max-w-3xl flex-col items-center gap-3 px-6 py-16 text-center text-sm md:py-20">
           <h2 className="text-base font-semibold tracking-tight">
