@@ -38,6 +38,15 @@ export const examples: Record<string, ExampleDefinition> = {
       return <Example />
     },
   },
+  "organ-tour-demo": {
+    title: "Organ tour",
+    file: "organ-tour-demo.tsx",
+    lazy: true,
+    render: async () => {
+      const { Example } = await import("./organ-tour-demo")
+      return <Example />
+    },
+  },
   ...Object.fromEntries(
     Object.entries({ ...organExamples, ...conditionExamples }).map(
       ([name, item]) => [name, { ...item, lazy: true }]

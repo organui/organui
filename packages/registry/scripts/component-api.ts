@@ -30,6 +30,7 @@ export const documented = {
     "ConditionViewer",
   ],
   "dna-helix": ["dna-helix/dna-helix.tsx", "DnaHelix"],
+  "organ-tour": ["organ-tour/organ-tour.tsx", "OrganTour"],
   "ecg-trace": ["ecg-trace/ecg-trace.tsx", "EcgTrace"],
   "growth-chart": ["growth-chart/growth-chart.tsx", "GrowthChart"],
   "scan-viewer": ["scan-viewer/scan-viewer.tsx", "ScanViewer"],

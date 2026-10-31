@@ -1026,6 +1026,31 @@
       "docs": "Condition viewer docs: https://organui.com/docs/components/condition-viewer. Educational, not for diagnosis."
     },
     {
+      "name": "organ-tour",
+      "type": "registry:component",
+      "title": "Organ tour",
+      "description": "Walks a reader through organ models at real scale, from an organ down to a cell, with captions that highlight each structure and questions that show what to explain again.",
+      "categories": ["anatomy"],
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "class-variance-authority@^0.7.1",
+        "cn@^0.5.0"
+      ],
+      "registryDependencies": [
+        "@organui/organ-viewer",
+        "alert",
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/base-nova/organ-tour/organ-tour.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "docs": "Organ tour docs: https://organui.com/docs/components/organ-tour. Keep each model's credit visible. Educational, and not a substitute for a clinician's explanation."
+    },
+    {
       "name": "abdominal-aortic-aneurysm",
       "type": "registry:component",
       "title": "Abdominal aortic aneurysm",
