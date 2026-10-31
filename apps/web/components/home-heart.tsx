@@ -16,7 +16,9 @@ const vertexShader = /* glsl */ `
   attribute vec3 aColor;
   attribute float aChamber;
   attribute float aSeed;
+  attribute vec3 aScatter;
   uniform float uTime;
+  uniform float uAssemble;
   uniform float uAtria;
   uniform float uVentricles;
   uniform float uScan;
@@ -29,13 +31,17 @@ const vertexShader = /* glsl */ `
     float squeeze = aChamber > 1.5 ? uVentricles * 0.06 : aChamber > 0.5 ? uAtria * 0.05 : uVentricles * 0.015;
     vec3 p = position * (1.0 - squeeze);
     p += normal * 0.006 * sin(uTime * 1.7 + aSeed * 6.2831);
+    // On arrival each point drifts in from a scattered cloud, the later
+    // ones a little after the first.
+    float gather = smoothstep(aSeed * 0.45, aSeed * 0.45 + 0.55, uAssemble);
+    p = mix(aScatter, p, gather * gather * (3.0 - 2.0 * gather));
     vec4 view = modelViewMatrix * vec4(p, 1.0);
     vec3 viewNormal = normalize(normalMatrix * normal);
     float rim = 1.0 - abs(viewNormal.z);
-    vScan = smoothstep(0.09, 0.0, abs(p.y - uScan));
+    vScan = smoothstep(0.07, 0.0, abs(p.y - uScan)) * 0.45;
     vColor = aColor;
-    vAlpha = mix(0.35, 1.0, rim);
-    gl_PointSize = uSize * (1.0 + vScan * 1.4) / -view.z;
+    vAlpha = mix(0.3, 1.0, rim) * mix(0.2, 1.0, gather);
+    gl_PointSize = uSize * (1.0 + vScan) / -view.z;
     gl_Position = projectionMatrix * view;
   }
 `
@@ -103,6 +109,7 @@ export function HomeHeart({
       const color = new Float32Array(count * 3)
       const chamber = new Float32Array(count)
       const seed = new Float32Array(count)
+      const scatter = new Float32Array(count * 3)
       for (let i = 0; i < count; i++) {
         const offset = header + i * 10
         const structure = data.getUint8(offset + 9)
@@ -119,6 +126,15 @@ export function HomeHeart({
             ? 1
             : 0
         seed[i] = Math.random()
+        // A random point in a shell around the heart to gather from.
+        const theta = Math.random() * Math.PI * 2
+        const z = Math.random() * 2 - 1
+        const radius = 1.4 + Math.random() * 1.2
+        const ring = Math.sqrt(1 - z * z) * radius
+        scatter.set(
+          [Math.cos(theta) * ring, z * radius, Math.sin(theta) * ring],
+          i * 3
+        )
       }
 
       const geometry = new THREE.BufferGeometry()
@@ -127,6 +143,7 @@ export function HomeHeart({
       geometry.setAttribute("aColor", new THREE.BufferAttribute(color, 3))
       geometry.setAttribute("aChamber", new THREE.BufferAttribute(chamber, 1))
       geometry.setAttribute("aSeed", new THREE.BufferAttribute(seed, 1))
+      geometry.setAttribute("aScatter", new THREE.BufferAttribute(scatter, 3))
 
       const material = new THREE.ShaderMaterial({
         vertexShader,
@@ -138,6 +155,7 @@ export function HomeHeart({
           uAtria: { value: 0 },
           uVentricles: { value: 0 },
           uScan: { value: -2 },
+          uAssemble: { value: 0 },
           uSize: { value: 1 },
           uOpacity: { value: 1 },
           uAccent: { value: new THREE.Color() },
@@ -147,7 +165,7 @@ export function HomeHeart({
       const scene = new THREE.Scene()
       scene.add(points)
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 20)
-      camera.position.set(0, 0, 5)
+      camera.position.set(0, 0, 4.6)
 
       let renderer: InstanceType<typeof THREE.WebGLRenderer>
       try {
@@ -210,7 +228,12 @@ export function HomeHeart({
       const down = (event: PointerEvent) => {
         dragging = event.clientX
       }
+      // The heart leans a little towards the pointer.
+      const lean = { x: 0, y: 0 }
+      const tilt = { x: 0, y: 0 }
       const move = (event: PointerEvent) => {
+        lean.x = (event.clientX / window.innerWidth) * 2 - 1
+        lean.y = (event.clientY / window.innerHeight) * 2 - 1
         if (dragging === null) return
         spin = (event.clientX - dragging) * 0.01
         angle += spin
@@ -243,15 +266,20 @@ export function HomeHeart({
         uniforms.uTime!.value = time
         uniforms.uAtria!.value = pulse(phase, 0, 0.18)
         uniforms.uVentricles!.value = pulse(phase, 0.16, 0.36)
-        uniforms.uScan!.value = ((time / 3.6) % 1) * 3 - 1.5
+        uniforms.uScan!.value = ((time / 4.2) % 1) * 3.2 - 1.6
+        uniforms.uAssemble!.value = Math.min(1, (now - born) / 2600)
+        tilt.x += (lean.y * 0.18 - tilt.x) * 0.05
+        tilt.y += (lean.x * 0.35 - tilt.y) * 0.05
         if (dragging === null) {
           spin *= 0.94
           angle += spin + delta * 0.25
         }
-        points.rotation.set(0.12, angle, 0)
+        points.rotation.set(0.12 + tilt.x, angle + tilt.y, 0)
         renderer.render(scene, camera)
       }
+      const born = performance.now()
       if (reduced) {
+        material.uniforms.uAssemble!.value = 1
         points.rotation.set(0.12, angle, 0)
         renderer.render(scene, camera)
       } else frame = requestAnimationFrame(render)
