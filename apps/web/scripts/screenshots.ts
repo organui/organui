@@ -1,10 +1,9 @@
 // Captures, in light and dark, the pictures that phones show in place of
-// live previews:
-// - each block's page, to public/blocks/<name>-<theme>.webp, for /blocks;
-// - the home page's components, to public/home/showcase-<theme>.webp.
+// live previews: each block's page, to public/blocks/<name>-<theme>.webp,
+// for /blocks.
 //
-//   bun run screenshots                    every block and the home page
-//   bun run screenshots --only explorer-01,home
+//   bun run screenshots                    every block
+//   bun run screenshots --only explorer-01
 //
 // It runs `next dev`, and one browser renders one block at a time.
 import { spawn } from "node:child_process"
@@ -41,10 +40,9 @@ const heights = new Map(
   ])
 )
 const only = values.only?.split(",").map((name) => name.trim())
-const unknown =
-  only?.filter((name) => name !== "home" && !blocks.includes(name)) ?? []
+const unknown = only?.filter((name) => !blocks.includes(name)) ?? []
 if (unknown.length) throw new Error(`Not a block: ${unknown.join(", ")}`)
-const targets = only ?? [...blocks, "home"]
+const targets = only ?? blocks
 
 const server = spawn("bunx", ["next", "dev", "--port", String(port)], {
   cwd: root,
@@ -75,13 +73,8 @@ try {
   try {
     for (const name of targets)
       for (const theme of ["light", "dark"] as const) {
-        const webp = await (name === "home"
-          ? captureHome(browser, theme)
-          : captureBlock(browser, name, theme))
-        const file =
-          name === "home"
-            ? new URL(`home/showcase-${theme}.webp`, publicDir)
-            : new URL(`blocks/${name}-${theme}.webp`, publicDir)
+        const webp = await captureBlock(browser, name, theme)
+        const file = new URL(`blocks/${name}-${theme}.webp`, publicDir)
         await mkdir(new URL(".", file), { recursive: true })
         await writeFile(file, webp)
         console.log(
@@ -129,40 +122,6 @@ async function captureBlock(browser: Browser, name: string, theme: Theme) {
     return await sharp(await page.screenshot())
       .webp({ quality: 80, effort: 6 })
       .toBuffer()
-  } finally {
-    await page.close()
-  }
-}
-
-// The cards as a wide screen lays them out, cut at 1400px, at twice the
-// pixels so phones can show it sharply.
-async function captureHome(browser: Browser, theme: Theme) {
-  const page = await browser.newPage({
-    viewport: { width: 1280, height: 900 },
-    deviceScaleFactor: 2,
-    colorScheme: theme,
-  })
-  try {
-    await page.goto(origin)
-    const showcase = page.locator("section[aria-label=Components]")
-    const cards = showcase.locator("[data-showcase-cards]")
-    await cards.waitFor()
-    await page.waitForLoadState("networkidle")
-    // Without the fades and the button over the cards.
-    await showcase.evaluate((section) => {
-      section.style.maxHeight = "none"
-      for (const child of section.children)
-        if (!child.querySelector("[data-showcase-cards]"))
-          (child as HTMLElement).style.display = "none"
-    })
-    await settle(page)
-    const box = await cards.boundingBox()
-    if (!box) throw new Error("home: the cards aren't visible")
-    const image = await page.screenshot({
-      fullPage: true,
-      clip: { ...box, height: Math.min(box.height, 1400) },
-    })
-    return await sharp(image).webp({ quality: 80, effort: 6 }).toBuffer()
   } finally {
     await page.close()
   }

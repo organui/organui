@@ -4,7 +4,6 @@ import { explorers, site } from "@/lib/site"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
 
-import { HomeShowcase } from "@/components/home-showcase"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
@@ -47,7 +46,6 @@ export default function Page() {
             </Link>
           </div>
         </section>
-        <HomeShowcase />
         <section className="mx-auto flex max-w-3xl flex-col items-center gap-3 px-6 py-16 text-center text-sm md:py-20">
           <h2 className="text-base font-semibold tracking-tight">
             3D anatomy explorers
