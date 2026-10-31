@@ -21,7 +21,7 @@ export const noseModel: OrganModel = {
       direction: [0.85, 0.2, 1],
     },
     {
-      name: "Lateral",
+      name: "Left lateral",
       direction: [1, 0, 0],
     },
   ],

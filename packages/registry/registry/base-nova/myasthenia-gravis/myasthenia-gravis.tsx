@@ -22,7 +22,7 @@ export const myastheniaGravis: Condition = {
       id: "eye",
       label: "Eye",
       model: eyeModel,
-      defaultView: "Lateral",
+      defaultView: "Right lateral",
       findings: {
         "levator-palpebrae": {
           affected: true,

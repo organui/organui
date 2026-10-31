@@ -21,11 +21,11 @@ export const kidneysModel: OrganModel = {
       direction: [0, 0, -1],
     },
     {
-      name: "Patient left",
+      name: "Left lateral",
       direction: [1, 0, 0],
     },
     {
-      name: "Patient right",
+      name: "Right lateral",
       direction: [-1, 0, 0],
     },
   ],
@@ -36,7 +36,7 @@ export const kidneysModel: OrganModel = {
       group: "Kidneys",
       color: "#9f4e45",
       description:
-        "The patient’s right kidney is one of the paired organs that filter blood and produce urine. In this source body it sits slightly lower than the left kidney.",
+        "One of the two bean-shaped organs that filter blood and make urine. It sits a little lower than the left kidney because the liver lies above it.",
     },
     {
       id: "left-kidney",
@@ -44,7 +44,7 @@ export const kidneysModel: OrganModel = {
       group: "Kidneys",
       color: "#b56256",
       description:
-        "The patient’s left kidney is shown in its source alignment beside the spine. This surface mesh does not expose cortex, medulla, or the renal pelvis.",
+        "Lies against the back wall of the abdomen beside the spine, a little higher than the right kidney. Its vessels and ureter leave from the hilum on its inner border.",
     },
     {
       id: "right-ureter",
@@ -52,7 +52,7 @@ export const kidneysModel: OrganModel = {
       group: "Urinary tract",
       color: "#d09b73",
       description:
-        "The right ureter is the narrow muscular tube that carries urine from the right kidney toward the bladder. The bladder is outside this release’s represented scope.",
+        "A narrow muscular tube, about 25 to 30 cm long, that carries urine from the right kidney down to the bladder by waves of contraction.",
     },
     {
       id: "left-ureter",
@@ -60,7 +60,7 @@ export const kidneysModel: OrganModel = {
       group: "Urinary tract",
       color: "#dcad86",
       description:
-        "The left ureter descends from the left kidney toward the bladder. Its lower end is truncated here because the bladder is not included in the selected geometry.",
+        "Carries urine from the left kidney to the bladder. It runs down over the psoas muscle and crosses into the pelvis near the split of the common iliac artery.",
     },
     {
       id: "right-renal-artery",
@@ -68,7 +68,7 @@ export const kidneysModel: OrganModel = {
       group: "Arterial supply",
       color: "#bd514c",
       description:
-        "The right renal artery supplies the right kidney. The source concept combines its represented trunk and mapped branches into one selectable scene object.",
+        "Carries blood from the aorta to the right kidney. It is longer than the left artery and passes behind the inferior vena cava.",
     },
     {
       id: "left-renal-artery",
@@ -76,7 +76,7 @@ export const kidneysModel: OrganModel = {
       group: "Arterial supply",
       color: "#cf6960",
       description:
-        "The left renal artery supplies the left kidney. Color is illustrative and is used to distinguish the arterial meshes from adjacent surfaces.",
+        "Carries blood from the aorta to the left kidney. It is shorter than the right artery because the aorta lies left of the midline.",
     },
   ],
   attribution: {

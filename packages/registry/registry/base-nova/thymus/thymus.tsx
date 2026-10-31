@@ -17,7 +17,7 @@ export const thymusModel: OrganModel = {
       direction: [0, 0, 1],
     },
     {
-      name: "Lateral",
+      name: "Left lateral",
       direction: [1, 0, 0],
     },
     {
