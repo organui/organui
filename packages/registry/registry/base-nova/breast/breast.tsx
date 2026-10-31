@@ -12,6 +12,7 @@ export const breastModel: OrganModel = {
   src: "https://organui.com/models/breast.glb",
   bytes: 2221312,
   defaultView: "Anterior",
+  translucentIds: ["right-fat", "left-fat"],
   views: [
     {
       name: "Anterior",
@@ -53,7 +54,7 @@ export const breastModel: OrganModel = {
       group: "Right breast",
       color: "#ecc99b",
       description:
-        "The fat that gives the right breast most of its size and shape. It fills the spaces between the lobes and lies under the skin. Hide it to see the gland inside.",
+        "The fat that gives the right breast most of its size and shape. It fills the spaces between the lobes and lies under the skin. It is drawn see-through so the gland inside shows.",
     },
     {
       id: "right-suspensory-ligaments",
@@ -117,7 +118,7 @@ export const breastModel: OrganModel = {
       group: "Left breast",
       color: "#e6c08f",
       description:
-        "The fat that gives the left breast most of its size and shape. It fills the spaces between the lobes and lies under the skin. Hide it to see the gland inside.",
+        "The fat that gives the left breast most of its size and shape. It fills the spaces between the lobes and lies under the skin. It is drawn see-through so the gland inside shows.",
     },
     {
       id: "left-suspensory-ligaments",

@@ -164,7 +164,11 @@ export default function Page() {
           Named views fill the toolbar&apos;s menu, and <code>defaultView</code>{" "}
           is the one shown first. Directions point from the model towards the
           camera, with +x the patient&apos;s left, +y superior and +z anterior.
-          A view with <code>structureIds</code> frames only those structures.
+          A view with <code>structureIds</code> frames only those structures,
+          and <code>focus: true</code> also fades everything else while the view
+          is shown, for a region such as the hand that sits beside other
+          anatomy. <code>translucentIds</code> draws structures see-through
+          until they are selected, such as fat over a gland.
         </p>
         <CodeSnippet label="Views example" code={views} />
         <DocsHeading id="render-it" level={3}>
@@ -195,8 +199,10 @@ export default function Page() {
           <code>onSelectionChange</code>. A selected structure glows in its own
           colour while everything else is ghosted, so it stays visible even
           inside other anatomy. Clicks on a ghost prefer the solid structure
-          behind it. <code>organAnatomyNodes(model)</code> builds anatomy tree
-          data from the model&apos;s groups, and{" "}
+          behind it. With a mouse, the structure under the pointer lights up and
+          its name follows the pointer, so readers can see what a click will
+          select. <code>organAnatomyNodes(model)</code> builds anatomy tree data
+          from the model&apos;s groups, and{" "}
           <code>organDefaultVisibility(model)</code> returns its initial
           visibility. The heart&apos;s page shows{" "}
           <Link
@@ -218,12 +224,13 @@ export default function Page() {
       <section className="flex flex-col gap-4">
         <DocsHeading id="views-and-controls">Views and controls</DocsHeading>
         <p>
-          Each named view fits the model to 80% of the stage from its direction.
-          Rotating leaves the named view, and <code>onViewChange</code> reports{" "}
-          <code>null</code>; zooming does not. Pass{" "}
-          <code>controls=&#123;false&#125;</code> to hide the view menu, zoom
-          and reset buttons, and drive the viewer from your own UI through its
-          ref.
+          Each named view fits the model to 80% of the stage from its direction,
+          and the camera flies there, swinging around the model rather than
+          through it. Rotating leaves the named view, and{" "}
+          <code>onViewChange</code> reports <code>null</code>; zooming does not.
+          Pass <code>controls=&#123;false&#125;</code> to hide the view menu,
+          zoom and reset buttons, and drive the viewer from your own UI through
+          its ref.
         </p>
         <CodeSnippet label="Imperative handle example" code={handle} />
       </section>
@@ -231,7 +238,8 @@ export default function Page() {
         <DocsHeading id="accessibility">Accessibility</DocsHeading>
         <p>
           Drag or the arrow keys rotate; scroll, pinch, plus and minus zoom.
-          Motion damping is off when the user prefers reduced motion.
+          Motion damping, camera flights and colour fades are off when the user
+          prefers reduced motion.
         </p>
         <p className="text-sm text-muted-foreground">
           WebGL is required. When it cannot start, or the model cannot load, the

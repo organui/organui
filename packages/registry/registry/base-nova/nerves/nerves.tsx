@@ -39,6 +39,7 @@ export const nervesModel: OrganModel = {
         "glossopharyngeal-nerves",
         "hypoglossal-nerves",
       ],
+      focus: true,
     },
     {
       name: "Arms",
@@ -52,6 +53,7 @@ export const nervesModel: OrganModel = {
         "ulnar-nerves",
         "medial-cutaneous-nerves",
       ],
+      focus: true,
     },
     {
       name: "Legs",
@@ -64,6 +66,7 @@ export const nervesModel: OrganModel = {
         "tibial-nerves",
         "common-fibular-nerves",
       ],
+      focus: true,
     },
   ],
   structures: [
