@@ -617,8 +617,9 @@ test("the organ tour steps through a chapter and collects what to go over", asyn
   // A wrong answer is final, explained, and offers the chapter again.
   await tour.getByRole("button", { name: /^I caught an infection/ }).click()
   await expect(tour.getByRole("alert")).toContainText("Not quite")
-  await tour.getByRole("button", { name: /^My immune system/ }).click()
-  await expect(tour.getByRole("alert")).toContainText("Not quite")
+  await expect(
+    tour.getByRole("button", { name: /^My immune system/ })
+  ).toHaveAttribute("aria-disabled", "true")
   await expect(next).toBeEnabled()
   await next.click()
   await expect(scale).toHaveText("×150 · 1.5 mm")

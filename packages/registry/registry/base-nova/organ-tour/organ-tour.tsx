@@ -314,9 +314,12 @@ export function OrganTour({
 
 function TourResult({
   correct,
+  label = correct ? "Understood" : "Needs going over",
   className,
 }: {
   correct: boolean
+  /** What the icon means here, for screen readers. */
+  label?: string
   className?: string
 }) {
   return (
@@ -342,9 +345,7 @@ function TourResult({
           className={className}
         />
       )}
-      <span className="sr-only">
-        {correct ? "Understood" : "Needs going over"}
-      </span>
+      <span className="sr-only">{label}</span>
     </>
   )
 }
@@ -388,7 +389,12 @@ function TourCheck({
               )}
             >
               <span className="min-w-0 flex-1">{option}</span>
-              {(right || chosen) && <TourResult correct={right} />}
+              {(right || chosen) && (
+                <TourResult
+                  correct={right}
+                  label={right ? "Right answer" : "Your answer"}
+                />
+              )}
             </Button>
           )
         })}
