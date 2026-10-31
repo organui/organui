@@ -15,9 +15,8 @@ export const appendixModel: OrganModel = {
   views: [
     {
       name: "Appendix",
-      direction: [-0.35, -0.45, 1],
+      direction: [0.5, -0.8, 0.6],
       structureIds: ["appendix"],
-      focus: true,
     },
     {
       name: "Anterior",

@@ -24,7 +24,6 @@ export const vesselsModel: OrganModel = {
       name: "Head and neck",
       direction: [0, 0, 1],
       structureIds: ["carotid-arteries", "vertebral-arteries", "jugular-veins"],
-      focus: true,
     },
     {
       name: "Chest",
@@ -42,7 +41,6 @@ export const vesselsModel: OrganModel = {
         "brachiocephalic-veins",
         "azygos-system",
       ],
-      focus: true,
     },
     {
       name: "Abdomen and pelvis",
@@ -66,7 +64,6 @@ export const vesselsModel: OrganModel = {
         "internal-iliac-veins",
         "external-iliac-veins",
       ],
-      focus: true,
     },
     {
       name: "Legs",
@@ -84,7 +81,6 @@ export const vesselsModel: OrganModel = {
         "great-saphenous-veins",
         "small-saphenous-veins",
       ],
-      focus: true,
     },
   ],
   structures: [

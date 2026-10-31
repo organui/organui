@@ -188,7 +188,6 @@ export const skeletonModel: OrganModel = {
         "right-ring-finger-distal-phalanx",
         "right-little-finger-distal-phalanx",
       ],
-      focus: true,
     },
     {
       name: "Right foot",
@@ -222,7 +221,6 @@ export const skeletonModel: OrganModel = {
         "right-little-toe-distal-phalanx",
         "right-sesamoid-bones-of-the-foot",
       ],
-      focus: true,
     },
   ],
   structures: [
