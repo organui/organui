@@ -4,7 +4,7 @@ import { conditionModel } from "@workspace/registry/condition-model"
 import { OrganTour, type Tour } from "@workspace/registry/organ-tour"
 
 // Explaining a new diagnosis: from the organ down to one cell and back, with a
-// question at the end of each chapter so the patient says it back. The models
+// question at the end of each chapter to show what to explain again. The models
 // come from the condition, so its amber shows what it affects.
 const understandingAutoimmuneHepatitis: Tour = {
   name: "Understanding autoimmune hepatitis",

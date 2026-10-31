@@ -311,7 +311,7 @@
         "type": "Tour",
         "required": true,
         "default": null,
-        "description": "The tour: its chapters, captions and teach-back questions."
+        "description": "The tour: its chapters, captions and questions."
       },
       {
         "name": "chapter",

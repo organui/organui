@@ -23,7 +23,7 @@ export type TourCaption = {
 }
 
 export type TourQuestion = {
-  /** Asks the reader to say it back, such as "Why do we keep checking your ALT?". */
+  /** What to check, such as "Why do we keep checking your ALT?". */
   question: string
   options: readonly string[]
   /** The index of the right option. */
@@ -41,7 +41,7 @@ export type TourChapter = {
   /** How wide the subject is in life, in millimetres, for the scale readout. */
   span: number
   captions: readonly TourCaption[]
-  /** The teach-back question that closes the chapter. */
+  /** The question that closes the chapter. */
   question?: TourQuestion
 }
 
@@ -89,7 +89,7 @@ export type OrganTourProps = Omit<
   OrganViewerProps,
   "model" | "src" | "selectedId" | "onSelectionChange" | "defaultView" | "ref"
 > & {
-  /** The tour: its chapters, captions and teach-back questions. */
+  /** The tour: its chapters, captions and questions. */
   tour: Tour
   /** The chapter shown, by ID. */
   chapter?: string
@@ -421,7 +421,7 @@ function TourCheck({
   )
 }
 
-// Teach-back is there to find what needs explaining again, so the summary
+// The questions are there to find what needs explaining again, so the summary
 // names those chapters and goes straight back to them.
 function TourSummary({
   chapters,

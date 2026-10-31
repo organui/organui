@@ -1029,7 +1029,7 @@
       "name": "organ-tour",
       "type": "registry:component",
       "title": "Organ tour",
-      "description": "Walks a reader through organ models at real scale, from an organ down to a cell, with captions that highlight each structure and teach-back questions that check what they understood.",
+      "description": "Walks a reader through organ models at real scale, from an organ down to a cell, with captions that highlight each structure and questions that show what to explain again.",
       "categories": ["anatomy"],
       "dependencies": [
         "@base-ui/react@^1.8.0",

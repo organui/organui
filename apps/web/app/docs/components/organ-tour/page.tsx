@@ -11,7 +11,7 @@ import { site } from "@/lib/site"
 
 export const metadata = docsMetadata(
   "Organ tour",
-  "A guided walk through organ models, from an organ down to a cell, with teach-back questions to check what a patient understood.",
+  "A guided walk through organ models, from an organ down to a cell, with questions that show what to explain again.",
   "/docs/components/organ-tour"
 )
 
@@ -61,7 +61,7 @@ export default function Page() {
         <p className="text-[1.05rem] text-balance text-muted-foreground sm:text-base md:max-w-[80%]">
           A guided walk through organ models for explaining a condition to a
           patient: from the organ down to a cell, one structure at a time, with
-          teach-back questions to check what they understood.
+          questions that show what to explain again.
         </p>
       </DocsHeader>
       <ComponentPreview name="organ-tour-demo" hideCode />
@@ -117,14 +117,22 @@ export default function Page() {
           </p>
         </section>
         <section className="flex flex-col gap-4">
-          <DocsHeading id="teach-back">Teach-back</DocsHeading>
+          <DocsHeading id="checking-understanding">
+            Checking understanding
+          </DocsHeading>
           <p>
-            Teach-back asks a patient to say something back in their own words,
-            which tests the explanation rather than the patient. So each
-            question has one answer per visit: a wrong one shows the explanation
-            and offers to go over the chapter, and the summary lists the
-            chapters to go over. Write questions about what the person needs to
-            do, and answers they might really believe.
+            Each chapter can close with a multiple-choice question, which shows
+            what to explain again. It is a prompt, not teach-back itself:
+            teach-back asks a patient to explain in their own words, and
+            choosing an answer only shows they recognise it. Use the questions
+            to start that conversation, and ask the patient to say it back
+            aloud.
+          </p>
+          <p>
+            A question has one answer per visit: a wrong one shows the
+            explanation and offers to go over the chapter, and the summary lists
+            the chapters to go over. Write questions about what the person needs
+            to do, and answers they might really believe.
           </p>
           <p>
             <code>onAnswer</code> reports each answer, for your own record of
