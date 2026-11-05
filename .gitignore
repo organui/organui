@@ -57,3 +57,6 @@ test-results/
 # agent worktrees and local settings
 .claude/worktrees/
 .claude/settings.local.json
+
+# social clips from apps/web/scripts/clips.ts
+apps/web/clips/

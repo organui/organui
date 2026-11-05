@@ -12,7 +12,7 @@
     },
     "dev": {
       "dependsOn": ["stage-registry"],
-      "env": ["ORGANUI_THUMBNAILS", "NODE_ENV"]
+      "env": ["ORGANUI_THUMBNAILS", "ORGANUI_CLIPS", "NODE_ENV"]
     },
     "test": {
       "dependsOn": ["transit"]
