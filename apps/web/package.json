@@ -12,6 +12,7 @@
     "stage-registry": "bun scripts/stage-registry.ts",
     "thumbnails": "bun scripts/organ-thumbnails.ts",
     "screenshots": "bun scripts/screenshots.ts",
+    "clips": "bun scripts/clips.ts",
     "test": "bun test tests"
   },
   "dependencies": {
