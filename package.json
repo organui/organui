@@ -20,9 +20,9 @@
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "@workspace/typescript-config": "workspace:*",
-    "prettier": "^3.9.10",
+    "prettier": "^3.10.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "turbo": "^2.11.9",
+    "turbo": "^2.11.10",
     "typescript": "^5.9.3"
   },
   "packageManager": "bun@1.4.2",
